@@ -6,20 +6,17 @@ import type { Language } from '@civique/shared';
 export function useRandomQuestions(
   count: number = 10,
   themeId?: number,
-  lang?: Language,
 ) {
-  const { currentLang } = useLanguageStore();
-  const effectiveLang = lang || currentLang;
-
+  // Always fetch in French - translations are loaded separately by TrainingSession
   return useQuery({
-    queryKey: ['questions', 'random', count, themeId, effectiveLang],
+    queryKey: ['questions', 'random', count, themeId],
     queryFn: () =>
       questionsService.getRandomQuestions({
         count,
         themeId,
-        lang: effectiveLang,
+        lang: 'fr',
       }),
-    staleTime: 0, // Always fetch fresh random questions
+    staleTime: 0,
     refetchOnWindowFocus: false,
   });
 }

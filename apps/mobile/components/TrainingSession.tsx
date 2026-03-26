@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import type { Question, Language, Choice } from '@civique/shared';
-import { LANGUAGES } from '@civique/shared';
+import type { Question, Choice, Language } from '@civique/shared';
 import { recordPractice } from '../services/stats';
-import { useLanguageStore } from '../stores/languageStore';
+import { useTranslation } from '../hooks/useTranslation';
+import api from '../services/api';
 
 interface TrainingSessionProps {
   questions: Question[];
@@ -28,7 +28,7 @@ export default function TrainingSession({
   onRefetch,
 }: TrainingSessionProps) {
   const router = useRouter();
-  const { currentLang, setLanguage } = useLanguageStore();
+  const { currentLang, cycleLang, langDef } = useTranslation();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
@@ -38,37 +38,53 @@ export default function TrainingSession({
   const [isFinished, setIsFinished] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Store translations separately so questions don't re-randomize
+  const [translations, setTranslations] = useState<Record<number, { text: string; explanation?: string; choices: Choice[] }>>({});
+  const [loadingTranslations, setLoadingTranslations] = useState(false);
+
+  // Fetch translations when language changes
+  useEffect(() => {
+    if (currentLang === 'fr' || questions.length === 0) {
+      setTranslations({});
+      return;
+    }
+
+    let cancelled = false;
+    setLoadingTranslations(true);
+
+    // Fetch each question with the target language
+    Promise.all(
+      questions.map(async (q) => {
+        try {
+          const { data } = await api.get<{ data: Question }>(`/questions/${q.id}`, {
+            params: { lang: currentLang },
+          });
+          return { id: q.id, data: data.data };
+        } catch {
+          return null;
+        }
+      }),
+    ).then((results) => {
+      if (cancelled) return;
+      const map: Record<number, { text: string; explanation?: string; choices: Choice[] }> = {};
+      for (const r of results) {
+        if (r && r.data.translatedText && r.data.translatedText !== r.data.textFr) {
+          map[r.id] = {
+            text: r.data.translatedText,
+            explanation: r.data.translatedExplanation,
+            choices: r.data.translatedChoices || [],
+          };
+        }
+      }
+      setTranslations(map);
+      setLoadingTranslations(false);
+    });
+
+    return () => { cancelled = true; };
+  }, [currentLang, questions]);
+
   const currentQuestion = questions[currentIndex];
-
-  const getChoices = useCallback(
-    (q: Question): Choice[] => {
-      if (currentLang !== 'fr' && q.translatedChoices && q.translatedChoices.length > 0) {
-        return q.translatedChoices;
-      }
-      return q.choicesFr;
-    },
-    [currentLang],
-  );
-
-  const getQuestionText = useCallback(
-    (q: Question): string => {
-      if (currentLang !== 'fr' && q.translatedText) {
-        return q.translatedText;
-      }
-      return q.textFr;
-    },
-    [currentLang],
-  );
-
-  const getExplanation = useCallback(
-    (q: Question): string | undefined => {
-      if (currentLang !== 'fr' && q.translatedExplanation) {
-        return q.translatedExplanation;
-      }
-      return q.explanationFr;
-    },
-    [currentLang],
-  );
+  const currentTranslation = currentQuestion ? translations[currentQuestion.id] : undefined;
 
   const handleAnswer = async (choiceId: string) => {
     if (showFeedback || isSubmitting) return;
@@ -109,8 +125,7 @@ export default function TrainingSession({
   };
 
   const toggleLanguage = async () => {
-    const newLang: Language = currentLang === 'fr' ? 'ar' : 'fr';
-    await setLanguage(newLang);
+    await cycleLang();
   };
 
   if (isLoading) {
@@ -206,11 +221,7 @@ export default function TrainingSession({
     );
   }
 
-  const choices = getChoices(currentQuestion);
-  const questionText = getQuestionText(currentQuestion);
-  const explanation = getExplanation(currentQuestion);
-  const langLabel =
-    LANGUAGES.find((l) => l.code === currentLang)?.nativeName || 'Fran\u00e7ais';
+  const langLabel = langDef.nativeName;
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.questionContent}>
@@ -239,14 +250,27 @@ export default function TrainingSession({
 
       {/* Question */}
       <View style={styles.questionCard}>
-        <Text style={styles.questionText}>{questionText}</Text>
+        <Text style={styles.questionText}>{currentQuestion.textFr}</Text>
+        {currentLang !== 'fr' && currentTranslation && (
+          <View style={styles.translationBlock}>
+            <Ionicons name="language" size={16} color="#002395" />
+            <Text style={styles.translatedText}>{currentTranslation.text}</Text>
+          </View>
+        )}
+        {currentLang !== 'fr' && loadingTranslations && (
+          <ActivityIndicator size="small" color="#002395" style={{ marginTop: 10 }} />
+        )}
       </View>
 
       {/* Choices */}
       <View style={styles.choices}>
-        {choices.map((choice) => {
+        {currentQuestion.choicesFr.map((choice) => {
           const isSelected = selectedChoice === choice.id;
           const isCorrectChoice = choice.id === currentQuestion.correctChoice;
+          const translatedChoice =
+            currentTranslation
+              ? currentTranslation.choices.find((c) => c.id === choice.id)
+              : null;
 
           let choiceStyle = styles.choiceDefault;
           let textStyle = styles.choiceTextDefault;
@@ -263,6 +287,8 @@ export default function TrainingSession({
             choiceStyle = styles.choiceSelected;
             textStyle = styles.choiceTextWhite;
           }
+
+          const isWhiteText = (showFeedback && (isCorrectChoice || (isSelected && !isCorrectChoice))) || (!showFeedback && isSelected);
 
           return (
             <TouchableOpacity
@@ -289,7 +315,14 @@ export default function TrainingSession({
                   {choice.id.toUpperCase()}
                 </Text>
               </View>
-              <Text style={[styles.choiceText, textStyle]}>{choice.text}</Text>
+              <View style={styles.choiceTextContainer}>
+                <Text style={[styles.choiceText, textStyle]}>{choice.text}</Text>
+                {translatedChoice && (
+                  <Text style={[styles.choiceTranslation, isWhiteText && styles.choiceTranslationLight]}>
+                    {translatedChoice.text}
+                  </Text>
+                )}
+              </View>
               {showFeedback && isCorrectChoice && (
                 <Ionicons name="checkmark-circle" size={22} color="#FFFFFF" />
               )}
@@ -312,8 +345,11 @@ export default function TrainingSession({
           <Text style={styles.feedbackTitle}>
             {isCorrect ? 'Bonne r\u00e9ponse !' : 'Mauvaise r\u00e9ponse'}
           </Text>
-          {explanation && (
-            <Text style={styles.feedbackExplanation}>{explanation}</Text>
+          {currentQuestion.explanationFr && (
+            <Text style={styles.feedbackExplanation}>{currentQuestion.explanationFr}</Text>
+          )}
+          {currentLang !== 'fr' && currentTranslation?.explanation && (
+            <Text style={styles.feedbackExplanationTranslated}>{currentTranslation.explanation}</Text>
           )}
         </View>
       )}
@@ -434,6 +470,21 @@ const styles = StyleSheet.create({
     color: '#333',
     lineHeight: 26,
   },
+  translationBlock: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 8,
+    marginTop: 14,
+    paddingTop: 14,
+    borderTopWidth: 1,
+    borderTopColor: '#E8EDF5',
+  },
+  translatedText: {
+    fontSize: 16,
+    color: '#002395',
+    lineHeight: 24,
+    flex: 1,
+  },
   choices: {
     gap: 12,
     marginBottom: 20,
@@ -487,9 +538,20 @@ const styles = StyleSheet.create({
   choiceIdTextWhite: {
     color: '#FFFFFF',
   },
-  choiceText: {
+  choiceTextContainer: {
     flex: 1,
+  },
+  choiceText: {
     fontSize: 16,
+  },
+  choiceTranslation: {
+    fontSize: 13,
+    color: '#002395',
+    marginTop: 4,
+    lineHeight: 18,
+  },
+  choiceTranslationLight: {
+    color: 'rgba(255,255,255,0.8)',
   },
   choiceTextDefault: {
     color: '#333',
@@ -522,6 +584,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
     lineHeight: 20,
+  },
+  feedbackExplanationTranslated: {
+    fontSize: 13,
+    color: '#002395',
+    lineHeight: 19,
+    marginTop: 8,
+    paddingTop: 8,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(0,35,149,0.1)',
   },
   nextButton: {
     backgroundColor: '#002395',

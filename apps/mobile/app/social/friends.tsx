@@ -8,21 +8,24 @@ import {
   TextInput,
   ActivityIndicator,
   Alert,
+  RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { type Friendship } from '@civique/shared';
 import { getFriends, requestFriend, respondFriend } from '../../services/social';
 import { useAuthStore } from '../../stores/authStore';
+import { Card, Badge } from '../../components/ui';
 
 export default function FriendsScreen() {
   const [friends, setFriends] = useState<Friendship[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [addInput, setAddInput] = useState('');
   const [sending, setSending] = useState(false);
   const user = useAuthStore((s) => s.user);
 
   const loadFriends = useCallback(async () => {
-    setLoading(true);
+    if (!refreshing) setLoading(true);
     try {
       const data = await getFriends();
       setFriends(data);
@@ -30,12 +33,13 @@ export default function FriendsScreen() {
       // silent
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
-  }, []);
+  }, [refreshing]);
 
   useEffect(() => {
     loadFriends();
-  }, [loadFriends]);
+  }, []);
 
   const accepted = friends.filter((f) => f.status === 'accepted');
   const pendingReceived = friends.filter(
@@ -68,11 +72,25 @@ export default function FriendsScreen() {
     }
   };
 
+  const handleRefresh = () => {
+    setRefreshing(true);
+    loadFriends();
+  };
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.content}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#002395" />
+      }
+    >
       {/* Add friend */}
-      <View style={styles.addSection}>
-        <Text style={styles.sectionTitle}>Ajouter un ami</Text>
+      <Card style={styles.addCard}>
+        <View style={styles.addHeader}>
+          <Ionicons name="person-add" size={20} color="#002395" />
+          <Text style={styles.addTitle}>Ajouter un ami</Text>
+        </View>
         <View style={styles.addRow}>
           <TextInput
             style={styles.input}
@@ -90,11 +108,11 @@ export default function FriendsScreen() {
             {sending ? (
               <ActivityIndicator size="small" color="#FFF" />
             ) : (
-              <Ionicons name="person-add" size={18} color="#FFF" />
+              <Ionicons name="send" size={18} color="#FFF" />
             )}
           </TouchableOpacity>
         </View>
-      </View>
+      </Card>
 
       {loading ? (
         <View style={styles.center}>
@@ -102,31 +120,40 @@ export default function FriendsScreen() {
         </View>
       ) : (
         <>
-          {/* Pending requests */}
+          {/* Pending received */}
           {pendingReceived.length > 0 && (
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>
-                Demandes re{'\u00e7'}ues ({pendingReceived.length})
-              </Text>
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>
+                  Demandes re{'\u00e7'}ues
+                </Text>
+                <Badge
+                  text={String(pendingReceived.length)}
+                  variant="warning"
+                  size="medium"
+                />
+              </View>
               {pendingReceived.map((f) => (
-                <View key={f.id} style={styles.friendRow}>
-                  <View style={styles.avatar}>
-                    <Ionicons name="person" size={18} color="#FFF" />
+                <Card key={f.id} style={styles.friendCard}>
+                  <View style={styles.friendRow}>
+                    <View style={styles.avatar}>
+                      <Ionicons name="person" size={18} color="#FFF" />
+                    </View>
+                    <Text style={styles.friendName}>{f.requesterId}</Text>
+                    <TouchableOpacity
+                      style={styles.acceptButton}
+                      onPress={() => handleRespond(f.id, 'accepted')}
+                    >
+                      <Ionicons name="checkmark" size={18} color="#FFF" />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.declineButton}
+                      onPress={() => handleRespond(f.id, 'declined')}
+                    >
+                      <Ionicons name="close" size={18} color="#FFF" />
+                    </TouchableOpacity>
                   </View>
-                  <Text style={styles.friendName}>{f.requesterId}</Text>
-                  <TouchableOpacity
-                    style={styles.acceptButton}
-                    onPress={() => handleRespond(f.id, 'accepted')}
-                  >
-                    <Ionicons name="checkmark" size={18} color="#FFF" />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.declineButton}
-                    onPress={() => handleRespond(f.id, 'declined')}
-                  >
-                    <Ionicons name="close" size={18} color="#FFF" />
-                  </TouchableOpacity>
-                </View>
+                </Card>
               ))}
             </View>
           )}
@@ -134,44 +161,71 @@ export default function FriendsScreen() {
           {/* Pending sent */}
           {pendingSent.length > 0 && (
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>
-                Demandes envoy{'\u00e9'}es ({pendingSent.length})
-              </Text>
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>
+                  Demandes envoy{'\u00e9'}es
+                </Text>
+                <Badge
+                  text={String(pendingSent.length)}
+                  variant="info"
+                  size="medium"
+                />
+              </View>
               {pendingSent.map((f) => (
-                <View key={f.id} style={styles.friendRow}>
-                  <View style={styles.avatar}>
-                    <Ionicons name="person" size={18} color="#FFF" />
+                <Card key={f.id} style={styles.friendCard}>
+                  <View style={styles.friendRow}>
+                    <View style={styles.avatar}>
+                      <Ionicons name="person" size={18} color="#FFF" />
+                    </View>
+                    <Text style={styles.friendName}>{f.addresseeId}</Text>
+                    <Badge text="En attente" variant="warning" />
                   </View>
-                  <Text style={styles.friendName}>{f.addresseeId}</Text>
-                  <View style={styles.pendingBadge}>
-                    <Text style={styles.pendingText}>En attente</Text>
-                  </View>
-                </View>
+                </Card>
               ))}
             </View>
           )}
 
           {/* Accepted friends */}
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Mes amis ({accepted.length})</Text>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Mes amis</Text>
+              <Badge
+                text={String(accepted.length)}
+                variant="success"
+                size="medium"
+              />
+            </View>
             {accepted.length === 0 ? (
-              <Text style={styles.emptyText}>
-                Ajoutez des amis pour les d{'\u00e9'}fier !
-              </Text>
+              <View style={styles.emptyContainer}>
+                <Ionicons name="people-outline" size={48} color="#CCC" />
+                <Text style={styles.emptyText}>
+                  Ajoutez des amis pour les d{'\u00e9'}fier !
+                </Text>
+              </View>
             ) : (
               accepted.map((f) => {
                 const friendId =
                   f.requesterId === user?.id ? f.addresseeId : f.requesterId;
                 return (
-                  <View key={f.id} style={styles.friendRow}>
-                    <View style={styles.avatar}>
-                      <Text style={styles.avatarText}>
-                        {friendId[0]?.toUpperCase() || '?'}
-                      </Text>
+                  <Card key={f.id} style={styles.friendCard}>
+                    <View style={styles.friendRow}>
+                      <View style={styles.avatar}>
+                        <Text style={styles.avatarText}>
+                          {friendId[0]?.toUpperCase() || '?'}
+                        </Text>
+                      </View>
+                      <View style={styles.friendInfo}>
+                        <Text style={styles.friendName}>{friendId}</Text>
+                        <Text style={styles.friendSince}>
+                          Ami depuis {new Date(f.createdAt).toLocaleDateString('fr-FR', {
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </Text>
+                      </View>
+                      <Ionicons name="checkmark-circle" size={22} color="#2ECC71" />
                     </View>
-                    <Text style={styles.friendName}>{friendId}</Text>
-                    <Ionicons name="checkmark-circle" size={20} color="#2ECC71" />
-                  </View>
+                  </Card>
                 );
               })
             )}
@@ -189,13 +243,26 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
+    paddingBottom: 30,
   },
   center: {
     paddingVertical: 40,
     alignItems: 'center',
   },
-  addSection: {
-    marginBottom: 24,
+  addCard: {
+    marginBottom: 20,
+    padding: 16,
+  },
+  addHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 12,
+  },
+  addTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
   },
   addRow: {
     flexDirection: 'row',
@@ -203,7 +270,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5F5F5',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -225,76 +292,77 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 24,
   },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 12,
   },
-  emptyText: {
-    fontSize: 14,
-    color: '#999',
-    textAlign: 'center',
-    paddingVertical: 20,
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#333',
+  },
+  friendCard: {
+    marginBottom: 8,
+    padding: 14,
   },
   friendRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 8,
     gap: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 3,
-    elevation: 1,
   },
   avatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: '#002395',
     alignItems: 'center',
     justifyContent: 'center',
   },
   avatarText: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  friendInfo: {
+    flex: 1,
   },
   friendName: {
     flex: 1,
     fontSize: 15,
     color: '#333',
-    fontWeight: '500',
+    fontWeight: '600',
+  },
+  friendSince: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 2,
   },
   acceptButton: {
     backgroundColor: '#2ECC71',
-    borderRadius: 8,
-    width: 34,
-    height: 34,
+    borderRadius: 10,
+    width: 36,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
   },
   declineButton: {
     backgroundColor: '#ED2939',
-    borderRadius: 8,
-    width: 34,
-    height: 34,
+    borderRadius: 10,
+    width: 36,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  pendingBadge: {
-    backgroundColor: '#FFF3E0',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+  emptyContainer: {
+    alignItems: 'center',
+    paddingVertical: 40,
   },
-  pendingText: {
-    fontSize: 12,
-    color: '#F57C00',
-    fontWeight: '600',
+  emptyText: {
+    fontSize: 15,
+    color: '#999',
+    marginTop: 12,
+    textAlign: 'center',
   },
 });

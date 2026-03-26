@@ -8,29 +8,40 @@ import {
   ActivityIndicator,
   Alert,
   TextInput,
+  Modal,
+  Pressable,
+  RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { type Challenge, type ChallengeStatus } from '@civique/shared';
+import { LinearGradient } from 'expo-linear-gradient';
+import { type Challenge, type ChallengeStatus, THEMES } from '@civique/shared';
 import { getChallenges, createChallenge } from '../../services/social';
 import { useAuthStore } from '../../stores/authStore';
+import { Card, Button } from '../../components/ui';
 
-const STATUS_CONFIG: Record<ChallengeStatus, { label: string; color: string; bg: string }> = {
-  pending: { label: 'En attente', color: '#F57C00', bg: '#FFF3E0' },
-  active: { label: 'En cours', color: '#002395', bg: '#EEF1FB' },
-  completed: { label: 'Termin\u00e9', color: '#2ECC71', bg: '#E8F5E9' },
-  declined: { label: 'Refus\u00e9', color: '#999', bg: '#F0F0F0' },
+const STATUS_CONFIG: Record<ChallengeStatus, { label: string; color: string; bg: string; icon: React.ComponentProps<typeof Ionicons>['name'] }> = {
+  pending: { label: 'En attente', color: '#F57C00', bg: '#FFF3E0', icon: 'time' },
+  active: { label: 'En cours', color: '#002395', bg: '#EEF1FB', icon: 'play-circle' },
+  completed: { label: 'Termin\u00e9', color: '#2ECC71', bg: '#E8F5E9', icon: 'checkmark-circle' },
+  declined: { label: 'Refus\u00e9', color: '#999', bg: '#F0F0F0', icon: 'close-circle' },
 };
+
+type Tab = 'mine' | 'invitations';
 
 export default function ChallengesScreen() {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
+  const [activeTab, setActiveTab] = useState<Tab>('mine');
   const [challengeTarget, setChallengeTarget] = useState('');
+  const [selectedTheme, setSelectedTheme] = useState<number | undefined>();
+  const [questionCount, setQuestionCount] = useState('10');
   const [creating, setCreating] = useState(false);
   const user = useAuthStore((s) => s.user);
 
   const loadChallenges = useCallback(async () => {
-    setLoading(true);
+    if (!refreshing) setLoading(true);
     try {
       const data = await getChallenges();
       setChallenges(data);
@@ -38,19 +49,30 @@ export default function ChallengesScreen() {
       // silent
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
-  }, []);
+  }, [refreshing]);
 
   useEffect(() => {
     loadChallenges();
-  }, [loadChallenges]);
+  }, []);
+
+  const myChallenges = challenges.filter((ch) => ch.challengerId === user?.id);
+  const invitations = challenges.filter((ch) => ch.challengedId === user?.id);
+  const displayList = activeTab === 'mine' ? myChallenges : invitations;
 
   const handleCreate = async () => {
     if (!challengeTarget.trim()) return;
     setCreating(true);
     try {
-      await createChallenge({ challengedId: challengeTarget.trim() });
+      await createChallenge({
+        challengedId: challengeTarget.trim(),
+        themeId: selectedTheme,
+        questionCount: parseInt(questionCount, 10) || 10,
+      });
       setChallengeTarget('');
+      setSelectedTheme(undefined);
+      setQuestionCount('10');
       setShowCreate(false);
       loadChallenges();
     } catch {
@@ -60,107 +82,270 @@ export default function ChallengesScreen() {
     }
   };
 
+  const handleRefresh = () => {
+    setRefreshing(true);
+    loadChallenges();
+  };
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={() => setShowCreate(!showCreate)}
+    <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor="#002395" />
+        }
       >
-        <Ionicons name="add-circle" size={20} color="#FFF" />
-        <Text style={styles.createButtonText}>Nouveau d{'\u00e9'}fi</Text>
+        {/* Tab selector */}
+        <View style={styles.tabRow}>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'mine' && styles.tabActive]}
+            onPress={() => setActiveTab('mine')}
+          >
+            <Text style={[styles.tabText, activeTab === 'mine' && styles.tabTextActive]}>
+              Mes d{'\u00e9'}fis ({myChallenges.length})
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'invitations' && styles.tabActive]}
+            onPress={() => setActiveTab('invitations')}
+          >
+            <Text style={[styles.tabText, activeTab === 'invitations' && styles.tabTextActive]}>
+              Invitations ({invitations.length})
+            </Text>
+            {invitations.filter((i) => i.status === 'pending').length > 0 && (
+              <View style={styles.notifDot} />
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {loading ? (
+          <View style={styles.center}>
+            <ActivityIndicator size="large" color="#002395" />
+          </View>
+        ) : displayList.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Ionicons
+              name={activeTab === 'mine' ? 'flash-outline' : 'mail-outline'}
+              size={48}
+              color="#CCC"
+            />
+            <Text style={styles.emptyText}>
+              {activeTab === 'mine'
+                ? 'Aucun d\u00e9fi pour le moment'
+                : 'Aucune invitation'}
+            </Text>
+            <Text style={styles.emptySubtext}>
+              {activeTab === 'mine'
+                ? 'D\u00e9fiez vos amis pour comparer vos scores !'
+                : 'Les d\u00e9fis de vos amis appara\u00eetront ici'}
+            </Text>
+          </View>
+        ) : (
+          displayList.map((ch) => {
+            const isSent = ch.challengerId === user?.id;
+            const opponentId = isSent ? ch.challengedId : ch.challengerId;
+            const config = STATUS_CONFIG[ch.status];
+            const theme = ch.themeId
+              ? THEMES.find((t) => t.id === ch.themeId)
+              : undefined;
+
+            return (
+              <Card key={ch.id} style={styles.challengeCard}>
+                <View style={styles.challengeHeader}>
+                  <View style={styles.avatar}>
+                    <Text style={styles.avatarText}>
+                      {opponentId[0]?.toUpperCase() || '?'}
+                    </Text>
+                  </View>
+                  <View style={styles.challengeInfo}>
+                    <Text style={styles.challengeName}>
+                      {isSent ? 'D\u00e9fi envoy\u00e9' : 'D\u00e9fi re\u00e7u'}
+                    </Text>
+                    <Text style={styles.challengeOpponent}>
+                      vs {opponentId}
+                    </Text>
+                  </View>
+                  <View style={[styles.statusBadge, { backgroundColor: config.bg }]}>
+                    <Ionicons name={config.icon} size={14} color={config.color} />
+                    <Text style={[styles.statusText, { color: config.color }]}>
+                      {config.label}
+                    </Text>
+                  </View>
+                </View>
+
+                {/* Challenge details */}
+                <View style={styles.detailsRow}>
+                  <View style={styles.detailItem}>
+                    <Ionicons name="help-circle-outline" size={16} color="#999" />
+                    <Text style={styles.detailText}>
+                      {ch.questionCount} questions
+                    </Text>
+                  </View>
+                  {theme && (
+                    <View style={styles.detailItem}>
+                      <View
+                        style={[styles.themeDot, { backgroundColor: theme.color }]}
+                      />
+                      <Text style={styles.detailText}>{theme.nameFr}</Text>
+                    </View>
+                  )}
+                </View>
+
+                {ch.status === 'completed' && (
+                  <View style={styles.scoreRow}>
+                    <View style={styles.scoreCol}>
+                      <Text style={styles.scoreLabel}>Vous</Text>
+                      <Text
+                        style={[
+                          styles.scoreValue,
+                          {
+                            color:
+                              (isSent ? ch.challengerScore : ch.challengedScore ?? 0) >=
+                              (isSent ? ch.challengedScore : ch.challengerScore ?? 0)
+                                ? '#2ECC71'
+                                : '#ED2939',
+                          },
+                        ]}
+                      >
+                        {isSent ? ch.challengerScore : ch.challengedScore ?? '-'}%
+                      </Text>
+                    </View>
+                    <View style={styles.vsCircle}>
+                      <Text style={styles.vsText}>VS</Text>
+                    </View>
+                    <View style={styles.scoreCol}>
+                      <Text style={styles.scoreLabel}>Adversaire</Text>
+                      <Text style={styles.scoreValue}>
+                        {isSent ? ch.challengedScore : ch.challengerScore ?? '-'}%
+                      </Text>
+                    </View>
+                  </View>
+                )}
+              </Card>
+            );
+          })
+        )}
+      </ScrollView>
+
+      {/* FAB */}
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => setShowCreate(true)}
+        activeOpacity={0.8}
+      >
+        <LinearGradient
+          colors={['#002395', '#1a3fad']}
+          style={styles.fabGradient}
+        >
+          <Ionicons name="flash" size={24} color="#FFFFFF" />
+        </LinearGradient>
       </TouchableOpacity>
 
-      {showCreate && (
-        <View style={styles.createCard}>
-          <Text style={styles.createLabel}>D{'\u00e9'}fier un ami</Text>
-          <View style={styles.createRow}>
+      {/* Create challenge modal */}
+      <Modal
+        visible={showCreate}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowCreate(false)}
+      >
+        <Pressable style={styles.modalOverlay} onPress={() => setShowCreate(false)}>
+          <Pressable style={styles.modalSheet} onPress={(e) => e.stopPropagation()}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>Lancer un d{'\u00e9'}fi</Text>
+
+            <Text style={styles.inputLabel}>Ami (email ou ID)</Text>
             <TextInput
               style={styles.input}
-              placeholder="ID de l'ami..."
+              placeholder="Entrez l'identifiant de votre ami..."
               placeholderTextColor="#AAA"
               value={challengeTarget}
               onChangeText={setChallengeTarget}
               autoCapitalize="none"
             />
-            <TouchableOpacity
-              style={[styles.sendButton, !challengeTarget.trim() && styles.sendButtonDisabled]}
-              onPress={handleCreate}
-              disabled={!challengeTarget.trim() || creating}
+
+            <Text style={styles.inputLabel}>Th{'\u00e8'}me (optionnel)</Text>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.themeScroll}
             >
-              {creating ? (
-                <ActivityIndicator size="small" color="#FFF" />
-              ) : (
-                <Text style={styles.sendButtonText}>Envoyer</Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-      )}
+              <TouchableOpacity
+                style={[
+                  styles.themeChip,
+                  !selectedTheme && styles.themeChipSelected,
+                ]}
+                onPress={() => setSelectedTheme(undefined)}
+              >
+                <Text
+                  style={[
+                    styles.themeChipText,
+                    !selectedTheme && styles.themeChipTextSelected,
+                  ]}
+                >
+                  Tous
+                </Text>
+              </TouchableOpacity>
+              {THEMES.map((t) => (
+                <TouchableOpacity
+                  key={t.id}
+                  style={[
+                    styles.themeChip,
+                    selectedTheme === t.id && {
+                      backgroundColor: t.color,
+                      borderColor: t.color,
+                    },
+                  ]}
+                  onPress={() => setSelectedTheme(t.id)}
+                >
+                  <Text
+                    style={[
+                      styles.themeChipText,
+                      selectedTheme === t.id && { color: '#FFFFFF' },
+                    ]}
+                    numberOfLines={1}
+                  >
+                    {t.nameFr}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
 
-      {loading ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" color="#002395" />
-        </View>
-      ) : challenges.length === 0 ? (
-        <View style={styles.emptyContainer}>
-          <Ionicons name="trophy-outline" size={48} color="#CCC" />
-          <Text style={styles.emptyText}>Aucun d{'\u00e9'}fi pour le moment</Text>
-          <Text style={styles.emptySubtext}>
-            D{'\u00e9'}fiez vos amis pour comparer vos scores !
-          </Text>
-        </View>
-      ) : (
-        challenges.map((ch) => {
-          const isSent = ch.challengerId === user?.id;
-          const opponentId = isSent ? ch.challengedId : ch.challengerId;
-          const config = STATUS_CONFIG[ch.status];
-          return (
-            <View key={ch.id} style={styles.challengeCard}>
-              <View style={styles.challengeHeader}>
-                <View style={styles.avatar}>
-                  <Text style={styles.avatarText}>
-                    {opponentId[0]?.toUpperCase() || '?'}
+            <Text style={styles.inputLabel}>Nombre de questions</Text>
+            <View style={styles.countRow}>
+              {['5', '10', '20'].map((n) => (
+                <TouchableOpacity
+                  key={n}
+                  style={[
+                    styles.countChip,
+                    questionCount === n && styles.countChipSelected,
+                  ]}
+                  onPress={() => setQuestionCount(n)}
+                >
+                  <Text
+                    style={[
+                      styles.countChipText,
+                      questionCount === n && styles.countChipTextSelected,
+                    ]}
+                  >
+                    {n}
                   </Text>
-                </View>
-                <View style={styles.challengeInfo}>
-                  <Text style={styles.challengeName}>
-                    {isSent ? 'vs ' : ''}
-                    {opponentId}
-                  </Text>
-                  <Text style={styles.challengeMeta}>
-                    {ch.questionCount} questions
-                    {ch.themeId ? ` \u2022 Th\u00e8me ${ch.themeId}` : ''}
-                  </Text>
-                </View>
-                <View style={[styles.statusBadge, { backgroundColor: config.bg }]}>
-                  <Text style={[styles.statusText, { color: config.color }]}>
-                    {config.label}
-                  </Text>
-                </View>
-              </View>
-
-              {ch.status === 'completed' && (
-                <View style={styles.scoreRow}>
-                  <View style={styles.scoreCol}>
-                    <Text style={styles.scoreLabel}>Vous</Text>
-                    <Text style={styles.scoreValue}>
-                      {isSent ? ch.challengerScore : ch.challengedScore ?? '-'}%
-                    </Text>
-                  </View>
-                  <Ionicons name="swap-horizontal" size={20} color="#CCC" />
-                  <View style={styles.scoreCol}>
-                    <Text style={styles.scoreLabel}>Adversaire</Text>
-                    <Text style={styles.scoreValue}>
-                      {isSent ? ch.challengedScore : ch.challengerScore ?? '-'}%
-                    </Text>
-                  </View>
-                </View>
-              )}
+                </TouchableOpacity>
+              ))}
             </View>
-          );
-        })
-      )}
-    </ScrollView>
+
+            <Button
+              title="Envoyer le d\u00e9fi"
+              onPress={handleCreate}
+              loading={creating}
+              disabled={!challengeTarget.trim()}
+              icon="flash"
+              style={{ marginTop: 20 }}
+              size="large"
+            />
+          </Pressable>
+        </Pressable>
+      </Modal>
+    </View>
   );
 }
 
@@ -171,90 +356,65 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
+    paddingBottom: 100,
   },
   center: {
     paddingVertical: 40,
     alignItems: 'center',
   },
-  createButton: {
+  tabRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#002395',
+    backgroundColor: '#E8E8E8',
     borderRadius: 12,
-    padding: 14,
-    gap: 8,
-    marginBottom: 16,
-  },
-  createButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  createCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
+    padding: 3,
     marginBottom: 20,
   },
-  createLabel: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 10,
-  },
-  createRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  input: {
+  tab: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 10,
-    paddingHorizontal: 14,
     paddingVertical: 10,
-    fontSize: 14,
-    color: '#333',
-  },
-  sendButton: {
-    backgroundColor: '#002395',
+    alignItems: 'center',
     borderRadius: 10,
-    paddingHorizontal: 16,
+    flexDirection: 'row',
     justifyContent: 'center',
+    gap: 4,
   },
-  sendButtonDisabled: {
-    opacity: 0.5,
+  tabActive: {
+    backgroundColor: '#002395',
   },
-  sendButtonText: {
-    color: '#FFF',
-    fontWeight: '600',
+  tabText: {
     fontSize: 14,
+    fontWeight: '500',
+    color: '#666',
+  },
+  tabTextActive: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  notifDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#ED2939',
   },
   emptyContainer: {
     alignItems: 'center',
     paddingVertical: 60,
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     color: '#999',
     marginTop: 12,
   },
   emptySubtext: {
-    fontSize: 13,
+    fontSize: 14,
     color: '#BBB',
     marginTop: 4,
+    textAlign: 'center',
   },
   challengeCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 3,
-    elevation: 1,
+    padding: 16,
   },
   challengeHeader: {
     flexDirection: 'row',
@@ -262,16 +422,16 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: '#002395',
     alignItems: 'center',
     justifyContent: 'center',
   },
   avatarText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   challengeInfo: {
@@ -282,19 +442,44 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333',
   },
-  challengeMeta: {
-    fontSize: 12,
+  challengeOpponent: {
+    fontSize: 13,
     color: '#999',
     marginTop: 2,
   },
   statusBadge: {
-    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 10,
     paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 5,
+    gap: 4,
   },
   statusText: {
     fontSize: 12,
     fontWeight: '600',
+  },
+  detailsRow: {
+    flexDirection: 'row',
+    gap: 16,
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#F5F5F5',
+  },
+  detailItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  detailText: {
+    fontSize: 13,
+    color: '#999',
+  },
+  themeDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
   scoreRow: {
     flexDirection: 'row',
@@ -308,6 +493,7 @@ const styles = StyleSheet.create({
   },
   scoreCol: {
     alignItems: 'center',
+    flex: 1,
   },
   scoreLabel: {
     fontSize: 12,
@@ -315,8 +501,133 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   scoreValue: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    color: '#002395',
+  },
+  vsCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#F0F0F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  vsText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#999',
+  },
+  // FAB
+  fab: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+    borderRadius: 28,
+    shadowColor: '#002395',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  fabGradient: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // Modal
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    justifyContent: 'flex-end',
+  },
+  modalSheet: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 24,
+    paddingBottom: 40,
+  },
+  modalHandle: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#DDD',
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+  },
+  inputLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#555',
+    marginBottom: 8,
+  },
+  input: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    fontSize: 15,
+    color: '#333',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#E8E8E8',
+  },
+  themeScroll: {
+    marginBottom: 16,
+  },
+  themeChip: {
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginRight: 8,
+    backgroundColor: '#F5F5F5',
+    borderWidth: 1,
+    borderColor: '#E8E8E8',
+  },
+  themeChipSelected: {
+    backgroundColor: '#002395',
+    borderColor: '#002395',
+  },
+  themeChipText: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#666',
+  },
+  themeChipTextSelected: {
+    color: '#FFFFFF',
+  },
+  countRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  countChip: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderRadius: 12,
+    backgroundColor: '#F5F5F5',
+    borderWidth: 1.5,
+    borderColor: '#E8E8E8',
+  },
+  countChipSelected: {
+    backgroundColor: '#EEF1FB',
+    borderColor: '#002395',
+  },
+  countChipText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#666',
+  },
+  countChipTextSelected: {
     color: '#002395',
   },
 });

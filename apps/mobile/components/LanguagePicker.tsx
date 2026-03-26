@@ -44,12 +44,16 @@ export default function LanguagePicker({ onLanguageChange }: LanguagePickerProps
       <Modal
         visible={visible}
         transparent
-        animationType="fade"
+        animationType="slide"
         onRequestClose={() => setVisible(false)}
       >
         <Pressable style={styles.overlay} onPress={() => setVisible(false)}>
-          <View style={styles.sheet}>
+          <Pressable style={styles.sheet} onPress={(e) => e.stopPropagation()}>
+            <View style={styles.handle} />
             <Text style={styles.sheetTitle}>Choisir la langue</Text>
+            <Text style={styles.sheetSubtitle}>
+              S{'\u00e9'}lectionnez votre langue pr{'\u00e9'}f{'\u00e9'}r{'\u00e9'}e
+            </Text>
             {LANGUAGES.map((lang) => {
               const isSelected = lang.code === currentLang;
               return (
@@ -57,12 +61,13 @@ export default function LanguagePicker({ onLanguageChange }: LanguagePickerProps
                   key={lang.code}
                   style={[styles.option, isSelected && styles.optionSelected]}
                   onPress={() => handleSelect(lang.code)}
+                  activeOpacity={0.7}
                 >
                   <View style={styles.optionLeft}>
-                    <Text style={[styles.optionName, isSelected && styles.optionNameSelected]}>
+                    <Text style={[styles.optionNative, isSelected && styles.optionNativeSelected]}>
                       {lang.nativeName}
                     </Text>
-                    <Text style={styles.optionSub}>{lang.name}</Text>
+                    <Text style={styles.optionName}>{lang.name}</Text>
                   </View>
                   <View style={styles.optionRight}>
                     {lang.rtl && (
@@ -70,14 +75,16 @@ export default function LanguagePicker({ onLanguageChange }: LanguagePickerProps
                         <Text style={styles.rtlText}>RTL</Text>
                       </View>
                     )}
-                    {isSelected && (
-                      <Ionicons name="checkmark-circle" size={22} color="#002395" />
+                    {isSelected ? (
+                      <Ionicons name="checkmark-circle" size={24} color="#002395" />
+                    ) : (
+                      <View style={styles.unselectedCircle} />
                     )}
                   </View>
                 </TouchableOpacity>
               );
             })}
-          </View>
+          </Pressable>
         </Pressable>
       </Modal>
     </>
@@ -106,45 +113,60 @@ const styles = StyleSheet.create({
   },
   sheet: {
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
     padding: 20,
     paddingBottom: 40,
   },
+  handle: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#DDD',
+    alignSelf: 'center',
+    marginBottom: 16,
+  },
   sheetTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 16,
     textAlign: 'center',
+  },
+  sheetSubtitle: {
+    fontSize: 14,
+    color: '#999',
+    textAlign: 'center',
+    marginTop: 4,
+    marginBottom: 20,
   },
   option: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 14,
     marginBottom: 8,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#F8F8F8',
+    borderWidth: 1.5,
+    borderColor: 'transparent',
   },
   optionSelected: {
-    backgroundColor: '#EEF1FB',
-    borderWidth: 1,
+    backgroundColor: '#F0F3FF',
     borderColor: '#002395',
   },
   optionLeft: {
     flex: 1,
   },
-  optionName: {
-    fontSize: 16,
+  optionNative: {
+    fontSize: 17,
     fontWeight: '500',
     color: '#333',
   },
-  optionNameSelected: {
+  optionNativeSelected: {
     color: '#002395',
-    fontWeight: '600',
+    fontWeight: '700',
   },
-  optionSub: {
+  optionName: {
     fontSize: 13,
     color: '#999',
     marginTop: 2,
@@ -156,13 +178,20 @@ const styles = StyleSheet.create({
   },
   rtlBadge: {
     backgroundColor: '#FFD700',
-    borderRadius: 6,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
   },
   rtlText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '700',
     color: '#333',
+  },
+  unselectedCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#DDD',
   },
 });

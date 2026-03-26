@@ -253,6 +253,40 @@ export default function ExamSessionScreen() {
         </View>
       </ScrollView>
 
+      {/* Question Dots */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.dotsScroll}
+        contentContainerStyle={styles.dotsContainer}
+      >
+        {questions.map((q, idx) => {
+          const isAnswered = answers[q.id] !== undefined;
+          const isCurrent = idx === currentIndex;
+          return (
+            <TouchableOpacity
+              key={idx}
+              style={[
+                styles.dot,
+                isAnswered && styles.dotAnswered,
+                isCurrent && styles.dotCurrent,
+              ]}
+              onPress={() => goToQuestion(idx)}
+            >
+              <Text
+                style={[
+                  styles.dotText,
+                  isAnswered && styles.dotTextAnswered,
+                  isCurrent && styles.dotTextCurrent,
+                ]}
+              >
+                {idx + 1}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </ScrollView>
+
       {/* Navigation */}
       <View style={styles.navRow}>
         <TouchableOpacity
@@ -273,6 +307,18 @@ export default function ExamSessionScreen() {
           >
             Pr{'\u00e9'}c{'\u00e9'}dent
           </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.finishSmallButton]}
+          onPress={confirmFinish}
+          disabled={isFinishing}
+        >
+          {isFinishing ? (
+            <ActivityIndicator color="#ED2939" size="small" />
+          ) : (
+            <Text style={styles.finishSmallButtonText}>Terminer</Text>
+          )}
         </TouchableOpacity>
 
         {currentIndex < totalQuestions - 1 ? (
@@ -479,5 +525,52 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  finishSmallButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+  },
+  finishSmallButtonText: {
+    color: '#ED2939',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  dotsScroll: {
+    maxHeight: 44,
+    marginBottom: 8,
+  },
+  dotsContainer: {
+    flexDirection: 'row',
+    gap: 6,
+    paddingHorizontal: 4,
+    alignItems: 'center',
+  },
+  dot: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#F0F0F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  dotAnswered: {
+    backgroundColor: '#002395',
+  },
+  dotCurrent: {
+    borderColor: '#002395',
+    backgroundColor: '#FFFFFF',
+  },
+  dotText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#999',
+  },
+  dotTextAnswered: {
+    color: '#FFFFFF',
+  },
+  dotTextCurrent: {
+    color: '#002395',
   },
 });

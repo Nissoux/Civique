@@ -10,19 +10,21 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import { createCheckout } from '../../services/payments';
+import { Card, Button } from '../../components/ui';
 
 type Plan = 'monthly' | 'yearly';
 
 const FEATURES = [
-  { name: 'Questions gratuites', free: true, premium: true },
-  { name: 'Examens blancs illimit\u00e9s', free: false, premium: true },
-  { name: 'Fiches de r\u00e9vision compl\u00e8tes', free: false, premium: true },
-  { name: 'Statistiques d\u00e9taill\u00e9es', free: false, premium: true },
-  { name: 'Traductions (6 langues)', free: false, premium: true },
-  { name: 'D\u00e9fis entre amis', free: true, premium: true },
-  { name: 'Sans publicit\u00e9', free: false, premium: true },
+  { name: 'Questions gratuites', free: true, premium: true, icon: 'help-circle' as const },
+  { name: 'Examens blancs illimit\u00e9s', free: false, premium: true, icon: 'school' as const },
+  { name: 'Fiches de r\u00e9vision compl\u00e8tes', free: false, premium: true, icon: 'document-text' as const },
+  { name: 'Statistiques d\u00e9taill\u00e9es', free: false, premium: true, icon: 'stats-chart' as const },
+  { name: 'Traductions (6 langues)', free: false, premium: true, icon: 'language' as const },
+  { name: 'D\u00e9fis entre amis', free: true, premium: true, icon: 'flash' as const },
+  { name: 'Sans publicit\u00e9', free: false, premium: true, icon: 'eye-off' as const },
 ];
 
 export default function SubscriptionScreen() {
@@ -43,12 +45,12 @@ export default function SubscriptionScreen() {
         await Linking.openURL(url);
       } else {
         // Placeholder for RevenueCat integration on native
+        console.log(`[Civique] Mock purchase: ${selectedPlan} plan`);
         const { url } = await createCheckout(selectedPlan);
-        // On mobile we would use RevenueCat, but for now open the URL
         await Linking.openURL(url);
       }
     } catch {
-      // silent
+      console.log('[Civique] Purchase flow error (mock)');
     } finally {
       setPurchasing(false);
     }
@@ -73,20 +75,54 @@ export default function SubscriptionScreen() {
 
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        <View style={styles.premiumActiveCard}>
-          <View style={styles.starCircle}>
-            <Ionicons name="star" size={32} color="#FFD700" />
+        <LinearGradient
+          colors={['#FFD700', '#FFC107']}
+          style={styles.premiumHeader}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+        >
+          <View style={styles.premiumStarCircle}>
+            <Ionicons name="star" size={36} color="#FFD700" />
           </View>
-          <Text style={styles.premiumActiveTitle}>Merci d'{'\u00ea'}tre Premium !</Text>
-          <Text style={styles.premiumActiveDesc}>
-            Vous avez acc{'\u00e8'}s {'\u00e0'} tout le contenu de Civique.
+          <Text style={styles.premiumHeaderTitle}>Merci d'{'\u00ea'}tre Premium !</Text>
+          <Text style={styles.premiumHeaderDesc}>
+            Vous avez acc{'\u00e8'}s {'\u00e0'} tout le contenu de Civique
           </Text>
+        </LinearGradient>
+
+        <Card style={styles.premiumInfoCard}>
           {expiryDate && (
-            <Text style={styles.expiryText}>
-              Votre abonnement expire le {expiryDate}
-            </Text>
+            <View style={styles.premiumInfoRow}>
+              <View style={styles.premiumInfoIcon}>
+                <Ionicons name="calendar" size={20} color="#002395" />
+              </View>
+              <View style={styles.premiumInfoContent}>
+                <Text style={styles.premiumInfoLabel}>Date d'expiration</Text>
+                <Text style={styles.premiumInfoValue}>{expiryDate}</Text>
+              </View>
+            </View>
           )}
-        </View>
+          <View style={styles.premiumInfoRow}>
+            <View style={styles.premiumInfoIcon}>
+              <Ionicons name="checkmark-circle" size={20} color="#2ECC71" />
+            </View>
+            <View style={styles.premiumInfoContent}>
+              <Text style={styles.premiumInfoLabel}>Statut</Text>
+              <Text style={[styles.premiumInfoValue, { color: '#2ECC71' }]}>Actif</Text>
+            </View>
+          </View>
+        </Card>
+
+        {/* Features you have */}
+        <Card style={styles.featuresCard}>
+          <Text style={styles.featuresTitle}>Vos avantages Premium</Text>
+          {FEATURES.filter(f => f.premium).map((f, idx) => (
+            <View key={idx} style={styles.featureCheckRow}>
+              <Ionicons name="checkmark-circle" size={20} color="#2ECC71" />
+              <Text style={styles.featureCheckText}>{f.name}</Text>
+            </View>
+          ))}
+        </Card>
       </ScrollView>
     );
   }
@@ -94,56 +130,75 @@ export default function SubscriptionScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {/* Header */}
-      <View style={styles.header}>
-        <Ionicons name="star" size={28} color="#FFD700" />
+      <LinearGradient
+        colors={['#002395', '#1a3fad']}
+        style={styles.header}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <LinearGradient
+          colors={['#FFD700', '#FFC107']}
+          style={styles.headerStarCircle}
+        >
+          <Ionicons name="star" size={32} color="#333" />
+        </LinearGradient>
         <Text style={styles.headerTitle}>Passer {'\u00e0'} Premium</Text>
         <Text style={styles.headerDesc}>
           D{'\u00e9'}bloquez tout le contenu et pr{'\u00e9'}parez votre examen sereinement
         </Text>
-      </View>
+      </LinearGradient>
 
-      {/* Comparison table */}
-      <View style={styles.comparisonCard}>
+      {/* Feature comparison */}
+      <Card style={styles.comparisonCard}>
         <View style={styles.comparisonHeader}>
-          <Text style={styles.featureLabel}> </Text>
-          <Text style={styles.planLabel}>Gratuit</Text>
-          <Text style={[styles.planLabel, styles.premiumLabel]}>Premium</Text>
+          <Text style={styles.compHeaderFeature}>Fonctionnalit{'\u00e9'}</Text>
+          <Text style={styles.compHeaderFree}>Gratuit</Text>
+          <Text style={styles.compHeaderPremium}>Premium</Text>
         </View>
         {FEATURES.map((f, idx) => (
           <View
             key={idx}
             style={[styles.featureRow, idx % 2 === 0 && styles.featureRowAlt]}
           >
-            <Text style={styles.featureName}>{f.name}</Text>
+            <View style={styles.featureNameRow}>
+              <Ionicons name={f.icon} size={16} color="#666" />
+              <Text style={styles.featureName}>{f.name}</Text>
+            </View>
             <View style={styles.checkCell}>
               {f.free ? (
-                <Ionicons name="checkmark-circle" size={20} color="#2ECC71" />
+                <Ionicons name="checkmark-circle" size={22} color="#2ECC71" />
               ) : (
-                <Ionicons name="close-circle" size={20} color="#DDD" />
+                <Ionicons name="close-circle" size={22} color="#DDD" />
               )}
             </View>
             <View style={styles.checkCell}>
-              <Ionicons name="checkmark-circle" size={20} color="#2ECC71" />
+              <Ionicons name="checkmark-circle" size={22} color="#2ECC71" />
             </View>
           </View>
         ))}
-      </View>
+      </Card>
 
       {/* Pricing options */}
+      <Text style={styles.pricingSectionTitle}>Choisissez votre formule</Text>
       <View style={styles.pricingSection}>
         <TouchableOpacity
           style={[styles.planCard, selectedPlan === 'yearly' && styles.planCardSelected]}
           onPress={() => setSelectedPlan('yearly')}
+          activeOpacity={0.7}
         >
           <View style={styles.bestValueBadge}>
+            <Ionicons name="ribbon" size={12} color="#333" />
             <Text style={styles.bestValueText}>Meilleure offre</Text>
           </View>
           <Text style={styles.planPrice}>29,99{'\u20ac'}</Text>
           <Text style={styles.planPeriod}>par an</Text>
-          <Text style={styles.planSaving}>2,50{'\u20ac'}/mois - {'\u00c9'}conomisez 50%</Text>
+          <View style={styles.savingBadge}>
+            <Text style={styles.savingText}>2,50{'\u20ac'}/mois</Text>
+          </View>
+          <Text style={styles.savingPercent}>{'\u00c9'}conomisez 50%</Text>
           {selectedPlan === 'yearly' && (
-            <View style={styles.selectedDot}>
-              <Ionicons name="checkmark-circle" size={24} color="#002395" />
+            <View style={styles.selectedCheck}>
+              <Ionicons name="checkmark-circle" size={26} color="#002395" />
             </View>
           )}
         </TouchableOpacity>
@@ -151,13 +206,14 @@ export default function SubscriptionScreen() {
         <TouchableOpacity
           style={[styles.planCard, selectedPlan === 'monthly' && styles.planCardSelected]}
           onPress={() => setSelectedPlan('monthly')}
+          activeOpacity={0.7}
         >
-          <Text style={styles.planPrice}>4,99{'\u20ac'}</Text>
+          <Text style={[styles.planPrice, { marginTop: 20 }]}>4,99{'\u20ac'}</Text>
           <Text style={styles.planPeriod}>par mois</Text>
-          <Text style={styles.planSaving}>Sans engagement</Text>
+          <Text style={styles.planFlexible}>Sans engagement</Text>
           {selectedPlan === 'monthly' && (
-            <View style={styles.selectedDot}>
-              <Ionicons name="checkmark-circle" size={24} color="#002395" />
+            <View style={styles.selectedCheck}>
+              <Ionicons name="checkmark-circle" size={26} color="#002395" />
             </View>
           )}
         </TouchableOpacity>
@@ -168,15 +224,32 @@ export default function SubscriptionScreen() {
         style={styles.subscribeButton}
         onPress={handleSubscribe}
         disabled={purchasing}
+        activeOpacity={0.8}
       >
-        {purchasing ? (
-          <ActivityIndicator size="small" color="#333" />
-        ) : (
-          <Text style={styles.subscribeButtonText}>
-            S'abonner - {selectedPlan === 'yearly' ? '29,99\u20ac/an' : '4,99\u20ac/mois'}
-          </Text>
-        )}
+        <LinearGradient
+          colors={['#FFD700', '#FFB300']}
+          style={styles.subscribeGradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          {purchasing ? (
+            <ActivityIndicator size="small" color="#333" />
+          ) : (
+            <>
+              <Ionicons name="star" size={20} color="#333" />
+              <Text style={styles.subscribeButtonText}>
+                S'abonner - {selectedPlan === 'yearly' ? '29,99\u20ac/an' : '4,99\u20ac/mois'}
+              </Text>
+            </>
+          )}
+        </LinearGradient>
       </TouchableOpacity>
+
+      {/* Terms */}
+      <Text style={styles.terms}>
+        En vous abonnant, vous acceptez nos conditions g{'\u00e9'}n{'\u00e9'}rales d'utilisation.
+        L'abonnement se renouvelle automatiquement sauf annulation pr{'\u00e9'}alable.
+      </Text>
 
       {Platform.OS !== 'web' && (
         <Text style={styles.disclaimer}>
@@ -193,7 +266,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   content: {
-    padding: 20,
+    paddingBottom: 40,
   },
   center: {
     flex: 1,
@@ -201,99 +274,143 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F5F5F5',
   },
+  // Header
   header: {
     alignItems: 'center',
-    marginBottom: 24,
+    paddingTop: 24,
+    paddingBottom: 32,
+    paddingHorizontal: 20,
+  },
+  headerStarCircle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
   },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#333',
-    marginTop: 8,
+    color: '#FFFFFF',
   },
   headerDesc: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 15,
+    color: 'rgba(255,255,255,0.8)',
     textAlign: 'center',
-    marginTop: 6,
-    lineHeight: 20,
+    marginTop: 8,
+    lineHeight: 22,
   },
+  // Comparison
   comparisonCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    marginHorizontal: 16,
+    marginTop: -16,
+    padding: 0,
     overflow: 'hidden',
     marginBottom: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
   },
   comparisonHeader: {
     flexDirection: 'row',
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 14,
     backgroundColor: '#F9F9F9',
     borderBottomWidth: 1,
     borderBottomColor: '#ECECEC',
   },
-  featureLabel: {
+  compHeaderFeature: {
     flex: 1,
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#999',
   },
-  planLabel: {
-    width: 70,
+  compHeaderFree: {
+    width: 65,
     textAlign: 'center',
     fontSize: 13,
     fontWeight: '600',
     color: '#999',
   },
-  premiumLabel: {
-    color: '#002395',
+  compHeaderPremium: {
+    width: 65,
+    textAlign: 'center',
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#FFB300',
   },
   featureRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 13,
   },
   featureRowAlt: {
     backgroundColor: '#FAFAFA',
   },
-  featureName: {
+  featureNameRow: {
     flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  featureName: {
     fontSize: 14,
     color: '#555',
+    flex: 1,
   },
   checkCell: {
-    width: 70,
+    width: 65,
     alignItems: 'center',
+  },
+  // Pricing
+  pricingSectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#333',
+    marginHorizontal: 20,
+    marginBottom: 12,
   },
   pricingSection: {
     flexDirection: 'row',
     gap: 12,
+    marginHorizontal: 16,
     marginBottom: 20,
   },
   planCard: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    borderRadius: 16,
+    borderRadius: 18,
     padding: 20,
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#ECECEC',
     position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
   },
   planCardSelected: {
     borderColor: '#002395',
     backgroundColor: '#F8F9FF',
+    shadowColor: '#002395',
+    shadowOpacity: 0.1,
   },
   bestValueBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     position: 'absolute',
-    top: -10,
+    top: -12,
     backgroundColor: '#FFD700',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 3,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    shadowColor: '#FFD700',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   bestValueText: {
     fontSize: 11,
@@ -301,7 +418,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   planPrice: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
     color: '#002395',
     marginTop: 8,
@@ -311,70 +428,152 @@ const styles = StyleSheet.create({
     color: '#666',
     marginTop: 2,
   },
-  planSaving: {
+  savingBadge: {
+    backgroundColor: '#E8F5E9',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    marginTop: 8,
+  },
+  savingText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#2ECC71',
+  },
+  savingPercent: {
     fontSize: 12,
     color: '#2ECC71',
     fontWeight: '600',
-    marginTop: 6,
+    marginTop: 4,
   },
-  selectedDot: {
+  planFlexible: {
+    fontSize: 13,
+    color: '#999',
+    marginTop: 10,
+  },
+  selectedCheck: {
     position: 'absolute',
-    top: 8,
-    right: 8,
+    top: 10,
+    right: 10,
   },
+  // Subscribe button
   subscribeButton: {
-    backgroundColor: '#FFD700',
-    borderRadius: 14,
-    padding: 16,
-    alignItems: 'center',
+    marginHorizontal: 16,
+    borderRadius: 16,
+    overflow: 'hidden',
     marginBottom: 12,
+    shadowColor: '#FFD700',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  subscribeGradient: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 18,
+    gap: 8,
   },
   subscribeButtonText: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: '700',
     color: '#333',
+  },
+  terms: {
+    fontSize: 11,
+    color: '#BBB',
+    textAlign: 'center',
+    marginHorizontal: 24,
+    lineHeight: 16,
+    marginTop: 4,
   },
   disclaimer: {
     fontSize: 12,
     color: '#BBB',
     textAlign: 'center',
-    marginTop: 4,
+    marginTop: 12,
   },
-  premiumActiveCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 32,
+  // Premium active state
+  premiumHeader: {
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    paddingTop: 32,
+    paddingBottom: 36,
+    paddingHorizontal: 20,
   },
-  starCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#FFF8E1',
+  premiumStarCircle: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: 'rgba(255,255,255,0.3)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
   },
-  premiumActiveTitle: {
-    fontSize: 22,
+  premiumHeaderTitle: {
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 8,
   },
-  premiumActiveDesc: {
+  premiumHeaderDesc: {
     fontSize: 15,
-    color: '#666',
+    color: '#555',
     textAlign: 'center',
-    lineHeight: 22,
+    marginTop: 6,
   },
-  expiryText: {
+  premiumInfoCard: {
+    marginHorizontal: 16,
+    marginTop: -16,
+    marginBottom: 16,
+    padding: 20,
+  },
+  premiumInfoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    paddingVertical: 10,
+  },
+  premiumInfoIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: '#EEF1FB',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  premiumInfoContent: {
+    flex: 1,
+  },
+  premiumInfoLabel: {
     fontSize: 13,
     color: '#999',
-    marginTop: 16,
+  },
+  premiumInfoValue: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+    marginTop: 2,
+  },
+  featuresCard: {
+    marginHorizontal: 16,
+    padding: 20,
+  },
+  featuresTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 16,
+  },
+  featureCheckRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F5F5F5',
+  },
+  featureCheckText: {
+    fontSize: 15,
+    color: '#555',
   },
 });
