@@ -4,8 +4,12 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuthStore } from '../stores/authStore';
 import { useLanguageStore } from '../stores/languageStore';
+import { useSubscriptionStore } from '../stores/subscriptionStore';
+import { useExamTypeStore } from '../stores/examTypeStore';
+import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
 
 const queryClient = new QueryClient({
@@ -21,14 +25,24 @@ function RootLayoutNav() {
   const { isAuthenticated, isLoading, setUser, logout, setLoading } =
     useAuthStore();
   const { loadStoredLanguage } = useLanguageStore();
+  const { fetchSubscription } = useSubscriptionStore();
+  const { selectedExamType, loadStoredExamType } = useExamTypeStore();
+  const { loadStoredTheme } = useThemeStore();
   const segments = useSegments();
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
+  const [onboardingDone, setOnboardingDone] = useState(true);
 
   useEffect(() => {
     async function bootstrap() {
       try {
         await loadStoredLanguage();
+        await loadStoredExamType();
+        await loadStoredTheme();
+
+        const onboardingFlag = await AsyncStorage.getItem('onboarding_done');
+        setOnboardingDone(onboardingFlag === 'true');
+
         const { loadStoredTokens } = useAuthStore.getState();
         const { accessToken } = await loadStoredTokens();
 
@@ -36,6 +50,7 @@ function RootLayoutNav() {
           try {
             const user = await authService.getMe();
             setUser(user);
+            fetchSubscription();
           } catch {
             await logout();
           }
@@ -54,13 +69,22 @@ function RootLayoutNav() {
     if (!isReady || isLoading) return;
 
     const inAuthGroup = segments[0] === '(auth)';
+    const onChooseExam = segments[1] === 'choose-exam';
 
-    if (!isAuthenticated && !inAuthGroup) {
+    if (!isAuthenticated && !onboardingDone && segments[0] !== 'onboarding') {
+      router.replace('/onboarding');
+    } else if (!isAuthenticated && onboardingDone && !inAuthGroup) {
       router.replace('/(auth)/login');
     } else if (isAuthenticated && inAuthGroup) {
-      router.replace('/(tabs)');
+      if (!selectedExamType) {
+        router.replace('/(tabs)/choose-exam');
+      } else {
+        router.replace('/(tabs)');
+      }
+    } else if (isAuthenticated && !selectedExamType && !onChooseExam) {
+      router.replace('/(tabs)/choose-exam');
     }
-  }, [isAuthenticated, segments, isReady, isLoading]);
+  }, [isAuthenticated, selectedExamType, segments, isReady, isLoading, onboardingDone]);
 
   if (!isReady || isLoading) {
     return (
@@ -72,6 +96,7 @@ function RootLayoutNav() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="onboarding" options={{ headerShown: false }} />
       <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
@@ -90,6 +115,7 @@ function RootLayoutNav() {
       <Stack.Screen name="fiches" options={{ headerShown: false }} />
       <Stack.Screen name="social" options={{ headerShown: false }} />
       <Stack.Screen name="settings" options={{ headerShown: false }} />
+      <Stack.Screen name="glossaire" options={{ headerShown: false }} />
     </Stack>
   );
 }
@@ -110,6 +136,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#0A0E1A',
   },
 });

@@ -21,7 +21,7 @@ export default function ThemeTrainingScreen() {
   }, [theme, navigation]);
 
   const { data: questions, isLoading, error, refetch } = useRandomQuestions(
-    10,
+    20,
     numericThemeId,
   );
 

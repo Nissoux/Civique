@@ -1,7 +1,16 @@
 import { useState, useCallback } from 'react';
+import axios from 'axios';
 import { useAuthStore } from '../stores/authStore';
 import * as authService from '../services/auth';
 import { useRouter } from 'expo-router';
+
+function getErrorMessage(err: unknown, fallback: string): string {
+  if (axios.isAxiosError(err)) {
+    const msg = err.response?.data?.message || err.response?.data?.error;
+    return typeof msg === 'string' ? msg : fallback;
+  }
+  return fallback;
+}
 
 export function useAuth() {
   const {
@@ -27,12 +36,8 @@ export function useAuth() {
         await setTokens(response.accessToken, response.refreshToken);
         setUser(response.user);
         router.replace('/(tabs)');
-      } catch (err: any) {
-        const message =
-          err.response?.data?.message ||
-          err.response?.data?.error ||
-          'Identifiants invalides. Veuillez réessayer.';
-        setError(message);
+      } catch (err: unknown) {
+        setError(getErrorMessage(err, 'Identifiants invalides. Veuillez r\u00e9essayer.'));
         throw err;
       } finally {
         setIsSubmitting(false);
@@ -54,12 +59,8 @@ export function useAuth() {
         await setTokens(response.accessToken, response.refreshToken);
         setUser(response.user);
         router.replace('/(tabs)');
-      } catch (err: any) {
-        const message =
-          err.response?.data?.message ||
-          err.response?.data?.error ||
-          "Erreur lors de l'inscription. Veuillez réessayer.";
-        setError(message);
+      } catch (err: unknown) {
+        setError(getErrorMessage(err, "Erreur lors de l'inscription. Veuillez r\u00e9essayer."));
         throw err;
       } finally {
         setIsSubmitting(false);

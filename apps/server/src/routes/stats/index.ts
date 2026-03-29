@@ -10,6 +10,7 @@ import {
   themes,
 } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
+import { checkPracticeQuota, getQuotaStatus } from '../../middleware/quota.js';
 
 const historyQuerySchema = z.object({
   period: z.enum(['week', 'month', 'all']).default('month'),
@@ -27,8 +28,16 @@ export default async function statsRoutes(app: FastifyInstance) {
   // ── GET /overview ───────────────────────────────────────
   app.get('/overview', async (request) => {
     const userId = request.currentUser!.id;
+    const examType = (request.query as { examType?: string }).examType;
 
-    // Exam stats
+    // Build exam type filter condition for questions
+    const examTypeFilter = examType ? sql`${examType} = ANY(${questions.examTypes})` : sql`true`;
+
+    // Exam stats (filtered by examType on session)
+    const examTypeSessionFilter = examType
+      ? and(eq(examSessions.userId, userId), eq(examSessions.examType, examType as 'csp' | 'cr' | 'nat'))
+      : eq(examSessions.userId, userId);
+
     const [examStats] = await db
       .select({
         examsTaken: sql<number>`count(*)::int`,
@@ -36,18 +45,25 @@ export default async function statsRoutes(app: FastifyInstance) {
         averageExamScore: sql<number>`coalesce(avg(${examSessions.score}), 0)`,
       })
       .from(examSessions)
-      .where(eq(examSessions.userId, userId));
+      .where(examTypeSessionFilter);
 
-    // Practice stats
+    // Practice stats (filtered by examType on questions)
+    const practiceConditions = [eq(practiceAnswers.userId, userId)];
+
     const [practiceStats] = await db
       .select({
         totalPracticed: sql<number>`count(*)::int`,
         totalCorrect: sql<number>`count(CASE WHEN ${practiceAnswers.isCorrect} = true THEN 1 END)::int`,
+        lastPracticeAt: sql<string | null>`max(${practiceAnswers.answeredAt})`,
       })
       .from(practiceAnswers)
-      .where(eq(practiceAnswers.userId, userId));
+      .innerJoin(questions, eq(practiceAnswers.questionId, questions.id))
+      .where(and(...practiceConditions, examTypeFilter));
 
-    // Also count exam answers for total practiced/correct
+    // Also count exam answers for total practiced/correct (filtered)
+    const examAnswerConditions = [eq(examSessions.userId, userId)];
+    if (examType) examAnswerConditions.push(eq(examSessions.examType, examType as 'csp' | 'cr' | 'nat'));
+
     const [examAnswerStats] = await db
       .select({
         totalAnswered: sql<number>`count(CASE WHEN ${examAnswers.selectedChoice} IS NOT NULL THEN 1 END)::int`,
@@ -55,7 +71,7 @@ export default async function statsRoutes(app: FastifyInstance) {
       })
       .from(examAnswers)
       .innerJoin(examSessions, eq(examAnswers.sessionId, examSessions.id))
-      .where(eq(examSessions.userId, userId));
+      .where(and(...examAnswerConditions));
 
     const totalPracticed = practiceStats.totalPracticed + examAnswerStats.totalAnswered;
     const totalCorrect = practiceStats.totalCorrect + examAnswerStats.totalCorrect;
@@ -100,6 +116,7 @@ export default async function statsRoutes(app: FastifyInstance) {
         examsTaken: examStats.examsTaken,
         examsPassed: examStats.examsPassed,
         averageExamScore: parseFloat(String(examStats.averageExamScore)) || 0,
+        lastPracticeAt: practiceStats.lastPracticeAt ?? null,
       },
     };
   });
@@ -108,6 +125,8 @@ export default async function statsRoutes(app: FastifyInstance) {
   // Per-theme stats combining exam + practice answers
   app.get('/by-theme', async (request) => {
     const userId = request.currentUser!.id;
+    const examType = (request.query as { examType?: string }).examType;
+    const examTypeFilter = examType ? sql`${examType} = ANY(${questions.examTypes})` : sql`true`;
 
     // Practice answers by theme
     const practiceByTheme = await db
@@ -118,7 +137,7 @@ export default async function statsRoutes(app: FastifyInstance) {
       })
       .from(practiceAnswers)
       .innerJoin(questions, eq(practiceAnswers.questionId, questions.id))
-      .where(eq(practiceAnswers.userId, userId))
+      .where(and(eq(practiceAnswers.userId, userId), examTypeFilter))
       .groupBy(questions.themeId);
 
     // Exam answers by theme
@@ -131,7 +150,7 @@ export default async function statsRoutes(app: FastifyInstance) {
       .from(examAnswers)
       .innerJoin(questions, eq(examAnswers.questionId, questions.id))
       .innerJoin(examSessions, eq(examAnswers.sessionId, examSessions.id))
-      .where(eq(examSessions.userId, userId))
+      .where(and(eq(examSessions.userId, userId), examTypeFilter))
       .groupBy(questions.themeId);
 
     // Merge both
@@ -140,6 +159,17 @@ export default async function statsRoutes(app: FastifyInstance) {
       orderBy: themes.displayOrder,
     });
 
+    // Count total available questions per theme (filtered by examType)
+    const questionCounts = await db
+      .select({
+        themeId: questions.themeId,
+        total: sql<number>`count(*)::int`,
+      })
+      .from(questions)
+      .where(examTypeFilter)
+      .groupBy(questions.themeId);
+
+    const questionCountMap = new Map(questionCounts.map((r) => [r.themeId, r.total]));
     const practiceMap = new Map(practiceByTheme.map((r) => [r.themeId, r]));
     const examMap = new Map(examByTheme.map((r) => [r.themeId, r]));
 
@@ -148,13 +178,16 @@ export default async function statsRoutes(app: FastifyInstance) {
       const exam = examMap.get(theme.id);
       const totalAnswered = (practice?.totalAnswered ?? 0) + (exam?.totalAnswered ?? 0);
       const correctAnswers = (practice?.correctAnswers ?? 0) + (exam?.correctAnswers ?? 0);
-      const accuracy = totalAnswered > 0 ? Math.round((correctAnswers / totalAnswered) * 100) : 0;
+      const totalQuestions = questionCountMap.get(theme.id) ?? 0;
+      // Accuracy = correct / total available questions (not just answered)
+      const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
 
       return {
         themeId: theme.id,
         themeName: theme.nameFr,
         totalAnswered,
         correctAnswers,
+        totalQuestions,
         accuracy,
       };
     });
@@ -261,9 +294,16 @@ export default async function statsRoutes(app: FastifyInstance) {
     };
   });
 
+  // ── GET /quota ──────────────────────────────────────────
+  app.get('/quota', async (request) => {
+    const userId = request.currentUser!.id;
+    const quota = await getQuotaStatus(userId);
+    return { data: quota };
+  });
+
   // ── POST /practice ──────────────────────────────────────
-  // Record a practice answer
-  app.post('/practice', async (request, reply) => {
+  // Record a practice answer (with daily quota for free users)
+  app.post('/practice', { preHandler: checkPracticeQuota }, async (request, reply) => {
     const userId = request.currentUser!.id;
     const body = practiceAnswerSchema.parse(request.body);
 

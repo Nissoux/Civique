@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRef } from 'react';
 import * as questionsService from '../services/questions';
 import { useLanguageStore } from '../stores/languageStore';
+import { useExamTypeStore } from '../stores/examTypeStore';
 import type { Language } from '@civique/shared';
 
 export function useRandomQuestions(
@@ -9,30 +11,41 @@ export function useRandomQuestions(
   lang?: Language,
 ) {
   const { currentLang } = useLanguageStore();
+  const { selectedExamType } = useExamTypeStore();
   const effectiveLang = lang || currentLang;
 
+  // Capture the language at first render only — don't refetch on lang change
+  const initialLangRef = useRef(effectiveLang);
+
   return useQuery({
-    queryKey: ['questions', 'random', count, themeId, effectiveLang],
+    // NO language in queryKey — same questions regardless of language changes
+    queryKey: ['questions', 'random', count, themeId, selectedExamType],
     queryFn: () =>
       questionsService.getRandomQuestions({
         count,
         themeId,
-        lang: effectiveLang,
+        lang: initialLangRef.current,
+        examType: selectedExamType || undefined,
       }),
-    staleTime: 0, // Always fetch fresh random questions
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 }
 
 export function useQuestions(params: questionsService.GetQuestionsParams = {}) {
   const { currentLang } = useLanguageStore();
+  const { selectedExamType } = useExamTypeStore();
   const effectiveLang = params.lang || currentLang;
 
   return useQuery({
-    queryKey: ['questions', { ...params, lang: effectiveLang }],
+    queryKey: ['questions', { ...params, lang: effectiveLang, examType: selectedExamType }],
     queryFn: () =>
-      questionsService.getQuestions({ ...params, lang: effectiveLang }),
-    staleTime: 5 * 60 * 1000, // 5 minutes
+      questionsService.getQuestions({
+        ...params,
+        lang: effectiveLang,
+        examType: params.examType || selectedExamType || undefined,
+      }),
+    staleTime: 5 * 60 * 1000,
   });
 }
 
@@ -44,6 +57,6 @@ export function useQuestion(id: number, lang?: Language) {
     queryKey: ['question', id, effectiveLang],
     queryFn: () => questionsService.getQuestion(id, effectiveLang),
     enabled: id > 0,
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 10 * 60 * 1000,
   });
 }

@@ -1,5 +1,7 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { Platform } from 'react-native';
+import { useColors, borderRadius } from '../../constants/theme';
 
 type TabIcon = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -11,24 +13,39 @@ interface TabConfig {
 }
 
 const tabs: TabConfig[] = [
-  { name: 'index', title: 'Accueil', icon: 'home-outline', iconFocused: 'home' },
-  { name: 'train', title: "S'entra\u00eener", icon: 'barbell-outline', iconFocused: 'barbell' },
-  { name: 'fiches', title: 'Fiches', icon: 'document-text-outline', iconFocused: 'document-text' },
-  { name: 'stats', title: 'Stats', icon: 'stats-chart-outline', iconFocused: 'stats-chart' },
-  { name: 'profile', title: 'Profil', icon: 'person-outline', iconFocused: 'person' },
+  { name: 'index', title: "S'entraîner", icon: 'fitness-outline', iconFocused: 'fitness' },
+  { name: 'flashcards', title: 'Mémo', icon: 'albums-outline', iconFocused: 'albums' },
+  { name: 'glossaire', title: 'Glossaire', icon: 'book-outline', iconFocused: 'book' },
+  { name: 'exams', title: 'Examens', icon: 'document-text-outline', iconFocused: 'document-text' },
+  { name: 'profile', title: 'Compte', icon: 'person-outline', iconFocused: 'person' },
 ];
 
+// Hide screens that are no longer tabs
+const hiddenScreens = ['train', 'fiches', 'stats', 'choose-exam'];
+
 export default function TabsLayout() {
+  const c = useColors();
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#002395',
-        tabBarInactiveTintColor: '#999',
-        headerStyle: { backgroundColor: '#002395' },
-        headerTintColor: '#FFFFFF',
+        headerShown: false,
+        tabBarActiveTintColor: c.primary,
+        tabBarInactiveTintColor: c.textTertiary,
         tabBarStyle: {
-          paddingBottom: 4,
-          height: 60,
+          backgroundColor: c.tabBar,
+          borderTopColor: c.tabBarBorder,
+          borderTopWidth: 1,
+          height: Platform.OS === 'ios' ? 88 : 68,
+          paddingBottom: Platform.OS === 'ios' ? 28 : 10,
+          paddingTop: 8,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: '600',
+          letterSpacing: 0.2,
         },
       }}
     >
@@ -41,11 +58,18 @@ export default function TabsLayout() {
             tabBarIcon: ({ focused, color, size }) => (
               <Ionicons
                 name={focused ? tab.iconFocused : tab.icon}
-                size={size}
+                size={22}
                 color={color}
               />
             ),
           }}
+        />
+      ))}
+      {hiddenScreens.map((name) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          options={{ href: null }}
         />
       ))}
     </Tabs>

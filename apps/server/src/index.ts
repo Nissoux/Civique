@@ -1,6 +1,9 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+// import helmet from '@fastify/helmet'; // TODO: install and enable in production
+import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
+import { ZodError } from 'zod';
 import { env } from './config/env.js';
 import authRoutes from './routes/auth/index.js';
 import questionRoutes from './routes/questions/index.js';
@@ -15,14 +18,61 @@ async function main() {
     logger: true,
   });
 
-  // Plugins
+  // Rate limiting: 100 requests per minute per IP
+  await app.register(rateLimit, {
+    max: 100,
+    timeWindow: '1 minute',
+    errorResponseBuilder: () => ({
+      error: 'Trop de requêtes',
+      message: 'Veuillez patienter avant de réessayer.',
+    }),
+  });
+
+  // CORS
   await app.register(cors, {
-    origin: true,
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+      'https://api.integrafle.fr',
+      'https://integrafle.fr',
+      'http://localhost:8081',
+      'http://localhost:3000',
+    ],
     credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   await app.register(jwt, {
     secret: env.JWT_SECRET,
+  });
+
+  // Global error handler for Zod validation errors
+  app.setErrorHandler((error: Error & { statusCode?: number; validation?: unknown }, _request, reply) => {
+    if (error instanceof ZodError) {
+      // Sanitize: strip "received" values from Zod messages to avoid reflecting user input
+      const sanitized = error.errors.map((e) => {
+        const msg = e.message.replace(/,\s*received\s+['"]?.*['"]?$/i, '');
+        return msg;
+      }).join(', ');
+      return reply.status(400).send({
+        error: 'Validation Error',
+        message: sanitized,
+      });
+    }
+    if (error.validation) {
+      return reply.status(400).send({
+        error: 'Validation Error',
+        message: error.message,
+      });
+    }
+    app.log.error(error);
+    if (error.statusCode && error.statusCode < 500) {
+      return reply.status(error.statusCode).send({
+        error: error.message || 'Erreur de requête',
+      });
+    }
+    return reply.status(500).send({
+      error: 'Internal Server Error',
+    });
   });
 
   // Routes
@@ -36,6 +86,30 @@ async function main() {
 
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));
+
+  // Payment redirect pages
+  app.get('/payment-success', async (_request, reply) => {
+    return reply.type('text/html').send(`
+      <html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement réussi</title></head>
+      <body style="font-family:sans-serif;text-align:center;padding:60px 20px;background:#0A0E1A;color:white">
+        <h1 style="color:#4CAF50">✅ Paiement réussi !</h1>
+        <p>Votre compte Civique Premium est maintenant actif.</p>
+        <p>Retournez dans l'application pour en profiter.</p>
+        <p style="margin-top:40px;color:#888">Vous pouvez fermer cette page.</p>
+      </body></html>
+    `);
+  });
+
+  app.get('/payment-cancel', async (_request, reply) => {
+    return reply.type('text/html').send(`
+      <html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement annulé</title></head>
+      <body style="font-family:sans-serif;text-align:center;padding:60px 20px;background:#0A0E1A;color:white">
+        <h1>Paiement annulé</h1>
+        <p>Aucun montant n'a été débité.</p>
+        <p>Retournez dans l'application pour réessayer.</p>
+      </body></html>
+    `);
+  });
 
   // Start
   try {

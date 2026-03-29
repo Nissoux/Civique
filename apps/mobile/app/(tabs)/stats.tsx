@@ -95,7 +95,7 @@ export default function StatsScreen() {
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statValue}>{passRate}%</Text>
-          <Text style={styles.statLabel}>R{'\u00e9'}ussite</Text>
+          <Text style={styles.statLabel}>Réussite</Text>
         </View>
       </View>
 
@@ -106,7 +106,7 @@ export default function StatsScreen() {
         </View>
         <View style={styles.statCard}>
           <Text style={styles.statValue}>{overview?.overallAccuracy ?? 0}%</Text>
-          <Text style={styles.statLabel}>Pr{'\u00e9'}cision</Text>
+          <Text style={styles.statLabel}>Précision</Text>
         </View>
       </View>
 
@@ -121,10 +121,10 @@ export default function StatsScreen() {
 
       {/* Theme progress */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Progression par th{'\u00e8'}me</Text>
+        <Text style={styles.sectionTitle}>Progression par thème</Text>
         {themeStats.length === 0 ? (
           <Text style={styles.emptyText}>
-            Commencez {'\u00e0'} vous entra{'\u00ee'}ner pour voir vos statistiques
+            Commencez à vous entraîner pour voir vos statistiques
           </Text>
         ) : (
           themeStats.map((ts) => (
@@ -150,7 +150,7 @@ export default function StatsScreen() {
       {weakAreas.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Points faibles</Text>
-          <Text style={styles.sectionSubtitle}>Th{'\u00e8'}mes {'\u00e0'} am{'\u00e9'}liorer</Text>
+          <Text style={styles.sectionSubtitle}>Thèmes à améliorer</Text>
           {weakAreas.map((wa) => (
             <View key={wa.themeId} style={styles.weakRow}>
               <Ionicons name="alert-circle" size={18} color="#ED2939" />
@@ -181,7 +181,7 @@ export default function StatsScreen() {
         </View>
 
         {history.length === 0 ? (
-          <Text style={styles.emptyText}>Aucune activit{'\u00e9'} pour cette p{'\u00e9'}riode</Text>
+          <Text style={styles.emptyText}>Aucune activité pour cette période</Text>
         ) : (
           history.map((entry, idx) => {
             const dayAccuracy =

@@ -64,7 +64,7 @@ export default function FriendsScreen() {
       await respondFriend(id, status);
       loadFriends();
     } catch {
-      Alert.alert('Erreur', 'Impossible de r\u00e9pondre');
+      Alert.alert('Erreur', 'Impossible de répondre');
     }
   };
 
@@ -106,7 +106,7 @@ export default function FriendsScreen() {
           {pendingReceived.length > 0 && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>
-                Demandes re{'\u00e7'}ues ({pendingReceived.length})
+                Demandes reçues ({pendingReceived.length})
               </Text>
               {pendingReceived.map((f) => (
                 <View key={f.id} style={styles.friendRow}>
@@ -135,7 +135,7 @@ export default function FriendsScreen() {
           {pendingSent.length > 0 && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>
-                Demandes envoy{'\u00e9'}es ({pendingSent.length})
+                Demandes envoyées ({pendingSent.length})
               </Text>
               {pendingSent.map((f) => (
                 <View key={f.id} style={styles.friendRow}>
@@ -156,7 +156,7 @@ export default function FriendsScreen() {
             <Text style={styles.sectionTitle}>Mes amis ({accepted.length})</Text>
             {accepted.length === 0 ? (
               <Text style={styles.emptyText}>
-                Ajoutez des amis pour les d{'\u00e9'}fier !
+                Ajoutez des amis pour les défier !
               </Text>
             ) : (
               accepted.map((f) => {

@@ -7,23 +7,39 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { THEMES, type Fiche, type Language } from '@civique/shared';
+import { LANGUAGES, THEMES, type Fiche, type Language } from '@civique/shared';
 import { getFiche } from '../../services/fiches';
 import { useLanguageStore } from '../../stores/languageStore';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
-import LanguagePicker from '../../components/LanguagePicker';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+
+function renderMarkdownText(text: string, baseStyle: object, rtlStyle: object) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return (
+    <Text style={[baseStyle, rtlStyle]}>
+      {parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <Text key={i} style={{ fontWeight: 'bold' }}>{part.slice(2, -2)}</Text>;
+        }
+        return part;
+      })}
+    </Text>
+  );
+}
 
 export default function FicheDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const navigation = useNavigation();
+  const router = useRouter();
   const { currentLang: storeLang } = useLanguageStore();
   const { isPremium } = useSubscriptionStore();
+  const c = useColors();
+  const insets = useSafeAreaInsets();
 
   const [fiche, setFiche] = useState<Fiche | null>(null);
   const [loading, setLoading] = useState(true);
-  const [currentLang, setCurrentLang] = useState<Language>(storeLang);
 
   const loadFiche = useCallback(async (lang: Language) => {
     if (!id) return;
@@ -39,42 +55,38 @@ export default function FicheDetailScreen() {
   }, [id]);
 
   useEffect(() => {
-    loadFiche(currentLang);
-  }, [currentLang, loadFiche]);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <LanguagePicker
-          onLanguageChange={(lang) => setCurrentLang(lang)}
-        />
-      ),
-    });
-  }, [navigation]);
+    loadFiche(storeLang);
+  }, [storeLang, loadFiche]);
 
   if (loading) {
     return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" color="#002395" />
+      <View style={[styles.center, { backgroundColor: c.background }]}>
+        <ActivityIndicator size="large" color={c.primary} />
       </View>
     );
   }
 
   if (!fiche) {
     return (
-      <View style={styles.center}>
-        <Text style={styles.errorText}>Fiche introuvable</Text>
+      <View style={[styles.center, { backgroundColor: c.background }]}>
+        <Text style={[styles.errorText, { color: c.textTertiary }]}>Fiche introuvable</Text>
       </View>
     );
   }
 
   const theme = THEMES.find((t) => t.id === fiche.themeId);
-  const title = fiche.translatedTitle || fiche.titleFr;
-  const content = fiche.translatedContent || fiche.contentFr;
+  const titleFr = fiche.titleFr;
+  const contentFr = fiche.contentFr;
+  const currentLang = storeLang;
+  const showTranslation = currentLang !== 'fr' && fiche.translatedContent;
+  const translatedTitle = showTranslation ? fiche.translatedTitle : null;
+  const translatedContent = showTranslation ? fiche.translatedContent : null;
   const isLocked = fiche.isPremium && !isPremium;
+  const isRtl = LANGUAGES.find((l) => l.code === currentLang)?.rtl ?? false;
+  const rtlTextStyle = isRtl ? { writingDirection: 'rtl' as const, textAlign: 'right' as const } : {};
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+    <ScrollView style={[styles.container, { backgroundColor: c.background }]} contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + 16 }]}>
       {theme && (
         <View style={[styles.themeBadge, { backgroundColor: theme.color + '20' }]}>
           <View style={[styles.themeDot, { backgroundColor: theme.color }]} />
@@ -83,45 +95,49 @@ export default function FicheDetailScreen() {
       )}
 
       <View style={styles.titleRow}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, { color: c.textPrimary }]}>{titleFr}</Text>
+        {translatedTitle && (
+          <Text style={[styles.translatedTitle, { color: c.textSecondary }, rtlTextStyle]}>{translatedTitle}</Text>
+        )}
         {fiche.isPremium && (
-          <View style={styles.premiumBadge}>
-            <Ionicons name="star" size={12} color="#333" />
-            <Text style={styles.premiumBadgeText}>Premium</Text>
+          <View style={[styles.premiumBadge, { backgroundColor: c.accent }]}>
+            <Ionicons name="star" size={12} color={c.textPrimary} />
+            <Text style={[styles.premiumBadgeText, { color: c.textPrimary }]}>Premium</Text>
           </View>
         )}
       </View>
 
       {isLocked ? (
         <View style={styles.lockedOverlay}>
-          <View style={styles.lockedCard}>
-            <Ionicons name="lock-closed" size={48} color="#002395" />
-            <Text style={styles.lockedTitle}>Contenu Premium</Text>
-            <Text style={styles.lockedDesc}>
-              Cette fiche est r{'\u00e9'}serv{'\u00e9'}e aux membres Premium.
-              Passez {'\u00e0'} Premium pour acc{'\u00e9'}der {'\u00e0'} tout le contenu.
+          <View style={[styles.lockedCard, { backgroundColor: c.card }]}>
+            <Ionicons name="lock-closed" size={48} color={c.primary} />
+            <Text style={[styles.lockedTitle, { color: c.textPrimary }]}>Contenu Premium</Text>
+            <Text style={[styles.lockedDesc, { color: c.textSecondary }]}>
+              Cette fiche est réservée aux membres Premium.
+              Passez à Premium pour accéder à tout le contenu.
             </Text>
-            <TouchableOpacity style={styles.upgradeButton}>
-              <Text style={styles.upgradeButtonText}>Passer {'\u00e0'} Premium</Text>
+            <TouchableOpacity style={[styles.upgradeButton, { backgroundColor: c.accent }]} onPress={() => router.push('/settings/subscription')}>
+              <Text style={[styles.upgradeButtonText, { color: c.textPrimary }]}>Passer à Premium</Text>
             </TouchableOpacity>
           </View>
         </View>
       ) : (
-        <View style={styles.contentCard}>
-          {content.split('\n\n').map((paragraph, idx) => {
+        <>
+        <View style={[styles.contentCard, { backgroundColor: c.card }]}>
+          {contentFr.split('\n\n').map((paragraph, idx) => {
             const trimmed = paragraph.trim();
             if (!trimmed) return null;
             // Treat lines starting with # as headings
             if (trimmed.startsWith('# ')) {
               return (
-                <Text key={idx} style={styles.heading1}>
+                <Text key={idx} style={[styles.heading1, { color: c.primary }, rtlTextStyle]}>
                   {trimmed.replace(/^# /, '')}
                 </Text>
               );
             }
             if (trimmed.startsWith('## ')) {
               return (
-                <Text key={idx} style={styles.heading2}>
+                <Text key={idx} style={[styles.heading2, { color: c.textPrimary }, rtlTextStyle]}>
                   {trimmed.replace(/^## /, '')}
                 </Text>
               );
@@ -129,50 +145,88 @@ export default function FicheDetailScreen() {
             // Treat lines starting with - as bullet points
             if (trimmed.startsWith('- ')) {
               return (
-                <View key={idx} style={styles.bulletRow}>
-                  <Text style={styles.bullet}>{'\u2022'}</Text>
-                  <Text style={styles.paragraph}>{trimmed.replace(/^- /, '')}</Text>
+                <View key={idx} style={[styles.bulletRow, isRtl && { flexDirection: 'row-reverse' }]}>
+                  <Text style={[styles.bullet, { color: c.primary }]}>{'\u2022'}</Text>
+                  {renderMarkdownText(trimmed.replace(/^- /, ''), { ...styles.paragraph, color: c.textSecondary }, rtlTextStyle)}
                 </View>
               );
             }
             return (
-              <Text key={idx} style={styles.paragraph}>
-                {trimmed}
-              </Text>
+              <View key={idx}>
+                {renderMarkdownText(trimmed, { ...styles.paragraph, color: c.textSecondary }, rtlTextStyle)}
+              </View>
             );
           })}
         </View>
+
+        {/* Translated content below French */}
+        {translatedContent && (
+          <View style={[styles.translatedCard, { backgroundColor: c.surface, borderColor: c.border }]}>
+            <Text style={[styles.translatedLabel, { color: c.textTertiary }, rtlTextStyle]}>
+              {LANGUAGES.find((l) => l.code === currentLang)?.nativeName}
+            </Text>
+            {translatedContent.split('\n\n').map((paragraph, idx) => {
+              const trimmed = paragraph.trim();
+              if (!trimmed) return null;
+              if (trimmed.startsWith('# ')) {
+                return (
+                  <Text key={idx} style={[styles.heading2, { color: c.textSecondary }, rtlTextStyle]}>
+                    {trimmed.replace(/^# /, '')}
+                  </Text>
+                );
+              }
+              if (trimmed.startsWith('## ')) {
+                return (
+                  <Text key={idx} style={[styles.heading2, { color: c.textTertiary, fontSize: 15 }, rtlTextStyle]}>
+                    {trimmed.replace(/^## /, '')}
+                  </Text>
+                );
+              }
+              if (trimmed.startsWith('- ')) {
+                return (
+                  <View key={idx} style={[styles.bulletRow, isRtl && { flexDirection: 'row-reverse' }]}>
+                    <Text style={[styles.bullet, { color: c.textTertiary }]}>{'\u2022'}</Text>
+                    {renderMarkdownText(trimmed.replace(/^- /, ''), { ...styles.paragraph, color: c.textSecondary }, rtlTextStyle)}
+                  </View>
+                );
+              }
+              return (
+                <View key={idx}>
+                  {renderMarkdownText(trimmed, { ...styles.paragraph, color: c.textSecondary }, rtlTextStyle)}
+                </View>
+              );
+            })}
+          </View>
+        )}
+        </>
       )}
-    </ScrollView>
+      </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   content: {
-    padding: 20,
+    padding: spacing.xl,
   },
   center: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F5F5F5',
   },
   errorText: {
-    fontSize: 16,
-    color: '#999',
+    fontSize: fontSize.lg,
   },
   themeBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    borderRadius: 20,
-    paddingHorizontal: 12,
+    borderRadius: borderRadius.xl,
+    paddingHorizontal: spacing.md,
     paddingVertical: 6,
-    marginBottom: 12,
+    marginBottom: spacing.md,
     gap: 6,
   },
   themeDot: {
@@ -181,40 +235,50 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   themeText: {
-    fontSize: 13,
+    fontSize: fontSize.sm,
     fontWeight: '600',
   },
   titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-    gap: 10,
-    flexWrap: 'wrap',
+    marginBottom: spacing.xl,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333',
     flex: 1,
+  },
+  translatedTitle: {
+    fontSize: fontSize.lg,
+    fontStyle: 'italic',
+    marginTop: spacing.xs,
+  },
+  translatedCard: {
+    borderRadius: borderRadius.lg,
+    padding: spacing.xl,
+    marginTop: spacing.lg,
+    borderWidth: 1,
+  },
+  translatedLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: spacing.md,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   premiumBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFD700',
-    borderRadius: 12,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    gap: 4,
+    borderRadius: borderRadius.md,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    gap: spacing.xs,
   },
   premiumBadgeText: {
-    fontSize: 11,
+    fontSize: fontSize.xs,
     fontWeight: '700',
-    color: '#333',
   },
   contentCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: borderRadius.lg,
+    padding: spacing.xl,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -222,45 +286,40 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   heading1: {
-    fontSize: 20,
+    fontSize: fontSize.xl,
     fontWeight: 'bold',
-    color: '#002395',
-    marginBottom: 12,
-    marginTop: 8,
+    marginBottom: spacing.md,
+    marginTop: spacing.sm,
   },
   heading2: {
-    fontSize: 17,
+    fontSize: fontSize.lg,
     fontWeight: '600',
-    color: '#333',
     marginBottom: 10,
-    marginTop: 8,
+    marginTop: spacing.sm,
   },
   paragraph: {
-    fontSize: 15,
+    fontSize: fontSize.md,
     lineHeight: 24,
-    color: '#444',
-    marginBottom: 12,
+    marginBottom: spacing.md,
     flex: 1,
   },
   bulletRow: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 8,
-    paddingLeft: 4,
+    gap: spacing.sm,
+    marginBottom: spacing.sm,
+    paddingLeft: spacing.xs,
   },
   bullet: {
-    fontSize: 15,
+    fontSize: fontSize.md,
     lineHeight: 24,
-    color: '#002395',
   },
   lockedOverlay: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: spacing.xl,
   },
   lockedCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 32,
+    borderRadius: borderRadius.lg,
+    padding: spacing.xxxl,
     alignItems: 'center',
     width: '100%',
     shadowColor: '#000',
@@ -270,28 +329,24 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   lockedTitle: {
-    fontSize: 20,
+    fontSize: fontSize.xl,
     fontWeight: 'bold',
-    color: '#333',
-    marginTop: 16,
-    marginBottom: 8,
+    marginTop: spacing.lg,
+    marginBottom: spacing.sm,
   },
   lockedDesc: {
     fontSize: 14,
-    color: '#666',
     textAlign: 'center',
     lineHeight: 22,
-    marginBottom: 20,
+    marginBottom: spacing.xl,
   },
   upgradeButton: {
-    backgroundColor: '#FFD700',
-    borderRadius: 12,
-    paddingHorizontal: 32,
+    borderRadius: borderRadius.md,
+    paddingHorizontal: spacing.xxxl,
     paddingVertical: 14,
   },
   upgradeButtonText: {
-    color: '#333',
-    fontSize: 16,
+    fontSize: fontSize.lg,
     fontWeight: '600',
   },
 });

@@ -17,8 +17,8 @@ import { useAuthStore } from '../../stores/authStore';
 const STATUS_CONFIG: Record<ChallengeStatus, { label: string; color: string; bg: string }> = {
   pending: { label: 'En attente', color: '#F57C00', bg: '#FFF3E0' },
   active: { label: 'En cours', color: '#002395', bg: '#EEF1FB' },
-  completed: { label: 'Termin\u00e9', color: '#2ECC71', bg: '#E8F5E9' },
-  declined: { label: 'Refus\u00e9', color: '#999', bg: '#F0F0F0' },
+  completed: { label: 'Terminé', color: '#2ECC71', bg: '#E8F5E9' },
+  declined: { label: 'Refusé', color: '#999', bg: '#F0F0F0' },
 };
 
 export default function ChallengesScreen() {
@@ -54,7 +54,7 @@ export default function ChallengesScreen() {
       setShowCreate(false);
       loadChallenges();
     } catch {
-      Alert.alert('Erreur', 'Impossible de cr\u00e9er le d\u00e9fi');
+      Alert.alert('Erreur', 'Impossible de créer le défi');
     } finally {
       setCreating(false);
     }
@@ -67,12 +67,12 @@ export default function ChallengesScreen() {
         onPress={() => setShowCreate(!showCreate)}
       >
         <Ionicons name="add-circle" size={20} color="#FFF" />
-        <Text style={styles.createButtonText}>Nouveau d{'\u00e9'}fi</Text>
+        <Text style={styles.createButtonText}>Nouveau défi</Text>
       </TouchableOpacity>
 
       {showCreate && (
         <View style={styles.createCard}>
-          <Text style={styles.createLabel}>D{'\u00e9'}fier un ami</Text>
+          <Text style={styles.createLabel}>Défier un ami</Text>
           <View style={styles.createRow}>
             <TextInput
               style={styles.input}
@@ -104,9 +104,9 @@ export default function ChallengesScreen() {
       ) : challenges.length === 0 ? (
         <View style={styles.emptyContainer}>
           <Ionicons name="trophy-outline" size={48} color="#CCC" />
-          <Text style={styles.emptyText}>Aucun d{'\u00e9'}fi pour le moment</Text>
+          <Text style={styles.emptyText}>Aucun défi pour le moment</Text>
           <Text style={styles.emptySubtext}>
-            D{'\u00e9'}fiez vos amis pour comparer vos scores !
+            Défiez vos amis pour comparer vos scores !
           </Text>
         </View>
       ) : (
@@ -129,7 +129,7 @@ export default function ChallengesScreen() {
                   </Text>
                   <Text style={styles.challengeMeta}>
                     {ch.questionCount} questions
-                    {ch.themeId ? ` \u2022 Th\u00e8me ${ch.themeId}` : ''}
+                    {ch.themeId ? ` \u2022 Thème ${ch.themeId}` : ''}
                   </Text>
                 </View>
                 <View style={[styles.statusBadge, { backgroundColor: config.bg }]}>

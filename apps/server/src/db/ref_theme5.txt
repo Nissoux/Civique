@@ -1,0 +1,111 @@
+=== CSP (difficulty 1) ===
+Quel numero d'urgence permet d'appeler le SAMU ?
+Quel numero d'urgence permet d'appeler les pompiers ?
+Apres avoir obtenu le permis de conduire, que faut-il faire pour pouvoir conduire sa voiture ?
+A quelles conditions un mariage est-il reconnu juridiquement ?
+Quand faut-il declarer son enfant au service d'etat civil de la mairie ?
+Le travail non declare est :
+Que doit faire un employeur pour fixer un salaire ?
+Qu'est-ce que le SMIC ?
+Quelle est la premiere demarche a realiser pour chercher un emploi ?
+Quelle est la duree legale du temps de travail par semaine ?
+Qui est aide par France Travail ?
+Une personne etrangere en situation reguliere peut creer son entreprise :
+Une femme peut-elle creer son entreprise ?
+A partir de quel age un mineur peut-il travailler ?
+Aupres de quel organisme faut-il demander le remboursement des frais de sante ?
+Qu'est-ce qu'un numero d'urgence ?
+Concernant l'acces aux soins, quelle proposition est correcte ?
+En cas de probleme de sante non urgent, a qui faut-il s'adresser en premier ?
+Quel est le role du medecin traitant ?
+Dans quelles situations doit-on se rendre aux urgences de l'hopital ?
+Quel est l'objectif des vaccinations obligatoires ?
+A quoi sert la carte Vitale ?
+A quoi sert une mutuelle sante ?
+Jusqu'a quel age l'ecole est-elle obligatoire ?
+L'autorite parentale prevoit l'obligation :
+Pour qui l'ecole est-elle obligatoire ?
+Quel diplome obtient-on a la fin du lycee ?
+Dans quels etablissements scolaires vont les eleves apres l'ecole elementaire ?
+Pour qui l'ecole est elle obligatoire ?
+Un enfant inscrit a l'ecole :
+Les enfants qui ne parlent pas francais :
+
+=== CR (difficulty 2 if not in CSP) ===
+Quel mariage est reconnu par l'Etat ?
+Aupres de quelle institution les parents peuvent-ils inscrire leur enfant a l'ecole publique ?
+En cas de divorce, qui exerce l'autorite parentale ?
+Quelle aide permet aux personnes qui ont des difficultes financieres d'avoir un avocat ?
+Ou faut-il declarer la naissance d'un enfant ?
+Quelle est l'une des conditions pour passer l'examen du permis de conduire ?
+Un bail locatif est valide s'il est :
+Ou peut-on deposer un lave-vaisselle casse ?
+Quel numero d'urgence permet d'appeler la police ?
+Concernant l'acces aux soins, quelle proposition est correcte ?
+A qui est accessible la contraception ?
+Qu'est-ce que le principe de confidentialite dans le domaine de la sante ?
+L'inscription a l'Assurance maladie est :
+Qui peut demander un conge parental d'education ?
+Quelles sont les affaires traitees par le conseil de prud'hommes ?
+Travailler sans etre declare est :
+Lorsqu'un employeur veut qu'un salarie travaille plus longtemps que la duree prevue dans le contrat de travail :
+Quelle est la mission de France Travail ?
+Dans une entreprise, le droit syndical permet :
+Dans une entreprise, le droit de greve autorise :
+Quelles sont les conditions pour toucher les allocations chomage ?
+Qu'est-ce que l'ecole maternelle ?
+Comment s'appelle le diplome passe par les eleves a la fin du college ?
+Les parents d'eleve ont le droit de :
+Qui peut manger a la cantine scolaire ?
+A quel age commence l'instruction obligatoire des enfants ?
+Quel est l'age de la majorite ?
+A l'ecole, il est interdit aux parents de :
+Quel motif d'absence est accepte par l'ecole ?
+Des parents ne respectent pas l'obligation d'instruction pour leurs enfants. Quelle sanction maximale risquent-ils ?
+Quand ont lieu les vacances scolaires de Noel ?
+A l'ecole, un enfant en situation de handicap :
+
+=== NAT (difficulty 3 if not in CSP or CR) ===
+Ou faut-il declarer la naissance d'un enfant ?
+Quelle action peut realiser le locataire d'un logement sans l'autorisation du proprietaire ?
+Quel mariage est reconnu legalement ?
+Le stationnement sur une place reservee aux personnes handicapees :
+Si une machine a laver est cassee, il est possible de :
+Dans quel cas faut-il declarer son enfant au service d'etat civil ?
+Quand faut-il declarer son enfant au service d'etat civil ?
+Quel numero d'urgence permet d'appeler la police ?
+Quel numero d'urgence permet d'appeler le SAMU ?
+Aupres de quelle institution les parents peuvent inscrire leurs enfants a l'ecole publique ?
+En cas de divorce, qui exerce l'autorite parentale ?
+Quelle aide permet aux personnes qui ont des difficultes financieres d'avoir un avocat ?
+Qui peut demander le divorce de personnes mariees ?
+Aupres de quel organisme faut-il demander le remboursement des frais de sante ?
+La contraception :
+A quoi sert la carte Vitale ?
+A quoi sert une mutuelle sante ?
+Qu'est-ce que le tiers payant ?
+L'inscription a l'Assurance maladie est :
+L'avortement est-il possible en France ?
+Travailler sans etre declare est :
+Qu'est-ce que le SMIC ?
+Quelle est la premiere demarche a realiser pour chercher un emploi ?
+Quelle est la duree legale du temps de travail par semaine ?
+Qui peut demander un conge parental d'education ?
+Une personne etrangere, en situation reguliere, peut creer son entreprise :
+Une femme peut-elle creer son entreprise ?
+Quels sont les textes qui definissent les regles au travail ?
+Quelles sont les affaires traitees par le conseil de prud'hommes ?
+Qui a le droit de se syndiquer ?
+Est-il possible de licencier une femme enceinte ou en conge maternite, en raison de sa grossesse ?
+L'instruction des enfants est obligatoire de :
+Des parents ne respectent pas l'obligation d'instruction pour leurs enfants. Quelle sanction maximale risquent-ils ?
+Quelle est la definition de l'autorite parentale ?
+Quel motif d'absence est accepte par l'ecole ?
+Jusqu'a quel age l'ecole est-elle obligatoire ?
+A quel age commence l'instruction obligatoire des enfants ?
+Comment s'appellent les etablissements scolaires que les eleves integrent apres l'ecole elementaire ?
+En tant que parent d'eleve, il est possible de :
+Quelle instruction est prevue pour les enfants qui ne parlent pas francais ?
+S'agissant de l'accueil des enfants en situation de handicap a l'ecole, laquelle des propositions est vraie ?
+Depuis le 1er juillet 2021, quelle est la duree du conge paternite ?
+Est-ce possible de punir physiquement ses enfants ?

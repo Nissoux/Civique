@@ -241,9 +241,8 @@ export default async function authRoutes(app: FastifyInstance) {
 
     passwordResetTokens.set(token, { email: user.email, expiresAt });
 
-    // In production, send email. For now, log to console.
-    console.log(`[Password Reset] Token for ${user.email}: ${token}`);
-    console.log(`[Password Reset] Reset URL: http://localhost:5173/reset-password?token=${token}`);
+    // TODO: Send email with reset link in production
+    // Token stored in memory, user will receive via email
 
     return { message: 'If that email exists, a reset link has been sent.' };
   });

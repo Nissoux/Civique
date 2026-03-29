@@ -24,6 +24,7 @@ export interface StatsOverview {
   examsTaken: number;
   examsPassed: number;
   averageExamScore: number;
+  lastPracticeAt: string | null;
 }
 
 export interface ThemeStat {
@@ -46,18 +47,29 @@ export interface HistoryEntry {
   correctAnswers: number;
 }
 
-export async function getStatsOverview(): Promise<StatsOverview> {
-  const { data } = await api.get('/stats/overview');
+export async function getStatsOverview(examType?: string): Promise<StatsOverview> {
+  const { data } = await api.get('/stats/overview', { params: examType ? { examType } : undefined });
   return data.data;
 }
 
-export async function getStatsByTheme(): Promise<ThemeStat[]> {
-  const { data } = await api.get('/stats/by-theme');
+export async function getStatsByTheme(examType?: string): Promise<ThemeStat[]> {
+  const { data } = await api.get('/stats/by-theme', { params: examType ? { examType } : undefined });
   return data.data;
 }
 
 export async function getWeakAreas(): Promise<WeakArea[]> {
   const { data } = await api.get('/stats/weak-areas');
+  return data.data;
+}
+
+export interface QuotaStatus {
+  isPremium: boolean;
+  daily: { limit: number; used: number };
+  weekly: { limit: number; used: number };
+}
+
+export async function getQuota(): Promise<QuotaStatus> {
+  const { data } = await api.get('/stats/quota');
   return data.data;
 }
 

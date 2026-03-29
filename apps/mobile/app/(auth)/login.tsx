@@ -8,17 +8,26 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { Link } from 'expo-router';
 import { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../hooks/useAuth';
+import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function LoginScreen() {
+  const c = useColors();
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const { login, isSubmitting, error, clearError } = useAuth();
 
-  const isValid = email.includes('@') && password.length >= 1;
+  const isValid = EMAIL_RE.test(email) && password.length >= 1;
 
   const handleLogin = async () => {
     if (!isValid) return;
@@ -31,27 +40,34 @@ export default function LoginScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={[styles.container, { backgroundColor: c.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingTop: insets.top + spacing.xxl, paddingBottom: insets.bottom + 16 }]}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.title}>Civique</Text>
-        <Text style={styles.subtitle}>
-          Pr{'\u00e9'}parez votre examen de citoyennet{'\u00e9'}
-        </Text>
+        <View style={styles.logoSection}>
+          <View style={[styles.logoCircle, { backgroundColor: c.primaryLight }]}>
+            <Ionicons name="shield-checkmark" size={40} color={c.primary} />
+          </View>
+          <Text style={[styles.title, { color: c.textPrimary }]}>Civique</Text>
+          <Text style={[styles.subtitle, { color: c.textSecondary }]}>
+            Préparez votre examen de citoyenneté
+          </Text>
+        </View>
 
         {error && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{error}</Text>
+          <View style={[styles.errorContainer, { backgroundColor: c.errorBg }]}>
+            <Ionicons name="warning" size={16} color={c.error} />
+            <Text style={[styles.errorText, { color: c.error }]}>{error}</Text>
           </View>
         )}
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { backgroundColor: c.inputBg, borderColor: c.border, color: c.textPrimary }]}
           placeholder="Email"
+          placeholderTextColor={c.textTertiary}
           value={email}
           onChangeText={(text) => {
             clearError();
@@ -63,21 +79,44 @@ export default function LoginScreen() {
           editable={!isSubmitting}
         />
 
-        <TextInput
-          style={styles.input}
-          placeholder="Mot de passe"
-          value={password}
-          onChangeText={(text) => {
-            clearError();
-            setPassword(text);
-          }}
-          secureTextEntry
-          autoComplete="password"
-          editable={!isSubmitting}
-        />
+        <View style={[styles.passwordContainer, { backgroundColor: c.inputBg, borderColor: c.border }]}>
+          <TextInput
+            style={[styles.passwordInput, { color: c.textPrimary }]}
+            placeholder="Mot de passe"
+            placeholderTextColor={c.textTertiary}
+            value={password}
+            onChangeText={(text) => {
+              clearError();
+              setPassword(text);
+            }}
+            secureTextEntry={!showPassword}
+            autoComplete="password"
+            editable={!isSubmitting}
+          />
+          <TouchableOpacity
+            style={styles.eyeButton}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            <Ionicons
+              name={showPassword ? 'eye-off' : 'eye'}
+              size={22}
+              color={c.textTertiary}
+            />
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity
-          style={[styles.button, (!isValid || isSubmitting) && styles.buttonDisabled]}
+          style={styles.forgotLink}
+          onPress={() => Alert.alert(
+            'Mot de passe oublié',
+            'Contactez le support à support@integrafle.fr pour réinitialiser votre mot de passe.'
+          )}
+        >
+          <Text style={[styles.forgotText, { color: c.primary }]}>Mot de passe oublié ?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: c.primary }, (!isValid || isSubmitting) && { opacity: 0.5 }]}
           onPress={handleLogin}
           disabled={!isValid || isSubmitting}
         >
@@ -89,8 +128,9 @@ export default function LoginScreen() {
         </TouchableOpacity>
 
         <Link href="/(auth)/register" style={styles.link}>
-          <Text style={styles.linkText}>
-            Pas encore de compte ? S'inscrire
+          <Text style={[styles.linkText, { color: c.textSecondary }]}>
+            Pas encore de compte ?{' '}
+            <Text style={{ color: c.primary, fontWeight: '600' }}>S'inscrire</Text>
           </Text>
         </Link>
       </ScrollView>
@@ -101,71 +141,91 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
   },
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: 24,
+    padding: spacing.xxl,
   },
-  title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#002395',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
+  logoSection: {
+    alignItems: 'center',
     marginBottom: 40,
   },
+  logoCircle: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.lg,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: spacing.sm,
+  },
+  subtitle: {
+    fontSize: fontSize.md,
+    textAlign: 'center',
+  },
   errorContainer: {
-    backgroundColor: '#FFEBEE',
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#FFCDD2',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    borderRadius: borderRadius.md,
+    padding: spacing.md,
+    marginBottom: spacing.lg,
   },
   errorText: {
-    color: '#C62828',
-    fontSize: 14,
-    textAlign: 'center',
+    fontSize: fontSize.sm,
+    flex: 1,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 12,
-    padding: 16,
-    fontSize: 16,
-    marginBottom: 16,
-    backgroundColor: '#F9F9F9',
+    borderRadius: borderRadius.md,
+    padding: spacing.lg,
+    fontSize: fontSize.md,
+    marginBottom: spacing.lg,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: borderRadius.md,
+    marginBottom: spacing.sm,
+  },
+  passwordInput: {
+    flex: 1,
+    padding: spacing.lg,
+    fontSize: fontSize.md,
+  },
+  eyeButton: {
+    padding: spacing.lg,
+  },
+  forgotLink: {
+    alignSelf: 'flex-end',
+    marginBottom: spacing.xl,
+  },
+  forgotText: {
+    fontSize: fontSize.sm,
   },
   button: {
-    backgroundColor: '#002395',
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: borderRadius.md,
+    padding: spacing.lg,
     alignItems: 'center',
-    marginTop: 8,
     height: 56,
     justifyContent: 'center',
   },
-  buttonDisabled: {
-    backgroundColor: '#99A8CC',
-  },
   buttonText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: fontSize.lg,
     fontWeight: '600',
   },
   link: {
-    marginTop: 24,
+    marginTop: spacing.xxl,
     alignSelf: 'center',
   },
   linkText: {
-    color: '#002395',
-    fontSize: 14,
+    fontSize: fontSize.sm,
   },
 });

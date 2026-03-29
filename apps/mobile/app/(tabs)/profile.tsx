@@ -1,26 +1,111 @@
-import { useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { LANGUAGES, type Language } from '@civique/shared';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuthStore } from '../../stores/authStore';
 import { useLanguageStore } from '../../stores/languageStore';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
+import { useExamTypeStore, EXAM_TYPES } from '../../stores/examTypeStore';
+import { useColors, useThemeStore, spacing, fontSize, borderRadius } from '../../constants/theme';
+import type { ThemeMode } from '../../constants/theme';
 import api from '../../services/api';
+import { getStatsOverview } from '../../services/stats';
 
+const APP_VERSION = '1.0.0';
+
+// ── Menu item component ──────────────────────────────
+function MenuItem({
+  icon,
+  iconColor,
+  iconBgColor,
+  label,
+  value,
+  onPress,
+  colors,
+  isLast,
+}: {
+  icon: keyof typeof Ionicons.glyphMap;
+  iconColor: string;
+  iconBgColor?: string;
+  label: string;
+  value?: string;
+  onPress?: () => void;
+  colors: ReturnType<typeof useColors>;
+  isLast?: boolean;
+}) {
+  return (
+    <TouchableOpacity
+      style={[
+        styles.menuItem,
+        !isLast && { borderBottomColor: colors.divider, borderBottomWidth: StyleSheet.hairlineWidth },
+      ]}
+      onPress={onPress}
+      activeOpacity={0.6}
+    >
+      <View style={[styles.menuIconWrap, { backgroundColor: iconBgColor || colors.surfaceElevated }]}>
+        <Ionicons name={icon} size={18} color={iconColor} />
+      </View>
+      <View style={styles.menuTextWrap}>
+        <Text style={[styles.menuLabel, { color: colors.textPrimary }]}>{label}</Text>
+        {value ? (
+          <Text style={[styles.menuValue, { color: colors.textTertiary }]} numberOfLines={1}>
+            {value}
+          </Text>
+        ) : null}
+      </View>
+      <Ionicons name="chevron-forward" size={18} color={colors.textTertiary} />
+    </TouchableOpacity>
+  );
+}
+
+// ── Section header ───────────────────────────────────
+function SectionHeader({ title, colors }: { title: string; colors: ReturnType<typeof useColors> }) {
+  return (
+    <Text style={[styles.sectionHeader, { color: colors.textTertiary }]}>
+      {title.toUpperCase()}
+    </Text>
+  );
+}
+
+// ── Main screen ──────────────────────────────────────
 export default function ProfileScreen() {
   const router = useRouter();
+  const colors = useColors();
+  const insets = useSafeAreaInsets();
   const { user, logout } = useAuthStore();
   const { currentLang, setLanguage } = useLanguageStore();
   const { isPremium, fetchSubscription } = useSubscriptionStore();
+  const { selectedExamType } = useExamTypeStore();
+  const { mode: themeMode, setMode: setThemeMode } = useThemeStore();
+
+  const [overallAccuracy, setOverallAccuracy] = useState(0);
 
   useEffect(() => {
     fetchSubscription();
-  }, [fetchSubscription]);
+    getStatsOverview(selectedExamType || undefined).then((s) => {
+      setOverallAccuracy(s.overallAccuracy || 0);
+    }).catch(() => {});
+  }, [fetchSubscription, selectedExamType]);
 
   const displayName = user?.displayName || 'Utilisateur';
-  const email = user?.email || 'utilisateur@example.com';
+  const email = user?.email || '';
   const initial = displayName[0]?.toUpperCase() || 'U';
+
+  const examDef = EXAM_TYPES.find((e) => e.code === selectedExamType);
+  const examLabel = examDef?.label ?? 'Non défini';
+
+  const currentLangDef = LANGUAGES.find((l) => l.code === currentLang);
+  const currentLangLabel = currentLangDef?.nativeName ?? 'Français';
 
   const handleLanguageChange = async (code: Language) => {
     await setLanguage(code);
@@ -31,11 +116,24 @@ export default function ProfileScreen() {
     }
   };
 
+  const showLanguagePicker = () => {
+    const options = LANGUAGES.map((l) => l.nativeName);
+    options.push('Annuler');
+
+    Alert.alert('Langue de traduction', 'Choisissez votre langue', [
+      ...LANGUAGES.map((lang) => ({
+        text: `${lang.nativeName} (${lang.name})${lang.code === currentLang ? ' \u2713' : ''}`,
+        onPress: () => handleLanguageChange(lang.code),
+      })),
+      { text: 'Annuler', style: 'cancel' as const },
+    ]);
+  };
+
   const handleLogout = () => {
-    Alert.alert('D\u00e9connexion', '\u00cates-vous s\u00fbr de vouloir vous d\u00e9connecter ?', [
+    Alert.alert('Déconnexion', 'Êtes-vous sûr de vouloir vous déconnecter ?', [
       { text: 'Annuler', style: 'cancel' },
       {
-        text: 'Se d\u00e9connecter',
+        text: 'Se déconnecter',
         style: 'destructive',
         onPress: async () => {
           await logout();
@@ -45,297 +143,497 @@ export default function ProfileScreen() {
     ]);
   };
 
+  // ── Render ─────────────────────────────────────────
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <View style={styles.avatarSection}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>{initial}</Text>
+    <ScrollView
+      style={[styles.container, { backgroundColor: colors.background }]}
+      contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + 16 }]}
+      showsVerticalScrollIndicator={false}
+    >
+      {/* ── Top user section ──────────────────────────── */}
+      <View style={[styles.topSection, { backgroundColor: colors.card }]}>
+        <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
+          <Text style={[styles.avatarText, { color: colors.textInverse }]}>{initial}</Text>
         </View>
-        <Text style={styles.displayName}>{displayName}</Text>
-        <Text style={styles.email}>{email}</Text>
-      </View>
-
-      {/* Social navigation cards */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Social</Text>
-        <View style={styles.navGrid}>
-          <TouchableOpacity
-            style={styles.navCard}
-            onPress={() => router.push('/social/leaderboard')}
-          >
-            <Ionicons name="trophy" size={24} color="#FFD700" />
-            <Text style={styles.navCardText}>Classement</Text>
-            <Ionicons name="chevron-forward" size={16} color="#CCC" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.navCard}
-            onPress={() => router.push('/social/friends')}
-          >
-            <Ionicons name="people" size={24} color="#002395" />
-            <Text style={styles.navCardText}>Amis</Text>
-            <Ionicons name="chevron-forward" size={16} color="#CCC" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.navCard}
-            onPress={() => router.push('/social/challenges')}
-          >
-            <Ionicons name="flash" size={24} color="#ED2939" />
-            <Text style={styles.navCardText}>D{'\u00e9'}fis</Text>
-            <Ionicons name="chevron-forward" size={16} color="#CCC" />
-          </TouchableOpacity>
+        <View style={styles.topTextWrap}>
+          <Text style={[styles.displayName, { color: colors.textPrimary }]}>{displayName}</Text>
+          {email ? (
+            <Text style={[styles.email, { color: colors.textSecondary }]}>{email}</Text>
+          ) : null}
+        </View>
+        <View style={[styles.examTypeBadge, { backgroundColor: colors.primaryLight }]}>
+          <View style={[styles.examTypeDot, { backgroundColor: colors.primary }]} />
+          <Text style={[styles.examTypeText, { color: colors.primary }]} numberOfLines={1}>
+            {examLabel}
+          </Text>
         </View>
       </View>
 
-      {/* Language selection */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Langue pr{'\u00e9'}f{'\u00e9'}r{'\u00e9'}e</Text>
-        {LANGUAGES.map((lang) => {
-          const isSelected = lang.code === currentLang;
-          return (
-            <TouchableOpacity
-              key={lang.code}
-              style={[styles.langOption, isSelected && styles.langOptionSelected]}
-              onPress={() => handleLanguageChange(lang.code)}
-            >
-              <View style={styles.langLeft}>
-                <Text style={[styles.langName, isSelected && styles.langNameSelected]}>
-                  {lang.nativeName}
+      {/* ── Exam badge card ───────────────────────────── */}
+      <View
+        style={[
+          styles.examBadgeCard,
+          { backgroundColor: colors.card, borderColor: colors.border },
+        ]}
+      >
+        {/* Progress overview */}
+        <View style={styles.progressSection}>
+          <View style={styles.progressHeader}>
+            <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
+              Progression globale
+            </Text>
+            <Text style={[styles.progressPercent, { color: colors.primary }]}>{overallAccuracy}%</Text>
+          </View>
+          <View style={[styles.progressBarBg, { backgroundColor: colors.progressBg }]}>
+            <View
+              style={[
+                styles.progressBarFill,
+                { backgroundColor: overallAccuracy >= 80 ? colors.success : colors.primary, width: `${Math.min(100, overallAccuracy)}%` },
+              ]}
+            />
+          </View>
+        </View>
+      </View>
+
+      {/* ── Premium upsell card ───────────────────────── */}
+      {!isPremium ? (
+        <TouchableOpacity
+          activeOpacity={0.85}
+          onPress={() => router.push('/settings/subscription')}
+        >
+          <LinearGradient
+            colors={[colors.premiumGradientStart, colors.premiumGradientEnd]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.premiumCard}
+          >
+            <View style={styles.premiumTopRow}>
+              <View style={styles.premiumStarCircle}>
+                <Ionicons name="star" size={20} color="#FF8C00" />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.premiumTitle}>Passer à Premium</Text>
+                <Text style={styles.premiumDesc}>
+                  Accédez à toutes les questions, examens blancs et contenus exclusifs.
                 </Text>
-                {lang.rtl && (
-                  <View style={styles.rtlBadge}>
-                    <Text style={styles.rtlText}>RTL</Text>
-                  </View>
-                )}
               </View>
-              <View style={styles.langRight}>
-                <Text style={styles.langCode}>{lang.name}</Text>
-                {isSelected && (
-                  <Ionicons name="checkmark-circle" size={20} color="#002395" />
-                )}
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      {/* Subscription */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Abonnement</Text>
-        <View style={styles.premiumCard}>
-          {isPremium ? (
-            <>
-              <View style={styles.premiumActiveRow}>
-                <Ionicons name="star" size={22} color="#FFD700" />
-                <Text style={styles.premiumTitle}>Premium actif</Text>
-              </View>
-              <Text style={styles.premiumDesc}>
-                Vous avez acc{'\u00e8'}s {'\u00e0'} tout le contenu
+            </View>
+            <View style={styles.premiumButton}>
+              <Text style={[styles.premiumButtonText, { color: colors.premiumGradientEnd }]}>
+                Découvrir l'offre
               </Text>
-              <TouchableOpacity
-                style={styles.manageButton}
-                onPress={() => router.push('/settings/subscription')}
-              >
-                <Text style={styles.manageButtonText}>G{'\u00e9'}rer l'abonnement</Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <Text style={styles.premiumTitle}>Gratuit</Text>
-              <Text style={styles.premiumDesc}>
-                Passez {'\u00e0'} Premium pour acc{'\u00e9'}der {'\u00e0'} tout le contenu
-              </Text>
-              <TouchableOpacity
-                style={styles.upgradeButton}
-                onPress={() => router.push('/settings/subscription')}
-              >
-                <Text style={styles.upgradeButtonText}>Passer {'\u00e0'} Premium</Text>
-              </TouchableOpacity>
-            </>
-          )}
+              <Ionicons name="arrow-forward" size={18} color={colors.premiumGradientEnd} />
+            </View>
+          </LinearGradient>
+        </TouchableOpacity>
+      ) : (
+        <View
+          style={[
+            styles.premiumActiveCard,
+            { backgroundColor: colors.premiumBg, borderColor: colors.accent },
+          ]}
+        >
+          <View style={styles.premiumTopRow}>
+            <Ionicons name="star" size={20} color={colors.accent} />
+            <Text style={[styles.premiumActiveTitle, { color: colors.premiumText }]}>
+              Premium actif
+            </Text>
+          </View>
+          <Text style={[styles.premiumActiveDesc, { color: colors.textSecondary }]}>
+            Vous avez accès à tout le contenu
+          </Text>
         </View>
+      )}
+
+      {/* ── Mon objectif ──────────────────────────────── */}
+      <SectionHeader title="Mon objectif" colors={colors} />
+      <View style={[styles.menuSection, { backgroundColor: colors.card }]}>
+        <MenuItem
+          icon="school-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Type d'examen"
+          value={examLabel}
+          onPress={() => router.push('/(tabs)/choose-exam')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="language-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Langue de traduction"
+          value={currentLangLabel}
+          onPress={showLanguagePicker}
+          colors={colors}
+          isLast
+        />
       </View>
 
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Ionicons name="log-out-outline" size={20} color="#ED2939" />
-        <Text style={styles.logoutText}>Se d{'\u00e9'}connecter</Text>
+      {/* ── Mon accès ────────────────────────────────── */}
+      <SectionHeader title="Mon accès" colors={colors} />
+      <View style={[styles.menuSection, { backgroundColor: colors.card }]}>
+        <MenuItem
+          icon="card-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.accent}
+          label="Abonnement"
+          value={isPremium ? 'Premium' : 'Gratuit'}
+          onPress={() => router.push('/settings/subscription')}
+          colors={colors}
+          isLast
+        />
+      </View>
+
+      {/* ── Compte et préférences ───────────────────── */}
+      <SectionHeader title="Compte et préférences" colors={colors} />
+      <View style={[styles.menuSection, { backgroundColor: colors.card }]}>
+        <MenuItem
+          icon="person-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Nom d'affichage"
+          value={displayName}
+          onPress={() => Alert.alert('Nom', user?.displayName || '')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="mail-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Adresse e-mail"
+          value={email || 'Non renseigné'}
+          onPress={() => Alert.alert('Email', user?.email || '')}
+          colors={colors}
+        />
+        <MenuItem
+          icon={themeMode === 'dark' ? 'moon' : 'sunny-outline'}
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Thème"
+          value={themeMode === 'dark' ? 'Sombre' : 'Clair'}
+          onPress={() => {
+            const newMode: ThemeMode = themeMode === 'dark' ? 'light' : 'dark';
+            setThemeMode(newMode);
+          }}
+          colors={colors}
+          isLast
+        />
+      </View>
+
+      {/* ── Aide & support ────────────────────────────── */}
+      <SectionHeader title="Aide & support" colors={colors} />
+      <View style={[styles.menuSection, { backgroundColor: colors.card }]}>
+        <MenuItem
+          icon="chatbubble-ellipses-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.textSecondary}
+          label="Nous contacter"
+          onPress={() => Alert.alert('Contact', 'support@integrafle.fr')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="document-text-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.textSecondary}
+          label="Conditions d'utilisation"
+          onPress={() => Alert.alert('Conditions', 'Les conditions d\'utilisation seront disponibles prochainement.')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="shield-checkmark-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.textSecondary}
+          label="Politique de confidentialité"
+          onPress={() => Alert.alert('Confidentialité', 'La politique de confidentialité sera disponible prochainement.')}
+          colors={colors}
+          isLast
+        />
+      </View>
+
+      {/* ── Social ────────────────────────────────────── */}
+      <SectionHeader title="Social" colors={colors} />
+      <View style={[styles.menuSection, { backgroundColor: colors.card }]}>
+        <MenuItem
+          icon="trophy-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.accent}
+          label="Classement"
+          onPress={() => router.push('/social/leaderboard')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="people-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
+          label="Amis"
+          onPress={() => router.push('/social/friends')}
+          colors={colors}
+        />
+        <MenuItem
+          icon="flash-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.secondary}
+          label="Défis"
+          onPress={() => router.push('/social/challenges')}
+          colors={colors}
+          isLast
+        />
+      </View>
+
+      {/* ── Logout ────────────────────────────────────── */}
+      <TouchableOpacity
+        style={[styles.logoutButton, { backgroundColor: colors.errorBg }]}
+        onPress={handleLogout}
+        activeOpacity={0.6}
+      >
+        <Ionicons name="log-out-outline" size={20} color={colors.error} />
+        <Text style={[styles.logoutText, { color: colors.error }]}>Se déconnecter</Text>
       </TouchableOpacity>
+
+      {/* ── Version ───────────────────────────────────── */}
+      <Text style={[styles.versionText, { color: colors.textTertiary }]}>
+        Civique v{APP_VERSION}
+      </Text>
     </ScrollView>
   );
 }
 
+// ── Styles ─────────────────────────────────────────────
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
   },
   content: {
-    padding: 20,
+    paddingHorizontal: spacing.xl,
+    paddingBottom: spacing.xxxl + 40,
   },
-  avatarSection: {
+
+  /* ── Top user section ─────────────────────────────── */
+  topSection: {
     alignItems: 'center',
-    marginBottom: 32,
+    paddingVertical: 28,
+    paddingHorizontal: spacing.xl,
+    borderRadius: 20,
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 4,
+    elevation: 1,
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#002395',
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 12,
   },
   avatarText: {
-    color: '#FFFFFF',
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 26,
+    fontWeight: '800',
+  },
+  topTextWrap: {
+    alignItems: 'center',
+    marginBottom: 14,
   },
   displayName: {
     fontSize: 22,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: '800',
+    letterSpacing: -0.3,
   },
   email: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 2,
+    fontSize: fontSize.sm,
+    marginTop: 4,
   },
-  section: {
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 12,
-  },
-  navGrid: {
-    gap: 8,
-  },
-  navCard: {
+  examTypeBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    gap: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 3,
-    elevation: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    gap: 8,
   },
-  navCardText: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
+  examTypeDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
-  langOption: {
+  examTypeText: {
+    fontSize: fontSize.sm,
+    fontWeight: '700',
+  },
+
+  /* ── Exam badge card ──────────────────────────────── */
+  examBadgeCard: {
+    borderRadius: 16,
+    padding: spacing.xl,
+    marginBottom: 24,
+    borderWidth: 1,
+  },
+  progressSection: {
+    gap: spacing.sm,
+  },
+  progressHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: 'transparent',
   },
-  langOptionSelected: {
-    borderColor: '#002395',
-    backgroundColor: '#F8F9FF',
+  progressLabel: {
+    fontSize: fontSize.sm,
+    fontWeight: '500',
   },
-  langLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  progressPercent: {
+    fontSize: fontSize.md,
+    fontWeight: '800',
   },
-  langName: {
-    fontSize: 16,
-    color: '#333',
+  progressBarBg: {
+    height: 8,
+    borderRadius: 4,
+    overflow: 'hidden',
   },
-  langNameSelected: {
-    fontWeight: '600',
-    color: '#002395',
+  progressBarFill: {
+    height: 8,
+    borderRadius: 4,
   },
-  rtlBadge: {
-    backgroundColor: '#FFD700',
-    borderRadius: 6,
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-  },
-  rtlText: {
-    fontSize: 10,
-    fontWeight: '700',
-    color: '#333',
-  },
-  langRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  langCode: {
-    fontSize: 14,
-    color: '#999',
-  },
+
+  /* ── Premium upsell ───────────────────────────────── */
   premiumCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 20,
+    padding: 24,
+    marginBottom: 24,
   },
-  premiumActiveRow: {
+  premiumTopRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 4,
+    alignItems: 'flex-start',
+    gap: 14,
+    marginBottom: 18,
   },
-  premiumTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-  },
-  premiumDesc: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 4,
-    marginBottom: 16,
-  },
-  upgradeButton: {
-    backgroundColor: '#FFD700',
-    borderRadius: 12,
-    padding: 14,
-    alignItems: 'center',
-  },
-  upgradeButtonText: {
-    color: '#333',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  manageButton: {
-    backgroundColor: '#EEF1FB',
-    borderRadius: 12,
-    padding: 14,
-    alignItems: 'center',
-  },
-  manageButtonText: {
-    color: '#002395',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  logoutButton: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
+  premiumStarCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.9)',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  premiumTitle: {
+    fontSize: 19,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+  premiumDesc: {
+    fontSize: fontSize.sm,
+    color: 'rgba(255,255,255,0.85)',
+    lineHeight: 20,
+  },
+  premiumButton: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: spacing.xl,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  premiumButtonText: {
+    fontSize: fontSize.md,
+    fontWeight: '800',
+  },
+
+  /* ── Premium active ───────────────────────────────── */
+  premiumActiveCard: {
+    borderRadius: 16,
+    padding: spacing.xl,
+    marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#EEE',
-    gap: 8,
+  },
+  premiumActiveTitle: {
+    fontSize: fontSize.md,
+    fontWeight: '700',
+  },
+  premiumActiveDesc: {
+    fontSize: fontSize.sm,
+    marginTop: spacing.xs,
+    marginLeft: 28,
+  },
+
+  /* ── Section header ───────────────────────────────── */
+  sectionHeader: {
+    fontSize: fontSize.xs,
+    fontWeight: '700',
+    letterSpacing: 1,
+    marginBottom: 10,
+    marginTop: 14,
+    marginLeft: spacing.xs,
+  },
+
+  /* ── Menu section card ────────────────────────────── */
+  menuSection: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.03,
+    shadowRadius: 3,
+    elevation: 1,
+  },
+
+  /* ── Menu item ────────────────────────────────────── */
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 56,
+    paddingHorizontal: spacing.lg,
+    gap: 14,
+  },
+  menuIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  menuTextWrap: {
+    flex: 1,
+  },
+  menuLabel: {
+    fontSize: fontSize.md,
+    fontWeight: '600',
+  },
+  menuValue: {
+    fontSize: fontSize.xs,
+    marginTop: 1,
+  },
+
+  /* ── Logout ───────────────────────────────────────── */
+  logoutButton: {
+    flexDirection: 'row',
+    borderRadius: 16,
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+    marginTop: 32,
   },
   logoutText: {
-    color: '#ED2939',
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: fontSize.md,
+    fontWeight: '700',
+  },
+
+  /* ── Version ──────────────────────────────────────── */
+  versionText: {
+    textAlign: 'center',
+    fontSize: fontSize.xs,
+    marginTop: spacing.xl,
+    marginBottom: spacing.lg,
   },
 });

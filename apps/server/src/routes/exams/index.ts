@@ -10,6 +10,11 @@ import {
   users,
 } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
+import { checkExamQuota } from '../../middleware/quota.js';
+
+const startExamSchema = z.object({
+  examType: z.enum(['csp', 'cr', 'nat']).optional(),
+});
 
 const submitAnswerSchema = z.object({
   questionId: z.number(),
@@ -33,42 +38,21 @@ export default async function examRoutes(app: FastifyInstance) {
 
   // ── POST /start ─────────────────────────────────────────
   // Generate exam: 28 knowledge + 12 situational across all 5 themes
-  app.post('/start', async (request, reply) => {
+  app.post('/start', { preHandler: checkExamQuota }, async (request, reply) => {
     const userId = request.currentUser!.id;
+    const body = startExamSchema.parse(request.body || {});
+    const examTypeFilter = body.examType;
 
-    // Premium gate: free users max 1 exam per day
-    const user = await db.query.users.findFirst({
-      where: eq(users.id, userId),
-      columns: { isPremium: true, premiumExpires: true },
-    });
+    // Limit concurrent active exams (max 1 unfinished at a time)
+    const [activeExam] = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(examSessions)
+      .where(and(eq(examSessions.userId, userId), sql`${examSessions.finishedAt} IS NULL`));
 
-    if (!user) {
-      return reply.status(404).send({ error: 'User not found' });
-    }
-
-    const isPremiumActive =
-      user.isPremium &&
-      (!user.premiumExpires || new Date(user.premiumExpires) > new Date());
-
-    if (!isPremiumActive) {
-      const todayStart = new Date();
-      todayStart.setHours(0, 0, 0, 0);
-
-      const [todayCount] = await db
-        .select({ count: sql<number>`count(*)::int` })
-        .from(examSessions)
-        .where(
-          and(
-            eq(examSessions.userId, userId),
-            gte(examSessions.startedAt, todayStart),
-          ),
-        );
-
-      if (todayCount.count >= 1) {
-        return reply.status(403).send({
-          error: 'Free users are limited to 1 exam per day. Upgrade to premium for unlimited exams.',
-        });
-      }
+    if (activeExam.count > 0) {
+      return reply.status(409).send({
+        error: 'Vous avez déjà un examen en cours. Terminez-le avant d\'en commencer un nouveau.',
+      });
     }
 
     // Get all 5 themes
@@ -96,27 +80,29 @@ export default async function examRoutes(app: FastifyInstance) {
       const knowledgeNeeded = knowledgePerTheme + (i < knowledgeRemainder ? 1 : 0);
       const situationalNeeded = situationalPerTheme + (i < situationalRemainder ? 1 : 0);
 
+      const knowledgeConditions = [
+        eq(questions.themeId, themeId),
+        eq(questions.type, 'knowledge'),
+      ];
+      if (examTypeFilter) knowledgeConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+
       const knowledgeQs = await db
         .select({ id: questions.id })
         .from(questions)
-        .where(
-          and(
-            eq(questions.themeId, themeId),
-            eq(questions.type, 'knowledge'),
-          ),
-        )
+        .where(and(...knowledgeConditions))
         .orderBy(sql`RANDOM()`)
         .limit(knowledgeNeeded);
+
+      const situationalConditions = [
+        eq(questions.themeId, themeId),
+        eq(questions.type, 'situational'),
+      ];
+      if (examTypeFilter) situationalConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
 
       const situationalQs = await db
         .select({ id: questions.id })
         .from(questions)
-        .where(
-          and(
-            eq(questions.themeId, themeId),
-            eq(questions.type, 'situational'),
-          ),
-        )
+        .where(and(...situationalConditions))
         .orderBy(sql`RANDOM()`)
         .limit(situationalNeeded);
 
@@ -124,12 +110,13 @@ export default async function examRoutes(app: FastifyInstance) {
       for (const q of situationalQs) selectedQuestionIds.push(q.id);
     }
 
-    // Create session
+    // Create session (use actual question count, may be fewer than 40 if DB lacks questions)
     const [session] = await db
       .insert(examSessions)
       .values({
         userId,
-        totalQuestions: TOTAL_QUESTIONS,
+        examType: examTypeFilter || 'nat',
+        totalQuestions: selectedQuestionIds.length,
         timeLimitSec: TIME_LIMIT_SEC,
       })
       .returning();

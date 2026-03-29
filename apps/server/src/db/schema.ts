@@ -9,6 +9,7 @@ import {
   uuid,
   jsonb,
   index,
+  uniqueIndex,
   pgEnum,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
@@ -20,6 +21,7 @@ import { relations } from 'drizzle-orm';
 export const languageEnum = pgEnum('language', ['fr', 'ar', 'fa', 'pt', 'es', 'hi']);
 export const questionTypeEnum = pgEnum('question_type', ['knowledge', 'situational']);
 export const choiceEnum = pgEnum('choice', ['a', 'b', 'c', 'd']);
+export const examTypeEnum = pgEnum('exam_type', ['csp', 'cr', 'nat']);
 export const friendshipStatusEnum = pgEnum('friendship_status', [
   'pending',
   'accepted',
@@ -56,6 +58,46 @@ export const users = pgTable(
     stripeCustomerIdx: index('users_stripe_customer_idx').on(table.stripeCustomerId),
   }),
 );
+
+// ──────────────────────────────────────────────
+// Promo Codes
+// ──────────────────────────────────────────────
+
+export const promoCodes = pgTable(
+  'promo_codes',
+  {
+    id: serial('id').primaryKey(),
+    code: varchar('code', { length: 50 }).notNull().unique(),
+    type: varchar('type', { length: 20 }).notNull().default('lifetime'), // 'lifetime', '30days', '90days', '365days'
+    durationDays: integer('duration_days'), // null = lifetime
+    maxUses: integer('max_uses').notNull().default(1),
+    currentUses: integer('current_uses').notNull().default(0),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    codeIdx: uniqueIndex('promo_codes_code_idx').on(table.code),
+  }),
+);
+
+export const promoRedemptions = pgTable(
+  'promo_redemptions',
+  {
+    id: serial('id').primaryKey(),
+    codeId: integer('code_id').notNull().references(() => promoCodes.id),
+    userId: uuid('user_id').notNull().references(() => users.id),
+    redeemedAt: timestamp('redeemed_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+);
+
+export const promoCodesRelations = relations(promoCodes, ({ many }) => ({
+  redemptions: many(promoRedemptions),
+}));
+
+export const promoRedemptionsRelations = relations(promoRedemptions, ({ one }) => ({
+  code: one(promoCodes, { fields: [promoRedemptions.codeId], references: [promoCodes.id] }),
+  user: one(users, { fields: [promoRedemptions.userId], references: [users.id] }),
+}));
 
 export const usersRelations = relations(users, ({ many }) => ({
   examSessions: many(examSessions),
@@ -120,9 +162,10 @@ export const questions = pgTable(
       .notNull()
       .references(() => themes.id, { onDelete: 'cascade' }),
     type: questionTypeEnum('type').notNull().default('knowledge'),
+    examTypes: text('exam_types').array().notNull().default(['csp', 'cr', 'nat']),
     difficulty: integer('difficulty').notNull().default(1),
     isPremium: boolean('is_premium').notNull().default(false),
-    textFr: text('text_fr').notNull(),
+    textFr: text('text_fr').notNull().unique(),
     explanationFr: text('explanation_fr'),
     choicesFr: jsonb('choices_fr').notNull().$type<
       { id: 'a' | 'b' | 'c' | 'd'; text: string }[]
@@ -163,7 +206,7 @@ export const questionTranslations = pgTable(
     choices: jsonb('choices').notNull().$type<{ id: 'a' | 'b' | 'c' | 'd'; text: string }[]>(),
   },
   (table) => ({
-    questionLangIdx: index('question_translations_question_lang_idx').on(
+    questionLangUniq: uniqueIndex('question_translations_question_lang_uniq').on(
       table.questionId,
       table.lang,
     ),
@@ -196,9 +239,8 @@ export const fiches = pgTable(
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => ({
-    themeIdx: index('fiches_theme_idx').on(table.themeId),
+    themeOrderUniq: uniqueIndex('fiches_theme_order_uniq').on(table.themeId, table.displayOrder),
     premiumIdx: index('fiches_premium_idx').on(table.isPremium),
-    orderIdx: index('fiches_order_idx').on(table.themeId, table.displayOrder),
   }),
 );
 
@@ -222,7 +264,7 @@ export const ficheTranslations = pgTable(
     content: text('content').notNull(),
   },
   (table) => ({
-    ficheLangIdx: index('fiche_translations_fiche_lang_idx').on(table.ficheId, table.lang),
+    ficheLangUniq: uniqueIndex('fiche_translations_fiche_lang_uniq').on(table.ficheId, table.lang),
   }),
 );
 
@@ -244,6 +286,7 @@ export const examSessions = pgTable(
     userId: uuid('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
+    examType: examTypeEnum('exam_type').notNull().default('nat'),
     startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
     finishedAt: timestamp('finished_at', { withTimezone: true }),
     timeLimitSec: integer('time_limit_sec').notNull().default(2700),

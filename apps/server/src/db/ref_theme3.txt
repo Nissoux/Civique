@@ -1,0 +1,109 @@
+=== CSP (difficulty 1) ===
+Comment s'appelle la Constitution actuelle de la France ?
+Comment s'appelle le texte qui enonce les droits et devoirs des personnes residant en France ?
+Concernant les droits individuels, quelle proposition est correcte ?
+De quelle annee date la Declaration des droits de l'homme et du citoyen ?
+Lequel de ces droits est un droit fondamental ?
+Parmi ces textes, lequel garantit les droits et libertes en France ?
+Qu'est-ce que la liberte d'expression ?
+Quel droit permet a une personne de se defendre devant la justice ?
+Quel est le texte fondateur etablissant en France les droits et les devoirs de chaque citoyen ?
+Quel texte a ete adopte pendant la Revolution francaise ?
+Quelle liberte permet a une personne de ne pas avoir de religion ?
+Une femme peut avorter :
+Est-il toujours possible de divorcer ?
+La peine de mort est :
+Concernant les limites aux libertes individuelles, quelle proposition est correcte ?
+En France, est-ce legal d'etre marie a plusieurs personnes en meme temps ?
+Faut-il reduire ses dechets ?
+Jeter une bouteille dans la rue est :
+Pourquoi les libertes individuelles peuvent-elles etre limitees ?
+Que doit faire une personne en cas d'accident ?
+Que permet la citoyennete francaise ?
+Que risque une personne qui ne respecte pas la loi ?
+Quel est le role de la gendarmerie ?
+Quel est le role de la police ?
+Qu'est-ce qu'une infraction ?
+Comment peut-on reduire ses dechets ?
+Deposer une machine a laver cassee sur le trottoir est :
+En quoi consiste la traite des etres humains ?
+Que doit faire une victime de violences ?
+Quelle est l'infraction la plus grave ?
+
+=== CR (difficulty 2 if not in CSP) ===
+A quelle liberte la PMA fait-elle reference ?
+Au nom de quoi l'Etat justifie-t-il la restriction des droits ?
+Concernant le droit de se marier, quelle proposition est correcte ?
+Est-il toujours possible de divorcer ?
+La peine de mort est :
+Laquelle de ces citations est inscrite dans la Declaration des Droits de l'homme et du Citoyen de 1789 ?
+Le recours a l'avortement est-il autorise ?
+Que contient la Constitution ?
+Que garantit la liberte de la presse ?
+Que prevoit la Charte de l'environnement ?
+Que signifie la dignite humaine ?
+Que signifie le droit de manifester ?
+Que signifie PMA ?
+Quel texte est le plus difficile a modifier ?
+Quelle liberte permet a une personne de croire en la religion de son choix ?
+Qu'est-ce que le droit de greve ?
+Qu'est-ce que la Constitution ?
+Qui peut demander a avorter ?
+Une femme majeure de nationalite francaise a-t-elle le droit de voter aux elections ?
+Concernant l'utilisation des reseaux sociaux, quelle proposition est correcte ?
+Jeter un megot par terre est :
+L'Etat peut-il limiter les droits et libertes ?
+Parmi ces actions, laquelle permet d'adopter une attitude respectueuse de l'environnement ?
+Quelle proposition constitue une obligation ?
+Pour quel motif peut-on limiter la liberte d'expression ?
+Pourquoi doit-on trier ses dechets ?
+Que doit faire une victime de violences ?
+Que doit-on faire face aux ordres des policiers ou gendarmes ?
+Quel est le role de la police ?
+Quel est un exemple d'assistance a personne en danger ?
+Quel exemple illustre une limitation de liberte pour proteger l'interet general ?
+Quelle est l'attitude a avoir lorsque qu'on est temoin de violences ?
+Quelle est l'infraction la plus grave ?
+Quelle obligation concerne toutes les personnes residant en France quelle que soit leur nationalite ?
+Quelle proposition represente un exemple de crime ?
+Quelle proposition represente un exemple de delit ?
+Qui veille au maintien de l'ordre public ?
+S'agissant des dechets, quelle proposition est correcte ?
+
+=== NAT (difficulty 3 if not in CSP or CR) ===
+A quoi sert le droit de greve ?
+Au nom de quoi l'Etat justifie-t-il la restriction des droits ?
+Laquelle de ces citations est inscrite dans la Declaration des Droits de l'Homme et du Citoyen de 1789 ?
+L'article 4 de la Declaration des droits de l'homme et du citoyen affirme que "la liberte consiste a pouvoir faire tout ce qui ne nuit pas a autrui". Qu'est-ce que cela signifie ?
+Que dit l'article 1er de la Constitution francaise ?
+Que garantit la liberte de la presse ?
+Que permet la liberte de circulation ?
+Que signifie etre citoyen d'un Etat ?
+Que sont les droits fondamentaux ?
+Quel droit protege une personne contre une arrestation arbitraire ?
+Quel est le texte fondateur etablissant les droits et les devoirs de chaque citoyen ?
+Quel texte affirme que tous les hommes naissent libres et egaux en droits ?
+Quelle situation est une atteinte a la dignite humaine ?
+Qu'est-ce que la liberte d'expression ?
+Suite a une interpellation par la police, il est possible de :
+Tous les citoyens francais ont-ils une religion ?
+A quel age est la majorite numerique en France ?
+Dans lequel de ces endroits est-on autorise a fumer ?
+En France, la conduite sans permis d'une moto est :
+En quoi consiste le devoir de solidarite ?
+Est-ce legal d'etre marie a plusieurs personnes en meme temps ?
+Est-ce obligatoire de declarer ses impots chaque annee en France ?
+Est-il obligatoire de porter secours a une personne en danger ?
+Etre jure d'assises est :
+La vente d'alcool en France est interdite aux personnes de moins de :
+Le non-respect du code de la route est :
+Lequel de ces crimes ou delits peut entrainer la privation des droits civils et politiques par un juge ?
+Pour obtenir une carte d'identite, il faut :
+Pour quel motif peut-on limiter la liberte d'expression ?
+Que doit faire un citoyen s'il est appele a etre jure dans un proces d'assises ?
+Quel est l'age de la majorite civile en France ?
+Quel est l'un des devoirs principaux d'un citoyen francais ?
+Quelle est l'infraction la plus grave ?
+Qu'est-ce que la citoyennete numerique ?
+Qu'est-ce que le devoir de memoire ?
+Une personne est privee de ses droits civils et politiques pendant 5 ans suite a une condamnation. Parmi ces propositions laquelle est correcte ?

@@ -11,12 +11,17 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useExamStore } from '../../stores/examStore';
+import { useLanguageStore } from '../../stores/languageStore';
 import * as examsService from '../../services/exams';
-import type { Choice } from '@civique/shared';
+import type { Choice, Question } from '@civique/shared';
+import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+import { shuffleChoices, getShuffledCorrectChoice } from '../../utils/shuffleChoices';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ExamSessionScreen() {
   const router = useRouter();
   const { sessionId } = useLocalSearchParams<{ sessionId: string }>();
+  const c = useColors();
   const {
     currentSession,
     questions,
@@ -34,15 +39,22 @@ export default function ExamSessionScreen() {
   const [isSubmittingAnswer, setIsSubmittingAnswer] = useState(false);
   const [isFinishing, setIsFinishing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const insets = useSafeAreaInsets();
+  const { currentLang, isRtl } = useLanguageStore();
   const effectiveSessionId = sessionId || currentSession?.id;
+
+  const getQuestionText = (q: Question): string =>
+    currentLang !== 'fr' && q.translatedText ? q.translatedText : q.textFr;
+
+  const getChoices = (q: Question): Choice[] =>
+    currentLang !== 'fr' && q.translatedChoices?.length ? q.translatedChoices : q.choicesFr;
 
   // Load questions
   useEffect(() => {
     async function loadExam() {
       if (!effectiveSessionId) {
-        setError("Aucune session d'examen trouv\u00e9e");
+        setError("Aucune session d'examen trouvée");
         setIsLoading(false);
         return;
       }
@@ -59,13 +71,15 @@ export default function ExamSessionScreen() {
     loadExam();
   }, [effectiveSessionId]);
 
-  // Timer
+  const handleFinishRef = useRef<() => void>(() => {});
+
+  // Timer — FIX 3: use local variable for interval, proper cleanup
   useEffect(() => {
-    timerRef.current = setInterval(() => {
+    const interval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          if (timerRef.current) clearInterval(timerRef.current);
-          handleFinish();
+          clearInterval(interval);
+          handleFinishRef.current();
           return 0;
         }
         return prev - 1;
@@ -73,7 +87,7 @@ export default function ExamSessionScreen() {
     }, 1000);
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      clearInterval(interval);
     };
   }, []);
 
@@ -83,18 +97,28 @@ export default function ExamSessionScreen() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  // FIX 2 & FIX 5: Store ORIGINAL choice ID, add null safety
   const handleSelectChoice = useCallback(
     async (choiceId: 'a' | 'b' | 'c' | 'd') => {
-      if (!effectiveSessionId || !questions[currentIndex]) return;
+      if (!effectiveSessionId || !questions.length || !questions[currentIndex]) return;
 
       const question = questions[currentIndex];
-      setAnswer(question.id, choiceId);
+      if (!question) return;
+
+      // Map shuffled label back to original choice ID for storage and API
+      const rawCh = question.choicesFr || [];
+      const { originalToNew: mapping } = shuffleChoices(rawCh, question.id);
+      const reverseMap = Object.fromEntries(Object.entries(mapping).map(([k, v]) => [v, k]));
+      const originalChoiceId = (reverseMap[choiceId] || choiceId) as 'a' | 'b' | 'c' | 'd';
+
+      // Store the ORIGINAL choice ID (not the shuffled one)
+      setAnswer(question.id, originalChoiceId);
       setIsSubmittingAnswer(true);
 
       try {
         await examsService.submitAnswer(effectiveSessionId, {
           questionId: question.id,
-          selectedChoice: choiceId,
+          selectedChoice: originalChoiceId,
         });
       } catch {
         // Answer saved locally even if API fails
@@ -109,8 +133,6 @@ export default function ExamSessionScreen() {
     if (!effectiveSessionId || isFinishing) return;
     setIsFinishing(true);
 
-    if (timerRef.current) clearInterval(timerRef.current);
-
     try {
       await examsService.finishExam(effectiveSessionId);
     } catch {
@@ -120,14 +142,16 @@ export default function ExamSessionScreen() {
     router.replace(`/exam/results?sessionId=${effectiveSessionId}`);
   }, [effectiveSessionId, isFinishing, router]);
 
+  useEffect(() => { handleFinishRef.current = handleFinish; }, [handleFinish]);
+
   const confirmFinish = () => {
     const answered = Object.keys(answers).length;
     const total = questions.length;
 
     if (answered < total) {
       Alert.alert(
-        'Terminer l\u2019examen ?',
-        `Vous avez r\u00e9pondu \u00e0 ${answered}/${total} questions. Les questions sans r\u00e9ponse seront compt\u00e9es comme incorrectes.`,
+        'Terminer l\'examen ?',
+        `Vous avez répondu à ${answered}/${total} questions. Les questions sans réponse seront comptées comme incorrectes.`,
         [
           { text: 'Continuer', style: 'cancel' },
           { text: 'Terminer', style: 'destructive', onPress: handleFinish },
@@ -140,53 +164,84 @@ export default function ExamSessionScreen() {
 
   if (isLoading) {
     return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#002395" />
-        <Text style={styles.loadingText}>Chargement de l'examen...</Text>
+      <View style={[styles.centered, { backgroundColor: c.background }]}>
+        <ActivityIndicator size="large" color={c.primary} />
+        <Text style={[styles.loadingText, { color: c.textSecondary }]}>Chargement de l'examen...</Text>
       </View>
     );
   }
 
   if (error || !questions.length) {
     return (
-      <View style={styles.centered}>
-        <Ionicons name="alert-circle" size={48} color="#ED2939" />
-        <Text style={styles.errorText}>{error || 'Aucune question'}</Text>
+      <View style={[styles.centered, { backgroundColor: c.background }]}>
+        <Ionicons name="alert-circle" size={48} color={c.secondary} />
+        <Text style={[styles.errorText, { color: c.textSecondary }]}>{error || 'Aucune question'}</Text>
         <TouchableOpacity
-          style={styles.retryButton}
+          style={[styles.retryButton, { backgroundColor: c.primary }]}
           onPress={() => router.replace('/exam')}
         >
-          <Text style={styles.retryButtonText}>Retour</Text>
+          <Text style={[styles.retryButtonText, { color: c.textInverse }]}>Retour</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
   const currentQuestion = questions[currentIndex];
-  const selectedChoice = currentQuestion ? answers[currentQuestion.id] : undefined;
+  if (!currentQuestion) {
+    return (
+      <View style={[styles.centered, { backgroundColor: c.background }]}>
+        <ActivityIndicator size="large" color={c.primary} />
+      </View>
+    );
+  }
+
   const totalQuestions = questions.length;
   const answeredCount = Object.keys(answers).length;
-  const choices: Choice[] = currentQuestion.choicesFr;
+  const rawChoices: Choice[] = getChoices(currentQuestion);
+  const { choices, originalToNew } = shuffleChoices(rawChoices, currentQuestion.id);
+  const questionText = getQuestionText(currentQuestion);
+
+  // Map stored answer (original ID) to shuffled label for display
+  // Only show selection if this specific question was answered
+  const storedAnswer = currentQuestion.id in answers ? answers[currentQuestion.id] : null;
+  const selectedChoice = storedAnswer ? (originalToNew[storedAnswer] || null) : null;
+
+  const showTranslation = currentLang !== 'fr';
+  const translatedText = showTranslation && currentQuestion.translatedText && currentQuestion.translatedText !== currentQuestion.textFr
+    ? currentQuestion.translatedText : null;
+  const rawTranslatedChoices = showTranslation && currentQuestion.translatedChoices?.length &&
+    JSON.stringify(currentQuestion.translatedChoices) !== JSON.stringify(currentQuestion.choicesFr)
+    ? currentQuestion.translatedChoices : null;
+  // Shuffle translated choices in the same order
+  const translatedChoices = rawTranslatedChoices
+    ? choices.map((c) => {
+        // Find the original ID that maps to this new label
+        const origId = Object.entries(originalToNew).find(([_, v]) => v === c.id)?.[0];
+        const translated = rawTranslatedChoices.find((tc) => tc.id === origId);
+        return translated ? { id: c.id, text: translated.text } : { id: c.id, text: c.text };
+      })
+    : null;
   const isTimeLow = timeLeft < 5 * 60;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: c.background, paddingTop: insets.top }]}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.progress}>
+        <Text style={[styles.progress, { color: c.textPrimary }]}>
           {currentIndex + 1} / {totalQuestions}
         </Text>
-        <Text style={[styles.timer, isTimeLow && styles.timerLow]}>
+        <Text style={[styles.timer, { color: c.primary }, isTimeLow && { color: c.secondary }]}>
           {formatTime(timeLeft)}
         </Text>
       </View>
 
       {/* Progress bar */}
-      <View style={styles.progressBar}>
+      <View style={[styles.progressBar, { backgroundColor: c.progressBg }]}>
         <View
           style={[
             styles.progressFill,
             {
+              backgroundColor: c.primary,
               width: `${((currentIndex + 1) / totalQuestions) * 100}%`,
             },
           ]}
@@ -194,8 +249,8 @@ export default function ExamSessionScreen() {
       </View>
 
       {/* Answered indicator */}
-      <Text style={styles.answeredText}>
-        {answeredCount}/{totalQuestions} r{'\u00e9'}pondues
+      <Text style={[styles.answeredText, { color: c.textTertiary }]}>
+        {answeredCount}/{totalQuestions} répondues
       </Text>
 
       <ScrollView
@@ -203,8 +258,13 @@ export default function ExamSessionScreen() {
         contentContainerStyle={styles.scrollContent}
       >
         {/* Question */}
-        <View style={styles.questionCard}>
-          <Text style={styles.questionText}>{currentQuestion.textFr}</Text>
+        <View style={[styles.questionCard, { backgroundColor: c.card }]}>
+          <Text style={[styles.questionText, { color: c.textPrimary }]}>{questionText}</Text>
+          {translatedText && (
+            <Text style={[styles.translatedText, { color: c.textSecondary, borderTopColor: c.border }, isRtl && { writingDirection: 'rtl', textAlign: 'right' }]}>
+              {translatedText}
+            </Text>
+          )}
         </View>
 
         {/* Choices */}
@@ -215,9 +275,11 @@ export default function ExamSessionScreen() {
             return (
               <TouchableOpacity
                 key={choice.id}
+                activeOpacity={0.7}
                 style={[
                   styles.choiceButton,
-                  isSelected && styles.choiceSelected,
+                  { backgroundColor: c.card, borderColor: c.border },
+                  isSelected && { borderColor: c.primary, backgroundColor: c.primary, transform: [{ scale: 0.98 }] },
                 ]}
                 onPress={() =>
                   handleSelectChoice(choice.id as 'a' | 'b' | 'c' | 'd')
@@ -227,69 +289,78 @@ export default function ExamSessionScreen() {
                 <View
                   style={[
                     styles.choiceIdBadge,
-                    isSelected && styles.choiceIdSelected,
+                    { backgroundColor: c.surfaceElevated },
+                    isSelected && { backgroundColor: 'rgba(255,255,255,0.3)' },
                   ]}
                 >
                   <Text
                     style={[
                       styles.choiceId,
-                      isSelected && styles.choiceIdTextWhite,
+                      { color: c.textPrimary },
+                      isSelected && { color: c.textInverse },
                     ]}
                   >
                     {choice.id.toUpperCase()}
                   </Text>
                 </View>
-                <Text
-                  style={[
-                    styles.choiceText,
-                    isSelected && styles.choiceTextSelected,
-                  ]}
-                >
-                  {choice.text}
-                </Text>
+                <View style={{ flex: 1, flexShrink: 1 }}>
+                  <Text
+                    style={[
+                      styles.choiceText,
+                      { color: c.textPrimary },
+                      isSelected && { color: c.textInverse },
+                    ]}
+                  >
+                    {choice.text}
+                  </Text>
+                  {translatedChoices && (
+                    <Text
+                      style={[
+                        styles.choiceTranslated,
+                        { color: c.textSecondary },
+                        isSelected && { color: 'rgba(255,255,255,0.7)' },
+                        isRtl && { writingDirection: 'rtl', textAlign: 'right' },
+                      ]}
+                    >
+                      {translatedChoices.find((tc) => tc.id === choice.id)?.text}
+                    </Text>
+                  )}
+                </View>
               </TouchableOpacity>
             );
           })}
         </View>
       </ScrollView>
 
-      {/* Navigation */}
-      <View style={styles.navRow}>
-        <TouchableOpacity
-          style={[styles.navButton, currentIndex === 0 && styles.navButtonDisabled]}
-          onPress={prevQuestion}
-          disabled={currentIndex === 0}
-        >
-          <Ionicons
-            name="chevron-back"
-            size={20}
-            color={currentIndex === 0 ? '#CCC' : '#002395'}
-          />
-          <Text
-            style={[
-              styles.navButtonText,
-              currentIndex === 0 && styles.navButtonTextDisabled,
-            ]}
-          >
-            Pr{'\u00e9'}c{'\u00e9'}dent
-          </Text>
-        </TouchableOpacity>
-
+      {/* Validate button */}
+      <View style={[styles.validateRow, { paddingBottom: insets.bottom }]}>
         {currentIndex < totalQuestions - 1 ? (
-          <TouchableOpacity style={styles.navButton} onPress={nextQuestion}>
-            <Text style={styles.navButtonText}>Suivant</Text>
-            <Ionicons name="chevron-forward" size={20} color="#002395" />
+          <TouchableOpacity
+            style={[styles.validateButton, { backgroundColor: c.success }, !selectedChoice && { opacity: 0.4 }]}
+            onPress={nextQuestion}
+            disabled={!selectedChoice}
+          >
+            <Text style={styles.validateButtonText}>Valider</Text>
+            <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
           </TouchableOpacity>
         ) : (
+          /* FIX 4: Require answer before finishing on last question */
           <TouchableOpacity
-            style={[styles.finishButton, isFinishing && styles.finishButtonDisabled]}
+            style={[
+              styles.validateButton,
+              { backgroundColor: selectedChoice ? c.primary : c.textTertiary },
+              (isFinishing || !selectedChoice) && { opacity: 0.5 },
+            ]}
             onPress={confirmFinish}
-            disabled={isFinishing}
+            disabled={isFinishing || !selectedChoice}
           >
             {isFinishing ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text style={styles.finishButtonText}>Terminer</Text>
+              <>
+                <Text style={styles.validateButtonText}>Terminer l'examen</Text>
+                <Ionicons name="flag" size={20} color="#FFFFFF" />
+              </>
             )}
           </TouchableOpacity>
         )}
@@ -301,86 +372,71 @@ export default function ExamSessionScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
-    padding: 20,
+    padding: spacing.xl,
   },
   centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 24,
-    backgroundColor: '#F5F5F5',
+    padding: spacing.xxl,
   },
   loadingText: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 16,
+    fontSize: fontSize.lg,
+    marginTop: spacing.lg,
   },
   errorText: {
-    fontSize: 16,
-    color: '#666',
-    marginTop: 12,
-    marginBottom: 20,
+    fontSize: fontSize.lg,
+    marginTop: spacing.md,
+    marginBottom: spacing.xl,
   },
   retryButton: {
-    backgroundColor: '#002395',
-    borderRadius: 12,
-    paddingHorizontal: 32,
+    borderRadius: borderRadius.md,
+    paddingHorizontal: spacing.xxxl,
     paddingVertical: 14,
   },
   retryButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSize.lg,
     fontWeight: '600',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: spacing.md,
   },
   progress: {
-    fontSize: 16,
+    fontSize: fontSize.lg,
     fontWeight: '600',
-    color: '#333',
   },
   timer: {
-    fontSize: 18,
+    fontSize: fontSize.xl,
     fontWeight: 'bold',
-    color: '#002395',
-  },
-  timerLow: {
-    color: '#ED2939',
   },
   progressBar: {
     height: 6,
-    backgroundColor: '#E0E0E0',
     borderRadius: 3,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#002395',
     borderRadius: 3,
   },
   answeredText: {
-    fontSize: 12,
-    color: '#999',
+    fontSize: fontSize.xs,
     textAlign: 'right',
-    marginBottom: 16,
+    marginBottom: spacing.lg,
   },
   scrollArea: {
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 20,
+    paddingBottom: spacing.xl,
   },
   questionCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 24,
-    marginBottom: 20,
+    borderRadius: borderRadius.lg,
+    padding: spacing.xxl,
+    marginBottom: spacing.xl,
     minHeight: 120,
     justifyContent: 'center',
     shadowColor: '#000',
@@ -390,94 +446,64 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   questionText: {
-    fontSize: 18,
-    color: '#333',
+    fontSize: fontSize.xl,
     lineHeight: 26,
   },
+  translatedText: {
+    fontSize: fontSize.md,
+    lineHeight: 22,
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    fontStyle: 'italic',
+  },
   choices: {
-    gap: 12,
+    gap: spacing.md,
   },
   choiceButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: borderRadius.md,
+    padding: spacing.lg,
     borderWidth: 2,
-    borderColor: '#EEE',
-  },
-  choiceSelected: {
-    borderColor: '#002395',
-    backgroundColor: '#002395',
   },
   choiceIdBadge: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#F0F0F0',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
-  },
-  choiceIdSelected: {
-    backgroundColor: 'rgba(255,255,255,0.3)',
+    marginRight: spacing.md,
   },
   choiceId: {
     fontWeight: 'bold',
-    color: '#333',
     fontSize: 14,
   },
-  choiceIdTextWhite: {
-    color: '#FFFFFF',
-  },
   choiceText: {
-    flex: 1,
-    fontSize: 16,
-    color: '#333',
+    fontSize: fontSize.lg,
+    flexWrap: 'wrap',
+    flexShrink: 1,
   },
-  choiceTextSelected: {
-    color: '#FFFFFF',
+  choiceTranslated: {
+    fontSize: fontSize.sm,
+    marginTop: 3,
+    fontStyle: 'italic',
   },
-  navRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
+  validateRow: {
+    paddingTop: spacing.lg,
   },
-  navButton: {
+  validateButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    paddingVertical: 12,
-    paddingHorizontal: 8,
+    justifyContent: 'center',
+    gap: spacing.sm,
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.lg,
+    height: 56,
   },
-  navButtonDisabled: {
-    opacity: 0.4,
-  },
-  navButtonText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#002395',
-  },
-  navButtonTextDisabled: {
-    color: '#CCC',
-  },
-  finishButton: {
-    backgroundColor: '#ED2939',
-    borderRadius: 12,
-    paddingHorizontal: 24,
-    paddingVertical: 14,
-    minWidth: 120,
-    alignItems: 'center',
-  },
-  finishButtonDisabled: {
-    backgroundColor: '#F5A0A8',
-  },
-  finishButtonText: {
+  validateButtonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: fontSize.lg,
     fontWeight: '600',
   },
 });

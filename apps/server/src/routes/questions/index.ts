@@ -13,6 +13,8 @@ const querySchema = z.object({
     .enum(['true', 'false'])
     .transform((v) => v === 'true')
     .optional(),
+  examType: z.enum(['csp', 'cr', 'nat']).optional(),
+  ids: z.string().optional(), // comma-separated IDs: "1,2,3"
   lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
   limit: z.coerce.number().min(1).max(100).default(20),
   offset: z.coerce.number().min(0).default(0),
@@ -29,9 +31,13 @@ const randomQuerySchema = z.object({
     .enum(['true', 'false'])
     .transform((v) => v === 'true')
     .optional(),
+  examType: z.enum(['csp', 'cr', 'nat']).optional(),
   lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
   limit: z.coerce.number().min(1).max(100).default(20),
-  perTheme: z.coerce.number().min(1).max(20).optional(),
+  perTheme: z
+    .enum(['true', 'false'])
+    .transform((v) => v === 'true')
+    .optional(),
 });
 
 // ── Helpers ────────────────────────────────────
@@ -71,10 +77,15 @@ export default async function questionRoutes(app: FastifyInstance) {
     const query = querySchema.parse(request.query);
     const conditions = [];
 
+    if (query.ids) {
+      const idList = query.ids.split(',').map(Number).filter((n) => !isNaN(n));
+      if (idList.length > 0) conditions.push(inArray(questions.id, idList));
+    }
     if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
     if (query.type) conditions.push(eq(questions.type, query.type));
     if (query.difficulty) conditions.push(eq(questions.difficulty, query.difficulty));
     if (query.isPremium !== undefined) conditions.push(eq(questions.isPremium, query.isPremium));
+    if (query.examType) conditions.push(sql`${query.examType} = ANY(${questions.examTypes})`);
 
     const where = conditions.length > 0 ? and(...conditions) : undefined;
 
@@ -91,7 +102,13 @@ export default async function questionRoutes(app: FastifyInstance) {
 
     const data = results.map((q) => flattenTranslation(q as QuestionRow, query.lang));
 
-    return { data, total: data.length };
+    // Get actual total count for pagination
+    const [countResult] = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(questions)
+      .where(where);
+
+    return { data, total: countResult.count };
   });
 
   // ── GET /random ──────────────────────────────
@@ -103,6 +120,7 @@ export default async function questionRoutes(app: FastifyInstance) {
     if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
     if (query.type) conditions.push(eq(questions.type, query.type));
     if (query.isPremium !== undefined) conditions.push(eq(questions.isPremium, query.isPremium));
+    if (query.examType) conditions.push(sql`${query.examType} = ANY(${questions.examTypes})`);
 
     const where = conditions.length > 0 ? and(...conditions) : undefined;
 
@@ -112,6 +130,7 @@ export default async function questionRoutes(app: FastifyInstance) {
         columns: { id: true },
       });
 
+      const perThemeCount = Math.ceil(query.limit / allThemes.length);
       const perThemeQuestions: QuestionRow[] = [];
 
       for (const theme of allThemes) {
@@ -120,7 +139,7 @@ export default async function questionRoutes(app: FastifyInstance) {
 
         const themeResults = await db.query.questions.findMany({
           where: themeWhere,
-          limit: query.perTheme,
+          limit: perThemeCount,
           orderBy: sql`RANDOM()`,
           with: {
             translations: query.lang && query.lang !== 'fr'

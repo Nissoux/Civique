@@ -22,7 +22,7 @@ export default function SocialLayout() {
       <Stack.Screen
         name="challenges"
         options={{
-          headerTitle: 'D\u00e9fis',
+          headerTitle: 'Défis',
           headerStyle: { backgroundColor: '#002395' },
           headerTintColor: '#FFFFFF',
         }}

@@ -38,9 +38,10 @@ export interface ExamHistoryResponse {
   };
 }
 
-export async function startExam(): Promise<StartExamResponse> {
-  const { data } = await api.post<{ data: StartExamResponse }>('/exams/start');
-  return data.data;
+export async function startExam(examType?: string): Promise<StartExamResponse> {
+  const { data } = await api.post<{ data: ExamSession & { questionIds: number[] } }>('/exams/start', examType ? { examType } : {});
+  const { questionIds, ...session } = data.data;
+  return { session: session as ExamSession, questionIds };
 }
 
 export async function getExam(sessionId: string): Promise<{
@@ -48,9 +49,12 @@ export async function getExam(sessionId: string): Promise<{
   questions: Question[];
 }> {
   const { data } = await api.get<{
-    data: { session: ExamSession; questions: Question[] };
+    data: ExamSession & { answers: Array<{ question: Question }> };
   }>(`/exams/${sessionId}`);
-  return data.data;
+  const raw = data.data;
+  const { answers, ...session } = raw;
+  const questions = (answers || []).map((a) => a.question).filter(Boolean);
+  return { session: session as ExamSession, questions };
 }
 
 export async function submitAnswer(
@@ -65,7 +69,7 @@ export async function submitAnswer(
 }
 
 export async function finishExam(sessionId: string): Promise<ExamSession> {
-  const { data } = await api.post<{ data: ExamSession }>(`/exams/${sessionId}/finish`);
+  const { data } = await api.post<{ data: ExamSession }>(`/exams/${sessionId}/finish`, {});
   return data.data;
 }
 

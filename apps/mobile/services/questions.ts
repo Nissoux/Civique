@@ -4,6 +4,7 @@ import type { Question, Language } from '@civique/shared';
 export interface GetQuestionsParams {
   themeId?: number;
   type?: string;
+  examType?: string;
   lang?: Language;
   limit?: number;
   offset?: number;
@@ -12,6 +13,7 @@ export interface GetQuestionsParams {
 export interface GetRandomQuestionsParams {
   count?: number;
   themeId?: number;
+  examType?: string;
   lang?: Language;
 }
 
@@ -28,6 +30,13 @@ export async function getQuestions(params: GetQuestionsParams = {}): Promise<{
 export async function getRandomQuestions(params: GetRandomQuestionsParams = {}): Promise<Question[]> {
   const { data } = await api.get<{ data: Question[] }>('/questions/random', {
     params,
+  });
+  return data.data;
+}
+
+export async function getQuestionsByIds(ids: number[], lang?: Language): Promise<Question[]> {
+  const { data } = await api.get<{ data: Question[] }>('/questions', {
+    params: { ids: ids.join(','), lang, limit: ids.length },
   });
   return data.data;
 }

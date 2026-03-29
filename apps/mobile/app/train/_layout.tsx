@@ -6,7 +6,7 @@ export default function TrainLayout() {
       <Stack.Screen
         name="[themeId]"
         options={{
-          headerTitle: 'Entra\u00eenement',
+          headerTitle: 'Entraînement',
           headerStyle: { backgroundColor: '#002395' },
           headerTintColor: '#FFFFFF',
         }}
@@ -14,7 +14,7 @@ export default function TrainLayout() {
       <Stack.Screen
         name="random"
         options={{
-          headerTitle: 'Entra\u00eenement libre',
+          headerTitle: 'Entraînement libre',
           headerStyle: { backgroundColor: '#002395' },
           headerTintColor: '#FFFFFF',
         }}
