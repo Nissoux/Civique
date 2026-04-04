@@ -69,6 +69,25 @@ export function useAuth() {
     [setTokens, setUser, router],
   );
 
+  const socialLogin = useCallback(
+    async (provider: 'google' | 'apple', token: string, email?: string, displayName?: string) => {
+      setError(null);
+      setIsSubmitting(true);
+      try {
+        const response = await authService.socialLogin(provider, token, email, displayName);
+        await setTokens(response.accessToken, response.refreshToken);
+        setUser(response.user);
+        router.replace('/(tabs)');
+      } catch (err: unknown) {
+        setError(getErrorMessage(err, 'Erreur lors de la connexion sociale. Veuillez réessayer.'));
+        throw err;
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [setTokens, setUser, router],
+  );
+
   const logout = useCallback(async () => {
     await storeLogout();
     router.replace('/(auth)/login');
@@ -96,6 +115,7 @@ export function useAuth() {
     error,
     login,
     register,
+    socialLogin,
     logout,
     loadUser,
     clearError,

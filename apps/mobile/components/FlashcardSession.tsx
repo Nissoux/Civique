@@ -189,7 +189,7 @@ export default function FlashcardSession({ cards, onComplete }: FlashcardSession
   return (
     <View style={{ flex: 1, backgroundColor: c.background }}>
       {/* Progress header */}
-      <View style={{ paddingHorizontal: spacing.xxl, paddingTop: insets.top + spacing.xl, paddingBottom: spacing.md }}>
+      <View style={{ paddingHorizontal: spacing.xxl, paddingTop: spacing.lg, paddingBottom: spacing.md }}>
         <Text style={{ fontSize: fontSize.md, fontWeight: '600', color: c.textSecondary, textAlign: 'center' }}>
           {currentIndex + 1}/{cards.length} cartes
         </Text>

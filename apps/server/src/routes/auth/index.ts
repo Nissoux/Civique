@@ -3,6 +3,7 @@ import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 import { eq } from 'drizzle-orm';
+import { sendEmail, welcomeEmailHtml, verificationEmailHtml } from '../../services/email.js';
 import { db } from '../../config/database.js';
 import { users } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
@@ -26,6 +27,13 @@ const refreshSchema = z.object({
   refreshToken: z.string(),
 });
 
+const socialLoginSchema = z.object({
+  provider: z.enum(['google', 'apple']),
+  token: z.string(),
+  displayName: z.string().optional(),
+  email: z.string().email(),
+});
+
 const updateProfileSchema = z.object({
   displayName: z.string().min(1).max(100).optional(),
   avatarUrl: z.string().url().nullable().optional(),
@@ -36,19 +44,21 @@ const forgotPasswordSchema = z.object({
   email: z.string().email(),
 });
 
+const verifyResetCodeSchema = z.object({
+  email: z.string().email(),
+  code: z.string().length(6),
+});
+
 const resetPasswordSchema = z.object({
-  token: z.string(),
-  password: z.string().min(8),
+  email: z.string().email(),
+  resetToken: z.string(),
+  newPassword: z.string().min(8),
 });
 
 // ── In-memory password reset store ─────────────
 
-interface ResetEntry {
-  email: string;
-  expiresAt: Date;
-}
-
-const passwordResetTokens = new Map<string, ResetEntry>();
+const resetCodes = new Map<string, { code: string; email: string; expiresAt: number }>();
+const resetTokens = new Map<string, { email: string; expiresAt: number }>();
 
 // ── Helpers ────────────────────────────────────
 
@@ -76,6 +86,10 @@ function sanitizeUser(user: {
     isPremium: user.isPremium,
     createdAt: user.createdAt,
   };
+}
+
+function generateCode(): string {
+  return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
 // ── Routes ─────────────────────────────────────
@@ -113,6 +127,15 @@ export default async function authRoutes(app: FastifyInstance) {
       });
 
     const tokens = issueTokens(app, { id: user.id, email: user.email });
+
+    // Send welcome email (async, don't block response)
+    sendEmail({
+      to: user.email,
+      toName: user.displayName,
+      subject: 'Bienvenue sur Civique !',
+      html: welcomeEmailHtml(user.displayName),
+    }).catch(() => {}); // Don't fail registration if email fails
+
     return reply.status(201).send({
       ...tokens,
       user: sanitizeUser(user),
@@ -228,47 +251,155 @@ export default async function authRoutes(app: FastifyInstance) {
     const { email } = forgotPasswordSchema.parse(request.body);
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),
-      columns: { id: true, email: true },
+      columns: { id: true, email: true, displayName: true },
     });
 
     // Always return success to prevent email enumeration
     if (!user) {
-      return { message: 'If that email exists, a reset link has been sent.' };
+      return { message: 'Si cet email existe, un code de vérification a été envoyé.' };
     }
 
-    const token = crypto.randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+    const code = generateCode();
+    const expiresAt = Date.now() + 15 * 60 * 1000; // 15 minutes
 
-    passwordResetTokens.set(token, { email: user.email, expiresAt });
+    // Store code keyed by email (overwrite any previous code)
+    resetCodes.set(email.toLowerCase(), { code, email: user.email, expiresAt });
 
-    // TODO: Send email with reset link in production
-    // Token stored in memory, user will receive via email
+    // Send verification code email
+    sendEmail({
+      to: user.email,
+      toName: user.displayName,
+      subject: 'Civique — Code de réinitialisation',
+      html: verificationEmailHtml(user.displayName, code),
+    }).catch((err) => {
+      console.error('[Auth] Failed to send reset code email:', err);
+    });
 
-    return { message: 'If that email exists, a reset link has been sent.' };
+    return { message: 'Si cet email existe, un code de vérification a été envoyé.' };
+  });
+
+  // ── POST /verify-reset-code ──────────────────
+  app.post('/verify-reset-code', async (request, reply) => {
+    const { email, code } = verifyResetCodeSchema.parse(request.body);
+
+    const entry = resetCodes.get(email.toLowerCase());
+
+    if (!entry) {
+      return reply.status(400).send({ error: 'Code invalide ou expiré.' });
+    }
+
+    if (Date.now() > entry.expiresAt) {
+      resetCodes.delete(email.toLowerCase());
+      return reply.status(400).send({ error: 'Code invalide ou expiré.' });
+    }
+
+    if (entry.code !== code) {
+      return reply.status(400).send({ error: 'Code invalide ou expiré.' });
+    }
+
+    // Code is valid — generate a one-time reset token
+    const resetToken = crypto.randomUUID();
+    resetTokens.set(resetToken, {
+      email: entry.email,
+      expiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes to use the token
+    });
+
+    return { valid: true, resetToken };
   });
 
   // ── POST /reset-password ─────────────────────
   app.post('/reset-password', async (request, reply) => {
-    const { token, password } = resetPasswordSchema.parse(request.body);
+    const { email, resetToken, newPassword } = resetPasswordSchema.parse(request.body);
 
-    const entry = passwordResetTokens.get(token);
-    if (!entry) {
-      return reply.status(400).send({ error: 'Invalid or expired reset token' });
+    const tokenEntry = resetTokens.get(resetToken);
+    if (!tokenEntry) {
+      return reply.status(400).send({ error: 'Jeton de réinitialisation invalide ou expiré.' });
     }
 
-    if (new Date() > entry.expiresAt) {
-      passwordResetTokens.delete(token);
-      return reply.status(400).send({ error: 'Invalid or expired reset token' });
+    if (Date.now() > tokenEntry.expiresAt) {
+      resetTokens.delete(resetToken);
+      return reply.status(400).send({ error: 'Jeton de réinitialisation invalide ou expiré.' });
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    if (tokenEntry.email.toLowerCase() !== email.toLowerCase()) {
+      return reply.status(400).send({ error: 'Jeton de réinitialisation invalide ou expiré.' });
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 12);
     await db
       .update(users)
       .set({ passwordHash, updatedAt: new Date() })
-      .where(eq(users.email, entry.email));
+      .where(eq(users.email, tokenEntry.email));
 
-    passwordResetTokens.delete(token);
+    // Clean up
+    resetTokens.delete(resetToken);
+    resetCodes.delete(email.toLowerCase());
 
-    return { message: 'Password has been reset successfully.' };
+    return { message: 'Mot de passe réinitialisé avec succès.' };
+  });
+
+  // ── POST /social-login ─────────────────────────
+  app.post('/social-login', async (request, reply) => {
+    const body = socialLoginSchema.parse(request.body);
+
+    // ── Verify token based on provider ──────────
+    if (body.provider === 'google') {
+      try {
+        const res = await fetch(
+          `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(body.token)}`,
+        );
+        if (!res.ok) {
+          return reply.status(401).send({ error: 'Invalid Google token' });
+        }
+        const tokenInfo = (await res.json()) as { email?: string };
+        if (tokenInfo.email?.toLowerCase() !== body.email.toLowerCase()) {
+          return reply.status(401).send({ error: 'Email mismatch with Google token' });
+        }
+      } catch {
+        return reply.status(401).send({ error: 'Failed to verify Google token' });
+      }
+    }
+    // For Apple: token is verified client-side by expo-apple-authentication
+
+    // ── Find or create user ─────────────────────
+    let user = await db.query.users.findFirst({
+      where: eq(users.email, body.email),
+    });
+
+    if (!user) {
+      // Create new user with a random password hash (social login only)
+      const randomPassword = crypto.randomUUID() + crypto.randomUUID();
+      const passwordHash = await bcrypt.hash(randomPassword, 12);
+      const displayName = body.displayName || body.email.split('@')[0];
+
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          email: body.email,
+          passwordHash,
+          displayName,
+        })
+        .returning();
+
+      user = newUser;
+
+      // Send welcome email (async, don't block response)
+      sendEmail({
+        to: newUser.email,
+        toName: newUser.displayName,
+        subject: 'Bienvenue sur Civique !',
+        html: welcomeEmailHtml(newUser.displayName),
+      }).catch(() => {});
+    }
+
+    if (!user) {
+      return reply.status(500).send({ error: 'Failed to create user' });
+    }
+
+    const tokens = issueTokens(app, { id: user.id, email: user.email });
+    return {
+      ...tokens,
+      user: sanitizeUser(user),
+    };
   });
 }

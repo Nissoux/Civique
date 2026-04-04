@@ -355,17 +355,16 @@ export default function ExamResultsScreen() {
                 }}
               >
                 <Text style={{ fontSize: 14, color: c.textPrimary, marginBottom: 10, lineHeight: 20 }}>{wa.questionText}</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                  <Ionicons name="close-circle" size={16} color={c.error} />
-                  <Text style={{ fontSize: 13, color: c.error, flex: 1 }}>
-                    Votre réponse : {wa.selectedChoice.toUpperCase()}
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 8, marginBottom: 6 }}>
+                  <Ionicons name="close-circle" size={16} color={c.error} style={{ marginTop: 2 }} />
+                  <Text style={{ fontSize: 13, color: c.error, flex: 1, lineHeight: 19 }}>
+                    {wa.choices?.find((ch: any) => ch.id === wa.selectedChoice)?.text || wa.selectedChoice.toUpperCase()}
                   </Text>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                  <Ionicons name="checkmark-circle" size={16} color={c.success} />
-                  <Text style={{ fontSize: 13, color: c.success, flex: 1 }}>
-                    Bonne réponse : {wa.correctChoice.toUpperCase()} -{' '}
-                    {wa.correctChoiceText}
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 8, marginBottom: 4 }}>
+                  <Ionicons name="checkmark-circle" size={16} color={c.success} style={{ marginTop: 2 }} />
+                  <Text style={{ fontSize: 13, color: c.success, flex: 1, lineHeight: 19 }}>
+                    {wa.choices?.find((ch: any) => ch.id === wa.correctChoice)?.text || wa.correctChoiceText || wa.correctChoice.toUpperCase()}
                   </Text>
                 </View>
               </View>

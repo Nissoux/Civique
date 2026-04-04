@@ -5,7 +5,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { THEMES } from '@civique/shared';
@@ -323,24 +322,29 @@ export default function FlashcardsScreen() {
 
       {/* Flashcard session modal */}
       <Modal visible={modalVisible} animationType="slide" presentationStyle="fullScreen">
-        <SafeAreaView style={{ flex: 1, backgroundColor: c.background }}>
-          {/* Close button */}
+        <View style={{ flex: 1, backgroundColor: c.background }}>
+          {/* Header with back button */}
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingHorizontal: spacing.xxl,
-              paddingVertical: spacing.md,
+              paddingHorizontal: spacing.lg,
+              paddingTop: 50,
+              paddingBottom: spacing.md,
+              backgroundColor: c.surface,
+              borderBottomWidth: 1,
+              borderBottomColor: c.border,
             }}
           >
-            <TouchableOpacity onPress={closeModal} style={{ padding: spacing.sm }}>
-              <Ionicons name="close" size={28} color={c.textPrimary} />
+            <TouchableOpacity onPress={closeModal} style={{ padding: spacing.sm, flexDirection: 'row', alignItems: 'center', gap: spacing.xs }}>
+              <Ionicons name="arrow-back" size={24} color={c.primary} />
+              <Text style={{ fontSize: fontSize.md, color: c.primary, fontWeight: '600' }}>Retour</Text>
             </TouchableOpacity>
-            <Text style={{ fontSize: fontSize.md, fontWeight: '600', color: c.textSecondary }}>
+            <Text style={{ fontSize: fontSize.md, fontWeight: '600', color: c.textPrimary }}>
               Fiches mémo
             </Text>
-            <View style={{ width: 44 }} />
+            <View style={{ width: 80 }} />
           </View>
 
           {sessionCards && sessionCards.length > 0 ? (
@@ -360,7 +364,7 @@ export default function FlashcardsScreen() {
               </Text>
             </View>
           )}
-        </SafeAreaView>
+        </View>
       </Modal>
     </View>
   );

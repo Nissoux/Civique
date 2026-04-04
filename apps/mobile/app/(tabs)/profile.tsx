@@ -19,6 +19,7 @@ import { useExamTypeStore, EXAM_TYPES } from '../../stores/examTypeStore';
 import { useColors, useThemeStore, spacing, fontSize, borderRadius } from '../../constants/theme';
 import type { ThemeMode } from '../../constants/theme';
 import api from '../../services/api';
+import * as Linking from 'expo-linking';
 import { getStatsOverview } from '../../services/stats';
 
 const APP_VERSION = '1.0.0';
@@ -336,7 +337,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Conditions d'utilisation"
-          onPress={() => Alert.alert('Conditions', 'Les conditions d\'utilisation seront disponibles prochainement.')}
+          onPress={() => Linking.openURL('https://api.integrafle.fr/legal/terms')}
           colors={colors}
         />
         <MenuItem
@@ -344,7 +345,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Politique de confidentialité"
-          onPress={() => Alert.alert('Confidentialité', 'La politique de confidentialité sera disponible prochainement.')}
+          onPress={() => Linking.openURL('https://api.integrafle.fr/legal/privacy')}
           colors={colors}
           isLast
         />

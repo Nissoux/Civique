@@ -8,35 +8,109 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Alert,
+  Image,
 } from 'react-native';
-import { Link } from 'expo-router';
-import { useState } from 'react';
+import { Link, useRouter } from 'expo-router';
+import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import * as Google from 'expo-auth-session/providers/google';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
 import { useAuth } from '../../hooks/useAuth';
 import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
 
+WebBrowser.maybeCompleteAuthSession();
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const GOOGLE_CLIENT_ID =
+  '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
 
 export default function LoginScreen() {
   const c = useColors();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isSubmitting, error, clearError } = useAuth();
+  const [socialLoading, setSocialLoading] = useState<'google' | 'apple' | null>(null);
+  const { login, socialLogin, isSubmitting, error, clearError } = useAuth();
 
-  const isValid = EMAIL_RE.test(email) && password.length >= 1;
+  const trimmedEmail = email.trim();
+  const isValid = EMAIL_RE.test(trimmedEmail) && password.length >= 1;
+
+  // ── Google Auth ──────────────────────────────
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId: GOOGLE_CLIENT_ID,
+    clientId: GOOGLE_CLIENT_ID,
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { id_token } = response.params;
+      if (id_token) {
+        handleGoogleLogin(id_token);
+      }
+    }
+  }, [response]);
+
+  const handleGoogleLogin = async (idToken: string) => {
+    setSocialLoading('google');
+    try {
+      // Decode JWT payload to get email and name
+      const payload = JSON.parse(atob(idToken.split('.')[1]));
+      await socialLogin('google', idToken, payload.email, payload.name);
+    } catch {
+      // error is set in hook
+    } finally {
+      setSocialLoading(null);
+    }
+  };
+
+  // ── Apple Auth ───────────────────────────────
+  const handleAppleLogin = async () => {
+    setSocialLoading('apple');
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      const idToken = credential.identityToken;
+      if (!idToken) {
+        throw new Error('No identity token from Apple');
+      }
+
+      const displayName =
+        credential.fullName?.givenName && credential.fullName?.familyName
+          ? `${credential.fullName.givenName} ${credential.fullName.familyName}`
+          : undefined;
+
+      // Decode JWT payload to get email
+      const payload = JSON.parse(atob(idToken.split('.')[1]));
+      await socialLogin('apple', idToken, credential.email || payload.email, displayName);
+    } catch (err: any) {
+      if (err?.code !== 'ERR_REQUEST_CANCELED') {
+        // error is set in hook
+      }
+    } finally {
+      setSocialLoading(null);
+    }
+  };
 
   const handleLogin = async () => {
     if (!isValid) return;
     try {
-      await login(email.trim(), password);
+      await login(trimmedEmail, password);
     } catch {
       // error is set in hook
     }
   };
+
+  const isBusy = isSubmitting || socialLoading !== null;
 
   return (
     <KeyboardAvoidingView
@@ -76,7 +150,7 @@ export default function LoginScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
-          editable={!isSubmitting}
+          editable={!isBusy}
         />
 
         <View style={[styles.passwordContainer, { backgroundColor: c.inputBg, borderColor: c.border }]}>
@@ -91,7 +165,7 @@ export default function LoginScreen() {
             }}
             secureTextEntry={!showPassword}
             autoComplete="password"
-            editable={!isSubmitting}
+            editable={!isBusy}
           />
           <TouchableOpacity
             style={styles.eyeButton}
@@ -107,18 +181,20 @@ export default function LoginScreen() {
 
         <TouchableOpacity
           style={styles.forgotLink}
-          onPress={() => Alert.alert(
-            'Mot de passe oublié',
-            'Contactez le support à support@integrafle.fr pour réinitialiser votre mot de passe.'
-          )}
+          onPress={() => router.push('/(auth)/forgot-password')}
         >
           <Text style={[styles.forgotText, { color: c.primary }]}>Mot de passe oublié ?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { backgroundColor: c.primary }, (!isValid || isSubmitting) && { opacity: 0.5 }]}
-          onPress={handleLogin}
-          disabled={!isValid || isSubmitting}
+          style={[styles.button, { backgroundColor: c.primary }]}
+          onPress={() => {
+            if (isBusy) return;
+            if (!email.trim().includes('@')) { clearError(); return; }
+            if (password.length < 1) return;
+            handleLogin();
+          }}
+          activeOpacity={0.7}
         >
           {isSubmitting ? (
             <ActivityIndicator color="#FFFFFF" />
@@ -126,6 +202,63 @@ export default function LoginScreen() {
             <Text style={styles.buttonText}>Se connecter</Text>
           )}
         </TouchableOpacity>
+
+        {/* ── Separator ─────────────────────────── */}
+        <View style={styles.separatorContainer}>
+          <View style={[styles.separatorLine, { backgroundColor: c.border }]} />
+          <Text style={[styles.separatorText, { color: c.textTertiary }]}>ou</Text>
+          <View style={[styles.separatorLine, { backgroundColor: c.border }]} />
+        </View>
+
+        {/* ── Social Login Buttons ──────────────── */}
+        <TouchableOpacity
+          style={[styles.socialButton, { backgroundColor: '#FFFFFF', borderColor: c.border, borderWidth: 1 }]}
+          onPress={() => {
+            if (isBusy) return;
+            clearError();
+            promptAsync();
+          }}
+          activeOpacity={0.7}
+          disabled={!request || isBusy}
+        >
+          {socialLoading === 'google' ? (
+            <ActivityIndicator color="#4285F4" />
+          ) : (
+            <>
+              <Image
+                source={{ uri: 'https://developers.google.com/identity/images/g-logo.png' }}
+                style={styles.socialIcon}
+              />
+              <Text style={[styles.socialButtonText, { color: '#1A1A2E' }]}>
+                Continuer avec Google
+              </Text>
+            </>
+          )}
+        </TouchableOpacity>
+
+        {Platform.OS === 'ios' && (
+          <TouchableOpacity
+            style={[styles.socialButton, { backgroundColor: '#000000' }]}
+            onPress={() => {
+              if (isBusy) return;
+              clearError();
+              handleAppleLogin();
+            }}
+            activeOpacity={0.7}
+            disabled={isBusy}
+          >
+            {socialLoading === 'apple' ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <>
+                <Ionicons name="logo-apple" size={20} color="#FFFFFF" />
+                <Text style={[styles.socialButtonText, { color: '#FFFFFF' }]}>
+                  Continuer avec Apple
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+        )}
 
         <Link href="/(auth)/register" style={styles.link}>
           <Text style={[styles.linkText, { color: c.textSecondary }]}>
@@ -221,8 +354,39 @@ const styles = StyleSheet.create({
     fontSize: fontSize.lg,
     fontWeight: '600',
   },
+  separatorContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.xl,
+  },
+  separatorLine: {
+    flex: 1,
+    height: 1,
+  },
+  separatorText: {
+    marginHorizontal: spacing.lg,
+    fontSize: fontSize.sm,
+  },
+  socialButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: borderRadius.md,
+    padding: spacing.lg,
+    height: 56,
+    gap: spacing.md,
+    marginBottom: spacing.md,
+  },
+  socialIcon: {
+    width: 20,
+    height: 20,
+  },
+  socialButtonText: {
+    fontSize: fontSize.lg,
+    fontWeight: '600',
+  },
   link: {
-    marginTop: spacing.xxl,
+    marginTop: spacing.lg,
     alignSelf: 'center',
   },
   linkText: {

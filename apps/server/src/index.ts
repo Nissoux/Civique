@@ -87,10 +87,53 @@ async function main() {
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));
 
+  // Legal pages (required by App Store / Google Play)
+  app.get('/legal/privacy', async (_request, reply) => {
+    const fs = await import('fs');
+    const path = await import('path');
+    try {
+      const md = fs.readFileSync(path.resolve(process.cwd(), '../../store/politique-confidentialite.md'), 'utf-8');
+      const html = md
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/^---$/gm, '<hr>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      return reply.type('text/html; charset=utf-8').send(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Politique de confidentialité - Civique</title><style>body{font-family:-apple-system,sans-serif;max-width:700px;margin:0 auto;padding:20px;background:#0A0E1A;color:#E0E0E0;line-height:1.6}h1,h2{color:#4D7CFF}h3{color:#AAB}hr{border-color:#333}a{color:#4D7CFF}</style></head><body><p>${html}</p></body></html>`);
+    } catch {
+      return reply.type('text/html; charset=utf-8').send('<h1>Politique de confidentialité</h1><p>Contactez support@integrafle.fr</p>');
+    }
+  });
+
+  app.get('/legal/terms', async (_request, reply) => {
+    const fs = await import('fs');
+    const path = await import('path');
+    try {
+      const md = fs.readFileSync(path.resolve(process.cwd(), '../../store/conditions-utilisation.md'), 'utf-8');
+      const html = md
+        .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/^---$/gm, '<hr>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n/g, '<br>');
+      return reply.type('text/html; charset=utf-8').send(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conditions d'utilisation - Civique</title><style>body{font-family:-apple-system,sans-serif;max-width:700px;margin:0 auto;padding:20px;background:#0A0E1A;color:#E0E0E0;line-height:1.6}h1,h2{color:#4D7CFF}h3{color:#AAB}hr{border-color:#333}a{color:#4D7CFF}</style></head><body><p>${html}</p></body></html>`);
+    } catch {
+      return reply.type('text/html; charset=utf-8').send('<h1>Conditions d\'utilisation</h1><p>Contactez support@integrafle.fr</p>');
+    }
+  });
+
   // Payment redirect pages
   app.get('/payment-success', async (_request, reply) => {
-    return reply.type('text/html').send(`
-      <html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement réussi</title></head>
+    return reply.type('text/html; charset=utf-8').send(`
+      <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement réussi</title></head>
       <body style="font-family:sans-serif;text-align:center;padding:60px 20px;background:#0A0E1A;color:white">
         <h1 style="color:#4CAF50">✅ Paiement réussi !</h1>
         <p>Votre compte Civique Premium est maintenant actif.</p>
@@ -101,8 +144,8 @@ async function main() {
   });
 
   app.get('/payment-cancel', async (_request, reply) => {
-    return reply.type('text/html').send(`
-      <html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement annulé</title></head>
+    return reply.type('text/html; charset=utf-8').send(`
+      <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Paiement annulé</title></head>
       <body style="font-family:sans-serif;text-align:center;padding:60px 20px;background:#0A0E1A;color:white">
         <h1>Paiement annulé</h1>
         <p>Aucun montant n'a été débité.</p>

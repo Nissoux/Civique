@@ -42,6 +42,9 @@ COPY --from=builder /app/apps/server/dist apps/server/dist
 COPY apps/server/drizzle apps/server/drizzle
 COPY apps/server/drizzle.config.ts apps/server/
 
+# Copy legal documents
+COPY store/ store/
+
 # Patch shared package.json to point to dist for production
 RUN sed -i 's|"./src/index.ts"|"./dist/index.js"|g' packages/shared/package.json
 

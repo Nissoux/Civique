@@ -31,7 +31,7 @@ function RootLayoutNav() {
   const segments = useSegments();
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [onboardingDone, setOnboardingDone] = useState(true);
+  const [onboardingDone, setOnboardingDone] = useState(false);
 
   useEffect(() => {
     async function bootstrap() {

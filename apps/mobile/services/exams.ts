@@ -23,9 +23,11 @@ export interface ExamResultsResponse {
   wrongAnswers: Array<{
     questionId: number;
     questionText: string;
+    choices: Array<{ id: string; text: string }>;
     selectedChoice: string;
     correctChoice: string;
     correctChoiceText: string;
+    explanation?: string;
   }>;
 }
 
