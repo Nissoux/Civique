@@ -462,9 +462,9 @@ const styles = StyleSheet.create({
   },
   choiceButton: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderRadius: borderRadius.md,
-    padding: spacing.lg,
+    padding: spacing.md,
     borderWidth: 2,
   },
   choiceIdBadge: {
@@ -480,9 +480,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   choiceText: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.md,
+    flex: 1,
     flexWrap: 'wrap',
-    flexShrink: 1,
+    lineHeight: 22,
   },
   choiceTranslated: {
     fontSize: fontSize.sm,

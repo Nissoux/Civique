@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
   },
   choiceItem: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderRadius: borderRadius.md,
     padding: spacing.lg,
     borderWidth: 1.5,

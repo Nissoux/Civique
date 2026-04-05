@@ -680,10 +680,10 @@ const styles = StyleSheet.create({
   },
   choiceButton: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderRadius: themeBorderRadius.lg,
-    paddingVertical: 18,
-    paddingHorizontal: 18,
+    paddingVertical: 14,
+    paddingHorizontal: 14,
     borderWidth: 2,
     minHeight: 60,
   },
@@ -704,8 +704,8 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   choiceText: {
-    fontSize: themeFontSize.lg,
-    lineHeight: 24,
+    fontSize: themeFontSize.md,
+    lineHeight: 22,
     flexWrap: 'wrap',
   },
   choiceTranslatedText: {
