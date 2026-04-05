@@ -61,11 +61,12 @@ const DAILY_QUESTIONS = [
 ];
 
 // ── Skill Level Helper ────────────────────────────────
-function getSkillLevel(accuracy: number): { label: string; color: string; icon: React.ComponentProps<typeof Ionicons>['name'] } {
-  if (accuracy <= 10) return { label: 'Débutant', color: '#9E9E9E', icon: 'leaf' };
-  if (accuracy <= 40) return { label: 'Apprenti', color: '#42A5F5', icon: 'school' };
-  if (accuracy <= 70) return { label: 'Confirmé', color: '#66BB6A', icon: 'shield-checkmark' };
-  if (accuracy <= 90) return { label: 'Avancé', color: '#AB47BC', icon: 'star' };
+function getSkillLevel(totalPracticed: number, overallAccuracy: number): { label: string; color: string; icon: React.ComponentProps<typeof Ionicons>['name'] } {
+  // Based on number of questions practiced AND accuracy, not just accuracy
+  if (totalPracticed < 20) return { label: 'Débutant', color: '#9E9E9E', icon: 'leaf' };
+  if (totalPracticed < 80 || overallAccuracy < 40) return { label: 'Apprenti', color: '#42A5F5', icon: 'school' };
+  if (totalPracticed < 200 || overallAccuracy < 60) return { label: 'Confirmé', color: '#66BB6A', icon: 'shield-checkmark' };
+  if (totalPracticed < 400 || overallAccuracy < 75) return { label: 'Avancé', color: '#AB47BC', icon: 'star' };
   return { label: 'Prêt pour l\'examen', color: '#FFB300', icon: 'trophy' };
 }
 
@@ -104,7 +105,7 @@ export default function TrainingScreen() {
 
   // ── Skill Level ──
   const overallAccuracy = stats?.overallAccuracy ?? 0;
-  const skillLevel = getSkillLevel(overallAccuracy);
+  const skillLevel = getSkillLevel(stats?.totalPracticed || 0, overallAccuracy);
 
   const s = styles(c);
 

@@ -89,12 +89,17 @@ export default function ProfileScreen() {
   const { selectedExamType } = useExamTypeStore();
   const { mode: themeMode, setMode: setThemeMode } = useThemeStore();
 
-  const [overallAccuracy, setOverallAccuracy] = useState(0);
+  const [progressPercent, setProgressPercent] = useState(0);
 
   useEffect(() => {
     fetchSubscription();
     getStatsOverview(selectedExamType || undefined).then((s) => {
-      setOverallAccuracy(s.overallAccuracy || 0);
+      // Progress = questions practiced / total available (not just accuracy)
+      const totalPracticed = s.totalPracticed || 0;
+      // Estimate total questions for this exam type (~300)
+      const estimatedTotal = 300;
+      const progress = Math.min(100, Math.round((totalPracticed / estimatedTotal) * 100));
+      setProgressPercent(progress);
     }).catch(() => {});
   }, [fetchSubscription, selectedExamType]);
 
@@ -183,13 +188,13 @@ export default function ProfileScreen() {
             <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
               Progression globale
             </Text>
-            <Text style={[styles.progressPercent, { color: colors.primary }]}>{overallAccuracy}%</Text>
+            <Text style={[styles.progressPercent, { color: colors.primary }]}>{progressPercent}%</Text>
           </View>
           <View style={[styles.progressBarBg, { backgroundColor: colors.progressBg }]}>
             <View
               style={[
                 styles.progressBarFill,
-                { backgroundColor: overallAccuracy >= 80 ? colors.success : colors.primary, width: `${Math.min(100, overallAccuracy)}%` },
+                { backgroundColor: progressPercent >= 80 ? colors.success : colors.primary, width: `${Math.min(100, progressPercent)}%` },
               ]}
             />
           </View>
