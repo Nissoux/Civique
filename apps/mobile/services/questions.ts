@@ -41,6 +41,19 @@ export async function getQuestionsByIds(ids: number[], lang?: Language): Promise
   return data.data;
 }
 
+export async function getSeriesQuestions(
+  themeId: number,
+  series: number,
+  examType?: string,
+  lang?: Language,
+): Promise<Question[]> {
+  const offset = (series - 1) * 20;
+  const { data } = await api.get<{ data: Question[]; total: number }>('/questions', {
+    params: { themeId, examType, lang, limit: 20, offset },
+  });
+  return data.data;
+}
+
 export async function getQuestion(id: number, lang?: Language): Promise<Question> {
   const { data } = await api.get<{ data: Question }>(`/questions/${id}`, {
     params: lang ? { lang } : undefined,

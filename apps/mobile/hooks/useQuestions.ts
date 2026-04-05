@@ -32,6 +32,24 @@ export function useRandomQuestions(
   });
 }
 
+export function useSeriesQuestions(themeId: number, series: number) {
+  const { currentLang } = useLanguageStore();
+  const { selectedExamType } = useExamTypeStore();
+
+  return useQuery({
+    queryKey: ['questions', 'series', themeId, series, selectedExamType],
+    queryFn: () =>
+      questionsService.getSeriesQuestions(
+        themeId,
+        series,
+        selectedExamType || undefined,
+        currentLang,
+      ),
+    staleTime: Infinity, // Fixed series never change
+    refetchOnWindowFocus: false,
+  });
+}
+
 export function useQuestions(params: questionsService.GetQuestionsParams = {}) {
   const { currentLang } = useLanguageStore();
   const { selectedExamType } = useExamTypeStore();

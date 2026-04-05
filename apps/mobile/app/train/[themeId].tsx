@@ -1,36 +1,39 @@
 import { useLocalSearchParams } from 'expo-router';
 import { THEMES } from '@civique/shared';
-import { useRandomQuestions } from '../../hooks/useQuestions';
+import { useSeriesQuestions, useRandomQuestions } from '../../hooks/useQuestions';
 import TrainingSession from '../../components/TrainingSession';
 import { useLayoutEffect } from 'react';
 import { useNavigation } from 'expo-router';
 
 export default function ThemeTrainingScreen() {
-  const { themeId } = useLocalSearchParams<{ themeId: string }>();
+  const { themeId, series } = useLocalSearchParams<{ themeId: string; series?: string }>();
   const numericThemeId = parseInt(themeId, 10);
+  const seriesNumber = series ? parseInt(series, 10) : 0;
   const navigation = useNavigation();
 
   const theme = THEMES.find((t) => t.id === numericThemeId);
 
   useLayoutEffect(() => {
     if (theme) {
-      navigation.setOptions({
-        headerTitle: theme.nameFr,
-      });
+      const title = seriesNumber
+        ? `${theme.nameFr} — Série ${seriesNumber}`
+        : theme.nameFr;
+      navigation.setOptions({ headerTitle: title });
     }
-  }, [theme, navigation]);
+  }, [theme, seriesNumber, navigation]);
 
-  const { data: questions, isLoading, error, refetch } = useRandomQuestions(
-    20,
-    numericThemeId,
-  );
+  // If series specified, use fixed series questions; otherwise random
+  const seriesQuery = useSeriesQuestions(numericThemeId, seriesNumber || 1);
+  const randomQuery = useRandomQuestions(20, numericThemeId);
+
+  const query = seriesNumber ? seriesQuery : randomQuery;
 
   return (
     <TrainingSession
-      questions={questions || []}
-      isLoading={isLoading}
-      error={error}
-      onRefetch={refetch}
+      questions={query.data || []}
+      isLoading={query.isLoading}
+      error={query.error}
+      onRefetch={query.refetch}
     />
   );
 }
