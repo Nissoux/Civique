@@ -24,8 +24,8 @@ WebBrowser.maybeCompleteAuthSession();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const GOOGLE_CLIENT_ID =
-  '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
+const GOOGLE_WEB_CLIENT_ID = '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
+const GOOGLE_ANDROID_CLIENT_ID = '593427095159-lq6gta272m2fulbfporu887i60c0kd59.apps.googleusercontent.com';
 
 export default function LoginScreen() {
   const c = useColors();
@@ -42,8 +42,9 @@ export default function LoginScreen() {
 
   // ── Google Auth ──────────────────────────────
   const [request, response, promptAsync] = Google.useAuthRequest({
-    webClientId: GOOGLE_CLIENT_ID,
-    clientId: GOOGLE_CLIENT_ID,
+    webClientId: GOOGLE_WEB_CLIENT_ID,
+    androidClientId: GOOGLE_ANDROID_CLIENT_ID,
+    clientId: GOOGLE_WEB_CLIENT_ID,
   });
 
   useEffect(() => {
