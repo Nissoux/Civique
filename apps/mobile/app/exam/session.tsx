@@ -62,6 +62,35 @@ export default function ExamSessionScreen() {
       try {
         const examData = await examsService.getExam(effectiveSessionId);
         setQuestions(examData.questions);
+
+        // Check if time expired (45 min from startedAt)
+        if (examData.session?.startedAt) {
+          const elapsed = Math.floor((Date.now() - new Date(examData.session.startedAt).getTime()) / 1000);
+          const remaining = 45 * 60 - elapsed;
+          if (remaining <= 0) {
+            // Time expired — auto-finish
+            try { await examsService.finishExam(effectiveSessionId); } catch {}
+            router.replace(`/exam/results?sessionId=${effectiveSessionId}`);
+            return;
+          }
+          setTimeLeft(remaining);
+        }
+
+        // Restore existing answers in store
+        const existing = examData.existingAnswers || {};
+        Object.entries(existing).forEach(([qId, choice]) => {
+          setAnswer(Number(qId), choice as 'a' | 'b' | 'c' | 'd');
+        });
+
+        // Go to first unanswered question
+        const answeredIds = new Set(Object.keys(existing).map(Number));
+        const firstUnanswered = examData.questions.findIndex((q) => !answeredIds.has(q.id));
+        if (firstUnanswered > 0) {
+          goToQuestion(firstUnanswered);
+        } else if (firstUnanswered === -1 && examData.questions.length > 0) {
+          // All answered — go to last question
+          goToQuestion(examData.questions.length - 1);
+        }
       } catch {
         setError('Impossible de charger les questions');
       } finally {

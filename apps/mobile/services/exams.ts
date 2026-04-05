@@ -49,14 +49,21 @@ export async function startExam(examType?: string): Promise<StartExamResponse> {
 export async function getExam(sessionId: string): Promise<{
   session: ExamSession;
   questions: Question[];
+  existingAnswers: Record<number, string>;
 }> {
   const { data } = await api.get<{
-    data: ExamSession & { answers: Array<{ question: Question }> };
+    data: ExamSession & { answers: Array<{ question: Question; questionId: number; selectedChoice: string | null }> };
   }>(`/exams/${sessionId}`);
   const raw = data.data;
   const { answers, ...session } = raw;
   const questions = (answers || []).map((a) => a.question).filter(Boolean);
-  return { session: session as ExamSession, questions };
+  const existingAnswers: Record<number, string> = {};
+  (answers || []).forEach((a) => {
+    if (a.selectedChoice) {
+      existingAnswers[a.questionId] = a.selectedChoice;
+    }
+  });
+  return { session: session as ExamSession, questions, existingAnswers };
 }
 
 export async function submitAnswer(
