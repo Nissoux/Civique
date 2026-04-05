@@ -39,6 +39,7 @@ export default function ExamSessionScreen() {
   const [isSubmittingAnswer, setIsSubmittingAnswer] = useState(false);
   const [isFinishing, setIsFinishing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [targetIndex, setTargetIndex] = useState<number | null>(null);
 
   const insets = useSafeAreaInsets();
   const { currentLang, isRtl } = useLanguageStore();
@@ -82,16 +83,14 @@ export default function ExamSessionScreen() {
           setAnswer(Number(qId), choice as 'a' | 'b' | 'c' | 'd');
         });
 
-        // Go to first unanswered question (delayed to let state update)
+        // Determine which question to navigate to after state updates
         const answeredIds = new Set(Object.keys(existing).map(Number));
         const firstUnanswered = examData.questions.findIndex((q) => !answeredIds.has(q.id));
-        setTimeout(() => {
-          if (firstUnanswered > 0) {
-            goToQuestion(firstUnanswered);
-          } else if (firstUnanswered === -1 && examData.questions.length > 0) {
-            goToQuestion(examData.questions.length - 1);
-          }
-        }, 100);
+        if (firstUnanswered > 0) {
+          setTargetIndex(firstUnanswered);
+        } else if (firstUnanswered === -1 && examData.questions.length > 0) {
+          setTargetIndex(examData.questions.length - 1);
+        }
       } catch {
         setError('Impossible de charger les questions');
       } finally {
@@ -100,6 +99,14 @@ export default function ExamSessionScreen() {
     }
     loadExam();
   }, [effectiveSessionId]);
+
+  // Navigate to target question AFTER questions are loaded in store
+  useEffect(() => {
+    if (targetIndex !== null && questions.length > 0 && targetIndex < questions.length) {
+      goToQuestion(targetIndex);
+      setTargetIndex(null);
+    }
+  }, [targetIndex, questions.length, goToQuestion]);
 
   const handleFinishRef = useRef<() => void>(() => {});
 

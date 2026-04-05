@@ -200,11 +200,9 @@ export default function ExamResultsScreen() {
   const passed = session?.passed ?? score >= 32;
   const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
 
-  // FIX 1: Wrap return in Fragment, render ConfettiOverlay when passed
   return (
-    <Fragment>
-      {passed && <ConfettiOverlay />}
-      <ScrollView style={{ flex: 1, backgroundColor: c.background }} contentContainerStyle={{ padding: 20, paddingTop: insets.top + 20, paddingBottom: insets.bottom + 20 }}>
+    <View style={{ flex: 1, backgroundColor: c.background }}>
+      <ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 20, paddingTop: insets.top + 20, paddingBottom: insets.bottom + 20 }}>
         {/* Result header */}
         <View
           style={{
@@ -389,6 +387,7 @@ export default function ExamResultsScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </Fragment>
+      {passed && <ConfettiOverlay />}
+    </View>
   );
 }

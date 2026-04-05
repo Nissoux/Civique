@@ -24,12 +24,14 @@ export const useExamStore = create<ExamState>((set, get) => ({
   answers: {},
   startTime: null,
 
+  // setSession: always reset currentIndex and answers for clean state
   setSession: (session: ExamSession) => {
-    set({ currentSession: session, startTime: Date.now() });
+    set({ currentSession: session, startTime: Date.now(), currentIndex: 0, answers: {} });
   },
 
+  // setQuestions: always reset currentIndex and answers
   setQuestions: (questions: Question[]) => {
-    set({ questions });
+    set({ questions, currentIndex: 0, answers: {} });
   },
 
   setAnswer: (questionId: number, choice: 'a' | 'b' | 'c' | 'd') => {

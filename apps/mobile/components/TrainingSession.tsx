@@ -223,12 +223,12 @@ export default function TrainingSession({
     // Refetch same questions with new language translations
     if (localQuestions.length > 0) {
       if (newLang === 'fr') {
-        // Reset to original French-only questions (clear translated fields)
+        // Clear translations — French only, no duplicated text
         setLocalQuestions(localQuestions.map((q) => ({
           ...q,
-          translatedText: q.textFr,
-          translatedChoices: q.choicesFr,
-          translatedExplanation: q.explanationFr,
+          translatedText: null as any,
+          translatedChoices: null as any,
+          translatedExplanation: null as any,
         })));
       } else {
         setIsChangingLang(true);

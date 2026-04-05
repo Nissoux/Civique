@@ -41,7 +41,10 @@ export default function ExamStartScreen() {
   const examLabel = EXAM_TYPES.find((e) => e.code === selectedExamType)?.label || 'Examen civique';
 
   const startExam = async () => {
-    // If there's an active exam, resume it instead
+    // ALWAYS reset store first for clean state
+    reset();
+
+    // If there's an active exam, resume it
     if (activeExam) {
       setSession(activeExam);
       router.push(`/exam/session?sessionId=${activeExam.id}`);
@@ -50,7 +53,6 @@ export default function ExamStartScreen() {
 
     setError(null);
     setIsStarting(true);
-    reset();
 
     try {
       const { session } = await examsService.startExam(selectedExamType || undefined);
