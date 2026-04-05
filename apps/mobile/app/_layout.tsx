@@ -6,6 +6,7 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuthStore } from '../stores/authStore';
+import { useOnboardingStore } from '../stores/onboardingStore';
 import { useLanguageStore } from '../stores/languageStore';
 import { useSubscriptionStore } from '../stores/subscriptionStore';
 import { useExamTypeStore } from '../stores/examTypeStore';
@@ -28,10 +29,10 @@ function RootLayoutNav() {
   const { fetchSubscription } = useSubscriptionStore();
   const { selectedExamType, loadStoredExamType } = useExamTypeStore();
   const { loadStoredTheme } = useThemeStore();
+  const { done: onboardingDone, setDone: setOnboardingDone } = useOnboardingStore();
   const segments = useSegments();
   const router = useRouter();
   const [isReady, setIsReady] = useState(false);
-  const [onboardingDone, setOnboardingDone] = useState(true);
 
   useEffect(() => {
     async function bootstrap() {
@@ -41,7 +42,7 @@ function RootLayoutNav() {
         await loadStoredTheme();
 
         const onboardingFlag = await AsyncStorage.getItem('onboarding_done');
-        setOnboardingDone(onboardingFlag === 'true');
+        setOnboardingDone(onboardingFlag === 'true' ? true : false);
 
         const { loadStoredTokens } = useAuthStore.getState();
         const { accessToken } = await loadStoredTokens();

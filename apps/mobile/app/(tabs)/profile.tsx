@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MotiView } from '../../components/ui/MotiView';
 import { LANGUAGES, type Language } from '@civique/shared';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuthStore } from '../../stores/authStore';
@@ -18,8 +19,10 @@ import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import { useExamTypeStore, EXAM_TYPES } from '../../stores/examTypeStore';
 import { useColors, useThemeStore, spacing, fontSize, borderRadius } from '../../constants/theme';
 import type { ThemeMode } from '../../constants/theme';
+import { Linking } from 'react-native';
 import api from '../../services/api';
 import { getStatsOverview } from '../../services/stats';
+import { AnimatedPressable, AnimatedCard, CMotif } from '../../components/ui';
 
 const APP_VERSION = '1.0.0';
 
@@ -44,13 +47,14 @@ function MenuItem({
   isLast?: boolean;
 }) {
   return (
-    <TouchableOpacity
+    <AnimatedPressable
+      onPress={onPress}
+      haptic={true}
+      scaleDown={0.99}
       style={[
         styles.menuItem,
         !isLast && { borderBottomColor: colors.divider, borderBottomWidth: StyleSheet.hairlineWidth },
       ]}
-      onPress={onPress}
-      activeOpacity={0.6}
     >
       <View style={[styles.menuIconWrap, { backgroundColor: iconBgColor || colors.surfaceElevated }]}>
         <Ionicons name={icon} size={18} color={iconColor} />
@@ -64,7 +68,7 @@ function MenuItem({
         ) : null}
       </View>
       <Ionicons name="chevron-forward" size={18} color={colors.textTertiary} />
-    </TouchableOpacity>
+    </AnimatedPressable>
   );
 }
 
@@ -151,10 +155,24 @@ export default function ProfileScreen() {
       showsVerticalScrollIndicator={false}
     >
       {/* ── Top user section ──────────────────────────── */}
+      <AnimatedCard delay={0}>
       <View style={[styles.topSection, { backgroundColor: colors.card }]}>
-        <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
-          <Text style={[styles.avatarText, { color: colors.textInverse }]}>{initial}</Text>
-        </View>
+        <MotiView
+          from={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: 'spring', damping: 12 }}
+        >
+          <LinearGradient
+            colors={['#002395', '#ED2939', '#FFD700']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.avatarRing}
+          >
+            <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
+              <Text style={[styles.avatarText, { color: colors.textInverse }]}>{initial}</Text>
+            </View>
+          </LinearGradient>
+        </MotiView>
         <View style={styles.topTextWrap}>
           <Text style={[styles.displayName, { color: colors.textPrimary }]}>{displayName}</Text>
           {email ? (
@@ -168,6 +186,7 @@ export default function ProfileScreen() {
           </Text>
         </View>
       </View>
+      </AnimatedCard>
 
       {/* ── Exam badge card ───────────────────────────── */}
       <View
@@ -328,7 +347,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Nous contacter"
-          onPress={() => Alert.alert('Contact', 'support@integrafle.fr')}
+          onPress={() => Linking.openURL('mailto:support@integrafle.fr?subject=Civique%20-%20Support')}
           colors={colors}
         />
         <MenuItem
@@ -381,14 +400,15 @@ export default function ProfileScreen() {
       </View>
 
       {/* ── Logout ────────────────────────────────────── */}
-      <TouchableOpacity
-        style={[styles.logoutButton, { backgroundColor: colors.errorBg }]}
+      <AnimatedPressable
         onPress={handleLogout}
-        activeOpacity={0.6}
+        scaleDown={0.97}
       >
-        <Ionicons name="log-out-outline" size={20} color={colors.error} />
-        <Text style={[styles.logoutText, { color: colors.error }]}>Se déconnecter</Text>
-      </TouchableOpacity>
+        <View style={[styles.logoutButton, { backgroundColor: colors.errorBg }]}>
+          <Ionicons name="log-out-outline" size={20} color={colors.error} />
+          <Text style={[styles.logoutText, { color: colors.error }]}>Se déconnecter</Text>
+        </View>
+      </AnimatedPressable>
 
       {/* ── Version ───────────────────────────────────── */}
       <Text style={[styles.versionText, { color: colors.textTertiary }]}>
@@ -421,13 +441,20 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 1,
   },
+  avatarRing: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 12,
+  },
   avatar: {
     width: 64,
     height: 64,
     borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 12,
   },
   avatarText: {
     fontSize: 26,

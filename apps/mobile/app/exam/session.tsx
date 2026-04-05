@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: spacing.xl,
+    paddingBottom: 100,
   },
   questionCard: {
     borderRadius: borderRadius.lg,

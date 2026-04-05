@@ -12,9 +12,12 @@ import {
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { MotiView } from '../../components/ui/MotiView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../hooks/useAuth';
 import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+import { AnimatedPressable, CMotif } from '../../components/ui';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -48,25 +51,30 @@ export default function RegisterScreen() {
     setTouched({ name: true, email: true, password: true });
     if (!isValid) return;
     try {
-      await register(email.trim(), password, displayName.trim());
+      await register(email.trim().toLowerCase(), password, displayName.trim());
     } catch {
       // error is set in hook
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.container, { backgroundColor: c.background }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
+    <LinearGradient colors={c.gradientHero} style={{ flex: 1 }}>
+      <CMotif size="xl" color="#FFFFFF" opacity="subtle" rotation={50} style={{ top: '12%', left: -25 }} />
+      <CMotif size="md" color="#4D7CFF" opacity="subtle" rotation={-40} style={{ bottom: '20%', right: -15 }} />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
       <ScrollView
         contentContainerStyle={[styles.scrollContent, { paddingTop: insets.top + spacing.xxl, paddingBottom: insets.bottom + 16 }]}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={[styles.title, { color: c.textPrimary }]}>Créer un compte</Text>
-        <Text style={[styles.subtitle, { color: c.textSecondary }]}>
-          Rejoignez Civique et préparez votre examen
-        </Text>
+        <MotiView from={{ opacity: 0, translateY: 15 }} animate={{ opacity: 1, translateY: 0 }}>
+          <Text style={[styles.title, { color: '#FFFFFF' }]}>Créer un compte</Text>
+          <Text style={[styles.subtitle, { color: 'rgba(255,255,255,0.6)' }]}>
+            Rejoignez Civique et préparez votre examen
+          </Text>
+        </MotiView>
 
         {error && (
           <View style={[styles.errorContainer, { backgroundColor: c.errorBg }]}>
@@ -158,6 +166,7 @@ export default function RegisterScreen() {
         </Link>
       </ScrollView>
     </KeyboardAvoidingView>
+    </LinearGradient>
   );
 }
 

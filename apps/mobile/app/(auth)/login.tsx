@@ -2,7 +2,6 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -10,12 +9,16 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { Link } from 'expo-router';
-import { useState } from 'react';
+import { Link, useRouter } from 'expo-router';
+import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { MotiView } from '../../components/ui/MotiView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../../hooks/useAuth';
 import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+import { AnimatedPressable, CMotif } from '../../components/ui';
+import { performGoogleSignIn, performAppleSignIn, isAppleSignInAvailable } from '../../services/socialAuth';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -25,120 +28,261 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isSubmitting, error, clearError } = useAuth();
+  const { login, isSubmitting, error, clearError, setTokens, setUser } = useAuth();
+  const router = useRouter();
+  const [showApple, setShowApple] = useState(false);
+  const [socialLoading, setSocialLoading] = useState(false);
+
+  useEffect(() => {
+    isAppleSignInAvailable().then(setShowApple);
+  }, []);
+
+  const handleGoogleLogin = async () => {
+    setSocialLoading(true);
+    try {
+      const result = await performGoogleSignIn();
+      if (result) {
+        await setTokens(result.accessToken, result.refreshToken);
+        setUser(result.user);
+        router.replace('/(tabs)');
+      }
+    } catch {
+      Alert.alert('Erreur', 'La connexion avec Google a échoué.');
+    } finally {
+      setSocialLoading(false);
+    }
+  };
+
+  const handleAppleLogin = async () => {
+    setSocialLoading(true);
+    try {
+      const result = await performAppleSignIn();
+      if (result) {
+        await setTokens(result.accessToken, result.refreshToken);
+        setUser(result.user);
+        router.replace('/(tabs)');
+      }
+    } catch {
+      Alert.alert('Erreur', 'La connexion avec Apple a échoué.');
+    } finally {
+      setSocialLoading(false);
+    }
+  };
 
   const isValid = EMAIL_RE.test(email) && password.length >= 1;
 
   const handleLogin = async () => {
     if (!isValid) return;
     try {
-      await login(email.trim(), password);
+      await login(email.trim().toLowerCase(), password);
     } catch {
       // error is set in hook
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={[styles.container, { backgroundColor: c.background }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    <LinearGradient
+      colors={c.gradientHero}
+      style={styles.gradient}
     >
-      <ScrollView
-        contentContainerStyle={[styles.scrollContent, { paddingTop: insets.top + spacing.xxl, paddingBottom: insets.bottom + 16 }]}
-        keyboardShouldPersistTaps="handled"
+      {/* C Motifs decoration */}
+      <CMotif size="xl" color="#FFFFFF" opacity="subtle" rotation={-45} style={{ top: '8%', right: -25 }} />
+      <CMotif size="lg" color="#4D7CFF" opacity="subtle" rotation={60} style={{ bottom: '15%', left: -20 }} />
+
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <View style={styles.logoSection}>
-          <View style={[styles.logoCircle, { backgroundColor: c.primaryLight }]}>
-            <Ionicons name="shield-checkmark" size={40} color={c.primary} />
-          </View>
-          <Text style={[styles.title, { color: c.textPrimary }]}>Civique</Text>
-          <Text style={[styles.subtitle, { color: c.textSecondary }]}>
-            Préparez votre examen de citoyenneté
-          </Text>
-        </View>
-
-        {error && (
-          <View style={[styles.errorContainer, { backgroundColor: c.errorBg }]}>
-            <Ionicons name="warning" size={16} color={c.error} />
-            <Text style={[styles.errorText, { color: c.error }]}>{error}</Text>
-          </View>
-        )}
-
-        <TextInput
-          style={[styles.input, { backgroundColor: c.inputBg, borderColor: c.border, color: c.textPrimary }]}
-          placeholder="Email"
-          placeholderTextColor={c.textTertiary}
-          value={email}
-          onChangeText={(text) => {
-            clearError();
-            setEmail(text);
-          }}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoComplete="email"
-          editable={!isSubmitting}
-        />
-
-        <View style={[styles.passwordContainer, { backgroundColor: c.inputBg, borderColor: c.border }]}>
-          <TextInput
-            style={[styles.passwordInput, { color: c.textPrimary }]}
-            placeholder="Mot de passe"
-            placeholderTextColor={c.textTertiary}
-            value={password}
-            onChangeText={(text) => {
-              clearError();
-              setPassword(text);
-            }}
-            secureTextEntry={!showPassword}
-            autoComplete="password"
-            editable={!isSubmitting}
-          />
-          <TouchableOpacity
-            style={styles.eyeButton}
-            onPress={() => setShowPassword(!showPassword)}
+        <ScrollView
+          contentContainerStyle={[styles.scrollContent, { paddingTop: insets.top + spacing.xxl, paddingBottom: insets.bottom + 16 }]}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Logo */}
+          <MotiView
+            from={{ opacity: 0, scale: 0.8, translateY: 20 }}
+            animate={{ opacity: 1, scale: 1, translateY: 0 }}
+            transition={{ type: 'spring', damping: 12, delay: 0 }}
           >
-            <Ionicons
-              name={showPassword ? 'eye-off' : 'eye'}
-              size={22}
-              color={c.textTertiary}
+            <View style={styles.logoSection}>
+              <View style={styles.logoCircle}>
+                <Ionicons name="shield-checkmark" size={40} color="#FFFFFF" />
+              </View>
+              <Text style={styles.title}>Civique</Text>
+              <Text style={styles.subtitle}>
+                Préparez votre examen de citoyenneté
+              </Text>
+            </View>
+          </MotiView>
+
+          {/* Error */}
+          {error && (
+            <MotiView
+              from={{ opacity: 0, translateX: 20 }}
+              animate={{ opacity: 1, translateX: 0 }}
+              transition={{ type: 'spring', damping: 10 }}
+            >
+              <View style={[styles.errorContainer, { backgroundColor: 'rgba(239, 83, 80, 0.15)', borderColor: 'rgba(239, 83, 80, 0.3)' }]}>
+                <Ionicons name="warning" size={16} color="#EF5350" />
+                <Text style={[styles.errorText, { color: '#EF5350' }]}>{error}</Text>
+              </View>
+            </MotiView>
+          )}
+
+          {/* Email */}
+          <MotiView
+            from={{ opacity: 0, translateY: 20 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: 200 }}
+          >
+            <TextInput
+              style={[styles.input, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }]}
+              placeholder="Email"
+              placeholderTextColor="rgba(255,255,255,0.4)"
+              value={email}
+              onChangeText={(text) => { clearError(); setEmail(text); }}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoComplete="email"
+              editable={!isSubmitting}
             />
-          </TouchableOpacity>
-        </View>
+          </MotiView>
 
-        <TouchableOpacity
-          style={styles.forgotLink}
-          onPress={() => Alert.alert(
-            'Mot de passe oublié',
-            'Contactez le support à support@integrafle.fr pour réinitialiser votre mot de passe.'
-          )}
-        >
-          <Text style={[styles.forgotText, { color: c.primary }]}>Mot de passe oublié ?</Text>
-        </TouchableOpacity>
+          {/* Password */}
+          <MotiView
+            from={{ opacity: 0, translateY: 20 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: 300 }}
+          >
+            <View style={[styles.passwordContainer, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)' }]}>
+              <TextInput
+                style={[styles.passwordInput, { color: '#FFFFFF' }]}
+                placeholder="Mot de passe"
+                placeholderTextColor="rgba(255,255,255,0.4)"
+                value={password}
+                onChangeText={(text) => { clearError(); setPassword(text); }}
+                secureTextEntry={!showPassword}
+                autoComplete="password"
+                editable={!isSubmitting}
+              />
+              <AnimatedPressable
+                style={styles.eyeButton}
+                onPress={() => setShowPassword(!showPassword)}
+                haptic={false}
+              >
+                <Ionicons
+                  name={showPassword ? 'eye-off' : 'eye'}
+                  size={22}
+                  color="rgba(255,255,255,0.4)"
+                />
+              </AnimatedPressable>
+            </View>
+          </MotiView>
 
-        <TouchableOpacity
-          style={[styles.button, { backgroundColor: c.primary }, (!isValid || isSubmitting) && { opacity: 0.5 }]}
-          onPress={handleLogin}
-          disabled={!isValid || isSubmitting}
-        >
-          {isSubmitting ? (
-            <ActivityIndicator color="#FFFFFF" />
-          ) : (
-            <Text style={styles.buttonText}>Se connecter</Text>
-          )}
-        </TouchableOpacity>
+          {/* Forgot password */}
+          <MotiView
+            from={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 350 }}
+          >
+            <AnimatedPressable
+              style={styles.forgotLink}
+              onPress={() => Alert.alert(
+                'Mot de passe oublié',
+                'Contactez le support à support@integrafle.fr pour réinitialiser votre mot de passe.'
+              )}
+              haptic={false}
+            >
+              <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
+            </AnimatedPressable>
+          </MotiView>
 
-        <Link href="/(auth)/register" style={styles.link}>
-          <Text style={[styles.linkText, { color: c.textSecondary }]}>
-            Pas encore de compte ?{' '}
-            <Text style={{ color: c.primary, fontWeight: '600' }}>S'inscrire</Text>
-          </Text>
-        </Link>
-      </ScrollView>
-    </KeyboardAvoidingView>
+          {/* Submit button */}
+          <MotiView
+            from={{ opacity: 0, translateY: 20 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{ delay: 400 }}
+          >
+            <AnimatedPressable
+              onPress={handleLogin}
+              disabled={!isValid || isSubmitting}
+              scaleDown={0.97}
+            >
+              <LinearGradient
+                colors={['#FFFFFF', '#E8E8F0']}
+                style={[styles.button, (!isValid || isSubmitting) && { opacity: 0.5 }]}
+              >
+                {isSubmitting ? (
+                  <ActivityIndicator color="#002395" />
+                ) : (
+                  <>
+                    <Text style={styles.buttonText}>Se connecter</Text>
+                    <Ionicons name="arrow-forward" size={20} color="#002395" />
+                  </>
+                )}
+              </LinearGradient>
+            </AnimatedPressable>
+          </MotiView>
+
+          {/* Separator */}
+          <MotiView from={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 450 }}>
+            <View style={styles.separator}>
+              <View style={styles.separatorLine} />
+              <Text style={styles.separatorText}>ou</Text>
+              <View style={styles.separatorLine} />
+            </View>
+          </MotiView>
+
+          {/* Social login buttons */}
+          <MotiView from={{ opacity: 0, translateY: 10 }} animate={{ opacity: 1, translateY: 0 }} transition={{ delay: 500 }}>
+            <View style={styles.socialRow}>
+              <AnimatedPressable
+                onPress={handleGoogleLogin}
+                style={styles.socialButtonWrapper}
+                scaleDown={0.95}
+              >
+                <View style={styles.socialButton}>
+                  <Ionicons name="logo-google" size={20} color="#FFFFFF" />
+                  <Text style={styles.socialButtonText}>Google</Text>
+                </View>
+              </AnimatedPressable>
+              {showApple && (
+                <AnimatedPressable
+                  onPress={handleAppleLogin}
+                  style={styles.socialButtonWrapper}
+                  scaleDown={0.95}
+                >
+                  <View style={styles.socialButton}>
+                    <Ionicons name="logo-apple" size={20} color="#FFFFFF" />
+                    <Text style={styles.socialButtonText}>Apple</Text>
+                  </View>
+                </AnimatedPressable>
+              )}
+            </View>
+          </MotiView>
+
+          {/* Register link */}
+          <MotiView
+            from={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 550 }}
+          >
+            <Link href="/(auth)/register" style={styles.link}>
+              <Text style={styles.linkText}>
+                Pas encore de compte ?{' '}
+                <Text style={styles.linkBold}>S'inscrire</Text>
+              </Text>
+            </Link>
+          </MotiView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },
@@ -155,24 +299,31 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.lg,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 36,
+    fontWeight: '800',
+    color: '#FFFFFF',
     marginBottom: spacing.sm,
+    letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: fontSize.md,
     textAlign: 'center',
+    color: 'rgba(255,255,255,0.6)',
   },
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
     borderRadius: borderRadius.md,
+    borderWidth: 1,
     padding: spacing.md,
     marginBottom: spacing.lg,
   },
@@ -208,18 +359,26 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     fontSize: fontSize.sm,
+    color: 'rgba(255,255,255,0.5)',
   },
   button: {
-    borderRadius: borderRadius.md,
+    borderRadius: borderRadius.lg,
     padding: spacing.lg,
     alignItems: 'center',
     height: 56,
     justifyContent: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    shadowColor: '#FFF',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 4,
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: '#002395',
     fontSize: fontSize.lg,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   link: {
     marginTop: spacing.xxl,
@@ -227,5 +386,50 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: fontSize.sm,
+    color: 'rgba(255,255,255,0.5)',
+  },
+  linkBold: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+  },
+  separator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.xl,
+    gap: spacing.md,
+  },
+  separatorLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+  },
+  separatorText: {
+    fontSize: fontSize.sm,
+    color: 'rgba(255,255,255,0.4)',
+    fontWeight: '500',
+  },
+  socialRow: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    marginBottom: spacing.md,
+  },
+  socialButtonWrapper: {
+    flex: 1,
+  },
+  socialButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    borderRadius: borderRadius.md,
+    paddingVertical: 14,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+  },
+  socialButtonText: {
+    color: '#FFFFFF',
+    fontSize: fontSize.md,
+    fontWeight: '600',
   },
 });

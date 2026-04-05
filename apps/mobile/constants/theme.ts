@@ -45,6 +45,16 @@ export const colors = {
     premiumGradientEnd: '#FF8C00',
     premiumBg: 'rgba(255, 215, 0, 0.1)',
     premiumText: '#B8860B',
+
+    // Glass & Gradients
+    glassBackground: 'rgba(255, 255, 255, 0.55)',
+    glassBorder: 'rgba(255, 255, 255, 0.25)',
+    gradientPrimary: ['#002395', '#4D7CFF'] as const,
+    gradientHero: ['#0A1628', '#1A2B50', '#002395'] as const,
+    gradientSuccess: ['#2E7D32', '#66BB6A'] as const,
+
+    // Confetti
+    confettiColors: ['#002395', '#ED2939', '#FFD700', '#4D7CFF', '#FFFFFF'] as const,
   },
   dark: {
     // Backgrounds
@@ -88,6 +98,16 @@ export const colors = {
     premiumGradientEnd: '#FF8C00',
     premiumBg: 'rgba(255, 179, 71, 0.12)',
     premiumText: '#FFD700',
+
+    // Glass & Gradients
+    glassBackground: 'rgba(255, 255, 255, 0.06)',
+    glassBorder: 'rgba(255, 255, 255, 0.10)',
+    gradientPrimary: ['#0A1628', '#4D7CFF'] as const,
+    gradientHero: ['#0A0E1A', '#0F1B3D', '#1A2B50'] as const,
+    gradientSuccess: ['#1B5E20', '#4CAF50'] as const,
+
+    // Confetti
+    confettiColors: ['#4D7CFF', '#FF4D5A', '#FFD700', '#4CAF50', '#FFFFFF'] as const,
   },
 };
 
@@ -157,5 +177,22 @@ export const borderRadius = {
   md: 12,
   lg: 16,
   xl: 20,
+  xxl: 28,
   round: 999,
+};
+
+// ── Animation Tokens ───────────────────────────────
+export const animation = {
+  springDefault: { damping: 15, stiffness: 150 },
+  springBouncy: { damping: 8, stiffness: 200 },
+  springGentle: { damping: 20, stiffness: 120 },
+  durationFast: 200,
+  durationNormal: 350,
+  durationSlow: 500,
+};
+
+// ── C Motif Constants ──────────────────────────────
+export const cMotif = {
+  sizes: { sm: 24, md: 48, lg: 80, xl: 120 },
+  opacity: { subtle: 0.04, light: 0.06, medium: 0.08 },
 };

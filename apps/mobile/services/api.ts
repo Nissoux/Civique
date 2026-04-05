@@ -2,7 +2,9 @@ import axios from 'axios';
 import { Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
-export const API_BASE_URL = 'https://api.integrafle.fr/api';
+export const API_BASE_URL = Platform.OS === 'web'
+  ? 'http://localhost:3000/api'
+  : 'https://api.integrafle.fr/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

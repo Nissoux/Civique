@@ -99,5 +99,7 @@ export function useAuth() {
     logout,
     loadUser,
     clearError,
+    setTokens,
+    setUser,
   };
 }

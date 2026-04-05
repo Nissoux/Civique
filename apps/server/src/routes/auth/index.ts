@@ -84,6 +84,7 @@ export default async function authRoutes(app: FastifyInstance) {
   // ── POST /register ───────────────────────────
   app.post('/register', async (request, reply) => {
     const body = registerSchema.parse(request.body);
+    body.email = body.email.toLowerCase();
     const existing = await db.query.users.findFirst({
       where: eq(users.email, body.email),
     });
@@ -122,6 +123,7 @@ export default async function authRoutes(app: FastifyInstance) {
   // ── POST /login ──────────────────────────────
   app.post('/login', async (request, reply) => {
     const body = loginSchema.parse(request.body);
+    body.email = body.email.toLowerCase();
     const user = await db.query.users.findFirst({
       where: eq(users.email, body.email),
     });
@@ -270,5 +272,95 @@ export default async function authRoutes(app: FastifyInstance) {
     passwordResetTokens.delete(token);
 
     return { message: 'Password has been reset successfully.' };
+  });
+
+  // ── POST /google ────────────────────────────
+  app.post('/google', async (request, reply) => {
+    const { idToken } = z.object({ idToken: z.string() }).parse(request.body);
+
+    // Verify the Google ID token
+    let payload: { email?: string; name?: string; sub?: string };
+    try {
+      const res = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
+      if (!res.ok) throw new Error('Invalid token');
+      payload = await res.json() as { email?: string; name?: string; sub?: string };
+    } catch {
+      return reply.status(401).send({ error: 'Invalid Google token' });
+    }
+
+    if (!payload.email) {
+      return reply.status(400).send({ error: 'Email not available from Google' });
+    }
+
+    const email = payload.email.toLowerCase();
+    let user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
+
+    if (!user) {
+      // Auto-register
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          email,
+          passwordHash: '', // No password for OAuth users
+          displayName: payload.name || email.split('@')[0],
+        })
+        .returning();
+      user = newUser;
+    }
+
+    const tokens = issueTokens(app, { id: user.id, email: user.email });
+    return {
+      ...tokens,
+      user: sanitizeUser(user),
+    };
+  });
+
+  // ── POST /apple ─────────────────────────────
+  app.post('/apple', async (request, reply) => {
+    const body = z.object({
+      identityToken: z.string(),
+      displayName: z.string().optional(),
+    }).parse(request.body);
+
+    // Decode Apple identity token (JWT) to get email
+    let payload: { email?: string; sub?: string };
+    try {
+      // Apple tokens are JWTs - decode the payload (middle part)
+      const parts = body.identityToken.split('.');
+      if (parts.length !== 3) throw new Error('Invalid JWT');
+      const decoded = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+      payload = decoded;
+    } catch {
+      return reply.status(401).send({ error: 'Invalid Apple token' });
+    }
+
+    if (!payload.email) {
+      return reply.status(400).send({ error: 'Email not available from Apple' });
+    }
+
+    const email = payload.email.toLowerCase();
+    let user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    });
+
+    if (!user) {
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          email,
+          passwordHash: '',
+          displayName: body.displayName || email.split('@')[0],
+        })
+        .returning();
+      user = newUser;
+    }
+
+    const tokens = issueTokens(app, { id: user.id, email: user.email });
+    return {
+      ...tokens,
+      user: sanitizeUser(user),
+    };
   });
 }

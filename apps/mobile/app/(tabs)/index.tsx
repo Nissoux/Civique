@@ -3,21 +3,30 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  FlatList,
+  Dimensions,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
 import { THEMES } from '@civique/shared';
-import { useAuthStore } from '../../stores/authStore';
-import { useExamTypeStore, getExamType } from '../../stores/examTypeStore';
-import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
-import { getStatsOverview, getStatsByTheme, type ThemeStat } from '../../services/stats';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Animated as RNAnimated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAuthStore } from '../../stores/authStore';
+import { useExamTypeStore, getExamType } from '../../stores/examTypeStore';
+import { useProgressionStore, computeLevelsForTheme } from '../../stores/progressionStore';
+import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+import { getStatsOverview } from '../../services/stats';
+import { getQuestions } from '../../services/questions';
+import { AnimatedCard, AnimatedCounter, AnimatedPressable, CMotif } from '../../components/ui';
+import { MotiView } from '../../components/ui/MotiView';
 
-// Map theme icon strings to Ionicons names
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const BUBBLE_SIZE = 64;
+const PATH_OFFSET = 40;
+
+// ── Theme Icons ──
 const THEME_ICONS: Record<string, React.ComponentProps<typeof Ionicons>['name']> = {
   flag: 'flag',
   landmark: 'business',
@@ -26,47 +35,107 @@ const THEME_ICONS: Record<string, React.ComponentProps<typeof Ionicons>['name']>
   home: 'home',
 };
 
-// ── Question of the Day Data ──────────────────────────
-const DAILY_QUESTIONS = [
-  { q: "Quelle est la devise de la République française ?", a: "Liberté, Égalité, Fraternité." },
-  { q: "En quelle année la Déclaration des droits de l'homme et du citoyen a-t-elle été adoptée ?", a: "En 1789." },
-  { q: "Quel est l'hymne national français ?", a: "La Marseillaise." },
-  { q: "Qui est le président de la République française élu en 2022 ?", a: "Emmanuel Macron." },
-  { q: "Combien de régions métropolitaines compte la France ?", a: "13 régions métropolitaines." },
-  { q: "Quel est le symbole de la République française ?", a: "Marianne." },
-  { q: "Quelle est la durée du mandat présidentiel en France ?", a: "5 ans (quinquennat)." },
-  { q: "Quel document garantit les libertés fondamentales en France ?", a: "La Constitution de la Ve République (1958)." },
-  { q: "Quel est le drapeau de la France ?", a: "Trois bandes verticales : bleu, blanc, rouge." },
-  { q: "Quelle est la capitale de la France ?", a: "Paris." },
-  { q: "Qui vote les lois en France ?", a: "Le Parlement (Assemblée nationale et Sénat)." },
-  { q: "Quel âge faut-il avoir pour voter en France ?", a: "18 ans." },
-  { q: "Qu'est-ce que la laïcité ?", a: "Le principe de séparation des Églises et de l'État." },
-  { q: "Quand célèbre-t-on la fête nationale française ?", a: "Le 14 juillet." },
-  { q: "Quel est le rôle du maire ?", a: "Il dirige la commune et célèbre les mariages civils." },
-  { q: "Combien de départements la France métropolitaine compte-t-elle ?", a: "96 départements." },
-  { q: "Qu'est-ce que le suffrage universel ?", a: "Le droit de vote accordé à tous les citoyens majeurs." },
-  { q: "Quelle institution juge la constitutionnalité des lois ?", a: "Le Conseil constitutionnel." },
-  { q: "Quel traité a fondé l'Union européenne ?", a: "Le traité de Maastricht (1992)." },
-  { q: "Combien d'étoiles figurent sur le drapeau européen ?", a: "12 étoiles." },
-  { q: "Quelle est la monnaie utilisée en France ?", a: "L'euro (€), depuis 2002." },
-  { q: "Qu'est-ce que l'Assemblée nationale ?", a: "La chambre basse du Parlement, composée de députés élus au suffrage universel direct." },
-  { q: "Quelle est la plus haute juridiction de l'ordre judiciaire ?", a: "La Cour de cassation." },
-  { q: "Quel est l'animal symbolique de la France ?", a: "Le coq gaulois." },
-  { q: "Qu'est-ce que la Sécurité sociale ?", a: "Un système de protection sociale couvrant maladie, retraite, famille et accidents du travail." },
-  { q: "Quelle est la langue officielle de la France ?", a: "Le français." },
-  { q: "Qui nomme le Premier ministre ?", a: "Le président de la République." },
-  { q: "Qu'est-ce que le Sénat ?", a: "La chambre haute du Parlement, dont les membres sont élus au suffrage universel indirect." },
-  { q: "En quelle année les femmes ont-elles obtenu le droit de vote en France ?", a: "En 1944." },
-  { q: "Qu'est-ce que la carte nationale d'identité ?", a: "Un document officiel prouvant l'identité et la nationalité française." },
-];
+// ── Crown display ──
+function CrownDisplay({ crowns, size = 14 }: { crowns: number; size?: number }) {
+  return (
+    <View style={{ flexDirection: 'row', gap: 2 }}>
+      {[1, 2, 3].map((i) => (
+        <Ionicons
+          key={i}
+          name={i <= crowns ? 'star' : 'star-outline'}
+          size={size}
+          color={i <= crowns ? '#FFD700' : 'rgba(255,255,255,0.3)'}
+        />
+      ))}
+    </View>
+  );
+}
 
-// ── Skill Level Helper ────────────────────────────────
-function getSkillLevel(accuracy: number): { label: string; color: string; icon: React.ComponentProps<typeof Ionicons>['name'] } {
-  if (accuracy <= 10) return { label: 'Débutant', color: '#9E9E9E', icon: 'leaf' };
-  if (accuracy <= 40) return { label: 'Apprenti', color: '#42A5F5', icon: 'school' };
-  if (accuracy <= 70) return { label: 'Confirmé', color: '#66BB6A', icon: 'shield-checkmark' };
-  if (accuracy <= 90) return { label: 'Avancé', color: '#AB47BC', icon: 'star' };
-  return { label: 'Prêt pour l\'examen', color: '#FFB300', icon: 'trophy' };
+// ── Level Bubble ──
+function LevelBubble({
+  levelNum,
+  crowns,
+  isLocked,
+  isCurrent,
+  themeColor,
+  onPress,
+  offsetX,
+}: {
+  levelNum: number;
+  crowns: number;
+  isLocked: boolean;
+  isCurrent: boolean;
+  themeColor: string;
+  onPress: () => void;
+  offsetX: number;
+}) {
+  const c = useColors();
+
+  const bgColor = isLocked
+    ? c.progressBg
+    : crowns >= 1
+      ? themeColor
+      : c.surface;
+
+  const borderColor = isCurrent
+    ? themeColor
+    : isLocked
+      ? 'transparent'
+      : crowns >= 1
+        ? themeColor
+        : c.border;
+
+  return (
+    <View style={[styles.bubbleContainer, { marginLeft: offsetX }]}>
+      <AnimatedPressable
+        onPress={onPress}
+        disabled={isLocked}
+        scaleDown={0.92}
+      >
+        <View
+          style={[
+            styles.bubble,
+            {
+              backgroundColor: bgColor,
+              borderColor,
+              borderWidth: isCurrent ? 3 : 1.5,
+              opacity: isLocked ? 0.4 : 1,
+            },
+            isCurrent && styles.bubbleCurrent,
+          ]}
+        >
+          {isLocked ? (
+            <Ionicons name="lock-closed" size={22} color={c.textTertiary} />
+          ) : (
+            <Text
+              style={[
+                styles.bubbleText,
+                { color: crowns >= 1 ? '#FFFFFF' : c.textPrimary },
+              ]}
+            >
+              {levelNum}
+            </Text>
+          )}
+        </View>
+      </AnimatedPressable>
+      {!isLocked && crowns > 0 && (
+        <View style={styles.bubbleCrowns}>
+          <CrownDisplay crowns={crowns} size={12} />
+        </View>
+      )}
+      {isCurrent && (
+        <MotiView
+          from={{ opacity: 0, translateY: -5 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: 'spring', delay: 200 }}
+        >
+          <View style={[styles.currentBadge, { backgroundColor: themeColor }]}>
+            <Text style={styles.currentBadgeText}>EN COURS</Text>
+          </View>
+        </MotiView>
+      )}
+    </View>
+  );
 }
 
 export default function TrainingScreen() {
@@ -75,768 +144,432 @@ export default function TrainingScreen() {
   const insets = useSafeAreaInsets();
   const { user } = useAuthStore();
   const { selectedExamType } = useExamTypeStore();
+  const { xp, streak, loadProgress, getLevelProgress, isLevelUnlocked, loaded } = useProgressionStore();
 
-  const [showDailyAnswer, setShowDailyAnswer] = useState(false);
+  const [questionCounts, setQuestionCounts] = useState<Record<number, number>>({});
+  const [expandedTheme, setExpandedTheme] = useState<number | null>(null);
+
+  const examDef = getExamType(selectedExamType);
+  const displayName = user?.displayName || 'Citoyen';
 
   const { data: stats } = useQuery({
     queryKey: ['stats', 'overview', selectedExamType],
     queryFn: () => getStatsOverview(selectedExamType || undefined),
     staleTime: 30 * 1000,
-    refetchOnWindowFocus: true,
   });
 
-  const { data: themeStats } = useQuery({
-    queryKey: ['stats', 'by-theme', selectedExamType],
-    queryFn: () => getStatsByTheme(selectedExamType || undefined),
-    staleTime: 30 * 1000,
-    refetchOnWindowFocus: true,
-  });
+  // Load progression and question counts
+  useEffect(() => {
+    loadProgress();
+  }, []);
 
-  const getThemeStat = (themeId: number): ThemeStat | undefined =>
-    themeStats?.find((ts) => ts.themeId === themeId);
-
-  const displayName = user?.displayName || 'Citoyen';
-  const examDef = getExamType(selectedExamType);
-
-  // ── Question of the Day ──
-  const dailySeed = Math.floor(Date.now() / (24 * 60 * 60 * 1000));
-  const dailyQuestion = DAILY_QUESTIONS[dailySeed % DAILY_QUESTIONS.length];
-
-  // ── Skill Level ──
-  const overallAccuracy = stats?.overallAccuracy ?? 0;
-  const skillLevel = getSkillLevel(overallAccuracy);
-
-  const s = styles(c);
+  useEffect(() => {
+    // Fetch question count per theme
+    async function fetchCounts() {
+      const counts: Record<number, number> = {};
+      for (const theme of THEMES) {
+        try {
+          const result = await getQuestions({
+            themeId: theme.id,
+            examType: selectedExamType || undefined,
+            limit: 1,
+          });
+          counts[theme.id] = result.total;
+        } catch {
+          counts[theme.id] = 0;
+        }
+      }
+      setQuestionCounts(counts);
+    }
+    fetchCounts();
+  }, [selectedExamType]);
 
   return (
     <ScrollView
-      style={[s.container]}
-      contentContainerStyle={s.content}
+      style={{ flex: 1, backgroundColor: c.background }}
+      contentContainerStyle={{ paddingBottom: 120 }}
       showsVerticalScrollIndicator={false}
     >
-      {/* ── Hero Header ──────────────────────────────── */}
-      <View style={[s.hero, { paddingTop: insets.top + 20 }]}>
-        <View style={s.heroInner}>
-          <View style={s.headerLeft}>
-            <Text style={s.greeting}>Bonjour, {displayName}</Text>
-            <Text style={s.heroSubtitle}>Préparez-vous pour réussir</Text>
-            {/* ── Skill Level Badge ── */}
-            <View style={[s.skillBadge, { backgroundColor: skillLevel.color + '30' }]}>
-              <Ionicons name={skillLevel.icon} size={14} color={skillLevel.color} />
-              <Text style={[s.skillBadgeText, { color: skillLevel.color }]}>{skillLevel.label}</Text>
-            </View>
-          </View>
-          <TouchableOpacity
-            style={s.avatarButton}
-            onPress={() => router.push('/profile')}
-          >
-            <Ionicons name="person" size={20} color={c.primary} />
-          </TouchableOpacity>
-        </View>
-
-        {/* ── Exam Objective Banner (inside hero) ── */}
-        {examDef && (
-          <TouchableOpacity
-            style={[s.objectiveBanner, { backgroundColor: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.25)' }]}
-            onPress={() => router.push('/(tabs)/choose-exam')}
-            activeOpacity={0.7}
-          >
-            <Text style={s.objectiveEmoji}>{examDef.emoji}</Text>
-            <View style={s.objectiveContent}>
-              <Text style={[s.objectiveLabel, { color: 'rgba(255,255,255,0.6)' }]}>Mon objectif</Text>
-              <Text style={[s.objectiveTitle, { color: '#FFFFFF' }]}>{examDef.shortLabel}</Text>
-            </View>
-            <View style={[s.objectiveChange, { backgroundColor: 'rgba(255,255,255,0.2)' }]}>
-              <Ionicons name="swap-horizontal" size={16} color="#FFFFFF" />
-            </View>
-          </TouchableOpacity>
-        )}
-      </View>
-
-      {/* ── Quick Stats ─────────────────────────── */}
-      <View style={s.statsRow}>
-        <View style={s.statCard}>
-          <View style={[s.statIconBg, { backgroundColor: c.primary + '18' }]}>
-            <Ionicons name="help-circle" size={22} color={c.primary} />
-          </View>
-          <Text style={s.statValue}>{stats?.totalPracticed ?? 0}</Text>
-          <Text style={s.statLabel}>Questions</Text>
-        </View>
-        <View style={s.statCard}>
-          <View style={[s.statIconBg, { backgroundColor: c.success + '18' }]}>
-            <Ionicons name="checkmark-circle" size={22} color={c.success} />
-          </View>
-          <Text style={s.statValue}>
-            {stats?.overallAccuracy ? `${Math.round(stats.overallAccuracy)}%` : '0%'}
-          </Text>
-          <Text style={s.statLabel}>Précision</Text>
-        </View>
-        <View style={s.statCard}>
-          <View style={[s.statIconBg, { backgroundColor: c.warning + '18' }]}>
-            <Ionicons name="flame" size={22} color={c.warning} />
-          </View>
-          <Text style={s.statValue}>{stats?.currentStreak ?? 0}</Text>
-          <Text style={s.statLabel}>Série</Text>
-        </View>
-      </View>
-
-      {/* ── Question du Jour ─────────────────────── */}
-      <View style={s.dailyCard}>
-        <View style={s.dailyHeader}>
-          <View style={s.dailyLabelRow}>
-            <Ionicons name="calendar" size={14} color={c.primary} />
-            <Text style={s.dailyLabel}>Question du jour</Text>
-          </View>
-        </View>
-        <Text style={s.dailyQuestion}>{dailyQuestion.q}</Text>
-        {showDailyAnswer ? (
-          <View style={s.dailyAnswerBox}>
-            <Text style={s.dailyAnswer}>{dailyQuestion.a}</Text>
-          </View>
-        ) : (
-          <TouchableOpacity
-            style={s.dailyButton}
-            activeOpacity={0.7}
-            onPress={() => setShowDailyAnswer(true)}
-          >
-            <Ionicons name="eye" size={16} color="#FFF" />
-            <Text style={s.dailyButtonText}>Voir la réponse</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-
-      {/* ── Continue Training ───────────────────── */}
-      {stats?.lastPracticeAt && (
-        <TouchableOpacity
-          style={s.continueCard}
-          activeOpacity={0.7}
-          onPress={() => router.push('/train/random')}
-        >
-          <View style={s.continueLeft}>
-            <View style={s.continueIconWrap}>
-              <Ionicons name="play" size={24} color="#FFF" />
-            </View>
-            <View style={s.continueContent}>
-              <Text style={s.continueTitle}>
-                Continuer l'entraînement
-              </Text>
-              <Text style={s.continueSubtitle}>Reprendre o{'\u00f9'} vous en étiez</Text>
-            </View>
-          </View>
-          <View style={s.continueArrowWrap}>
-            <Ionicons name="arrow-forward" size={20} color="#FFF" />
-          </View>
-        </TouchableOpacity>
-      )}
-
-      {/* ── Random Quick Start ──────────────────── */}
-      <TouchableOpacity
-        style={s.randomCard}
-        activeOpacity={0.7}
-        onPress={() => router.push('/train/random')}
+      {/* ── Hero Header ────────────────────────── */}
+      <LinearGradient
+        colors={c.gradientHero}
+        style={[styles.hero, { paddingTop: insets.top + 16 }]}
       >
-        <View style={s.randomLeft}>
-          <View style={s.randomIconWrap}>
-            <Ionicons name="shuffle" size={24} color="#FFF" />
-          </View>
-          <View>
-            <Text style={s.randomTitle}>Entraînement rapide</Text>
-            <Text style={s.randomSubtitle}>10 questions aléatoires</Text>
-          </View>
-        </View>
-        <View style={s.randomArrowWrap}>
-          <Ionicons name="arrow-forward" size={18} color={c.primary} />
-        </View>
-      </TouchableOpacity>
+        <CMotif size="xl" color="#FFFFFF" opacity="subtle" rotation={-30} style={{ top: 20, right: -20 }} />
+        <CMotif size="md" color="#4D7CFF" opacity="subtle" rotation={120} style={{ top: 50, left: '35%' }} />
 
-      {/* ── Themes Section ──────────────────────── */}
-      <View style={s.sectionHeader}>
-        <Text style={s.sectionTitle}>Thèmes</Text>
-        <Text style={s.sectionSubtitle}>{THEMES.length} thèmes disponibles</Text>
+        <View style={styles.heroInner}>
+          <View style={styles.headerLeft}>
+            <MotiView from={{ opacity: 0, translateY: 10 }} animate={{ opacity: 1, translateY: 0 }}>
+              <Text style={styles.greeting}>Bonjour, {displayName}</Text>
+            </MotiView>
+            {examDef && (
+              <MotiView from={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 100 }}>
+                <AnimatedPressable onPress={() => router.push('/(tabs)/choose-exam')} haptic={false}>
+                  <View style={styles.examBadge}>
+                    <Text style={styles.examEmoji}>{examDef.emoji}</Text>
+                    <Text style={styles.examLabel}>{examDef.shortLabel}</Text>
+                    <Ionicons name="chevron-forward" size={14} color="rgba(255,255,255,0.6)" />
+                  </View>
+                </AnimatedPressable>
+              </MotiView>
+            )}
+          </View>
+          <AnimatedPressable onPress={() => router.push('/profile')} scaleDown={0.9}>
+            <View style={styles.avatarButton}>
+              <Ionicons name="person" size={20} color={c.primary} />
+            </View>
+          </AnimatedPressable>
+        </View>
+
+        {/* XP & Streak row */}
+        <MotiView from={{ opacity: 0, translateY: 10 }} animate={{ opacity: 1, translateY: 0 }} transition={{ delay: 150 }}>
+          <View style={styles.xpRow}>
+            <View style={styles.xpItem}>
+              <Ionicons name="flash" size={16} color="#FFD700" />
+              <AnimatedCounter value={xp} style={styles.xpValue} />
+              <Text style={styles.xpLabel}>XP</Text>
+            </View>
+            <View style={styles.xpDivider} />
+            <View style={styles.xpItem}>
+              <Ionicons name="flame" size={16} color="#FF6B35" />
+              <Text style={styles.xpValue}>{streak}</Text>
+              <Text style={styles.xpLabel}>jour{streak !== 1 ? 's' : ''}</Text>
+            </View>
+            <View style={styles.xpDivider} />
+            <View style={styles.xpItem}>
+              <Ionicons name="checkmark-circle" size={16} color="#4CAF50" />
+              <Text style={styles.xpValue}>{stats?.overallAccuracy ? `${Math.round(stats.overallAccuracy)}%` : '0%'}</Text>
+              <Text style={styles.xpLabel}>précision</Text>
+            </View>
+          </View>
+        </MotiView>
+      </LinearGradient>
+
+      {/* ── Quick Actions ──────────────────────── */}
+      <View style={styles.quickActions}>
+        <AnimatedCard delay={200} style={{ flex: 1 }}>
+          <AnimatedPressable onPress={() => router.push('/train/random')}>
+            <View style={[styles.quickCard, { backgroundColor: c.surface }]}>
+              <View style={[styles.quickIcon, { backgroundColor: c.secondary + '18' }]}>
+                <Ionicons name="shuffle" size={20} color={c.secondary} />
+              </View>
+              <Text style={[styles.quickTitle, { color: c.textPrimary }]}>Rapide</Text>
+              <Text style={[styles.quickSub, { color: c.textTertiary }]}>10 questions</Text>
+            </View>
+          </AnimatedPressable>
+        </AnimatedCard>
+        <AnimatedCard delay={300} style={{ flex: 1 }}>
+          <AnimatedPressable onPress={() => router.push('/exam')}>
+            <View style={[styles.quickCard, { backgroundColor: c.surface }]}>
+              <View style={[styles.quickIcon, { backgroundColor: c.primary + '18' }]}>
+                <Ionicons name="document-text" size={20} color={c.primary} />
+              </View>
+              <Text style={[styles.quickTitle, { color: c.textPrimary }]}>Examen</Text>
+              <Text style={[styles.quickSub, { color: c.textTertiary }]}>40 questions</Text>
+            </View>
+          </AnimatedPressable>
+        </AnimatedCard>
       </View>
 
-      {THEMES.map((theme) => {
+      {/* ── Learning Path ──────────────────────── */}
+      <AnimatedCard delay={400}>
+        <View style={styles.pathHeader}>
+          <Text style={[styles.pathTitle, { color: c.textPrimary }]}>Parcours d'apprentissage</Text>
+          <Text style={[styles.pathSubtitle, { color: c.textTertiary }]}>
+            Complétez les niveaux pour gagner des couronnes
+          </Text>
+        </View>
+      </AnimatedCard>
+
+      {THEMES.map((theme, themeIdx) => {
         const iconName = THEME_ICONS[theme.icon] || 'ellipse';
-        const ts = getThemeStat(theme.id);
-        const accuracy = ts?.accuracy || 0;
-        const answered = ts?.totalAnswered || 0;
+        const totalQ = questionCounts[theme.id] || 0;
+        const totalLevels = computeLevelsForTheme(totalQ);
+
+        // Find current level (first with < 1 crown)
+        let currentLevel = 1;
+        for (let i = 1; i <= totalLevels; i++) {
+          const lp = getLevelProgress(theme.id, i);
+          if (lp.crowns < 1) {
+            currentLevel = i;
+            break;
+          }
+          if (i === totalLevels) currentLevel = totalLevels;
+        }
+
+        // Count crowns for this theme
+        let themeCrowns = 0;
+        for (let i = 1; i <= totalLevels; i++) {
+          themeCrowns += getLevelProgress(theme.id, i).crowns;
+        }
+
+        const isExpanded = expandedTheme === theme.id;
+
         return (
-          <View key={theme.id} style={s.themeBlock}>
-            <View style={s.themeHeader}>
-              <View style={[s.themeIconBadge, { backgroundColor: theme.color + '20' }]}>
-                <Ionicons name={iconName} size={20} color={theme.color} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={s.themeName} numberOfLines={1}>{theme.nameFr}</Text>
-                {answered > 0 && (
-                  <View style={s.themeProgress}>
-                    <View style={[s.themeProgressBar, { backgroundColor: c.progressBg }]}>
-                      <View style={[s.themeProgressFill, { backgroundColor: accuracy >= 80 ? c.success : theme.color, width: `${Math.min(100, accuracy)}%` }]} />
-                    </View>
-                    <Text style={s.themeProgressText}>{accuracy}%</Text>
+          <AnimatedCard key={theme.id} delay={500 + themeIdx * 100}>
+            <View style={styles.themeSection}>
+              {/* Theme header — tappable to expand/collapse */}
+              <AnimatedPressable
+                onPress={() => setExpandedTheme(isExpanded ? null : theme.id)}
+                scaleDown={0.98}
+              >
+                <View style={[styles.themeCard, { backgroundColor: c.surface, borderColor: c.border }]}>
+                  <View style={[styles.themeIconBadge, { backgroundColor: theme.color + '18' }]}>
+                    <Ionicons name={iconName} size={22} color={theme.color} />
                   </View>
-                )}
-              </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.themeName, { color: c.textPrimary }]}>{theme.nameFr}</Text>
+                    <View style={styles.themeMetaRow}>
+                      <CrownDisplay crowns={Math.min(3, Math.floor(themeCrowns / Math.max(1, totalLevels)))} size={11} />
+                      <Text style={[styles.themeMeta, { color: c.textTertiary }]}>
+                        {themeCrowns}/{totalLevels * 3} · {totalLevels} niveaux
+                      </Text>
+                    </View>
+                  </View>
+                  <Ionicons
+                    name={isExpanded ? 'chevron-up' : 'chevron-down'}
+                    size={20}
+                    color={c.textTertiary}
+                  />
+                </View>
+              </AnimatedPressable>
+
+              {/* Level bubbles path — only when expanded */}
+              {isExpanded && <View style={styles.pathContainer}>
+                {Array.from({ length: Math.min(totalLevels, 20) }, (_, i) => i + 1).map((levelNum) => {
+                  const lp = getLevelProgress(theme.id, levelNum);
+                  const unlocked = isLevelUnlocked(theme.id, levelNum, totalLevels);
+                  const isCurrent = unlocked && levelNum === currentLevel;
+
+                  // Zigzag offset
+                  const zigzag = (levelNum % 4 === 1) ? -PATH_OFFSET
+                    : (levelNum % 4 === 2) ? 0
+                    : (levelNum % 4 === 3) ? PATH_OFFSET
+                    : 0;
+
+                  return (
+                    <LevelBubble
+                      key={levelNum}
+                      levelNum={levelNum}
+                      crowns={lp.crowns}
+                      isLocked={!unlocked}
+                      isCurrent={isCurrent}
+                      themeColor={theme.color}
+                      offsetX={zigzag}
+                      onPress={() => {
+                        router.push(`/train/${theme.id}?series=${levelNum}`);
+                      }}
+                    />
+                  );
+                })}
+              </View>}
             </View>
-
-            {/* Horizontal series scroll */}
-            <FlatList
-              data={[1, 2, 3, 4, 5]}
-              keyExtractor={(item) => `${theme.id}-${item}`}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={s.seriesListContent}
-              renderItem={({ item: seriesNum }) => {
-                // Only count CORRECT answers for progression
-                const correctAnswers = ts?.correctAnswers || 0;
-                const seriesStart = (seriesNum - 1) * 20;
-                const seriesCorrect = Math.max(0, Math.min(20, correctAnswers - seriesStart));
-                const seriesProgress = seriesCorrect / 20;
-                const isCompleted = seriesCorrect >= 20;
-                const isStarted = seriesCorrect > 0;
-
-                return (
-                  <TouchableOpacity
-                    style={s.seriesCard}
-                    activeOpacity={0.7}
-                    onPress={() => router.push(`/train/${theme.id}?series=${seriesNum}`)}
-                  >
-                    {/* Colored top area */}
-                    <View style={[s.seriesColorArea, { backgroundColor: theme.color + '18' }]}>
-                      <Text style={[s.seriesNumberLarge, { color: theme.color }]}>
-                        {seriesNum}
-                      </Text>
-                      {isCompleted && (
-                        <View style={[s.seriesCompleteBadge, { backgroundColor: c.success }]}>
-                          <Ionicons name="checkmark" size={12} color="#FFF" />
-                        </View>
-                      )}
-                    </View>
-                    {/* Bottom info area */}
-                    <View style={s.seriesInfoArea}>
-                      <Text style={s.seriesLabel}>Série {seriesNum}</Text>
-                      <Text style={s.seriesQuestions}>20 questions</Text>
-                      <View style={[s.seriesProgressBar, { backgroundColor: c.progressBg }]}>
-                        <View style={[s.seriesProgressFill, {
-                          backgroundColor: isCompleted ? c.success : theme.color,
-                          width: `${seriesProgress * 100}%`,
-                        }]} />
-                      </View>
-                      <Text style={[s.seriesProgressLabel, { color: isCompleted ? c.success : c.textTertiary }]}>
-                        {isCompleted ? '✓ Terminée' : isStarted ? `${seriesCorrect}/20` : 'Commencer'}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          </View>
+          </AnimatedCard>
         );
       })}
 
-      {/* Bottom spacer */}
       <View style={{ height: spacing.xxxl }} />
     </ScrollView>
   );
 }
 
-const styles = (c: ReturnType<typeof useColors>) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: c.background,
-    },
-    content: {
-      paddingBottom: spacing.xxxl + 20,
-    },
+const styles = StyleSheet.create({
+  // ── Hero ──
+  hero: {
+    paddingHorizontal: spacing.xl,
+    paddingBottom: 24,
+    borderBottomLeftRadius: 28,
+    borderBottomRightRadius: 28,
+    overflow: 'hidden',
+  },
+  heroInner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: spacing.lg,
+  },
+  headerLeft: { flex: 1 },
+  greeting: {
+    fontSize: 26,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    letterSpacing: -0.5,
+    marginBottom: 6,
+  },
+  examBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: 6,
+    backgroundColor: 'rgba(255,255,255,0.12)',
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    borderRadius: borderRadius.round,
+  },
+  examEmoji: { fontSize: 16 },
+  examLabel: { fontSize: 12, fontWeight: '600', color: '#FFFFFF' },
+  avatarButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    // ── Hero ────────────────────────────
-    hero: {
-      backgroundColor: c.primary,
-      paddingHorizontal: spacing.xl + 4,
-      paddingBottom: 28,
-      borderBottomLeftRadius: 28,
-      borderBottomRightRadius: 28,
-      marginBottom: -14,
-    },
-    heroInner: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'flex-start',
-    },
-    headerLeft: {
-      flex: 1,
-    },
-    greeting: {
-      fontSize: 28,
-      fontWeight: '700',
-      color: '#FFFFFF',
-      letterSpacing: -0.5,
-    },
-    heroSubtitle: {
-      fontSize: 15,
-      color: 'rgba(255,255,255,0.7)',
-      marginTop: 4,
-    },
-    examBadge: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      alignSelf: 'flex-start',
-      gap: spacing.xs,
-      marginTop: spacing.md,
-      backgroundColor: 'rgba(255,255,255,0.15)',
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.xs + 2,
-      borderRadius: borderRadius.round,
-    },
-    examBadgeText: {
-      fontSize: 12,
-      fontWeight: '600',
-      color: '#FFFFFF',
-    },
-    avatarButton: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      backgroundColor: '#FFFFFF',
-      alignItems: 'center',
-      justifyContent: 'center',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
+  // ── XP Row ──
+  xpRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
+    borderRadius: borderRadius.lg,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    gap: spacing.lg,
+  },
+  xpItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  xpValue: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
+  xpLabel: {
+    fontSize: 11,
+    color: 'rgba(255,255,255,0.5)',
+  },
+  xpDivider: {
+    width: 1,
+    height: 20,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+  },
 
-    // ── Skill Level Badge ─────────────────
-    skillBadge: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      alignSelf: 'flex-start',
-      gap: 6,
-      marginTop: spacing.sm + 2,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.xs + 2,
-      borderRadius: borderRadius.round,
-    },
-    skillBadgeText: {
-      fontSize: 12,
-      fontWeight: '700',
-    },
+  // ── Quick Actions ──
+  quickActions: {
+    flexDirection: 'row',
+    gap: spacing.md,
+    paddingHorizontal: spacing.xl,
+    marginTop: spacing.xl,
+    marginBottom: spacing.xl,
+  },
+  quickCard: {
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  quickIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.sm,
+  },
+  quickTitle: { fontSize: 14, fontWeight: '700' },
+  quickSub: { fontSize: 11, marginTop: 2 },
 
-    // ── Objective Banner ────────────────
-    objectiveBanner: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginHorizontal: spacing.xl,
-      marginTop: spacing.lg,
-      padding: spacing.md,
-      borderRadius: borderRadius.md,
-      borderWidth: 1,
-    },
-    objectiveEmoji: {
-      fontSize: 32,
-      marginRight: spacing.md,
-    },
-    objectiveContent: {
-      flex: 1,
-    },
-    objectiveLabel: {
-      fontSize: 11,
-      fontWeight: '600',
-      textTransform: 'uppercase',
-      letterSpacing: 1,
-      marginBottom: 2,
-    },
-    objectiveTitle: {
-      fontSize: fontSize.lg,
-      fontWeight: '700',
-    },
-    objectiveChange: {
-      width: 36,
-      height: 36,
-      borderRadius: 18,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+  // ── Path ──
+  pathHeader: {
+    paddingHorizontal: spacing.xl,
+    marginBottom: spacing.lg,
+  },
+  pathTitle: { fontSize: 20, fontWeight: '800', letterSpacing: -0.3 },
+  pathSubtitle: { fontSize: 13, marginTop: 2 },
 
-    // ── Stats ───────────────────────────
-    statsRow: {
-      flexDirection: 'row',
-      gap: spacing.md,
-      marginTop: 28,
-      marginBottom: 28,
-      paddingHorizontal: spacing.xl,
-    },
-    statCard: {
-      flex: 1,
-      backgroundColor: c.surface,
-      borderRadius: borderRadius.lg,
-      paddingVertical: spacing.lg + 4,
-      paddingHorizontal: spacing.md,
-      alignItems: 'center',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.06,
-      shadowRadius: 8,
-      elevation: 2,
-    },
-    statIconBg: {
-      width: 42,
-      height: 42,
-      borderRadius: 21,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: spacing.sm + 2,
-    },
-    statValue: {
-      fontSize: 24,
-      fontWeight: '800',
-      color: c.textPrimary,
-      letterSpacing: -0.5,
-    },
-    statLabel: {
-      fontSize: 12,
-      color: c.textTertiary,
-      marginTop: 3,
-      fontWeight: '500',
-    },
+  // ── Theme Section ──
+  themeSection: {
+    marginBottom: spacing.xxl,
+    paddingHorizontal: spacing.xl,
+  },
+  themeCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  themeHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  themeIconBadge: {
+    width: 44,
+    height: 44,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  themeName: { fontSize: 17, fontWeight: '700' },
+  themeMetaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 3,
+  },
+  themeMeta: { fontSize: 11 },
 
-    // ── Question du Jour ──────────────────
-    dailyCard: {
-      backgroundColor: c.surface,
-      borderRadius: borderRadius.xl,
-      padding: spacing.xl,
-      marginHorizontal: spacing.xl,
-      marginBottom: spacing.lg,
-      borderWidth: 1.5,
-      borderColor: c.primary + '25',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.06,
-      shadowRadius: 8,
-      elevation: 2,
-    },
-    dailyHeader: {
-      marginBottom: spacing.md,
-    },
-    dailyLabelRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: 6,
-    },
-    dailyLabel: {
-      fontSize: 12,
-      fontWeight: '700',
-      color: c.primary,
-      textTransform: 'uppercase',
-      letterSpacing: 0.8,
-    },
-    dailyQuestion: {
-      fontSize: 16,
-      fontWeight: '600',
-      color: c.textPrimary,
-      lineHeight: 24,
-      marginBottom: spacing.lg,
-    },
-    dailyButton: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 8,
-      backgroundColor: c.primary,
-      paddingVertical: spacing.md,
-      paddingHorizontal: spacing.xl,
-      borderRadius: borderRadius.md,
-      alignSelf: 'flex-start',
-    },
-    dailyButtonText: {
-      fontSize: 14,
-      fontWeight: '600',
-      color: '#FFFFFF',
-    },
-    dailyAnswerBox: {
-      backgroundColor: c.primary + '10',
-      borderRadius: borderRadius.md,
-      padding: spacing.lg,
-      borderLeftWidth: 3,
-      borderLeftColor: c.primary,
-    },
-    dailyAnswer: {
-      fontSize: 15,
-      fontWeight: '500',
-      color: c.textPrimary,
-      lineHeight: 22,
-    },
-
-    // ── Continue ────────────────────────
-    continueCard: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: c.primary,
-      borderRadius: borderRadius.xl,
-      padding: spacing.xl,
-      marginHorizontal: spacing.xl,
-      marginBottom: spacing.lg,
-      shadowColor: c.primary,
-      shadowOffset: { width: 0, height: 6 },
-      shadowOpacity: 0.3,
-      shadowRadius: 12,
-      elevation: 6,
-    },
-    continueLeft: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      flex: 1,
-    },
-    continueIconWrap: {
-      width: 48,
-      height: 48,
-      borderRadius: 24,
-      backgroundColor: 'rgba(255,255,255,0.2)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    continueContent: {
-      flex: 1,
-      marginLeft: spacing.lg,
-    },
-    continueTitle: {
-      fontSize: 16,
-      fontWeight: '700',
-      color: '#FFFFFF',
-    },
-    continueSubtitle: {
-      fontSize: 13,
-      color: 'rgba(255,255,255,0.7)',
-      marginTop: 3,
-    },
-    continueArrowWrap: {
-      width: 36,
-      height: 36,
-      borderRadius: 18,
-      backgroundColor: 'rgba(255,255,255,0.2)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-
-    // ── Random ──────────────────────────
-    randomCard: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: c.surface,
-      borderRadius: borderRadius.xl,
-      padding: spacing.xl,
-      marginHorizontal: spacing.xl,
-      marginBottom: 32,
-      borderWidth: 1.5,
-      borderColor: c.primary + '20',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.05,
-      shadowRadius: 8,
-      elevation: 2,
-    },
-    randomLeft: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.lg,
-    },
-    randomIconWrap: {
-      width: 46,
-      height: 46,
-      borderRadius: borderRadius.md,
-      backgroundColor: c.secondary,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    randomTitle: {
-      fontSize: 16,
-      fontWeight: '600',
-      color: c.textPrimary,
-    },
-    randomSubtitle: {
-      fontSize: 13,
-      color: c.textSecondary,
-      marginTop: 3,
-    },
-    randomArrowWrap: {
-      width: 34,
-      height: 34,
-      borderRadius: 17,
-      backgroundColor: c.primaryLight,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-
-    // ── Quick Links ──────────────────────
-    quickLinksRow: {
-      flexDirection: 'row',
-      gap: spacing.sm,
-      paddingHorizontal: spacing.xl,
-      marginBottom: spacing.xxl,
-    },
-    quickLink: {
-      flex: 1,
-      alignItems: 'center',
-      gap: spacing.xs,
-      paddingVertical: spacing.md,
-      borderRadius: borderRadius.md,
-      borderWidth: 1,
-    },
-    quickLinkText: {
-      fontSize: fontSize.xs,
-      fontWeight: '600',
-    },
-
-    // ── Section Header ──────────────────
-    sectionHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'baseline',
-      marginBottom: spacing.xl,
-      paddingHorizontal: spacing.xl,
-    },
-    sectionTitle: {
-      fontSize: 20,
-      fontWeight: '700',
-      color: c.textPrimary,
-      letterSpacing: -0.3,
-    },
-    sectionSubtitle: {
-      fontSize: 13,
-      color: c.textTertiary,
-    },
-
-    // ── Theme Block ─────────────────────
-    themeBlock: {
-      marginBottom: 32,
-    },
-    themeHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.md,
-      marginBottom: spacing.lg,
-      paddingHorizontal: spacing.xl,
-    },
-    themeIconBadge: {
-      width: 40,
-      height: 40,
-      borderRadius: borderRadius.md,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    themeName: {
-      fontSize: 17,
-      fontWeight: '600',
-      color: c.textPrimary,
-    },
-    themeProgress: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: spacing.sm,
-      marginTop: 5,
-    },
-    themeProgressBar: {
-      height: 4,
-      flex: 1,
-      borderRadius: 2,
-      overflow: 'hidden',
-    },
-    themeProgressFill: {
-      height: '100%',
-      borderRadius: 2,
-    },
-    themeProgressText: {
-      fontSize: 12,
-      fontWeight: '600',
-      color: c.textTertiary,
-      width: 32,
-      textAlign: 'right',
-    },
-
-    // ── Series Cards ────────────────────
-    seriesListContent: {
-      gap: spacing.lg,
-      paddingHorizontal: spacing.xl,
-    },
-    seriesCard: {
-      width: 164,
-      height: 148,
-      backgroundColor: c.surface,
-      borderRadius: borderRadius.lg,
-      overflow: 'hidden',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.06,
-      shadowRadius: 8,
-      elevation: 2,
-    },
-    seriesColorArea: {
-      height: '40%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
-    },
-    seriesNumberLarge: {
-      fontSize: 28,
-      fontWeight: '800',
-      letterSpacing: -0.5,
-    },
-    seriesCompleteBadge: {
-      position: 'absolute',
-      top: 8,
-      right: 8,
-      width: 20,
-      height: 20,
-      borderRadius: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    seriesInfoArea: {
-      flex: 1,
-      paddingHorizontal: spacing.md,
-      paddingTop: spacing.sm + 2,
-      paddingBottom: spacing.sm,
-      justifyContent: 'center',
-    },
-    seriesLabel: {
-      fontSize: 14,
-      fontWeight: '600',
-      color: c.textPrimary,
-      marginBottom: 2,
-    },
-    seriesQuestions: {
-      fontSize: 11,
-      color: c.textTertiary,
-      marginBottom: spacing.sm,
-    },
-    seriesCardTop: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: spacing.xs,
-    },
-    seriesNumber: {
-      fontSize: fontSize.md,
-      fontWeight: '600',
-      color: c.textPrimary,
-      marginBottom: spacing.xs,
-    },
-    seriesProgressBar: {
-      height: 4,
-      borderRadius: 2,
-      overflow: 'hidden',
-      marginBottom: 4,
-    },
-    seriesProgressFill: {
-      height: '100%',
-      borderRadius: 2,
-    },
-    seriesProgressLabel: {
-      fontSize: 11,
-      fontWeight: '600',
-    },
-  });
+  // ── Level Bubbles ──
+  pathContainer: {
+    alignItems: 'center',
+    gap: spacing.lg,
+    paddingVertical: spacing.sm,
+  },
+  bubbleContainer: {
+    alignItems: 'center',
+    gap: 4,
+  },
+  bubble: {
+    width: BUBBLE_SIZE,
+    height: BUBBLE_SIZE,
+    borderRadius: BUBBLE_SIZE / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  bubbleCurrent: {
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  bubbleText: {
+    fontSize: 22,
+    fontWeight: '800',
+  },
+  bubbleCrowns: {
+    marginTop: 2,
+  },
+  currentBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderRadius: 10,
+    marginTop: 2,
+  },
+  currentBadgeText: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    letterSpacing: 0.5,
+  },
+});
