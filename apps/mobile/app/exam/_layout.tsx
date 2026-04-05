@@ -23,7 +23,7 @@ export default function ExamLayout() {
       <Stack.Screen
         name="results"
         options={{
-          headerTitle: 'R\u00e9sultats',
+          headerTitle: 'Résultats',
           headerBackVisible: false,
           headerStyle: { backgroundColor: '#002395' },
           headerTintColor: '#FFFFFF',
