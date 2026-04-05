@@ -82,15 +82,16 @@ export default function ExamSessionScreen() {
           setAnswer(Number(qId), choice as 'a' | 'b' | 'c' | 'd');
         });
 
-        // Go to first unanswered question
+        // Go to first unanswered question (delayed to let state update)
         const answeredIds = new Set(Object.keys(existing).map(Number));
         const firstUnanswered = examData.questions.findIndex((q) => !answeredIds.has(q.id));
-        if (firstUnanswered > 0) {
-          goToQuestion(firstUnanswered);
-        } else if (firstUnanswered === -1 && examData.questions.length > 0) {
-          // All answered — go to last question
-          goToQuestion(examData.questions.length - 1);
-        }
+        setTimeout(() => {
+          if (firstUnanswered > 0) {
+            goToQuestion(firstUnanswered);
+          } else if (firstUnanswered === -1 && examData.questions.length > 0) {
+            goToQuestion(examData.questions.length - 1);
+          }
+        }, 100);
       } catch {
         setError('Impossible de charger les questions');
       } finally {
