@@ -330,41 +330,40 @@ export default function ExamSessionScreen() {
             );
           })}
         </View>
-      </ScrollView>
 
-      {/* Validate button */}
-      <View style={[styles.validateRow, { paddingBottom: insets.bottom + 80 }]}>
-        {currentIndex < totalQuestions - 1 ? (
-          <TouchableOpacity
-            style={[styles.validateButton, { backgroundColor: c.success }, !selectedChoice && { opacity: 0.4 }]}
-            onPress={nextQuestion}
-            disabled={!selectedChoice}
-          >
-            <Text style={styles.validateButtonText}>Valider</Text>
-            <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-        ) : (
-          /* FIX 4: Require answer before finishing on last question */
-          <TouchableOpacity
-            style={[
-              styles.validateButton,
-              { backgroundColor: selectedChoice ? c.primary : c.textTertiary },
-              (isFinishing || !selectedChoice) && { opacity: 0.5 },
-            ]}
-            onPress={confirmFinish}
-            disabled={isFinishing || !selectedChoice}
-          >
-            {isFinishing ? (
-              <ActivityIndicator color="#FFFFFF" size="small" />
-            ) : (
-              <>
-                <Text style={styles.validateButtonText}>Terminer l'examen</Text>
-                <Ionicons name="flag" size={20} color="#FFFFFF" />
-              </>
-            )}
-          </TouchableOpacity>
-        )}
-      </View>
+        {/* Validate button — inside ScrollView so it doesn't cover choices */}
+        <View style={[styles.validateRow, { paddingBottom: insets.bottom + 40, marginTop: spacing.xl }]}>
+          {currentIndex < totalQuestions - 1 ? (
+            <TouchableOpacity
+              style={[styles.validateButton, { backgroundColor: c.success }, !selectedChoice && { opacity: 0.4 }]}
+              onPress={nextQuestion}
+              disabled={!selectedChoice}
+            >
+              <Text style={styles.validateButtonText}>Valider</Text>
+              <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={[
+                styles.validateButton,
+                { backgroundColor: selectedChoice ? c.primary : c.textTertiary },
+                (isFinishing || !selectedChoice) && { opacity: 0.5 },
+              ]}
+              onPress={confirmFinish}
+              disabled={isFinishing || !selectedChoice}
+            >
+              {isFinishing ? (
+                <ActivityIndicator color="#FFFFFF" size="small" />
+              ) : (
+                <>
+                  <Text style={styles.validateButtonText}>Terminer l'examen</Text>
+                  <Ionicons name="flag" size={20} color="#FFFFFF" />
+                </>
+              )}
+            </TouchableOpacity>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 }
