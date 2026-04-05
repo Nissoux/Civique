@@ -52,8 +52,8 @@ export default async function statsRoutes(app: FastifyInstance) {
 
     const [practiceStats] = await db
       .select({
-        totalPracticed: sql<number>`count(*)::int`,
-        totalCorrect: sql<number>`count(CASE WHEN ${practiceAnswers.isCorrect} = true THEN 1 END)::int`,
+        totalPracticed: sql<number>`count(DISTINCT ${practiceAnswers.questionId})::int`,
+        totalCorrect: sql<number>`count(DISTINCT CASE WHEN ${practiceAnswers.isCorrect} = true THEN ${practiceAnswers.questionId} END)::int`,
         lastPracticeAt: sql<string | null>`max(${practiceAnswers.answeredAt})`,
       })
       .from(practiceAnswers)
