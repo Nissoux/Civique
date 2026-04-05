@@ -82,15 +82,15 @@ export default function TrainingScreen() {
   const { data: stats } = useQuery({
     queryKey: ['stats', 'overview', selectedExamType],
     queryFn: () => getStatsOverview(selectedExamType || undefined),
-    staleTime: 30 * 1000,
-    refetchOnWindowFocus: true,
+    staleTime: 0,
+    refetchOnMount: 'always',
   });
 
   const { data: themeStats } = useQuery({
     queryKey: ['stats', 'by-theme', selectedExamType],
     queryFn: () => getStatsByTheme(selectedExamType || undefined),
-    staleTime: 30 * 1000,
-    refetchOnWindowFocus: true,
+    staleTime: 0,
+    refetchOnMount: 'always',
   });
 
   const getThemeStat = (themeId: number): ThemeStat | undefined =>
