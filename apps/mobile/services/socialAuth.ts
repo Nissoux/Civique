@@ -1,4 +1,5 @@
-import { Platform, Alert } from 'react-native';
+import { Platform } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 import api from './api';
 import type { AuthResponse } from './auth';
 
@@ -13,33 +14,32 @@ const googleClientId = Platform.select({
   default: GOOGLE_CLIENT_ID_WEB,
 });
 
-// ── Google Sign-In (lazy loaded) ──
+// ── Google Sign-In via WebBrowser (no expo-crypto needed) ──
 export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   try {
-    const AuthSession = await import('expo-auth-session');
-    const WebBrowser = await import('expo-web-browser');
+    const redirectUri = 'civique://';
 
-    WebBrowser.maybeCompleteAuthSession();
+    const authUrl =
+      `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${encodeURIComponent(googleClientId!)}` +
+      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `&response_type=id_token` +
+      `&scope=${encodeURIComponent('openid profile email')}` +
+      `&nonce=${Date.now()}`;
 
-    const discovery = await AuthSession.fetchDiscoveryAsync('https://accounts.google.com');
+    const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
 
-    const redirectUri = AuthSession.makeRedirectUri({
-      scheme: 'civique',
-    });
+    if (result.type === 'success' && result.url) {
+      // Extract id_token from the URL fragment
+      const fragment = result.url.split('#')[1];
+      if (!fragment) return null;
 
-    const authRequest = new AuthSession.AuthRequest({
-      clientId: googleClientId!,
-      scopes: ['openid', 'profile', 'email'],
-      responseType: AuthSession.ResponseType.IdToken,
-      redirectUri,
-    });
+      const params = new URLSearchParams(fragment);
+      const idToken = params.get('id_token');
 
-    const result = await authRequest.promptAsync(discovery);
+      if (!idToken) return null;
 
-    if (result.type === 'success' && result.params?.id_token) {
-      const { data } = await api.post<AuthResponse>('/auth/google', {
-        idToken: result.params.id_token,
-      });
+      const { data } = await api.post<AuthResponse>('/auth/google', { idToken });
       return data;
     }
     return null;
