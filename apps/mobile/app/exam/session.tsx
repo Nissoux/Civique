@@ -303,7 +303,7 @@ export default function ExamSessionScreen() {
                     {choice.id.toUpperCase()}
                   </Text>
                 </View>
-                <View style={{ flex: 1, flexShrink: 1 }}>
+                <View style={{ flex: 1, flexShrink: 1, overflow: 'hidden' }}>
                   <Text
                     style={[
                       styles.choiceText,
@@ -333,7 +333,7 @@ export default function ExamSessionScreen() {
       </ScrollView>
 
       {/* Validate button */}
-      <View style={[styles.validateRow, { paddingBottom: insets.bottom }]}>
+      <View style={[styles.validateRow, { paddingBottom: insets.bottom + 80 }]}>
         {currentIndex < totalQuestions - 1 ? (
           <TouchableOpacity
             style={[styles.validateButton, { backgroundColor: c.success }, !selectedChoice && { opacity: 0.4 }]}

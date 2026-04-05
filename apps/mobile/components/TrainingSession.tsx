@@ -299,7 +299,7 @@ export default function TrainingSession({
     const passed = percentage >= 80;
 
     return (
-      <ScrollView style={[styles.container, { backgroundColor: c.background }]} contentContainerStyle={[styles.summaryContent, { paddingTop: insets.top, paddingBottom: insets.bottom + 16 }]}>
+      <ScrollView style={[styles.container, { backgroundColor: c.background }]} contentContainerStyle={[styles.summaryContent, { paddingTop: insets.top, paddingBottom: insets.bottom + 100 }]}>
         <View style={[styles.summaryCard, { backgroundColor: c.card }]}>
           <View
             style={[
@@ -400,7 +400,7 @@ export default function TrainingSession({
     LANGUAGES.find((l) => l.code === currentLang)?.nativeName || 'Français';
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: c.background }]} contentContainerStyle={[styles.questionContent, { paddingTop: insets.top + themeSpacing.xl, paddingBottom: insets.bottom + 16 }]}>
+    <ScrollView style={[styles.container, { backgroundColor: c.background }]} contentContainerStyle={[styles.questionContent, { paddingTop: insets.top + themeSpacing.xl, paddingBottom: insets.bottom + 100 }]}>
       {/* Header */}
       <View style={[styles.header, isRtl && { flexDirection: 'row-reverse' }]}>
         <Text style={[styles.progress, { color: c.textPrimary }]}>
@@ -702,16 +702,17 @@ const styles = StyleSheet.create({
   choiceTextContainer: {
     flex: 1,
     flexShrink: 1,
+    overflow: 'hidden',
   },
   choiceText: {
     fontSize: themeFontSize.lg,
     lineHeight: 24,
-    flexWrap: 'wrap',
   },
   choiceTranslatedText: {
     fontSize: themeFontSize.sm,
     marginTop: themeSpacing.xs,
     fontStyle: 'italic',
+    lineHeight: 20,
   },
   feedbackCard: {
     borderRadius: themeBorderRadius.lg,
