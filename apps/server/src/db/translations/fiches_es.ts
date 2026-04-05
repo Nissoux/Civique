@@ -1,0 +1,32 @@
+export const fichesEs = [
+  {
+    themeId: 1,
+    lang: 'es' as const,
+    title: 'Los principios y valores de la Republica francesa',
+    content: `# Los principios y valores de la Republica francesa\n\n## El lema: Libertad, Igualdad, Fraternidad\n\nEl lema de la Republica francesa esta inscrito en la Constitucion. Resume los valores fundamentales de la nacion.\n\n- **Libertad**: cada ciudadano es libre en sus opiniones, su religion y sus desplazamientos.\n- **Igualdad**: todos los ciudadanos son iguales ante la ley, sin distincion de origen, raza o religion.\n- **Fraternidad**: los ciudadanos deben mostrar solidaridad los unos con los otros.\n\n## La laicidad\n\nLa ley del 9 de diciembre de 1905 establecio la separacion de las Iglesias y el Estado. La laicidad garantiza la libertad de conciencia: cada persona es libre de creer o de no creer. El Estado no privilegia ninguna religion.\n\n## Los simbolos de la Republica\n\n- La **bandera tricolor** (azul, blanca, roja)\n- El **himno nacional**: la Marsellesa\n- **Marianne**: figura femenina que representa la Republica\n- El **lema**: Libertad, Igualdad, Fraternidad\n\n## La democracia\n\nFrancia es una republica democratica. El poder pertenece al pueblo, que lo ejerce mediante el voto. El sufragio es universal: todo ciudadano mayor de edad puede votar.`,
+  },
+  {
+    themeId: 2,
+    lang: 'es' as const,
+    title: 'El sistema institucional y politico frances',
+    content: `# El sistema institucional y politico frances\n\n## La Constitucion de 1958\n\nLa V Republica fue fundada por la Constitucion del 4 de octubre de 1958. Organiza los poderes del Estado.\n\n## El Presidente de la Republica\n\n- Jefe del Estado, elegido por sufragio universal directo por 5 anos (quinquenio)\n- Nombra al Primer Ministro\n- Puede disolver la Asamblea Nacional\n- Jefe de las fuerzas armadas\n\n## El Gobierno\n\n- Dirigido por el Primer Ministro\n- Conduce la politica de la nacion\n- Responsable ante la Asamblea Nacional\n\n## El Parlamento\n\nEl Parlamento vota las leyes. Esta compuesto por dos camaras:\n- La **Asamblea Nacional**: 577 diputados elegidos por sufragio universal directo por 5 anos\n- El **Senado**: 348 senadores elegidos por sufragio universal indirecto por 6 anos\n\n## Las colectividades territoriales\n\n- **Municipios**: mas de 35 000, dirigidos por un alcalde y un consejo municipal\n- **Departamentos**: 101 (96 metropolitanos + 5 de ultramar)\n- **Regiones**: 18 (13 metropolitanas + 5 de ultramar)`,
+  },
+  {
+    themeId: 3,
+    lang: 'es' as const,
+    title: 'Los derechos y deberes del ciudadano',
+    content: `# Los derechos y deberes del ciudadano\n\n## Los derechos fundamentales\n\nLa Declaracion de los Derechos del Hombre y del Ciudadano (1789) y la Constitucion garantizan:\n\n- **Libertad de expresion**: cada persona puede expresar sus opiniones (dentro del respeto a la ley)\n- **Libertad de conciencia y de religion**: cada persona es libre en sus creencias\n- **Derecho de voto**: todo ciudadano mayor de edad (18 anos) puede votar\n- **Igualdad ante la ley**: sin distincion de origen, sexo o religion\n- **Derecho a la educacion**: la instruccion es obligatoria de los 3 a los 16 anos\n- **Derecho de asilo**: proteccion de las personas perseguidas\n- **Presuncion de inocencia**: toda persona es inocente hasta que se demuestre lo contrario\n\n## Los deberes\n\n- **Respetar las leyes** de la Republica\n- **Pagar los impuestos**: financian los servicios publicos\n- **Participar en la defensa nacional**: Jornada de defensa y ciudadania (JDC)\n- **Votar**: es un deber moral (no juridicamente obligatorio)\n- **Respetar los derechos de los demas**\n- **Escolarizar a los hijos**\n\n## La igualdad entre mujeres y hombres\n\nLa igualdad entre mujeres y hombres es un principio constitucional. Las mujeres obtuvieron el derecho de voto en 1944.`,
+  },
+  {
+    themeId: 4,
+    lang: 'es' as const,
+    title: 'Historia, geografia y cultura de Francia',
+    content: `# Historia, geografia y cultura de Francia\n\n## Grandes fechas de la historia\n\n- **1789**: Revolucion francesa, toma de la Bastilla (14 de julio), Declaracion de los Derechos del Hombre y del Ciudadano\n- **1848**: Abolicion definitiva de la esclavitud (Victor Schoelcher)\n- **1905**: Ley de separacion de las Iglesias y el Estado\n- **1944**: Derecho de voto de las mujeres\n- **1945**: Fin de la Segunda Guerra Mundial (8 de mayo)\n- **1958**: Fundacion de la V Republica (Constitucion del 4 de octubre)\n\n## Los dias festivos y conmemoraciones\n\n- **14 de julio**: Fiesta nacional (toma de la Bastilla)\n- **11 de noviembre**: Armisticio de 1918 (fin de la Primera Guerra Mundial)\n- **8 de mayo**: Victoria de 1945 (fin de la Segunda Guerra Mundial en Europa)\n\n## Geografia\n\n- **Capital**: Paris\n- **Poblacion**: aproximadamente 68 millones de habitantes\n- **13 regiones metropolitanas** y 5 regiones de ultramar\n- Francia es el pais mas grande de la Union Europea por su superficie\n\n## La Ilustracion\n\nMovimiento intelectual del siglo XVIII portador de las ideas de razon, libertad y progreso. Figuras principales: Voltaire, Rousseau, Montesquieu, Diderot.`,
+  },
+  {
+    themeId: 5,
+    lang: 'es' as const,
+    title: 'Vivir en la sociedad francesa',
+    content: `# Vivir en la sociedad francesa\n\n## Tramites administrativos\n\n- **Nacimiento**: declaracion en el ayuntamiento dentro de los 5 dias\n- **Permiso de residencia**: solicitud en la prefectura\n- **Inscripcion electoral**: en el ayuntamiento o en linea\n- **Tarjeta Vitale**: tarjeta de seguro de enfermedad expedida por la Seguridad Social\n\n## Los numeros de emergencia\n\n- **15**: SAMU (urgencias medicas)\n- **17**: Policia / Gendarmeria\n- **18**: Bomberos\n- **112**: Numero de emergencia europeo (funciona en toda la UE)\n\n## La proteccion social\n\nLa Seguridad Social es el sistema de proteccion social frances. Cubre:\n- Enfermedad y maternidad\n- Jubilacion\n- Prestaciones familiares (CAF)\n- Accidentes laborales\n\n## El empleo\n\n- **France Travail** (antes Pole emploi): ayuda en la busqueda de empleo e indemnizacion por desempleo\n- El SMIC (salario minimo) garantiza un ingreso minimo a todo trabajador\n- El contrato de trabajo (CDI, CDD) define los derechos y obligaciones\n\n## El contrato de integracion republicana (CIR)\n\nLos extranjeros recien llegados firman el CIR que incluye:\n- Una formacion civica sobre los valores de la Republica\n- Una formacion linguistica en frances (si es necesario)\n- Un acompanamiento hacia el empleo y la vivienda`,
+  },
+];

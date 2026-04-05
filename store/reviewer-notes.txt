@@ -1,0 +1,30 @@
+App Review Demo Account
+=======================
+
+Email: review@civique.fr
+Password: Review2026!
+
+This account has Premium access enabled for testing all features.
+
+How to test:
+1. Open the app and tap "Se connecter"
+2. Enter the email and password above
+3. Choose an exam type (e.g., "Carte de séjour pluriannuelle")
+4. You can now access: training, exams, flashcards, glossary
+
+Key features to test:
+- Training: Tap "Entraînement rapide" for 10 random questions
+- Exam: Go to "Examens" tab, tap "Commencer" for a full 40-question mock exam
+- Flashcards: Go to "Mémo" tab, tap a theme to start a flashcard session
+- Glossary: Go to "Glossaire" tab, search for terms like "République" or "laïcité"
+- Language: Change translation language from the training session or glossary
+- Subscription: Go to "Compte" → "Abonnement" to see premium plans
+
+Payment testing:
+- The app uses Stripe for payments (currently in test mode)
+- Test card: 4242 4242 4242 4242 (any future date, any CVC)
+- Promo code: CIVIQUE2026 (grants Premium access)
+
+Privacy Policy: https://api.integrafle.fr/legal/privacy
+Terms of Service: https://api.integrafle.fr/legal/terms
+Support: support@integrafle.fr

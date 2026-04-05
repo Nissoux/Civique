@@ -1,4 +1,4 @@
-import { Language } from '../constants/languages';
+import type { Language } from '../constants/languages';
 
 export interface User {
   id: string;

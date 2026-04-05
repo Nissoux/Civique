@@ -1,0 +1,117 @@
+=== CSP (difficulty 1) ===
+A quoi correspond la date du 14 juillet ?
+Quel est l'un des symboles de la Republique francaise ?
+Le principe d'egalite signifie que :
+"Liberte, egalite, fraternite", c'est :
+A-t-on le droit d'insulter publiquement quelqu'un parce qu'il est different (handicap, apparence physique, sexe...) ?
+Certains metiers peuvent-ils etre reserves aux hommes ?
+De quand date la Constitution de la Ve Republique ?
+Le regime de la France est :
+Lequel de ces symboles represente officiellement la Republique francaise ?
+Ou peut-on voir la devise de la Republique ?
+Quels sont des symboles officiels de la Republique francaise ?
+Qu'est-ce que l'egalite ?
+Que signifie la liberte ?
+Que signifie le mot "fraternite" dans la devise francaise ?
+Quel animal est un symbole de la France ?
+Quel est l'un des roles des associations ?
+Quel est le nom de l'hymne national ?
+Quel symbole de la Republique francaise est tricolore ?
+Quelle est la date de la fete nationale francaise ?
+Quelle est la devise de la Republique francaise ?
+Quelle est la langue officielle de la Republique francaise ?
+Quelle est la place de la langue francaise dans la Republique ?
+Quelle liberte permet a chacun d'exprimer ses idees ?
+Quelle proposition est correcte ? La liberte d'expression :
+Quelles sont les couleurs du drapeau francais ?
+Qu'est-ce que la Marseillaise ?
+Qu'est ce qui est traditionnellement organise sur les Champs Elysees le 14 juillet pour celebrer la fete nationale ?
+Qui est Marianne ?
+Une personne peut-elle changer librement de religion ?
+"La France est une Republique indivisible, ..., democratique et sociale". Completez cette phrase extraite de l'article 1er de la Constitution :
+En quelle annee la loi de separation des Eglises et de l'Etat a-t-elle ete votee ?
+Que permet le principe de laicite ?
+Quel droit est garanti par la laicite ?
+Pourquoi le principe de laicite doit-il etre respecte a l'ecole ?
+Qu'est-ce que la laicite ?
+Un enfant peut-il refuser d'aller a l'ecole pour une raison religieuse ?
+Une personne a-t-elle le droit de ne pas croire en une religion ?
+
+=== CR (difficulty 2 if not in CSP) ===
+Parmi les propositions suivantes, laquelle constitue une participation citoyenne ?
+Que garantit la liberte d'expression ?
+A quoi sert un titre de sejour ?
+La liberte de circulation permet a toute personne de :
+Sur quel site internet peut-on retrouver le symbole de la Republique francaise ?
+Completez ces paroles de la Marseillaise : "Aux armes [...] ! Formez vos bataillons"
+Completez les paroles de la Marseillaise : "Allons enfants de la patrie [...]"
+En application de la liberte individuelle, quelle proposition est correcte ? Une personne peut :
+Concernant la pratique de la religion, quelle proposition est correcte ?
+En tant que parent, peut-on refuser que son enfant participe aux cours de sport a l'ecole car ils sont mixtes ?
+Quelle est la devise de la France ?
+La repudiation de sa femme est :
+Les impots permettent de financer les depenses publiques. Quelle proposition est correcte ?
+Peut-on bruler publiquement un drapeau francais ?
+Que fait l'Etat pour lutter contre les discriminations ?
+Que represente Marianne ?
+Qu'est-ce que la liberte d'association ?
+Qu'est-ce que la liberte ?
+Qu'est-ce que la Marseillaise ?
+Sur quel document peut-on voir Marianne ?
+Un employeur refuse d'embaucher des femmes dans son entreprise. Que dit la loi ?
+Une des valeurs de la devise republicaine est l'egalite. Qu'est-ce que cela signifie ?
+Quelle est la place de la langue francaise dans la Republique ?
+Quels sont des symboles officiels de la Republique francaise ?
+A-t-on le droit d'insulter publiquement quelqu'un parce qu'il est different (handicap, apparence physique, sexe...) ?
+Le regime de la France est :
+Pourquoi le principe de laicite doit-il etre respecte a l'ecole ?
+En quelle annee la loi de separation des Eglises et de l'Etat a-t-elle ete votee ?
+Une personne a-t-elle le droit de ne pas croire en une religion ?
+Quel droit est garanti par la laicite ?
+A l'ecole publique, qui peut porter des signes religieux tres visibles ?
+Selon le principe de laicite, que signifie la neutralite de l'Etat ?
+Que peut faire un usager du service public dans une mairie ?
+Qui doit respecter le principe de neutralite religieuse dans une prefecture ?
+La laicite impose-t-elle aux agents publics d'etre neutres vis-a-vis des usagers ?
+Que garantit le principe de laicite ?
+A-t-on le droit de changer de religion ?
+Que represente la laicite ?
+Qu'est ce qui est interdit par la Charte de la laicite a l'ecole ?
+Que dit l'article 1er de la Constitution francaise ?
+
+=== NAT (difficulty 3 if not in CSP or CR) ===
+Completez les paroles de la Marseillaise "Allons enfants de la patrie..."
+Dans le cadre d'un entretien d'embauche, que peut-on demander au candidat ?
+Declarer ses revenus aux services fiscaux est :
+En France, les impots permettent de financer les depenses publiques. Quelle proposition est correcte ?
+La liberte d'association est :
+La liberte d'expression sur les reseaux sociaux en France est :
+Lequel de ces prenoms evoque un symbole de la Republique ?
+Lequel de ces symboles represente la Republique francaise ?
+Ou peut-on voir la devise de la Republique ?
+Lesquels sont des symboles officiels de la Republique francaise ?
+Peut-on bruler publiquement un drapeau francais ?
+Quand la securite sociale a-t-elle ete etablie en France ?
+Que commemore la fete nationale ?
+Que porte Marianne sur la tete ?
+Quel symbole de la Republique peut-on voir sur les maillots de l'equipe de France de football ?
+Quelle est la devise de la Republique francaise ?
+Qu'est-ce que la liberte d'association ?
+Qu'est-ce qu'une liberte ?
+Sur quel document peut-on voir Marianne ?
+Une des valeurs de la devise republicaine est l'Egalite. Qu'est-ce que cela signifie ?
+Une personne peut-elle changer librement de religion en France ?
+Que peut faire un usager du service public dans une mairie ?
+En France, il est possible pour l'Etat de financer :
+En quelle annee la loi de separation des Eglises et de l'Etat a-t-elle ete votee ?
+Que dit la loi de 1905 ?
+Que garantit le principe de laicite ?
+Quel jour celebre-t-on officiellement la laicite en France ?
+Quel symbole religieux peut etre porte dans une ecole publique dans le respect de la laicite ?
+Quel terme designe precisement la haine ou les prejuges contre les Juifs ?
+Quel texte est considere comme le texte fondateur de la laicite ?
+Quelle institution francaise doit rester neutre en matiere de religion ?
+Qu'est-ce que la laicite ?
+A l'ecole, la charte de la laicite permet de :
+Qui doit respecter et veiller a la neutralite religieuse dans les services publics ?
+Une personne declare ne croire en aucun dieu. On peut dire :

@@ -1,0 +1,177 @@
+=== CSP (difficulty 1) ===
+En quelle annee a debute la Revolution francaise ?
+Qui etait Napoleon Ier ?
+Lequel de ces personnages historiques est francais ?
+Dans quelle Republique est-on aujourd'hui ?
+Qu'est-ce que la Shoah ?
+Quel pays ou region du monde a ete colonise par la France ?
+Qui a rendu l'ecole gratuite, laique et obligatoire ?
+Quand a eu lieu la Seconde Guerre mondiale ?
+Quand a eu lieu la Premiere Guerre mondiale ?
+En quelle annee a ete creee la Communaute Economique Europeenne (CEE) ?
+Le 11 novembre est un jour ferie. A quoi correspond cette date ?
+Qui a ete le premier President elu sous la Ve Republique ?
+En quelle annee l'esclavage a-t-il ete aboli definitivement en France ?
+Depuis quelle annee l'ecole publique est-elle gratuite ?
+Combien y a-t-il eu de republiques en France ?
+Qui etait le roi de France au moment de la Revolution francaise ?
+Qui a fonde la Ve Republique ?
+Que celebre-t-on le 14 juillet ?
+Quelle guerre a eu lieu entre 1914 et 1918 ?
+Pourquoi l'annee 1958 est importante pour la France ?
+Quel fleuve coule en France ?
+Quelle ville est francaise ?
+Quel ocean borde la cote ouest francaise ?
+Qu'est-ce que Paris ?
+Quelle est la capitale de la France ?
+Sur quel continent se situe la France metropolitaine ?
+Quelle ile est un departement d'outre-mer francais ?
+Combien y a-t-il de regions en France metropolitaine ?
+Quelle ville est un grand port maritime ?
+Quelle est la mer au sud de la France metropolitaine ?
+Quelle ville est situee au bord de la mer Mediterranee ?
+Ou se situe la Corse ?
+Quelle chaine de montagnes est situee entre la France et l'Italie ?
+Qui etait Moliere ?
+Qui etait Charles Baudelaire ?
+Qui etait George Sand ?
+Qui etait Simone de Beauvoir ?
+Qui etait Albert Camus ?
+Qui etait Paul Cezanne ?
+Qui etait Marc Chagall ?
+Qui etait Josephine Baker ?
+Qui etait une chanteuse francaise celebre ?
+Qu'est-ce que le Louvre ?
+Qui etait Jean de la Fontaine ?
+Quel ecrivain est francais ?
+Dans quelle ville se trouve la tour Eiffel ?
+Quand celebre-t-on Noel ?
+
+=== CR (difficulty 2 if not in CSP) ===
+Quel etait le surnom de Louis XIV ?
+Quel roi de France a ete execute pendant la Revolution francaise ?
+En quelle annee Napoleon Ier est-il devenu empereur ?
+Lequel de ces personnages a un lien avec la Republique francaise ?
+De quand date l'appel a la resistance du general de Gaulle ?
+Pourquoi la Shoah est-elle etudiee a l'ecole ?
+Quel pays a ete colonise par la France ?
+Depuis quand les Francais elisent-ils le president de la Republique au suffrage universel direct ?
+Quelle est la premiere etape de la construction europeenne en 1951 ?
+Durant le mandat de quel president la peine de mort a-t-elle ete abolie ?
+Quel regime politique a ete mis en place pendant la Revolution francaise en 1792 ?
+Qui etait une figure de la Resistance francaise pendant la Seconde Guerre mondiale ?
+En 1944, qu'est-ce qui a change pour les femmes ?
+Quelle organisation internationale a ete creee en 1945 apres la Seconde Guerre mondiale ?
+Quelle peine a ete supprimee en 1981 ?
+En quelle annee l'euro est-elle devenue la monnaie utilisee en France ?
+En quelle annee a commence la Premiere Guerre mondiale ?
+Ou a eu lieu le debarquement en 1944 ?
+Quel continent a ete le plus concerne par la decolonisation francaise apres la Seconde Guerre mondiale ?
+Que fete-t-on le 8 mai ?
+Quelle mer ou ocean borde la France metropolitaine ?
+Quel pays a une frontiere terrestre avec la France metropolitaine ?
+Quelle ville francaise est un port maritime ?
+Quelle mer se situe entre la France et l'Angleterre ?
+Qu'est ce que la France d'outre-mer ?
+Quelle chaine de montagnes est situee entre la France et l'Espagne ?
+Quelle ile francaise se trouve dans l'ocean Indien ?
+Quelle est la population approximative de la France en 2025 ?
+Quel fleuve traverse Paris ?
+Lequel de ces pays partage des frontieres terrestres avec la France ?
+Quel pays a une frontiere avec la France metropolitaine au nord-est ?
+Ou se trouvent les principales activites economiques en France ?
+Parmi ces pays, lequel attire le plus de visiteurs chaque annee ?
+Ou habite la majorite des Francais ?
+Quelle region est la plus peuplee ?
+Quelle ville francaise fait partie des 10 plus grandes metropoles du pays ?
+Lequel de ces departements de France est le plus touristique ?
+Quand peut-on visiter gratuitement des lieux culturels en France ?
+Combien de personnes parlent francais dans le monde ?
+Qui etait Marguerite Yourcenar ?
+Quel peintre est francais ?
+Quel musee est situe a Paris ?
+Qui etait Auguste Rodin ?
+Quel est le classement de la langue francaise parmi les langues les plus parlees dans le monde ?
+Quelle cathedrale celebre a ete en partie detruite par un incendie en 2019 ?
+Qui etait une ecrivaine francaise celebre ?
+Qui etait un celebre musicien francais ?
+Qui etait Auguste Renoir ?
+Quelle fete est francaise ?
+
+=== NAT (difficulty 3 if not in CSP or CR) ===
+Parmi ces textes, lequel a ete adopte sous Napoleon Ier ?
+Qui a ete president de la Ve Republique ?
+Que signifie la date du 14 juillet pour les Francais ?
+Lequel de ces pays est un pays fondateur de l'Union Europeenne ?
+Dans quelle region est situee une partie des plages du debarquement ?
+Dans quelle ville les rois de France etaient-ils couronnes ?
+Quel roi de France a ete guillotine pendant la Revolution francaise ?
+En quelle annee a debute la Revolution francaise ?
+En quelle annee Napoleon Ier est-il devenu empereur ?
+Lequel de ces personnages a un lien avec la Republique francaise ?
+De quand date l'appel a la resistance du general de Gaulle ?
+Qu'est-ce que la Shoah ?
+Quel pays a ete une colonie francaise ?
+Depuis quand les Francais elisent-ils le president au suffrage universel direct ?
+En quelle annee l'Union europeenne a-t-elle ete fondee ?
+Quand a eu lieu la Seconde guerre mondiale ?
+Quand a eu lieu la Premiere guerre mondiale ?
+Sous quel president a ete abolie la peine de mort en France ?
+Que celebre-t-on le 8 mai ?
+Quelle est la premiere etape de la construction europeenne en 1951 ?
+Qui etait une figure de la Resistance francaise pendant la Seconde Guerre mondiale ?
+Le 11 novembre est un jour ferie. A quoi correspond cette date ?
+Depuis quand l'esclavage a-t-il ete aboli en France ?
+Qui a aboli l'esclavage en France ?
+Depuis quelle annee l'ecole publique est-elle gratuite ?
+En 1944, qu'est-ce qui a change pour les femmes ?
+Quelle organisation a ete creee en 1945 apres la Seconde Guerre mondiale ?
+En quelle annee l'euro est-il devenu la monnaie officielle de la France ?
+Lors de la seconde guerre mondiale, a quelle date Paris a-t-elle ete liberee ?
+Quel etait le principal port francais implique dans la traite negriere au XVIIIe siecle ?
+Quel celebre philosophe des Lumieres a denonce l'esclavage ?
+Quel peintre est francais ?
+Quel plat est une specialite de la cuisine francaise ?
+Qui etait Marie Curie ?
+Qui a peint "La liberte guidant le peuple" ?
+Dans quel grand musee parisien est exposee la Joconde ?
+Quel chateau celebre se trouve pres de Paris et symbolise le pouvoir royal de Louis XIV ?
+Ou peut-on voir des peintures prehistoriques en France ?
+Quel peintre celebre a peint les Nympheas ?
+Pendant quelles journees peut-on visiter gratuitement des lieux culturels en France ?
+Que symbolise le 1er mai ?
+Qui etait Monsieur Rouget de Lisle ?
+A quelle occasion a ete construite la Tour Eiffel ?
+Quelle chaine de montagnes est situee entre la France et l'Italie ?
+Qui etait Moliere ?
+Qui etait Charles Baudelaire ?
+Qui etait George Sand ?
+Qui etait Simone de Beauvoir ?
+Qui etait Albert Camus ?
+Qui etait Marguerite Yourcenar ?
+Qui etait Paul Cezanne ?
+Qui etait Auguste Rodin ?
+Qui etait un celebre compositeur francais ?
+Qui etait Auguste Renoir ?
+Quel musee est situe a Paris ?
+Quel monument historique se trouve sur une ile en Normandie ?
+Quelle ville francaise fait partie des 10 plus grandes metropoles du pays ?
+Quelle ile fait partie des Antilles francaises ?
+Quelle ile est francaise ?
+Quelle est la plus haute montagne de France ?
+Quelle ile francaise est situee dans l'ocean indien ?
+Quel departement francais a une frontiere avec le Bresil ?
+De quelle ville francaise decolle la fusee Ariane ?
+Quelle mer ou ocean borde la France metropolitaine ?
+Quelle ile est un departement d'outre-mer francais ?
+Qu'est-ce que la France d'outre-mer ?
+Quelle est la population approximative de la France en 2025 ?
+Quel est le principal port maritime de France ?
+Combien y a-t-il de regions en France metropolitaine ?
+Quelle ile francaise se trouve au sud-est du continent africain ?
+Quel est le chef-lieu de la region Auvergne-Rhone-Alpes ?
+Quel est le chef-lieu de la region Bretagne ?
+Quel est le chef-lieu de la region Provence-Alpes-Cote d'Azur ?
+Quel est le 101eme departement francais depuis 2011 ?
+Quelle region francaise est reputee pour ses stations de ski ?
+Quel fleuve traverse Paris ?

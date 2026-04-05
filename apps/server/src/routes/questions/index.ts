@@ -1,29 +1,91 @@
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
-import { eq, and, sql } from 'drizzle-orm';
+import { eq, and, sql, inArray } from 'drizzle-orm';
 import { db } from '../../config/database.js';
-import { questions, questionTranslations } from '../../db/schema.js';
+import { questions, questionTranslations, themes } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 
 const querySchema = z.object({
   themeId: z.coerce.number().optional(),
   type: z.enum(['knowledge', 'situational']).optional(),
   difficulty: z.coerce.number().min(1).max(5).optional(),
+  isPremium: z
+    .enum(['true', 'false'])
+    .transform((v) => v === 'true')
+    .optional(),
+  examType: z.enum(['csp', 'cr', 'nat']).optional(),
+  ids: z.string().optional(), // comma-separated IDs: "1,2,3"
   lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
   limit: z.coerce.number().min(1).max(100).default(20),
   offset: z.coerce.number().min(0).default(0),
 });
 
+const idParamSchema = z.object({
+  id: z.coerce.number(),
+});
+
+const randomQuerySchema = z.object({
+  themeId: z.coerce.number().optional(),
+  type: z.enum(['knowledge', 'situational']).optional(),
+  isPremium: z
+    .enum(['true', 'false'])
+    .transform((v) => v === 'true')
+    .optional(),
+  examType: z.enum(['csp', 'cr', 'nat']).optional(),
+  lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  limit: z.coerce.number().min(1).max(100).default(20),
+  perTheme: z
+    .enum(['true', 'false'])
+    .transform((v) => v === 'true')
+    .optional(),
+});
+
+// ── Helpers ────────────────────────────────────
+
+type QuestionRow = typeof questions.$inferSelect & {
+  translations?: (typeof questionTranslations.$inferSelect)[];
+};
+
+function flattenTranslation(question: QuestionRow, lang?: string) {
+  const { translations, ...rest } = question;
+
+  if (!lang || lang === 'fr' || !translations || translations.length === 0) {
+    return {
+      ...rest,
+      translatedText: rest.textFr,
+      translatedChoices: rest.choicesFr,
+      translatedExplanation: rest.explanationFr,
+    };
+  }
+
+  const t = translations[0];
+  return {
+    ...rest,
+    translatedText: t.text,
+    translatedChoices: t.choices,
+    translatedExplanation: t.explanation,
+  };
+}
+
+// ── Routes ─────────────────────────────────────
+
 export default async function questionRoutes(app: FastifyInstance) {
   app.addHook('onRequest', authGuard);
 
+  // ── GET / ────────────────────────────────────
   app.get('/', async (request) => {
     const query = querySchema.parse(request.query);
     const conditions = [];
 
+    if (query.ids) {
+      const idList = query.ids.split(',').map(Number).filter((n) => !isNaN(n));
+      if (idList.length > 0) conditions.push(inArray(questions.id, idList));
+    }
     if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
     if (query.type) conditions.push(eq(questions.type, query.type));
     if (query.difficulty) conditions.push(eq(questions.difficulty, query.difficulty));
+    if (query.isPremium !== undefined) conditions.push(eq(questions.isPremium, query.isPremium));
+    if (query.examType) conditions.push(sql`${query.examType} = ANY(${questions.examTypes})`);
 
     const where = conditions.length > 0 ? and(...conditions) : undefined;
 
@@ -32,49 +94,111 @@ export default async function questionRoutes(app: FastifyInstance) {
       limit: query.limit,
       offset: query.offset,
       with: {
-        translations: query.lang
+        translations: query.lang && query.lang !== 'fr'
           ? { where: eq(questionTranslations.lang, query.lang) }
           : undefined,
       },
     });
 
-    return { data: results };
+    const data = results.map((q) => flattenTranslation(q as QuestionRow, query.lang));
+
+    // Get actual total count for pagination
+    const [countResult] = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(questions)
+      .where(where);
+
+    return { data, total: countResult.count };
   });
 
+  // ── GET /random ──────────────────────────────
+  // NOTE: must be registered before /:id to avoid route conflict
+  app.get('/random', async (request) => {
+    const query = randomQuerySchema.parse(request.query);
+    const conditions = [];
+
+    if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
+    if (query.type) conditions.push(eq(questions.type, query.type));
+    if (query.isPremium !== undefined) conditions.push(eq(questions.isPremium, query.isPremium));
+    if (query.examType) conditions.push(sql`${query.examType} = ANY(${questions.examTypes})`);
+
+    const where = conditions.length > 0 ? and(...conditions) : undefined;
+
+    // If perTheme is specified, distribute evenly across themes
+    if (query.perTheme && !query.themeId) {
+      const allThemes = await db.query.themes.findMany({
+        columns: { id: true },
+      });
+
+      const perThemeCount = Math.ceil(query.limit / allThemes.length);
+      const perThemeQuestions: QuestionRow[] = [];
+
+      for (const theme of allThemes) {
+        const themeConditions = [...conditions, eq(questions.themeId, theme.id)];
+        const themeWhere = and(...themeConditions);
+
+        const themeResults = await db.query.questions.findMany({
+          where: themeWhere,
+          limit: perThemeCount,
+          orderBy: sql`RANDOM()`,
+          with: {
+            translations: query.lang && query.lang !== 'fr'
+              ? { where: eq(questionTranslations.lang, query.lang) }
+              : undefined,
+          },
+        });
+
+        perThemeQuestions.push(...(themeResults as QuestionRow[]));
+      }
+
+      // Shuffle the combined results
+      for (let i = perThemeQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [perThemeQuestions[i], perThemeQuestions[j]] = [perThemeQuestions[j], perThemeQuestions[i]];
+      }
+
+      const limited = perThemeQuestions.slice(0, query.limit);
+      const data = limited.map((q) => flattenTranslation(q, query.lang));
+      return { data, total: data.length };
+    }
+
+    // Standard random
+    const results = await db.query.questions.findMany({
+      where,
+      limit: query.limit,
+      orderBy: sql`RANDOM()`,
+      with: {
+        translations: query.lang && query.lang !== 'fr'
+          ? { where: eq(questionTranslations.lang, query.lang) }
+          : undefined,
+      },
+    });
+
+    const data = results.map((q) => flattenTranslation(q as QuestionRow, query.lang));
+    return { data, total: data.length };
+  });
+
+  // ── GET /:id ─────────────────────────────────
   app.get('/:id', async (request, reply) => {
-    const { id } = request.params as { id: string };
+    const { id } = idParamSchema.parse(request.params);
+    const lang = (request.query as { lang?: string }).lang as
+      | 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi'
+      | undefined;
+
     const question = await db.query.questions.findFirst({
-      where: eq(questions.id, parseInt(id, 10)),
-      with: { translations: true },
+      where: eq(questions.id, id),
+      with: {
+        translations: lang && lang !== 'fr'
+          ? { where: eq(questionTranslations.lang, lang) }
+          : undefined,
+      },
     });
 
     if (!question) {
       return reply.status(404).send({ error: 'Question not found' });
     }
 
-    return { data: question };
-  });
-
-  app.get('/random', async (request) => {
-    const query = querySchema.parse(request.query);
-    const conditions = [];
-
-    if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
-    if (query.type) conditions.push(eq(questions.type, query.type));
-
-    const where = conditions.length > 0 ? and(...conditions) : undefined;
-
-    const results = await db.query.questions.findMany({
-      where,
-      limit: query.limit,
-      orderBy: sql`RANDOM()`,
-      with: {
-        translations: query.lang
-          ? { where: eq(questionTranslations.lang, query.lang) }
-          : undefined,
-      },
-    });
-
-    return { data: results };
+    const data = flattenTranslation(question as QuestionRow, lang);
+    return { data };
   });
 }

@@ -1,0 +1,37 @@
+App Name: Civique - French Civic Exam 2026
+
+Short description (80 chars):
+Prepare for the French civic exam 2026: quizzes, mock exams, and study cards.
+
+Full description:
+Civique is the ultimate app to prepare for the French civic exam, mandatory since January 1st, 2026.
+
+Whether you're preparing for a multi-year residence permit (CSP), a resident card (CR), or French nationality, Civique adapts to your goal:
+
+📚 610+ QUESTIONS
+• Knowledge questions covering all 5 official topics
+• 145 realistic situational questions for exam day
+• Filtered by your exam type (CSP, CR, or Nationality)
+
+🎯 MOCK EXAMS
+• 40 questions in 45 minutes, just like the real exam
+• Passing score: 80% (32/40)
+• Different questions every session
+
+🌍 AVAILABLE IN 6 LANGUAGES
+• French always displayed first
+• Translations: Arabic, Spanish, Farsi, Hindi, Portuguese
+• Perfect for understanding questions in your language
+
+📖 STUDY MATERIALS
+• Revision sheets on all 5 themes
+• 150 interactive flashcards
+• 100-term civic glossary
+
+📊 PROGRESS TRACKING
+• Detailed statistics by theme
+• Session history
+• Weak areas identified
+• Daily question and skill badges
+
+Download Civique and give yourself the best chance of success!

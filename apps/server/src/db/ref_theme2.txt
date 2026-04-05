@@ -1,0 +1,154 @@
+=== CSP (difficulty 1) ===
+Qui nomme le Premier ministre ?
+Le Parlement est compose :
+Qu'est-ce que le pouvoir executif ? Le pouvoir :
+Les dirigeants sont elus par les citoyens dans :
+A-t-on le droit de ne pas respecter une loi ?
+Qui doit respecter la loi ?
+Quel est le role de l'autorite judiciaire ?
+Quel pouvoir detient un juge ? Le pouvoir :
+L'autorite judiciaire est exercee par :
+Que se passe-t-il si un ministre ne respecte pas la loi ?
+Qui est elu lors des elections legislatives ?
+Combien de deputes composent l'Assemblee nationale ?
+Quand sont elus les senateurs ?
+Qui est elu lors des elections municipales ?
+Qui est elu lors des elections presidentielles ?
+A partir de quel age a-t-on le droit de voter ?
+Pour combien de temps est elu le president de la Republique francaise ?
+Pour combien de temps sont elus les deputes ?
+Pour combien de temps sont elus les senateurs ?
+Qui possede le pouvoir executif ?
+Quelle condition est necessaire pour voter aux elections ?
+Qui peut voter aux elections en France ?
+Que signifie "suffrage universel" ?
+Concernant les partis politiques, quelle proposition est correcte ?
+Quel est le role des deputes ?
+La separation des pouvoirs est un principe fondamental. Quels sont les trois pouvoirs concernes ?
+Qui possede le pouvoir legislatif ?
+Qui sanctionne l'auteur d'un vol ?
+Qui elit les deputes ?
+Qui vote les lois ?
+Qui reside au palais de l'Elysee ?
+Combien y a-t-il de departements en France ?
+Qui represente l'Etat dans un departement ?
+Qui dirige la commune ?
+Est-ce que le president de la Republique a tous les pouvoirs ?
+Qui est le prefet ?
+Quel est le role du Parlement ?
+Quel est le regime politique de la France aujourd'hui ?
+Combien d'Etats font partie de l'Union europeenne au 1er janvier 2025 ?
+Quel Etat n'est pas membre de l'Union europeenne ?
+Quelle condition est necessaire pour voter aux elections europeennes ?
+A quelle frequence les elections europeennes sont-elles organisees ?
+Quel pays est un pays fondateur de l'Union europeenne ?
+Quelle est la monnaie utilisee en France ?
+Qui elit les deputes europeens ?
+Quand celebre-t-on la journee de l'Europe ?
+
+=== CR (difficulty 2 if not in CSP) ===
+Qu'est-ce que l'Etat de droit ?
+Le president de la Republique a commis un crime. Quelle proposition est correcte ?
+La loi est l'expression de :
+Quelle est la duree du mandat du conseil municipal et du maire ?
+Que garantit l'Etat de droit ?
+Une personne peut-elle voter a la place d'une autre ?
+Est-ce que le vote est obligatoire ?
+A la fin de son mandat, le president de la Republique peut-il decider de rester au pouvoir ?
+Qui dirige l'action du Gouvernement ?
+Qui nomme le Premier ministre ?
+Quelle est l'organisation administrative de la France ?
+Qu'est-ce que le pouvoir legislatif ? Le pouvoir :
+Pourquoi separer les trois pouvoirs dans une democratie ?
+Qui sanctionne l'auteur d'un vol ?
+Quel est le role du gouvernement ?
+Que se passe-t-il si un ministre ne respecte pas la loi ?
+Combien de deputes composent l'Assemblee nationale ?
+Qui peut voter aux elections en France ?
+Pour combien de temps sont elus les senateurs ?
+La separation des pouvoirs est un principe fondamental. Quels sont les trois pouvoirs concernes ?
+Est-ce que le president de la Republique a tous les pouvoirs ?
+Qui est le prefet ?
+Quelle condition est necessaire pour voter aux elections ?
+Qui dirige la commune ?
+Quel est le regime politique de la France aujourd'hui ?
+Qu'est-ce que l'Hotel de Matignon ?
+Le Parlement est compose :
+Quel est le role du president de la Republique ?
+Quel est le role du Premier ministre ?
+Qui est le chef du Gouvernement ?
+Combien y a-t-il de regions en France ?
+Quel est le role du Defenseur des droits ?
+Depuis quand l'euro est-elle la monnaie unique ?
+Quel est le role principal du departement ?
+Quel est le role principal des communes ?
+Combien de communes environ existe-t-il en France ?
+Quel traite concerne la construction de l'Union europeenne ?
+Quel Etat a quitte l'Union europeenne en 2020 ?
+Quelle est la devise de l'Union europeenne ?
+Quel est l'hymne de l'Union europeenne ?
+De quoi est compose le drapeau europeen ?
+De quelle couleur est le drapeau europeen ?
+En quelle annee le traite de Maastricht a-t-il ete signe ?
+Ou est le siege du Parlement europeen ?
+Ou est le siege de la Commission europeenne ?
+Quel Etat n'est pas membre de l'Union europeenne ?
+Quand celebre-t-on la journee de l'Europe ?
+A quelle frequence les elections europeennes sont-elles organisees ?
+Quelle condition est necessaire pour voter aux elections europeennes ?
+Quel pays est un pays fondateur de l'Union europeenne ?
+
+=== NAT (difficulty 3 if not in CSP or CR) ===
+Comment est designe le Premier ministre ?
+Qui peut se presenter aux elections presidentielles ?
+A qui appartient la souverainete nationale ?
+Qui est elu lors des elections municipales ?
+L'inscription sur les listes electorales est :
+Quelle condition est necessaire pour voter aux elections presidentielles ?
+Quelle condition faut-il remplir pour etre candidat aux elections municipales ?
+Parmi ces autorites, laquelle est elue ?
+Quelles sont les fonctions du maire ?
+Une personne n'ayant pas d'acces a internet veut s'inscrire sur les listes electorales. Ou peut-elle s'inscrire ?
+A quel age peut-on devenir electeur ?
+En France, est-ce obligatoire de voter ?
+A-t-on le droit de ne pas respecter une loi ?
+Comment sont designes les deputes ?
+Qui vote les lois ?
+La separation des pouvoirs est un principe fondamental. Quels sont les trois pouvoirs concernes ?
+Qu'est-ce que l'Etat de droit ?
+Quelles sont les durees du mandat du conseil municipal et du maire ?
+Qui est elu lors des elections legislatives ?
+Quelle est la duree du mandat du President de la Republique francaise ?
+Quelle est la duree du mandat des deputes ?
+Quelle est la duree du mandat des senateurs ?
+Qui dirige l'action du gouvernement ?
+En France, est-ce possible d'adherer a un parti politique ?
+Qui sanctionne l'auteur d'un vol ?
+Qui gere les colleges publics ?
+Qui gere les ecoles primaires et maternelles publiques ?
+Comment sont designes les maires ?
+Quelle collectivite territoriale est responsable des transports regionaux ?
+Quelle est l'une des voies possibles pour modifier la Constitution ?
+Qui assure l'interim du president de la Republique en cas de deces ?
+Quel est le role du Conseil constitutionnel ?
+Quelle condition est obligatoire pour se presenter a l'election presidentielle ?
+Combien y a-t-il de departements en France ?
+Comment est organise le decoupage administratif de la France ?
+Qui represente l'Etat dans un departement ?
+Quel est le role du President de la Republique ?
+Quel est le role du Premier ministre ?
+Quel est le role du Defenseur des droits ?
+En quelle annee la citoyennete europeenne a-t-elle ete creee ?
+Qui a compose l'hymne de l'Union europeenne ?
+Quand est celebree la journee de l'Europe ?
+Ou est le siege de la Banque centrale europeenne ?
+Ou est le siege de la Commission europeenne ?
+Qui siege au Parlement europeen ?
+Combien d'Etats font partie de l'Union europeenne au 1er janvier 2025 ?
+En quelle annee le traite de Maastricht a-t-il ete signe ?
+Quel traite concerne la construction de l'Union europeenne ?
+Quel Etat a quitte l'Union Europeenne en 2020 ?
+Quel est l'hymne de l'Union Europeenne ?
+De quoi est compose le drapeau europeen ?
+Qui elit les deputes europeens ?
+Ou est le siege du Parlement europeen ?

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#002FA7"/>
+      <stop offset="100%" stop-color="#001654"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+
+  <!-- Arc de Triomphe silhouette - simplified, iconic -->
+  <!-- Main arch structure -->
+  <g transform="translate(512, 480)" fill="white">
+    <!-- Left pillar -->
+    <rect x="-220" y="-200" width="80" height="400" rx="4"/>
+    <!-- Right pillar -->
+    <rect x="140" y="-200" width="80" height="400" rx="4"/>
+    <!-- Top beam -->
+    <rect x="-240" y="-240" width="480" height="60" rx="6"/>
+    <!-- Attic (top section) -->
+    <rect x="-220" y="-300" width="440" height="70" rx="4"/>
+    <!-- Crown/top decoration -->
+    <rect x="-180" y="-330" width="360" height="40" rx="4"/>
+    <!-- Arch opening -->
+    <path d="M-140 200 L-140 -100 Q-140 -200 0 -200 Q140 -200 140 -100 L140 200 Z" fill="#002FA7"/>
+    <!-- Inner arch border -->
+    <path d="M-140 200 L-140 -100 Q-140 -200 0 -200 Q140 -200 140 -100 L140 200" fill="none" stroke="white" stroke-width="6"/>
+    <!-- Small decorative elements on pillars -->
+    <rect x="-200" y="-160" width="40" height="6" rx="2" opacity="0.6"/>
+    <rect x="160" y="-160" width="40" height="6" rx="2" opacity="0.6"/>
+    <rect x="-200" y="-100" width="40" height="6" rx="2" opacity="0.6"/>
+    <rect x="160" y="-100" width="40" height="6" rx="2" opacity="0.6"/>
+  </g>
+
+  <!-- Tricolor accent at bottom -->
+  <rect x="312" y="740" width="133" height="8" rx="4" fill="#002395"/>
+  <rect x="445" y="740" width="134" height="8" rx="4" fill="#FFFFFF"/>
+  <rect x="579" y="740" width="133" height="8" rx="4" fill="#ED2939"/>
+
+  <!-- Golden star above -->
+  <g transform="translate(512, 120)" fill="#FFD700">
+    <polygon points="0,-28 8,-10 28,-10 12,4 18,24 0,14 -18,24 -12,4 -28,-10 -8,-10"/>
+  </g>
+</svg>
