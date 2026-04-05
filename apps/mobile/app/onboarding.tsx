@@ -57,7 +57,7 @@ export default function OnboardingScreen() {
 
   const handleComplete = async () => {
     await AsyncStorage.setItem('onboarding_done', 'true');
-    router.replace('/(tabs)/choose-exam');
+    router.replace('/(auth)/login');
   };
 
   const handleNext = () => {

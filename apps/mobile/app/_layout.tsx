@@ -68,6 +68,13 @@ function RootLayoutNav() {
   useEffect(() => {
     if (!isReady || isLoading) return;
 
+    // Re-check onboarding flag from storage (in case it was just set by onboarding screen)
+    AsyncStorage.getItem('onboarding_done').then((flag) => {
+      if (flag === 'true' && !onboardingDone) {
+        setOnboardingDone(true);
+      }
+    });
+
     const inAuthGroup = segments[0] === '(auth)';
     const onChooseExam = segments[1] === 'choose-exam';
 
