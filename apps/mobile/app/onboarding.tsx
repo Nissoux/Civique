@@ -15,7 +15,7 @@ import { MotiView } from '../components/ui/MotiView';
 import * as Haptics from 'expo-haptics';
 import { useOnboardingStore } from '../stores/onboardingStore';
 import { useColors, spacing, borderRadius } from '../constants/theme';
-import { AnimatedPressable, CMotif } from '../components/ui';
+import { AnimatedPressable } from '../components/ui';
 
 const { width } = Dimensions.get('window');
 
@@ -24,8 +24,7 @@ interface Slide {
   icon: keyof typeof Ionicons.glyphMap;
   title: string;
   subtitle: string;
-  gradient: readonly [string, string, string];
-  motifRotations: number[];
+  gradient: [string, string, string];
 }
 
 const slides: Slide[] = [
@@ -35,7 +34,6 @@ const slides: Slide[] = [
     title: 'Bienvenue sur Civique',
     subtitle: 'Préparez votre examen civique français avec confiance',
     gradient: ['#0A1628', '#0F1B3D', '#002395'],
-    motifRotations: [-30, 120, 60],
   },
   {
     id: '2',
@@ -43,7 +41,6 @@ const slides: Slide[] = [
     title: 'Entraînez-vous',
     subtitle: '611 questions, examens blancs et 6 langues disponibles',
     gradient: ['#0A1628', '#1A2340', '#2962FF'],
-    motifRotations: [45, -60, 150],
   },
   {
     id: '3',
@@ -51,7 +48,6 @@ const slides: Slide[] = [
     title: 'Suivez votre progression',
     subtitle: 'Statistiques détaillées, flashcards et fiches mémo',
     gradient: ['#0A1628', '#1B2E1C', '#2E7D32'],
-    motifRotations: [90, -120, 30],
   },
 ];
 
@@ -82,13 +78,9 @@ export default function OnboardingScreen() {
 
   const renderSlide = ({ item, index }: { item: Slide; index: number }) => (
     <LinearGradient
-      colors={item.gradient as unknown as [string, string, ...string[]]}
+      colors={[item.gradient[0], item.gradient[1], item.gradient[2]]}
       style={[styles.slide, { width }]}
     >
-      {/* C Motifs decoration */}
-      <CMotif size="xl" color="#FFFFFF" opacity="light" rotation={item.motifRotations[0]} style={{ top: '10%', right: -30 }} />
-      <CMotif size="lg" color="#FFFFFF" opacity="subtle" rotation={item.motifRotations[1]} style={{ bottom: '25%', left: -20 }} />
-      <CMotif size="md" color="#4D7CFF" opacity="medium" rotation={item.motifRotations[2]} style={{ top: '35%', left: '15%' }} />
 
       <MotiView
         from={{ opacity: 0, scale: 0.7 }}
