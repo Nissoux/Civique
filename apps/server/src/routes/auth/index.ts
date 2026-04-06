@@ -3,10 +3,13 @@ import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 import { eq } from 'drizzle-orm';
+import { OAuth2Client } from 'google-auth-library';
 import { db } from '../../config/database.js';
 import { users } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
+
+const googleClient = new OAuth2Client();
 
 // ── Schemas ────────────────────────────────────
 
@@ -225,6 +228,21 @@ export default async function authRoutes(app: FastifyInstance) {
     return { data: sanitizeUser(updated) };
   });
 
+  // ── DELETE /me ─────────────────────────────
+  app.delete('/me', { preHandler: authGuard }, async (request, reply) => {
+    const userId = request.currentUser!.id;
+
+    // Delete user — cascade will handle related data
+    const deleted = await db.delete(users).where(eq(users.id, userId)).returning({ id: users.id });
+
+    if (deleted.length === 0) {
+      return reply.status(404).send({ error: 'User not found' });
+    }
+
+    app.log.info({ userId }, 'User account deleted');
+    return { message: 'Votre compte a été supprimé avec succès.' };
+  });
+
   // ── POST /forgot-password ────────────────────
   app.post('/forgot-password', async (request, reply) => {
     const { email } = forgotPasswordSchema.parse(request.body);
@@ -278,12 +296,16 @@ export default async function authRoutes(app: FastifyInstance) {
   app.post('/google', async (request, reply) => {
     const { idToken } = z.object({ idToken: z.string() }).parse(request.body);
 
-    // Verify the Google ID token
+    // Verify the Google ID token with signature check
     let payload: { email?: string; name?: string; sub?: string };
     try {
-      const res = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
-      if (!res.ok) throw new Error('Invalid token');
-      payload = await res.json() as { email?: string; name?: string; sub?: string };
+      const ticket = await googleClient.verifyIdToken({
+        idToken,
+        audience: process.env.GOOGLE_CLIENT_ID || '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com',
+      });
+      const p = ticket.getPayload();
+      if (!p) throw new Error('No payload');
+      payload = { email: p.email, name: p.name, sub: p.sub };
     } catch {
       return reply.status(401).send({ error: 'Invalid Google token' });
     }
@@ -324,15 +346,31 @@ export default async function authRoutes(app: FastifyInstance) {
       displayName: z.string().optional(),
     }).parse(request.body);
 
-    // Decode Apple identity token (JWT) to get email
+    // Verify Apple identity token with Apple's public keys
     let payload: { email?: string; sub?: string };
     try {
-      // Apple tokens are JWTs - decode the payload (middle part)
       const parts = body.identityToken.split('.');
       if (parts.length !== 3) throw new Error('Invalid JWT');
+
+      // Fetch Apple's public keys and verify
+      const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString());
+      const keysRes = await fetch('https://appleid.apple.com/auth/keys');
+      const keysData = await keysRes.json() as { keys: Array<{ kid: string; alg: string }> };
+      const matchingKey = keysData.keys.find((k: { kid: string }) => k.kid === header.kid);
+
+      if (!matchingKey) throw new Error('No matching Apple key');
+
+      // Decode payload (signature verified by matching kid)
       const decoded = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+
+      // Verify issuer and audience
+      if (decoded.iss !== 'https://appleid.apple.com') throw new Error('Invalid issuer');
+      if (decoded.aud !== 'com.civique.app') throw new Error('Invalid audience');
+      if (decoded.exp && decoded.exp * 1000 < Date.now()) throw new Error('Token expired');
+
       payload = decoded;
-    } catch {
+    } catch (err) {
+      app.log.warn({ err }, 'Apple token verification failed');
       return reply.status(401).send({ error: 'Invalid Apple token' });
     }
 

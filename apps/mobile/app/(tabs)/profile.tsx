@@ -141,6 +141,29 @@ export default function ProfileScreen() {
     ]);
   };
 
+  const handleDeleteAccount = () => {
+    Alert.alert(
+      'Supprimer mon compte',
+      'Cette action est irréversible. Toutes vos données seront supprimées définitivement (progression, examens, abonnement).',
+      [
+        { text: 'Annuler', style: 'cancel' },
+        {
+          text: 'Supprimer définitivement',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await api.delete('/auth/me');
+              await logout();
+              router.replace('/(auth)/login');
+            } catch {
+              Alert.alert('Erreur', 'Impossible de supprimer le compte. Réessayez plus tard.');
+            }
+          },
+        },
+      ],
+    );
+  };
+
   const handleLogout = () => {
     Alert.alert('Déconnexion', 'Êtes-vous sûr de vouloir vous déconnecter ?', [
       { text: 'Annuler', style: 'cancel' },
@@ -364,6 +387,14 @@ export default function ProfileScreen() {
             setThemeMode(newMode);
           }}
           colors={colors}
+        />
+        <MenuItem
+          icon="trash-outline"
+          iconColor="#FFFFFF"
+          iconBgColor={colors.error}
+          label="Supprimer mon compte"
+          onPress={handleDeleteAccount}
+          colors={colors}
           isLast
         />
       </View>
@@ -384,7 +415,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Conditions d'utilisation"
-          onPress={() => Alert.alert('Conditions', 'Les conditions d\'utilisation seront disponibles prochainement.')}
+          onPress={() => Linking.openURL('https://integrafle.fr/conditions-utilisation')}
           colors={colors}
         />
         <MenuItem
@@ -392,7 +423,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Politique de confidentialité"
-          onPress={() => Alert.alert('Confidentialité', 'La politique de confidentialité sera disponible prochainement.')}
+          onPress={() => Linking.openURL('https://integrafle.fr/politique-confidentialite')}
           colors={colors}
           isLast
         />

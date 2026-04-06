@@ -18,12 +18,14 @@
   "dependencies": {
     "@civique/shared": "workspace:*",
     "@fastify/cors": "^10.0.0",
+    "@fastify/helmet": "^13.0.2",
     "@fastify/jwt": "^9.0.0",
     "@fastify/rate-limit": "^10.3.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.0",
     "drizzle-orm": "^0.36.0",
     "fastify": "^5.1.0",
+    "google-auth-library": "^10.6.2",
     "pg": "^8.13.0",
     "zod": "^3.23.0"
   },

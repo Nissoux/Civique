@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
-// import helmet from '@fastify/helmet'; // TODO: install and enable in production
+import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
 import jwt from '@fastify/jwt';
 import { ZodError } from 'zod';
@@ -28,14 +28,18 @@ async function main() {
     }),
   });
 
+  // Helmet security headers
+  await app.register(helmet, {
+    contentSecurityPolicy: false, // Disabled for API server
+  });
+
   // CORS
+  const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
+    'https://api.integrafle.fr',
+    'https://integrafle.fr',
+  ];
   await app.register(cors, {
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || [
-      'https://api.integrafle.fr',
-      'https://integrafle.fr',
-      'http://localhost:8081',
-      'http://localhost:3000',
-    ],
+    origin: allowedOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -110,6 +114,15 @@ async function main() {
       </body></html>
     `);
   });
+
+  // Graceful shutdown
+  const shutdown = async (signal: string) => {
+    app.log.info(`${signal} received, shutting down gracefully...`);
+    await app.close();
+    process.exit(0);
+  };
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 
   // Start
   try {

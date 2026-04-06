@@ -126,9 +126,9 @@ export default async function paymentRoutes(app: FastifyInstance) {
 
       if (userId) {
         // Set expiry based on plan
-        let premiumExpires: Date;
+        let premiumExpires: Date | null;
         if (plan === 'lifetime') {
-          premiumExpires = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000); // 6 months
+          premiumExpires = null; // Lifetime = no expiry
         } else if (plan === 'weekly') {
           premiumExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         } else {
@@ -314,7 +314,10 @@ export default async function paymentRoutes(app: FastifyInstance) {
     const body = createCodeSchema.parse(request.body);
 
     // Verify admin secret
-    const adminSecret = process.env.ADMIN_SECRET || env.JWT_SECRET;
+    const adminSecret = process.env.ADMIN_SECRET;
+    if (!adminSecret) {
+      return reply.status(503).send({ error: 'Admin endpoint not configured' });
+    }
     if (body.adminSecret !== adminSecret) {
       return reply.status(403).send({ error: 'Accès refusé' });
     }
