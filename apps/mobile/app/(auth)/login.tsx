@@ -295,8 +295,9 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 100,
     height: 100,
-    borderRadius: 22,
+    borderRadius: 24,
     marginBottom: spacing.lg,
+    overflow: 'hidden',
   },
   title: {
     fontSize: 36,

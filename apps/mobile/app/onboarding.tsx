@@ -202,8 +202,9 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 120,
     height: 120,
-    borderRadius: 26,
+    borderRadius: 28,
     marginBottom: 32,
+    overflow: 'hidden',
   },
   iconContainer: {
     width: 120,
