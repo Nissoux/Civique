@@ -199,7 +199,7 @@ export default function ProfileScreen() {
         <View style={styles.progressSection}>
           <View style={styles.progressHeader}>
             <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
-              Progression globale
+              Taux de réussite
             </Text>
             <Text style={[styles.progressPercent, { color: colors.primary }]}>{overallAccuracy}%</Text>
           </View>
