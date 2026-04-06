@@ -415,7 +415,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Conditions d'utilisation"
-          onPress={() => Linking.openURL('https://integrafle.fr/conditions-utilisation')}
+          onPress={() => Linking.openURL('https://api.integrafle.fr/terms')}
           colors={colors}
         />
         <MenuItem
@@ -423,7 +423,7 @@ export default function ProfileScreen() {
           iconColor="#FFFFFF"
           iconBgColor={colors.textSecondary}
           label="Politique de confidentialité"
-          onPress={() => Linking.openURL('https://integrafle.fr/politique-confidentialite')}
+          onPress={() => Linking.openURL('https://api.integrafle.fr/privacy')}
           colors={colors}
           isLast
         />

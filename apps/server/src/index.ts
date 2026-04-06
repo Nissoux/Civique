@@ -115,6 +115,37 @@ async function main() {
     `);
   });
 
+  // Legal pages
+  app.get('/privacy', async (_request, reply) => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const md = fs.readFileSync(path.resolve('../../store/politique-confidentialite.md'), 'utf-8');
+    const html = md.replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^---$/gm, '<hr>');
+    return reply.type('text/html').send(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Politique de confidentialité - Civique</title><style>body{font-family:-apple-system,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#333}h1{color:#002395}h2{color:#444;margin-top:30px}hr{border:none;border-top:1px solid #ddd;margin:20px 0}</style></head><body><p>${html}</p></body></html>`);
+  });
+
+  app.get('/terms', async (_request, reply) => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const md = fs.readFileSync(path.resolve('../../store/conditions-utilisation.md'), 'utf-8');
+    const html = md.replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^---$/gm, '<hr>');
+    return reply.type('text/html').send(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conditions d'utilisation - Civique</title><style>body{font-family:-apple-system,sans-serif;max-width:700px;margin:0 auto;padding:20px;line-height:1.6;color:#333}h1{color:#002395}h2{color:#444;margin-top:30px}hr{border:none;border-top:1px solid #ddd;margin:20px 0}</style></head><body><p>${html}</p></body></html>`);
+  });
+
   // Graceful shutdown
   const shutdown = async (signal: string) => {
     app.log.info(`${signal} received, shutting down gracefully...`);
