@@ -5,6 +5,7 @@ import {
   FlatList,
   Dimensions,
   StyleSheet,
+  Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -94,9 +95,17 @@ export default function OnboardingScreen() {
         animate={{ opacity: currentIndex === index ? 1 : 0.5, scale: currentIndex === index ? 1 : 0.8 }}
         transition={{ type: 'spring', damping: 12, stiffness: 150 }}
       >
-        <View style={styles.iconContainer}>
-          <Ionicons name={item.icon} size={64} color="#FFFFFF" />
-        </View>
+        {index === 0 ? (
+          <Image
+            source={require('../assets/logo-c.png')}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
+        ) : (
+          <View style={styles.iconContainer}>
+            <Ionicons name={item.icon} size={64} color="#FFFFFF" />
+          </View>
+        )}
       </MotiView>
 
       <MotiView
@@ -197,6 +206,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 40,
     overflow: 'hidden',
+  },
+  logoImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 26,
+    marginBottom: 32,
   },
   iconContainer: {
     width: 120,

@@ -8,6 +8,7 @@ import {
   Platform,
   ScrollView,
   Alert,
+  Image,
 } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
@@ -104,9 +105,11 @@ export default function LoginScreen() {
             transition={{ type: 'spring', damping: 12, delay: 0 }}
           >
             <View style={styles.logoSection}>
-              <View style={styles.logoCircle}>
-                <Ionicons name="shield-checkmark" size={40} color="#FFFFFF" />
-              </View>
+              <Image
+                source={require('../../assets/logo-c.png')}
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
               <Text style={styles.title}>Civique</Text>
               <Text style={styles.subtitle}>
                 Préparez votre examen de citoyenneté
@@ -234,26 +237,24 @@ export default function LoginScreen() {
 
           {/* Social login buttons */}
           <MotiView from={{ opacity: 0, translateY: 10 }} animate={{ opacity: 1, translateY: 0 }} transition={{ delay: 500 }}>
-            <View style={styles.socialRow}>
+            <AnimatedPressable
+              onPress={handleGoogleLogin}
+              style={styles.socialButton}
+              scaleDown={0.95}
+            >
+              <Ionicons name="logo-google" size={20} color="#FFFFFF" />
+              <Text style={styles.socialButtonText}>Continuer avec Google</Text>
+            </AnimatedPressable>
+            {showApple && (
               <AnimatedPressable
-                onPress={handleGoogleLogin}
-                style={styles.socialButton}
+                onPress={handleAppleLogin}
+                style={[styles.socialButton, { marginTop: spacing.md }]}
                 scaleDown={0.95}
               >
-                <Ionicons name="logo-google" size={20} color="#FFFFFF" />
-                <Text style={styles.socialButtonText}>Google</Text>
+                <Ionicons name="logo-apple" size={22} color="#FFFFFF" />
+                <Text style={styles.socialButtonText}>Continuer avec Apple</Text>
               </AnimatedPressable>
-              {showApple && (
-                <AnimatedPressable
-                  onPress={handleAppleLogin}
-                  style={styles.socialButton}
-                  scaleDown={0.95}
-                >
-                  <Ionicons name="logo-apple" size={20} color="#FFFFFF" />
-                  <Text style={styles.socialButtonText}>Apple</Text>
-                </AnimatedPressable>
-              )}
-            </View>
+            )}
           </MotiView>
 
           {/* Register link */}
@@ -291,15 +292,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
   },
-  logoCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255,255,255,0.12)',
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
+  logoImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 22,
     marginBottom: spacing.lg,
   },
   title: {
@@ -404,20 +400,14 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.4)',
     fontWeight: '500',
   },
-  socialRow: {
-    flexDirection: 'row',
-    gap: spacing.md,
-    marginBottom: spacing.md,
-  },
   socialButton: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
+    gap: 10,
     borderRadius: borderRadius.md,
-    paddingVertical: 14,
-    backgroundColor: 'rgba(255,255,255,0.1)',
+    paddingVertical: 15,
+    backgroundColor: 'rgba(255,255,255,0.08)',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.15)',
   },

@@ -22,12 +22,12 @@ import type { Question } from '@civique/shared';
 import { AnimatedPressable, AnimatedCard, CMotif } from '../../components/ui';
 import FlashcardQuizSession from '../../components/FlashcardQuizSession';
 
-const ICON_MAP: Record<string, React.ComponentProps<typeof Ionicons>['name']> = {
-  flag: 'flag',
-  landmark: 'business',
-  scale: 'scale',
-  'book-open': 'book',
-  home: 'home',
+const THEME_EMOJIS: Record<number, string> = {
+  1: '🇫🇷',
+  2: '🏛️',
+  3: '⚖️',
+  4: '📜',
+  5: '🤝',
 };
 
 const SESSION_SIZE = 10;
@@ -189,13 +189,13 @@ export default function FlashcardsScreen() {
           </AnimatedCard>
 
           {THEMES.map((theme, i) => {
-            const iconName = ICON_MAP[theme.icon] || 'ellipse';
+            const emoji = THEME_EMOJIS[theme.id] || '📚';
             return (
               <AnimatedCard key={theme.id} delay={500 + i * 80}>
                 <AnimatedPressable onPress={() => startMixedSession(theme.id)} scaleDown={0.98}>
                   <View style={[styles.themeCard, { backgroundColor: c.surface, borderColor: c.border }]}>
-                    <View style={[styles.themeIcon, { backgroundColor: theme.color + '18' }]}>
-                      <Ionicons name={iconName} size={24} color={theme.color} />
+                    <View style={[styles.themeIcon, { backgroundColor: theme.color + '15' }]}>
+                      <Text style={{ fontSize: 26 }}>{emoji}</Text>
                     </View>
                     <View style={{ flex: 1 }}>
                       <Text style={[styles.themeName, { color: c.textPrimary }]} numberOfLines={1}>

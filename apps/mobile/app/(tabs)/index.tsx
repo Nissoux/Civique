@@ -26,13 +26,13 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const BUBBLE_SIZE = 64;
 const PATH_OFFSET = 40;
 
-// ── Theme Icons ──
-const THEME_ICONS: Record<string, React.ComponentProps<typeof Ionicons>['name']> = {
-  flag: 'flag',
-  landmark: 'business',
-  scale: 'scale',
-  'book-open': 'book',
-  home: 'home',
+// ── Theme Emojis (unique, not generic Ionicons) ──
+const THEME_EMOJIS: Record<number, string> = {
+  1: '🇫🇷', // Principes et valeurs de la République
+  2: '🏛️', // Système institutionnel et politique
+  3: '⚖️', // Droits et devoirs
+  4: '📜', // Histoire, géographie et culture
+  5: '🤝', // Vivre dans la société française
 };
 
 // ── Crown display ──
@@ -283,7 +283,7 @@ export default function TrainingScreen() {
       </AnimatedCard>
 
       {THEMES.map((theme, themeIdx) => {
-        const iconName = THEME_ICONS[theme.icon] || 'ellipse';
+        const emoji = THEME_EMOJIS[theme.id] || '📚';
         const totalQ = questionCounts[theme.id] || 0;
         const totalLevels = computeLevelsForTheme(totalQ);
 
@@ -315,8 +315,8 @@ export default function TrainingScreen() {
                 scaleDown={0.98}
               >
                 <View style={[styles.themeCard, { backgroundColor: c.surface, borderColor: c.border }]}>
-                  <View style={[styles.themeIconBadge, { backgroundColor: theme.color + '18' }]}>
-                    <Ionicons name={iconName} size={22} color={theme.color} />
+                  <View style={[styles.themeIconBadge, { backgroundColor: theme.color + '15' }]}>
+                    <Text style={styles.themeEmoji}>{emoji}</Text>
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={[styles.themeName, { color: c.textPrimary }]}>{theme.nameFr}</Text>
@@ -511,11 +511,14 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   themeIconBadge: {
-    width: 44,
-    height: 44,
-    borderRadius: borderRadius.md,
+    width: 48,
+    height: 48,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  themeEmoji: {
+    fontSize: 26,
   },
   themeName: { fontSize: 17, fontWeight: '700' },
   themeMetaRow: {
