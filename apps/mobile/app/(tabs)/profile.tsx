@@ -94,13 +94,14 @@ export default function ProfileScreen() {
 
   const [overallAccuracy, setOverallAccuracy] = useState(0);
   const [totalPracticed, setTotalPracticed] = useState(0);
-  const [totalQuestions, setTotalQuestions] = useState(611);
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
   useEffect(() => {
     fetchSubscription();
     getStatsOverview(selectedExamType || undefined).then((s) => {
       setOverallAccuracy(s.overallAccuracy || 0);
       setTotalPracticed(s.totalPracticed || 0);
+      setTotalQuestions((s as any).totalAvailableQuestions || 611);
     }).catch(() => {});
   }, [fetchSubscription, selectedExamType]);
 

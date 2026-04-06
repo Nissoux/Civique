@@ -107,10 +107,21 @@ export default async function statsRoutes(app: FastifyInstance) {
       ? streakResult.rows[0].streak
       : 0;
 
+    // Count total available questions for this exam type
+    const questionConditions = [];
+    if (examType) {
+      questionConditions.push(sql`${examType} = ANY(${questions.examTypes})`);
+    }
+    const [questionCount] = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(questions)
+      .where(questionConditions.length > 0 ? and(...questionConditions) : undefined);
+
     return {
       data: {
         totalPracticed,
         totalCorrect,
+        totalAvailableQuestions: questionCount.count,
         overallAccuracy,
         currentStreak,
         examsTaken: examStats.examsTaken,
