@@ -18,12 +18,12 @@ import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import api from '../../services/api';
 import * as Linking from 'expo-linking';
 
-type Plan = 'weekly' | 'monthly' | 'lifetime';
+type Plan = 'weekly' | 'monthly' | 'semiannual';
 
 const PLANS: { id: Plan; label: string; price: string; detail: string; badge?: string }[] = [
-  { id: 'weekly', label: 'Hebdomadaire', price: '4,99 €', detail: 'par semaine' },
-  { id: 'monthly', label: 'Mensuel', price: '14,99 €', detail: 'par mois', badge: 'Populaire' },
-  { id: 'lifetime', label: '6 mois', price: '29,99 €', detail: 'pour 6 mois', badge: 'Meilleure offre' },
+  { id: 'weekly', label: 'Hebdomadaire', price: '2,99 €', detail: 'par semaine' },
+  { id: 'monthly', label: 'Mensuel', price: '7,99 €', detail: 'par mois', badge: 'Populaire' },
+  { id: 'semiannual', label: '6 mois', price: '29,99 €', detail: 'pour 6 mois', badge: 'Meilleure offre' },
 ];
 
 const FEATURES = [
@@ -40,7 +40,7 @@ export default function SubscriptionScreen() {
   const c = useColors();
   const insets = useSafeAreaInsets();
   const { isPremium } = useSubscriptionStore();
-  const [selectedPlan, setSelectedPlan] = useState<Plan>('lifetime');
+  const [selectedPlan, setSelectedPlan] = useState<Plan>('semiannual');
   const [isPurchasing, setIsPurchasing] = useState(false);
   const [promoCode, setPromoCode] = useState('');
   const [isRedeeming, setIsRedeeming] = useState(false);
@@ -155,8 +155,8 @@ export default function SubscriptionScreen() {
                 <View>
                   <Text style={[styles.planLabel, { color: c.textPrimary }]}>{plan.label}</Text>
                   {plan.badge && (
-                    <View style={[styles.planBadge, { backgroundColor: plan.id === 'lifetime' ? c.accentBg : c.primaryLight }]}>
-                      <Text style={[styles.planBadgeText, { color: plan.id === 'lifetime' ? c.accent : c.primary }]}>
+                    <View style={[styles.planBadge, { backgroundColor: plan.id === 'semiannual' ? c.accentBg : c.primaryLight }]}>
+                      <Text style={[styles.planBadgeText, { color: plan.id === 'semiannual' ? c.accent : c.primary }]}>
                         {plan.badge}
                       </Text>
                     </View>

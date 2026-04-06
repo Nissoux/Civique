@@ -7,13 +7,14 @@ import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
 
 const createCheckoutSchema = z.object({
-  plan: z.enum(['weekly', 'monthly', 'lifetime']),
+  plan: z.enum(['weekly', 'monthly', 'semiannual']),
 });
 
+// Prices: Weekly 2.99€, Monthly 7.99€, 6 months 29.99€
 const STRIPE_PRICES: Record<string, { priceId: string; mode: 'subscription' | 'payment' }> = {
-  weekly: { priceId: 'price_1TG5ueQ2N6UyO2vPxFEV6yqN', mode: 'subscription' },
-  monthly: { priceId: 'price_1TG5ufQ2N6UyO2vP2vmSmaTX', mode: 'subscription' },
-  lifetime: { priceId: 'price_1TG5ufQ2N6UyO2vPSuxsRTnj', mode: 'payment' },
+  weekly: { priceId: process.env.STRIPE_PRICE_WEEKLY || 'price_1TG5ueQ2N6UyO2vPxFEV6yqN', mode: 'subscription' },
+  monthly: { priceId: process.env.STRIPE_PRICE_MONTHLY || 'price_1TG5ufQ2N6UyO2vP2vmSmaTX', mode: 'subscription' },
+  semiannual: { priceId: process.env.STRIPE_PRICE_SEMIANNUAL || 'price_1TG5ufQ2N6UyO2vPSuxsRTnj', mode: 'payment' },
 };
 
 export default async function paymentRoutes(app: FastifyInstance) {
@@ -127,8 +128,8 @@ export default async function paymentRoutes(app: FastifyInstance) {
       if (userId) {
         // Set expiry based on plan
         let premiumExpires: Date | null;
-        if (plan === 'lifetime') {
-          premiumExpires = null; // Lifetime = no expiry
+        if (plan === 'semiannual') {
+          premiumExpires = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000); // 6 months
         } else if (plan === 'weekly') {
           premiumExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         } else {
