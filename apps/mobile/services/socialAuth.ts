@@ -4,40 +4,43 @@ import api from './api';
 import type { AuthResponse } from './auth';
 
 // ── Configuration ──
-const GOOGLE_CLIENT_ID_IOS = '593427095159-lq6gta272m2fulbfporu887i60c0kd59.apps.googleusercontent.com';
-const GOOGLE_CLIENT_ID_ANDROID = '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
 const GOOGLE_CLIENT_ID_WEB = '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
 
-const googleClientId = Platform.select({
-  ios: GOOGLE_CLIENT_ID_IOS,
-  android: GOOGLE_CLIENT_ID_ANDROID,
-  default: GOOGLE_CLIENT_ID_WEB,
-});
+// Use the Expo auth proxy for redirect
+const REDIRECT_URI = 'https://auth.expo.io/@nissouz/civique';
 
-// ── Google Sign-In via WebBrowser (no expo-crypto needed) ──
+// ── Google Sign-In ──
 export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   try {
-    const redirectUri = 'civique://';
+    WebBrowser.maybeCompleteAuthSession();
+
+    const state = Math.random().toString(36).substring(2);
+    const nonce = Date.now().toString();
 
     const authUrl =
       `https://accounts.google.com/o/oauth2/v2/auth?` +
-      `client_id=${encodeURIComponent(googleClientId!)}` +
-      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `client_id=${encodeURIComponent(GOOGLE_CLIENT_ID_WEB)}` +
+      `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
       `&response_type=id_token` +
       `&scope=${encodeURIComponent('openid profile email')}` +
-      `&nonce=${Date.now()}`;
+      `&nonce=${nonce}` +
+      `&state=${state}`;
 
-    const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
+    const result = await WebBrowser.openAuthSessionAsync(authUrl, REDIRECT_URI);
 
     if (result.type === 'success' && result.url) {
       // Extract id_token from the URL fragment
-      const fragment = result.url.split('#')[1];
-      if (!fragment) return null;
+      const url = result.url;
+      const fragment = url.includes('#') ? url.split('#')[1] : '';
+      const query = url.includes('?') ? url.split('?')[1]?.split('#')[0] : '';
 
-      const params = new URLSearchParams(fragment);
+      const params = new URLSearchParams(fragment || query);
       const idToken = params.get('id_token');
 
-      if (!idToken) return null;
+      if (!idToken) {
+        console.error('Google Sign-In: no id_token in response', result.url);
+        return null;
+      }
 
       const { data } = await api.post<AuthResponse>('/auth/google', { idToken });
       return data;
@@ -49,7 +52,7 @@ export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   }
 }
 
-// ── Apple Sign-In (lazy loaded) ──
+// ── Apple Sign-In (lazy loaded, iOS only) ──
 export async function performAppleSignIn(): Promise<AuthResponse | null> {
   if (Platform.OS !== 'ios') return null;
 
