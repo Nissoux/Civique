@@ -61,9 +61,8 @@ export function AnimatedPressable({
       onLongPress={onLongPress}
       disabled={disabled}
       activeOpacity={activeOpacity}
-      style={style}
     >
-      <Animated.View style={[{ transform: [{ scale }] }, disabled && { opacity: 0.5 }]}>
+      <Animated.View style={[style, { transform: [{ scale }] }, disabled && { opacity: 0.5 }]}>
         {children}
       </Animated.View>
     </TouchableOpacity>
