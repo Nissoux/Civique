@@ -237,24 +237,20 @@ export default function LoginScreen() {
             <View style={styles.socialRow}>
               <AnimatedPressable
                 onPress={handleGoogleLogin}
-                style={styles.socialButtonWrapper}
+                style={styles.socialButton}
                 scaleDown={0.95}
               >
-                <View style={styles.socialButton}>
-                  <Ionicons name="logo-google" size={20} color="#FFFFFF" />
-                  <Text style={styles.socialButtonText}>Google</Text>
-                </View>
+                <Ionicons name="logo-google" size={20} color="#FFFFFF" />
+                <Text style={styles.socialButtonText}>Google</Text>
               </AnimatedPressable>
               {showApple && (
                 <AnimatedPressable
                   onPress={handleAppleLogin}
-                  style={styles.socialButtonWrapper}
+                  style={styles.socialButton}
                   scaleDown={0.95}
                 >
-                  <View style={styles.socialButton}>
-                    <Ionicons name="logo-apple" size={20} color="#FFFFFF" />
-                    <Text style={styles.socialButtonText}>Apple</Text>
-                  </View>
+                  <Ionicons name="logo-apple" size={20} color="#FFFFFF" />
+                  <Text style={styles.socialButtonText}>Apple</Text>
                 </AnimatedPressable>
               )}
             </View>
@@ -413,10 +409,8 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     marginBottom: spacing.md,
   },
-  socialButtonWrapper: {
-    flex: 1,
-  },
   socialButton: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
