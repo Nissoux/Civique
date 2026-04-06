@@ -38,17 +38,16 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
   const question = questions[currentIndex];
   const isSituational = question?.type === 'situational';
 
-  const questionText = (currentLang !== 'fr' && question?.translatedText)
-    ? question.translatedText
-    : question?.textFr;
+  // French is ALWAYS the primary text
+  const questionText = question?.textFr;
+  const translatedQuestion = (currentLang !== 'fr' && question?.translatedText) ? question.translatedText : null;
 
-  const choices = (currentLang !== 'fr' && question?.translatedChoices)
-    ? question.translatedChoices
-    : question?.choicesFr;
+  // French choices are ALWAYS primary
+  const choices = question?.choicesFr;
+  const translatedChoices = (currentLang !== 'fr' && question?.translatedChoices) ? question.translatedChoices : null;
 
-  const explanation = (currentLang !== 'fr' && question?.translatedExplanation)
-    ? question.translatedExplanation
-    : question?.explanationFr;
+  const explanation = question?.explanationFr;
+  const translatedExplanation = (currentLang !== 'fr' && question?.translatedExplanation) ? question.translatedExplanation : null;
 
   const handleSelectChoice = useCallback((choiceId: string) => {
     if (hasAnswered) return;
@@ -198,14 +197,14 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
               </View>
             )}
 
-            {/* Question text */}
+            {/* Question text — French always primary */}
             <View style={[styles.questionCard, { backgroundColor: c.surface, borderColor: c.border }]}>
               <Text style={[styles.questionText, { color: c.textPrimary }]}>
                 {questionText}
               </Text>
-              {currentLang !== 'fr' && question?.textFr && question.translatedText && (
+              {translatedQuestion && (
                 <Text style={[styles.questionOriginal, { color: c.textTertiary }]}>
-                  {question.textFr}
+                  {translatedQuestion}
                 </Text>
               )}
             </View>
@@ -245,9 +244,16 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
                           {CHOICE_LETTERS[i]}
                         </Text>
                       </View>
-                      <Text style={[styles.choiceText, { color: c.textPrimary }]}>
-                        {choice.text}
-                      </Text>
+                      <View style={{ flex: 1 }}>
+                        <Text style={[styles.choiceText, { color: c.textPrimary }]}>
+                          {choice.text}
+                        </Text>
+                        {translatedChoices && (
+                          <Text style={[styles.choiceTranslated, { color: c.textTertiary }]}>
+                            {translatedChoices.find(tc => tc.id === choice.id)?.text}
+                          </Text>
+                        )}
+                      </View>
                       {isCorrectAnswer && (
                         <Ionicons name="checkmark-circle" size={20} color={c.success} />
                       )}
@@ -269,9 +275,16 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
               >
                 <View style={[styles.explanationCard, { backgroundColor: c.primary + '10', borderColor: c.primary + '30' }]}>
                   <Ionicons name="bulb" size={18} color={c.primary} style={{ marginTop: 2 }} />
-                  <Text style={[styles.explanationText, { color: c.textPrimary }]}>
-                    {explanation}
-                  </Text>
+                  <View style={{ flex: 1 }}>
+                    <Text style={[styles.explanationText, { color: c.textPrimary }]}>
+                      {explanation}
+                    </Text>
+                    {translatedExplanation && (
+                      <Text style={[styles.choiceTranslated, { color: c.textTertiary, marginTop: 8 }]}>
+                        {translatedExplanation}
+                      </Text>
+                    )}
+                  </View>
                 </View>
               </MotiView>
             )}
@@ -399,9 +412,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   choiceText: {
-    flex: 1,
     fontSize: fontSize.md,
     lineHeight: 22,
+  },
+  choiceTranslated: {
+    fontSize: fontSize.sm,
+    fontStyle: 'italic',
+    marginTop: 4,
+    lineHeight: 18,
   },
   explanationCard: {
     flexDirection: 'row',

@@ -93,13 +93,20 @@ export default function ProfileScreen() {
   const { mode: themeMode, setMode: setThemeMode } = useThemeStore();
 
   const [overallAccuracy, setOverallAccuracy] = useState(0);
+  const [totalPracticed, setTotalPracticed] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(611);
 
   useEffect(() => {
     fetchSubscription();
     getStatsOverview(selectedExamType || undefined).then((s) => {
       setOverallAccuracy(s.overallAccuracy || 0);
+      setTotalPracticed(s.totalPracticed || 0);
     }).catch(() => {});
   }, [fetchSubscription, selectedExamType]);
+
+  const progressPercent = totalQuestions > 0
+    ? Math.min(100, Math.round((totalPracticed / totalQuestions) * 100))
+    : 0;
 
   const displayName = user?.displayName || 'Utilisateur';
   const email = user?.email || '';
@@ -188,26 +195,47 @@ export default function ProfileScreen() {
       </View>
       </AnimatedCard>
 
-      {/* ── Exam badge card ───────────────────────────── */}
+      {/* ── Progress card ───────────────────────────── */}
       <View
         style={[
           styles.examBadgeCard,
           { backgroundColor: colors.card, borderColor: colors.border },
         ]}
       >
-        {/* Progress overview */}
+        {/* Progression globale (questions vues / total) */}
         <View style={styles.progressSection}>
           <View style={styles.progressHeader}>
             <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
-              Taux de réussite
+              Progression globale
             </Text>
-            <Text style={[styles.progressPercent, { color: colors.primary }]}>{overallAccuracy}%</Text>
+            <Text style={[styles.progressPercent, { color: colors.primary }]}>{progressPercent}%</Text>
           </View>
           <View style={[styles.progressBarBg, { backgroundColor: colors.progressBg }]}>
             <View
               style={[
                 styles.progressBarFill,
-                { backgroundColor: overallAccuracy >= 80 ? colors.success : colors.primary, width: `${Math.min(100, overallAccuracy)}%` },
+                { backgroundColor: progressPercent >= 80 ? colors.success : colors.primary, width: `${progressPercent}%` },
+              ]}
+            />
+          </View>
+          <Text style={[styles.progressDetail, { color: colors.textTertiary }]}>
+            {totalPracticed} / {totalQuestions} questions travaillées
+          </Text>
+        </View>
+
+        {/* Taux de réussite */}
+        <View style={[styles.progressSection, { marginTop: 16 }]}>
+          <View style={styles.progressHeader}>
+            <Text style={[styles.progressLabel, { color: colors.textSecondary }]}>
+              Taux de réussite
+            </Text>
+            <Text style={[styles.progressPercent, { color: overallAccuracy >= 80 ? colors.success : colors.warning }]}>{overallAccuracy}%</Text>
+          </View>
+          <View style={[styles.progressBarBg, { backgroundColor: colors.progressBg }]}>
+            <View
+              style={[
+                styles.progressBarFill,
+                { backgroundColor: overallAccuracy >= 80 ? colors.success : colors.warning, width: `${Math.min(100, overallAccuracy)}%` },
               ]}
             />
           </View>
@@ -513,6 +541,10 @@ const styles = StyleSheet.create({
   progressPercent: {
     fontSize: fontSize.md,
     fontWeight: '800',
+  },
+  progressDetail: {
+    fontSize: fontSize.xs,
+    marginTop: 4,
   },
   progressBarBg: {
     height: 8,
