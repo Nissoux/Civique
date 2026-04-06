@@ -613,7 +613,7 @@ const styles = StyleSheet.create({
   },
   questionContent: {
     padding: themeSpacing.xl,
-    paddingBottom: 48,
+    paddingBottom: 100,
   },
   header: {
     flexDirection: 'row',
@@ -706,7 +706,6 @@ const styles = StyleSheet.create({
   choiceText: {
     fontSize: themeFontSize.md,
     lineHeight: 22,
-    flexWrap: 'wrap',
   },
   choiceTranslatedText: {
     fontSize: themeFontSize.sm,

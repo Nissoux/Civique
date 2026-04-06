@@ -481,8 +481,6 @@ const styles = StyleSheet.create({
   },
   choiceText: {
     fontSize: fontSize.md,
-    flex: 1,
-    flexWrap: 'wrap',
     lineHeight: 22,
   },
   choiceTranslated: {
