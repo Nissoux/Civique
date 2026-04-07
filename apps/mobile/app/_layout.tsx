@@ -13,6 +13,7 @@ import { useSubscriptionStore } from '../stores/subscriptionStore';
 import { useExamTypeStore } from '../stores/examTypeStore';
 import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
+import { initRevenueCat, identifyUser, addCustomerInfoListener } from '../services/revenuecat';
 
 Sentry.init({
   dsn: 'https://9a327ca9daf3af53d2ea26b014979b3d@o4511176778186752.ingest.de.sentry.io/4511176784937040',
@@ -44,6 +45,9 @@ function RootLayoutNav() {
   useEffect(() => {
     async function bootstrap() {
       try {
+        // Initialize RevenueCat
+        await initRevenueCat();
+
         await loadStoredLanguage();
         await loadStoredExamType();
         await loadStoredTheme();
@@ -58,6 +62,7 @@ function RootLayoutNav() {
           try {
             const user = await authService.getMe();
             setUser(user);
+            await identifyUser(user.id);
             fetchSubscription();
           } catch {
             await logout();

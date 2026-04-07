@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useAuthStore } from '../stores/authStore';
 import * as authService from '../services/auth';
+import { identifyUser } from '../services/revenuecat';
 import { useRouter } from 'expo-router';
 
 function getErrorMessage(err: unknown, fallback: string): string {
@@ -35,6 +36,7 @@ export function useAuth() {
         const response = await authService.login({ email, password });
         await setTokens(response.accessToken, response.refreshToken);
         setUser(response.user);
+        await identifyUser(response.user.id);
         router.replace('/(tabs)');
       } catch (err: unknown) {
         setError(getErrorMessage(err, 'Identifiants invalides. Veuillez r\u00e9essayer.'));
@@ -58,6 +60,7 @@ export function useAuth() {
         });
         await setTokens(response.accessToken, response.refreshToken);
         setUser(response.user);
+        await identifyUser(response.user.id);
         router.replace('/(auth)/verify-email');
       } catch (err: unknown) {
         setError(getErrorMessage(err, "Erreur lors de l'inscription. Veuillez r\u00e9essayer."));

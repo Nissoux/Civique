@@ -1,131 +1,184 @@
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  Alert,
   ActivityIndicator,
-  TextInput,
+  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useState, useEffect, useCallback } from 'react';
-import { AppState } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { PurchasesPackage } from 'react-native-purchases';
 import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
+import { AnimatedPressable } from '../../components/ui';
+import {
+  getOfferings,
+  purchasePackage,
+  restorePurchases,
+  checkPremiumStatus,
+} from '../../services/revenuecat';
 import api from '../../services/api';
-import * as Linking from 'expo-linking';
-
-type Plan = 'weekly' | 'monthly' | 'semiannual';
-
-const PLANS: { id: Plan; label: string; price: string; detail: string; badge?: string }[] = [
-  { id: 'weekly', label: 'Hebdomadaire', price: '3,99 €', detail: 'par semaine' },
-  { id: 'monthly', label: 'Mensuel', price: '10,99 €', detail: 'par mois', badge: 'Populaire' },
-  { id: 'semiannual', label: '6 mois', price: '39,99 €', detail: 'pour 6 mois', badge: 'Meilleure offre' },
-];
 
 const FEATURES = [
-  'Questions d\'entraînement illimitées',
+  "Questions d'entraînement illimitées",
   'Examens blancs illimités',
   'Toutes les fiches de révision',
-  'Toutes les séries par thème',
+  'Flashcards et mises en situation',
   'Statistiques détaillées',
-  '6 langues de traduction',
+  'Support multilingue complet',
 ];
 
 export default function SubscriptionScreen() {
-  const router = useRouter();
   const c = useColors();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { isPremium } = useSubscriptionStore();
-  const [selectedPlan, setSelectedPlan] = useState<Plan>('semiannual');
-  const [isPurchasing, setIsPurchasing] = useState(false);
+  const { isPremium, fetchSubscription } = useSubscriptionStore();
+
+  const [packages, setPackages] = useState<PurchasesPackage[]>([]);
+  const [selectedPkg, setSelectedPkg] = useState<PurchasesPackage | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [purchasing, setPurchasing] = useState(false);
+  const [restoring, setRestoring] = useState(false);
   const [promoCode, setPromoCode] = useState('');
-  const [isRedeeming, setIsRedeeming] = useState(false);
-  const { fetchSubscription } = useSubscriptionStore();
+  const [promoLoading, setPromoLoading] = useState(false);
 
-  // Refresh premium status when app comes back from Stripe browser
   useEffect(() => {
-    const sub = AppState.addEventListener('change', (state) => {
-      if (state === 'active') {
-        fetchSubscription();
-      }
-    });
-    return () => sub.remove();
-  }, [fetchSubscription]);
+    loadOfferings();
+  }, []);
 
-  const handleRedeemCode = async () => {
-    if (!promoCode.trim()) return;
-    setIsRedeeming(true);
+  const loadOfferings = async () => {
+    setLoading(true);
     try {
-      const { data } = await api.post('/payments/redeem-code', { code: promoCode.trim() });
-      Alert.alert('Succès !', data.data.message);
-      fetchSubscription();
-      router.back();
-    } catch (err: any) {
-      const msg = err.response?.data?.error || 'Code invalide';
-      Alert.alert('Erreur', msg);
+      const offering = await getOfferings();
+      if (offering) {
+        const sortedPkgs = offering.availablePackages.sort((a, b) => {
+          const order: Record<string, number> = { weekly: 0, monthly: 1, six_month: 2 };
+          const aOrder = order[a.identifier] ?? 99;
+          const bOrder = order[b.identifier] ?? 99;
+          return aOrder - bOrder;
+        });
+        setPackages(sortedPkgs);
+        // Select best value by default
+        setSelectedPkg(sortedPkgs[sortedPkgs.length - 1] || null);
+      }
+    } catch (err) {
+      console.error('Failed to load offerings:', err);
     } finally {
-      setIsRedeeming(false);
+      setLoading(false);
     }
   };
 
   const handlePurchase = async () => {
-    setIsPurchasing(true);
+    if (!selectedPkg || purchasing) return;
+    setPurchasing(true);
     try {
-      const { data } = await api.post('/payments/create-checkout', { plan: selectedPlan });
-      const checkoutUrl = data.data.checkoutUrl;
-      if (checkoutUrl) {
-        await Linking.openURL(checkoutUrl);
+      const result = await purchasePackage(selectedPkg);
+      if (result.success && result.isPremium) {
+        await fetchSubscription();
+        Alert.alert('Bienvenue dans Civique Pro !', 'Vous avez maintenant accès à tout le contenu.', [
+          { text: 'OK', onPress: () => router.back() },
+        ]);
       }
     } catch (err: any) {
-      const msg = err.response?.data?.error || 'Erreur lors de la création du paiement';
-      Alert.alert('Erreur', msg);
+      Alert.alert('Erreur', "L'achat n'a pas pu être effectué. Veuillez réessayer.");
     } finally {
-      setIsPurchasing(false);
+      setPurchasing(false);
     }
+  };
+
+  const handleRestore = async () => {
+    setRestoring(true);
+    try {
+      const result = await restorePurchases();
+      if (result.isPremium) {
+        await fetchSubscription();
+        Alert.alert('Achats restaurés', 'Votre abonnement Premium a été restauré.', [
+          { text: 'OK', onPress: () => router.back() },
+        ]);
+      } else {
+        Alert.alert('Aucun achat trouvé', "Aucun abonnement actif n'a été trouvé pour ce compte.");
+      }
+    } catch (err) {
+      Alert.alert('Erreur', 'Impossible de restaurer les achats.');
+    } finally {
+      setRestoring(false);
+    }
+  };
+
+  const handleRedeemPromo = async () => {
+    if (!promoCode.trim()) return;
+    setPromoLoading(true);
+    try {
+      await api.post('/payments/redeem-code', { code: promoCode.trim() });
+      await fetchSubscription();
+      Alert.alert('Code activé !', 'Votre accès Premium a été activé.', [
+        { text: 'OK', onPress: () => router.back() },
+      ]);
+    } catch (err: any) {
+      Alert.alert('Erreur', err.response?.data?.error || 'Code invalide.');
+    } finally {
+      setPromoLoading(false);
+    }
+  };
+
+  const getPackageLabel = (identifier: string): string => {
+    const labels: Record<string, string> = {
+      weekly: 'Hebdomadaire',
+      monthly: 'Mensuel',
+      six_month: '6 mois',
+    };
+    return labels[identifier] || identifier;
+  };
+
+  const getPackageBadge = (identifier: string): string | null => {
+    if (identifier === 'monthly') return 'Populaire';
+    if (identifier === 'six_month') return 'Meilleure offre';
+    return null;
   };
 
   if (isPremium) {
     return (
-      <View style={[styles.container, { backgroundColor: c.background, paddingTop: insets.top }]}>
-        <View style={[styles.premiumCard, { backgroundColor: c.card }]}>
-          <Ionicons name="shield-checkmark" size={48} color={c.accent} />
-          <Text style={[styles.premiumTitle, { color: c.textPrimary }]}>Vous êtes Premium !</Text>
-          <Text style={[styles.premiumDesc, { color: c.textSecondary }]}>
-            Accès illimité à tout le contenu de Civique.
+      <ScrollView style={{ flex: 1, backgroundColor: c.background }} contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.xl }]}>
+        <AnimatedPressable onPress={() => router.back()} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color={c.textPrimary} />
+        </AnimatedPressable>
+
+        <View style={styles.premiumActive}>
+          <Ionicons name="star" size={48} color={c.accent} />
+          <Text style={[styles.premiumTitle, { color: c.textPrimary }]}>Civique Pro actif</Text>
+          <Text style={[styles.premiumSubtitle, { color: c.textSecondary }]}>
+            Vous avez accès à tout le contenu
           </Text>
-          <TouchableOpacity
-            style={[styles.backButton, { backgroundColor: c.primary }]}
-            onPress={() => router.back()}
-          >
-            <Text style={styles.backButtonText}>Retour</Text>
-          </TouchableOpacity>
         </View>
-      </View>
+
+        <AnimatedPressable onPress={handleRestore} disabled={restoring}>
+          <Text style={[styles.restoreText, { color: c.primary }]}>
+            {restoring ? 'Restauration...' : 'Restaurer les achats'}
+          </Text>
+        </AnimatedPressable>
+      </ScrollView>
     );
   }
 
   return (
-    <ScrollView
-      style={[styles.container, { backgroundColor: c.background }]}
-      contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + 20 }]}
-    >
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.closeButton}>
-          <Ionicons name="close" size={24} color={c.textPrimary} />
-        </TouchableOpacity>
-      </View>
+    <ScrollView style={{ flex: 1, backgroundColor: c.background }} contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + 40 }]}>
+      <AnimatedPressable onPress={() => router.back()} style={styles.backButton}>
+        <Ionicons name="arrow-back" size={24} color={c.textPrimary} />
+      </AnimatedPressable>
 
-      <Text style={[styles.title, { color: c.textPrimary }]}>
-        Donnez-vous toutes les chances de réussir
-      </Text>
+      {/* Header */}
+      <LinearGradient colors={c.gradientPrimary} style={styles.header}>
+        <Ionicons name="star" size={40} color="#FFD700" />
+        <Text style={styles.headerTitle}>Civique Pro</Text>
+        <Text style={styles.headerSubtitle}>Débloquez tout le contenu</Text>
+      </LinearGradient>
 
       {/* Features */}
-      <View style={styles.features}>
+      <View style={[styles.featuresCard, { backgroundColor: c.surface }]}>
         {FEATURES.map((feature, i) => (
           <View key={i} style={styles.featureRow}>
             <Ionicons name="checkmark-circle" size={20} color={c.success} />
@@ -134,150 +187,273 @@ export default function SubscriptionScreen() {
         ))}
       </View>
 
-      {/* Plans */}
-      <View style={styles.plans}>
-        {PLANS.map((plan) => {
-          const isSelected = selectedPlan === plan.id;
-          return (
-            <TouchableOpacity
-              key={plan.id}
-              style={[
-                styles.planCard,
-                { backgroundColor: c.card, borderColor: c.border },
-                isSelected && { borderColor: c.primary, borderWidth: 2 },
-              ]}
-              onPress={() => setSelectedPlan(plan.id)}
-            >
-              <View style={styles.planLeft}>
-                <View style={[styles.planRadio, { borderColor: isSelected ? c.primary : c.textTertiary }]}>
-                  {isSelected && <View style={[styles.planRadioInner, { backgroundColor: c.primary }]} />}
-                </View>
-                <View>
-                  <Text style={[styles.planLabel, { color: c.textPrimary }]}>{plan.label}</Text>
-                  {plan.badge && (
-                    <View style={[styles.planBadge, { backgroundColor: plan.id === 'semiannual' ? c.accentBg : c.primaryLight }]}>
-                      <Text style={[styles.planBadgeText, { color: plan.id === 'semiannual' ? c.accent : c.primary }]}>
-                        {plan.badge}
-                      </Text>
+      {/* Packages */}
+      {loading ? (
+        <ActivityIndicator size="large" color={c.primary} style={{ marginVertical: spacing.xxl }} />
+      ) : packages.length === 0 ? (
+        <Text style={[styles.noPackages, { color: c.textTertiary }]}>
+          Les offres ne sont pas encore disponibles. Utilisez un code promo ci-dessous.
+        </Text>
+      ) : (
+        <View style={styles.packagesContainer}>
+          {packages.map((pkg) => {
+            const isSelected = selectedPkg?.identifier === pkg.identifier;
+            const badge = getPackageBadge(pkg.identifier);
+            return (
+              <AnimatedPressable
+                key={pkg.identifier}
+                onPress={() => setSelectedPkg(pkg)}
+                scaleDown={0.97}
+              >
+                <View style={[
+                  styles.packageCard,
+                  { backgroundColor: c.surface, borderColor: isSelected ? c.primary : c.border },
+                  isSelected && { borderWidth: 2 },
+                ]}>
+                  {badge && (
+                    <View style={[styles.badge, { backgroundColor: c.primary }]}>
+                      <Text style={styles.badgeText}>{badge}</Text>
                     </View>
                   )}
+                  <Text style={[styles.packageLabel, { color: c.textPrimary }]}>
+                    {getPackageLabel(pkg.identifier)}
+                  </Text>
+                  <Text style={[styles.packagePrice, { color: c.primary }]}>
+                    {pkg.product.priceString}
+                  </Text>
+                  <Text style={[styles.packageDetail, { color: c.textTertiary }]}>
+                    {pkg.product.description || ''}
+                  </Text>
                 </View>
-              </View>
-              <View style={styles.planRight}>
-                <Text style={[styles.planPrice, { color: c.textPrimary }]}>{plan.price}</Text>
-                <Text style={[styles.planDetail, { color: c.textTertiary }]}>{plan.detail}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      {/* CTA */}
-      <TouchableOpacity
-        style={[styles.ctaButton, { backgroundColor: c.primary }, isPurchasing && { opacity: 0.6 }]}
-        onPress={handlePurchase}
-        disabled={isPurchasing}
-      >
-        {isPurchasing ? (
-          <ActivityIndicator color="#FFFFFF" />
-        ) : (
-          <Text style={styles.ctaText}>Accéder à la version complète</Text>
-        )}
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.skipButton} onPress={() => router.back()}>
-        <Text style={[styles.skipText, { color: c.textTertiary }]}>Continuer gratuitement</Text>
-      </TouchableOpacity>
-
-      {/* Promo Code */}
-      <View style={[styles.promoSection, { borderTopColor: c.border }]}>
-        <Text style={[styles.promoTitle, { color: c.textSecondary }]}>Vous avez un code ?</Text>
-        <View style={styles.promoRow}>
-          <TextInput
-            style={[styles.promoInput, { backgroundColor: c.inputBg, borderColor: c.border, color: c.textPrimary }]}
-            placeholder="Entrez votre code"
-            placeholderTextColor={c.textTertiary}
-            value={promoCode}
-            onChangeText={setPromoCode}
-            autoCapitalize="characters"
-            editable={!isRedeeming}
-          />
-          <TouchableOpacity
-            style={[styles.promoButton, { backgroundColor: c.success }, (!promoCode.trim() || isRedeeming) && { opacity: 0.5 }]}
-            onPress={handleRedeemCode}
-            disabled={!promoCode.trim() || isRedeeming}
-          >
-            {isRedeeming ? (
-              <ActivityIndicator color="#FFFFFF" size="small" />
-            ) : (
-              <Text style={styles.promoButtonText}>Activer</Text>
-            )}
-          </TouchableOpacity>
+              </AnimatedPressable>
+            );
+          })}
         </View>
+      )}
+
+      {/* Purchase button */}
+      {packages.length > 0 && (
+        <AnimatedPressable onPress={handlePurchase} disabled={!selectedPkg || purchasing} scaleDown={0.97}>
+          <LinearGradient
+            colors={c.gradientPrimary}
+            style={[styles.purchaseButton, (!selectedPkg || purchasing) && { opacity: 0.5 }]}
+          >
+            {purchasing ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <Text style={styles.purchaseText}>S'abonner</Text>
+            )}
+          </LinearGradient>
+        </AnimatedPressable>
+      )}
+
+      {/* Promo code */}
+      <View style={[styles.promoSection, { borderColor: c.border }]}>
+        <Text style={[styles.promoLabel, { color: c.textSecondary }]}>Code promo</Text>
+        <View style={styles.promoRow}>
+          <View style={[styles.promoInput, { backgroundColor: c.inputBg, borderColor: c.border }]}>
+            <Ionicons name="gift-outline" size={18} color={c.textTertiary} />
+            <Text style={{ flex: 1 }}>
+              {/* Using a simple touchable to enter promo code */}
+            </Text>
+          </View>
+        </View>
+        <AnimatedPressable
+          onPress={() => {
+            Alert.prompt(
+              'Code promo',
+              'Entrez votre code promotionnel',
+              [
+                { text: 'Annuler', style: 'cancel' },
+                {
+                  text: 'Activer',
+                  onPress: (code) => {
+                    if (code) {
+                      setPromoCode(code);
+                      // Trigger redeem
+                      api.post('/payments/redeem-code', { code: code.trim().toUpperCase() })
+                        .then(() => {
+                          fetchSubscription();
+                          Alert.alert('Code activé !', 'Votre accès Premium a été activé.', [
+                            { text: 'OK', onPress: () => router.back() },
+                          ]);
+                        })
+                        .catch((err: any) => {
+                          Alert.alert('Erreur', err.response?.data?.error || 'Code invalide.');
+                        });
+                    }
+                  },
+                },
+              ],
+              'plain-text',
+            );
+          }}
+        >
+          <Text style={[styles.promoButton, { color: c.primary }]}>Entrer un code promo</Text>
+        </AnimatedPressable>
       </View>
 
-      <Text style={[styles.legal, { color: c.textTertiary }]}>
-        L'abonnement se renouvelle automatiquement. Vous pouvez annuler à tout moment.
+      {/* Restore */}
+      <AnimatedPressable onPress={handleRestore} disabled={restoring}>
+        <Text style={[styles.restoreText, { color: c.primary }]}>
+          {restoring ? 'Restauration...' : 'Restaurer les achats'}
+        </Text>
+      </AnimatedPressable>
+
+      {/* Legal */}
+      <Text style={[styles.legalText, { color: c.textTertiary }]}>
+        Le paiement sera débité de votre compte Apple ou Google. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Gérez vos abonnements dans les réglages de votre appareil.
       </Text>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
-  content: { padding: spacing.xxl },
-  header: { flexDirection: 'row', justifyContent: 'flex-end', marginBottom: spacing.lg },
-  closeButton: { padding: spacing.sm },
-  title: { fontSize: fontSize.xxl, fontWeight: 'bold', textAlign: 'center', marginBottom: spacing.xxl, lineHeight: 32 },
-  features: { marginBottom: spacing.xxxl },
-  featureRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, marginBottom: spacing.md },
-  featureText: { fontSize: fontSize.md, flex: 1 },
-  plans: { gap: spacing.md, marginBottom: spacing.xxl },
-  planCard: {
+  content: {
+    padding: spacing.xl,
+  },
+  backButton: {
+    marginBottom: spacing.lg,
+    alignSelf: 'flex-start',
+  },
+  header: {
+    borderRadius: borderRadius.xl,
+    padding: spacing.xxl,
+    alignItems: 'center',
+    marginBottom: spacing.xl,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    marginTop: spacing.md,
+  },
+  headerSubtitle: {
+    fontSize: fontSize.md,
+    color: 'rgba(255,255,255,0.7)',
+    marginTop: spacing.xs,
+  },
+  featuresCard: {
+    borderRadius: borderRadius.lg,
+    padding: spacing.xl,
+    marginBottom: spacing.xl,
+    gap: spacing.md,
+  },
+  featureRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    borderRadius: borderRadius.lg,
-    padding: spacing.lg,
-    borderWidth: 1,
+    gap: spacing.md,
   },
-  planLeft: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
-  planRadio: { width: 22, height: 22, borderRadius: 11, borderWidth: 2, alignItems: 'center', justifyContent: 'center' },
-  planRadioInner: { width: 12, height: 12, borderRadius: 6 },
-  planLabel: { fontSize: fontSize.lg, fontWeight: '600' },
-  planBadge: { borderRadius: 6, paddingHorizontal: 8, paddingVertical: 2, marginTop: 4 },
-  planBadgeText: { fontSize: 11, fontWeight: '600' },
-  planRight: { alignItems: 'flex-end' },
-  planPrice: { fontSize: fontSize.lg, fontWeight: 'bold' },
-  planDetail: { fontSize: fontSize.xs, marginTop: 2 },
-  ctaButton: {
+  featureText: {
+    fontSize: fontSize.md,
+    flex: 1,
+  },
+  packagesContainer: {
+    gap: spacing.md,
+    marginBottom: spacing.xl,
+  },
+  packageCard: {
     borderRadius: borderRadius.lg,
-    padding: spacing.lg,
+    padding: spacing.xl,
+    borderWidth: 1,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  badge: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    borderBottomLeftRadius: borderRadius.sm,
+  },
+  badgeText: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '700',
+  },
+  packageLabel: {
+    fontSize: fontSize.lg,
+    fontWeight: '700',
+  },
+  packagePrice: {
+    fontSize: fontSize.xxl,
+    fontWeight: '800',
+    marginTop: spacing.xs,
+  },
+  packageDetail: {
+    fontSize: fontSize.sm,
+    marginTop: spacing.xs,
+  },
+  noPackages: {
+    textAlign: 'center',
+    fontSize: fontSize.md,
+    marginVertical: spacing.xxl,
+    lineHeight: 22,
+  },
+  purchaseButton: {
+    borderRadius: borderRadius.lg,
+    paddingVertical: 18,
     alignItems: 'center',
-    height: 56,
-    justifyContent: 'center',
+    marginBottom: spacing.xl,
+  },
+  purchaseText: {
+    color: '#FFFFFF',
+    fontSize: fontSize.lg,
+    fontWeight: '800',
+  },
+  promoSection: {
+    borderTopWidth: 1,
+    paddingTop: spacing.xl,
+    marginBottom: spacing.lg,
+    alignItems: 'center',
+  },
+  promoLabel: {
+    fontSize: fontSize.sm,
     marginBottom: spacing.md,
   },
-  ctaText: { color: '#FFFFFF', fontSize: fontSize.lg, fontWeight: '600' },
-  skipButton: { alignItems: 'center', padding: spacing.md, marginBottom: spacing.xl },
-  skipText: { fontSize: fontSize.md },
-  legal: { fontSize: fontSize.xs, textAlign: 'center', lineHeight: 16 },
-  premiumCard: {
-    margin: spacing.xxl,
-    padding: spacing.xxxl,
-    borderRadius: borderRadius.xl,
-    alignItems: 'center',
-    gap: spacing.lg,
-    marginTop: 100,
+  promoRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    width: '100%',
+    marginBottom: spacing.md,
   },
-  premiumTitle: { fontSize: fontSize.xxl, fontWeight: 'bold' },
-  premiumDesc: { fontSize: fontSize.md, textAlign: 'center' },
-  promoSection: { borderTopWidth: 1, paddingTop: spacing.xl, marginBottom: spacing.xl },
-  promoTitle: { fontSize: fontSize.md, fontWeight: '600', marginBottom: spacing.md },
-  promoRow: { flexDirection: 'row', gap: spacing.sm },
-  promoInput: { flex: 1, borderWidth: 1, borderRadius: borderRadius.md, padding: spacing.md, fontSize: fontSize.md, letterSpacing: 2, fontWeight: '600' },
-  promoButton: { borderRadius: borderRadius.md, paddingHorizontal: spacing.xl, justifyContent: 'center', alignItems: 'center', minWidth: 80 },
-  promoButtonText: { color: '#FFFFFF', fontSize: fontSize.md, fontWeight: '600' },
-  backButton: { borderRadius: borderRadius.lg, padding: spacing.lg, paddingHorizontal: spacing.xxxl, marginTop: spacing.md },
-  backButtonText: { color: '#FFFFFF', fontSize: fontSize.md, fontWeight: '600' },
+  promoInput: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    borderRadius: borderRadius.md,
+    borderWidth: 1,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+  },
+  promoButton: {
+    fontSize: fontSize.md,
+    fontWeight: '600',
+  },
+  premiumActive: {
+    alignItems: 'center',
+    paddingVertical: spacing.xxxl,
+    gap: spacing.md,
+  },
+  premiumTitle: {
+    fontSize: fontSize.xxl,
+    fontWeight: '800',
+  },
+  premiumSubtitle: {
+    fontSize: fontSize.md,
+  },
+  restoreText: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginVertical: spacing.lg,
+  },
+  legalText: {
+    fontSize: 11,
+    lineHeight: 16,
+    textAlign: 'center',
+    marginTop: spacing.md,
+  },
 });

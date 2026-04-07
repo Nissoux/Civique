@@ -19,6 +19,7 @@ import { useLanguageStore } from '../../stores/languageStore';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import { useExamTypeStore, EXAM_TYPES } from '../../stores/examTypeStore';
 import { useProgressionStore } from '../../stores/progressionStore';
+import { resetUser as resetRevenueCat } from '../../services/revenuecat';
 import { useColors, useThemeStore, spacing, fontSize, borderRadius } from '../../constants/theme';
 import type { ThemeMode } from '../../constants/theme';
 import { Linking } from 'react-native';
@@ -159,6 +160,7 @@ export default function ProfileScreen() {
               await api.delete('/auth/me');
               queryClient.clear();
               await clearProgress();
+              await resetRevenueCat();
               await logout();
               router.replace('/(auth)/login');
             } catch {
@@ -179,6 +181,7 @@ export default function ProfileScreen() {
         onPress: async () => {
           queryClient.clear();
           await clearProgress();
+          await resetRevenueCat();
           await logout();
           router.replace('/(auth)/login');
         },
