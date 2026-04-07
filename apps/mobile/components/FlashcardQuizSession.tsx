@@ -45,13 +45,26 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
 
   // Shuffle choices so correct answer isn't always "a"
   const rawChoices = question?.choicesFr || [];
+  const rawTranslatedChoices = (currentLang !== 'fr' && question?.translatedChoices) ? question.translatedChoices : null;
   const { choices: shuffledChoices, originalToNew } = question
     ? shuffleChoices(rawChoices, question.id)
     : { choices: rawChoices, originalToNew: {} as Record<string, string> };
   const choices = shuffledChoices;
   const shuffledCorrectChoice = question ? getShuffledCorrectChoice(question.correctChoice, originalToNew) : 'a';
 
-  const translatedChoices = (currentLang !== 'fr' && question?.translatedChoices) ? question.translatedChoices : null;
+  // Build a map from new shuffled ID → original ID for translation lookup
+  const newToOriginal: Record<string, string> = {};
+  for (const [orig, newId] of Object.entries(originalToNew)) {
+    newToOriginal[newId] = orig;
+  }
+  // Reorder translations to match shuffle order
+  const translatedChoices = rawTranslatedChoices
+    ? shuffledChoices.map((sc) => {
+        const origId = newToOriginal[sc.id];
+        const origTranslation = rawTranslatedChoices.find((tc: any) => tc.id === origId);
+        return origTranslation ? { ...origTranslation, id: sc.id } : null;
+      }).filter(Boolean)
+    : null;
 
   const explanation = question?.explanationFr;
   const translatedExplanation = (currentLang !== 'fr' && question?.translatedExplanation) ? question.translatedExplanation : null;

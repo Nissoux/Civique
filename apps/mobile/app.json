@@ -20,7 +20,8 @@
       "bundleIdentifier": "com.civique.app",
       "usesAppleSignIn": true,
       "infoPlist": {
-        "SKAdNetworkItems": []
+        "SKAdNetworkItems": [],
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
