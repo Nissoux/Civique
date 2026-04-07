@@ -7,6 +7,10 @@ const envSchema = z.object({
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
   OPENAI_API_KEY: z.string().optional(),
+  BREVO_SMTP_LOGIN: z.string().optional(),
+  BREVO_SMTP_KEY: z.string().optional(),
+  ADMIN_SECRET: z.string().optional(),
+  ALLOWED_ORIGINS: z.string().optional(),
   PORT: z.coerce.number().default(3000),
   HOST: z.string().default('0.0.0.0'),
 });

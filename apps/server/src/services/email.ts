@@ -1,11 +1,12 @@
 import nodemailer from 'nodemailer';
+import { env } from '../config/env.js';
 
 const FROM_EMAIL = 'noreply@integrafle.fr';
 const FROM_NAME = 'Civique';
 
 function getTransporter() {
-  const smtpKey = process.env.BREVO_SMTP_KEY;
-  const smtpLogin = process.env.BREVO_SMTP_LOGIN;
+  const smtpKey = env.BREVO_SMTP_KEY;
+  const smtpLogin = env.BREVO_SMTP_LOGIN;
   if (!smtpKey || !smtpLogin) {
     console.error('BREVO_SMTP_KEY or BREVO_SMTP_LOGIN not set — emails will not be sent');
     return null;
