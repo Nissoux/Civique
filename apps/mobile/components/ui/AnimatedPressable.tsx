@@ -22,7 +22,7 @@ export function AnimatedPressable({
   disabled = false,
   haptic = true,
   hapticStyle = Haptics.ImpactFeedbackStyle.Light,
-  scaleDown = 0.97,
+  scaleDown = 0.94,
   activeOpacity = 0.9,
 }: Props) {
   const scale = useRef(new Animated.Value(1)).current;

@@ -4,60 +4,60 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // ── Color Palette ───────────────────────────────────
 export const colors = {
   light: {
-    // Backgrounds
-    background: '#F5F5F5',
-    surface: '#FFFFFF',
+    // Backgrounds — Claymorphism: soft lavender-white, never pure white
+    background: '#F4F1FA',
+    surface: 'rgba(255, 255, 255, 0.85)',
     surfaceElevated: '#FFFFFF',
-    card: '#FFFFFF',
+    card: 'rgba(255, 255, 255, 0.80)',
 
     // Text
     textPrimary: '#1A1A2E',
-    textSecondary: '#666666',
-    textTertiary: '#999999',
+    textSecondary: '#635F69',
+    textTertiary: '#9994A1',
     textInverse: '#FFFFFF',
 
-    // Brand
-    primary: '#002395',
-    primaryLight: '#EEF1F9',
+    // Brand — Quiz blue + French identity
+    primary: '#2563EB',
+    primaryLight: '#EFF6FF',
     secondary: '#ED2939',
-    accent: '#FFD700',
-    accentBg: 'rgba(255, 215, 0, 0.15)',
+    accent: '#F59E0B',
+    accentBg: 'rgba(245, 158, 11, 0.15)',
 
-    // Feedback
-    success: '#2E7D32',
-    successBg: '#E8F5E9',
-    error: '#C62828',
-    errorBg: '#FFEBEE',
-    warning: '#E65100',
-    warningBg: '#FFF3E0',
+    // Feedback — Claymorphism feedback colors
+    success: '#16A34A',
+    successBg: '#DCFCE7',
+    error: '#DC2626',
+    errorBg: '#FEE2E2',
+    warning: '#F59E0B',
+    warningBg: '#FEF3C7',
 
     // UI
-    border: '#E8E8E8',
-    divider: '#F0F0F0',
-    inputBg: '#F9F9F9',
-    tabBar: '#FFFFFF',
-    tabBarBorder: '#E0E0E0',
-    progressBg: '#E0E0E0',
-    skeleton: '#EEEEEE',
+    border: '#E4ECFC',
+    divider: '#EDE9F5',
+    inputBg: '#F8F6FC',
+    tabBar: 'rgba(255, 255, 255, 0.85)',
+    tabBarBorder: '#E4ECFC',
+    progressBg: '#E4ECFC',
+    skeleton: '#EDE9F5',
 
     // Premium
-    premiumGradientStart: '#FFB347',
-    premiumGradientEnd: '#FF8C00',
-    premiumBg: 'rgba(255, 215, 0, 0.1)',
-    premiumText: '#B8860B',
+    premiumGradientStart: '#F59E0B',
+    premiumGradientEnd: '#D97706',
+    premiumBg: 'rgba(245, 158, 11, 0.1)',
+    premiumText: '#92400E',
 
     // Glass & Gradients
     glassBackground: 'rgba(255, 255, 255, 0.55)',
-    glassBorder: 'rgba(255, 255, 255, 0.25)',
-    gradientPrimary: ['#002395', '#4D7CFF'] as const,
-    gradientHero: ['#0A1628', '#1A2B50', '#002395'] as const,
-    gradientSuccess: ['#2E7D32', '#66BB6A'] as const,
+    glassBorder: 'rgba(255, 255, 255, 0.30)',
+    gradientPrimary: ['#2563EB', '#7C3AED'] as const,
+    gradientHero: ['#0F172A', '#1E2B50', '#2563EB'] as const,
+    gradientSuccess: ['#16A34A', '#4ADE80'] as const,
 
     // Confetti
-    confettiColors: ['#002395', '#ED2939', '#FFD700', '#4D7CFF', '#FFFFFF'] as const,
+    confettiColors: ['#2563EB', '#ED2939', '#F59E0B', '#7C3AED', '#FFFFFF'] as const,
   },
   dark: {
-    // Backgrounds
+    // Backgrounds — Deep navy
     background: '#0A0E1A',
     surface: '#141829',
     surfaceElevated: '#1C2137',
@@ -70,18 +70,18 @@ export const colors = {
     textInverse: '#0A0E1A',
 
     // Brand
-    primary: '#4D7CFF',
+    primary: '#60A5FA',
     primaryLight: '#1A2340',
     secondary: '#FF4D5A',
-    accent: '#FFD700',
-    accentBg: 'rgba(255, 215, 0, 0.12)',
+    accent: '#FBBF24',
+    accentBg: 'rgba(251, 191, 36, 0.12)',
 
     // Feedback
-    success: '#4CAF50',
+    success: '#4ADE80',
     successBg: '#1B2E1C',
-    error: '#EF5350',
+    error: '#F87171',
     errorBg: '#2E1B1B',
-    warning: '#FFB74D',
+    warning: '#FBBF24',
     warningBg: '#2E2417',
 
     // UI
@@ -94,20 +94,20 @@ export const colors = {
     skeleton: '#1C2137',
 
     // Premium
-    premiumGradientStart: '#FFB347',
-    premiumGradientEnd: '#FF8C00',
-    premiumBg: 'rgba(255, 179, 71, 0.12)',
-    premiumText: '#FFD700',
+    premiumGradientStart: '#FBBF24',
+    premiumGradientEnd: '#D97706',
+    premiumBg: 'rgba(251, 191, 36, 0.12)',
+    premiumText: '#FBBF24',
 
     // Glass & Gradients
     glassBackground: 'rgba(255, 255, 255, 0.06)',
     glassBorder: 'rgba(255, 255, 255, 0.10)',
-    gradientPrimary: ['#0A1628', '#4D7CFF'] as const,
-    gradientHero: ['#0A0E1A', '#0F1B3D', '#1A2B50'] as const,
-    gradientSuccess: ['#1B5E20', '#4CAF50'] as const,
+    gradientPrimary: ['#0F172A', '#60A5FA'] as const,
+    gradientHero: ['#0A0E1A', '#0F1B3D', '#1E2B50'] as const,
+    gradientSuccess: ['#166534', '#4ADE80'] as const,
 
     // Confetti
-    confettiColors: ['#4D7CFF', '#FF4D5A', '#FFD700', '#4CAF50', '#FFFFFF'] as const,
+    confettiColors: ['#60A5FA', '#FF4D5A', '#FBBF24', '#4ADE80', '#FFFFFF'] as const,
   },
 };
 
@@ -172,12 +172,13 @@ export const fontSize = {
   title: 28,
 };
 
+// Claymorphism: generous, bubbly radii
 export const borderRadius = {
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  xxl: 28,
+  sm: 12,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 40,
   round: 999,
 };
 
