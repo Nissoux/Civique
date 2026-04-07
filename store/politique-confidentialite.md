@@ -144,14 +144,13 @@ L'authentification repose sur des jetons JWT stockés localement sur l'appareil 
 
 ## Article 10 — Sécurité des données
 
-Le responsable de traitement met en œuvre les mesures suivantes :
+Le responsable de traitement met en œuvre des mesures techniques et organisationnelles appropriées pour assurer la sécurité et la confidentialité des données personnelles, conformément à l'article 32 du RGPD, et notamment :
 
-- **Chiffrement** : communications HTTPS/TLS entre l'Application et les serveurs ;
-- **Hashage des mots de passe** : algorithme bcrypt (12 rounds) ;
-- **Tokens JWT** : accès expirant en 15 minutes, rafraîchissement en 7 jours ;
-- **Headers de sécurité** : Helmet (X-Frame-Options, X-Content-Type-Options, etc.) ;
-- **Limitation de débit** : 100 requêtes par minute par adresse IP ;
-- **Contrôle des accès** : routes protégées par authentification.
+- **Chiffrement des communications** : les échanges entre l'Application et les serveurs sont chiffrés ;
+- **Protection des mots de passe** : les mots de passe ne sont jamais stockés en clair et sont protégés par un algorithme de hashage reconnu ;
+- **Authentification sécurisée** : mécanismes de jetons à durée de vie limitée ;
+- **Protection contre les abus** : limitation du nombre de requêtes par utilisateur ;
+- **Contrôle des accès** : accès aux données strictement limité au personnel autorisé.
 
 En cas de violation de données, la CNIL sera notifiée dans les 72 heures (article 33 du RGPD).
 
