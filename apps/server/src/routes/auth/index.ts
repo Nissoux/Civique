@@ -342,11 +342,11 @@ export default async function authRoutes(app: FastifyInstance) {
   app.delete('/me', { preHandler: authGuard }, async (request, reply) => {
     const userId = request.currentUser!.id;
 
-    // Delete related data that doesn't have CASCADE
+    // Delete all related data before deleting user
     await db.execute(sql`DELETE FROM promo_redemptions WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM comments WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM challenge_answers WHERE user_id = ${userId}`);
-    await db.execute(sql`DELETE FROM challenges WHERE creator_id = ${userId}`);
+    await db.execute(sql`DELETE FROM challenges WHERE challenger_id = ${userId} OR challenged_id = ${userId}`);
     await db.execute(sql`DELETE FROM friendships WHERE user_id = ${userId} OR friend_id = ${userId}`);
     await db.execute(sql`DELETE FROM practice_answers WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM exam_answers WHERE session_id IN (SELECT id FROM exam_sessions WHERE user_id = ${userId})`);
