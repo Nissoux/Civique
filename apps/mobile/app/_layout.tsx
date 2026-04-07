@@ -79,17 +79,19 @@ function RootLayoutNav() {
     const inAuthGroup = segments[0] === '(auth)';
     const onChooseExam = segments[1] === 'choose-exam';
 
+    const onVerifyEmail = segments[1] === 'verify-email';
+
     if (!isAuthenticated && !onboardingDone && segments[0] !== 'onboarding') {
       router.replace('/onboarding');
     } else if (!isAuthenticated && onboardingDone && !inAuthGroup) {
       router.replace('/(auth)/login');
-    } else if (isAuthenticated && inAuthGroup) {
+    } else if (isAuthenticated && inAuthGroup && !onVerifyEmail) {
       if (!selectedExamType) {
         router.replace('/(tabs)/choose-exam');
       } else {
         router.replace('/(tabs)');
       }
-    } else if (isAuthenticated && !selectedExamType && !onChooseExam) {
+    } else if (isAuthenticated && !selectedExamType && !onChooseExam && !onVerifyEmail) {
       router.replace('/(tabs)/choose-exam');
     }
   }, [isAuthenticated, selectedExamType, segments, isReady, isLoading, onboardingDone]);
