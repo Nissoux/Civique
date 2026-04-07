@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { OAuth2Client } from 'google-auth-library';
 import { db } from '../../config/database.js';
 import { users } from '../../db/schema.js';
@@ -342,7 +342,17 @@ export default async function authRoutes(app: FastifyInstance) {
   app.delete('/me', { preHandler: authGuard }, async (request, reply) => {
     const userId = request.currentUser!.id;
 
-    // Delete user — cascade will handle related data
+    // Delete related data that doesn't have CASCADE
+    await db.execute(sql`DELETE FROM promo_redemptions WHERE user_id = ${userId}`);
+    await db.execute(sql`DELETE FROM comments WHERE user_id = ${userId}`);
+    await db.execute(sql`DELETE FROM challenge_answers WHERE user_id = ${userId}`);
+    await db.execute(sql`DELETE FROM challenges WHERE creator_id = ${userId}`);
+    await db.execute(sql`DELETE FROM friendships WHERE user_id = ${userId} OR friend_id = ${userId}`);
+    await db.execute(sql`DELETE FROM practice_answers WHERE user_id = ${userId}`);
+    await db.execute(sql`DELETE FROM exam_answers WHERE session_id IN (SELECT id FROM exam_sessions WHERE user_id = ${userId})`);
+    await db.execute(sql`DELETE FROM exam_sessions WHERE user_id = ${userId}`);
+
+    // Now delete the user
     const deleted = await db.delete(users).where(eq(users.id, userId)).returning({ id: users.id });
 
     if (deleted.length === 0) {

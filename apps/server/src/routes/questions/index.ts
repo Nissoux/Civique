@@ -33,6 +33,7 @@ const randomQuerySchema = z.object({
     .optional(),
   examType: z.enum(['csp', 'cr', 'nat']).optional(),
   lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  count: z.coerce.number().min(1).max(100).optional(),
   limit: z.coerce.number().min(1).max(100).default(20),
   perTheme: z
     .enum(['true', 'false'])
@@ -116,6 +117,7 @@ export default async function questionRoutes(app: FastifyInstance) {
   // NOTE: must be registered before /:id to avoid route conflict
   app.get('/random', async (request) => {
     const query = randomQuerySchema.parse(request.query);
+    const effectiveLimit = query.count || query.limit;
     const conditions = [];
 
     if (query.themeId) conditions.push(eq(questions.themeId, query.themeId));
@@ -166,7 +168,7 @@ export default async function questionRoutes(app: FastifyInstance) {
     // Standard random
     const results = await db.query.questions.findMany({
       where,
-      limit: query.limit,
+      limit: effectiveLimit,
       orderBy: sql`RANDOM()`,
       with: {
         translations: query.lang && query.lang !== 'fr'
