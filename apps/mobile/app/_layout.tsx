@@ -15,7 +15,7 @@ import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
 
 Sentry.init({
-  dsn: 'https://YOUR_DSN_HERE@o0.ingest.sentry.io/0',
+  dsn: 'https://9a327ca9daf3af53d2ea26b014979b3d@o4511176778186752.ingest.de.sentry.io/4511176784937040',
   tracesSampleRate: 0.2,
   enabled: !__DEV__,
 });
