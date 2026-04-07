@@ -4,9 +4,10 @@ const FROM_EMAIL = 'noreply@integrafle.fr';
 const FROM_NAME = 'Civique';
 
 function getTransporter() {
-  const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) {
-    console.error('BREVO_API_KEY not set — emails will not be sent');
+  const smtpKey = process.env.BREVO_SMTP_KEY;
+  const smtpLogin = process.env.BREVO_SMTP_LOGIN;
+  if (!smtpKey || !smtpLogin) {
+    console.error('BREVO_SMTP_KEY or BREVO_SMTP_LOGIN not set — emails will not be sent');
     return null;
   }
   return nodemailer.createTransport({
@@ -14,8 +15,8 @@ function getTransporter() {
     port: 587,
     secure: false,
     auth: {
-      user: FROM_EMAIL,
-      pass: apiKey,
+      user: smtpLogin,
+      pass: smtpKey,
     },
   });
 }
