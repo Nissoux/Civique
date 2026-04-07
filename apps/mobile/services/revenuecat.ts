@@ -6,7 +6,9 @@ import Purchases, {
 } from 'react-native-purchases';
 import { Platform } from 'react-native';
 
-const REVENUECAT_API_KEY = 'test_wtffDfprKOzDtdzHBVmQRBTKrge';
+const REVENUECAT_APPLE_KEY = 'appl_nQxYIjvONBNnMwfRyQIfvWjkkcm';
+const REVENUECAT_GOOGLE_KEY = 'goog_NyEtOpLwYjFGSBcAQPygeTmhMYs';
+const REVENUECAT_API_KEY = Platform.OS === 'ios' ? REVENUECAT_APPLE_KEY : REVENUECAT_GOOGLE_KEY;
 const ENTITLEMENT_ID = 'Civique Pro';
 
 /**
