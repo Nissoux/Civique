@@ -18,6 +18,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { useLanguageStore } from '../../stores/languageStore';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import { useExamTypeStore, EXAM_TYPES } from '../../stores/examTypeStore';
+import { useProgressionStore } from '../../stores/progressionStore';
 import { useColors, useThemeStore, spacing, fontSize, borderRadius } from '../../constants/theme';
 import type { ThemeMode } from '../../constants/theme';
 import { Linking } from 'react-native';
@@ -93,6 +94,7 @@ export default function ProfileScreen() {
   const { isPremium, fetchSubscription } = useSubscriptionStore();
   const { selectedExamType } = useExamTypeStore();
   const { mode: themeMode, setMode: setThemeMode } = useThemeStore();
+  const { clearProgress } = useProgressionStore();
 
   const [overallAccuracy, setOverallAccuracy] = useState(0);
   const [totalPracticed, setTotalPracticed] = useState(0);
@@ -156,6 +158,7 @@ export default function ProfileScreen() {
             try {
               await api.delete('/auth/me');
               queryClient.clear();
+              await clearProgress();
               await logout();
               router.replace('/(auth)/login');
             } catch {
@@ -175,6 +178,7 @@ export default function ProfileScreen() {
         style: 'destructive',
         onPress: async () => {
           queryClient.clear();
+          await clearProgress();
           await logout();
           router.replace('/(auth)/login');
         },

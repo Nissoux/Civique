@@ -21,6 +21,7 @@ interface ProgressionState {
 
   // Actions
   loadProgress: () => Promise<void>;
+  clearProgress: () => Promise<void>;
   saveProgress: () => Promise<void>;
   getLevelProgress: (themeId: number, levelNum: number) => LevelProgress;
   isLevelUnlocked: (themeId: number, levelNum: number, totalLevels: number) => boolean;
@@ -81,6 +82,11 @@ export const useProgressionStore = create<ProgressionState>((set, get) => ({
     } catch {
       // silent
     }
+  },
+
+  clearProgress: async () => {
+    await AsyncStorage.removeItem(STORAGE_KEY);
+    set({ xp: 0, streak: 0, lastPracticeDate: null, levels: {} });
   },
 
   getLevelProgress: (themeId, levelNum) => {
