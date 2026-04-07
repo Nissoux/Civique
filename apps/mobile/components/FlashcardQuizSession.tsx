@@ -13,6 +13,7 @@ import * as Haptics from 'expo-haptics';
 import type { Question } from '@civique/shared';
 import { useColors, spacing, fontSize, borderRadius } from '../constants/theme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { shuffleChoices, getShuffledCorrectChoice } from '../utils/shuffleChoices';
 import { useLanguageStore } from '../stores/languageStore';
 import { AnimatedPressable, AnimatedCard, AnimatedCounter, ProgressRing } from './ui';
 
@@ -42,8 +43,14 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
   const questionText = question?.textFr;
   const translatedQuestion = (currentLang !== 'fr' && question?.translatedText) ? question.translatedText : null;
 
-  // French choices are ALWAYS primary
-  const choices = question?.choicesFr;
+  // Shuffle choices so correct answer isn't always "a"
+  const rawChoices = question?.choicesFr || [];
+  const { choices: shuffledChoices, originalToNew } = question
+    ? shuffleChoices(rawChoices, question.id)
+    : { choices: rawChoices, originalToNew: {} as Record<string, string> };
+  const choices = shuffledChoices;
+  const shuffledCorrectChoice = question ? getShuffledCorrectChoice(question.correctChoice, originalToNew) : 'a';
+
   const translatedChoices = (currentLang !== 'fr' && question?.translatedChoices) ? question.translatedChoices : null;
 
   const explanation = question?.explanationFr;
@@ -58,7 +65,7 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
     if (!selectedChoice || hasAnswered) return;
 
     setHasAnswered(true);
-    const isCorrect = selectedChoice === question.correctChoice;
+    const isCorrect = selectedChoice === shuffledCorrectChoice;
 
     if (isCorrect) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
@@ -85,10 +92,10 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
         ? { bg: c.primary + '15', border: c.primary }
         : { bg: c.surface, border: c.border };
     }
-    if (choiceId === question.correctChoice) {
+    if (choiceId === shuffledCorrectChoice) {
       return { bg: c.successBg, border: c.success };
     }
-    if (choiceId === selectedChoice && choiceId !== question.correctChoice) {
+    if (choiceId === selectedChoice && choiceId !== shuffledCorrectChoice) {
       return { bg: c.errorBg, border: c.error };
     }
     return { bg: c.surface, border: c.border };
@@ -213,8 +220,8 @@ export default function FlashcardQuizSession({ questions, onClose }: Props) {
             <View style={styles.choicesContainer}>
               {choices?.map((choice, i) => {
                 const choiceStyle = getChoiceStyle(choice.id);
-                const isCorrectAnswer = hasAnswered && choice.id === question.correctChoice;
-                const isWrongSelected = hasAnswered && choice.id === selectedChoice && choice.id !== question.correctChoice;
+                const isCorrectAnswer = hasAnswered && choice.id === shuffledCorrectChoice;
+                const isWrongSelected = hasAnswered && choice.id === selectedChoice && choice.id !== shuffledCorrectChoice;
 
                 return (
                   <AnimatedPressable
