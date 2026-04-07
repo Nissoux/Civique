@@ -14,11 +14,9 @@ export function useRandomQuestions(
   const { selectedExamType } = useExamTypeStore();
   const effectiveLang = lang || currentLang;
 
-  // Capture the language at first render only — don't refetch on lang change
   const initialLangRef = useRef(effectiveLang);
 
   return useQuery({
-    // NO language in queryKey — same questions regardless of language changes
     queryKey: ['questions', 'random', count, themeId, selectedExamType],
     queryFn: () =>
       questionsService.getRandomQuestions({
@@ -27,6 +25,37 @@ export function useRandomQuestions(
         lang: initialLangRef.current,
         examType: selectedExamType || undefined,
       }),
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
+}
+
+/**
+ * Fetch questions for a specific level (paginated, not random).
+ * Level 1 = offset 0, Level 2 = offset 10, etc.
+ * Ensures each level has unique questions.
+ */
+export function useLevelQuestions(
+  themeId: number,
+  levelNum: number,
+  questionsPerLevel: number = 10,
+) {
+  const { currentLang } = useLanguageStore();
+  const { selectedExamType } = useExamTypeStore();
+  const offset = (levelNum - 1) * questionsPerLevel;
+
+  return useQuery({
+    queryKey: ['questions', 'level', themeId, levelNum, selectedExamType],
+    queryFn: async () => {
+      const result = await questionsService.getQuestions({
+        themeId,
+        examType: selectedExamType || undefined,
+        lang: currentLang !== 'fr' ? currentLang : undefined,
+        limit: questionsPerLevel,
+        offset,
+      });
+      return result.data;
+    },
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });

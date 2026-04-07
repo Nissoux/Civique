@@ -93,6 +93,7 @@ export default async function questionRoutes(app: FastifyInstance) {
       where,
       limit: query.limit,
       offset: query.offset,
+      orderBy: (q, { asc }) => [asc(q.themeId), asc(q.type), asc(q.id)],
       with: {
         translations: query.lang && query.lang !== 'fr'
           ? { where: eq(questionTranslations.lang, query.lang) }

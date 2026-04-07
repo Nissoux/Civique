@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import { THEMES } from '@civique/shared';
-import { useRandomQuestions } from '../../hooks/useQuestions';
+import { useLevelQuestions } from '../../hooks/useQuestions';
 import TrainingSession from '../../components/TrainingSession';
 import { useLayoutEffect, useCallback } from 'react';
 import { useNavigation } from 'expo-router';
@@ -23,9 +23,11 @@ export default function ThemeTrainingScreen() {
     }
   }, [theme, levelNum, navigation]);
 
-  const { data: questions, isLoading, error, refetch } = useRandomQuestions(
-    10,
+  // Use paginated questions — each level gets unique questions
+  const { data: questions, isLoading, error, refetch } = useLevelQuestions(
     numericThemeId,
+    levelNum,
+    10,
   );
 
   const handleSessionComplete = useCallback((correctCount: number, totalQuestions: number) => {
