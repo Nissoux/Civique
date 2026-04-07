@@ -35,10 +35,10 @@ function levelKey(themeId: number, levelNum: number): string {
 }
 
 function getCrownsForScore(score: number): number {
-  if (score >= 100) return 3;
-  if (score >= 80) return 2;
-  if (score > 0) return 1;
-  return 0;
+  if (score >= 100) return 3;  // Parfait
+  if (score >= 80) return 2;   // Très bien
+  if (score >= 60) return 1;   // Assez bien — débloque le niveau suivant
+  return 0;                    // En dessous de 60% — refaire le niveau
 }
 
 function getTodayStr(): string {

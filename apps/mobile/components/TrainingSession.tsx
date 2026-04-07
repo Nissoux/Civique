@@ -25,6 +25,7 @@ interface TrainingSessionProps {
   isLoading: boolean;
   error: Error | null;
   onRefetch: () => void;
+  onSessionComplete?: (correctCount: number, totalQuestions: number) => void;
 }
 
 export default function TrainingSession({
@@ -32,6 +33,7 @@ export default function TrainingSession({
   isLoading,
   error,
   onRefetch,
+  onSessionComplete,
 }: TrainingSessionProps) {
   const router = useRouter();
   const { currentLang, isRtl, setLanguage } = useLanguageStore();
@@ -196,6 +198,7 @@ export default function TrainingSession({
     if (currentIndex >= questions.length - 1) {
       setIsFinished(true);
       clearSession();
+      onSessionComplete?.(correctCount, questions.length);
       return;
     }
     const nextIdx = currentIndex + 1;
