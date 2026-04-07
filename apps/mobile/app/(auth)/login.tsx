@@ -140,7 +140,8 @@ export default function LoginScreen() {
             onChangeText={(text) => { clearError(); setEmail(text); }}
             keyboardType="email-address"
             autoCapitalize="none"
-            autoComplete="email"
+            autoComplete="off"
+            textContentType="none"
             editable={!isSubmitting}
           />
 
@@ -153,7 +154,8 @@ export default function LoginScreen() {
               value={password}
               onChangeText={(text) => { clearError(); setPassword(text); }}
               secureTextEntry={!showPassword}
-              autoComplete="password"
+              autoComplete="off"
+              textContentType="none"
               editable={!isSubmitting}
             />
               <AnimatedPressable
