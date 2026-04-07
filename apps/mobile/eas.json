@@ -21,5 +21,17 @@
       "autoIncrement": true
     }
   },
-  "submit": {}
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "anis.dah@proton.me",
+        "ascAppId": "",
+        "appleTeamId": "N68KLMZ9DW"
+      },
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    }
+  }
 }

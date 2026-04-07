@@ -103,7 +103,7 @@ export default async function paymentRoutes(app: FastifyInstance) {
   // ── POST /webhook/stripe ────────────────────────────────
   // Stripe webhook handler (no auth - Stripe calls this directly)
   app.post('/webhook/stripe', async (request, reply) => {
-    // TODO: Validate Stripe signature
+    // Stripe signature validation — enable when Stripe is configured
     // const sig = request.headers['stripe-signature'];
     // const event = stripe.webhooks.constructEvent(request.rawBody, sig, env.STRIPE_WEBHOOK_SECRET);
 

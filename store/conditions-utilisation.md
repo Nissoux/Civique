@@ -92,7 +92,7 @@ Conformément à l'article L. 221-28 du Code de la consommation, le droit de ré
 ### 6.1 Contenu proposé
 
 L'Application met à disposition :
-- 611 questions d'entraînement à choix multiples, dont des mises en situation ;
+- Plus de 600 questions d'entraînement à choix multiples, dont des mises en situation ;
 - Des fiches de révision thématiques ;
 - Des flashcards interactives ;
 - Un glossaire des termes civiques ;
