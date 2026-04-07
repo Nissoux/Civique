@@ -132,41 +132,30 @@ export default function LoginScreen() {
           )}
 
           {/* Email */}
-          <MotiView
-            from={{ opacity: 0, translateY: 20 }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ delay: 200 }}
-          >
-            <TextInput
-              style={[styles.input, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }]}
-              placeholder="Email"
-              placeholderTextColor="rgba(255,255,255,0.4)"
-              value={email}
-              onChangeText={(text) => { clearError(); setEmail(text); }}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoComplete="email"
-              editable={!isSubmitting}
-            />
-          </MotiView>
+          <TextInput
+            style={[styles.input, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }]}
+            placeholder="Email"
+            placeholderTextColor="rgba(255,255,255,0.4)"
+            value={email}
+            onChangeText={(text) => { clearError(); setEmail(text); }}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoComplete="email"
+            editable={!isSubmitting}
+          />
 
           {/* Password */}
-          <MotiView
-            from={{ opacity: 0, translateY: 20 }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ delay: 300 }}
-          >
-            <View style={[styles.passwordContainer, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)' }]}>
-              <TextInput
-                style={[styles.passwordInput, { color: '#FFFFFF' }]}
-                placeholder="Mot de passe"
-                placeholderTextColor="rgba(255,255,255,0.4)"
-                value={password}
-                onChangeText={(text) => { clearError(); setPassword(text); }}
-                secureTextEntry={!showPassword}
-                autoComplete="password"
-                editable={!isSubmitting}
-              />
+          <View style={[styles.passwordContainer, { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)' }]}>
+            <TextInput
+              style={[styles.passwordInput, { color: '#FFFFFF' }]}
+              placeholder="Mot de passe"
+              placeholderTextColor="rgba(255,255,255,0.4)"
+              value={password}
+              onChangeText={(text) => { clearError(); setPassword(text); }}
+              secureTextEntry={!showPassword}
+              autoComplete="password"
+              editable={!isSubmitting}
+            />
               <AnimatedPressable
                 style={styles.eyeButton}
                 onPress={() => setShowPassword(!showPassword)}
@@ -179,29 +168,17 @@ export default function LoginScreen() {
                 />
               </AnimatedPressable>
             </View>
-          </MotiView>
 
           {/* Forgot password */}
-          <MotiView
-            from={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 350 }}
+          <AnimatedPressable
+            style={styles.forgotLink}
+            onPress={() => router.push('/(auth)/forgot-password')}
+            haptic={false}
           >
-            <AnimatedPressable
-              style={styles.forgotLink}
-              onPress={() => router.push('/(auth)/forgot-password')}
-              haptic={false}
-            >
-              <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
-            </AnimatedPressable>
-          </MotiView>
+            <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
+          </AnimatedPressable>
 
           {/* Submit button */}
-          <MotiView
-            from={{ opacity: 0, translateY: 20 }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ delay: 400 }}
-          >
             <AnimatedPressable
               onPress={handleLogin}
               disabled={!isValid || isSubmitting}
@@ -221,19 +198,15 @@ export default function LoginScreen() {
                 )}
               </LinearGradient>
             </AnimatedPressable>
-          </MotiView>
 
           {/* Separator */}
-          <MotiView from={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 450 }}>
-            <View style={styles.separator}>
+          <View style={styles.separator}>
               <View style={styles.separatorLine} />
               <Text style={styles.separatorText}>ou</Text>
               <View style={styles.separatorLine} />
             </View>
-          </MotiView>
 
           {/* Social login buttons */}
-          <MotiView from={{ opacity: 0, translateY: 10 }} animate={{ opacity: 1, translateY: 0 }} transition={{ delay: 500 }}>
             <AnimatedPressable
               onPress={handleGoogleLogin}
               style={styles.socialButton}
@@ -252,21 +225,14 @@ export default function LoginScreen() {
                 <Text style={styles.socialButtonText}>Continuer avec Apple</Text>
               </AnimatedPressable>
             )}
-          </MotiView>
 
           {/* Register link */}
-          <MotiView
-            from={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 550 }}
-          >
-            <Link href="/(auth)/register" style={styles.link}>
-              <Text style={styles.linkText}>
-                Pas encore de compte ?{' '}
-                <Text style={styles.linkBold}>S'inscrire</Text>
-              </Text>
-            </Link>
-          </MotiView>
+          <Link href="/(auth)/register" style={styles.link}>
+            <Text style={styles.linkText}>
+              Pas encore de compte ?{' '}
+              <Text style={styles.linkBold}>S'inscrire</Text>
+            </Text>
+          </Link>
         </ScrollView>
       </KeyboardAvoidingView>
     </LinearGradient>
