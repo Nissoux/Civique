@@ -380,6 +380,50 @@ export default function ProfileScreen() {
           icon={themeMode === 'dark' ? 'moon' : 'sunny-outline'}
           iconColor="#FFFFFF"
           iconBgColor={colors.primary}
+          label="Modifier le mot de passe"
+          onPress={() => {
+            Alert.prompt(
+              'Modifier le mot de passe',
+              'Entrez votre mot de passe actuel',
+              [
+                { text: 'Annuler', style: 'cancel' },
+                {
+                  text: 'Suivant',
+                  onPress: (currentPwd) => {
+                    Alert.prompt(
+                      'Nouveau mot de passe',
+                      'Minimum 8 caractères',
+                      [
+                        { text: 'Annuler', style: 'cancel' },
+                        {
+                          text: 'Confirmer',
+                          onPress: async (newPwd) => {
+                            try {
+                              await api.post('/auth/change-password', {
+                                currentPassword: currentPwd,
+                                newPassword: newPwd,
+                              });
+                              Alert.alert('Succès', 'Votre mot de passe a été modifié.');
+                            } catch (err: any) {
+                              Alert.alert('Erreur', err.response?.data?.error || 'Impossible de modifier le mot de passe.');
+                            }
+                          },
+                        },
+                      ],
+                      'secure-text',
+                    );
+                  },
+                },
+              ],
+              'secure-text',
+            );
+          }}
+          colors={colors}
+        />
+        <MenuItem
+          icon={themeMode === 'dark' ? 'moon' : 'sunny-outline'}
+          iconColor="#FFFFFF"
+          iconBgColor={colors.primary}
           label="Thème"
           value={themeMode === 'dark' ? 'Sombre' : 'Clair'}
           onPress={() => {

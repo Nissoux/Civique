@@ -8,6 +8,7 @@ import { db } from '../../config/database.js';
 import { users } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
+import { sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../../services/email.js';
 
 const googleClient = new OAuth2Client();
 
@@ -117,6 +118,10 @@ export default async function authRoutes(app: FastifyInstance) {
       });
 
     const tokens = issueTokens(app, { id: user.id, email: user.email });
+
+    // Send welcome email (non-blocking)
+    sendWelcomeEmail(user.email, user.displayName).catch(() => {});
+
     return reply.status(201).send({
       ...tokens,
       user: sanitizeUser(user),
@@ -228,6 +233,37 @@ export default async function authRoutes(app: FastifyInstance) {
     return { data: sanitizeUser(updated) };
   });
 
+  // ── POST /change-password ───────────────────
+  const changePasswordSchema = z.object({
+    currentPassword: z.string(),
+    newPassword: z.string().min(8),
+  });
+
+  app.post('/change-password', { preHandler: authGuard }, async (request, reply) => {
+    const { currentPassword, newPassword } = changePasswordSchema.parse(request.body);
+    const userId = request.currentUser!.id;
+
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+    });
+
+    if (!user || !user.passwordHash) {
+      return reply.status(400).send({ error: 'Ce compte utilise la connexion sociale (Apple/Google). Aucun mot de passe à modifier.' });
+    }
+
+    const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!valid) {
+      return reply.status(401).send({ error: 'Mot de passe actuel incorrect.' });
+    }
+
+    const newHash = await bcrypt.hash(newPassword, 12);
+    await db.update(users).set({ passwordHash: newHash, updatedAt: new Date() }).where(eq(users.id, userId));
+
+    sendPasswordChangedEmail(user.email).catch(() => {});
+
+    return { message: 'Mot de passe modifié avec succès.' };
+  });
+
   // ── DELETE /me ─────────────────────────────
   app.delete('/me', { preHandler: authGuard }, async (request, reply) => {
     const userId = request.currentUser!.id;
@@ -261,10 +297,10 @@ export default async function authRoutes(app: FastifyInstance) {
 
     passwordResetTokens.set(token, { email: user.email, expiresAt });
 
-    // TODO: Send email with reset link in production
-    // Token stored in memory, user will receive via email
+    // Send reset email (non-blocking)
+    sendPasswordResetEmail(user.email, token).catch(() => {});
 
-    return { message: 'If that email exists, a reset link has been sent.' };
+    return { message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' };
   });
 
   // ── POST /reset-password ─────────────────────
@@ -365,7 +401,8 @@ export default async function authRoutes(app: FastifyInstance) {
 
       // Verify issuer and audience
       if (decoded.iss !== 'https://appleid.apple.com') throw new Error('Invalid issuer');
-      if (decoded.aud !== 'com.civique.app') throw new Error('Invalid audience');
+      const validAudiences = ['com.civique.app', 'host.exp.Exponent'];
+      if (!validAudiences.includes(decoded.aud)) throw new Error('Invalid audience');
       if (decoded.exp && decoded.exp * 1000 < Date.now()) throw new Error('Token expired');
 
       payload = decoded;
