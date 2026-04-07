@@ -189,10 +189,7 @@ export default function LoginScreen() {
           >
             <AnimatedPressable
               style={styles.forgotLink}
-              onPress={() => Alert.alert(
-                'Mot de passe oublié',
-                'Contactez le support à support@integrafle.fr pour réinitialiser votre mot de passe.'
-              )}
+              onPress={() => router.push('/(auth)/forgot-password')}
               haptic={false}
             >
               <Text style={styles.forgotText}>Mot de passe oublié ?</Text>

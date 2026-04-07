@@ -377,9 +377,9 @@ export default function ProfileScreen() {
           colors={colors}
         />
         <MenuItem
-          icon={themeMode === 'dark' ? 'moon' : 'sunny-outline'}
+          icon="key-outline"
           iconColor="#FFFFFF"
-          iconBgColor={colors.primary}
+          iconBgColor={colors.warning}
           label="Modifier le mot de passe"
           onPress={() => {
             Alert.prompt(
