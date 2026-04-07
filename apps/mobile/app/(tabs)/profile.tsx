@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from '../../components/ui/MotiView';
@@ -84,6 +85,7 @@ function SectionHeader({ title, colors }: { title: string; colors: ReturnType<ty
 // ── Main screen ──────────────────────────────────────
 export default function ProfileScreen() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const colors = useColors();
   const insets = useSafeAreaInsets();
   const { user, logout } = useAuthStore();
@@ -153,6 +155,7 @@ export default function ProfileScreen() {
           onPress: async () => {
             try {
               await api.delete('/auth/me');
+              queryClient.clear();
               await logout();
               router.replace('/(auth)/login');
             } catch {
@@ -171,6 +174,7 @@ export default function ProfileScreen() {
         text: 'Se déconnecter',
         style: 'destructive',
         onPress: async () => {
+          queryClient.clear();
           await logout();
           router.replace('/(auth)/login');
         },
