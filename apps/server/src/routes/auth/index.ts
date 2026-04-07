@@ -347,7 +347,7 @@ export default async function authRoutes(app: FastifyInstance) {
     await db.execute(sql`DELETE FROM comments WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM challenge_answers WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM challenges WHERE challenger_id = ${userId} OR challenged_id = ${userId}`);
-    await db.execute(sql`DELETE FROM friendships WHERE user_id = ${userId} OR friend_id = ${userId}`);
+    await db.execute(sql`DELETE FROM friendships WHERE requester_id = ${userId} OR addressee_id = ${userId}`);
     await db.execute(sql`DELETE FROM practice_answers WHERE user_id = ${userId}`);
     await db.execute(sql`DELETE FROM exam_answers WHERE session_id IN (SELECT id FROM exam_sessions WHERE user_id = ${userId})`);
     await db.execute(sql`DELETE FROM exam_sessions WHERE user_id = ${userId}`);
