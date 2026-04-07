@@ -47,6 +47,7 @@ export const users = pgTable(
     displayName: varchar('display_name', { length: 100 }).notNull(),
     avatarUrl: text('avatar_url'),
     preferredLang: languageEnum('preferred_lang').notNull().default('fr'),
+    emailVerified: boolean('email_verified').notNull().default(false),
     isPremium: boolean('is_premium').notNull().default(false),
     premiumExpires: timestamp('premium_expires', { withTimezone: true }),
     stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),

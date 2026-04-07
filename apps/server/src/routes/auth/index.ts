@@ -8,7 +8,7 @@ import { db } from '../../config/database.js';
 import { users } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
-import { sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../../services/email.js';
+import { sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../../services/email.js';
 
 const googleClient = new OAuth2Client();
 
@@ -45,7 +45,7 @@ const resetPasswordSchema = z.object({
   password: z.string().min(8),
 });
 
-// ── In-memory password reset store ─────────────
+// ── In-memory stores ─────────────────────────
 
 interface ResetEntry {
   email: string;
@@ -53,6 +53,14 @@ interface ResetEntry {
 }
 
 const passwordResetTokens = new Map<string, ResetEntry>();
+
+interface VerificationEntry {
+  email: string;
+  code: string;
+  expiresAt: Date;
+}
+
+const emailVerificationCodes = new Map<string, VerificationEntry>();
 
 // ── Helpers ────────────────────────────────────
 
@@ -68,6 +76,7 @@ function sanitizeUser(user: {
   displayName: string;
   avatarUrl: string | null;
   preferredLang: string;
+  emailVerified?: boolean;
   isPremium: boolean;
   createdAt: Date;
 }) {
@@ -77,6 +86,7 @@ function sanitizeUser(user: {
     displayName: user.displayName,
     avatarUrl: user.avatarUrl,
     preferredLang: user.preferredLang,
+    emailVerified: user.emailVerified ?? false,
     isPremium: user.isPremium,
     createdAt: user.createdAt,
   };
@@ -119,13 +129,77 @@ export default async function authRoutes(app: FastifyInstance) {
 
     const tokens = issueTokens(app, { id: user.id, email: user.email });
 
-    // Send welcome email (non-blocking)
-    sendWelcomeEmail(user.email, user.displayName).catch(() => {});
+    // Generate 6-digit verification code
+    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+    emailVerificationCodes.set(user.id, {
+      email: user.email,
+      code: verifyCode,
+      expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    });
+
+    // Send verification email (non-blocking)
+    sendVerificationEmail(user.email, verifyCode).catch(() => {});
 
     return reply.status(201).send({
       ...tokens,
       user: sanitizeUser(user),
+      emailVerified: false,
     });
+  });
+
+  // ── POST /verify-email ──────────────────────
+  const verifyEmailSchema = z.object({
+    code: z.string().length(6),
+  });
+
+  app.post('/verify-email', { preHandler: authGuard }, async (request, reply) => {
+    const userId = request.currentUser!.id;
+    const { code } = verifyEmailSchema.parse(request.body);
+
+    const entry = emailVerificationCodes.get(userId);
+    if (!entry) {
+      return reply.status(400).send({ error: 'Aucun code de vérification en attente. Demandez un nouveau code.' });
+    }
+
+    if (new Date() > entry.expiresAt) {
+      emailVerificationCodes.delete(userId);
+      return reply.status(410).send({ error: 'Le code a expiré. Demandez un nouveau code.' });
+    }
+
+    if (entry.code !== code) {
+      return reply.status(401).send({ error: 'Code incorrect.' });
+    }
+
+    // Mark email as verified
+    await db.update(users).set({ emailVerified: true, updatedAt: new Date() }).where(eq(users.id, userId));
+    emailVerificationCodes.delete(userId);
+
+    // Send welcome email now that email is verified
+    const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
+    if (user) {
+      sendWelcomeEmail(user.email, user.displayName).catch(() => {});
+    }
+
+    return { message: 'Email vérifié avec succès.', emailVerified: true };
+  });
+
+  // ── POST /resend-verification ──────────────
+  app.post('/resend-verification', { preHandler: authGuard }, async (request, reply) => {
+    const userId = request.currentUser!.id;
+    const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
+
+    if (!user) return reply.status(404).send({ error: 'Utilisateur non trouvé.' });
+    if (user.emailVerified) return reply.status(400).send({ error: 'Email déjà vérifié.' });
+
+    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+    emailVerificationCodes.set(userId, {
+      email: user.email,
+      code: verifyCode,
+      expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+    });
+
+    sendVerificationEmail(user.email, verifyCode).catch(() => {});
+    return { message: 'Un nouveau code a été envoyé.' };
   });
 
   // ── POST /login ──────────────────────────────

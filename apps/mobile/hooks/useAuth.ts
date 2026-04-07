@@ -58,7 +58,7 @@ export function useAuth() {
         });
         await setTokens(response.accessToken, response.refreshToken);
         setUser(response.user);
-        router.replace('/(tabs)');
+        router.replace('/(auth)/verify-email');
       } catch (err: unknown) {
         setError(getErrorMessage(err, "Erreur lors de l'inscription. Veuillez r\u00e9essayer."));
         throw err;
