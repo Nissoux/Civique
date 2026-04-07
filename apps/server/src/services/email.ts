@@ -1,21 +1,29 @@
 import nodemailer from 'nodemailer';
 
-const BREVO_API_KEY = process.env.BREVO_API_KEY || '';
 const FROM_EMAIL = 'noreply@integrafle.fr';
 const FROM_NAME = 'Civique';
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp-relay.brevo.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: FROM_EMAIL,
-    pass: BREVO_API_KEY,
-  },
-});
+function getTransporter() {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.error('BREVO_API_KEY not set — emails will not be sent');
+    return null;
+  }
+  return nodemailer.createTransport({
+    host: 'smtp-relay.brevo.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: FROM_EMAIL,
+      pass: apiKey,
+    },
+  });
+}
 
 export async function sendWelcomeEmail(email: string, displayName: string) {
   try {
+    const transporter = getTransporter();
+    if (!transporter) return;
     await transporter.sendMail({
       from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
       to: email,
@@ -56,6 +64,8 @@ export async function sendPasswordResetEmail(email: string, token: string) {
   const resetUrl = `https://api.integrafle.fr/reset-password?token=${token}`;
 
   try {
+    const transporter = getTransporter();
+    if (!transporter) return;
     await transporter.sendMail({
       from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
       to: email,
@@ -88,6 +98,8 @@ export async function sendPasswordResetEmail(email: string, token: string) {
 
 export async function sendPasswordChangedEmail(email: string) {
   try {
+    const transporter = getTransporter();
+    if (!transporter) return;
     await transporter.sendMail({
       from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
       to: email,
