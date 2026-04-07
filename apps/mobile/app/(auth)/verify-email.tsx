@@ -5,6 +5,9 @@ import {
   StyleSheet,
   ActivityIndicator,
   Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -74,7 +77,8 @@ export default function VerifyEmailScreen() {
 
   return (
     <LinearGradient colors={c.gradientHero} style={{ flex: 1 }}>
-      <View style={[styles.container, { paddingTop: insets.top + 60 }]}>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView contentContainerStyle={[styles.container, { paddingTop: insets.top + 40, paddingBottom: insets.bottom + 40 }]} keyboardShouldPersistTaps="handled">
         <MotiView from={{ opacity: 0, translateY: 15 }} animate={{ opacity: 1, translateY: 0 }}>
           <Ionicons name="mail-open-outline" size={56} color="#FFFFFF" style={styles.icon} />
           <Text style={styles.title}>Vérifiez votre e-mail</Text>
@@ -125,14 +129,15 @@ export default function VerifyEmailScreen() {
             </Text>
           </AnimatedPressable>
         </MotiView>
-      </View>
+      </ScrollView>
+      </KeyboardAvoidingView>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     paddingHorizontal: spacing.xxl,
     justifyContent: 'center',
   },
