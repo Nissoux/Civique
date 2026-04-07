@@ -95,7 +95,8 @@ L'utilisateur peut supprimer son compte à tout moment depuis les paramètres de
 | Destinataire | Finalité | Localisation |
 |---|---|---|
 | **Hetzner Online GmbH** | Hébergement de l'infrastructure et des données | Allemagne (UE) |
-| **Stripe, Inc.** | Gestion des paiements pour les abonnements premium | États-Unis (clauses contractuelles types) |
+| **Stripe, Inc.** | Gestion des paiements pour les codes promo | États-Unis (clauses contractuelles types) |
+| **RevenueCat, Inc.** | Gestion des achats in-app et abonnements premium | États-Unis (clauses contractuelles types) |
 | **Brevo (Sendinblue)** | Envoi d'e-mails transactionnels (bienvenue, réinitialisation) | France (UE) |
 | **Apple Inc.** | Authentification via Apple Sign-In (si utilisé par l'utilisateur) | États-Unis (clauses contractuelles types) |
 | **Google LLC** | Authentification via Google Sign-In (si utilisé par l'utilisateur) | États-Unis (clauses contractuelles types) |

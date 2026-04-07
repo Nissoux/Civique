@@ -69,7 +69,7 @@ L'Application propose un accès gratuit comprenant :
 
 ### 5.2 Modalités de paiement
 
-Le paiement s'effectue via **Stripe** (prestataire de paiement sécurisé). L'éditeur ne stocke aucune donnée de carte bancaire.
+Le paiement s'effectue via les systèmes d'achat intégrés de l'**Apple App Store** et du **Google Play Store**. L'éditeur ne stocke aucune donnée de carte bancaire. La gestion des abonnements est assurée par **RevenueCat** (prestataire technique).
 
 ### 5.3 Codes promotionnels
 

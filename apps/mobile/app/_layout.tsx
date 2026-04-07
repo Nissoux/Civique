@@ -13,7 +13,7 @@ import { useSubscriptionStore } from '../stores/subscriptionStore';
 import { useExamTypeStore } from '../stores/examTypeStore';
 import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
-import { initRevenueCat, identifyUser, addCustomerInfoListener } from '../services/revenuecat';
+import { initRevenueCat, identifyUser } from '../services/revenuecat';
 
 Sentry.init({
   dsn: 'https://9a327ca9daf3af53d2ea26b014979b3d@o4511176778186752.ingest.de.sentry.io/4511176784937040',
