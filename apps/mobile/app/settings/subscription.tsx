@@ -21,9 +21,9 @@ import * as Linking from 'expo-linking';
 type Plan = 'weekly' | 'monthly' | 'semiannual';
 
 const PLANS: { id: Plan; label: string; price: string; detail: string; badge?: string }[] = [
-  { id: 'weekly', label: 'Hebdomadaire', price: '2,99 €', detail: 'par semaine' },
-  { id: 'monthly', label: 'Mensuel', price: '7,99 €', detail: 'par mois', badge: 'Populaire' },
-  { id: 'semiannual', label: '6 mois', price: '29,99 €', detail: 'pour 6 mois', badge: 'Meilleure offre' },
+  { id: 'weekly', label: 'Hebdomadaire', price: '3,99 €', detail: 'par semaine' },
+  { id: 'monthly', label: 'Mensuel', price: '10,99 €', detail: 'par mois', badge: 'Populaire' },
+  { id: 'semiannual', label: '6 mois', price: '39,99 €', detail: 'pour 6 mois', badge: 'Meilleure offre' },
 ];
 
 const FEATURES = [

@@ -63,9 +63,9 @@ L'Application propose un accès gratuit comprenant :
 
 | Offre | Tarif TTC | Durée |
 |---|---|---|
-| Hebdomadaire | 2,99 € | 7 jours |
-| Mensuel | 7,99 € | 30 jours |
-| Semestriel | 29,99 € | 180 jours (6 mois) |
+| Hebdomadaire | 3,99 € | 7 jours |
+| Mensuel | 10,99 € | 30 jours |
+| Semestriel | 39,99 € | 180 jours (6 mois) |
 
 ### 5.2 Modalités de paiement
 
