@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Sentry from '@sentry/react-native';
 import { useAuthStore } from '../stores/authStore';
 import { useOnboardingStore } from '../stores/onboardingStore';
 import { useLanguageStore } from '../stores/languageStore';
@@ -12,6 +13,12 @@ import { useSubscriptionStore } from '../stores/subscriptionStore';
 import { useExamTypeStore } from '../stores/examTypeStore';
 import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
+
+Sentry.init({
+  dsn: 'https://YOUR_DSN_HERE@o0.ingest.sentry.io/0',
+  tracesSampleRate: 0.2,
+  enabled: !__DEV__,
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {
