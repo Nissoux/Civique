@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "civique",
+    "scheme": ["civique", "com.googleusercontent.apps.593427095159-lq6gta272m2fulbfporu887i60c0kd59"],
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
