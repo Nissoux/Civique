@@ -9,9 +9,8 @@ const GOOGLE_CLIENT_ID_WEB = '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps
 const GOOGLE_IOS_REVERSED = 'com.googleusercontent.apps.593427095159-lq6gta272m2fulbfporu887i60c0kd59';
 
 function getGoogleRedirectUri(): string {
-  if (__DEV__) return 'https://auth.expo.io/@nissouz/civique';
-  if (Platform.OS === 'ios') return `${GOOGLE_IOS_REVERSED}:/oauth2redirect`;
-  return 'civique://';
+  // Expo auth proxy works in both dev and production
+  return 'https://auth.expo.io/@nissouz/civique';
 }
 
 function getGoogleClientId(): string {
