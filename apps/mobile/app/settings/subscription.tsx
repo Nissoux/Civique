@@ -57,7 +57,7 @@ export default function SubscriptionScreen() {
       const offering = await getOfferings();
       if (offering) {
         const sortedPkgs = offering.availablePackages.sort((a, b) => {
-          const order: Record<string, number> = { weekly: 0, monthly: 1, six_month: 2 };
+          const order: Record<string, number> = { $rc_weekly: 0, $rc_monthly: 1, $rc_six_month: 2 };
           const aOrder = order[a.identifier] ?? 99;
           const bOrder = order[b.identifier] ?? 99;
           return aOrder - bOrder;
@@ -128,16 +128,16 @@ export default function SubscriptionScreen() {
 
   const getPackageLabel = (identifier: string): string => {
     const labels: Record<string, string> = {
-      weekly: 'Hebdomadaire',
-      monthly: 'Mensuel',
-      six_month: '6 mois',
+      $rc_weekly: 'Hebdomadaire',
+      $rc_monthly: 'Mensuel',
+      $rc_six_month: '6 mois',
     };
     return labels[identifier] || identifier;
   };
 
   const getPackageBadge = (identifier: string): string | null => {
-    if (identifier === 'monthly') return 'Populaire';
-    if (identifier === 'six_month') return 'Meilleure offre';
+    if (identifier === '$rc_monthly') return 'Populaire';
+    if (identifier === '$rc_six_month') return 'Meilleure offre';
     return null;
   };
 
