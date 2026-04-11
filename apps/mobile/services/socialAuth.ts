@@ -43,6 +43,10 @@ export async function performGoogleSignIn(): Promise<AuthResponse | null> {
       scopes: ['openid', 'profile', 'email'],
       responseType: AuthSession.ResponseType.IdToken,
       redirectUri,
+      // PKCE is not compatible with the IdToken (implicit) response type.
+      // Google returns "parameter not allowed for this message type:
+      // code_challenge_method" when PKCE params are included.
+      usePKCE: false,
       extraParams: {
         nonce: Math.random().toString(36).substring(2, 15),
       },
