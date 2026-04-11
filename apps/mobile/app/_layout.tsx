@@ -6,6 +6,7 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Sentry from '@sentry/react-native';
+import * as WebBrowser from 'expo-web-browser';
 import { useAuthStore } from '../stores/authStore';
 import { useOnboardingStore } from '../stores/onboardingStore';
 import { useLanguageStore } from '../stores/languageStore';
@@ -14,6 +15,14 @@ import { useExamTypeStore } from '../stores/examTypeStore';
 import { useThemeStore } from '../constants/theme';
 import * as authService from '../services/auth';
 import { initRevenueCat, identifyUser } from '../services/revenuecat';
+
+// IMPORTANT: Must be called at the module level, NOT inside a component,
+// so that it runs synchronously when the app is woken up from a Google
+// OAuth deep link. Otherwise Expo Router intercepts the redirect URL
+// (e.g. com.googleusercontent.apps.XXX://oauthredirect?code=...) and
+// renders its "Unmatched Route" error screen before expo-auth-session
+// can close the WebBrowser session.
+WebBrowser.maybeCompleteAuthSession();
 
 Sentry.init({
   dsn: 'https://9a327ca9daf3af53d2ea26b014979b3d@o4511176778186752.ingest.de.sentry.io/4511176784937040',
