@@ -6,26 +6,46 @@ import type { AuthResponse } from './auth';
 
 WebBrowser.maybeCompleteAuthSession();
 
-// ── Configuration ──
-const GOOGLE_CLIENT_ID_IOS = '593427095159-lq6gta272m2fulbfporu887i60c0kd59.apps.googleusercontent.com';
-const GOOGLE_CLIENT_ID_WEB = '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
+// ── Google OAuth Configuration ──
+// Platform-specific OAuth client IDs from Google Cloud Console.
+// Each platform has its own client type (iOS / Android) with its own
+// reversed scheme used as the native redirect URI. This avoids the
+// deprecated auth.expo.io proxy and works in production builds.
+//
+// The reversed schemes below MUST be declared in app.json under `scheme`.
+const GOOGLE_CLIENT_ID_IOS = '593427095159-374od3aoal2tvm9lutvp383po7kaknrf.apps.googleusercontent.com';
+const GOOGLE_IOS_REVERSED = 'com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf';
+
+const GOOGLE_CLIENT_ID_ANDROID = '593427095159-lq6gta272m2fulbfporu887i60c0kd59.apps.googleusercontent.com';
+const GOOGLE_ANDROID_REVERSED = 'com.googleusercontent.apps.593427095159-lq6gta272m2fulbfporu887i60c0kd59';
+
+function getGoogleConfig(): { clientId: string; redirectUri: string } {
+  if (Platform.OS === 'ios') {
+    return {
+      clientId: GOOGLE_CLIENT_ID_IOS,
+      redirectUri: `${GOOGLE_IOS_REVERSED}:/oauthredirect`,
+    };
+  }
+  return {
+    clientId: GOOGLE_CLIENT_ID_ANDROID,
+    redirectUri: `${GOOGLE_ANDROID_REVERSED}:/oauthredirect`,
+  };
+}
 
 // ── Google Sign-In ──
 export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   try {
     const discovery = await AuthSession.fetchDiscoveryAsync('https://accounts.google.com');
-
-    const clientId = Platform.OS === 'ios' ? GOOGLE_CLIENT_ID_IOS : GOOGLE_CLIENT_ID_WEB;
-
-    const redirectUri = AuthSession.makeRedirectUri({
-      scheme: 'civique',
-    });
+    const { clientId, redirectUri } = getGoogleConfig();
 
     const request = new AuthSession.AuthRequest({
       clientId,
       scopes: ['openid', 'profile', 'email'],
       responseType: AuthSession.ResponseType.IdToken,
       redirectUri,
+      extraParams: {
+        nonce: Math.random().toString(36).substring(2, 15),
+      },
     });
 
     const result = await request.promptAsync(discovery);
@@ -36,9 +56,12 @@ export async function performGoogleSignIn(): Promise<AuthResponse | null> {
       });
       return data;
     }
+    if (result.type === 'error') {
+      console.error('Google Sign-In error:', result.error, result.params);
+    }
     return null;
   } catch (err) {
-    console.error('Google Sign-In error:', err);
+    console.error('Google Sign-In exception:', err);
     return null;
   }
 }
