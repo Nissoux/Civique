@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { PurchasesPackage } from 'react-native-purchases';
 import { useColors, spacing, fontSize, borderRadius } from '../../constants/theme';
+import { LEGAL_SUBSCRIPTION_TEXT } from '../../constants/subscription-strings';
 import { useSubscriptionStore } from '../../stores/subscriptionStore';
 import { AnimatedPressable } from '../../components/ui';
 import {
@@ -302,11 +303,10 @@ export default function SubscriptionScreen() {
         </Text>
       </AnimatedPressable>
 
-      {/* Legal */}
+      {/* Legal — loaded from platform-specific file so the iOS binary
+          contains no "Google Play" string (Apple guideline 2.3.10) */}
       <Text style={[styles.legalText, { color: c.textTertiary }]}>
-        {Platform.OS === 'ios'
-          ? "Le paiement sera débité de votre compte Apple. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Vous pouvez gérer et annuler votre abonnement à tout moment dans les Réglages de votre iPhone."
-          : "Le paiement sera débité de votre compte Google Play. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Vous pouvez gérer et annuler votre abonnement à tout moment dans Google Play."}
+        {LEGAL_SUBSCRIPTION_TEXT}
       </Text>
     </ScrollView>
   );
