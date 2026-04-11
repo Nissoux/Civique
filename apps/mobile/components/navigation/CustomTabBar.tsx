@@ -44,11 +44,11 @@ function TabItem({
   focusedColor: string;
 }) {
   const scale = useRef(new Animated.Value(1)).current;
-  const labelOpacity = useRef(new Animated.Value(isFocused ? 1 : 0)).current;
+  const labelOpacity = useRef(new Animated.Value(isFocused ? 1 : 0.7)).current;
 
   useEffect(() => {
     Animated.timing(labelOpacity, {
-      toValue: isFocused ? 1 : 0,
+      toValue: isFocused ? 1 : 0.7,
       duration: 200,
       useNativeDriver: true,
     }).start();
@@ -83,7 +83,7 @@ function TabItem({
       <Animated.Text
         style={[
           styles.tabLabel,
-          { color: focusedColor, opacity: labelOpacity },
+          { color: isFocused ? focusedColor : color, opacity: labelOpacity },
         ]}
         numberOfLines={1}
       >

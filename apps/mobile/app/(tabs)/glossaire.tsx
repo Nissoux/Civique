@@ -244,6 +244,11 @@ export default function GlossaireScreen() {
         contentContainerStyle={s.listContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        initialNumToRender={12}
+        maxToRenderPerBatch={10}
+        windowSize={7}
+        removeClippedSubviews={Platform.OS === 'android'}
+        updateCellsBatchingPeriod={50}
         ListEmptyComponent={
           <View style={s.emptyContainer}>
             <Ionicons name="book-outline" size={48} color={c.textTertiary} />

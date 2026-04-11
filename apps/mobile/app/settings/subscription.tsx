@@ -6,6 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -192,7 +193,7 @@ export default function SubscriptionScreen() {
         <ActivityIndicator size="large" color={c.primary} style={{ marginVertical: spacing.xxl }} />
       ) : packages.length === 0 ? (
         <Text style={[styles.noPackages, { color: c.textTertiary }]}>
-          Les offres ne sont pas encore disponibles. Utilisez un code promo ci-dessous.
+          Les offres sont en cours de chargement. Veuillez réessayer dans quelques instants.
         </Text>
       ) : (
         <View style={styles.packagesContainer}>
@@ -247,51 +248,52 @@ export default function SubscriptionScreen() {
         </AnimatedPressable>
       )}
 
-      {/* Promo code */}
-      <View style={[styles.promoSection, { borderColor: c.border }]}>
-        <Text style={[styles.promoLabel, { color: c.textSecondary }]}>Code promo</Text>
-        <View style={styles.promoRow}>
-          <View style={[styles.promoInput, { backgroundColor: c.inputBg, borderColor: c.border }]}>
-            <Ionicons name="gift-outline" size={18} color={c.textTertiary} />
-            <Text style={{ flex: 1 }}>
-              {/* Using a simple touchable to enter promo code */}
-            </Text>
+      {/* Promo code — Android uniquement (Apple interdit les codes promo bypassant l'IAP) */}
+      {Platform.OS !== 'ios' && (
+        <View style={[styles.promoSection, { borderColor: c.border }]}>
+          <Text style={[styles.promoLabel, { color: c.textSecondary }]}>Code promo</Text>
+          <View style={styles.promoRow}>
+            <View style={[styles.promoInput, { backgroundColor: c.inputBg, borderColor: c.border }]}>
+              <Ionicons name="gift-outline" size={18} color={c.textTertiary} />
+              <Text style={{ flex: 1 }}>
+                {/* Using a simple touchable to enter promo code */}
+              </Text>
+            </View>
           </View>
-        </View>
-        <AnimatedPressable
-          onPress={() => {
-            Alert.prompt(
-              'Code promo',
-              'Entrez votre code promotionnel',
-              [
-                { text: 'Annuler', style: 'cancel' },
-                {
-                  text: 'Activer',
-                  onPress: (code) => {
-                    if (code) {
-                      setPromoCode(code);
-                      // Trigger redeem
-                      api.post('/payments/redeem-code', { code: code.trim().toUpperCase() })
-                        .then(() => {
-                          fetchSubscription();
-                          Alert.alert('Code activé !', 'Votre accès Premium a été activé.', [
-                            { text: 'OK', onPress: () => router.back() },
-                          ]);
-                        })
-                        .catch((err: any) => {
-                          Alert.alert('Erreur', err.response?.data?.error || 'Code invalide.');
-                        });
-                    }
+          <AnimatedPressable
+            onPress={() => {
+              Alert.prompt(
+                'Code promo',
+                'Entrez votre code promotionnel',
+                [
+                  { text: 'Annuler', style: 'cancel' },
+                  {
+                    text: 'Activer',
+                    onPress: (code) => {
+                      if (code) {
+                        setPromoCode(code);
+                        api.post('/payments/redeem-code', { code: code.trim().toUpperCase() })
+                          .then(() => {
+                            fetchSubscription();
+                            Alert.alert('Code activé !', 'Votre accès Premium a été activé.', [
+                              { text: 'OK', onPress: () => router.back() },
+                            ]);
+                          })
+                          .catch((err: any) => {
+                            Alert.alert('Erreur', err.response?.data?.error || 'Code invalide.');
+                          });
+                      }
+                    },
                   },
-                },
-              ],
-              'plain-text',
-            );
-          }}
-        >
-          <Text style={[styles.promoButton, { color: c.primary }]}>Entrer un code promo</Text>
-        </AnimatedPressable>
-      </View>
+                ],
+                'plain-text',
+              );
+            }}
+          >
+            <Text style={[styles.promoButton, { color: c.primary }]}>Entrer un code promo</Text>
+          </AnimatedPressable>
+        </View>
+      )}
 
       {/* Restore */}
       <AnimatedPressable onPress={handleRestore} disabled={restoring}>
@@ -302,7 +304,9 @@ export default function SubscriptionScreen() {
 
       {/* Legal */}
       <Text style={[styles.legalText, { color: c.textTertiary }]}>
-        Le paiement sera débité de votre compte Apple ou Google. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Gérez vos abonnements dans les réglages de votre appareil.
+        {Platform.OS === 'ios'
+          ? "Le paiement sera débité de votre compte Apple. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Vous pouvez gérer et annuler votre abonnement à tout moment dans les Réglages de votre iPhone."
+          : "Le paiement sera débité de votre compte Google Play. L'abonnement se renouvelle automatiquement sauf résiliation au moins 24h avant la fin de la période en cours. Vous pouvez gérer et annuler votre abonnement à tout moment dans Google Play."}
       </Text>
     </ScrollView>
   );

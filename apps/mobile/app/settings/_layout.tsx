@@ -6,9 +6,7 @@ export default function SettingsLayout() {
       <Stack.Screen
         name="subscription"
         options={{
-          headerTitle: 'Abonnement',
-          headerStyle: { backgroundColor: '#002395' },
-          headerTintColor: '#FFFFFF',
+          headerShown: false,
         }}
       />
     </Stack>

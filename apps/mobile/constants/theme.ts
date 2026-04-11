@@ -6,9 +6,9 @@ export const colors = {
   light: {
     // Backgrounds — Claymorphism: soft lavender-white, never pure white
     background: '#F4F1FA',
-    surface: 'rgba(255, 255, 255, 0.85)',
+    surface: '#FFFFFF',
     surfaceElevated: '#FFFFFF',
-    card: 'rgba(255, 255, 255, 0.80)',
+    card: '#FFFFFF',
 
     // Text
     textPrimary: '#1A1A2E',

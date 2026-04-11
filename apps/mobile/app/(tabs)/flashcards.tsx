@@ -4,7 +4,6 @@ import {
   Text,
   ScrollView,
   Modal,
-  SafeAreaView,
   ActivityIndicator,
   StyleSheet,
 } from 'react-native';
@@ -225,11 +224,11 @@ export default function FlashcardsScreen() {
       )}
 
       {/* Session modal */}
-      <Modal visible={modalVisible} animationType="slide" presentationStyle="fullScreen">
-        <SafeAreaView style={{ flex: 1, backgroundColor: c.background }}>
+      <Modal visible={modalVisible} animationType="slide" presentationStyle="fullScreen" statusBarTranslucent>
+        <View style={{ flex: 1, backgroundColor: c.background, paddingTop: insets.top }}>
           {/* Close button */}
           <View style={styles.modalHeader}>
-            <AnimatedPressable onPress={closeModal}>
+            <AnimatedPressable onPress={closeModal} style={styles.closeButton}>
               <Ionicons name="close" size={28} color={c.textPrimary} />
             </AnimatedPressable>
             <Text style={[styles.modalTitle, { color: c.textSecondary }]}>
@@ -253,7 +252,7 @@ export default function FlashcardsScreen() {
               </Text>
             </View>
           )}
-        </SafeAreaView>
+        </View>
       </Modal>
     </View>
   );
@@ -394,7 +393,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.xxl,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.lg,
+  },
+  closeButton: {
+    width: 44,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: -10,
   },
   modalTitle: { fontSize: fontSize.md, fontWeight: '600' },
 });
