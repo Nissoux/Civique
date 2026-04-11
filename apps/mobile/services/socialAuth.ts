@@ -7,42 +7,30 @@ import type { AuthResponse } from './auth';
 WebBrowser.maybeCompleteAuthSession();
 
 // ── Google OAuth Configuration ──
-// Platform-specific OAuth client IDs from Google Cloud Console.
-// Each platform has its own client type (iOS / Android) with its own
-// reversed scheme used as the native redirect URI. This avoids the
-// deprecated auth.expo.io proxy and works in production builds.
+// We use the iOS OAuth client on BOTH platforms for the browser-based flow.
+// Reasons:
+//   - iOS clients support the `id_token` response type via browser flow.
+//   - Android clients are designed for the native Google Play Services SDK
+//     and reject browser-based id_token requests ("invalid request").
+//   - The reversed scheme redirect URI is caught natively on both iOS and
+//     Android thanks to the scheme declarations in app.json.
+// This avoids the deprecated auth.expo.io proxy entirely.
 //
-// The reversed schemes below MUST be declared in app.json under `scheme`.
-const GOOGLE_CLIENT_ID_IOS = '593427095159-374od3aoal2tvm9lutvp383po7kaknrf.apps.googleusercontent.com';
-const GOOGLE_IOS_REVERSED = 'com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf';
-
-const GOOGLE_CLIENT_ID_ANDROID = '593427095159-lq6gta272m2fulbfporu887i60c0kd59.apps.googleusercontent.com';
-const GOOGLE_ANDROID_REVERSED = 'com.googleusercontent.apps.593427095159-lq6gta272m2fulbfporu887i60c0kd59';
-
-function getGoogleConfig(): { clientId: string; redirectUri: string } {
-  if (Platform.OS === 'ios') {
-    return {
-      clientId: GOOGLE_CLIENT_ID_IOS,
-      redirectUri: `${GOOGLE_IOS_REVERSED}:/oauthredirect`,
-    };
-  }
-  return {
-    clientId: GOOGLE_CLIENT_ID_ANDROID,
-    redirectUri: `${GOOGLE_ANDROID_REVERSED}:/oauthredirect`,
-  };
-}
+// The Android OAuth client (with its SHA-1) is still needed for RevenueCat
+// / Play Store billing, but is not used for Sign-In here.
+const GOOGLE_CLIENT_ID = '593427095159-374od3aoal2tvm9lutvp383po7kaknrf.apps.googleusercontent.com';
+const GOOGLE_REVERSED_SCHEME = 'com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf';
 
 // ── Google Sign-In ──
 export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   try {
     const discovery = await AuthSession.fetchDiscoveryAsync('https://accounts.google.com');
-    const { clientId, redirectUri } = getGoogleConfig();
 
     const request = new AuthSession.AuthRequest({
-      clientId,
+      clientId: GOOGLE_CLIENT_ID,
       scopes: ['openid', 'profile', 'email'],
       responseType: AuthSession.ResponseType.IdToken,
-      redirectUri,
+      redirectUri: `${GOOGLE_REVERSED_SCHEME}:/oauthredirect`,
       // PKCE is not compatible with the IdToken (implicit) response type.
       // Google returns "parameter not allowed for this message type:
       // code_challenge_method" when PKCE params are included.
