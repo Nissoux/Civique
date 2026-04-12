@@ -1,84 +1,81 @@
 import { Platform } from 'react-native';
-import * as AuthSession from 'expo-auth-session';
-import * as WebBrowser from 'expo-web-browser';
+import {
+  GoogleSignin,
+  isErrorWithCode,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import api from './api';
 import type { AuthResponse } from './auth';
 
-WebBrowser.maybeCompleteAuthSession();
-
 // ── Google OAuth Configuration ──
-// We use the iOS OAuth client on BOTH platforms for the browser-based flow.
-//   - iOS clients accept the browser flow with a custom scheme redirect URI.
-//   - Android clients are designed for the native Google Play Services SDK
-//     and reject browser-based auth requests.
-//   - The reversed scheme redirect URI is caught natively on both iOS and
-//     Android thanks to the scheme declarations in app.json.
-// This avoids the deprecated auth.expo.io proxy entirely.
+// Uses @react-native-google-signin/google-signin — the official native SDK
+// recommended by both Expo and Google for production mobile apps.
 //
-// The Android OAuth client (with its SHA-1) remains configured for
-// RevenueCat / Play Store billing; it is not used here for Sign-In.
-const GOOGLE_CLIENT_ID = '593427095159-374od3aoal2tvm9lutvp383po7kaknrf.apps.googleusercontent.com';
-const GOOGLE_REVERSED_SCHEME = 'com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf';
+// On Android: uses Google Play Services under the hood. The Android OAuth
+// client (com.civique.app + SHA-1) is matched automatically by GMS.
+//
+// On iOS: uses the native Google Sign-In SDK. The iosUrlScheme is
+// configured via the config plugin in app.json.
+//
+// webClientId is required to get an idToken that can be verified server-side.
+//
+// Docs:
+//   https://docs.expo.dev/guides/google-authentication/
+//   https://react-native-google-signin.github.io/docs/setting-up/expo
+
+// Web client ID (required for backend idToken verification)
+const GOOGLE_WEB_CLIENT_ID =
+  '593427095159-ccfousaqelr1rj1mk9ojhifbo87levud.apps.googleusercontent.com';
+// iOS client ID (for iOS native sign-in)
+const GOOGLE_IOS_CLIENT_ID =
+  '593427095159-374od3aoal2tvm9lutvp383po7kaknrf.apps.googleusercontent.com';
+
+/**
+ * Must be called once before any signIn call.
+ * Typically from the root _layout.tsx at module level.
+ */
+export function configureGoogleSignIn() {
+  GoogleSignin.configure({
+    webClientId: GOOGLE_WEB_CLIENT_ID,
+    iosClientId: GOOGLE_IOS_CLIENT_ID,
+    offlineAccess: false,
+  });
+}
 
 // ── Google Sign-In ──
-// Uses the OAuth 2.0 Authorization Code flow with PKCE — the only flow
-// that Google accepts for native mobile apps (iOS/Android OAuth clients).
-// The implicit id_token flow returns "unsupported_response_type" on these
-// client types. We request an authorization code, then exchange it
-// client-side for an id_token using PKCE (no client secret needed), and
-// finally send the id_token to our backend for verification as before.
 export async function performGoogleSignIn(): Promise<AuthResponse | null> {
   try {
-    const discovery = await AuthSession.fetchDiscoveryAsync('https://accounts.google.com');
-    // Google's official iOS OAuth redirect URI format:
-    //   com.googleusercontent.apps.{CLIENT_ID}:/oauth2redirect
-    // (single colon single slash, path literal "oauth2redirect" with the "2")
-    // Any other format triggers Google's "doesn't comply with OAuth 2.0 policy"
-    // error on Android. The module-level WebBrowser.maybeCompleteAuthSession()
-    // call in app/_layout.tsx now handles the single-slash redirect correctly
-    // on cold-start wakeups, so we no longer need the double-slash workaround.
-    const redirectUri = `${GOOGLE_REVERSED_SCHEME}:/oauth2redirect`;
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
 
-    const request = new AuthSession.AuthRequest({
-      clientId: GOOGLE_CLIENT_ID,
-      scopes: ['openid', 'profile', 'email'],
-      responseType: AuthSession.ResponseType.Code,
-      redirectUri,
-      usePKCE: true,
-    });
+    const response = await GoogleSignin.signIn();
 
-    const result = await request.promptAsync(discovery);
-
-    if (result.type !== 'success' || !result.params?.code) {
-      if (result.type === 'error') {
-        console.error('Google Sign-In auth error:', result.error, result.params);
-      }
-      return null;
-    }
-
-    // Exchange the authorization code for tokens (PKCE).
-    const tokenResponse = await AuthSession.exchangeCodeAsync(
-      {
-        clientId: GOOGLE_CLIENT_ID,
-        code: result.params.code,
-        redirectUri,
-        extraParams: {
-          code_verifier: request.codeVerifier ?? '',
-        },
-      },
-      discovery,
-    );
-
-    const idToken = tokenResponse.idToken;
+    const idToken = response.data?.idToken;
     if (!idToken) {
-      console.error('Google Sign-In: no id_token in token response');
+      console.error('Google Sign-In: no idToken in response');
       return null;
     }
 
+    // Send to our backend for verification and account creation/login
     const { data } = await api.post<AuthResponse>('/auth/google', { idToken });
     return data;
-  } catch (err) {
-    console.error('Google Sign-In exception:', err);
+  } catch (error: any) {
+    if (isErrorWithCode(error)) {
+      switch (error.code) {
+        case statusCodes.SIGN_IN_CANCELLED:
+          // User cancelled — not an error
+          return null;
+        case statusCodes.IN_PROGRESS:
+          // Sign-in already in progress
+          return null;
+        case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+          console.error('Google Play Services not available');
+          return null;
+        default:
+          console.error('Google Sign-In error code:', error.code, error.message);
+          return null;
+      }
+    }
+    console.error('Google Sign-In exception:', error);
     return null;
   }
 }

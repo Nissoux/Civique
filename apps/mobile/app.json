@@ -5,11 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": [
-      "civique",
-      "com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf",
-      "com.googleusercontent.apps.593427095159-lq6gta272m2fulbfporu887i60c0kd59"
-    ],
+    "scheme": "civique",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
@@ -43,7 +39,13 @@
     "plugins": [
       "expo-router",
       "expo-secure-store",
-      "expo-apple-authentication"
+      "expo-apple-authentication",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.593427095159-374od3aoal2tvm9lutvp383po7kaknrf"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
