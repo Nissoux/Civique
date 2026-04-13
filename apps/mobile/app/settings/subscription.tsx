@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Alert,
   Platform,
+  Linking,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -308,6 +309,17 @@ export default function SubscriptionScreen() {
       <Text style={[styles.legalText, { color: c.textTertiary }]}>
         {LEGAL_SUBSCRIPTION_TEXT}
       </Text>
+
+      {/* Privacy Policy + Terms of Use links — required by Apple 3.1.2(c) */}
+      <View style={styles.legalLinks}>
+        <AnimatedPressable onPress={() => Linking.openURL('https://api.integrafle.fr/privacy')}>
+          <Text style={[styles.legalLink, { color: c.primary }]}>Politique de confidentialité</Text>
+        </AnimatedPressable>
+        <Text style={[styles.legalSeparator, { color: c.textTertiary }]}>•</Text>
+        <AnimatedPressable onPress={() => Linking.openURL('https://api.integrafle.fr/terms')}>
+          <Text style={[styles.legalLink, { color: c.primary }]}>Conditions d'utilisation</Text>
+        </AnimatedPressable>
+      </View>
     </ScrollView>
   );
 }
@@ -459,5 +471,21 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     textAlign: 'center',
     marginTop: spacing.md,
+  },
+  legalLinks: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+    marginBottom: spacing.md,
+  },
+  legalLink: {
+    fontSize: 12,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
+  legalSeparator: {
+    fontSize: 12,
   },
 });
