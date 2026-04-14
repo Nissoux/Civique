@@ -134,24 +134,26 @@ export default async function questionRoutes(app: FastifyInstance) {
       });
 
       const perThemeCount = Math.ceil(query.limit / allThemes.length);
+
+      // Single query across all themes (was N+1: one per theme). ORDER BY
+      // RANDOM() at the SQL layer survives the JS filter, so each theme
+      // still receives a uniformly random sample of its own questions.
+      const allResults = await db.query.questions.findMany({
+        where,
+        orderBy: sql`RANDOM()`,
+        with: {
+          translations: query.lang && query.lang !== 'fr'
+            ? { where: eq(questionTranslations.lang, query.lang) }
+            : undefined,
+        },
+      });
+
       const perThemeQuestions: QuestionRow[] = [];
-
       for (const theme of allThemes) {
-        const themeConditions = [...conditions, eq(questions.themeId, theme.id)];
-        const themeWhere = and(...themeConditions);
-
-        const themeResults = await db.query.questions.findMany({
-          where: themeWhere,
-          limit: perThemeCount,
-          orderBy: sql`RANDOM()`,
-          with: {
-            translations: query.lang && query.lang !== 'fr'
-              ? { where: eq(questionTranslations.lang, query.lang) }
-              : undefined,
-          },
-        });
-
-        perThemeQuestions.push(...(themeResults as QuestionRow[]));
+        const themeSlice = (allResults as QuestionRow[])
+          .filter((q) => q.themeId === theme.id)
+          .slice(0, perThemeCount);
+        perThemeQuestions.push(...themeSlice);
       }
 
       // Shuffle the combined results
