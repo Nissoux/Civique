@@ -1,21 +1,9 @@
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
-import { eq, and, sql } from 'drizzle-orm';
+import { eq, and } from 'drizzle-orm';
 import { db } from '../../config/database.js';
 import { users, promoCodes, promoRedemptions } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
-import { env } from '../../config/env.js';
-
-const createCheckoutSchema = z.object({
-  plan: z.enum(['weekly', 'monthly', 'semiannual']),
-});
-
-// Prices: Weekly 3.99€, Monthly 10.99€, 6 months 39.99€
-const STRIPE_PRICES: Record<string, { priceId: string; mode: 'subscription' | 'payment' }> = {
-  weekly: { priceId: process.env.STRIPE_PRICE_WEEKLY || 'price_1TG5ueQ2N6UyO2vPxFEV6yqN', mode: 'subscription' },
-  monthly: { priceId: process.env.STRIPE_PRICE_MONTHLY || 'price_1TG5ufQ2N6UyO2vP2vmSmaTX', mode: 'subscription' },
-  semiannual: { priceId: process.env.STRIPE_PRICE_SEMIANNUAL || 'price_1TG5ufQ2N6UyO2vPSuxsRTnj', mode: 'payment' },
-};
 
 export default async function paymentRoutes(app: FastifyInstance) {
   // ── GET /subscription ───────────────────────────────────
@@ -28,7 +16,6 @@ export default async function paymentRoutes(app: FastifyInstance) {
       columns: {
         isPremium: true,
         premiumExpires: true,
-        stripeCustomerId: true,
       },
     });
 
@@ -44,128 +31,8 @@ export default async function paymentRoutes(app: FastifyInstance) {
       data: {
         isPremium: isActive,
         premiumExpires: user.premiumExpires,
-        hasStripeCustomer: !!user.stripeCustomerId,
       },
     };
-  });
-
-  // ── POST /create-checkout ───────────────────────────────
-  // Create a Stripe Checkout Session
-  app.post('/create-checkout', { preHandler: authGuard }, async (request, reply) => {
-    const userId = request.currentUser!.id;
-    const body = createCheckoutSchema.parse(request.body);
-
-    const stripeKey = env.STRIPE_SECRET_KEY;
-    if (!stripeKey) {
-      return reply.status(503).send({ error: 'Paiement non configuré' });
-    }
-
-    const planConfig = STRIPE_PRICES[body.plan];
-    if (!planConfig) {
-      return reply.status(400).send({ error: 'Plan invalide' });
-    }
-
-    // Create Stripe Checkout Session via API
-    const params = new URLSearchParams();
-    params.append('line_items[0][price]', planConfig.priceId);
-    params.append('line_items[0][quantity]', '1');
-    params.append('mode', planConfig.mode);
-    params.append('success_url', 'https://api.integrafle.fr/payment-success');
-    params.append('cancel_url', 'https://api.integrafle.fr/payment-cancel');
-    params.append('client_reference_id', userId);
-    params.append('metadata[userId]', userId);
-    params.append('metadata[plan]', body.plan);
-
-    const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${stripeKey}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: params.toString(),
-    });
-
-    const session = await response.json() as { id: string; url: string; error?: { message: string } };
-
-    if (!response.ok || session.error) {
-      return reply.status(502).send({ error: session.error?.message || 'Erreur Stripe' });
-    }
-
-    return reply.status(201).send({
-      data: {
-        checkoutUrl: session.url,
-        sessionId: session.id,
-        plan: body.plan,
-      },
-    });
-  });
-
-  // ── POST /webhook/stripe ────────────────────────────────
-  // Stripe webhook handler (no auth - Stripe calls this directly)
-  app.post('/webhook/stripe', async (request, reply) => {
-    // Stripe signature validation — enable when Stripe is configured
-    // const sig = request.headers['stripe-signature'];
-    // const event = stripe.webhooks.constructEvent(request.rawBody, sig, env.STRIPE_WEBHOOK_SECRET);
-
-    const event = request.body as {
-      type: string;
-      data: {
-        object: {
-          customer?: string;
-          client_reference_id?: string;
-          metadata?: Record<string, string>;
-        };
-      };
-    };
-
-    app.log.info({ eventType: event.type }, 'Stripe webhook received');
-
-    if (event.type === 'checkout.session.completed') {
-      const session = event.data.object;
-      const userId = session.client_reference_id ?? session.metadata?.userId;
-      const plan = session.metadata?.plan || 'lifetime';
-
-      if (userId) {
-        // Set expiry based on plan
-        let premiumExpires: Date | null;
-        if (plan === 'semiannual') {
-          premiumExpires = new Date(Date.now() + 180 * 24 * 60 * 60 * 1000); // 6 months
-        } else if (plan === 'weekly') {
-          premiumExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-        } else {
-          premiumExpires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
-        }
-
-        await db
-          .update(users)
-          .set({
-            isPremium: true,
-            premiumExpires,
-            stripeCustomerId: session.customer ?? undefined,
-            updatedAt: new Date(),
-          })
-          .where(eq(users.id, userId));
-
-        app.log.info({ userId, plan }, 'User upgraded to premium via Stripe');
-      }
-    } else if (event.type === 'customer.subscription.deleted') {
-      const subscription = event.data.object;
-      const customerId = subscription.customer;
-
-      if (customerId) {
-        await db
-          .update(users)
-          .set({
-            isPremium: false,
-            updatedAt: new Date(),
-          })
-          .where(eq(users.stripeCustomerId, customerId));
-
-        app.log.info({ customerId }, 'User premium cancelled via Stripe');
-      }
-    }
-
-    return reply.status(200).send({ received: true });
   });
 
   // ── POST /webhook/revenuecat ────────────────────────────
