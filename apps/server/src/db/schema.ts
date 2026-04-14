@@ -50,13 +50,11 @@ export const users = pgTable(
     emailVerified: boolean('email_verified').notNull().default(false),
     isPremium: boolean('is_premium').notNull().default(false),
     premiumExpires: timestamp('premium_expires', { withTimezone: true }),
-    stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => ({
     emailIdx: index('users_email_idx').on(table.email),
-    stripeCustomerIdx: index('users_stripe_customer_idx').on(table.stripeCustomerId),
   }),
 );
 
