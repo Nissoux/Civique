@@ -75,36 +75,32 @@ export default async function examRoutes(app: FastifyInstance) {
 
     const selectedQuestionIds: number[] = [];
 
+    // Pull each question type once across all themes in a single SQL round-trip
+    // (was N+1: 2 queries per theme). Random order is applied at the SQL layer
+    // and survives the JS filter below, so every theme still samples uniformly.
+    const knowledgeConditions = [eq(questions.type, 'knowledge')];
+    if (examTypeFilter) knowledgeConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+    const knowledgePool = await db
+      .select({ id: questions.id, themeId: questions.themeId })
+      .from(questions)
+      .where(and(...knowledgeConditions))
+      .orderBy(sql`RANDOM()`);
+
+    const situationalConditions = [eq(questions.type, 'situational')];
+    if (examTypeFilter) situationalConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+    const situationalPool = await db
+      .select({ id: questions.id, themeId: questions.themeId })
+      .from(questions)
+      .where(and(...situationalConditions))
+      .orderBy(sql`RANDOM()`);
+
     for (let i = 0; i < allThemes.length; i++) {
       const themeId = allThemes[i].id;
       const knowledgeNeeded = knowledgePerTheme + (i < knowledgeRemainder ? 1 : 0);
       const situationalNeeded = situationalPerTheme + (i < situationalRemainder ? 1 : 0);
 
-      const knowledgeConditions = [
-        eq(questions.themeId, themeId),
-        eq(questions.type, 'knowledge'),
-      ];
-      if (examTypeFilter) knowledgeConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
-
-      const knowledgeQs = await db
-        .select({ id: questions.id })
-        .from(questions)
-        .where(and(...knowledgeConditions))
-        .orderBy(sql`RANDOM()`)
-        .limit(knowledgeNeeded);
-
-      const situationalConditions = [
-        eq(questions.themeId, themeId),
-        eq(questions.type, 'situational'),
-      ];
-      if (examTypeFilter) situationalConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
-
-      const situationalQs = await db
-        .select({ id: questions.id })
-        .from(questions)
-        .where(and(...situationalConditions))
-        .orderBy(sql`RANDOM()`)
-        .limit(situationalNeeded);
+      const knowledgeQs = knowledgePool.filter((q) => q.themeId === themeId).slice(0, knowledgeNeeded);
+      const situationalQs = situationalPool.filter((q) => q.themeId === themeId).slice(0, situationalNeeded);
 
       for (const q of knowledgeQs) selectedQuestionIds.push(q.id);
       for (const q of situationalQs) selectedQuestionIds.push(q.id);
