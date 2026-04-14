@@ -98,13 +98,25 @@ async function signIn() {
 | **Android** | Google Play Services détecte auto | Package name + SHA-1 du keystore EAS production |
 | **Web** | `webClientId` pour idToken | Redirect URI = pas nécessaire pour mobile |
 
-#### ⚠️ SHA-1 Android critique
-Le SHA-1 dans le client Android Google Cloud **DOIT** correspondre au keystore EAS production :
+#### ⚠️ SHA-1 Android — DEUX clés à configurer
+Google Play utilise **deux clés** distinctes :
+1. **Upload key** (ton keystore EAS) — utilisé pour signer les builds envoyés à Google
+2. **App Signing key** (clé Google) — utilisé par Google pour re-signer l'AAB avant distribution aux users
+
+**Les DEUX SHA-1 doivent être dans le client Android Google Cloud Console.** Sinon :
+- APK preview (signé upload key) → marche ✅
+- AAB Play Store tests fermés/production (signé App Signing key) → échoue silencieusement ❌
+
 ```bash
+# SHA-1 de l'upload key
 eas credentials --platform android
-# → SHA1 Fingerprint: XX:XX:XX:...
+
+# SHA-1 de l'App Signing key
+# → Google Play Console → Configuration → Intégrité de l'application
+# → Certificat de la clé de signature de l'appli → SHA-1
 ```
-Si ça ne matche pas → Google Sign-In échouera silencieusement sur Android.
+
+Ajouter les deux SHA-1 dans Google Cloud Console → Credentials → client Android → fingerprints.
 
 #### Pourquoi ça marche (et pas les autres)
 - Android : utilise **Google Play Services** nativement (pas de browser, pas de redirect URI)
