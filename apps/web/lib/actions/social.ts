@@ -3,13 +3,19 @@
 import { revalidatePath } from 'next/cache';
 import type { FriendshipStatus } from '@civique/shared';
 import { ApiError } from '@/lib/server/api';
+import { getCurrentUser } from '@/lib/server/me';
 import {
   requestFriend,
   respondFriend,
+  searchUsers,
   createChallenge,
   postComment,
   getComments,
+  submitChallengeAnswer,
+  finishChallenge,
   type CommentWithUser,
+  type UserSearchResult,
+  type FinishChallengeResult,
 } from '@/lib/server/social';
 import type { FormState } from '@/lib/auth-types';
 
@@ -104,6 +110,45 @@ export async function respondFriendFormAction(formData: FormData): Promise<void>
   await respondFriendAction(id, status);
 }
 
+// ── User search ───────────────────────────────────────────
+
+export type SearchUsersResult =
+  | { ok: true; results: UserSearchResult[] }
+  | { ok: false; error: string };
+
+/**
+ * Search users by name or email for the "add friend" UI.
+ *
+ * - Returns an empty list when `q` is too short (< 2 chars) — the UI
+ *   uses this as the "idle" state.
+ * - Filters out the current user defensively (the backend already does).
+ * - Returns `{ ok: false, error }` for auth or unexpected failures.
+ *   Rate-limited responses (429) are converted to an empty list by
+ *   `searchUsers` itself, so the UI just shows "no results".
+ */
+export async function searchUsersAction(q: string): Promise<SearchUsersResult> {
+  const trimmed = (q ?? '').trim();
+  if (trimmed.length < 2) {
+    return { ok: true, results: [] };
+  }
+
+  const me = await getCurrentUser();
+  if (!me) {
+    return { ok: false, error: 'Vous devez être connecté pour rechercher.' };
+  }
+
+  try {
+    const results = await searchUsers(trimmed);
+    const filtered = results.filter((r) => r.id !== me.id);
+    return { ok: true, results: filtered };
+  } catch (err) {
+    if (err instanceof ApiError) {
+      return { ok: false, error: err.userMessage };
+    }
+    return { ok: false, error: 'Recherche indisponible pour le moment.' };
+  }
+}
+
 // ── Challenges ────────────────────────────────────────────
 
 export interface CreateChallengeResult {
@@ -157,6 +202,80 @@ export async function acceptChallengeAction(
     error:
       'Les défis deviennent actifs dès que vous répondez à la première question.',
   };
+}
+
+// ── Challenge play (answer + finish) ──────────────────────
+
+export interface SubmitChallengeAnswerActionParams {
+  challengeId: string;
+  questionId: number;
+  selectedChoice: 'a' | 'b' | 'c' | 'd';
+  timeSpentMs?: number;
+}
+
+export interface SubmitChallengeAnswerActionResult {
+  ok: boolean;
+  error?: string;
+  isCorrect?: boolean;
+  currentScore?: number;
+  totalAnswered?: number;
+}
+
+export async function submitChallengeAnswerAction(
+  params: SubmitChallengeAnswerActionParams,
+): Promise<SubmitChallengeAnswerActionResult> {
+  if (!params.challengeId || typeof params.challengeId !== 'string') {
+    return { ok: false, error: 'Défi introuvable.' };
+  }
+  if (!Number.isFinite(params.questionId) || params.questionId <= 0) {
+    return { ok: false, error: 'Question invalide.' };
+  }
+  if (!['a', 'b', 'c', 'd'].includes(params.selectedChoice)) {
+    return { ok: false, error: 'Choix invalide.' };
+  }
+  try {
+    const res = await submitChallengeAnswer(params.challengeId, {
+      questionId: params.questionId,
+      selectedChoice: params.selectedChoice,
+      timeSpentMs: params.timeSpentMs,
+    });
+    return {
+      ok: true,
+      isCorrect: res.isCorrect,
+      currentScore: res.currentScore,
+      totalAnswered: res.totalAnswered,
+    };
+  } catch (err) {
+    if (err instanceof ApiError) {
+      return { ok: false, error: err.userMessage };
+    }
+    return { ok: false, error: 'Impossible d’enregistrer la réponse.' };
+  }
+}
+
+export interface FinishChallengeActionResult {
+  ok: boolean;
+  error?: string;
+  challenge?: FinishChallengeResult;
+}
+
+export async function finishChallengeAction(
+  challengeId: string,
+): Promise<FinishChallengeActionResult> {
+  if (!challengeId || typeof challengeId !== 'string') {
+    return { ok: false, error: 'Défi introuvable.' };
+  }
+  try {
+    const challenge = await finishChallenge(challengeId);
+    revalidatePath(`/app/social/challenges/${challengeId}`);
+    revalidatePath('/app/social/challenges');
+    return { ok: true, challenge };
+  } catch (err) {
+    if (err instanceof ApiError) {
+      return { ok: false, error: err.userMessage };
+    }
+    return { ok: false, error: 'Impossible de terminer le défi.' };
+  }
 }
 
 // ── Comments ──────────────────────────────────────────────

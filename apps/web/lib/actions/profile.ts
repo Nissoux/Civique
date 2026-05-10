@@ -5,11 +5,15 @@ import { revalidatePath } from 'next/cache';
 import type { Language } from '@civique/shared';
 import { LANGUAGES } from '@civique/shared';
 import { ApiError, fastifyFetch } from '@/lib/server/api';
+import { getCurrentUser } from '@/lib/server/me';
 import { clearSessionCookies } from '@/lib/server/session';
 import { clearCurrentExamType } from '@/lib/server/examType';
 import type { FormState } from '@/lib/auth-types';
 
 const VALID_LANG_CODES = new Set<Language>(LANGUAGES.map((l) => l.code));
+
+// Simple RFC-5322-ish email validation — same shape the API also enforces.
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // ── Update profile (display name + lang) ─────────────────
 
@@ -19,8 +23,13 @@ export async function updateProfileAction(
 ): Promise<FormState> {
   const displayNameRaw = formData.get('displayName');
   const preferredLangRaw = formData.get('preferredLang');
+  const emailRaw = formData.get('email');
 
-  const payload: { displayName?: string; preferredLang?: Language } = {};
+  const payload: {
+    displayName?: string;
+    preferredLang?: Language;
+    email?: string;
+  } = {};
 
   if (typeof displayNameRaw === 'string') {
     const trimmed = displayNameRaw.trim();
@@ -40,6 +49,23 @@ export async function updateProfileAction(
     payload.preferredLang = preferredLangRaw as Language;
   }
 
+  // Email: only forward to the API if it actually differs from the current one.
+  let emailChanged = false;
+  if (typeof emailRaw === 'string') {
+    const normalized = emailRaw.trim().toLowerCase();
+    if (normalized.length > 0) {
+      if (!EMAIL_RE.test(normalized) || normalized.length > 254) {
+        return { error: 'Adresse e-mail invalide.' };
+      }
+      const me = await getCurrentUser();
+      const currentEmail = me?.email.trim().toLowerCase() ?? '';
+      if (normalized !== currentEmail) {
+        payload.email = normalized;
+        emailChanged = true;
+      }
+    }
+  }
+
   if (Object.keys(payload).length === 0) {
     return { error: 'Aucune modification à enregistrer.' };
   }
@@ -52,6 +78,10 @@ export async function updateProfileAction(
     );
   } catch (err) {
     if (err instanceof ApiError) {
+      // 409 → email collision. Surface a clear, actionable message.
+      if (err.status === 409) {
+        return { error: 'Cet email est déjà utilisé par un autre compte.' };
+      }
       return { error: err.userMessage };
     }
     return { error: 'Impossible de mettre à jour votre profil.' };
@@ -59,6 +89,14 @@ export async function updateProfileAction(
 
   revalidatePath('/app/profile');
   revalidatePath('/app');
+
+  if (emailChanged) {
+    return {
+      message:
+        'Email mis à jour. Vérifiez votre boîte de réception pour confirmer la nouvelle adresse.',
+      emailChanged: true,
+    };
+  }
   return { message: 'Profil mis à jour.' };
 }
 

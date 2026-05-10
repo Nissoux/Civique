@@ -5,7 +5,7 @@ import type {
   Comment,
   FriendshipStatus,
 } from '@civique/shared';
-import { fastifyFetch } from './api';
+import { ApiError, fastifyFetch } from './api';
 
 // ── Types ─────────────────────────────────────────────────
 
@@ -16,6 +16,17 @@ export interface LeaderboardEntry {
   bestScore: number;
   examCount: number;
   userId?: string;
+}
+
+/**
+ * One row in the user search results returned by POST /users/search.
+ * The backend excludes the current user automatically.
+ */
+export interface UserSearchResult {
+  id: string;
+  displayName: string;
+  avatarUrl?: string | null;
+  email: string;
 }
 
 export type LeaderboardPeriod = 'week' | 'month' | 'all';
@@ -118,6 +129,47 @@ export async function respondFriend(
   return res.data;
 }
 
+// ── User search ───────────────────────────────────────────
+
+/**
+ * Search the user directory by display name or email.
+ * Backend route: POST /users/search with `{ q, limit? }`.
+ *
+ * - Requires at least 2 characters in `q` (the backend enforces this too).
+ * - Excludes the current user from results server-side.
+ * - 429 responses (per-user rate limit, 10/min) are swallowed:
+ *   we return an empty array and log a warning so the UI degrades gracefully.
+ */
+export async function searchUsers(
+  q: string,
+  limit?: number,
+): Promise<UserSearchResult[]> {
+  const trimmed = q.trim();
+  if (trimmed.length < 2) return [];
+
+  const body: { q: string; limit?: number } = { q: trimmed };
+  if (typeof limit === 'number' && Number.isFinite(limit)) {
+    body.limit = Math.max(1, Math.min(20, Math.floor(limit)));
+  }
+
+  try {
+    const res = await fastifyFetch<{ data: UserSearchResult[] }>(
+      '/users/search',
+      { method: 'POST', body: JSON.stringify(body) },
+      { auth: true },
+    );
+    return res.data;
+  } catch (err) {
+    if (err instanceof ApiError && err.status === 429) {
+      console.warn(
+        '[searchUsers] rate-limited by API (429); returning empty results',
+      );
+      return [];
+    }
+    throw err;
+  }
+}
+
 // ── Challenges ────────────────────────────────────────────
 
 export async function getChallenges(): Promise<ChallengeWithUsers[]> {
@@ -150,6 +202,53 @@ export async function getChallenge(id: string): Promise<ChallengeDetail> {
   const res = await fastifyFetch<{ data: ChallengeDetail }>(
     `/social/challenges/${id}`,
     { method: 'GET' },
+    { auth: true },
+  );
+  return res.data;
+}
+
+export interface SubmitChallengeAnswerParams {
+  questionId: number;
+  selectedChoice: 'a' | 'b' | 'c' | 'd';
+  timeSpentMs?: number;
+}
+
+export interface SubmitChallengeAnswerResult {
+  isCorrect: boolean;
+  currentScore: number;
+  totalAnswered: number;
+  answerId: number;
+}
+
+export async function submitChallengeAnswer(
+  challengeId: string,
+  params: SubmitChallengeAnswerParams,
+): Promise<SubmitChallengeAnswerResult> {
+  const res = await fastifyFetch<{ data: SubmitChallengeAnswerResult }>(
+    `/social/challenges/${challengeId}/answer`,
+    { method: 'POST', body: JSON.stringify(params) },
+    { auth: true },
+  );
+  return res.data;
+}
+
+/**
+ * The /finish endpoint returns the full Challenge object enriched with
+ * both participants, theme, plus `winnerId` and `isDraw` markers.
+ */
+export interface FinishChallengeResult extends ChallengeWithUsers {
+  winnerId: string | null;
+  isDraw: boolean;
+  myScore?: number;
+  totalQuestions?: number;
+}
+
+export async function finishChallenge(
+  challengeId: string,
+): Promise<FinishChallengeResult> {
+  const res = await fastifyFetch<{ data: FinishChallengeResult }>(
+    `/social/challenges/${challengeId}/finish`,
+    { method: 'POST' },
     { auth: true },
   );
   return res.data;

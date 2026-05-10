@@ -7,6 +7,7 @@ import {
 } from '@/lib/server/social';
 import { ApiError } from '@/lib/server/api';
 import { Avatar } from '@/components/social/Avatar';
+import { ChallengePlay } from '@/components/social/ChallengePlay';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -50,6 +51,45 @@ export default async function ChallengeDetailPage({ params }: PageProps) {
     else if ((myScore ?? 0) < (theirScore ?? 0)) winner = 'them';
     else winner = 'draw';
   }
+
+  // ─── Branch 1: user still has questions to answer → play view ──
+  // We render only the ChallengePlay component (it has its own header /
+  // progress bar). The user can return to this page after finishing.
+  const hasUnanswered = answeredCount < challenge.questionCount;
+  if (hasUnanswered) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <Link
+            href="/app/social/challenges"
+            className="
+              inline-flex items-center gap-1.5 text-sm font-semibold
+              text-aubergine hover:text-terracotta transition-colors
+            "
+          >
+            <span aria-hidden>←</span> Tous les défis
+          </Link>
+        </div>
+        <ChallengePlay
+          challengeId={challenge.id}
+          questions={questions}
+          currentUserId={user.id}
+          opponent={{
+            displayName: opponent.displayName,
+            avatarUrl: opponent.avatarUrl,
+          }}
+          themeId={challenge.theme?.id}
+          themeNameFr={challenge.theme?.nameFr}
+        />
+      </div>
+    );
+  }
+
+  // ─── Branch 2 + 3: user is done. Show versus header + summary list.
+  // If the opponent hasn't played yet, surface a "waiting" notice; otherwise
+  // we render the standard recap (winner banner is computed above).
+  const waitingForOpponent =
+    !isCompleted && (theirScore === null || theirScore === undefined);
 
   return (
     <div className="space-y-8">
@@ -225,12 +265,23 @@ export default async function ChallengeDetailPage({ params }: PageProps) {
           })}
         </ol>
 
-        {answeredCount < challenge.questionCount ? (
+        {waitingForOpponent ? (
           <div className="mt-6 card !rounded-2xl p-6 bg-bone-deep border-dashed">
-            <p className="text-sm text-aubergine font-display italic">
-              — La lecture des questions et la soumission de vos réponses
-              dans cette interface arrivent bientôt. En attendant, ouvrez
-              l'application mobile pour terminer le défi.
+            <p className="eyebrow mb-2">— En attente</p>
+            <p
+              className="font-display text-lg text-aubergine font-medium mb-1"
+              style={{ fontVariationSettings: "'opsz' 32" }}
+            >
+              On attend que{' '}
+              <span className="display-italic">
+                {opponent.displayName.split(' ')[0]}
+              </span>{' '}
+              joue.
+            </p>
+            <p className="text-sm text-ink-mute leading-relaxed">
+              Votre score est verrouillé ({myScore}/{challenge.questionCount}).
+              Le résultat final s’affichera ici dès que votre adversaire aura
+              terminé.
             </p>
           </div>
         ) : null}

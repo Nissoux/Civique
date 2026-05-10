@@ -10,4 +10,5 @@ export interface AuthResponse {
 export interface FormState {
   error?: string;
   message?: string;
+  emailChanged?: boolean;
 }

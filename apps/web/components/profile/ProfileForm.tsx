@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState } from 'react';
 import { LANGUAGES, type Language } from '@civique/shared';
 import { TextField } from '@/components/auth/TextField';
@@ -12,12 +13,15 @@ interface ProfileFormProps {
   initialDisplayName: string;
   initialLang: Language;
   email: string;
+  /** Defaults to `true` so accounts without the flag don't show the banner. */
+  emailVerified?: boolean;
 }
 
 export function ProfileForm({
   initialDisplayName,
   initialLang,
   email,
+  emailVerified = true,
 }: ProfileFormProps) {
   const [state, formAction] = useActionState<FormState, FormData>(
     updateProfileAction,
@@ -26,6 +30,27 @@ export function ProfileForm({
 
   return (
     <form action={formAction} className="space-y-5">
+      {!emailVerified ? (
+        <div
+          role="status"
+          className="
+            rounded-xl bg-saffron/15 border-[1.5px] border-saffron/50
+            px-4 py-3 text-sm text-aubergine
+            flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2
+          "
+        >
+          <span>
+            Votre email n&apos;est pas encore vérifié.
+          </span>
+          <Link
+            href="/verify-email"
+            className="font-semibold underline underline-offset-4 hover:text-terracotta"
+          >
+            Saisir le code →
+          </Link>
+        </div>
+      ) : null}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <TextField
           label="Nom d'affichage"
@@ -37,19 +62,18 @@ export function ProfileForm({
           required
         />
         <div className="flex flex-col">
-          <label htmlFor="email" className="field-label">
-            Adresse e-mail
-          </label>
-          <input
-            id="email"
+          <TextField
+            label="Adresse e-mail"
+            name="email"
             type="email"
-            value={email}
-            disabled
-            className="field-input opacity-70 cursor-not-allowed"
-            aria-readonly="true"
+            autoComplete="email"
+            defaultValue={email}
+            inputMode="email"
+            maxLength={254}
+            required
           />
-          <p className="text-xs text-ink-mute mt-2 font-display italic">
-            L'e-mail ne peut pas être modifié pour le moment.
+          <p className="text-xs text-ink-mute italic font-display mt-2">
+            En modifiant votre email, vous recevrez un code de vérification à 6 chiffres. Votre compte restera actif.
           </p>
         </div>
       </div>
@@ -82,6 +106,14 @@ export function ProfileForm({
       </div>
 
       <FormMessage error={state.error} message={state.message} />
+
+      {state.emailChanged ? (
+        <div className="flex justify-start">
+          <Link href="/verify-email" className="btn-primary">
+            Saisir le code de vérification →
+          </Link>
+        </div>
+      ) : null}
 
       <div className="flex justify-end">
         <SubmitButton full={false} pendingLabel="Enregistrement…">

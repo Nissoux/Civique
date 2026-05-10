@@ -91,6 +91,9 @@ export default async function ProfilePage() {
             initialDisplayName={user.displayName}
             initialLang={user.preferredLang}
             email={user.email}
+            emailVerified={
+              (user as { emailVerified?: boolean }).emailVerified !== false
+            }
           />
         </Section>
 
