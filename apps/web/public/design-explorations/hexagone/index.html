@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civique · Hexagone — exploration design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@200..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #0A1A2B;
+    --bg-elev: #0F2236;
+    --bg-card: #142B43;
+    --pearl: #F4F4F0;
+    --pearl-mid: #C5CCD2;
+    --pearl-mute: #7A8794;
+    --terracotta: #D45D3F;
+    --terracotta-deep: #B84725;
+    --blueprint: #4A7BA8;
+    --hairline: rgba(244, 244, 240, 0.10);
+    --hairline-strong: rgba(244, 244, 240, 0.22);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--pearl);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* blueprint grid background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(74, 123, 168, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 123, 168, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* radial glow top-right */
+  body::after {
+    content: '';
+    position: fixed; top: -300px; right: -200px; width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212, 93, 63, 0.12), transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  main, header, footer { position: relative; z-index: 1; }
+
+  .display { font-family: 'Instrument Serif', serif; font-weight: 400; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: 'zero', 'ss01'; }
+
+  .display-tight {
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  .accent { color: var(--terracotta); }
+  .pearl-mute { color: var(--pearl-mute); }
+  .pearl-mid { color: var(--pearl-mid); }
+
+  .label-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  .label-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pearl-mute);
+  }
+
+  /* sharp button — no rounding */
+  .btn-fill {
+    background: var(--terracotta);
+    color: var(--pearl);
+    font-weight: 600;
+    padding: 0.95rem 1.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    transition: all 0.25s ease;
+    border: 1px solid var(--terracotta);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-fill::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--terracotta-deep);
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.6, 0.0, 0.0, 1);
+  }
+  .btn-fill:hover::before { transform: translateX(0); }
+  .btn-fill span { position: relative; z-index: 1; }
+  .btn-fill .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .btn-fill:hover .arrow { transform: translateX(4px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--pearl);
+    font-weight: 500;
+    padding: 0.95rem 1.5rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--hairline-strong);
+    transition: all 0.25s ease;
+  }
+  .btn-outline:hover { border-color: var(--pearl); background: rgba(244, 244, 240, 0.04); }
+
+  /* hero numbers */
+  .stat-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--pearl);
+  }
+  .stat-num-italic { font-style: italic; color: var(--terracotta); }
+
+  /* rise stagger */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.8em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes mask-in {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  .rise { opacity: 0; animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .mask-in { clip-path: inset(0 100% 0 0); animation: mask-in 1.2s 0.3s cubic-bezier(0.6, 0.0, 0.0, 1) forwards; }
+  .d-1 { animation-delay: 0.1s; }
+  .d-2 { animation-delay: 0.25s; }
+  .d-3 { animation-delay: 0.45s; }
+  .d-4 { animation-delay: 0.65s; }
+  .d-5 { animation-delay: 0.85s; }
+  .d-6 { animation-delay: 1.05s; }
+
+  /* dossier rows */
+  .dossier-row {
+    border-top: 1px solid var(--hairline);
+    transition: background-color 0.4s ease, padding 0.5s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .dossier-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .dossier-row:hover { background: rgba(244, 244, 240, 0.025); padding-inline: 1.5rem; }
+  .dossier-row::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--terracotta);
+    transform: scaleY(0);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: top;
+  }
+  .dossier-row:hover::before { transform: scaleY(1); }
+  .dossier-row .meta-detail {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .dossier-row:hover .meta-detail { opacity: 1; transform: translateX(0); }
+
+  /* auth card — administrative document */
+  .doc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--hairline-strong);
+    position: relative;
+  }
+  .doc-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--terracotta) 0%, var(--terracotta) 33%, var(--pearl) 33%, var(--pearl) 66%, var(--blueprint) 66%);
+  }
+
+  .doc-corner {
+    position: absolute; width: 14px; height: 14px;
+    border-color: var(--terracotta);
+  }
+  .doc-corner.tl { top: 12px; left: 12px; border-top: 1px solid; border-left: 1px solid; }
+  .doc-corner.tr { top: 12px; right: 12px; border-top: 1px solid; border-right: 1px solid; }
+  .doc-corner.bl { bottom: 12px; left: 12px; border-bottom: 1px solid; border-left: 1px solid; }
+  .doc-corner.br { bottom: 12px; right: 12px; border-bottom: 1px solid; border-right: 1px solid; }
+
+  .field-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--hairline-strong);
+    padding: 0.65rem 0;
+    width: 100%;
+    color: var(--pearl);
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  .field-input:focus { outline: none; border-bottom-color: var(--terracotta); }
+  .field-input::placeholder { color: var(--pearl-mute); }
+
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pearl-mute);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  /* draw stroke for SVG hexagon map */
+  @keyframes draw-stroke {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes pulse-node {
+    0%, 100% { opacity: 0.95; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.06); }
+  }
+  .map-line {
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: draw-stroke 2.4s 0.8s cubic-bezier(0.6, 0.0, 0.0, 1) forwards;
+  }
+  .map-node {
+    transform-origin: center;
+    animation: pulse-node 3s ease-in-out infinite;
+  }
+  .map-node-1 { animation-delay: 0s; }
+  .map-node-2 { animation-delay: 0.5s; }
+  .map-node-3 { animation-delay: 1s; }
+  .map-node-4 { animation-delay: 1.5s; }
+  .map-node-5 { animation-delay: 2s; }
+
+  ::selection { background: var(--terracotta); color: var(--pearl); }
+
+  .hairline { border-color: var(--hairline); }
+
+  /* link underline draw */
+  .link-draw { position: relative; transition: color 0.25s ease; }
+  .link-draw::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .link-draw:hover::after { transform: scaleX(1); }
+</style>
+</head>
+<body>
+
+<!-- masthead -->
+<header class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <span class="display text-[1.65rem] tracking-tight" style="line-height: 1">Civique</span>
+      <span class="label-meta">N°2026 / Vol. I</span>
+    </div>
+    <nav class="flex gap-8 text-[0.92rem]">
+      <a href="#themes" class="link-draw pearl-mid">Programme</a>
+      <a href="#" class="link-draw pearl-mid">Méthode</a>
+      <a href="#" class="link-draw pearl-mid">Tarifs</a>
+      <a href="#auth" class="link-draw">Connexion</a>
+    </nav>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 pt-24 pb-20 grid grid-cols-12 gap-10">
+    <div class="col-span-7">
+      <div class="rise d-1 label-eyebrow mb-9">— Préparation civique · Édition 2026</div>
+
+      <h1 class="display display-tight text-[clamp(3.5rem,8vw,7rem)] mb-9">
+        <span class="rise d-2 inline-block">Réussir l'examen</span><br/>
+        <span class="rise d-3 inline-block">de naturalisation,</span><br/>
+        <span class="rise d-4 inline-block" style="font-style: italic; color: var(--terracotta)">avec méthode.</span>
+      </h1>
+
+      <p class="rise d-4 max-w-[30rem] text-[1.1rem] leading-[1.6] pearl-mid mb-10">
+        Une plateforme rigoureuse de préparation à l'entretien préfectoral. Les cinq thèmes officiels, des centaines de questions, six langues.
+      </p>
+
+      <div class="rise d-5 flex items-center gap-5 mb-16">
+        <a href="#auth" class="btn-fill"><span>Commencer la préparation <span class="arrow">→</span></span></a>
+        <a href="#themes" class="btn-outline">Voir le programme</a>
+      </div>
+
+      <!-- live stats -->
+      <div class="rise d-6 grid grid-cols-3 gap-10 pt-10 border-t hairline max-w-xl">
+        <div>
+          <div class="stat-num">12<span class="stat-num-italic">k+</span></div>
+          <div class="label-meta mt-1">Candidats préparés</div>
+        </div>
+        <div>
+          <div class="stat-num">94<span class="stat-num-italic">%</span></div>
+          <div class="label-meta mt-1">Taux de réussite</div>
+        </div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="label-meta mt-1">Langues</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- hexagonal France map -->
+    <div class="col-span-5 flex items-center justify-center relative">
+      <svg viewBox="0 0 460 540" class="w-full max-w-[460px]" fill="none">
+        <defs>
+          <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M0,10 L20,10 M10,0 L10,20" stroke="rgba(74, 123, 168, 0.08)" stroke-width="0.5"/>
+          </pattern>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- France hexagon outline (stylized) -->
+        <path
+          d="M 230,70 L 360,140 L 380,300 L 320,440 L 200,480 L 90,420 L 70,260 L 130,130 Z"
+          stroke="rgba(244, 244, 240, 0.2)"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+          fill="url(#grid-pattern)"
+          class="map-line"
+        />
+
+        <!-- inner connecting lines -->
+        <g stroke="rgba(212, 93, 63, 0.4)" stroke-width="0.8" stroke-dasharray="3,3">
+          <line x1="230" y1="180" x2="320" y2="240" class="map-line" style="animation-delay: 1.4s"/>
+          <line x1="320" y1="240" x2="280" y2="370" class="map-line" style="animation-delay: 1.6s"/>
+          <line x1="280" y1="370" x2="160" y2="380" class="map-line" style="animation-delay: 1.8s"/>
+          <line x1="160" y1="380" x2="140" y2="240" class="map-line" style="animation-delay: 2.0s"/>
+          <line x1="140" y1="240" x2="230" y2="180" class="map-line" style="animation-delay: 2.2s"/>
+        </g>
+
+        <!-- 5 theme nodes (hexagons) -->
+        <!-- Node 1: Republican principles (top) -->
+        <g transform="translate(230, 180)" class="map-node map-node-1">
+          <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#0F2236" stroke="#D45D3F" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="20" fill="#D45D3F">I</text>
+        </g>
+
+        <!-- Node 2: Institutional (right) -->
+        <g transform="translate(320, 240)" class="map-node map-node-2">
+          <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#0F2236" stroke="#F4F4F0" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="20" fill="#F4F4F0">II</text>
+        </g>
+
+        <!-- Node 3: Rights/duties (bottom-right) -->
+        <g transform="translate(280, 370)" class="map-node map-node-3">
+          <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#0F2236" stroke="#F4F4F0" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="20" fill="#F4F4F0">III</text>
+        </g>
+
+        <!-- Node 4: History (bottom-left) -->
+        <g transform="translate(160, 380)" class="map-node map-node-4">
+          <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#0F2236" stroke="#F4F4F0" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="20" fill="#F4F4F0">IV</text>
+        </g>
+
+        <!-- Node 5: Society (left) -->
+        <g transform="translate(140, 240)" class="map-node map-node-5">
+          <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#0F2236" stroke="#F4F4F0" stroke-width="1.5"/>
+          <text x="0" y="5" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="20" fill="#F4F4F0">V</text>
+        </g>
+
+        <!-- Coordinate marks -->
+        <g font-family="JetBrains Mono" font-size="9" fill="#7A8794" letter-spacing="1">
+          <text x="230" y="56">N 46°00'</text>
+          <text x="395" y="305" text-anchor="start">E 6°00'</text>
+          <text x="200" y="510" text-anchor="middle">S 41°00'</text>
+          <text x="55" y="265" text-anchor="end">W 4°00'</text>
+        </g>
+
+        <!-- corner ticks -->
+        <g stroke="#F4F4F0" stroke-width="1" opacity="0.4">
+          <line x1="20" y1="20" x2="20" y2="40"/><line x1="20" y1="20" x2="40" y2="20"/>
+          <line x1="440" y1="20" x2="440" y2="40"/><line x1="440" y1="20" x2="420" y2="20"/>
+          <line x1="20" y1="520" x2="20" y2="500"/><line x1="20" y1="520" x2="40" y2="520"/>
+          <line x1="440" y1="520" x2="440" y2="500"/><line x1="440" y1="520" x2="420" y2="520"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- hero meta strip -->
+  <div class="max-w-[1340px] mx-auto px-10 py-4 grid grid-cols-12 gap-10 border-t hairline label-meta">
+    <div class="col-span-3">↳ Mis à jour 03 · 2026</div>
+    <div class="col-span-6 text-center" style="text-transform: none; letter-spacing: 0.04em; font-size: 0.78rem">
+      <span class="display" style="font-style: italic; color: var(--pearl-mid); font-size: 0.95rem">Préparation reconnue par les centres préfectoraux</span>
+    </div>
+    <div class="col-span-3 text-right">Conforme livret 2024 →</div>
+  </div>
+</section>
+
+<!-- themes — dossier list -->
+<section id="themes" class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-24">
+    <div class="grid grid-cols-12 gap-10 mb-14">
+      <div class="col-span-3">
+        <div class="label-eyebrow mb-3">— 02. Programme</div>
+        <div class="label-meta">5 dossiers thématiques</div>
+      </div>
+      <h2 class="col-span-9 display display-tight text-[clamp(2.5rem,5vw,4.25rem)]">
+        Cinq thèmes,<br/>
+        <span style="font-style: italic; color: var(--terracotta)">un parcours structuré.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-12 gap-3 px-3 pb-3 label-meta border-b hairline mb-1">
+      <div class="col-span-1">№</div>
+      <div class="col-span-5">Thème</div>
+      <div class="col-span-2">Questions</div>
+      <div class="col-span-2">Fiches</div>
+      <div class="col-span-1">Niveau</div>
+      <div class="col-span-1 text-right">→</div>
+    </div>
+
+    <ol>
+      <li class="dossier-row grid grid-cols-12 gap-3 items-center px-3 py-5">
+        <div class="col-span-1 mono accent text-lg">01</div>
+        <div class="col-span-5">
+          <div class="display text-[1.5rem] leading-tight">Principes & valeurs de la République</div>
+          <div class="meta-detail label-meta mt-1.5" style="text-transform: none; letter-spacing: 0.04em">Devise · laïcité · symboles républicains</div>
+        </div>
+        <div class="col-span-2 mono pearl-mid">42</div>
+        <div class="col-span-2 mono pearl-mid">18</div>
+        <div class="col-span-1 mono pearl-mid">A</div>
+        <div class="col-span-1 text-right display text-2xl accent" style="font-style: italic">→</div>
+      </li>
+
+      <li class="dossier-row grid grid-cols-12 gap-3 items-center px-3 py-5">
+        <div class="col-span-1 mono accent text-lg">02</div>
+        <div class="col-span-5">
+          <div class="display text-[1.5rem] leading-tight">Système institutionnel & politique</div>
+          <div class="meta-detail label-meta mt-1.5" style="text-transform: none; letter-spacing: 0.04em">Pouvoirs · élections · collectivités · Europe</div>
+        </div>
+        <div class="col-span-2 mono pearl-mid">58</div>
+        <div class="col-span-2 mono pearl-mid">22</div>
+        <div class="col-span-1 mono pearl-mid">B</div>
+        <div class="col-span-1 text-right display text-2xl accent" style="font-style: italic">→</div>
+      </li>
+
+      <li class="dossier-row grid grid-cols-12 gap-3 items-center px-3 py-5">
+        <div class="col-span-1 mono accent text-lg">03</div>
+        <div class="col-span-5">
+          <div class="display text-[1.5rem] leading-tight">Droits & devoirs du citoyen</div>
+          <div class="meta-detail label-meta mt-1.5" style="text-transform: none; letter-spacing: 0.04em">Vote · justice · service · solidarité</div>
+        </div>
+        <div class="col-span-2 mono pearl-mid">36</div>
+        <div class="col-span-2 mono pearl-mid">14</div>
+        <div class="col-span-1 mono pearl-mid">B</div>
+        <div class="col-span-1 text-right display text-2xl accent" style="font-style: italic">→</div>
+      </li>
+
+      <li class="dossier-row grid grid-cols-12 gap-3 items-center px-3 py-5">
+        <div class="col-span-1 mono accent text-lg">04</div>
+        <div class="col-span-5">
+          <div class="display text-[1.5rem] leading-tight">Histoire, géographie & culture</div>
+          <div class="meta-detail label-meta mt-1.5" style="text-transform: none; letter-spacing: 0.04em">Grandes dates · régions · patrimoine · arts</div>
+        </div>
+        <div class="col-span-2 mono pearl-mid">94</div>
+        <div class="col-span-2 mono pearl-mid">38</div>
+        <div class="col-span-1 mono pearl-mid">C</div>
+        <div class="col-span-1 text-right display text-2xl accent" style="font-style: italic">→</div>
+      </li>
+
+      <li class="dossier-row grid grid-cols-12 gap-3 items-center px-3 py-5">
+        <div class="col-span-1 mono accent text-lg">05</div>
+        <div class="col-span-5">
+          <div class="display text-[1.5rem] leading-tight">Vivre dans la société française</div>
+          <div class="meta-detail label-meta mt-1.5" style="text-transform: none; letter-spacing: 0.04em">Travail · santé · école · vie quotidienne</div>
+        </div>
+        <div class="col-span-2 mono pearl-mid">48</div>
+        <div class="col-span-2 mono pearl-mid">19</div>
+        <div class="col-span-1 mono pearl-mid">B</div>
+        <div class="col-span-1 text-right display text-2xl accent" style="font-style: italic">→</div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- auth -->
+<section id="auth">
+  <div class="max-w-[1340px] mx-auto px-10 py-28 grid grid-cols-12 gap-10">
+    <div class="col-span-5 pt-4">
+      <div class="label-eyebrow mb-7">— 03. Accès au dossier</div>
+      <h2 class="display display-tight text-[clamp(2.5rem,4.5vw,3.75rem)] mb-7">
+        Ouvrir un<br/>
+        <span style="font-style: italic; color: var(--terracotta)">dossier privé</span>.
+      </h2>
+      <p class="leading-[1.65] mb-9 max-w-md pearl-mid">
+        Vos données restent strictement chiffrées. Aucune information n'est partagée avec un tiers, jamais.
+      </p>
+      <ul class="space-y-3.5 text-[0.92rem] pearl-mid">
+        <li class="flex gap-3">
+          <span class="mono accent text-xs pt-0.5">▮</span>
+          <span>Reprise sur tous vos appareils</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mono accent text-xs pt-0.5">▮</span>
+          <span>Six langues d'accompagnement</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mono accent text-xs pt-0.5">▮</span>
+          <span>Aucune carte bancaire requise</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="mono accent text-xs pt-0.5">▮</span>
+          <span>Suppression possible à tout moment</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-span-7">
+      <div class="doc-card p-12 pt-14 relative">
+        <span class="doc-corner tl"></span>
+        <span class="doc-corner tr"></span>
+        <span class="doc-corner bl"></span>
+        <span class="doc-corner br"></span>
+
+        <div class="flex items-baseline justify-between mb-2">
+          <span class="display text-[1.7rem]">Connexion sécurisée</span>
+          <span class="label-meta">FORM-LOG-001</span>
+        </div>
+        <div class="label-meta mb-10" style="text-transform: none; letter-spacing: 0.04em; font-size: 0.85rem">Identifiez-vous pour accéder à votre dossier de préparation</div>
+
+        <form class="space-y-6">
+          <div>
+            <label class="field-label">Adresse électronique</label>
+            <input type="email" class="field-input" placeholder="vous@exemple.fr" />
+          </div>
+          <div>
+            <label class="field-label">Mot de passe</label>
+            <input type="password" class="field-input" placeholder="••••••••••" />
+            <a href="#" class="link-draw label-meta inline-block mt-3" style="color: var(--terracotta); text-transform: none; letter-spacing: 0.04em">Réinitialiser →</a>
+          </div>
+          <div class="pt-3">
+            <button type="submit" class="btn-fill w-full"><span>Accéder à mon dossier <span class="arrow">→</span></span></button>
+          </div>
+        </form>
+
+        <div class="mt-10 pt-7 border-t hairline flex items-center justify-between">
+          <span class="label-meta" style="text-transform: none; letter-spacing: 0.04em; font-size: 0.85rem">Première fois ?</span>
+          <a href="#" class="link-draw text-[0.95rem]" style="color: var(--terracotta)">Créer un dossier →</a>
+        </div>
+
+        <!-- security badges -->
+        <div class="mt-8 flex items-center gap-5 label-meta">
+          <span class="flex items-center gap-2"><span class="accent">●</span> Chiffré TLS 1.3</span>
+          <span>·</span>
+          <span class="flex items-center gap-2"><span class="accent">●</span> RGPD conforme</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-7 flex justify-between items-center label-meta">
+    <span>Civique · MMXXVI · Tous droits réservés</span>
+    <span style="text-transform: none; letter-spacing: 0.04em">api.integrafle.fr / v.0.1.0</span>
+  </div>
+</footer>
+
+</body>
+</html>

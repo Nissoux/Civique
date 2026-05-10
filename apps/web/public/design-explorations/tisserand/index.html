@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civique · Tisserand — exploration design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Karla:wght@300..700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bone: #F4ECDD;
+    --bone-deep: #ECE0CB;
+    --bone-warm: #E5D6BA;
+    --aubergine: #2D1B2E;
+    --aubergine-mid: #4A2D43;
+    --ink-mute: #6E5B5F;
+    --terracotta: #C7522A;
+    --saffron: #E8A33D;
+    --teal: #5D7A6B;
+    --sienna: #8B5A3C;
+    --indigo: #364E80;
+    --hairline: rgba(45, 27, 46, 0.14);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Karla', system-ui, sans-serif;
+    background: var(--bone);
+    color: var(--aubergine);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'ss01';
+  }
+
+  /* woven texture (cross-hatch pattern) */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(45, 27, 46, 0.018) 0 2px, transparent 2px 8px),
+      repeating-linear-gradient(-45deg, rgba(45, 27, 46, 0.012) 0 2px, transparent 2px 8px);
+    pointer-events: none; z-index: 100;
+  }
+
+  .display { font-family: 'Newsreader', serif; font-feature-settings: 'lnum'; }
+
+  .display-tight {
+    font-variation-settings: 'opsz' 60;
+    line-height: 0.96;
+    letter-spacing: -0.018em;
+    font-weight: 500;
+  }
+
+  .display-italic {
+    font-style: italic;
+    font-variation-settings: 'opsz' 72;
+    font-weight: 400;
+  }
+
+  .accent-terracotta { color: var(--terracotta); }
+  .accent-saffron { color: var(--saffron); }
+  .accent-teal { color: var(--teal); }
+  .accent-sienna { color: var(--sienna); }
+  .text-mute { color: var(--ink-mute); }
+
+  .label-eyebrow {
+    font-family: 'Karla', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+
+  .hairline { border-color: var(--hairline); }
+
+  /* organic rounded button */
+  .btn-warm {
+    background: var(--terracotta);
+    color: var(--bone);
+    font-family: 'Karla', sans-serif;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    letter-spacing: 0.005em;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 0 var(--aubergine-mid), 0 8px 24px -8px rgba(199, 82, 42, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .btn-warm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--aubergine-mid), 0 12px 32px -8px rgba(199, 82, 42, 0.5);
+  }
+  .btn-warm:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--aubergine-mid), 0 4px 12px -4px rgba(199, 82, 42, 0.3);
+  }
+  .btn-warm .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .btn-warm:hover .arrow { transform: translateX(3px); }
+
+  .btn-soft {
+    background: transparent;
+    color: var(--aubergine);
+    font-family: 'Karla', sans-serif;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    border: 1.5px solid var(--aubergine);
+    transition: all 0.3s ease;
+  }
+  .btn-soft:hover { background: var(--aubergine); color: var(--bone); }
+
+  /* rise & weave animations */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.8em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes weave {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .rise { opacity: 0; animation: rise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .d-1 { animation-delay: 0.15s; }
+  .d-2 { animation-delay: 0.32s; }
+  .d-3 { animation-delay: 0.55s; }
+  .d-4 { animation-delay: 0.8s; }
+  .d-5 { animation-delay: 1.05s; }
+
+  .weave-thread {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: weave 2.4s 0.8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  }
+
+  /* welcome strip */
+  .welcome-strip {
+    background: var(--aubergine);
+    color: var(--bone);
+    overflow: hidden;
+  }
+  @keyframes scroll-strip {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .welcome-track {
+    display: flex;
+    gap: 3rem;
+    animation: scroll-strip 32s linear infinite;
+    width: max-content;
+    padding-block: 0.85rem;
+    align-items: center;
+  }
+  .welcome-track span {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    color: var(--saffron);
+  }
+  .welcome-track .dot { color: var(--bone); font-style: normal; opacity: 0.4; }
+
+  /* theme cards — embroidered */
+  .theme-card {
+    background: var(--bone-deep);
+    border: 1.5px solid var(--aubergine);
+    border-radius: 28px;
+    padding: 2rem 1.75rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 3px 0 var(--aubergine);
+    overflow: hidden;
+  }
+  .theme-card:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 0 9px 0 var(--aubergine), 0 18px 32px -12px rgba(45, 27, 46, 0.2);
+  }
+  .theme-card::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed var(--hairline);
+    border-radius: 22px;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .theme-card:hover::before { opacity: 0; }
+
+  .theme-num {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 4.5rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .theme-icon {
+    width: 64px; height: 64px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .theme-card:hover .theme-icon { transform: rotate(-8deg) scale(1.05); }
+
+  /* auth card */
+  .card-warm {
+    background: var(--bone);
+    border: 1.5px solid var(--aubergine);
+    border-radius: 32px;
+    padding: 2.5rem;
+    box-shadow: 0 6px 0 var(--aubergine), 0 30px 60px -25px rgba(45, 27, 46, 0.18);
+    position: relative;
+  }
+  .card-warm::after {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px dashed var(--sienna);
+    opacity: 0.35;
+    border-radius: 22px;
+    pointer-events: none;
+  }
+
+  .field-input {
+    background: var(--bone-deep);
+    border: 1.5px solid var(--aubergine);
+    border-radius: 14px;
+    padding: 0.85rem 1rem;
+    width: 100%;
+    color: var(--aubergine);
+    font-family: 'Karla', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  .field-input:focus {
+    outline: none;
+    background: var(--bone);
+    box-shadow: 0 0 0 3px rgba(199, 82, 42, 0.15);
+    border-color: var(--terracotta);
+  }
+  .field-input::placeholder { color: var(--ink-mute); opacity: 0.6; }
+
+  .field-label {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--aubergine);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  ::selection { background: var(--saffron); color: var(--aubergine); }
+
+  /* link */
+  .link-arrow {
+    position: relative;
+    color: var(--terracotta);
+    font-weight: 600;
+    transition: color 0.25s ease;
+  }
+  .link-arrow:hover { color: var(--aubergine); }
+
+  /* badges */
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--bone-warm);
+    border: 1px solid var(--aubergine);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .lang-pill {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: var(--bone);
+    border: 1px solid var(--aubergine);
+    border-radius: 999px;
+    padding: 0.32rem 0.75rem;
+    font-size: 0.85rem;
+    font-family: 'Newsreader', serif;
+    transition: all 0.3s ease;
+  }
+  .lang-pill:hover { background: var(--saffron); transform: translateY(-2px) rotate(-2deg); }
+
+  /* underline wavy */
+  .underline-wavy {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--saffron);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- top welcome strip -->
+<div class="welcome-strip border-b" style="border-color: var(--aubergine)">
+  <div class="welcome-track">
+    <span>مرحباً</span><span class="dot">·</span>
+    <span>Bienvenue</span><span class="dot">·</span>
+    <span>خوش آمدید</span><span class="dot">·</span>
+    <span>Bem-vindo</span><span class="dot">·</span>
+    <span>Bienvenidos</span><span class="dot">·</span>
+    <span>स्वागत है</span><span class="dot">·</span>
+    <!-- duplicate for seamless loop -->
+    <span>مرحباً</span><span class="dot">·</span>
+    <span>Bienvenue</span><span class="dot">·</span>
+    <span>خوش آمدید</span><span class="dot">·</span>
+    <span>Bem-vindo</span><span class="dot">·</span>
+    <span>Bienvenidos</span><span class="dot">·</span>
+    <span>स्वागत है</span><span class="dot">·</span>
+  </div>
+</div>
+
+<!-- masthead -->
+<header class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-6 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="#2D1B2E" stroke-width="1.5"/>
+        <path d="M8 16 Q12 8, 16 16 Q20 24, 24 16" stroke="#C7522A" stroke-width="2" fill="none"/>
+        <path d="M8 16 Q12 24, 16 16 Q20 8, 24 16" stroke="#E8A33D" stroke-width="2" fill="none"/>
+      </svg>
+      <span class="display text-[1.7rem] tracking-tight font-medium" style="font-variation-settings: 'opsz' 36">Civique</span>
+    </div>
+    <nav class="flex gap-9 text-[0.95rem] font-medium">
+      <a href="#themes">Le programme</a>
+      <a href="#">Notre méthode</a>
+      <a href="#auth">Se connecter</a>
+    </nav>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="border-b hairline relative">
+  <div class="max-w-[1340px] mx-auto px-10 py-24 grid grid-cols-12 gap-10 items-center">
+    <div class="col-span-7 relative z-10">
+      <div class="rise d-1 label-eyebrow mb-9">— Préparation à la naturalisation</div>
+
+      <h1 class="display display-tight text-[clamp(3.5rem,8.5vw,7.25rem)] mb-9">
+        <span class="rise d-2 inline-block">Devenir</span>
+        <span class="rise d-2 inline-block display-italic accent-terracotta">français·e</span>,<br/>
+        <span class="rise d-3 inline-block">à votre</span>
+        <span class="rise d-3 inline-block underline-wavy">rythme</span><span class="rise d-3 inline-block">.</span>
+      </h1>
+
+      <p class="rise d-4 max-w-[32rem] text-[1.15rem] leading-[1.65] text-mute mb-9">
+        Une préparation à l'<em class="display display-italic" style="color: var(--aubergine)">entretien officiel</em> pensée pour celles et ceux dont le français est une nouvelle voix. Six langues, cinq thèmes, un parcours qui s'adapte à vous.
+      </p>
+
+      <div class="rise d-4 flex items-center gap-4 mb-10 flex-wrap">
+        <a href="#auth" class="btn-warm">Commencer ma préparation <span class="arrow">→</span></a>
+        <a href="#themes" class="btn-soft">Voir le programme</a>
+      </div>
+
+      <!-- language pills -->
+      <div class="rise d-5 flex flex-wrap gap-2 items-center">
+        <span class="text-mute text-sm font-medium mr-2">disponible en</span>
+        <span class="lang-pill">🇫🇷 Français</span>
+        <span class="lang-pill">العربية</span>
+        <span class="lang-pill">فارسی</span>
+        <span class="lang-pill">Português</span>
+        <span class="lang-pill">Español</span>
+        <span class="lang-pill">हिन्दी</span>
+      </div>
+    </div>
+
+    <!-- woven threads illustration -->
+    <div class="col-span-5 flex items-center justify-center relative">
+      <svg viewBox="0 0 480 540" class="w-full max-w-[500px]" fill="none" stroke-width="6" stroke-linecap="round">
+        <!-- 5 threads weaving together representing 5 themes -->
+        <!-- each thread enters from a different direction and weaves through center -->
+
+        <!-- Thread 1: terracotta (top-left) -->
+        <path
+          d="M 30,80 Q 130,140 200,200 Q 260,260 200,340 Q 140,420 220,490"
+          stroke="#C7522A"
+          class="weave-thread"
+          style="animation-delay: 0.4s"
+        />
+        <!-- Thread 2: saffron (top) -->
+        <path
+          d="M 240,40 Q 280,140 220,210 Q 160,280 240,360 Q 320,440 260,510"
+          stroke="#E8A33D"
+          class="weave-thread"
+          style="animation-delay: 0.7s"
+        />
+        <!-- Thread 3: teal (top-right) -->
+        <path
+          d="M 450,100 Q 360,180 290,210 Q 220,240 270,320 Q 320,400 240,470"
+          stroke="#5D7A6B"
+          class="weave-thread"
+          style="animation-delay: 1.0s"
+        />
+        <!-- Thread 4: indigo (right) -->
+        <path
+          d="M 460,300 Q 370,290 290,250 Q 210,210 240,310 Q 270,410 350,460"
+          stroke="#364E80"
+          class="weave-thread"
+          style="animation-delay: 1.3s"
+        />
+        <!-- Thread 5: sienna (bottom) -->
+        <path
+          d="M 60,440 Q 160,400 220,330 Q 280,260 220,180 Q 160,100 220,30"
+          stroke="#8B5A3C"
+          class="weave-thread"
+          style="animation-delay: 1.6s"
+        />
+
+        <!-- center "knot" -->
+        <circle cx="240" cy="270" r="40" fill="#F4ECDD" stroke="#2D1B2E" stroke-width="2" style="animation: float 4s ease-in-out infinite"/>
+        <text x="240" y="278" text-anchor="middle" font-family="Newsreader" font-style="italic" font-size="22" fill="#2D1B2E" font-weight="500" stroke="none">vous</text>
+
+        <!-- decorative dots along edges -->
+        <g fill="#2D1B2E">
+          <circle cx="30" cy="80" r="5"/>
+          <circle cx="240" cy="40" r="5"/>
+          <circle cx="450" cy="100" r="5"/>
+          <circle cx="460" cy="300" r="5"/>
+          <circle cx="60" cy="440" r="5"/>
+        </g>
+        <g fill="#C7522A">
+          <circle cx="220" cy="490" r="6"/>
+          <circle cx="260" cy="510" r="6"/>
+          <circle cx="240" cy="470" r="6"/>
+          <circle cx="350" cy="460" r="6"/>
+          <circle cx="220" cy="30" r="6"/>
+        </g>
+      </svg>
+
+      <!-- floating sticker / témoignage -->
+      <div class="absolute top-10 right-2 px-4 py-3 rounded-3xl border-1.5 max-w-[180px]" style="background: var(--saffron); border: 1.5px solid var(--aubergine); transform: rotate(8deg); box-shadow: 0 4px 0 var(--aubergine); animation: float 5s ease-in-out infinite; animation-delay: 1s">
+        <div class="display display-italic text-[0.95rem] leading-snug" style="color: var(--aubergine)">« J'ai eu mon entretien la semaine dernière. »</div>
+        <div class="text-[0.75rem] mt-2 font-medium" style="color: var(--aubergine-mid)">— Amina, Marseille</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- themes -->
+<section id="themes" class="border-b hairline relative">
+  <div class="max-w-[1340px] mx-auto px-10 py-24">
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <div class="label-eyebrow mb-4">— Le programme officiel</div>
+      <h2 class="display display-tight text-[clamp(2.5rem,5vw,4.25rem)] mb-5">
+        Cinq thèmes,<br/>
+        <span class="display-italic accent-terracotta">cinq fils</span> à tisser ensemble.
+      </h2>
+      <p class="text-mute text-[1.05rem] leading-[1.6]">
+        Chaque thème est traité comme un parcours indépendant, à votre rythme. Tout reste accessible quand vous en avez besoin.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Theme 1 -->
+      <div class="theme-card">
+        <div class="flex justify-between items-start mb-4">
+          <div class="theme-icon" style="background: #C7522A">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F4ECDD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L4 8v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V8l-8-6z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <span class="theme-num accent-terracotta">I</span>
+        </div>
+        <h3 class="display display-tight text-[1.4rem] mb-3" style="font-variation-settings: 'opsz' 36">Principes & valeurs<br/>de la République</h3>
+        <p class="text-mute text-sm leading-[1.55] mb-4">Devise nationale, laïcité, symboles républicains et droits fondamentaux.</p>
+        <div class="flex items-center gap-3 text-xs font-medium">
+          <span class="pill">42 questions</span>
+          <span class="pill">18 fiches</span>
+        </div>
+      </div>
+
+      <!-- Theme 2 -->
+      <div class="theme-card">
+        <div class="flex justify-between items-start mb-4">
+          <div class="theme-icon" style="background: #E8A33D">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2D1B2E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="10" rx="1"/>
+              <path d="M5 11V7l7-5 7 5v4"/>
+              <path d="M9 21v-6h6v6"/>
+            </svg>
+          </div>
+          <span class="theme-num accent-saffron">II</span>
+        </div>
+        <h3 class="display display-tight text-[1.4rem] mb-3" style="font-variation-settings: 'opsz' 36">Système institutionnel<br/>& politique</h3>
+        <p class="text-mute text-sm leading-[1.55] mb-4">Pouvoirs, élections, collectivités locales, intégration européenne.</p>
+        <div class="flex items-center gap-3 text-xs font-medium">
+          <span class="pill">58 questions</span>
+          <span class="pill">22 fiches</span>
+        </div>
+      </div>
+
+      <!-- Theme 3 -->
+      <div class="theme-card">
+        <div class="flex justify-between items-start mb-4">
+          <div class="theme-icon" style="background: #5D7A6B">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F4ECDD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18"/>
+              <path d="M5 8h14M3 12h18M5 16h14"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+          </div>
+          <span class="theme-num accent-teal">III</span>
+        </div>
+        <h3 class="display display-tight text-[1.4rem] mb-3" style="font-variation-settings: 'opsz' 36">Droits & devoirs<br/>du citoyen</h3>
+        <p class="text-mute text-sm leading-[1.55] mb-4">Le vote, la justice, le service civique, la solidarité républicaine.</p>
+        <div class="flex items-center gap-3 text-xs font-medium">
+          <span class="pill">36 questions</span>
+          <span class="pill">14 fiches</span>
+        </div>
+      </div>
+
+      <!-- Theme 4 -->
+      <div class="theme-card">
+        <div class="flex justify-between items-start mb-4">
+          <div class="theme-icon" style="background: #364E80">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F4ECDD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <span class="theme-num" style="color: #364E80">IV</span>
+        </div>
+        <h3 class="display display-tight text-[1.4rem] mb-3" style="font-variation-settings: 'opsz' 36">Histoire, géographie<br/>& culture</h3>
+        <p class="text-mute text-sm leading-[1.55] mb-4">Grandes dates, régions, patrimoine, arts, gastronomie, traditions.</p>
+        <div class="flex items-center gap-3 text-xs font-medium">
+          <span class="pill">94 questions</span>
+          <span class="pill">38 fiches</span>
+        </div>
+      </div>
+
+      <!-- Theme 5 -->
+      <div class="theme-card">
+        <div class="flex justify-between items-start mb-4">
+          <div class="theme-icon" style="background: #8B5A3C">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F4ECDD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9.5L12 3l9 6.5V21H3z"/>
+              <path d="M9 21V12h6v9"/>
+            </svg>
+          </div>
+          <span class="theme-num accent-sienna">V</span>
+        </div>
+        <h3 class="display display-tight text-[1.4rem] mb-3" style="font-variation-settings: 'opsz' 36">Vivre dans la<br/>société française</h3>
+        <p class="text-mute text-sm leading-[1.55] mb-4">Travail, santé, école, démarches, vie associative et quotidien.</p>
+        <div class="flex items-center gap-3 text-xs font-medium">
+          <span class="pill">48 questions</span>
+          <span class="pill">19 fiches</span>
+        </div>
+      </div>
+
+      <!-- "Tous les fiches" tease card -->
+      <div class="theme-card flex items-center justify-center text-center" style="background: var(--aubergine); color: var(--bone); border-color: var(--aubergine)">
+        <div>
+          <div class="display display-italic text-[1.5rem] mb-2" style="color: var(--saffron)">+ 250 fiches</div>
+          <div class="text-sm leading-[1.55]" style="color: var(--bone-deep)">pédagogiques traduites dans les six langues d'accompagnement</div>
+          <a href="#" class="link-arrow inline-block mt-4 text-sm" style="color: var(--saffron)">Découvrir →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- auth -->
+<section id="auth">
+  <div class="max-w-[1340px] mx-auto px-10 py-28 grid grid-cols-12 gap-10 items-start">
+    <div class="col-span-5 pt-6">
+      <div class="label-eyebrow mb-7">— Bienvenue dans Civique</div>
+      <h2 class="display display-tight text-[clamp(2.5rem,4.5vw,3.75rem)] mb-7">
+        Prenons<br/>
+        <span class="display-italic accent-terracotta">le temps</span><br/>
+        ensemble.
+      </h2>
+      <p class="leading-[1.7] mb-7 max-w-md text-[1.05rem] text-mute">
+        Pas de pression : votre progression est personnelle, vos données restent privées, et tout est gratuit pour commencer.
+      </p>
+      <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-3.5">
+          <span class="display display-italic text-2xl accent-terracotta leading-none">·</span>
+          <span class="text-[0.98rem]">Reprise sur tous vos appareils, à tout moment</span>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="display display-italic text-2xl accent-saffron leading-none">·</span>
+          <span class="text-[0.98rem]">Six langues d'accompagnement disponibles</span>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="display display-italic text-2xl accent-teal leading-none">·</span>
+          <span class="text-[0.98rem]">Aucune carte bancaire requise pour démarrer</span>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="display display-italic text-2xl accent-sienna leading-none">·</span>
+          <span class="text-[0.98rem]">Suppression possible à tout moment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-7">
+      <div class="card-warm relative">
+        <div class="text-center mb-9">
+          <div class="display display-italic text-[2rem] accent-terracotta mb-1">Bonjour</div>
+          <h3 class="display text-[1.6rem] font-medium" style="font-variation-settings: 'opsz' 36">Connectez-vous à votre parcours</h3>
+        </div>
+
+        <form class="space-y-5">
+          <div>
+            <label class="field-label">Votre adresse email</label>
+            <input type="email" class="field-input" placeholder="vous@exemple.fr" />
+          </div>
+          <div>
+            <label class="field-label">Votre mot de passe</label>
+            <input type="password" class="field-input" placeholder="••••••••" />
+            <a href="#" class="link-arrow inline-block mt-2.5 text-sm">Mot de passe oublié ? →</a>
+          </div>
+          <div class="pt-2">
+            <button type="submit" class="btn-warm w-full justify-center">
+              Reprendre mon parcours <span class="arrow">→</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t hairline">
+          <div class="text-center mb-4 text-sm text-mute">ou continuez avec</div>
+          <div class="grid grid-cols-2 gap-3">
+            <button class="btn-soft justify-center text-sm flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Google
+            </button>
+            <button class="btn-soft justify-center text-sm flex items-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              Apple
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-7 text-center text-sm text-mute">
+          Première fois ? <a href="#" class="link-arrow font-semibold">Créer un compte gratuit →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="background: var(--aubergine); color: var(--bone)">
+  <div class="max-w-[1340px] mx-auto px-10 py-12 grid grid-cols-12 gap-8">
+    <div class="col-span-4">
+      <div class="flex items-center gap-3 mb-3">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="15" stroke="#F4ECDD" stroke-width="1.5"/>
+          <path d="M8 16 Q12 8, 16 16 Q20 24, 24 16" stroke="#C7522A" stroke-width="2" fill="none"/>
+          <path d="M8 16 Q12 24, 16 16 Q20 8, 24 16" stroke="#E8A33D" stroke-width="2" fill="none"/>
+        </svg>
+        <span class="display text-[1.5rem]">Civique</span>
+      </div>
+      <p class="display display-italic text-[1.05rem]" style="color: var(--saffron)">Tisser un nouveau chez-soi.</p>
+    </div>
+    <div class="col-span-2"></div>
+    <div class="col-span-2 text-sm space-y-2" style="color: var(--bone-deep)">
+      <div class="font-semibold mb-3" style="color: var(--bone)">Produit</div>
+      <div>Le programme</div>
+      <div>Méthode</div>
+      <div>Tarifs</div>
+    </div>
+    <div class="col-span-2 text-sm space-y-2" style="color: var(--bone-deep)">
+      <div class="font-semibold mb-3" style="color: var(--bone)">Support</div>
+      <div>Contact</div>
+      <div>FAQ</div>
+      <div>Communauté</div>
+    </div>
+    <div class="col-span-2 text-sm space-y-2" style="color: var(--bone-deep)">
+      <div class="font-semibold mb-3" style="color: var(--bone)">Légal</div>
+      <div>Confidentialité</div>
+      <div>Conditions</div>
+      <div>Mentions</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

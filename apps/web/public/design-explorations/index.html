@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civique · 3 directions visuelles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #0F1014;
+    --ink: #FAFAF7;
+    --mute: #888A8E;
+    --line: rgba(255, 255, 255, 0.08);
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: 'Fraunces', serif; }
+  .italic { font-style: italic; font-variation-settings: 'opsz' 144, 'SOFT' 80; }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+  }
+  .card:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+  }
+
+  .swatch {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+  }
+
+  iframe {
+    width: 100%;
+    height: 480px;
+    border: 0;
+    background: white;
+    transform-origin: top left;
+    transform: scale(0.6);
+    width: 166.67%;
+    height: 800px;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<header class="border-b border-[color:var(--line)] sticky top-0 backdrop-blur-md z-50" style="background: rgba(15, 16, 20, 0.85)">
+  <div class="max-w-[1400px] mx-auto px-8 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="display text-xl">Civique</span>
+      <span class="text-sm" style="color: var(--mute)">/ explorations design</span>
+    </div>
+    <div class="text-sm" style="color: var(--mute)">3 directions à comparer</div>
+  </div>
+</header>
+
+<main class="max-w-[1400px] mx-auto px-8 py-20">
+  <div class="mb-20">
+    <p class="text-sm uppercase tracking-widest mb-6" style="color: #D45D3F">— Choisir une direction visuelle</p>
+    <h1 class="display text-[clamp(3rem,6vw,5.5rem)] leading-[0.95] mb-6" style="font-variation-settings: 'opsz' 144">
+      Trois <span class="italic" style="color: #D45D3F">identités</span><br/>radicalement différentes.
+    </h1>
+    <p class="max-w-2xl text-lg leading-relaxed" style="color: var(--mute)">
+      Chaque prototype est complet (hero, programme, auth) et peut être ouvert en plein écran. Les trois ne sont pas des variations sur le même thème — chacun défend une vision distincte du produit.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+    <!-- L'Atelier -->
+    <a href="/design-explorations/atelier" target="_blank" class="card block">
+      <div class="aspect-[4/3] overflow-hidden border-b border-[color:var(--line)]" style="background: #F1ECE2">
+        <iframe src="/design-explorations/atelier" loading="lazy"></iframe>
+      </div>
+      <div class="p-6">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="display text-2xl">L'Atelier</h2>
+          <span class="text-xs uppercase tracking-widest" style="color: #7B2C28">— Éditorial</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color: var(--mute)">
+          Magazine intellectuel français. Papier crème, oxblood, serif Fraunces. Pour un produit qui se lit comme une revue savante.
+        </p>
+        <div class="flex gap-2 mb-5">
+          <span class="swatch" style="background: #F1ECE2"></span>
+          <span class="swatch" style="background: #1A1410"></span>
+          <span class="swatch" style="background: #7B2C28"></span>
+          <span class="swatch" style="background: #A38860"></span>
+        </div>
+        <div class="text-xs space-y-1" style="color: var(--mute)">
+          <div>Display : Fraunces (variable serif)</div>
+          <div>Body : Bricolage Grotesque</div>
+          <div>Mode : clair, papier · 1 voie</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Hexagone -->
+    <a href="/design-explorations/hexagone" target="_blank" class="card block">
+      <div class="aspect-[4/3] overflow-hidden border-b border-[color:var(--line)]" style="background: #0A1A2B">
+        <iframe src="/design-explorations/hexagone" loading="lazy"></iframe>
+      </div>
+      <div class="p-6">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="display text-2xl">Hexagone</h2>
+          <span class="text-xs uppercase tracking-widest" style="color: #D45D3F">— Architectural</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color: var(--mute)">
+          Beta.gouv meets Linear. Navy + terracotta, blueprint grid, carte hexagonale animée. Pour un produit administratif premium.
+        </p>
+        <div class="flex gap-2 mb-5">
+          <span class="swatch" style="background: #0A1A2B"></span>
+          <span class="swatch" style="background: #F4F4F0"></span>
+          <span class="swatch" style="background: #D45D3F"></span>
+          <span class="swatch" style="background: #4A7BA8"></span>
+        </div>
+        <div class="text-xs space-y-1" style="color: var(--mute)">
+          <div>Display : Instrument Serif</div>
+          <div>Body : Manrope · Mono : JetBrains</div>
+          <div>Mode : sombre · grille blueprint</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Tisserand -->
+    <a href="/design-explorations/tisserand" target="_blank" class="card block">
+      <div class="aspect-[4/3] overflow-hidden border-b border-[color:var(--line)]" style="background: #F4ECDD">
+        <iframe src="/design-explorations/tisserand" loading="lazy"></iframe>
+      </div>
+      <div class="p-6">
+        <div class="flex items-baseline justify-between mb-3">
+          <h2 class="display text-2xl">Tisserand</h2>
+          <span class="text-xs uppercase tracking-widest" style="color: #C7522A">— Multiculturel</span>
+        </div>
+        <p class="text-sm leading-relaxed mb-5" style="color: var(--mute)">
+          Chaleureux, tissé, multilingue. Bone + saffron + aubergine, fils tissés, témoignage flottant. Pour un produit qui accueille la diversité linguistique.
+        </p>
+        <div class="flex gap-2 mb-5">
+          <span class="swatch" style="background: #F4ECDD"></span>
+          <span class="swatch" style="background: #2D1B2E"></span>
+          <span class="swatch" style="background: #C7522A"></span>
+          <span class="swatch" style="background: #E8A33D"></span>
+          <span class="swatch" style="background: #5D7A6B"></span>
+        </div>
+        <div class="text-xs space-y-1" style="color: var(--mute)">
+          <div>Display : Newsreader (italics)</div>
+          <div>Body : Karla</div>
+          <div>Mode : clair, ton chaud · 5 voix</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="mt-24 grid grid-cols-1 lg:grid-cols-3 gap-8 text-sm" style="color: var(--mute)">
+    <div>
+      <div class="text-[color:var(--ink)] mb-2 font-semibold">Quand choisir L'Atelier ?</div>
+      Si tu veux qu'on perçoive Civique comme une institution culturelle sérieuse — un livre qu'on consulte. Risque : peut intimider les utilisateurs L2.
+    </div>
+    <div>
+      <div class="text-[color:var(--ink)] mb-2 font-semibold">Quand choisir Hexagone ?</div>
+      Si tu veux que Civique inspire confiance par sa rigueur — comme un dossier officiel bien fait. Risque : peut sembler froid sans contre-poids humain.
+    </div>
+    <div>
+      <div class="text-[color:var(--ink)] mb-2 font-semibold">Quand choisir Tisserand ?</div>
+      Si tu veux que les utilisateurs se sentent attendus, accueillis. La diversité linguistique est célébrée, pas cachée. Le plus chaleureux des trois.
+    </div>
+  </div>
+
+</main>
+
+<footer class="border-t border-[color:var(--line)] mt-20">
+  <div class="max-w-[1400px] mx-auto px-8 py-8 flex justify-between text-sm" style="color: var(--mute)">
+    <span>Explorations Civique · 2026</span>
+    <span>Cliquer une direction pour l'ouvrir en plein écran →</span>
+  </div>
+</footer>
+
+</body>
+</html>
