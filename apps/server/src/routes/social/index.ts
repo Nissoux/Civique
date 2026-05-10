@@ -351,6 +351,11 @@ export default async function socialRoutes(app: FastifyInstance) {
       return reply.status(404).send({ error: 'Challenge not found' });
     }
 
+    // Defi doit être actif (ou pending — on l'active à la première réponse)
+    if (challenge.status === 'completed' || challenge.status === 'declined') {
+      return reply.status(400).send({ error: 'Ce défi est terminé.' });
+    }
+
     // Verify question belongs to this challenge for this user
     const existingAnswer = await db.query.challengeAnswers.findFirst({
       where: and(
@@ -400,7 +405,31 @@ export default async function socialRoutes(app: FastifyInstance) {
         .where(eq(challenges.id, id));
     }
 
-    return { data: { isCorrect, answerId: updated.id } };
+    // Calcul du score courant et du total répondu
+    const stats = await db
+      .select({
+        currentScore: sql<number>`count(*) filter (where ${challengeAnswers.isCorrect} = true)::int`,
+        totalAnswered: sql<number>`count(*) filter (where ${challengeAnswers.selectedChoice} is not null)::int`,
+      })
+      .from(challengeAnswers)
+      .where(
+        and(
+          eq(challengeAnswers.challengeId, id),
+          eq(challengeAnswers.userId, userId),
+        ),
+      );
+
+    const currentScore = stats[0]?.currentScore ?? 0;
+    const totalAnswered = stats[0]?.totalAnswered ?? 0;
+
+    return {
+      data: {
+        isCorrect,
+        currentScore,
+        totalAnswered,
+        answerId: updated.id,
+      },
+    };
   });
 
   app.post('/challenges/:id/finish', async (request, reply) => {
@@ -433,25 +462,59 @@ export default async function socialRoutes(app: FastifyInstance) {
 
     // Update the appropriate score field
     const isChallenger = challenge.challengerId === userId;
-    const updateData = isChallenger
+    const updateData: {
+      challengerScore?: number;
+      challengedScore?: number;
+      status?: 'completed';
+    } = isChallenger
       ? { challengerScore: correctCount }
       : { challengedScore: correctCount };
 
     // If both scores are now set, mark as completed
     const otherScore = isChallenger ? challenge.challengedScore : challenge.challengerScore;
-    if (otherScore !== null) {
-      Object.assign(updateData, { status: 'completed' as const });
+    if (otherScore !== null && otherScore !== undefined) {
+      updateData.status = 'completed';
     }
 
-    const [updated] = await db
+    await db
       .update(challenges)
       .set(updateData)
-      .where(eq(challenges.id, id))
-      .returning();
+      .where(eq(challenges.id, id));
+
+    // Re-fetch with relations so the response includes both participants' info
+    const full = await db.query.challenges.findFirst({
+      where: eq(challenges.id, id),
+      with: {
+        challenger: {
+          columns: { id: true, displayName: true, avatarUrl: true },
+        },
+        challenged: {
+          columns: { id: true, displayName: true, avatarUrl: true },
+        },
+        theme: {
+          columns: { id: true, nameFr: true },
+        },
+      },
+    });
+
+    let winnerId: string | null = null;
+    let isDraw = false;
+    if (full?.status === 'completed') {
+      const cs = full.challengerScore ?? 0;
+      const ds = full.challengedScore ?? 0;
+      if (cs === ds) {
+        isDraw = true;
+      } else {
+        winnerId = cs > ds ? full.challengerId : full.challengedId;
+      }
+    }
 
     return {
       data: {
-        challenge: updated,
+        ...full,
+        winnerId,
+        isDraw,
+        // Conservé pour compatibilité ascendante avec le mobile existant
         myScore: correctCount,
         totalQuestions: myAnswers.length,
       },

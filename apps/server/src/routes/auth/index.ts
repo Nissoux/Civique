@@ -34,6 +34,7 @@ const updateProfileSchema = z.object({
   displayName: z.string().min(1).max(100).optional(),
   avatarUrl: z.string().url().nullable().optional(),
   preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  email: z.string().email().optional(),
 });
 
 const forgotPasswordSchema = z.object({
@@ -96,7 +97,14 @@ function sanitizeUser(user: {
 
 export default async function authRoutes(app: FastifyInstance) {
   // ── POST /register ───────────────────────────
-  app.post('/register', async (request, reply) => {
+  app.post('/register', {
+    config: {
+      rateLimit: {
+        max: 3,
+        timeWindow: '15 minutes',
+      },
+    },
+  }, async (request, reply) => {
     const body = registerSchema.parse(request.body);
     body.email = body.email.toLowerCase();
     const existing = await db.query.users.findFirst({
@@ -203,7 +211,14 @@ export default async function authRoutes(app: FastifyInstance) {
   });
 
   // ── POST /login ──────────────────────────────
-  app.post('/login', async (request, reply) => {
+  app.post('/login', {
+    config: {
+      rateLimit: {
+        max: 5,
+        timeWindow: '15 minutes',
+      },
+    },
+  }, async (request, reply) => {
     const body = loginSchema.parse(request.body);
     body.email = body.email.toLowerCase();
     const user = await db.query.users.findFirst({
@@ -278,30 +293,83 @@ export default async function authRoutes(app: FastifyInstance) {
   // ── PATCH /me ────────────────────────────────
   app.patch('/me', { preHandler: authGuard }, async (request, reply) => {
     const body = updateProfileSchema.parse(request.body);
+    const userId = request.currentUser!.id;
 
     if (Object.keys(body).length === 0) {
       return reply.status(400).send({ error: 'No fields to update' });
     }
 
+    // Normalise email + détecte un changement réel
+    let emailChanged = false;
+    let newEmail: string | undefined;
+    if (body.email) {
+      newEmail = body.email.toLowerCase();
+      const current = await db.query.users.findFirst({
+        where: eq(users.id, userId),
+        columns: { email: true },
+      });
+      if (!current) {
+        return reply.status(404).send({ error: 'User not found' });
+      }
+      if (newEmail !== current.email) {
+        // S'assurer qu'aucun autre utilisateur n'a déjà cet email
+        const conflict = await db.query.users.findFirst({
+          where: eq(users.email, newEmail),
+          columns: { id: true },
+        });
+        if (conflict && conflict.id !== userId) {
+          return reply.status(409).send({ error: 'Cet email est déjà utilisé.' });
+        }
+        emailChanged = true;
+      }
+    }
+
+    const updateData: {
+      displayName?: string;
+      avatarUrl?: string | null;
+      preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi';
+      email?: string;
+      emailVerified?: boolean;
+      updatedAt: Date;
+    } = {
+      updatedAt: new Date(),
+    };
+    if (body.displayName !== undefined) updateData.displayName = body.displayName;
+    if (body.avatarUrl !== undefined) updateData.avatarUrl = body.avatarUrl;
+    if (body.preferredLang !== undefined) updateData.preferredLang = body.preferredLang;
+    if (emailChanged && newEmail) {
+      updateData.email = newEmail;
+      updateData.emailVerified = false;
+    }
+
     const [updated] = await db
       .update(users)
-      .set({
-        ...body,
-        updatedAt: new Date(),
-      })
-      .where(eq(users.id, request.currentUser!.id))
+      .set(updateData)
+      .where(eq(users.id, userId))
       .returning({
         id: users.id,
         email: users.email,
         displayName: users.displayName,
         avatarUrl: users.avatarUrl,
         preferredLang: users.preferredLang,
+        emailVerified: users.emailVerified,
         isPremium: users.isPremium,
         createdAt: users.createdAt,
       });
 
     if (!updated) {
       return reply.status(404).send({ error: 'User not found' });
+    }
+
+    // Si l'email a changé, génère un code et envoie un email de vérification
+    if (emailChanged && newEmail) {
+      const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+      emailVerificationCodes.set(userId, {
+        email: newEmail,
+        code: verifyCode,
+        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+      });
+      sendVerificationEmail(newEmail, verifyCode).catch(() => {});
     }
 
     return { data: sanitizeUser(updated) };
@@ -364,7 +432,14 @@ export default async function authRoutes(app: FastifyInstance) {
   });
 
   // ── POST /forgot-password ────────────────────
-  app.post('/forgot-password', async (request, reply) => {
+  app.post('/forgot-password', {
+    config: {
+      rateLimit: {
+        max: 3,
+        timeWindow: '15 minutes',
+      },
+    },
+  }, async (request, reply) => {
     const { email } = forgotPasswordSchema.parse(request.body);
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),
