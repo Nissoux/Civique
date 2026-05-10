@@ -377,9 +377,12 @@ export default async function authRoutes(app: FastifyInstance) {
     }
 
     const token = crypto.randomBytes(32).toString('hex');
+    // Email shows token.substring(0, 8).toUpperCase() — store keyed by that
+    // so user-typed codes match. Full token kept in entry for any future use.
+    const code = token.substring(0, 8).toUpperCase();
     const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-    passwordResetTokens.set(token, { email: user.email, expiresAt });
+    passwordResetTokens.set(code, { email: user.email, expiresAt });
 
     // Send reset email (non-blocking)
     sendPasswordResetEmail(user.email, token).catch(() => {});
@@ -391,13 +394,16 @@ export default async function authRoutes(app: FastifyInstance) {
   app.post('/reset-password', async (request, reply) => {
     const { token, password } = resetPasswordSchema.parse(request.body);
 
-    const entry = passwordResetTokens.get(token);
+    // Tokens are stored keyed by the 8-char uppercase code that ships in the
+    // email. Accept what the user typed, normalised to that shape.
+    const code = token.trim().toUpperCase();
+    const entry = passwordResetTokens.get(code);
     if (!entry) {
       return reply.status(400).send({ error: 'Invalid or expired reset token' });
     }
 
     if (new Date() > entry.expiresAt) {
-      passwordResetTokens.delete(token);
+      passwordResetTokens.delete(code);
       return reply.status(400).send({ error: 'Invalid or expired reset token' });
     }
 
@@ -407,7 +413,7 @@ export default async function authRoutes(app: FastifyInstance) {
       .set({ passwordHash, updatedAt: new Date() })
       .where(eq(users.email, entry.email));
 
-    passwordResetTokens.delete(token);
+    passwordResetTokens.delete(code);
 
     return { message: 'Password has been reset successfully.' };
   });
