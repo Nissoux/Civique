@@ -1,8 +1,11 @@
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 import { Logo } from '@/components/brand/Logo';
 import { getCurrentExamType } from '@/lib/server/examType';
 import { getCurrentUser } from '@/lib/server/me';
 import { ExamTypeForm } from './ExamTypeForm';
+
+const WELCOME_COOKIE = 'civique_welcome_done';
 
 export default async function ExamTypePage() {
   const user = await getCurrentUser();
@@ -10,6 +13,14 @@ export default async function ExamTypePage() {
 
   const existing = await getCurrentExamType();
   if (existing) redirect('/app');
+
+  // Show the 3-slide welcome carousel before the exam-type picker on first
+  // visit. Once the user advances past it, a cookie marks it done so we
+  // don't loop them back into it on refresh.
+  const c = await cookies();
+  if (c.get(WELCOME_COOKIE)?.value !== '1') {
+    redirect('/onboarding/welcome');
+  }
 
   const firstName = user.displayName.split(' ')[0];
 

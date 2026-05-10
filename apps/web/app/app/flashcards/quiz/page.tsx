@@ -2,6 +2,8 @@ import { redirect } from 'next/navigation';
 import type { Question } from '@civique/shared';
 import { getRandomQuestions } from '@/lib/server/questions';
 import { getCurrentExamType } from '@/lib/server/examType';
+import { getCurrentUser } from '@/lib/server/me';
+import { getCurrentLang } from '@/lib/server/lang';
 import { FlashcardQuizSession } from '@/components/flashcard/FlashcardQuizSession';
 
 export const metadata = {
@@ -20,10 +22,13 @@ export default async function FlashcardQuizPage() {
     redirect('/onboarding/exam-type');
   }
 
+  const user = await getCurrentUser();
+  const lang = await getCurrentLang(user?.preferredLang);
+
   // Try to fetch each pool separately when the API supports a `type` filter via
   // getRandomQuestions; if not available, fall back to a single random call and
   // pad/truncate locally.
-  const all = await safeGetRandom({ count: 30, examType });
+  const all = await safeGetRandom({ count: 30, examType, lang });
   const knowledge = all.filter((q) => q.type !== 'situational');
   const situational = all.filter((q) => q.type === 'situational');
 
@@ -74,9 +79,13 @@ export default async function FlashcardQuizPage() {
   return <FlashcardQuizSession questions={mixed} />;
 }
 
-async function safeGetRandom(params: { count: number; examType: string }) {
+async function safeGetRandom(params: {
+  count: number;
+  examType: string;
+  lang?: string;
+}) {
   try {
-    return await getRandomQuestions(params);
+    return await getRandomQuestions(params as Parameters<typeof getRandomQuestions>[0]);
   } catch {
     return [];
   }

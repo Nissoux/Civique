@@ -1,6 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { AuthShell } from '@/components/auth/AuthShell';
 import { ResetPasswordForm } from './ResetPasswordForm';
+
+export const metadata: Metadata = {
+  title: 'Réinitialiser le mot de passe — Civique',
+  description:
+    'Définissez un nouveau mot de passe pour votre compte Civique à l\'aide du code reçu par email.',
+  alternates: { canonical: '/reset-password' },
+  robots: { index: false, follow: false },
+};
 
 interface PageProps {
   searchParams: Promise<{ token?: string; sent?: string }>;

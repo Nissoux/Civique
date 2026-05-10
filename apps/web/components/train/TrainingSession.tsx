@@ -7,6 +7,7 @@ import { THEMES } from '@civique/shared';
 import { shuffleChoices, getShuffledCorrectChoice } from '@/lib/shuffleChoices';
 import { useProgressionStore } from '@/lib/stores/progressionStore';
 import { recordPracticeAnswerAction } from '@/lib/actions/practice';
+import { QuestionComments } from './QuestionComments';
 
 type ChoiceLabel = 'a' | 'b' | 'c' | 'd';
 type Phase = 'question' | 'feedback' | 'finished';
@@ -148,9 +149,9 @@ export function TrainingSession({
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 sm:px-10 py-8 sm:py-12">
+    <div className="max-w-3xl mx-auto px-4 sm:px-10 py-6 sm:py-12">
       {/* Header — progress */}
-      <header className="mb-8">
+      <header className="mb-6 sm:mb-8">
         <div className="flex items-baseline justify-between mb-3">
           <Link
             href="/app"
@@ -192,14 +193,14 @@ export function TrainingSession({
       </header>
 
       {/* Question card */}
-      <article className="card !rounded-3xl !p-7 sm:!p-9">
-        <div className="mb-6">
+      <article className="card !rounded-3xl !p-5 sm:!p-9">
+        <div className="mb-5 sm:mb-6">
           <p className="eyebrow mb-3 text-[0.7rem]">— Question {currentIndex + 1}</p>
-          <h2 className="font-display text-2xl sm:text-3xl leading-snug font-medium" style={{ fontVariationSettings: "'opsz' 36" }}>
+          <h2 className="font-display text-xl sm:text-3xl leading-snug font-medium" style={{ fontVariationSettings: "'opsz' 36" }}>
             {currentQ.textFr}
           </h2>
           {currentQ.translatedText ? (
-            <p className="mt-3 text-base text-ink-mute italic">{currentQ.translatedText}</p>
+            <p className="mt-3 text-sm sm:text-base text-ink-mute italic">{currentQ.translatedText}</p>
           ) : null}
         </div>
 
@@ -242,6 +243,7 @@ export function TrainingSession({
 
         {phase === 'feedback' ? (
           <FeedbackPanel
+            questionId={currentQ.id}
             isCorrect={isCorrect}
             explanation={currentQ.explanationFr}
             translatedExplanation={
@@ -302,8 +304,8 @@ function ChoiceButton({
       onClick={onClick}
       disabled={disabled}
       className={`
-        text-left rounded-2xl border-[1.5px] px-5 py-4
-        transition-all flex items-center gap-4
+        text-left rounded-2xl border-[1.5px] px-3 py-3 sm:px-5 sm:py-4
+        transition-all flex items-center gap-3 sm:gap-4
         disabled:cursor-not-allowed
         ${stateClasses}
       `}
@@ -311,8 +313,8 @@ function ChoiceButton({
     >
       <span
         className={`
-          flex h-10 w-10 shrink-0 items-center justify-center rounded-xl
-          font-display font-medium text-lg
+          flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl
+          font-display font-medium text-base sm:text-lg
           ${
             showResult && isCorrect
               ? 'bg-success text-bone'
@@ -332,9 +334,9 @@ function ChoiceButton({
         {label.toUpperCase()}
       </span>
       <span className="flex-1 min-w-0 leading-snug">
-        <span className="block text-base sm:text-lg">{text}</span>
+        <span className="block text-sm sm:text-lg">{text}</span>
         {translatedText ? (
-          <span className="block mt-1 text-sm text-ink-mute italic font-display">
+          <span className="block mt-1 text-xs sm:text-sm text-ink-mute italic font-display">
             {translatedText}
           </span>
         ) : null}
@@ -354,12 +356,14 @@ function ChoiceButton({
 }
 
 function FeedbackPanel({
+  questionId,
   isCorrect,
   explanation,
   translatedExplanation,
   onNext,
   isLast,
 }: {
+  questionId: number;
   isCorrect: boolean;
   explanation?: string;
   translatedExplanation?: string;
@@ -369,7 +373,7 @@ function FeedbackPanel({
   return (
     <div
       className={`
-        mt-7 rounded-2xl p-5 sm:p-6 border-[1.5px]
+        mt-6 sm:mt-7 rounded-2xl p-4 sm:p-6 border-[1.5px]
         ${isCorrect ? 'bg-success-bg/50 border-success/30' : 'bg-error-bg/50 border-fr-red/30'}
       `}
     >
@@ -410,6 +414,8 @@ function FeedbackPanel({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
       </button>
+
+      <QuestionComments questionId={questionId} />
     </div>
   );
 }

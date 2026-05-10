@@ -204,14 +204,14 @@ function Stat({
 }) {
   const valueColor = accent === 'terracotta' ? 'text-terracotta' : 'text-aubergine';
   return (
-    <div className="rounded-2xl bg-bone-deep border border-aubergine/15 px-3 py-4 text-center">
+    <div className="rounded-2xl bg-bone-deep border border-aubergine/15 px-2 py-3 sm:px-3 sm:py-4 text-center">
       <p
-        className={`font-display text-2xl sm:text-3xl font-medium ${valueColor}`}
+        className={`font-display text-xl sm:text-3xl font-medium ${valueColor} leading-tight`}
         style={{ fontVariationSettings: "'opsz' 60" }}
       >
         {value}
       </p>
-      <p className="text-[0.7rem] uppercase tracking-wider text-ink-mute mt-1">
+      <p className="text-[0.6rem] sm:text-[0.7rem] uppercase tracking-wider text-ink-mute mt-1 truncate">
         {label}
       </p>
     </div>
@@ -257,18 +257,18 @@ function HistoryItem({ session }: { session: ExamSession }) {
     <Link
       href={`/app/exams/results/${session.id}`}
       className="
-        card !rounded-2xl !p-5 flex items-center gap-4
+        card !rounded-2xl !p-4 sm:!p-5 flex items-center gap-3 sm:gap-4
         transition-all hover:-translate-y-0.5 hover:shadow-clay-lg
       "
     >
       <div
         className={`
-          flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl
+          flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-2xl
           ${passed ? 'bg-success/15 text-success' : 'bg-fr-red/15 text-fr-red'}
         `}
         aria-hidden
       >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           {passed ? (
             <path
               strokeLinecap="round"
@@ -288,17 +288,17 @@ function HistoryItem({ session }: { session: ExamSession }) {
       </div>
 
       <div className="flex-1 min-w-0">
-        <p className="font-display text-xl font-medium text-aubergine">
+        <p className="font-display text-lg sm:text-xl font-medium text-aubergine">
           {score} / {total}
         </p>
-        <p className="text-sm text-ink-mute">
+        <p className="text-xs sm:text-sm text-ink-mute truncate">
           {pct} % · {dateStr}
         </p>
       </div>
 
       <span
         className={`
-          pill !text-xs !font-medium shrink-0
+          pill !text-[0.65rem] sm:!text-xs !font-medium shrink-0 !px-2.5 !py-1
           ${
             passed
               ? '!bg-success/15 !text-success !border-success/40'

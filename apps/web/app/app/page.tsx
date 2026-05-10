@@ -41,14 +41,14 @@ export default async function AppPage() {
         <div className="pointer-events-none absolute -top-32 right-0 w-96 h-96 rounded-full bg-terracotta/30 blur-3xl" />
         <div className="pointer-events-none absolute bottom-0 left-1/3 w-80 h-80 rounded-full bg-saffron/20 blur-3xl" />
 
-        <div className="relative max-w-6xl mx-auto px-6 sm:px-10 py-10 sm:py-12">
-          <div className="flex items-start justify-between gap-6 mb-7 flex-wrap">
-            <div>
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-10 py-8 sm:py-12">
+          <div className="flex items-start justify-between gap-4 mb-7 flex-wrap">
+            <div className="min-w-0">
               <p className="font-display italic text-saffron text-base mb-1">
                 — {greeting()}, {firstName}
               </p>
               <h1
-                className="font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.05] font-medium tracking-tight"
+                className="font-display text-[clamp(1.875rem,4vw,3.25rem)] leading-[1.05] font-medium tracking-tight"
                 style={{ fontVariationSettings: "'opsz' 96" }}
               >
                 Continuez votre <span className="display-italic text-terracotta">parcours</span>.
@@ -58,15 +58,15 @@ export default async function AppPage() {
               <Link
                 href="/onboarding/exam-type"
                 className="
-                  inline-flex items-center gap-3 rounded-full
+                  inline-flex items-center gap-2 sm:gap-3 rounded-full
                   bg-bone/10 hover:bg-bone/15 backdrop-blur
-                  px-4 py-2.5 text-sm font-semibold transition-all
-                  border border-bone/20
+                  px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm font-semibold transition-all
+                  border border-bone/20 max-w-full
                 "
               >
                 <span aria-hidden>{examDef.emoji}</span>
-                <span>{examDef.shortLabel}</span>
-                <svg className="h-4 w-4 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="truncate">{examDef.shortLabel}</span>
+                <svg className="h-4 w-4 opacity-60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
@@ -74,7 +74,7 @@ export default async function AppPage() {
           </div>
 
           {/* Stats row — server-side accuracy, local XP/streak hydrate client-side */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-2xl">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-6 max-w-2xl">
             <StatTile
               label="Précision"
               value={
@@ -99,12 +99,12 @@ export default async function AppPage() {
       </section>
 
       {/* Quick actions */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 pt-8">
+      <section className="max-w-6xl mx-auto px-5 sm:px-10 pt-6 sm:pt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link
             href="/app/train/random"
             className="
-              card !rounded-2xl p-6 flex items-center gap-5
+              card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
               transition-all hover:-translate-y-1 hover:shadow-clay-lg cursor-pointer
             "
           >
@@ -120,10 +120,10 @@ export default async function AppPage() {
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-display text-xl font-medium" style={{ fontVariationSettings: "'opsz' 32" }}>
+              <h3 className="font-display text-lg sm:text-xl font-medium" style={{ fontVariationSettings: "'opsz' 32" }}>
                 Entraînement rapide
               </h3>
-              <p className="text-sm text-ink-mute">10 questions au hasard, tous thèmes</p>
+              <p className="text-xs sm:text-sm text-ink-mute">10 questions au hasard, tous thèmes</p>
             </div>
             <ArrowIcon />
           </Link>
@@ -131,7 +131,7 @@ export default async function AppPage() {
           <Link
             href="/app/exams"
             className="
-              card !rounded-2xl p-6 flex items-center gap-5
+              card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
               transition-all hover:-translate-y-1 hover:shadow-clay-lg cursor-pointer
             "
           >
@@ -147,10 +147,10 @@ export default async function AppPage() {
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-display text-xl font-medium" style={{ fontVariationSettings: "'opsz' 32" }}>
+              <h3 className="font-display text-lg sm:text-xl font-medium" style={{ fontVariationSettings: "'opsz' 32" }}>
                 Examen blanc
               </h3>
-              <p className="text-sm text-ink-mute">40 questions, 45 minutes, simulation officielle</p>
+              <p className="text-xs sm:text-sm text-ink-mute">40 questions, 45 minutes, simulation officielle</p>
             </div>
             <ArrowIcon />
           </Link>
@@ -158,7 +158,7 @@ export default async function AppPage() {
       </section>
 
       {/* Theme paths (client component for progression hydration) */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 py-10 sm:py-12">
+      <section className="max-w-6xl mx-auto px-5 sm:px-10 py-8 sm:py-12">
         <div className="mb-8">
           <p className="eyebrow mb-3">— Parcours d'apprentissage</p>
           <h2 className="font-display text-3xl sm:text-4xl font-medium tracking-tight" style={{ fontVariationSettings: "'opsz' 60" }}>
@@ -193,11 +193,11 @@ function StatTile({
     teal: 'text-teal',
   }[accent];
   return (
-    <div className="bg-bone/5 backdrop-blur rounded-2xl border border-bone/15 px-5 py-4">
-      <p className={`font-display text-2xl sm:text-3xl font-medium ${accentColor}`} style={{ fontVariationSettings: "'opsz' 60" }}>
+    <div className="bg-bone/5 backdrop-blur rounded-2xl border border-bone/15 px-3 py-3 sm:px-5 sm:py-4">
+      <p className={`font-display text-xl sm:text-3xl font-medium ${accentColor} leading-tight`} style={{ fontVariationSettings: "'opsz' 60" }}>
         {value}
       </p>
-      <p className="text-xs text-bone/60 uppercase tracking-wider mt-1">{label}</p>
+      <p className="text-[0.6rem] sm:text-xs text-bone/60 uppercase tracking-wider mt-1 truncate">{label}</p>
     </div>
   );
 }

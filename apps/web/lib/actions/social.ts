@@ -8,6 +8,8 @@ import {
   respondFriend,
   createChallenge,
   postComment,
+  getComments,
+  type CommentWithUser,
 } from '@/lib/server/social';
 import type { FormState } from '@/lib/auth-types';
 
@@ -188,4 +190,31 @@ export async function postCommentAction(
     return { ok: false, error: 'Impossible de publier le commentaire.' };
   }
   return { ok: true };
+}
+
+export interface FetchCommentsResult {
+  ok: boolean;
+  error?: string;
+  comments?: CommentWithUser[];
+}
+
+/**
+ * Fetch the threaded comment list for a question. Used by the in-session
+ * feedback panel after the user answers.
+ */
+export async function fetchQuestionCommentsAction(
+  questionId: number,
+): Promise<FetchCommentsResult> {
+  if (!Number.isFinite(questionId) || questionId <= 0) {
+    return { ok: false, error: 'Question inconnue.' };
+  }
+  try {
+    const comments = await getComments(questionId);
+    return { ok: true, comments };
+  } catch (err) {
+    if (err instanceof ApiError) {
+      return { ok: false, error: err.userMessage };
+    }
+    return { ok: false, error: 'Impossible de charger les commentaires.' };
+  }
 }

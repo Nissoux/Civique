@@ -6,7 +6,8 @@ import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 export const metadata: Metadata = {
   title: "Conditions d'utilisation — Civique",
   description:
-    "Les conditions d'utilisation du service Civique : création de compte, abonnement, résiliation, propriété intellectuelle.",
+    "Les conditions d'utilisation du service Civique : création de compte, abonnement, résiliation, propriété intellectuelle et loi applicable.",
+  alternates: { canonical: '/terms' },
 };
 
 const LAST_UPDATED = '10 mai 2026';
@@ -357,9 +358,12 @@ export default function TermsPage() {
             <span>
               © {new Date().getFullYear()} Civique · Tous droits réservés
             </span>
-            <span className="display-italic">
+            <span className="display-italic flex gap-4">
               <Link href="/privacy" className="hover:text-saffron">
                 Politique de confidentialité
+              </Link>
+              <Link href="/mentions-legales" className="hover:text-saffron">
+                Mentions légales
               </Link>
             </span>
           </div>

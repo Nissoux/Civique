@@ -14,51 +14,30 @@ interface NavItem {
   icon: ReactNode;
 }
 
-const NAV: NavItem[] = [
+interface NavSection {
+  eyebrow: string;
+  items: NavItem[];
+}
+
+const SECTIONS: NavSection[] = [
   {
-    href: '/app',
-    label: 'Accueil',
-    icon: <HomeIcon />,
+    eyebrow: '— Préparation',
+    items: [
+      { href: '/app', label: 'Accueil', icon: <HomeIcon /> },
+      { href: '/app/exams', label: 'Examens blancs', icon: <DocIcon /> },
+      { href: '/app/fiches', label: 'Fiches mémo', icon: <BookIcon /> },
+      { href: '/app/flashcards', label: 'Révisions', icon: <CardsIcon /> },
+      { href: '/app/glossaire', label: 'Glossaire', icon: <ListIcon /> },
+    ],
   },
   {
-    href: '/app/exams',
-    label: 'Examens blancs',
-    icon: <DocIcon />,
-  },
-  {
-    href: '/app/fiches',
-    label: 'Fiches mémo',
-    icon: <BookIcon />,
-  },
-  {
-    href: '/app/flashcards',
-    label: 'Révisions',
-    icon: <CardsIcon />,
-  },
-  {
-    href: '/app/glossaire',
-    label: 'Glossaire',
-    icon: <ListIcon />,
-  },
-  {
-    href: '/app/stats',
-    label: 'Progression',
-    icon: <ChartIcon />,
-  },
-  {
-    href: '/app/social',
-    label: 'Social',
-    icon: <UsersIcon />,
-  },
-  {
-    href: '/app/profile',
-    label: 'Compte',
-    icon: <UserIcon />,
-  },
-  {
-    href: '/app/settings',
-    label: 'Réglages',
-    icon: <CogIcon />,
+    eyebrow: '— Votre parcours',
+    items: [
+      { href: '/app/stats', label: 'Progression', icon: <ChartIcon /> },
+      { href: '/app/social', label: 'Social', icon: <UsersIcon /> },
+      { href: '/app/profile', label: 'Compte', icon: <UserIcon /> },
+      { href: '/app/settings', label: 'Réglages', icon: <CogIcon /> },
+    ],
   },
 ];
 
@@ -79,66 +58,72 @@ export function Sidebar({ user, examLabel, currentLang }: SidebarProps) {
         sticky top-0 h-screen
       "
     >
-      <div className="p-6 border-b border-aubergine/10">
+      <div className="px-6 py-5 border-b border-aubergine/10 shrink-0">
         <Logo size="md" />
       </div>
 
-      <nav className="flex-1 px-3 py-5 overflow-y-auto">
-        <p className="eyebrow px-3 mb-3 text-[0.65rem]">— Navigation</p>
-        <ul className="space-y-1">
-          {NAV.map((item) => {
-            const isActive =
-              item.href === '/app'
-                ? pathname === '/app'
-                : pathname.startsWith(item.href);
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`
-                    flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
-                    transition-all
-                    ${
-                      isActive
-                        ? 'bg-aubergine text-bone shadow-[0_2px_0_rgb(74_45_67)]'
-                        : 'text-aubergine hover:bg-bone-deep'
-                    }
-                  `}
-                >
-                  <span
-                    className={isActive ? 'text-saffron' : 'text-aubergine/60'}
-                    aria-hidden
-                  >
-                    {item.icon}
-                  </span>
-                  <span>{item.label}</span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+      <nav className="flex-1 px-3 py-4 overflow-y-auto">
+        {SECTIONS.map((section, sIdx) => (
+          <div key={section.eyebrow} className={sIdx > 0 ? 'mt-5' : undefined}>
+            <p className="eyebrow px-3 mb-2 text-[0.65rem]">{section.eyebrow}</p>
+            <ul className="space-y-0.5">
+              {section.items.map((item) => {
+                const isActive =
+                  item.href === '/app'
+                    ? pathname === '/app'
+                    : pathname.startsWith(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`
+                        flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium
+                        transition-all
+                        ${
+                          isActive
+                            ? 'bg-aubergine text-bone shadow-[0_2px_0_rgb(74_45_67)]'
+                            : 'text-aubergine hover:bg-bone-deep'
+                        }
+                      `}
+                    >
+                      <span
+                        className={isActive ? 'text-saffron' : 'text-aubergine/60'}
+                        aria-hidden
+                      >
+                        {item.icon}
+                      </span>
+                      <span className="truncate">{item.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </nav>
 
-      <div className="p-4 border-t border-aubergine/10 space-y-3">
+      <div className="px-3 py-3 border-t border-aubergine/10 space-y-2 shrink-0">
         <LanguagePicker currentLang={currentLang} />
         {examLabel ? (
           <Link
             href="/onboarding/exam-type"
-            className="block px-3 py-2 rounded-xl bg-bone-deep border border-aubergine/15 text-xs hover:border-aubergine/30 transition-colors"
+            className="block px-3 py-1.5 rounded-xl bg-bone-deep border border-aubergine/15 text-xs hover:border-aubergine/30 transition-colors"
           >
-            <p className="font-display italic text-ink-mute mb-0.5">— Examen ciblé</p>
-            <p className="font-semibold text-aubergine truncate">{examLabel}</p>
+            <p className="font-display italic text-ink-mute text-[0.7rem]">— Examen ciblé</p>
+            <p className="font-semibold text-aubergine truncate text-sm">{examLabel}</p>
           </Link>
         ) : null}
-        <div className="px-3 py-2">
-          <p className="text-xs text-ink-mute font-display italic mb-0.5">— Connecté</p>
-          <p className="text-sm font-semibold text-aubergine truncate">{user.displayName}</p>
-          <p className="text-xs text-ink-mute truncate">{user.email}</p>
+        <div className="px-3 py-1.5">
+          <p className="text-[0.7rem] text-ink-mute font-display italic">— Connecté</p>
+          <p className="text-sm font-semibold text-aubergine truncate leading-tight">
+            {user.displayName}
+          </p>
+          <p className="text-[0.7rem] text-ink-mute truncate">{user.email}</p>
         </div>
         <form action={logoutAction}>
           <button
             type="submit"
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-ink-mute hover:text-aubergine hover:bg-bone-deep transition-colors"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm font-medium text-ink-mute hover:text-aubergine hover:bg-bone-deep transition-colors"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

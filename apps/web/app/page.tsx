@@ -1,10 +1,28 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { THEMES, LANGUAGES } from '@civique/shared';
 import { getCurrentUser } from '@/lib/server/me';
 import { Logo } from '@/components/brand/Logo';
 import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 import { WovenThreads } from '@/components/brand/WovenThreads';
 import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
+
+export const metadata: Metadata = {
+  title: 'Civique — Préparez votre examen civique français',
+  description:
+    "Civique vous accompagne dans la préparation de l'examen civique français : pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité. 5 thèmes officiels, 611 questions, 6 langues d'accompagnement.",
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Civique — Préparez votre examen civique français',
+    description:
+      "Préparation à l'examen civique pour la carte de séjour pluriannuelle, la carte de résident et la nationalité française.",
+    url: '/',
+    type: 'website',
+    locale: 'fr_FR',
+  },
+};
 
 const THEME_DESCRIPTIONS: Record<number, string> = {
   1: 'Devise nationale, laïcité, symboles républicains, droits fondamentaux.',
@@ -22,11 +40,51 @@ const THEME_META: Record<number, { questions: number; fiches: number }> = {
   5: { questions: 107, fiches: 29 },
 };
 
+// schema.org JSON-LD describing the program. Helps search engines surface
+// Civique as an educational resource for the French civic exam.
+const STRUCTURED_DATA = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOccupationalProgram',
+  name: 'Civique',
+  alternateName: 'Préparation à l\'examen civique français',
+  description:
+    'Préparation indépendante à l\'examen civique français pour la carte de séjour pluriannuelle, la carte de résident et la nationalité. 5 thèmes officiels, 611 questions, accompagnement en 6 langues.',
+  url: 'https://civique.fr',
+  inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi'],
+  educationalLevel: 'Adult education',
+  educationalProgramMode: 'online',
+  programType: 'Civic education',
+  provider: {
+    '@type': 'Organization',
+    name: 'Civique',
+    url: 'https://civique.fr',
+    email: 'support@integrafle.fr',
+  },
+  occupationalCategory: 'Civic integration',
+  audience: {
+    '@type': 'EducationalAudience',
+    educationalRole: 'Candidate to French civic exam',
+  },
+  teaches: [
+    'Devise nationale, laïcité, symboles républicains, droits fondamentaux',
+    'Pouvoirs, élections, collectivités locales, intégration européenne',
+    'Le vote, la justice, le service civique, la solidarité',
+    'Grandes dates, régions, patrimoine, arts, traditions',
+    'Travail, santé, école, démarches, vie associative',
+  ],
+};
+
 export default async function HomePage() {
   const user = await getCurrentUser();
 
   return (
     <main className="min-h-screen bg-bone">
+      <script
+        type="application/ld+json"
+        // Schema.org JSON-LD — safe, server-rendered, no XSS risk
+        // (only static, server-controlled values).
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
+      />
       <WelcomeStrip />
 
       {/* Header */}
@@ -264,6 +322,7 @@ export default async function HomePage() {
             <ul className="space-y-2 text-sm text-bone/70">
               <li><Link href="/privacy" className="hover:text-saffron">Confidentialité</Link></li>
               <li><Link href="/terms" className="hover:text-saffron">Conditions</Link></li>
+              <li><Link href="/mentions-legales" className="hover:text-saffron">Mentions légales</Link></li>
             </ul>
           </div>
         </div>

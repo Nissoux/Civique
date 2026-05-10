@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+import { LANGUAGES, type Language } from '@civique/shared';
 import type { Flashcard } from '@/lib/data/flashcards';
 import { useFlashcardStore } from '@/lib/stores/flashcardStore';
 
@@ -10,6 +11,22 @@ interface Props {
   themeId: number;
   themeName: string;
   themeColor: string;
+  currentLang: Language;
+}
+
+function isRtl(lang: Language): boolean {
+  return LANGUAGES.find((l) => l.code === lang)?.rtl ?? false;
+}
+
+function getCardTranslation(
+  card: Flashcard,
+  lang: Language,
+): { front: string; back: string } | undefined {
+  if (lang === 'fr') return undefined;
+  if (lang === 'ar' || lang === 'es' || lang === 'fa' || lang === 'hi' || lang === 'pt') {
+    return card.translations[lang];
+  }
+  return undefined;
 }
 
 type SessionPhase = 'review' | 'finished';
@@ -23,7 +40,7 @@ function shuffleArray<T>(arr: T[]): T[] {
   return a;
 }
 
-export function FlashcardSession({ cards, themeId, themeName, themeColor }: Props) {
+export function FlashcardSession({ cards, themeId, themeName, themeColor, currentLang }: Props) {
   const loadProgress = useFlashcardStore((s) => s.loadProgress);
   const markCard = useFlashcardStore((s) => s.markCard);
 
@@ -128,6 +145,9 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor }: Prop
         key={card.id}
         front={card.front}
         back={card.back}
+        translatedFront={getCardTranslation(card, currentLang)?.front}
+        translatedBack={getCardTranslation(card, currentLang)?.back}
+        rtl={isRtl(currentLang)}
         flipped={flipped}
         themeColor={themeColor}
         onFlip={() => setFlipped((f) => !f)}
@@ -182,12 +202,18 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor }: Prop
 function FlipCard({
   front,
   back,
+  translatedFront,
+  translatedBack,
+  rtl,
   flipped,
   themeColor,
   onFlip,
 }: {
   front: string;
   back: string;
+  translatedFront?: string;
+  translatedBack?: string;
+  rtl: boolean;
   flipped: boolean;
   themeColor: string;
   onFlip: () => void;
@@ -241,6 +267,14 @@ function FlipCard({
           >
             {front}
           </p>
+          {translatedFront ? (
+            <p
+              className="text-base sm:text-lg text-ink-mute italic font-display leading-snug"
+              dir={rtl ? 'rtl' : undefined}
+            >
+              {translatedFront}
+            </p>
+          ) : null}
           <p className="text-xs text-ink-mute font-display italic">
             — Touchez pour révéler
           </p>
@@ -279,6 +313,14 @@ function FlipCard({
           >
             {back}
           </p>
+          {translatedBack ? (
+            <p
+              className="text-sm sm:text-base text-bone/80 italic font-display leading-relaxed"
+              dir={rtl ? 'rtl' : undefined}
+            >
+              {translatedBack}
+            </p>
+          ) : null}
         </div>
       </button>
     </div>

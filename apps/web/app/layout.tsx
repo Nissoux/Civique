@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Newsreader, Karla } from 'next/font/google';
+import { CookieBanner } from '@/components/cookie/CookieBanner';
 import './globals.css';
 
 const newsreader = Newsreader({
@@ -51,7 +52,10 @@ export default function RootLayout({
       className={`${newsreader.variable} ${karla.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        {children}
+        <CookieBanner />
+      </body>
     </html>
   );
 }

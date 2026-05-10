@@ -1,11 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { THEMES } from '@civique/shared';
+import { THEMES, LANGUAGES, type Language } from '@civique/shared';
 import type { GlossaryTerm } from '@/lib/data/glossaire';
 
 interface Props {
   terms: GlossaryTerm[];
+  currentLang: Language;
 }
 
 function normalize(s: string): string {
@@ -21,20 +22,54 @@ function firstLetter(term: string): string {
   return /[A-Z]/.test(c) ? c : '#';
 }
 
-export function GlossaireList({ terms }: Props) {
+function isRtl(lang: Language): boolean {
+  return LANGUAGES.find((l) => l.code === lang)?.rtl ?? false;
+}
+
+function getTranslation(
+  term: GlossaryTerm,
+  lang: Language,
+): { term: string; definition: string } | undefined {
+  if (lang === 'fr') return undefined;
+  // Narrow to the languages with translation data (matches the type).
+  if (lang === 'ar' || lang === 'es' || lang === 'fa' || lang === 'hi' || lang === 'pt') {
+    return term.translations[lang];
+  }
+  return undefined;
+}
+
+export function GlossaireList({ terms, currentLang }: Props) {
   const [query, setQuery] = useState('');
   const [themeFilter, setThemeFilter] = useState<number | null>(null);
+
+  const rtl = isRtl(currentLang);
 
   const filtered = useMemo(() => {
     const q = normalize(query.trim());
     return terms.filter((t) => {
       if (themeFilter !== null && t.themeId !== themeFilter) return false;
       if (!q) return true;
-      return (
-        normalize(t.term).includes(q) || normalize(t.definition).includes(q)
-      );
+      // Search FR primary text.
+      if (
+        normalize(t.term).includes(q) ||
+        normalize(t.definition).includes(q)
+      ) {
+        return true;
+      }
+      // Search the active translation as well, so a user can find a term in
+      // their language.
+      const tr = getTranslation(t, currentLang);
+      if (tr) {
+        if (
+          normalize(tr.term).includes(q) ||
+          normalize(tr.definition).includes(q)
+        ) {
+          return true;
+        }
+      }
+      return false;
     });
-  }, [terms, query, themeFilter]);
+  }, [terms, query, themeFilter, currentLang]);
 
   const grouped = useMemo(() => {
     const map = new Map<string, GlossaryTerm[]>();
@@ -154,7 +189,13 @@ export function GlossaireList({ terms }: Props) {
             </header>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {items.map((t) => (
-                <TermCard key={t.id} term={t} query={query} />
+                <TermCard
+                  key={t.id}
+                  term={t}
+                  query={query}
+                  currentLang={currentLang}
+                  rtl={rtl}
+                />
               ))}
             </ul>
           </section>
@@ -240,8 +281,19 @@ function highlight(text: string, query: string) {
   );
 }
 
-function TermCard({ term, query }: { term: GlossaryTerm; query: string }) {
+function TermCard({
+  term,
+  query,
+  currentLang,
+  rtl,
+}: {
+  term: GlossaryTerm;
+  query: string;
+  currentLang: Language;
+  rtl: boolean;
+}) {
   const theme = THEMES.find((t) => t.id === term.themeId);
+  const tr = getTranslation(term, currentLang);
   return (
     <li className="card !rounded-2xl !p-5 hover:-translate-y-0.5 transition-transform">
       <div className="flex items-baseline justify-between gap-3 mb-1.5">
@@ -268,6 +320,14 @@ function TermCard({ term, query }: { term: GlossaryTerm; query: string }) {
       <p className="text-sm text-ink-mute leading-relaxed">
         {highlight(term.definition, query)}
       </p>
+      {tr ? (
+        <p
+          className="mt-1.5 text-sm text-ink-mute italic font-display leading-relaxed"
+          dir={rtl ? 'rtl' : undefined}
+        >
+          {highlight(tr.definition, query)}
+        </p>
+      ) : null}
     </li>
   );
 }

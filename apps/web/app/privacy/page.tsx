@@ -6,7 +6,8 @@ import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 export const metadata: Metadata = {
   title: 'Politique de confidentialité — Civique',
   description:
-    'Comment Civique collecte, utilise et protège vos données personnelles. Vos droits RGPD et nos engagements.',
+    'Comment Civique collecte, utilise et protège vos données personnelles. Vos droits RGPD, durées de conservation et engagements.',
+  alternates: { canonical: '/privacy' },
 };
 
 const LAST_UPDATED = '10 mai 2026';
@@ -370,9 +371,12 @@ export default function PrivacyPage() {
             <span>
               © {new Date().getFullYear()} Civique · Tous droits réservés
             </span>
-            <span className="display-italic">
+            <span className="display-italic flex gap-4">
               <Link href="/terms" className="hover:text-saffron">
                 Conditions d'utilisation
+              </Link>
+              <Link href="/mentions-legales" className="hover:text-saffron">
+                Mentions légales
               </Link>
             </span>
           </div>

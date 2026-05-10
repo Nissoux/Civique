@@ -1,5 +1,7 @@
 import { GLOSSARY } from '@/lib/data/glossaire';
 import { GlossaireList } from '@/components/glossaire/GlossaireList';
+import { getCurrentUser } from '@/lib/server/me';
+import { getCurrentLang } from '@/lib/server/lang';
 
 export const metadata = {
   title: 'Glossaire civique — Civique',
@@ -7,7 +9,10 @@ export const metadata = {
     "Tous les termes essentiels de l'éducation civique : République, laïcité, institutions, droits, vie sociale.",
 };
 
-export default function GlossairePage() {
+export default async function GlossairePage() {
+  const user = await getCurrentUser();
+  const currentLang = await getCurrentLang(user?.preferredLang);
+
   return (
     <div className="min-h-screen">
       {/* Header */}
@@ -40,7 +45,7 @@ export default function GlossairePage() {
       </section>
 
       <section className="max-w-5xl mx-auto px-6 sm:px-10 py-8 sm:py-12">
-        <GlossaireList terms={GLOSSARY} />
+        <GlossaireList terms={GLOSSARY} currentLang={currentLang} />
       </section>
     </div>
   );

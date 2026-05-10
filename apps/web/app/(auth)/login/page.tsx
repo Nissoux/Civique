@@ -1,7 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { AuthShell } from '@/components/auth/AuthShell';
 import { FormMessage } from '@/components/auth/FormMessage';
 import { LoginForm } from './LoginForm';
+
+export const metadata: Metadata = {
+  title: 'Se connecter — Civique',
+  description:
+    "Connectez-vous à votre compte Civique pour reprendre votre préparation à l'examen civique français.",
+  alternates: { canonical: '/login' },
+};
 
 interface PageProps {
   searchParams: Promise<{ next?: string; reset?: string }>;

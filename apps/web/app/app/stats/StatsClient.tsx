@@ -23,6 +23,12 @@ interface StatsClientProps {
   themeStats: ThemeStat[];
   weakAreas: WeakArea[];
   initialHistory: HistoryEntry[];
+  /**
+   * Number of levels per theme, computed server-side from the real question
+   * count (same math the dashboard uses — 10 questions per level). Used to
+   * size the couronnes totals so they line up with the parcours page.
+   */
+  levelCountByTheme: Record<number, number>;
 }
 
 export function StatsClient({
@@ -30,6 +36,7 @@ export function StatsClient({
   themeStats,
   weakAreas,
   initialHistory,
+  levelCountByTheme,
 }: StatsClientProps) {
   const [period, setPeriod] = useState<StatsPeriod>('week');
   const [history, setHistory] = useState<HistoryEntry[]>(initialHistory);
@@ -98,7 +105,7 @@ export function StatsClient({
       </section>
 
       <div className="max-w-6xl mx-auto px-6 sm:px-10 py-10 space-y-8">
-        <ProgressionXPSection />
+        <ProgressionXPSection levelCountByTheme={levelCountByTheme} />
 
         {/* Par thème */}
         <section className="card !rounded-2xl p-6 sm:p-8">
@@ -395,7 +402,11 @@ function LegendDot({ tone, label }: { tone: string; label: string }) {
 
 // ── Local progression (XP + crowns from localStorage) ─────
 
-function ProgressionXPSection() {
+function ProgressionXPSection({
+  levelCountByTheme,
+}: {
+  levelCountByTheme: Record<number, number>;
+}) {
   const [hydrated, setHydrated] = useState(false);
   const xp = useProgressionStore((s) => s.xp);
   const streak = useProgressionStore((s) => s.streak);
@@ -408,9 +419,6 @@ function ProgressionXPSection() {
     setHydrated(true);
   }, [loaded, loadProgress]);
 
-  // Default to 5 levels per theme — same convention as the dashboard.
-  const LEVELS_PER_THEME = 5;
-
   if (!hydrated) {
     // SSR / pre-hydration placeholder (avoids layout shift)
     return (
@@ -420,10 +428,13 @@ function ProgressionXPSection() {
     );
   }
 
+  // Level counts are computed server-side from real question totals (matches
+  // the dashboard convention). Fallback to 0 → no crowns for that theme.
   let earnedAll = 0;
   let totalAll = 0;
   const perTheme = THEMES.map((t) => {
-    const c = getThemeCrowns(t.id, LEVELS_PER_THEME);
+    const totalLevels = levelCountByTheme[t.id] ?? 0;
+    const c = getThemeCrowns(t.id, totalLevels);
     earnedAll += c.earned;
     totalAll += c.total;
     return { theme: t, ...c };
