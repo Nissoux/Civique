@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
+import crypto from 'node:crypto';
 import { eq, and, sql } from 'drizzle-orm';
 import { db } from '../../config/database.js';
 import { users, promoCodes, promoRedemptions } from '../../db/schema.js';
@@ -70,8 +71,8 @@ export default async function paymentRoutes(app: FastifyInstance) {
     params.append('line_items[0][price]', planConfig.priceId);
     params.append('line_items[0][quantity]', '1');
     params.append('mode', planConfig.mode);
-    params.append('success_url', 'https://api.integrafle.fr/payment-success');
-    params.append('cancel_url', 'https://api.integrafle.fr/payment-cancel');
+    params.append('success_url', `${env.WEB_BASE_URL}/app/settings/subscription?success=1`);
+    params.append('cancel_url', `${env.WEB_BASE_URL}/app/settings/subscription?canceled=1`);
     params.append('client_reference_id', userId);
     params.append('metadata[userId]', userId);
     params.append('metadata[plan]', body.plan);
@@ -103,9 +104,60 @@ export default async function paymentRoutes(app: FastifyInstance) {
   // ── POST /webhook/stripe ────────────────────────────────
   // Stripe webhook handler (no auth - Stripe calls this directly)
   app.post('/webhook/stripe', async (request, reply) => {
-    // Stripe signature validation — enable when Stripe is configured
-    // const sig = request.headers['stripe-signature'];
-    // const event = stripe.webhooks.constructEvent(request.rawBody, sig, env.STRIPE_WEBHOOK_SECRET);
+    const webhookSecret = env.STRIPE_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      return reply.status(503).send({ error: 'Stripe webhook secret not configured' });
+    }
+
+    const signatureHeader = request.headers['stripe-signature'];
+    if (!signatureHeader || typeof signatureHeader !== 'string') {
+      return reply.status(400).send({ error: 'Missing stripe-signature header' });
+    }
+
+    const rawBody = request.rawBody;
+    if (!rawBody) {
+      app.log.warn('Stripe webhook received without rawBody — content type parser misconfigured');
+      return reply.status(400).send({ error: 'Raw body unavailable' });
+    }
+
+    // Parse Stripe signature header: "t=<timestamp>,v1=<sig>[,v1=<sig>...]"
+    const parts = signatureHeader.split(',').reduce<Record<string, string[]>>((acc, p) => {
+      const [k, v] = p.split('=', 2);
+      if (!k || !v) return acc;
+      acc[k] = acc[k] ?? [];
+      acc[k].push(v);
+      return acc;
+    }, {});
+
+    const timestamp = parts['t']?.[0];
+    const signatures = parts['v1'] ?? [];
+    if (!timestamp || signatures.length === 0) {
+      return reply.status(400).send({ error: 'Invalid stripe-signature header' });
+    }
+
+    // Reject signatures older than 5 minutes (replay protection)
+    const tsSec = Number.parseInt(timestamp, 10);
+    if (!Number.isFinite(tsSec) || Math.abs(Date.now() / 1000 - tsSec) > 300) {
+      return reply.status(400).send({ error: 'Signature timestamp out of tolerance' });
+    }
+
+    const expected = crypto
+      .createHmac('sha256', webhookSecret)
+      .update(`${timestamp}.${rawBody}`, 'utf8')
+      .digest('hex');
+
+    const expectedBuf = Buffer.from(expected, 'hex');
+    const isMatch = signatures.some((sig) => {
+      const sigBuf = Buffer.from(sig, 'hex');
+      return (
+        sigBuf.length === expectedBuf.length && crypto.timingSafeEqual(sigBuf, expectedBuf)
+      );
+    });
+
+    if (!isMatch) {
+      app.log.warn({ ip: request.ip }, 'Stripe webhook signature mismatch');
+      return reply.status(400).send({ error: 'Invalid signature' });
+    }
 
     const event = request.body as {
       type: string;
@@ -228,6 +280,143 @@ export default async function paymentRoutes(app: FastifyInstance) {
     }
 
     return reply.status(200).send({ received: true });
+  });
+
+  // ── POST /customer-portal ───────────────────────────────
+  // Crée une session Stripe Billing Portal pour gérer l'abonnement
+  app.post('/customer-portal', { preHandler: authGuard }, async (request, reply) => {
+    const userId = request.currentUser!.id;
+    const stripeKey = env.STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      return reply.status(503).send({ error: 'Paiement non configuré' });
+    }
+
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+      columns: { stripeCustomerId: true },
+    });
+
+    if (!user) {
+      return reply.status(404).send({ error: 'Utilisateur non trouvé' });
+    }
+    if (!user.stripeCustomerId) {
+      return reply.status(404).send({ error: 'Aucun abonnement Stripe associé à ce compte' });
+    }
+
+    const params = new URLSearchParams();
+    params.append('customer', user.stripeCustomerId);
+    params.append(
+      'return_url',
+      `${env.WEB_BASE_URL}/app/settings/subscription`,
+    );
+
+    const response = await fetch('https://api.stripe.com/v1/billing_portal/sessions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${stripeKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString(),
+    });
+
+    const session = (await response.json()) as {
+      url?: string;
+      error?: { message: string };
+    };
+
+    if (!response.ok || !session.url) {
+      return reply
+        .status(502)
+        .send({ error: session.error?.message || 'Erreur Stripe' });
+    }
+
+    return { data: { url: session.url } };
+  });
+
+  // ── POST /cancel ────────────────────────────────────────
+  // Annule l'abonnement actif de l'utilisateur à la fin de la période en cours
+  app.post('/cancel', { preHandler: authGuard }, async (request, reply) => {
+    const userId = request.currentUser!.id;
+    const stripeKey = env.STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      return reply.status(503).send({ error: 'Paiement non configuré' });
+    }
+
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+      columns: { stripeCustomerId: true },
+    });
+
+    if (!user) {
+      return reply.status(404).send({ error: 'Utilisateur non trouvé' });
+    }
+    if (!user.stripeCustomerId) {
+      return reply.status(404).send({ error: 'Aucun abonnement Stripe associé à ce compte' });
+    }
+
+    // Récupère les abonnements actifs du client
+    const listRes = await fetch(
+      `https://api.stripe.com/v1/subscriptions?customer=${encodeURIComponent(user.stripeCustomerId)}&status=active&limit=1`,
+      {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${stripeKey}` },
+      },
+    );
+
+    const listJson = (await listRes.json()) as {
+      data?: Array<{ id: string }>;
+      error?: { message: string };
+    };
+
+    if (!listRes.ok) {
+      return reply
+        .status(502)
+        .send({ error: listJson.error?.message || 'Erreur Stripe' });
+    }
+
+    const sub = listJson.data?.[0];
+    if (!sub) {
+      return reply.status(404).send({ error: 'Aucun abonnement actif à annuler' });
+    }
+
+    // Met à jour l'abonnement pour annulation à la fin de période
+    const updateParams = new URLSearchParams();
+    updateParams.append('cancel_at_period_end', 'true');
+
+    const updateRes = await fetch(
+      `https://api.stripe.com/v1/subscriptions/${encodeURIComponent(sub.id)}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${stripeKey}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: updateParams.toString(),
+      },
+    );
+
+    const updated = (await updateRes.json()) as {
+      id: string;
+      cancel_at: number | null;
+      canceled_at: number | null;
+      current_period_end: number;
+      error?: { message: string };
+    };
+
+    if (!updateRes.ok) {
+      return reply
+        .status(502)
+        .send({ error: updated.error?.message || 'Erreur Stripe' });
+    }
+
+    const periodEnd = updated.current_period_end
+      ? new Date(updated.current_period_end * 1000).toISOString()
+      : null;
+    const canceledAt = updated.canceled_at
+      ? new Date(updated.canceled_at * 1000).toISOString()
+      : new Date().toISOString();
+
+    return { data: { canceledAt, periodEnd } };
   });
 
   // ── POST /redeem-code ─────────────────────────────────

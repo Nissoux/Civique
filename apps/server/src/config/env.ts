@@ -10,6 +10,7 @@ const envSchema = z.object({
   BREVO_API_KEY: z.string().optional(),
   ADMIN_SECRET: z.string().optional(),
   ALLOWED_ORIGINS: z.string().optional(),
+  WEB_BASE_URL: z.string().url().default('https://civique.fr'),
   PORT: z.coerce.number().default(3000),
   HOST: z.string().default('0.0.0.0'),
 });

@@ -12,6 +12,7 @@ import ficheRoutes from './routes/fiches/index.js';
 import statsRoutes from './routes/stats/index.js';
 import socialRoutes from './routes/social/index.js';
 import paymentRoutes from './routes/payments/index.js';
+import userRoutes from './routes/users/index.js';
 
 async function main() {
   const app = Fastify({
@@ -37,6 +38,8 @@ async function main() {
   const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
     'https://api.integrafle.fr',
     'https://integrafle.fr',
+    'https://civique.fr',
+    'http://localhost:3001',
   ];
   await app.register(cors, {
     origin: allowedOrigins,
@@ -48,6 +51,29 @@ async function main() {
   await app.register(jwt, {
     secret: env.JWT_SECRET,
   });
+
+  // Capture raw JSON body (string) on request so Stripe webhook can verify signature.
+  // We override the default JSON parser, parse JSON manually, and stash the raw text.
+  app.removeContentTypeParser('application/json');
+  app.addContentTypeParser(
+    'application/json',
+    { parseAs: 'string' },
+    (req, body: string, done) => {
+      (req as unknown as { rawBody?: string }).rawBody = body;
+      if (body.length === 0) {
+        done(null, {});
+        return;
+      }
+      try {
+        const json = JSON.parse(body);
+        done(null, json);
+      } catch (err) {
+        const e = err as Error & { statusCode?: number };
+        e.statusCode = 400;
+        done(e, undefined);
+      }
+    },
+  );
 
   // Global error handler for Zod validation errors
   app.setErrorHandler((error: Error & { statusCode?: number; validation?: unknown }, _request, reply) => {
@@ -87,6 +113,7 @@ async function main() {
   await app.register(statsRoutes, { prefix: '/api/stats' });
   await app.register(socialRoutes, { prefix: '/api/social' });
   await app.register(paymentRoutes, { prefix: '/api/payments' });
+  await app.register(userRoutes, { prefix: '/api/users' });
 
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));

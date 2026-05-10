@@ -8,6 +8,7 @@ export interface AuthUser {
 declare module 'fastify' {
   interface FastifyRequest {
     currentUser?: AuthUser;
+    rawBody?: string;
   }
 }
 
