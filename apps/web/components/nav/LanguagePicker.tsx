@@ -9,16 +9,25 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
   const [pending, start] = useTransition();
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  // Close on outside click.
+  // Close on outside click or Escape key.
   useEffect(() => {
     if (!open) return;
-    function handler(e: MouseEvent) {
+    function clickHandler(e: MouseEvent) {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    function keyHandler(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', clickHandler);
+    document.addEventListener('keydown', keyHandler);
+    return () => {
+      document.removeEventListener('mousedown', clickHandler);
+      document.removeEventListener('keydown', keyHandler);
+    };
   }, [open]);
 
   const current = LANGUAGES.find((l) => l.code === currentLang) ?? LANGUAGES[0];
@@ -40,10 +49,15 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         disabled={pending}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`Langue de traduction : ${current.nativeName}. Cliquez pour changer.`}
+        aria-busy={pending || undefined}
         className="
           w-full px-3 py-2 rounded-xl bg-bone-deep border border-aubergine/15
           text-left transition-colors hover:border-aubergine/30
           disabled:opacity-60
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone
         "
       >
         <p className="font-display italic text-ink-mute mb-0.5 text-xs">
@@ -61,6 +75,7 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
       {open ? (
         <ul
           role="listbox"
+          aria-label="Choisir une langue de traduction"
           className="
             absolute bottom-full left-0 right-0 mb-2 z-30
             bg-bone border-[1.5px] border-aubergine rounded-xl
@@ -70,13 +85,14 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
           {LANGUAGES.map((l) => {
             const active = l.code === currentLang;
             return (
-              <li key={l.code}>
+              <li key={l.code} role="option" aria-selected={active}>
                 <button
                   type="button"
                   onClick={() => handlePick(l.code)}
                   className={`
                     w-full px-3 py-2 rounded-lg text-left text-sm
                     transition-colors flex items-center justify-between
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-inset
                     ${
                       active
                         ? 'bg-aubergine text-bone'
@@ -85,7 +101,6 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
                   `}
                   lang={l.code}
                   dir={l.rtl ? 'rtl' : 'ltr'}
-                  aria-selected={active}
                 >
                   <span className="font-semibold">{l.nativeName}</span>
                   {active ? (
@@ -94,6 +109,7 @@ export function LanguagePicker({ currentLang }: { currentLang: Language }) {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden
                     >
                       <path
                         strokeLinecap="round"

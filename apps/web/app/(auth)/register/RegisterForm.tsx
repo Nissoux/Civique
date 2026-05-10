@@ -11,9 +11,11 @@ import { registerAction } from './actions';
 
 export function RegisterForm() {
   const [state, formAction] = useActionState(registerAction, {});
+  const errorId = state.error ? 'register-error' : undefined;
+  const invalid = Boolean(state.error);
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    <form action={formAction} className="flex flex-col gap-5" noValidate>
       <TextField
         label="Nom complet"
         name="displayName"
@@ -22,6 +24,8 @@ export function RegisterForm() {
         required
         placeholder="Marie Dupont"
         maxLength={100}
+        aria-invalid={invalid || undefined}
+        aria-describedby={errorId}
       />
 
       <TextField
@@ -31,6 +35,8 @@ export function RegisterForm() {
         autoComplete="email"
         required
         placeholder="vous@exemple.fr"
+        aria-invalid={invalid || undefined}
+        aria-describedby={errorId}
       />
 
       <PasswordField
@@ -40,6 +46,8 @@ export function RegisterForm() {
         required
         minLength={8}
         hint="8 caractères minimum"
+        aria-invalid={invalid || undefined}
+        aria-describedby={errorId}
       />
 
       <div className="flex flex-col gap-1.5">
@@ -63,7 +71,7 @@ export function RegisterForm() {
         </select>
       </div>
 
-      <FormMessage error={state.error} />
+      <FormMessage error={state.error} id={errorId} />
 
       <SubmitButton pendingLabel="Création du compte…">
         Créer mon compte

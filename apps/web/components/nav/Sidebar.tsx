@@ -62,7 +62,7 @@ export function Sidebar({ user, examLabel, currentLang }: SidebarProps) {
         <Logo size="md" />
       </div>
 
-      <nav className="flex-1 px-3 py-4 overflow-y-auto">
+      <nav aria-label="Navigation principale" className="flex-1 px-3 py-4 overflow-y-auto">
         {SECTIONS.map((section, sIdx) => (
           <div key={section.eyebrow} className={sIdx > 0 ? 'mt-5' : undefined}>
             <p className="eyebrow px-3 mb-2 text-[0.65rem]">{section.eyebrow}</p>
@@ -76,9 +76,11 @@ export function Sidebar({ user, examLabel, currentLang }: SidebarProps) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      aria-current={isActive ? 'page' : undefined}
                       className={`
                         flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium
                         transition-all
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-1 focus-visible:ring-offset-bone
                         ${
                           isActive
                             ? 'bg-aubergine text-bone shadow-[0_2px_0_rgb(74_45_67)]'
@@ -123,9 +125,9 @@ export function Sidebar({ user, examLabel, currentLang }: SidebarProps) {
         <form action={logoutAction}>
           <button
             type="submit"
-            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm font-medium text-ink-mute hover:text-aubergine hover:bg-bone-deep transition-colors"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm font-medium text-ink-mute hover:text-aubergine hover:bg-bone-deep transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-1 focus-visible:ring-offset-bone"
           >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             Déconnexion

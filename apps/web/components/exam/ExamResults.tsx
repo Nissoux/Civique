@@ -4,6 +4,7 @@ import type {
   ThemeBreakdownItem,
   WrongAnswerItem,
 } from '@/lib/server/exams';
+import { ConfettiBurst } from './ConfettiBurst';
 
 interface Props {
   results: ExamResultsResponse;
@@ -39,6 +40,7 @@ export function ExamResults({ results }: Props) {
 
   return (
     <div className="min-h-screen bg-bone">
+      {passed ? <ConfettiBurst /> : null}
       <div className="max-w-3xl mx-auto px-5 sm:px-8 py-8 sm:py-12">
         <ResultHeader passed={passed} />
 

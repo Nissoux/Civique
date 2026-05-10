@@ -53,6 +53,21 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased">
+        {/* Skip-to-main-content link for keyboard / screen-reader users.
+            Stays visually hidden until focused, then surfaces as a focused chip. */}
+        <a
+          href="#main-content"
+          className="
+            sr-only focus:not-sr-only
+            focus:fixed focus:top-3 focus:left-3 focus:z-[100]
+            focus:inline-flex focus:items-center focus:px-4 focus:py-2
+            focus:rounded-full focus:bg-aubergine focus:text-bone
+            focus:font-semibold focus:text-sm focus:shadow-warm
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone
+          "
+        >
+          Aller au contenu principal
+        </a>
         {children}
         <CookieBanner />
       </body>

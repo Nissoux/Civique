@@ -34,8 +34,8 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div
-      role="dialog"
+    <aside
+      role="region"
       aria-live="polite"
       aria-label="Information sur les cookies"
       className="
@@ -70,17 +70,19 @@ export function CookieBanner() {
         <button
           type="button"
           onClick={dismiss}
+          aria-label="J'accepte l'utilisation des cookies essentiels"
           className="
             shrink-0 inline-flex items-center justify-center
             px-5 py-2.5 rounded-full font-semibold text-sm
             bg-aubergine text-bone hover:bg-aubergine-mid
             shadow-[0_2px_0_rgb(45_27_46)]
             transition-colors
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone
           "
         >
           OK
         </button>
       </div>
-    </div>
+    </aside>
   );
 }

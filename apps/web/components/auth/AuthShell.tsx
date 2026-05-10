@@ -76,7 +76,11 @@ export function AuthShell({
         </aside>
 
         {/* Form panel — right on desktop, bottom on mobile */}
-        <main className="relative flex flex-col p-8 sm:p-12 lg:p-16">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="relative flex flex-col p-8 sm:p-12 lg:p-16 focus:outline-none"
+        >
           <Link
             href="/"
             className="

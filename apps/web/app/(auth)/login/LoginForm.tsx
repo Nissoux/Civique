@@ -11,9 +11,11 @@ import { loginAction } from './actions';
 
 export function LoginForm({ next }: { next: string }) {
   const [state, formAction] = useActionState(loginAction, {});
+  const errorId = state.error ? 'login-error' : undefined;
+  const invalid = Boolean(state.error);
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    <form action={formAction} className="flex flex-col gap-5" noValidate>
       <input type="hidden" name="next" value={next} />
 
       <TextField
@@ -23,6 +25,8 @@ export function LoginForm({ next }: { next: string }) {
         autoComplete="email"
         required
         placeholder="vous@exemple.fr"
+        aria-invalid={invalid || undefined}
+        aria-describedby={errorId}
       />
 
       <div>
@@ -31,6 +35,8 @@ export function LoginForm({ next }: { next: string }) {
           name="password"
           autoComplete="current-password"
           required
+          aria-invalid={invalid || undefined}
+          aria-describedby={errorId}
         />
         <Link
           href="/forgot-password"
@@ -40,7 +46,7 @@ export function LoginForm({ next }: { next: string }) {
         </Link>
       </div>
 
-      <FormMessage error={state.error} />
+      <FormMessage error={state.error} id={errorId} />
 
       <SubmitButton pendingLabel="Connexion…">Se connecter</SubmitButton>
 

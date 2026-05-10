@@ -8,9 +8,11 @@ import { forgotPasswordAction } from './actions';
 
 export function ForgotPasswordForm() {
   const [state, formAction] = useActionState(forgotPasswordAction, {});
+  const feedbackId = state.error || state.message ? 'forgot-feedback' : undefined;
+  const invalid = Boolean(state.error);
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    <form action={formAction} className="flex flex-col gap-5" noValidate>
       <TextField
         label="Email"
         name="email"
@@ -18,9 +20,11 @@ export function ForgotPasswordForm() {
         autoComplete="email"
         required
         placeholder="vous@exemple.fr"
+        aria-invalid={invalid || undefined}
+        aria-describedby={feedbackId}
       />
 
-      <FormMessage error={state.error} message={state.message} />
+      <FormMessage error={state.error} message={state.message} id={feedbackId} />
 
       <SubmitButton pendingLabel="Envoi…">
         Recevoir mon code

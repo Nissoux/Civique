@@ -27,9 +27,12 @@ export function ProfileForm({
     updateProfileAction,
     {},
   );
+  const feedbackId =
+    state.error || state.message ? 'profile-feedback' : undefined;
+  const invalid = Boolean(state.error);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="space-y-5" noValidate>
       {!emailVerified ? (
         <div
           role="status"
@@ -60,6 +63,8 @@ export function ProfileForm({
           defaultValue={initialDisplayName}
           maxLength={100}
           required
+          aria-invalid={invalid || undefined}
+          aria-describedby={feedbackId}
         />
         <div className="flex flex-col">
           <TextField
@@ -71,6 +76,8 @@ export function ProfileForm({
             inputMode="email"
             maxLength={254}
             required
+            aria-invalid={invalid || undefined}
+            aria-describedby={feedbackId}
           />
           <p className="text-xs text-ink-mute italic font-display mt-2">
             En modifiant votre email, vous recevrez un code de vérification à 6 chiffres. Votre compte restera actif.
@@ -105,7 +112,7 @@ export function ProfileForm({
         </p>
       </div>
 
-      <FormMessage error={state.error} message={state.message} />
+      <FormMessage error={state.error} message={state.message} id={feedbackId} />
 
       {state.emailChanged ? (
         <div className="flex justify-start">

@@ -105,9 +105,11 @@ export function MobileNav() {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  aria-current={active ? 'page' : undefined}
                   className={`
                     flex flex-col items-center justify-center py-2 px-1 text-[0.65rem] font-semibold
                     transition-colors
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-inset
                     ${active ? 'text-terracotta' : 'text-ink-mute hover:text-aubergine'}
                   `}
                 >
@@ -128,9 +130,11 @@ export function MobileNav() {
               onClick={() => setDrawerOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={drawerOpen}
+              aria-label="Plus d'options"
               className={`
                 w-full flex flex-col items-center justify-center py-2 px-1 text-[0.65rem] font-semibold
                 transition-colors
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-inset
                 ${overflowActive ? 'text-terracotta' : 'text-ink-mute hover:text-aubergine'}
               `}
             >
@@ -155,10 +159,9 @@ export function MobileNav() {
         `}
         aria-hidden={!drawerOpen}
       >
-        {/* Backdrop */}
-        <button
-          type="button"
-          tabIndex={-1}
+        {/* Backdrop — purely decorative click-catcher.
+            Keyboard users dismiss via Escape or the close button. */}
+        <div
           aria-hidden
           onClick={() => setDrawerOpen(false)}
           className="absolute inset-0 bg-aubergine/30 backdrop-blur-sm"
@@ -196,9 +199,10 @@ export function MobileNav() {
                 bg-bone-deep border border-aubergine/20
                 text-aubergine hover:bg-bone hover:border-aubergine/40
                 transition-colors
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone
               "
             >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -212,9 +216,11 @@ export function MobileNav() {
                   <Link
                     href={item.href}
                     onClick={() => setDrawerOpen(false)}
+                    aria-current={active ? 'page' : undefined}
                     className={`
                       flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium
                       transition-colors
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-1 focus-visible:ring-offset-bone
                       ${
                         active
                           ? 'bg-aubergine text-bone'
@@ -252,6 +258,7 @@ export function MobileNav() {
                   w-full flex items-center gap-3 px-4 py-3 rounded-2xl
                   text-sm font-medium text-fr-red
                   hover:bg-fr-red/10 transition-colors
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-fr-red focus-visible:ring-offset-2 focus-visible:ring-offset-bone
                 "
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>

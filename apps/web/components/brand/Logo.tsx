@@ -21,15 +21,19 @@ export function Logo({
   className = '',
 }: LogoProps) {
   const s = SIZES[size];
+  // When the wordmark is shown, mark the image as decorative so screen
+  // readers don't read "Civique" twice. Otherwise, the image provides the
+  // accessible name.
   const inner = (
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <Image
         src="/logo-c.png"
-        alt="Civique"
+        alt={withWordmark ? '' : 'Civique'}
         width={s.mark}
         height={s.mark}
         priority
         className="rounded-[8px] shrink-0"
+        aria-hidden={withWordmark || undefined}
       />
       {withWordmark ? (
         <span
@@ -44,7 +48,11 @@ export function Logo({
 
   if (href) {
     return (
-      <Link href={href} className="inline-flex items-center">
+      <Link
+        href={href}
+        className="inline-flex items-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone"
+        aria-label={withWordmark ? undefined : 'Civique — accueil'}
+      >
         {inner}
       </Link>
     );

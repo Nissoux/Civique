@@ -16,7 +16,11 @@ export default function ErrorPage({
   }, [error]);
 
   return (
-    <main className="min-h-screen bg-bone flex items-center justify-center px-6">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="min-h-screen bg-bone flex items-center justify-center px-6 focus:outline-none"
+    >
       <div className="text-center max-w-md">
         <p className="eyebrow mb-4">— Une erreur est survenue</p>
         <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] mb-6 font-medium tracking-tight">

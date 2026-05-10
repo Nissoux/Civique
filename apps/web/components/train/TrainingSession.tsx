@@ -98,6 +98,7 @@ export function TrainingSession({
         correctCount={correctCount}
         total={total}
         themeColor={theme.color}
+        isRandom={isRandom}
       />
     );
   }
@@ -148,6 +149,15 @@ export function TrainingSession({
     }
   }
 
+  function handleQuit(e: React.MouseEvent<HTMLAnchorElement>) {
+    // Skip confirm if user already finished (no progression at risk).
+    if (phase === 'finished') return;
+    const ok = window.confirm(
+      'Êtes-vous sûr de vouloir quitter ? Votre progression de cette session ne sera pas sauvegardée.',
+    );
+    if (!ok) e.preventDefault();
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-10 py-6 sm:py-12">
       {/* Header — progress */}
@@ -155,6 +165,7 @@ export function TrainingSession({
         <div className="flex items-baseline justify-between mb-3">
           <Link
             href="/app"
+            onClick={handleQuit}
             className="text-sm text-ink-mute hover:text-aubergine font-medium inline-flex items-center gap-1.5"
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,10 +195,18 @@ export function TrainingSession({
             style={{ backgroundColor: theme.color }}
             aria-hidden
           >
-            {themeId}
+            {isRandom ? (
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            ) : (
+              themeId
+            )}
           </span>
           <span className="text-ink-mute">
-            Thème {themeId} · Niveau {levelNum} · {theme.nameFr}
+            {isRandom
+              ? 'Entraînement aléatoire · 5 thèmes confondus'
+              : `Thème ${themeId} · Niveau ${levelNum} · ${theme.nameFr}`}
           </span>
         </div>
       </header>
@@ -427,6 +446,7 @@ function SessionResults({
   correctCount,
   total,
   themeColor,
+  isRandom,
 }: {
   themeId: number;
   levelNum: number;
@@ -434,29 +454,48 @@ function SessionResults({
   correctCount: number;
   total: number;
   themeColor: string;
+  isRandom: boolean;
 }) {
   const scorePercent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
   const crowns = scorePercent >= 100 ? 3 : scorePercent >= 80 ? 2 : scorePercent >= 60 ? 1 : 0;
 
   const isPerfect = scorePercent === 100;
   const isPass = scorePercent >= 60;
-  const headline = isPerfect
+
+  // Random training has no concept of "level passed/failed" — adapt the copy
+  // and CTAs accordingly. No level number, no crowns, no "next level" link.
+  const headline = isRandom
+    ? isPerfect
+      ? 'Parfait !'
+      : isPass
+      ? 'Belle session.'
+      : "Continuez l'entraînement."
+    : isPerfect
     ? 'Parfait !'
     : isPass
     ? 'Niveau réussi.'
     : 'Encore un peu.';
-  const subtitle = isPerfect
+
+  const subtitle = isRandom
+    ? isPerfect
+      ? '10 sur 10 — vous maîtrisez tous les thèmes.'
+      : isPass
+      ? 'Belle performance sur ce quiz aléatoire.'
+      : 'Un nouveau quiz vous attend pour vous améliorer.'
+    : isPerfect
     ? 'Trois couronnes — vous maîtrisez ce niveau.'
     : isPass
     ? 'Ce niveau est validé. Vous pouvez continuer.'
     : 'Il faut au moins 60 % pour valider. Réessayez quand vous voulez.';
+
+  const eyebrow = isRandom ? '— Entraînement rapide' : `— Niveau ${levelNum}`;
 
   const hasNextLevel = levelNum < totalLevels;
 
   return (
     <div className="max-w-2xl mx-auto px-6 sm:px-10 py-12 sm:py-20">
       <div className="text-center mb-10">
-        <p className="eyebrow mb-3">— Niveau {levelNum}</p>
+        <p className="eyebrow mb-3">{eyebrow}</p>
         <h1
           className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] font-medium tracking-tight mb-4"
           style={{ fontVariationSettings: "'opsz' 96" }}
@@ -473,7 +512,7 @@ function SessionResults({
       </div>
 
       <div className="card !rounded-3xl !p-8 mb-8">
-        <div className="text-center mb-7">
+        <div className="text-center mb-2">
           <div
             className="
               inline-flex flex-col items-center justify-center
@@ -495,57 +534,80 @@ function SessionResults({
           </p>
         </div>
 
-        {/* Crown row */}
-        <div className="flex items-center justify-center gap-2 mb-2">
-          {[1, 2, 3].map((i) => (
-            <svg
-              key={i}
-              className={`h-10 w-10 transition-all ${i <= crowns ? 'text-saffron' : 'text-aubergine/15'}`}
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              style={{ transform: i <= crowns ? `translateY(-${(crowns - i + 1) * 2}px)` : 'none' }}
-            >
-              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-            </svg>
-          ))}
-        </div>
-        <p className="text-center text-xs text-ink-mute">
-          {crowns === 3
-            ? 'Trois couronnes — perfection'
-            : crowns === 2
-            ? 'Deux couronnes — très bien'
-            : crowns === 1
-            ? 'Une couronne — niveau validé'
-            : 'Aucune couronne — réessayez'}
-        </p>
+        {/* Crown row — only for level-bound training. Random doesn't earn crowns. */}
+        {!isRandom ? (
+          <>
+            <div className="flex items-center justify-center gap-2 mb-2 mt-5">
+              {[1, 2, 3].map((i) => (
+                <svg
+                  key={i}
+                  className={`h-10 w-10 transition-all ${i <= crowns ? 'text-saffron' : 'text-aubergine/15'}`}
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{ transform: i <= crowns ? `translateY(-${(crowns - i + 1) * 2}px)` : 'none' }}
+                >
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-center text-xs text-ink-mute">
+              {crowns === 3
+                ? 'Trois couronnes — perfection'
+                : crowns === 2
+                ? 'Deux couronnes — très bien'
+                : crowns === 1
+                ? 'Une couronne — niveau validé'
+                : 'Aucune couronne — réessayez'}
+            </p>
+          </>
+        ) : null}
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
-        {!isPass ? (
-          <Link
-            href={`/app/train/${themeId}/${levelNum}`}
-            className="btn-primary flex-1 !justify-center"
-          >
-            Refaire le niveau
-          </Link>
-        ) : null}
-        {isPass && hasNextLevel ? (
-          <Link
-            href={`/app/train/${themeId}/${levelNum + 1}`}
-            className="btn-primary flex-1 !justify-center"
-          >
-            Niveau suivant
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </Link>
-        ) : null}
-        <Link
-          href="/app"
-          className={`btn-secondary !justify-center ${(!isPass || !hasNextLevel) ? 'flex-1' : ''}`}
-        >
-          Retour au tableau de bord
-        </Link>
+        {isRandom ? (
+          <>
+            <Link
+              href="/app/train/random"
+              className="btn-primary flex-1 !justify-center"
+            >
+              Nouveau quiz aléatoire
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </Link>
+            <Link href="/app" className="btn-secondary !justify-center flex-1">
+              Retour au tableau de bord
+            </Link>
+          </>
+        ) : (
+          <>
+            {!isPass ? (
+              <Link
+                href={`/app/train/${themeId}/${levelNum}`}
+                className="btn-primary flex-1 !justify-center"
+              >
+                Refaire le niveau
+              </Link>
+            ) : null}
+            {isPass && hasNextLevel ? (
+              <Link
+                href={`/app/train/${themeId}/${levelNum + 1}`}
+                className="btn-primary flex-1 !justify-center"
+              >
+                Niveau suivant
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            ) : null}
+            <Link
+              href="/app"
+              className={`btn-secondary !justify-center ${(!isPass || !hasNextLevel) ? 'flex-1' : ''}`}
+            >
+              Retour au tableau de bord
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

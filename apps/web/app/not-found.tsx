@@ -3,7 +3,11 @@ import { Logo } from '@/components/brand/Logo';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-bone flex items-center justify-center px-6">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="min-h-screen bg-bone flex items-center justify-center px-6 focus:outline-none"
+    >
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-10">
           <Logo size="md" href="/" />

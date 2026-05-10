@@ -74,27 +74,44 @@ export default async function AppPage() {
           </div>
 
           {/* Stats row — server-side accuracy, local XP/streak hydrate client-side */}
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-6 max-w-2xl">
-            <StatTile
-              label="Précision"
-              value={
-                stats?.overallAccuracy !== undefined
-                  ? `${Math.round(stats.overallAccuracy)}%`
-                  : '—'
-              }
-              accent="saffron"
-            />
-            <StatTile
-              label="Pratiquées"
-              value={stats?.totalPracticed?.toString() ?? '0'}
-              accent="terracotta"
-            />
-            <StatTile
-              label="Examens"
-              value={`${stats?.examsPassed ?? 0}/${stats?.examsTaken ?? 0}`}
-              accent="teal"
-            />
-          </div>
+          {(() => {
+            const totalPracticed = stats?.totalPracticed ?? 0;
+            const examsTaken = stats?.examsTaken ?? 0;
+            const isNewUser = totalPracticed === 0 && examsTaken === 0;
+            return (
+              <>
+                <div className="grid grid-cols-3 gap-2.5 sm:gap-6 max-w-2xl">
+                  <StatTile
+                    label="Précision"
+                    value={
+                      stats?.overallAccuracy !== undefined
+                        ? `${Math.round(stats.overallAccuracy)}%`
+                        : '—'
+                    }
+                    accent="saffron"
+                    dim={isNewUser}
+                  />
+                  <StatTile
+                    label="Pratiquées"
+                    value={totalPracticed.toString()}
+                    accent="terracotta"
+                    dim={isNewUser}
+                  />
+                  <StatTile
+                    label="Examens"
+                    value={`${stats?.examsPassed ?? 0}/${examsTaken}`}
+                    accent="teal"
+                    dim={isNewUser}
+                  />
+                </div>
+                {isNewUser ? (
+                  <p className="mt-4 text-xs sm:text-sm text-bone/60 font-display italic">
+                    — Commencez par une session d'entraînement.
+                  </p>
+                ) : null}
+              </>
+            );
+          })()}
         </div>
       </section>
 
@@ -182,10 +199,12 @@ function StatTile({
   label,
   value,
   accent,
+  dim = false,
 }: {
   label: string;
   value: string;
   accent: 'saffron' | 'terracotta' | 'teal';
+  dim?: boolean;
 }) {
   const accentColor = {
     saffron: 'text-saffron',
@@ -193,7 +212,11 @@ function StatTile({
     teal: 'text-teal',
   }[accent];
   return (
-    <div className="bg-bone/5 backdrop-blur rounded-2xl border border-bone/15 px-3 py-3 sm:px-5 sm:py-4">
+    <div
+      className={`bg-bone/5 backdrop-blur rounded-2xl border border-bone/15 px-3 py-3 sm:px-5 sm:py-4 transition-opacity ${
+        dim ? 'opacity-60' : ''
+      }`}
+    >
       <p className={`font-display text-xl sm:text-3xl font-medium ${accentColor} leading-tight`} style={{ fontVariationSettings: "'opsz' 60" }}>
         {value}
       </p>

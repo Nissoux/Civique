@@ -14,14 +14,14 @@ const LAST_UPDATED = '10 mai 2026';
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-bone">
+    <div className="min-h-screen bg-bone">
       <WelcomeStrip />
 
       {/* Header */}
       <header className="border-b border-aubergine/15">
         <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
           <Logo />
-          <nav className="hidden md:flex items-center gap-9 text-[0.95rem] font-medium">
+          <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-9 text-[0.95rem] font-medium">
             <Link href="/" className="hover:text-terracotta transition-colors">
               Accueil
             </Link>
@@ -42,6 +42,7 @@ export default function TermsPage() {
       </header>
 
       {/* Hero */}
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <section className="border-b border-aubergine/15 bg-bone-deep">
         <div className="max-w-[70ch] mx-auto px-6 sm:px-10 py-14 sm:py-20">
           <p className="eyebrow mb-4">— Document légal</p>
@@ -341,6 +342,7 @@ export default function TermsPage() {
           </Section>
         </article>
       </section>
+      </main>
 
       {/* Footer */}
       <footer className="bg-aubergine text-bone border-t border-aubergine">
@@ -369,7 +371,7 @@ export default function TermsPage() {
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
 

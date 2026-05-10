@@ -13,18 +13,23 @@ export function ChangePasswordForm() {
     {},
   );
   const formRef = useRef<HTMLFormElement>(null);
+  const feedbackId =
+    state.error || state.message ? 'change-password-feedback' : undefined;
+  const invalid = Boolean(state.error);
 
   useEffect(() => {
     if (state.message) formRef.current?.reset();
   }, [state.message]);
 
   return (
-    <form ref={formRef} action={formAction} className="space-y-5">
+    <form ref={formRef} action={formAction} className="space-y-5" noValidate>
       <PasswordField
         label="Mot de passe actuel"
         name="currentPassword"
         autoComplete="current-password"
         required
+        aria-invalid={invalid || undefined}
+        aria-describedby={feedbackId}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <PasswordField
@@ -34,6 +39,8 @@ export function ChangePasswordForm() {
           minLength={8}
           required
           hint="Minimum 8 caractères."
+          aria-invalid={invalid || undefined}
+          aria-describedby={feedbackId}
         />
         <PasswordField
           label="Confirmer le mot de passe"
@@ -41,10 +48,12 @@ export function ChangePasswordForm() {
           autoComplete="new-password"
           minLength={8}
           required
+          aria-invalid={invalid || undefined}
+          aria-describedby={feedbackId}
         />
       </div>
 
-      <FormMessage error={state.error} message={state.message} />
+      <FormMessage error={state.error} message={state.message} id={feedbackId} />
 
       <div className="flex justify-end">
         <SubmitButton full={false} pendingLabel="Mise à jour…">

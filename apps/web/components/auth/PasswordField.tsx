@@ -14,10 +14,14 @@ export function PasswordField({
   id,
   name,
   className = '',
+  'aria-describedby': ariaDescribedBy,
   ...rest
 }: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
   const inputId = id ?? name;
+  const hintId = hint && inputId ? `${inputId}-hint` : undefined;
+  const describedBy =
+    [ariaDescribedBy, hintId].filter(Boolean).join(' ') || undefined;
 
   return (
     <div className="flex flex-col">
@@ -30,6 +34,7 @@ export function PasswordField({
           name={name}
           type={visible ? 'text' : 'password'}
           className={`field-input pr-12 ${className}`}
+          aria-describedby={describedBy}
           {...rest}
         />
         <button
@@ -38,15 +43,22 @@ export function PasswordField({
           className="
             absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full
             text-ink-mute hover:text-aubergine transition-colors
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-bone
           "
           aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+          aria-pressed={visible}
           tabIndex={-1}
         >
           {visible ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       </div>
       {hint ? (
-        <p className="text-xs text-ink-mute mt-2 font-display italic">{hint}</p>
+        <p
+          id={hintId}
+          className="text-xs text-ink-mute mt-2 font-display italic"
+        >
+          {hint}
+        </p>
       ) : null}
     </div>
   );

@@ -78,7 +78,7 @@ export default async function HomePage() {
   const user = await getCurrentUser();
 
   return (
-    <main className="min-h-screen bg-bone">
+    <div className="min-h-screen bg-bone">
       <script
         type="application/ld+json"
         // Schema.org JSON-LD — safe, server-rendered, no XSS risk
@@ -91,7 +91,7 @@ export default async function HomePage() {
       <header className="border-b border-aubergine/15">
         <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
           <Logo />
-          <nav className="hidden md:flex items-center gap-9 text-[0.95rem] font-medium">
+          <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-9 text-[0.95rem] font-medium">
             <a href="#programme" className="hover:text-terracotta transition-colors">Le programme</a>
             <a href="#methode" className="hover:text-terracotta transition-colors">Notre méthode</a>
             {user ? (
@@ -106,6 +106,7 @@ export default async function HomePage() {
       </header>
 
       {/* Hero */}
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <section className="relative">
         <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 relative z-10">
@@ -289,6 +290,7 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+      </main>
 
       {/* Footer */}
       <footer className="bg-aubergine text-bone border-t border-aubergine">
@@ -307,7 +309,13 @@ export default async function HomePage() {
             <ul className="space-y-2 text-sm text-bone/70">
               <li><a href="#programme" className="hover:text-saffron">Le programme</a></li>
               <li><a href="#methode" className="hover:text-saffron">Méthode</a></li>
-              <li><Link href="/login" className="hover:text-saffron">Connexion</Link></li>
+              <li>
+                {user ? (
+                  <Link href="/app" className="hover:text-saffron">Mon tableau de bord</Link>
+                ) : (
+                  <Link href="/login" className="hover:text-saffron">Connexion</Link>
+                )}
+              </li>
             </ul>
           </div>
           <div className="col-span-1 md:col-span-2">
@@ -333,7 +341,7 @@ export default async function HomePage() {
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }
 

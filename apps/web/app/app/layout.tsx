@@ -29,7 +29,13 @@ export default async function AppLayout({
         examLabel={examType?.shortLabel}
         currentLang={currentLang}
       />
-      <main className="flex-1 min-w-0 pb-20 lg:pb-0">{children}</main>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 min-w-0 pb-20 lg:pb-0 focus:outline-none"
+      >
+        {children}
+      </main>
       <MobileNav />
     </div>
   );

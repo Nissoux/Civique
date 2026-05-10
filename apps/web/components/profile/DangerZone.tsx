@@ -74,10 +74,12 @@ export function DangerZone() {
           onChange={(e) => setConfirmText(e.target.value)}
           className="field-input"
           required
+          aria-invalid={Boolean(state.error) || undefined}
+          aria-describedby={state.error ? 'danger-zone-error' : undefined}
         />
       </div>
 
-      <FormMessage error={state.error} />
+      <FormMessage error={state.error} id="danger-zone-error" />
 
       <div className="flex flex-wrap items-center gap-3">
         <button
