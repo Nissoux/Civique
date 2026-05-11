@@ -49,7 +49,7 @@ const STRUCTURED_DATA = {
   alternateName: 'Préparation à l\'examen civique français',
   description:
     'Préparation indépendante à l\'examen civique français pour la carte de séjour pluriannuelle, la carte de résident et la nationalité. 5 thèmes officiels, 611 questions, accompagnement en 6 langues.',
-  url: 'https://civique.fr',
+  url: 'https://civique.integrafle.fr',
   inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi'],
   educationalLevel: 'Adult education',
   educationalProgramMode: 'online',
@@ -57,7 +57,7 @@ const STRUCTURED_DATA = {
   provider: {
     '@type': 'Organization',
     name: 'Civique',
-    url: 'https://civique.fr',
+    url: 'https://civique.integrafle.fr',
     email: 'support@integrafle.fr',
   },
   occupationalCategory: 'Civic integration',

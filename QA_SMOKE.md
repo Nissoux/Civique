@@ -1,6 +1,6 @@
 # Civique — Smoke test manuel avant mise en ligne
 
-Dérouler cette checklist sur <https://civique.fr> avant d'annoncer un lancement
+Dérouler cette checklist sur <https://civique.integrafle.fr> avant d'annoncer un lancement
 ou un déploiement majeur. Cocher au fur et à mesure ; toute case **P0** non
 cochée bloque la communication publique.
 
@@ -28,7 +28,7 @@ de paiement = un litige bancaire, pas juste un bug.
       `checkout.session.completed` à statut `Succeeded` dans les 5 dernières minutes
       (déclencher un paiement test avec carte `4242 4242 4242 4242` pour générer l'event).
 - [ ] **(Email) Brevo envoie** — un email d'inscription test arrive sur une boîte
-      Mailinator en moins de 2 minutes, depuis l'adresse `no-reply@civique.fr` (et non
+      Mailinator en moins de 2 minutes, depuis l'adresse `no-reply@civique.integrafle.fr` (et non
       `no-reply@sendinblue.com` — sinon la config Brevo n'est pas finalisée).
 - [ ] **(Reset password) flow complet** — `/forgot-password` envoie un code, le code
       est valide pendant 15 min, `/reset-password?token=…` accepte un nouveau mot de
@@ -176,7 +176,7 @@ publiquement. Régler d'abord.
 - [ ] **P1** — `/robots.txt` accessible et autorise `/`, `/login`, `/register`, `/privacy`, `/terms`, `/mentions-legales`, `/forgot-password`
 - [ ] **P1** — `/sitemap.xml` accessible et liste les pages publiques
 - [ ] **P1** — `<title>` et `<meta description>` uniques sur chaque page publique (vérifier sur landing, login, register, privacy)
-- [ ] **P2** — OG image accessible — `https://civique.fr/opengraph-image` renvoie une image PNG/JPG
+- [ ] **P2** — OG image accessible — `https://civique.integrafle.fr/opengraph-image` renvoie une image PNG/JPG
 
 ## Accessibilité (smoke)
 

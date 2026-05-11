@@ -39,7 +39,7 @@ git push origin main
 ssh root@api.integrafle.fr "bash /root/Civique/infra/deploy.sh web"
 
 # Vérifier :
-curl -I https://civique.fr   # 200 attendu
+curl -I https://civique.integrafle.fr   # 200 attendu
 ```
 
 Si le rebuild casse aussi : `cd /root/Civique && git checkout <sha_stable> -- apps/web && pnpm --filter web build && pm2 restart civique-web`. Note le SHA stable depuis `git log --oneline -10`.
@@ -194,7 +194,7 @@ pm2 resurrect
 # Vérifier :
 pm2 status
 curl https://api.integrafle.fr/health
-curl -I https://civique.fr
+curl -I https://civique.integrafle.fr
 ```
 
 Si `pm2 resurrect` ne ramène pas `civique-web`, redémarre-le manuellement :
@@ -253,11 +253,11 @@ certbot renew
 systemctl reload nginx
 
 # Vérifier la date d'expiration :
-echo | openssl s_client -connect civique.fr:443 2>/dev/null | \
+echo | openssl s_client -connect civique.integrafle.fr:443 2>/dev/null | \
   openssl x509 -noout -dates
 ```
 
-Domaines à surveiller : `civique.fr`, `www.civique.fr`, `api.integrafle.fr`.
+Domaines à surveiller : `civique.integrafle.fr`, `www.civique.integrafle.fr`, `api.integrafle.fr`.
 
 ---
 

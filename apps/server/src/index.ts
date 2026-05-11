@@ -38,7 +38,7 @@ async function main() {
   const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
     'https://api.integrafle.fr',
     'https://integrafle.fr',
-    'https://civique.fr',
+    'https://civique.integrafle.fr',
     'http://localhost:3001',
   ];
   await app.register(cors, {

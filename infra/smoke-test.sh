@@ -4,7 +4,7 @@
 #
 #  Runs a series of HTTP probes against the public web app and the API.
 #  No dependencies beyond curl + a POSIX shell. Intended to be runnable both
-#  in CI (against civique.fr / api.integrafle.fr) and locally (against the
+#  in CI (against civique.integrafle.fr / api.integrafle.fr) and locally (against the
 #  dev server: pnpm --filter web dev + pnpm --filter server dev).
 #
 #  Usage:
@@ -13,7 +13,7 @@
 #    bash infra/smoke-test.sh http://localhost:3000 http://localhost:4000/api
 #
 #  Environment overrides:
-#    WEB_URL — base URL of the web app    (default: https://civique.fr)
+#    WEB_URL — base URL of the web app    (default: https://civique.integrafle.fr)
 #    API_URL — base URL of the API + /api (default: https://api.integrafle.fr/api)
 #    CURL_TIMEOUT — per-request timeout in seconds (default: 10)
 #
@@ -22,7 +22,7 @@
 set -euo pipefail
 
 # ── Arguments / defaults ──────────────────────────────────────────────────────
-WEB_URL="${1:-${WEB_URL:-https://civique.fr}}"
+WEB_URL="${1:-${WEB_URL:-https://civique.integrafle.fr}}"
 API_URL="${2:-${API_URL:-https://api.integrafle.fr/api}}"
 CURL_TIMEOUT="${CURL_TIMEOUT:-10}"
 

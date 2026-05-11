@@ -1,7 +1,7 @@
 # Civique — Feuille de route post-lancement (D+30 / D+60 / D+90)
 
 Document de pilotage technique pour les trois mois qui suivent le lancement
-public de `civique.fr` et la mise en production des apps iOS/Android. Chaque
+public de `civique.integrafle.fr` et la mise en production des apps iOS/Android. Chaque
 item suit le format **POURQUOI / QUOI / COMMENT** + ordre de grandeur du
 coût (temps homme + euros si récurrent).
 
@@ -34,7 +34,7 @@ Aucune nouvelle fonctionnalité.
 ### 2. Uptime + alertes
 - **Pourquoi** : si Nginx, PM2 ou Postgres tombe, on doit le savoir avant
   l'utilisateur. Aujourd'hui aucune sonde externe.
-- **Quoi** : ping HTTP toutes les 5 min sur `https://civique.fr` et
+- **Quoi** : ping HTTP toutes les 5 min sur `https://civique.integrafle.fr` et
   `https://api.integrafle.fr/health`, alerte mail + SMS.
 - **Comment** : compte gratuit Uptime Robot, 2 monitors, 50 contacts
   par défaut. **30 min, 0 €/mois** (jusqu'à 50 monitors gratuits).

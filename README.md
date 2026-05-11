@@ -26,7 +26,7 @@ pour le détail.
 
 Monorepo **pnpm workspaces** orchestré par **Turborepo**. API en
 production sur `https://api.integrafle.fr`, web sur
-`https://civique.fr`.
+`https://civique.integrafle.fr`.
 
 ---
 

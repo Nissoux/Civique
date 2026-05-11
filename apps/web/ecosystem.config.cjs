@@ -36,7 +36,7 @@ module.exports = {
         NODE_ENV: 'production',
         // 3001 is taken by the existing IntégraFLE Next.js app on the
         // same VPS. Use 3005 for civique-web. Nginx fronts both via
-        // separate vhosts (civique.fr → 3005, integrafle.fr → 3001).
+        // separate vhosts (civique.integrafle.fr → 3005, integrafle.fr → 3001).
         PORT: '3005',
         HOSTNAME: '127.0.0.1',
         NEXT_PUBLIC_API_BASE_URL: 'https://api.integrafle.fr/api',

@@ -37,7 +37,7 @@ Brevo dédié), session de navigation privée (cookies vidés).
 
 | # | URL / Action | Attendu |
 |---|---|---|
-| 1 | Ouvrir `https://civique.fr/` en navigation privée | Landing s'affiche, bannière cookies visible, hero "Civique" |
+| 1 | Ouvrir `https://civique.integrafle.fr/` en navigation privée | Landing s'affiche, bannière cookies visible, hero "Civique" |
 | 2 | Cliquer "Commencer" → `/register` | Formulaire `email + mot de passe + nom` |
 | 3 | Remplir avec `qa-<timestamp>@mailinator.com`, MdP `Test1234!`, soumettre | Redirection vers `/verify-email` |
 | 4 | Ouvrir Mailinator, cliquer le lien de vérification | Atterrit sur `/auth/verified` puis `/onboarding` |
@@ -72,7 +72,7 @@ navigateur et que la progression est conservée.
 | # | URL / Action | Attendu |
 |---|---|---|
 | 1 | Fermer toutes les fenêtres du navigateur, vider les cookies de session uniquement (garder `civique_refresh`) | — |
-| 2 | Ouvrir `https://civique.fr/login` | Formulaire login |
+| 2 | Ouvrir `https://civique.integrafle.fr/login` | Formulaire login |
 | 3 | Renseigner email + MdP, soumettre | Redirection directe vers `/app` |
 | 4 | Reprendre une session : Thème 1 → niveau 2 → `/app/train/1/2` | Questions chargées en < 1 s |
 | 5 | Répondre à 3 questions puis quitter (cliquer "Logo" pour revenir au dashboard) | Session sauvegardée, message "Reprise possible" |

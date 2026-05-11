@@ -67,15 +67,15 @@ découvrira en prod.
 ### M4 — Brevo email templates pointent uniquement vers deep-links mobile
 - **Fichier** : `apps/server/src/services/email.ts`
 - **Symptôme** : aucun lien des emails (vérification, welcome, reset,
-  password-changed) ne pointe vers `civique.fr`. L'email "Bienvenue"
+  password-changed) ne pointe vers `civique.integrafle.fr`. L'email "Bienvenue"
   ne propose pas le web comme alternative au mobile. Les liens du
   footer pointent vers `api.integrafle.fr/privacy` (backend HTML) et
-  pas vers `civique.fr/privacy` (UI propre).
+  pas vers `civique.integrafle.fr/privacy` (UI propre).
 - **Bloquant pour** : conversion des inscrits web qui ne téléchargent
   pas le mobile.
 - **Fix** : ajouter un CTA "Ouvrir Civique sur le web →
-  https://civique.fr/app" dans `sendWelcomeEmail`. Remplacer les liens
-  footer par `https://civique.fr/privacy` / `/terms`.
+  https://civique.integrafle.fr/app" dans `sendWelcomeEmail`. Remplacer les liens
+  footer par `https://civique.integrafle.fr/privacy` / `/terms`.
 
 ### M5 — Disque local de la machine de dev (C:) saturé
 - **Symptôme** : sur la machine de dev d'Anis (Windows), `C:` plein →
@@ -178,7 +178,7 @@ découvrira en prod.
 - **Impact** : risque de divergence — modifier le `.md` change la
   version mobile/backend mais pas la version web (et vice-versa).
 - **Fix** : à terme, supprimer les routes backend HTML et faire
-  pointer mobile vers `https://civique.fr/privacy` directement.
+  pointer mobile vers `https://civique.integrafle.fr/privacy` directement.
 
 ### D4 — `STRIPE_PRICES` avec fallback en dur
 - **Fichier** : `apps/server/src/routes/payments/index.ts` (lignes

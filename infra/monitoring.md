@@ -33,7 +33,7 @@ Hetzner Monitoring plus tard pour les métriques serveur.
 2. Remplir :
    - **Monitor Type** : `HTTP(s)`
    - **Friendly Name** : `Civique Web`
-   - **URL** : `https://civique.fr`
+   - **URL** : `https://civique.integrafle.fr`
    - **Monitoring Interval** : `5 minutes` (max en free)
 3. **Alert Contacts to Notify** : cocher l'email par défaut (ton email
    d'inscription). Tu peux ajouter une 2e adresse en

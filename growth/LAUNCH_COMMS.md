@@ -4,7 +4,7 @@
 **Date** : Mai 2026
 **Statut** : Prêt pour relecture par Anis avant publication
 
-Ce document rassemble l'ensemble des assets de communication pour le lancement web de Civique (civique.fr). Tous les contenus sont en français, sauf indication contraire. Les passages entre crochets `[…]` sont à compléter par Anis (chiffres réels, anecdotes personnelles, etc.).
+Ce document rassemble l'ensemble des assets de communication pour le lancement web de Civique (civique.integrafle.fr). Tous les contenus sont en français, sauf indication contraire. Les passages entre crochets `[…]` sont à compléter par Anis (chiffres réels, anecdotes personnelles, etc.).
 
 Tonalité globale : chaleureuse, professionnelle, jamais corporate-gov, jamais startup-bro. Pensez « association bienveillante au design soigné ».
 
@@ -30,7 +30,7 @@ Tonalité globale : chaleureuse, professionnelle, jamais corporate-gov, jamais s
 >
 > Aujourd'hui, **Civique arrive sur le web** : 611 questions civiques officielles, 6 langues d'accompagnement, 3 examens couverts (CSP, CR, NAT). Toujours la même promesse : préparer sans humilier.
 >
-> civique.fr
+> civique.integrafle.fr
 >
 > #naturalisation #integrafle #civique #français #LangueFrançaise
 
@@ -44,7 +44,7 @@ Tonalité globale : chaleureuse, professionnelle, jamais corporate-gov, jamais s
 
 > Aujourd'hui, **Civique arrive sur le web**.
 >
-> Déjà disponible sur App Store et Google Play, l'application rejoint civique.fr pour celles et ceux qui préfèrent réviser sur ordinateur — souvent en pause au travail, parfois tard le soir une fois les enfants couchés.
+> Déjà disponible sur App Store et Google Play, l'application rejoint civique.integrafle.fr pour celles et ceux qui préfèrent réviser sur ordinateur — souvent en pause au travail, parfois tard le soir une fois les enfants couchés.
 >
 > Ce qu'on apporte :
 > – **611 questions civiques** alignées sur les référentiels officiels
@@ -54,7 +54,7 @@ Tonalité globale : chaleureuse, professionnelle, jamais corporate-gov, jamais s
 >
 > Pas de promesse miraculeuse. Juste un outil clair, pour préparer un moment qui compte.
 >
-> civique.fr
+> civique.integrafle.fr
 >
 > #naturalisation #integrafle #civique #français #LangueFrançaise
 
@@ -74,7 +74,7 @@ Tonalité globale : chaleureuse, professionnelle, jamais corporate-gov, jamais s
 >
 > Avec Civique, j'ai voulu offrir un outil à la hauteur de ce moment : sérieux sans être rigide, accessible en 6 langues sans jamais infantiliser, design soigné parce que le respect commence par là.
 >
-> **Civique est maintenant disponible sur le web** : civique.fr
+> **Civique est maintenant disponible sur le web** : civique.integrafle.fr
 >
 > Pour préparer l'entretien préfectoral autrement.
 >
@@ -146,7 +146,7 @@ Format : thread de 7 tweets. Court, rythmé, pas de hashtags dans le corps (uniq
 >
 > Premiers chapitres gratuits, sans carte bancaire.
 >
-> 👉 civique.fr
+> 👉 civique.integrafle.fr
 >
 > #naturalisation #civique #integrafle #français
 
@@ -170,7 +170,7 @@ Trois variantes selon l'audience. Toutes en tu/vous adapté (vous par défaut), 
 >
 > J'aimerais beaucoup avoir votre avis pédagogique. Si l'outil vous semble utile, je serais ravi de l'offrir gratuitement à vos apprenant·es pendant la phase de lancement.
 >
-> civique.fr — n'hésitez pas à tester librement.
+> civique.integrafle.fr — n'hésitez pas à tester librement.
 >
 > Bien à vous,
 >
@@ -192,7 +192,7 @@ Trois variantes selon l'audience. Toutes en tu/vous adapté (vous par défaut), 
 >
 > Je serais heureux d'offrir des accès gratuits aux personnes que vous accompagnez, et d'échanger sur la meilleure façon de l'intégrer à votre démarche.
 >
-> civique.fr — testez librement, je reste disponible pour un appel.
+> civique.integrafle.fr — testez librement, je reste disponible pour un appel.
 >
 > Bien cordialement,
 >
@@ -209,7 +209,7 @@ Trois variantes selon l'audience. Toutes en tu/vous adapté (vous par défaut), 
 >
 > Je me permets de vous adresser ce message au sujet de **Civique**, un outil numérique privé de préparation aux examens civiques français (CSP, CR, NAT).
 >
-> Civique propose 611 questions issues des référentiels publics, traduites dans 6 langues d'accompagnement (français, arabe, persan, espagnol, portugais, hindi). L'application est disponible sur iOS, Android et désormais sur civique.fr.
+> Civique propose 611 questions issues des référentiels publics, traduites dans 6 langues d'accompagnement (français, arabe, persan, espagnol, portugais, hindi). L'application est disponible sur iOS, Android et désormais sur civique.integrafle.fr.
 >
 > Civique est une initiative indépendante, sans affiliation avec l'administration française. Notre objectif est d'offrir aux candidat·es un complément d'entraînement clair et accessible, en amont de leur entretien.
 >
@@ -225,7 +225,7 @@ Trois variantes selon l'audience. Toutes en tu/vous adapté (vous par défaut), 
 
 ## Section 4 — Onboarding Email Sequence
 
-Séquence déclenchée à l'inscription sur civique.fr. À implémenter dans Brevo (templates HTML compatibles tables, pas de flex/grid).
+Séquence déclenchée à l'inscription sur civique.integrafle.fr. À implémenter dans Brevo (templates HTML compatibles tables, pas de flex/grid).
 
 Couleurs Tisserand à appliquer dans la CSS inline :
 - Fond : `#FBF7F0` (bone)
@@ -256,7 +256,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
         Pour démarrer du bon pied, je vous recommande un entraînement rapide de 5 minutes. Pas pour vous évaluer — juste pour calibrer votre parcours.
       </td></tr>
       <tr><td align="center" style="padding:16px 0 24px;">
-        <a href="https://civique.fr/entrainement" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
+        <a href="https://civique.integrafle.fr/entrainement" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
           Commencer mon entraînement
         </a>
       </td></tr>
@@ -296,7 +296,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
         Aujourd'hui, je vous suggère d'explorer les <strong>fiches mémo</strong>. Ce sont les sujets qui reviennent le plus souvent à l'entretien.
       </td></tr>
       <tr><td align="center" style="padding:16px 0;">
-        <a href="https://civique.fr/fiches" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
+        <a href="https://civique.integrafle.fr/fiches" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
           Voir les fiches mémo
         </a>
       </td></tr>
@@ -321,7 +321,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
         On vous a réservé un entraînement court. Vous pouvez le quitter à tout moment.
       </td></tr>
       <tr><td align="center" style="padding:16px 0;">
-        <a href="https://civique.fr/entrainement" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
+        <a href="https://civique.integrafle.fr/entrainement" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
           Faire 5 questions
         </a>
       </td></tr>
@@ -356,7 +356,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
         Prochaine étape recommandée : <strong>l'examen blanc</strong>. Vous vous mettez dans les conditions du jour J, avec le chrono. C'est inconfortable au début. C'est exactement le but.
       </td></tr>
       <tr><td align="center" style="padding:16px 0;">
-        <a href="https://civique.fr/examen-blanc" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
+        <a href="https://civique.integrafle.fr/examen-blanc" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
           Lancer l'examen blanc
         </a>
       </td></tr>
@@ -410,7 +410,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
       </td></tr>
 
       <tr><td align="center" style="padding:16px 0;">
-        <a href="https://civique.fr/premium" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
+        <a href="https://civique.integrafle.fr/premium" style="background:#C66F4A; color:#FFFFFF; text-decoration:none; padding:14px 28px; border-radius:6px; font-weight:bold; display:inline-block;">
           Voir les formules
         </a>
       </td></tr>
@@ -428,7 +428,7 @@ Couleurs Tisserand à appliquer dans la CSS inline :
 
 ## Section 5 — Landing Page A/B Tests (top 5)
 
-À mettre en place une fois civique.fr stabilisé, via feature flag simple (cookie 50/50 ou similaire). Lancer les tests un par un — pas en parallèle — pour ne pas brouiller les signaux.
+À mettre en place une fois civique.integrafle.fr stabilisé, via feature flag simple (cookie 50/50 ou similaire). Lancer les tests un par un — pas en parallèle — pour ne pas brouiller les signaux.
 
 ### Test 1 — Hero Headline
 
@@ -484,17 +484,17 @@ Couleurs Tisserand à appliquer dans la CSS inline :
 
 ## Section 6 — Press Kit
 
-À héberger sur civique.fr/presse (page dédiée) avec liens vers tous les assets.
+À héberger sur civique.integrafle.fr/presse (page dédiée) avec liens vers tous les assets.
 
 ### Description courte — Français (50-80 mots)
 
-> **Civique** est une application française qui aide les personnes immigrées à préparer les examens civiques requis pour la carte de séjour pluriannuelle, la carte de résident et la naturalisation. 611 questions officielles, un accompagnement en 6 langues (français, arabe, persan, espagnol, portugais, hindi), un examen blanc chronométré et des fiches mémo. Disponible sur App Store, Google Play et civique.fr. Civique est une initiative indépendante, éditée par IntégraFLE.
+> **Civique** est une application française qui aide les personnes immigrées à préparer les examens civiques requis pour la carte de séjour pluriannuelle, la carte de résident et la naturalisation. 611 questions officielles, un accompagnement en 6 langues (français, arabe, persan, espagnol, portugais, hindi), un examen blanc chronométré et des fiches mémo. Disponible sur App Store, Google Play et civique.integrafle.fr. Civique est une initiative indépendante, éditée par IntégraFLE.
 
 *(72 mots)*
 
 ### Description courte — English (50-80 words)
 
-> **Civique** is a French app that helps immigrants prepare for the civic examinations required for the multi-year residence permit, long-term resident card, and naturalization. It offers 611 official questions, support in 6 languages (French, Arabic, Persian, Spanish, Portuguese, Hindi), timed mock exams, and study sheets. Available on App Store, Google Play, and at civique.fr. Civique is an independent initiative published by IntégraFLE.
+> **Civique** is a French app that helps immigrants prepare for the civic examinations required for the multi-year residence permit, long-term resident card, and naturalization. It offers 611 official questions, support in 6 languages (French, Arabic, Persian, Spanish, Portuguese, Hindi), timed mock exams, and study sheets. Available on App Store, Google Play, and at civique.integrafle.fr. Civique is an independent initiative published by IntégraFLE.
 
 *(64 words)*
 
@@ -532,8 +532,8 @@ Format ZIP téléchargeable : `/public/press/civique-press-kit.zip`
 ### Contact presse
 
 **Email** : contact@integrafle.fr
-**Web** : civique.fr
-**Mentions légales** : civique.fr/mentions-legales
+**Web** : civique.integrafle.fr
+**Mentions légales** : civique.integrafle.fr/mentions-legales
 
 *Civique est une initiative indépendante éditée par IntégraFLE. Sans affiliation avec l'administration française.*
 

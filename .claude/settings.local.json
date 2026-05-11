@@ -67,7 +67,8 @@
       "Read(//c/Users/Anis/AppData/Local/Temp/**)",
       "Bash(grep -c \"''ar''\" questions_theme1.ts)",
       "Bash(grep -c \"''es''\" questions_theme1.ts)",
-      "Bash(grep -c \"''fa''\" questions_theme1.ts)"
+      "Bash(grep -c \"''fa''\" questions_theme1.ts)",
+      "Bash(pnpm --filter web dev)"
     ]
   }
 }

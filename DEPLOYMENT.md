@@ -11,7 +11,7 @@ et frontend Next.js sur le même VPS, fronted par Nginx, supervisés par PM2.
 │  │  Nginx       │ →  │ PM2 civique-web  │    │ Postgres     │  │
 │  │  443 / 80    │    │   :3001 (Next)   │    │   :5432      │  │
 │  │              │    └──────────────────┘    └──────────────┘  │
-│  │  civique.fr  │    ┌──────────────────┐                      │
+│  │  civique.integrafle.fr  │    ┌──────────────────┐                      │
 │  │  api.…       │ →  │ PM2 civique      │    ┌──────────────┐  │
 │  │              │    │   :3000 (Fastify)│ ←→ │ Brevo / Stripe│ │
 │  │  Let's Enc.  │    └──────────────────┘    └──────────────┘  │
@@ -42,7 +42,7 @@ npm install -g pm2
 
 Vérifie que le backend tourne déjà (`pm2 status` doit lister `civique` en `online`). Si oui, saute à 1.2.
 
-### 1.2 — Pointer DNS civique.fr vers le VPS
+### 1.2 — Pointer DNS civique.integrafle.fr vers le VPS
 
 Chez ton registrar (OVH, Gandi, Cloudflare…) :
 
@@ -52,7 +52,7 @@ Chez ton registrar (OVH, Gandi, Cloudflare…) :
 | `A`    | `www`       | même IP                      | 300  |
 
 Propagation : 5 min à 1 h selon le registrar. Vérifie avec :
-`dig civique.fr +short` doit retourner ton IP VPS.
+`dig civique.integrafle.fr +short` doit retourner ton IP VPS.
 
 ### 1.3 — Récupérer le code + builder le web
 
@@ -82,22 +82,22 @@ pm2 save   # persiste à travers les reboots (avec pm2 startup une fois)
 Vérifie : `pm2 status` doit lister `civique-web` en `online`.
 Test local : `curl -I http://127.0.0.1:3001` retourne `200 OK`.
 
-### 1.5 — Configurer Nginx pour civique.fr
+### 1.5 — Configurer Nginx pour civique.integrafle.fr
 
 ```bash
-cp /root/Civique/infra/nginx/civique.fr.conf /etc/nginx/sites-available/civique.fr
-ln -s /etc/nginx/sites-available/civique.fr /etc/nginx/sites-enabled/civique.fr
+cp /root/Civique/infra/nginx/civique.integrafle.fr.conf /etc/nginx/sites-available/civique.integrafle.fr
+ln -s /etc/nginx/sites-available/civique.integrafle.fr /etc/nginx/sites-enabled/civique.integrafle.fr
 nginx -t   # vérifier la syntaxe
 systemctl reload nginx
 ```
 
-Test : `curl -I http://civique.fr` doit retourner `200 OK` (en HTTP, pas
+Test : `curl -I http://civique.integrafle.fr` doit retourner `200 OK` (en HTTP, pas
 encore HTTPS).
 
 ### 1.6 — Obtenir le certificat HTTPS via Let's Encrypt
 
 ```bash
-certbot --nginx -d civique.fr -d www.civique.fr
+certbot --nginx -d civique.integrafle.fr -d www.civique.integrafle.fr
 ```
 
 Réponds aux prompts :
@@ -105,12 +105,12 @@ Réponds aux prompts :
 - Accepter les CGU Let's Encrypt
 - Choisir l'option **redirect** (HTTP → HTTPS auto)
 
-Certbot modifie automatiquement `/etc/nginx/sites-enabled/civique.fr` pour
+Certbot modifie automatiquement `/etc/nginx/sites-enabled/civique.integrafle.fr` pour
 ajouter `listen 443 ssl;` + la redirection 301. Le cert se renouvelle
 automatiquement via le timer `certbot.timer` (vérifier avec
 `systemctl status certbot.timer`).
 
-Test final : `https://civique.fr` répond, badge HTTPS vert.
+Test final : `https://civique.integrafle.fr` répond, badge HTTPS vert.
 
 ### 1.7 — Variables d'environnement (côté VPS)
 
@@ -130,10 +130,10 @@ STRIPE_PRICE_MONTHLY=price_...
 STRIPE_PRICE_SEMIANNUAL=price_...
 
 # Nouveau : URL du web pour les redirects Stripe checkout
-WEB_BASE_URL=https://civique.fr
+WEB_BASE_URL=https://civique.integrafle.fr
 
 # CORS — déjà whitelisté côté code mais peut être surchargé ici
-# ALLOWED_ORIGINS=https://civique.fr,https://www.civique.fr
+# ALLOWED_ORIGINS=https://civique.integrafle.fr,https://www.civique.integrafle.fr
 ```
 
 Après modif : `pm2 restart civique`.
@@ -176,7 +176,7 @@ Dans le [Stripe Dashboard](https://dashboard.stripe.com) :
    - Copie le `whsec_xxx` → `STRIPE_WEBHOOK_SECRET`
 5. `pm2 restart civique`
 
-Test : crée un Checkout en mode Test depuis `civique.fr/app/settings/subscription`, vérifie que le user passe `isPremium=true` après le webhook.
+Test : crée un Checkout en mode Test depuis `civique.integrafle.fr/app/settings/subscription`, vérifie que le user passe `isPremium=true` après le webhook.
 
 ---
 
@@ -195,7 +195,7 @@ Le sender utilisé dans le code : `support@integrafle.fr` (voir `apps/server/src
 ## 5. Pré-launch QA
 
 Avant d'annoncer publiquement :
-- Run [QA_SMOKE.md](QA_SMOKE.md) sur `https://civique.fr` (53 items)
+- Run [QA_SMOKE.md](QA_SMOKE.md) sur `https://civique.integrafle.fr` (53 items)
 - Vérifie les 4 emails transactionnels : verification, password reset, password changed, welcome
 - Test 1 cycle Stripe complet en mode live avec une vraie carte (rembourse-toi après)
 - Lighthouse audit (devrait être > 90 sur la landing)
@@ -210,9 +210,9 @@ Si tu veux migrer vers Vercel plus tard (zero ops, edge CDN) :
 2. Root Directory = `apps/web` (critique pour monorepo)
 3. Env var `NEXT_PUBLIC_API_BASE_URL=https://api.integrafle.fr/api` (Production + Preview + Development)
 4. Deploy
-5. Settings → Domains → ajouter `civique.fr` + `www.civique.fr`
+5. Settings → Domains → ajouter `civique.integrafle.fr` + `www.civique.integrafle.fr`
 6. Sur le VPS : `pm2 stop civique-web && pm2 delete civique-web` (libère la RAM)
-7. Sur Nginx : retirer le vhost `civique.fr` ou le rediriger vers Vercel
+7. Sur Nginx : retirer le vhost `civique.integrafle.fr` ou le rediriger vers Vercel
 
 Le `vercel.json` à `apps/web/vercel.json` est déjà prêt si tu fais ce switch.
 
@@ -223,7 +223,7 @@ Le `vercel.json` à `apps/web/vercel.json` est déjà prêt si tu fais ce switch
 À installer une fois en prod et qu'on a libéré du disque :
 - **Sentry web** : `pnpm --filter web add @sentry/nextjs` puis `npx @sentry/wizard@latest -i nextjs`
 - **Plausible** ou **Umami** auto-hébergé sur le VPS pour les analytics RGPD-compliant
-- **Uptime Robot** (gratuit) → ping `https://civique.fr` toutes les 5 min, alerte mail/SMS si down
+- **Uptime Robot** (gratuit) → ping `https://civique.integrafle.fr` toutes les 5 min, alerte mail/SMS si down
 
 ---
 
@@ -232,7 +232,7 @@ Le `vercel.json` à `apps/web/vercel.json` est déjà prêt si tu fais ce switch
 | Fichier | Rôle |
 |---|---|
 | `apps/web/ecosystem.config.cjs` | Config PM2 pour `civique-web` |
-| `infra/nginx/civique.fr.conf` | Vhost Nginx + caching + security headers |
+| `infra/nginx/civique.integrafle.fr.conf` | Vhost Nginx + caching + security headers |
 | `infra/deploy.sh` | Script de déploiement (full / server / web) |
 | `apps/web/.env.production.example` | Template d'env (PORT, NEXT_PUBLIC_API_BASE_URL) |
 | `QA_SMOKE.md` | Checklist QA manuelle pré-launch |

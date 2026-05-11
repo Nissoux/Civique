@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://civique.fr';
+const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://civique.integrafle.fr';
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -32,7 +32,7 @@ Top priorities: fix #1 today (single line of code: pass `matchingKey.kid` throug
 | 7 | Auth — Empty passwordHash for OAuth | **Medium** | Open | Google/Apple users created with `passwordHash: ''`. Combined with bcrypt allowing empty input as "valid" against an empty hash, this risks login bypass if any code path were ever to bcrypt-compare against these accounts. Today `/login` calls `bcrypt.compare(body.password, user.passwordHash)` on an empty hash — bcrypt returns false for non-bcrypt strings, so currently safe, but the invariant is fragile. |
 | 8 | Auth — Social abuse | **Medium** | Open | `POST /api/social/challenges` lets any user enqueue a challenge against any other user by UUID, no friendship requirement — spam / harassment vector |
 | 9 | Auth — Password policy | **Medium** | Open | 8-char minimum, no upper/lower/digit/symbol mix, no breach check |
-| 10 | Headers — CSP/HSTS missing | **Medium** | Open | `infra/nginx/civique.fr.conf` has no CSP, no HSTS; `helmet` started with `contentSecurityPolicy: false` |
+| 10 | Headers — CSP/HSTS missing | **Medium** | Open | `infra/nginx/civique.integrafle.fr.conf` has no CSP, no HSTS; `helmet` started with `contentSecurityPolicy: false` |
 | 11 | Auth — Verification code TTL/attempts | **Medium** | **Fixed** (see commit XXX) | 6-digit verify code has no per-attempt limit on `/verify-email` — 1M codes / 15 min |
 | 12 | DoS — In-memory token stores | **Medium** | Open | `passwordResetTokens` / `emailVerificationCodes` are unbounded `Map`s with no LRU/eviction beyond TTL on read; not multi-instance safe |
 | 13 | Auth — Token revocation on password change | **Medium** | Open | After `POST /auth/change-password`, existing refresh + access tokens stay valid |
@@ -219,11 +219,11 @@ if (!user.passwordHash) return reply.status(401).send({ error: 'Use social sign-
 ---
 
 ### F10 — Medium: Missing CSP and HSTS
-**File:** `infra/nginx/civique.fr.conf:43–48`, `apps/server/src/index.ts:32–35`
+**File:** `infra/nginx/civique.integrafle.fr.conf:43–48`, `apps/server/src/index.ts:32–35`
 
 Nginx sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` — but **no** `Content-Security-Policy` and **no** `Strict-Transport-Security`. The server-side Helmet is explicitly disabled for CSP (`contentSecurityPolicy: false`).
 
-For a Next.js app handling auth cookies, this leaves several footguns open: any future inline-script XSS in a server component has no second-line containment, and a browser that has only seen HTTP (e.g. a misclick on `civique.fr` before HTTPS redirect) won't pin to HTTPS for return visits.
+For a Next.js app handling auth cookies, this leaves several footguns open: any future inline-script XSS in a server component has no second-line containment, and a browser that has only seen HTTP (e.g. a misclick on `civique.integrafle.fr` before HTTPS redirect) won't pin to HTTPS for return visits.
 
 **Fix:** after `certbot --nginx` adds the 443 block, add:
 
@@ -315,7 +315,7 @@ Brief evidence:
 - **F23 Stripe raw body**: the content-type override parses JSON once (the route still gets `request.body` as an object), and `rawBody` is reused only by the webhook route — non-webhook routes function normally.
 - **F24 secrets**: `git ls-files | grep env` only returns three `.env.example` files. `.gitignore` covers `.env`, `.env.local`, `.env.*.local`.
 - **F25 deps**: resolved versions are `next@15.5.18` (>= 15.2.3 fixes CVE-2025-29927 middleware bypass), `axios@1.14.0` (>= 1.7.5 fixes CVE-2024-39338 SSRF chain, >= 1.8.x recent), `fastify@^5.1.0`, `bcryptjs@^2.4.3` (slow but no known CVEs), `pg@^8.13.0`, `drizzle-orm@^0.36.0`. No known critical CVEs at these versions as of the cutoff.
-- **F26 CORS**: explicit list (`api.integrafle.fr`, `integrafle.fr`, `civique.fr`, `localhost:3001`), `credentials: true`, no wildcard.
+- **F26 CORS**: explicit list (`api.integrafle.fr`, `integrafle.fr`, `civique.integrafle.fr`, `localhost:3001`), `credentials: true`, no wildcard.
 - **F27 rate limits**: documented in the spec and verified in code (`/login` 5/15min, `/register` 3/15min, `/forgot-password` 3/15min, global 100/min). Acceptable for launch — see F11 to extend to `/verify-email` and `/reset-password`.
 
 ---
@@ -329,7 +329,7 @@ Brief evidence:
 
 **Strongly recommended before launch:**
 - [ ] F4: Require `GOOGLE_CLIENT_ID` and `APPLE_BUNDLE_ID` as env vars; remove hardcoded fallbacks.
-- [ ] F10: Add CSP (report-only first) + HSTS to `infra/nginx/civique.fr.conf`. Also enable `helmet`'s CSP on `api.integrafle.fr` (since it returns HTML for `/privacy`, `/terms`, `/payment-success`).
+- [ ] F10: Add CSP (report-only first) + HSTS to `infra/nginx/civique.integrafle.fr.conf`. Also enable `helmet`'s CSP on `api.integrafle.fr` (since it returns HTML for `/privacy`, `/terms`, `/payment-success`).
 - [x] F11: Per-attempt rate limit on `/auth/verify-email` (5/15min by user id) + per-code attempt counter (5 → invalidate). See commit XXX.
 - [ ] Verify production `.env` on the VPS contains:
   - `JWT_SECRET` ≥ 32 random bytes (enforced by Zod, but check the actual value isn't `change-me-…`)
@@ -337,7 +337,7 @@ Brief evidence:
   - `STRIPE_WEBHOOK_SECRET` matches what's configured in the Stripe Dashboard for the *production* endpoint
   - `BREVO_API_KEY` is set (otherwise no verification/reset emails go out — silent failure today)
   - `ADMIN_SECRET` is set and ≥ 32 bytes (used by `/payments/admin/create-code` to mint promo codes)
-  - `ALLOWED_ORIGINS` is set explicitly to `https://civique.fr,https://www.civique.fr,https://api.integrafle.fr` (otherwise the hardcoded fallback admits `http://localhost:3001` in production)
+  - `ALLOWED_ORIGINS` is set explicitly to `https://civique.integrafle.fr,https://www.civique.integrafle.fr,https://api.integrafle.fr` (otherwise the hardcoded fallback admits `http://localhost:3001` in production)
 - [ ] Confirm `NODE_ENV=production` on the VPS — `setSessionCookies` only sets `secure` when `isProd`, and the env validation runs `dotenv/config` early.
 - [ ] Run a smoke `curl https://api.integrafle.fr/health` and check headers include the security ones from nginx.
 - [ ] Rotate any secret that has touched a dev machine (JWT secret, BREVO key) before launch.

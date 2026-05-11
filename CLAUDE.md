@@ -16,7 +16,7 @@
 - **Serveur** : Fastify 5, Drizzle ORM, PostgreSQL 16
 - **VPS** : Hetzner (Allemagne), PM2, Nginx, Let's Encrypt
 - **API** : https://api.integrafle.fr
-- **Web** : https://civique.fr
+- **Web** : https://civique.integrafle.fr
 - **Emails** : Brevo API HTTP (sender `support@integrafle.fr`)
 - **Auth** : JWT (httpOnly cookies côté web) + Apple Sign-In + Google Sign-In (mobile)
 

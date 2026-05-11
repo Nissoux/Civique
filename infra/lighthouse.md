@@ -21,7 +21,7 @@ Pas d'install du tout. À chaque lancement, npm télécharge Lighthouse dans
 son cache global et l'exécute :
 
 ```bash
-npx lighthouse@latest https://civique.fr --view
+npx lighthouse@latest https://civique.integrafle.fr --view
 ```
 
 Avantage : aucun fichier ajouté au projet, pas de cache npm à nettoyer
@@ -35,7 +35,7 @@ Si vous lancez 5+ audits par jour, l'install globale évite le download :
 
 ```bash
 npm install -g lighthouse
-lighthouse https://civique.fr --view
+lighthouse https://civique.integrafle.fr --view
 ```
 
 > Choix retenu pour Civique : **Option A (`npx`)**. La machine de dev a
@@ -55,7 +55,7 @@ Sur le VPS Linux, installer `chromium-browser` (`apt install chromium-browser`).
 Pas d'authentification requise, scénario le plus simple :
 
 ```bash
-npx lighthouse@latest https://civique.fr \
+npx lighthouse@latest https://civique.integrafle.fr \
   --output html \
   --output json \
   --output-path ./lighthouse-landing \
@@ -73,7 +73,7 @@ Par défaut, Lighthouse simule un mobile bas de gamme (Moto G4 + 3G ralenti).
 Pour auditer en desktop :
 
 ```bash
-npx lighthouse@latest https://civique.fr \
+npx lighthouse@latest https://civique.integrafle.fr \
   --preset=desktop \
   --output html \
   --output-path ./lighthouse-landing-desktop.html \
@@ -99,7 +99,7 @@ Récupérer une session de test depuis votre navigateur (DevTools →
 Application → Cookies → `civique_access` + `civique_refresh`) puis :
 
 ```bash
-npx lighthouse@latest https://civique.fr/app \
+npx lighthouse@latest https://civique.integrafle.fr/app \
   --extra-headers='{"Cookie":"civique_access=<token>; civique_refresh=<token>"}' \
   --output html \
   --output-path ./lighthouse-dashboard.html \
@@ -121,7 +121,7 @@ de training, pas pour des audits avant-déploiement.
 
 ### 2.c — Mode "compté comme une page publique" (mauvais)
 
-NE PAS lancer Lighthouse sur `https://civique.fr/app` sans session : il
+NE PAS lancer Lighthouse sur `https://civique.integrafle.fr/app` sans session : il
 mesurera `/login`. Le score sera trompeur et faux-vert.
 
 ---
@@ -182,7 +182,7 @@ abandonnent.
 
 ### Bonnes pratiques < 95
 
-- Images en HTTP au lieu de HTTPS → tout doit passer par civique.fr.
+- Images en HTTP au lieu de HTTPS → tout doit passer par civique.integrafle.fr.
 - Console errors visibles à l'audit → corriger ou supprimer.
 - Vulnérabilités JS détectées (jQuery ancien, etc.) → upgrade pnpm.
 

@@ -192,7 +192,7 @@ L'utilisateur clique « Réponse B » dans une session de training web.
 ┌─────────────────── VPS Hetzner (Allemagne) ─────────────────────┐
 │                                                                  │
 │  Nginx 1.24 (443 / 80)                                           │
-│    ├─► civique.fr           → PM2 civique-web (Next :3001)       │
+│    ├─► civique.integrafle.fr           → PM2 civique-web (Next :3001)       │
 │    └─► api.integrafle.fr    → PM2 civique     (Fastify :3000)    │
 │                                                                  │
 │  PostgreSQL 16 (:5432, localhost only)                           │
