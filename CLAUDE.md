@@ -12,18 +12,35 @@
 ## Architecture
 
 - **Mobile** : Expo SDK 54, React Native, TypeScript
+- **Web** : Next.js 15 App Router, React 19, Tailwind 3.4 (Tisserand design)
 - **Serveur** : Fastify, Drizzle ORM, PostgreSQL
 - **VPS** : Hetzner (Allemagne), PM2, Nginx
 - **API** : https://api.integrafle.fr
+- **Web** : https://civique.fr
 - **Emails** : Brevo API HTTP
-- **Auth** : JWT + Apple Sign-In + Google Sign-In
+- **Auth** : JWT (httpOnly cookies côté web) + Apple Sign-In + Google Sign-In (mobile)
 
 ## Déploiement
 
-Après chaque push :
+**Backend uniquement** (rapide, pas d'install) :
 ```bash
-ssh root@api.integrafle.fr "cd /root/Civique && git pull origin main && pm2 restart civique"
+ssh root@api.integrafle.fr "bash /root/Civique/infra/deploy.sh server"
 ```
+
+**Web uniquement** (build Next.js, ~2-3 min) :
+```bash
+ssh root@api.integrafle.fr "bash /root/Civique/infra/deploy.sh web"
+```
+
+**Tout (par défaut)** :
+```bash
+ssh root@api.integrafle.fr "bash /root/Civique/infra/deploy.sh"
+```
+
+Le script `infra/deploy.sh` fait `git pull` + `pnpm install --frozen-lockfile`
+(si web) + `pnpm --filter web build` (si web) + `pm2 restart`. Voir
+[DEPLOYMENT.md](DEPLOYMENT.md) pour le setup initial (Nginx, Let's Encrypt,
+PM2 register).
 
 ## Checklist avant build
 

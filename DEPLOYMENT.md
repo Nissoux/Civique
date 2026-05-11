@@ -1,147 +1,238 @@
 # Déploiement Civique
 
-Ce document décrit la mise en production de toutes les briques de Civique :
+Le stack tourne **entièrement sur Hetzner** (Allemagne) : backend Fastify
+et frontend Next.js sur le même VPS, fronted par Nginx, supervisés par PM2.
 
-- **Web** (Next.js 15) → Vercel
-- **Backend** (Fastify + Postgres) → VPS Hetzner via PM2
-- **Stripe** (paiements) → Dashboard Stripe + variables `.env` serveur
-- **Brevo** (emails transactionnels) → Dashboard Brevo + variable `.env` serveur
-
----
-
-## 1. Première mise en ligne du web sur Vercel
-
-> Pré-requis : avoir un compte Vercel relié au compte GitHub qui détient le repo `Nissoux/Civique`.
-
-### 1.1 Création du projet Vercel
-
-1. Se connecter à <https://vercel.com> avec le compte qui sera propriétaire du projet (Anis).
-2. Cliquer sur **Add New… → Project**.
-3. Choisir **Import Git Repository** puis sélectionner `Nissoux/Civique`. Si le repo n'apparaît pas, cliquer sur *Configure GitHub App* et autoriser l'accès au repo.
-4. Sur l'écran **Configure Project** :
-   - **Project Name** : `civique` (le sous-domaine `civique.vercel.app` sera réservé).
-   - **Framework Preset** : `Next.js` (auto-détecté).
-   - **Root Directory** : cliquer sur **Edit** et choisir `apps/web` — c'est la racine du sous-projet Vercel. Toutes les commandes seront exécutées relativement à ce dossier.
-   - **Build & Output Settings** : ne **rien modifier** — `apps/web/vercel.json` couvre déjà :
-     - `installCommand` = `cd ../.. && pnpm install --frozen-lockfile`
-     - `buildCommand` = `cd ../.. && pnpm --filter web build`
-     - `outputDirectory` = `.next`
-     - `regions` = `["cdg1"]` (Paris, faible latence pour la France).
-5. **Environment Variables** : ajouter (Production + Preview + Development) :
-
-   | Nom                          | Valeur                                |
-   | ---------------------------- | ------------------------------------- |
-   | `NEXT_PUBLIC_API_BASE_URL`   | `https://api.integrafle.fr/api`       |
-
-6. Cliquer **Deploy**. Vercel installe pnpm, exécute le workspace install puis `next build`. Compter 3–5 minutes.
-
-### 1.2 Branchement du domaine `civique.fr`
-
-1. Une fois le déploiement vert sur `civique.vercel.app`, ouvrir **Project Settings → Domains**.
-2. Cliquer **Add Domain** et entrer `civique.fr`. Vercel propose une configuration *Apex domain*.
-3. Refaire l'opération avec `www.civique.fr` ; Vercel propose une redirection 308 vers l'apex (à laisser activée).
-4. Vercel affiche les enregistrements DNS à poser chez le registrar du domaine :
-   - Apex `civique.fr` → enregistrement **A** vers `76.76.21.21`
-   - Sous-domaine `www` → enregistrement **CNAME** vers `cname.vercel-dns.com.`
-5. Configurer ces enregistrements chez le registrar (OVH, Gandi, Cloudflare, etc.). Propagation : 5 min – 24 h.
-6. Vercel délivre automatiquement le certificat SSL Let's Encrypt dès que les DNS résolvent.
-
-### 1.3 Vérification après mise en ligne
-
-- Ouvrir <https://civique.fr> → la landing doit s'afficher.
-- DevTools → Network → `/api/auth/me` doit appeler `api.integrafle.fr/api/...` (CORS OK).
-- Tester un cycle complet : voir `QA_SMOKE.md`.
-
----
-
-## 2. Déploiement backend (rappel)
-
-Le backend Fastify est déjà en production sur le VPS Hetzner. À chaque push sur `main` :
-
-```bash
-ssh root@api.integrafle.fr "cd /root/Civique && git pull origin main && pm2 restart civique"
+```
+┌───────────────────────────────────────────────────────────────┐
+│  VPS Hetzner (Allemagne)                                       │
+│                                                                │
+│  ┌──────────────┐    ┌──────────────────┐    ┌──────────────┐  │
+│  │  Nginx       │ →  │ PM2 civique-web  │    │ Postgres     │  │
+│  │  443 / 80    │    │   :3001 (Next)   │    │   :5432      │  │
+│  │              │    └──────────────────┘    └──────────────┘  │
+│  │  civique.fr  │    ┌──────────────────┐                      │
+│  │  api.…       │ →  │ PM2 civique      │    ┌──────────────┐  │
+│  │              │    │   :3000 (Fastify)│ ←→ │ Brevo / Stripe│ │
+│  │  Let's Enc.  │    └──────────────────┘    └──────────────┘  │
+│  └──────────────┘                                              │
+│                                                                │
+└───────────────────────────────────────────────────────────────┘
 ```
 
-Logs : `ssh root@api.integrafle.fr "pm2 logs civique --lines 100"`.
+---
+
+## 1. Première mise en ligne — checklist
+
+À faire **une seule fois**. Tu es root sur le VPS (`ssh root@api.integrafle.fr`).
+
+### 1.1 — Installer les dépendances système (déjà fait pour le backend)
+
+Si tu pars d'un VPS vierge :
+
+```bash
+apt update && apt install -y nginx certbot python3-certbot-nginx postgresql curl
+# Node 20 + pnpm
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
+corepack enable
+corepack prepare pnpm@latest --activate
+npm install -g pm2
+```
+
+Vérifie que le backend tourne déjà (`pm2 status` doit lister `civique` en `online`). Si oui, saute à 1.2.
+
+### 1.2 — Pointer DNS civique.fr vers le VPS
+
+Chez ton registrar (OVH, Gandi, Cloudflare…) :
+
+| Type   | Nom (Host)  | Valeur                       | TTL  |
+|--------|-------------|------------------------------|------|
+| `A`    | `@`         | **IP du VPS** (`dig api.integrafle.fr +short`) | 300  |
+| `A`    | `www`       | même IP                      | 300  |
+
+Propagation : 5 min à 1 h selon le registrar. Vérifie avec :
+`dig civique.fr +short` doit retourner ton IP VPS.
+
+### 1.3 — Récupérer le code + builder le web
+
+```bash
+cd /root/Civique
+git pull origin main
+pnpm install --frozen-lockfile
+pnpm --filter web build
+```
+
+Le build prend ~2-3 min. Mémoire pic ~1-1.5 GB. Si le VPS a < 4 GB de RAM
+total, ajoute du swap avant :
+
+```bash
+fallocate -l 2G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+```
+
+### 1.4 — Démarrer le web via PM2
+
+```bash
+cd /root/Civique
+pm2 start apps/web/ecosystem.config.cjs
+pm2 save   # persiste à travers les reboots (avec pm2 startup une fois)
+```
+
+Vérifie : `pm2 status` doit lister `civique-web` en `online`.
+Test local : `curl -I http://127.0.0.1:3001` retourne `200 OK`.
+
+### 1.5 — Configurer Nginx pour civique.fr
+
+```bash
+cp /root/Civique/infra/nginx/civique.fr.conf /etc/nginx/sites-available/civique.fr
+ln -s /etc/nginx/sites-available/civique.fr /etc/nginx/sites-enabled/civique.fr
+nginx -t   # vérifier la syntaxe
+systemctl reload nginx
+```
+
+Test : `curl -I http://civique.fr` doit retourner `200 OK` (en HTTP, pas
+encore HTTPS).
+
+### 1.6 — Obtenir le certificat HTTPS via Let's Encrypt
+
+```bash
+certbot --nginx -d civique.fr -d www.civique.fr
+```
+
+Réponds aux prompts :
+- Email pour les notifications de renouvellement
+- Accepter les CGU Let's Encrypt
+- Choisir l'option **redirect** (HTTP → HTTPS auto)
+
+Certbot modifie automatiquement `/etc/nginx/sites-enabled/civique.fr` pour
+ajouter `listen 443 ssl;` + la redirection 301. Le cert se renouvelle
+automatiquement via le timer `certbot.timer` (vérifier avec
+`systemctl status certbot.timer`).
+
+Test final : `https://civique.fr` répond, badge HTTPS vert.
+
+### 1.7 — Variables d'environnement (côté VPS)
+
+Le fichier `/root/Civique/.env` doit contenir (en plus de ce qui y est déjà) :
+
+```env
+# Backend (existant)
+DATABASE_URL=postgresql://civique:...@localhost:5432/civique
+JWT_SECRET=...
+BREVO_API_KEY=xkeysib-...
+
+# Stripe (à compléter pour la prod payante)
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_PRICE_WEEKLY=price_...
+STRIPE_PRICE_MONTHLY=price_...
+STRIPE_PRICE_SEMIANNUAL=price_...
+
+# Nouveau : URL du web pour les redirects Stripe checkout
+WEB_BASE_URL=https://civique.fr
+
+# CORS — déjà whitelisté côté code mais peut être surchargé ici
+# ALLOWED_ORIGINS=https://civique.fr,https://www.civique.fr
+```
+
+Après modif : `pm2 restart civique`.
 
 ---
 
-## 3. Variables d'environnement (récapitulatif)
+## 2. Redéployer après chaque push
 
-### 3.1 Web — Vercel (Project Settings → Environment Variables)
+Sur ta machine locale, push vers `main`. Puis :
 
-| Nom                          | Production                          | Notes                                  |
-| ---------------------------- | ----------------------------------- | -------------------------------------- |
-| `NEXT_PUBLIC_API_BASE_URL`   | `https://api.integrafle.fr/api`     | Inline au build. Aucun secret.         |
+```bash
+ssh root@api.integrafle.fr "bash /root/Civique/infra/deploy.sh"
+```
 
-### 3.2 Backend — `/root/Civique/.env` (Hetzner)
+Le script :
+1. `git pull origin main`
+2. `pnpm install --frozen-lockfile` (workspace)
+3. `pnpm --filter web build`
+4. `pm2 restart civique civique-web`
 
-| Nom                        | Description                                                        |
-| -------------------------- | ------------------------------------------------------------------ |
-| `DATABASE_URL`             | `postgres://civique:…@localhost:5432/civique`                      |
-| `JWT_SECRET`               | Secret long et aléatoire (≥ 64 caractères). Ne **jamais** changer en prod sans plan de migration de session. |
-| `STRIPE_SECRET_KEY`        | `sk_live_…` (clé secrète Stripe en mode live)                      |
-| `STRIPE_WEBHOOK_SECRET`    | `whsec_…` fourni par Stripe lors de la création du webhook endpoint |
-| `STRIPE_PRICE_WEEKLY`      | `price_…` pour l'abonnement hebdo                                  |
-| `STRIPE_PRICE_MONTHLY`     | `price_…` pour l'abonnement mensuel                                |
-| `STRIPE_PRICE_SEMIANNUAL`  | `price_…` pour l'abonnement semestriel                             |
-| `BREVO_API_KEY`            | `xkeysib-…` (API key Brevo HTTP)                                   |
-| `WEB_BASE_URL`             | `https://civique.fr` (utilisé pour les liens dans les emails et les redirects Stripe Checkout) |
-
-Après modification, redémarrer PM2 : `pm2 restart civique`.
+Options :
+- `bash deploy.sh server` → backend uniquement (rapide, pas de install)
+- `bash deploy.sh web` → web uniquement
 
 ---
 
-## 4. Stripe — passage en mode live
+## 3. Configuration Stripe (avant ouverture publique)
 
-> Tant que les clés sont en `sk_test_…`, aucun paiement réel n'est traité.
+Dans le [Stripe Dashboard](https://dashboard.stripe.com) :
 
-### 4.1 Créer les produits & prix dans le Dashboard Stripe
+1. **Bascule en mode Live** (toggle en haut à droite)
+2. **Products → Add product** pour chacun :
+   - Civique Hebdomadaire — 3,99 € — Recurring weekly
+   - Civique Mensuel — 10,99 € — Recurring monthly
+   - Civique 6 mois — 39,99 € — One-time (mode payment)
+3. Copie les 3 `price_xxx` IDs → dans `/root/Civique/.env`
+4. **Developers → Webhooks → Add endpoint**
+   - URL : `https://api.integrafle.fr/api/payments/webhook/stripe`
+   - Events : `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
+   - Copie le `whsec_xxx` → `STRIPE_WEBHOOK_SECRET`
+5. `pm2 restart civique`
 
-Dans <https://dashboard.stripe.com> (mode **Live**) → *Catalogue → Produits* :
-
-1. **Civique Hebdo** — 1 prix récurrent (par exemple 2,99 € / semaine) → noter le `price_xxx`.
-2. **Civique Mensuel** — 1 prix récurrent (par exemple 7,99 € / mois) → noter le `price_xxx`.
-3. **Civique Semestriel** — 1 prix récurrent (par exemple 29,99 € / 6 mois) → noter le `price_xxx`.
-
-Reporter chaque `price_xxx` dans `/root/Civique/.env` sous les clés `STRIPE_PRICE_WEEKLY`, `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_SEMIANNUAL`.
-
-> Sur iOS, les 7 prix sandbox StoreKit (incluant `civique_six_month`) existent côté Apple — voir `DEBUG_SIX_MONTH_SUBSCRIPTION.md`. Stripe ne concerne que le web et Android.
-
-### 4.2 Configurer le webhook
-
-1. *Developers → Webhooks → Add endpoint*.
-2. URL : `https://api.integrafle.fr/api/payments/webhook/stripe`.
-3. Évènements à écouter :
-   - `checkout.session.completed`
-   - `customer.subscription.created`
-   - `customer.subscription.updated`
-   - `customer.subscription.deleted`
-   - `invoice.payment_failed`
-4. Stripe affiche le **Signing secret** (`whsec_…`) → reporter dans `STRIPE_WEBHOOK_SECRET`.
-5. `pm2 restart civique`.
-6. Tester avec *Send test event → checkout.session.completed* → vérifier l'arrivée dans `pm2 logs civique`.
+Test : crée un Checkout en mode Test depuis `civique.fr/app/settings/subscription`, vérifie que le user passe `isPremium=true` après le webhook.
 
 ---
 
-## 5. Brevo — emails transactionnels
+## 4. Brevo (emails transactionnels)
 
-1. Dashboard Brevo → *Senders, Domains & dedicated IPs → Domains*.
-2. Vérifier que `integrafle.fr` est marqué *Authenticated* (SPF + DKIM verts).
-3. Si ce n'est pas le cas, suivre les instructions Brevo pour ajouter les enregistrements DNS chez le registrar et cliquer sur *Authenticate this domain*.
-4. Le sender utilisé par le serveur est `support@integrafle.fr` — il doit apparaître comme adresse vérifiée.
-5. Tester en déclenchant un email transactionnel (par exemple `/api/auth/forgot-password`) et vérifier l'arrivée + la non-mise en spam.
+Le backend utilise déjà Brevo via `BREVO_API_KEY`. Vérifier :
 
----
+1. [Brevo Dashboard](https://app.brevo.com) → Senders & IP → Domains
+2. `integrafle.fr` doit être en statut **Authenticated** (DKIM + SPF verts)
+3. Sinon : suivre les instructions Brevo pour ajouter les enregistrements DNS
 
-## 6. En cas de rollback web
-
-Sur Vercel, *Deployments → choisir un déploiement précédent → Promote to Production*. Le rollback est instantané ; les variables d'environnement ne changent pas.
-
-Pour un rollback backend : `ssh root@api.integrafle.fr "cd /root/Civique && git reset --hard <SHA> && pm2 restart civique"`.
+Le sender utilisé dans le code : `support@integrafle.fr` (voir `apps/server/src/services/email.ts`).
 
 ---
 
-## 7. Checklist post-déploiement
+## 5. Pré-launch QA
 
-Après chaque mise en prod majeure, dérouler `QA_SMOKE.md` avant de communiquer.
+Avant d'annoncer publiquement :
+- Run [QA_SMOKE.md](QA_SMOKE.md) sur `https://civique.fr` (53 items)
+- Vérifie les 4 emails transactionnels : verification, password reset, password changed, welcome
+- Test 1 cycle Stripe complet en mode live avec une vraie carte (rembourse-toi après)
+- Lighthouse audit (devrait être > 90 sur la landing)
+
+---
+
+## 6. Alternative — Vercel (si tu changes d'avis)
+
+Si tu veux migrer vers Vercel plus tard (zero ops, edge CDN) :
+
+1. Vercel.com → Add Project → import `Nissoux/Civique`
+2. Root Directory = `apps/web` (critique pour monorepo)
+3. Env var `NEXT_PUBLIC_API_BASE_URL=https://api.integrafle.fr/api` (Production + Preview + Development)
+4. Deploy
+5. Settings → Domains → ajouter `civique.fr` + `www.civique.fr`
+6. Sur le VPS : `pm2 stop civique-web && pm2 delete civique-web` (libère la RAM)
+7. Sur Nginx : retirer le vhost `civique.fr` ou le rediriger vers Vercel
+
+Le `vercel.json` à `apps/web/vercel.json` est déjà prêt si tu fais ce switch.
+
+---
+
+## 7. Monitoring (post-launch)
+
+À installer une fois en prod et qu'on a libéré du disque :
+- **Sentry web** : `pnpm --filter web add @sentry/nextjs` puis `npx @sentry/wizard@latest -i nextjs`
+- **Plausible** ou **Umami** auto-hébergé sur le VPS pour les analytics RGPD-compliant
+- **Uptime Robot** (gratuit) → ping `https://civique.fr` toutes les 5 min, alerte mail/SMS si down
+
+---
+
+## Récap des fichiers d'infra
+
+| Fichier | Rôle |
+|---|---|
+| `apps/web/ecosystem.config.cjs` | Config PM2 pour `civique-web` |
+| `infra/nginx/civique.fr.conf` | Vhost Nginx + caching + security headers |
+| `infra/deploy.sh` | Script de déploiement (full / server / web) |
+| `apps/web/.env.production.example` | Template d'env (PORT, NEXT_PUBLIC_API_BASE_URL) |
+| `QA_SMOKE.md` | Checklist QA manuelle pré-launch |
