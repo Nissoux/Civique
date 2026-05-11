@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Tisserand — warm welcoming */
+    --bone: 244 236 221;
+    --bone-deep: 236 224 203;
+    --bone-warm: 229 214 186;
+    --aubergine: 45 27 46;
+    --aubergine-mid: 74 45 67;
+    --ink-mute: 110 91 95;
+    --ink-faded: 156 137 130;
+
+    /* Brand officiel République Française */
+    --fr-blue: 0 35 149;
+    --fr-blue-deep: 0 26 110;
+    --fr-red: 237 41 57;
+
+    /* Accents Tisserand */
+    --terracotta: 199 82 42;
+    --terracotta-deep: 168 60 27;
+    --saffron: 232 163 61;
+    --teal: 93 122 107;
+    --sienna: 139 90 60;
+    --indigo: 54 78 128;
+  }
+
+  /* Pure dark not implemented — Tisserand is fundamentally light/warm.
+     Mobile remains dark; web embraces the bone palette for differentiation. */
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bone text-aubergine font-sans;
+    font-feature-settings: 'ss01';
+  }
+
+  /* Woven texture — subtle cross-hatch overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        rgba(45, 27, 46, 0.018) 0 2px,
+        transparent 2px 8px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(45, 27, 46, 0.012) 0 2px,
+        transparent 2px 8px
+      );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  ::selection {
+    background: rgb(var(--saffron));
+    color: rgb(var(--aubergine));
+  }
+
+  /* Display family helper */
+  .font-display {
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-feature-settings: 'lnum';
+  }
+
+  .display-italic {
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 72;
+  }
+}
+
+@layer components {
+  /* Primary CTA — warm rounded with stamped shadow */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full;
+    @apply bg-terracotta text-bone font-semibold px-7 py-3.5;
+    @apply shadow-warm transition-all;
+    @apply hover:-translate-y-0.5 hover:shadow-warm-lift;
+    @apply active:translate-y-0.5 active:shadow-none;
+    @apply focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2 focus:ring-offset-bone;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Secondary CTA — soft outlined */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full;
+    @apply bg-transparent text-aubergine font-semibold px-6 py-3.5;
+    @apply border-[1.5px] border-aubergine transition-all;
+    @apply hover:bg-aubergine hover:text-bone;
+  }
+
+  /* Brand CTA — DSFR navy for trust moments */
+  .btn-brand {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full;
+    @apply bg-fr-blue text-bone font-semibold px-7 py-3.5;
+    @apply transition-all;
+    @apply hover:-translate-y-0.5;
+    box-shadow: 0 4px 0 rgb(var(--fr-blue-deep)), 0 8px 24px -8px rgba(0, 35, 149, 0.4);
+  }
+
+  /* Card — warm with stamped shadow */
+  .card {
+    @apply rounded-2xl bg-bone border-[1.5px] border-aubergine shadow-clay;
+  }
+
+  .card-deep {
+    @apply rounded-2xl bg-bone-deep border-[1.5px] border-aubergine shadow-clay;
+  }
+
+  /* Theme card with hover lift */
+  .theme-card {
+    @apply rounded-3xl bg-bone-deep border-[1.5px] border-aubergine shadow-clay;
+    @apply transition-all cursor-pointer;
+    @apply p-7 relative overflow-hidden;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-duration: 400ms;
+  }
+  .theme-card:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow:
+      0 9px 0 rgb(var(--aubergine)),
+      0 18px 32px -12px rgba(45, 27, 46, 0.2);
+  }
+  .theme-card::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(45, 27, 46, 0.18);
+    border-radius: 22px;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .theme-card:hover::before {
+    opacity: 0;
+  }
+
+  /* Pill — language / exam type / badge */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-bone-warm;
+    @apply border border-aubergine px-3 py-1 text-xs font-semibold tracking-wide;
+  }
+
+  .pill-lg {
+    @apply inline-flex items-center gap-2 rounded-full bg-bone;
+    @apply border-[1.5px] border-aubergine px-4 py-2 text-sm font-medium;
+    @apply transition-all hover:-translate-y-0.5 hover:bg-saffron;
+  }
+
+  /* Form fields */
+  .field-input {
+    @apply w-full rounded-xl bg-bone-deep border-[1.5px] border-aubergine;
+    @apply px-4 py-3.5 text-base text-aubergine placeholder:text-ink-mute placeholder:opacity-60;
+    @apply transition-all focus:outline-none focus:bg-bone focus:border-terracotta;
+    @apply focus:ring-[3px] focus:ring-terracotta/15;
+  }
+
+  .field-label {
+    @apply font-display italic text-aubergine text-base mb-2 block;
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    @apply text-[0.78rem] font-bold uppercase tracking-[0.18em] text-terracotta;
+  }
+
+  /* Wavy underline accent */
+  .underline-wavy {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: rgb(var(--saffron));
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+  }
+
+  /* Animated thread */
+  .weave-thread {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: weave 2.4s 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+/* Keyframes — defined here so animation: <name> resolves without
+   requiring the Tailwind animate-* utilities. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(0.8em); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes weave {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes scroll-strip {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer utilities {
+  /* Stagger rise utilities */
+  .rise-init {
+    opacity: 0;
+    animation: rise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  .rise-d-1 { animation-delay: 0.1s; }
+  .rise-d-2 { animation-delay: 0.25s; }
+  .rise-d-3 { animation-delay: 0.45s; }
+  .rise-d-4 { animation-delay: 0.65s; }
+  .rise-d-5 { animation-delay: 0.85s; }
+  .rise-d-6 { animation-delay: 1.05s; }
+}

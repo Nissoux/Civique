@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Civique · L'Atelier — exploration design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,0..100;1,9..144,300..800,0..100&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --paper: #F1ECE2;
+    --paper-deep: #E8E2D5;
+    --paper-dark: #DDD5C2;
+    --ink: #1A1410;
+    --ink-muted: #5C534A;
+    --oxblood: #7B2C28;
+    --brass: #A38860;
+    --rule: #C9C0AF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* paper grain via SVG noise */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.4; pointer-events: none; z-index: 100; mix-blend-mode: multiply;
+  }
+
+  .display { font-family: 'Fraunces', serif; font-feature-settings: 'lnum'; }
+
+  .display-tight {
+    font-variation-settings: 'opsz' 144, 'SOFT' 30, 'wght' 400;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+  }
+
+  .italic-soft {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 80, 'wght' 400;
+    color: var(--oxblood);
+  }
+
+  .smcp { font-variant-caps: all-small-caps; letter-spacing: 0.14em; font-weight: 500; }
+
+  .ornament {
+    color: var(--brass);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-feature-settings: 'ss01';
+  }
+
+  .section-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--oxblood);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+
+  .hairline { border-color: var(--rule); }
+
+  /* button: classical letterpress feel */
+  .btn-ink {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Bricolage Grotesque';
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 0.95rem 1.75rem;
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-ink::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--oxblood);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .btn-ink:hover::before { transform: translateY(0); }
+  .btn-ink span { position: relative; z-index: 1; }
+
+  /* underline draw on link */
+  @keyframes draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .draw-underline { position: relative; }
+  .draw-underline::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: var(--ink);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .draw-underline:hover::after { transform: scaleX(1); }
+  .draw-underline-auto::after {
+    transform-origin: left;
+    animation: draw 1.4s 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    background: var(--oxblood);
+  }
+
+  /* rise stagger */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(1.2em); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .rise { opacity: 0; animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .d-1 { animation-delay: 0.1s; }
+  .d-2 { animation-delay: 0.3s; }
+  .d-3 { animation-delay: 0.55s; }
+  .d-4 { animation-delay: 0.8s; }
+  .d-5 { animation-delay: 1.05s; }
+
+  /* ToC rows */
+  .toc-row {
+    border-top: 1px solid var(--rule);
+    padding-block: 1.75rem;
+    transition: padding-left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .toc-row:hover { padding-left: 1rem; background: var(--paper-deep); }
+  .toc-row .roman {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .toc-row .gloss {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-muted);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .toc-row:hover .gloss { opacity: 1; transform: translateX(0); }
+  .toc-row .arrow {
+    color: var(--oxblood);
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .toc-row:hover .arrow { opacity: 1; transform: translateX(0); }
+
+  /* auth card: paper double-rule frame */
+  .card-paper {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow:
+      0 1px 0 var(--rule),
+      0 30px 60px -30px rgba(26, 20, 16, 0.18);
+    position: relative;
+  }
+  .card-paper::before {
+    content: '';
+    position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid var(--ink);
+    pointer-events: none;
+  }
+  .card-paper::after {
+    content: '·';
+    position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    background: var(--paper); padding: 0 14px;
+    color: var(--brass); font-family: 'Fraunces', serif; font-size: 1.5rem;
+  }
+
+  .field-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+  .field-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.65rem 0;
+    width: 100%;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    color: var(--ink);
+    font-size: 1.05rem;
+    transition: border-color 0.35s ease;
+  }
+  .field-input:focus { outline: none; border-bottom-color: var(--ink); }
+  .field-input::placeholder { color: var(--ink-muted); opacity: 0.5; }
+
+  ::selection { background: var(--oxblood); color: var(--paper); }
+
+  /* ornament line */
+  .rule-ornament {
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--brass);
+  }
+  .rule-ornament::before, .rule-ornament::after {
+    content: ''; flex: 1; height: 1px; background: var(--brass); opacity: 0.4;
+  }
+
+  /* tricolor stamp seal */
+  .seal {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    width: 64px; height: 64px;
+    border: 1.5px solid var(--oxblood);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--oxblood);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    transform: rotate(-12deg);
+    background: rgba(241, 236, 226, 0.9);
+  }
+  .seal::before {
+    content: '';
+    position: absolute; inset: 4px;
+    border: 0.5px solid var(--oxblood);
+    border-radius: 50%;
+  }
+
+  /* engraving SVG glow */
+  @keyframes etch {
+    from { stroke-dashoffset: 1000; opacity: 0; }
+    to { stroke-dashoffset: 0; opacity: 1; }
+  }
+  .etch path, .etch line, .etch circle { animation: etch 2.5s 0.6s ease-out forwards; }
+</style>
+</head>
+<body>
+
+<!-- masthead -->
+<header class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-7">
+      <span class="display text-[1.7rem] tracking-tight" style="font-variation-settings: 'opsz' 36, 'SOFT' 50">Civique</span>
+      <span class="ornament text-xl">·</span>
+      <span class="smcp text-[0.7rem]" style="color: var(--ink-muted)">Édition 2026 · Volume I</span>
+    </div>
+    <nav class="flex gap-8 text-[0.95rem]">
+      <a href="#themes" class="draw-underline">Le programme</a>
+      <a href="#" class="draw-underline">Mission</a>
+      <a href="#auth" class="draw-underline">Se connecter</a>
+    </nav>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="border-b hairline relative overflow-hidden">
+  <div class="max-w-[1340px] mx-auto px-10 py-24 grid grid-cols-12 gap-10">
+    <div class="col-span-7 relative z-10">
+      <div class="rise d-1 section-mark mb-10">— Tome I. Préparation</div>
+      <h1 class="display display-tight text-[clamp(3.5rem,8.5vw,7.5rem)] mb-10">
+        <span class="rise d-2 inline-block">L'examen civique,</span><br/>
+        <span class="rise d-3 inline-block italic-soft draw-underline-auto">sereinement</span><span class="rise d-3 italic-soft" style="color: var(--ink)">.</span>
+      </h1>
+      <p class="rise d-3 max-w-[28rem] text-[1.15rem] leading-[1.55] mb-12" style="color: var(--ink-muted)">
+        <span class="display italic-soft">Une préparation rigoureuse</span> à l'entretien de naturalisation française. Cinq thèmes officiels, des centaines de questions, six langues d'accompagnement.
+      </p>
+      <div class="rise d-4 flex items-center gap-10">
+        <a href="#auth" class="btn-ink"><span>Commencer la préparation →</span></a>
+        <a href="#themes" class="text-base draw-underline italic-soft display">— Découvrir le programme</a>
+      </div>
+    </div>
+
+    <div class="col-span-5 flex items-center justify-center relative">
+      <!-- Engraving: art deco sun + motto -->
+      <svg viewBox="0 0 400 500" class="w-full h-auto etch" stroke="#7B2C28" fill="none" stroke-width="1.2">
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse">
+            <path d="M0,6 L6,0" stroke="#7B2C28" stroke-width="0.4" opacity="0.5"/>
+          </pattern>
+        </defs>
+        <!-- circle frame -->
+        <circle cx="200" cy="200" r="170" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+        <circle cx="200" cy="200" r="158" stroke-dasharray="1000" stroke-dashoffset="1000" stroke-width="0.5"/>
+        <!-- sun rays -->
+        <g stroke-dasharray="1000" stroke-dashoffset="1000">
+          <line x1="200" y1="40" x2="200" y2="80"/>
+          <line x1="313" y1="87" x2="285" y2="115"/>
+          <line x1="360" y1="200" x2="320" y2="200"/>
+          <line x1="313" y1="313" x2="285" y2="285"/>
+          <line x1="200" y1="360" x2="200" y2="320"/>
+          <line x1="87" y1="313" x2="115" y2="285"/>
+          <line x1="40" y1="200" x2="80" y2="200"/>
+          <line x1="87" y1="87" x2="115" y2="115"/>
+          <!-- diagonals -->
+          <line x1="285" y1="60" x2="270" y2="95"/>
+          <line x1="340" y1="115" x2="310" y2="135"/>
+          <line x1="340" y1="285" x2="310" y2="265"/>
+          <line x1="285" y1="340" x2="270" y2="305"/>
+          <line x1="115" y1="340" x2="130" y2="305"/>
+          <line x1="60" y1="285" x2="90" y2="265"/>
+          <line x1="60" y1="115" x2="90" y2="135"/>
+          <line x1="115" y1="60" x2="130" y2="95"/>
+        </g>
+        <!-- inner sun -->
+        <circle cx="200" cy="200" r="65" fill="url(#hatch)" stroke-dasharray="500" stroke-dashoffset="500"/>
+        <circle cx="200" cy="200" r="65" stroke-dasharray="500" stroke-dashoffset="500"/>
+        <!-- crown of stars (12 dots, EU/republican echo) -->
+        <g stroke-dasharray="500" stroke-dashoffset="500">
+          <circle cx="200" cy="125" r="2.5" fill="#7B2C28"/>
+          <circle cx="237" cy="135" r="2.5" fill="#7B2C28"/>
+          <circle cx="265" cy="162" r="2.5" fill="#7B2C28"/>
+          <circle cx="275" cy="200" r="2.5" fill="#7B2C28"/>
+          <circle cx="265" cy="237" r="2.5" fill="#7B2C28"/>
+          <circle cx="237" cy="265" r="2.5" fill="#7B2C28"/>
+          <circle cx="200" cy="275" r="2.5" fill="#7B2C28"/>
+          <circle cx="162" cy="265" r="2.5" fill="#7B2C28"/>
+          <circle cx="135" cy="237" r="2.5" fill="#7B2C28"/>
+          <circle cx="125" cy="200" r="2.5" fill="#7B2C28"/>
+          <circle cx="135" cy="162" r="2.5" fill="#7B2C28"/>
+          <circle cx="162" cy="135" r="2.5" fill="#7B2C28"/>
+        </g>
+        <!-- motto -->
+        <text x="200" y="430" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="22" fill="#7B2C28">Liberté · Égalité · Fraternité</text>
+        <text x="200" y="460" text-anchor="middle" font-family="Bricolage Grotesque" font-size="11" fill="#5C534A" letter-spacing="3">PRÉPARATION CIVIQUE · 2026</text>
+      </svg>
+
+      <span class="seal">
+        Civique<br/>· Vol. I ·
+      </span>
+    </div>
+  </div>
+
+  <!-- hero footer -->
+  <div class="max-w-[1340px] mx-auto px-10 py-5 grid grid-cols-12 gap-10 border-t hairline text-sm">
+    <div class="col-span-3 smcp" style="color: var(--ink-muted)">Établi en 2024</div>
+    <div class="col-span-6 text-center italic-soft display" style="color: var(--ink-muted); font-size: 0.95rem">
+      « On ne naît pas Français, on le devient. »
+    </div>
+    <div class="col-span-3 text-right smcp" style="color: var(--ink-muted)">N° 001 — fr</div>
+  </div>
+</section>
+
+<!-- themes -->
+<section id="themes" class="border-b hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-24">
+    <div class="grid grid-cols-12 gap-10 mb-16">
+      <div class="col-span-3 section-mark pt-3">— Tome II. Sommaire</div>
+      <h2 class="col-span-9 display text-[clamp(2.75rem,5vw,4.25rem)] leading-[1.05]" style="font-variation-settings: 'opsz' 96, 'SOFT' 30">
+        Cinq thèmes officiels<span class="italic-soft">,</span><br/>
+        abordés avec <span class="italic-soft">méthode</span>.
+      </h2>
+    </div>
+
+    <ol class="grid grid-cols-1">
+      <li class="toc-row grid grid-cols-12 gap-8 items-baseline">
+        <div class="col-span-1 roman text-4xl text-[color:var(--oxblood)]">I.</div>
+        <div class="col-span-6">
+          <div class="text-[1.7rem] display leading-tight" style="font-variation-settings: 'opsz' 36">Principes & valeurs de la République</div>
+          <div class="gloss text-base mt-1.5">— les fondations républicaines</div>
+        </div>
+        <div class="col-span-3 italic-soft display text-base" style="color: var(--ink-muted)">42 questions · 18 fiches</div>
+        <div class="col-span-2 text-right flex items-center justify-end gap-3">
+          <span class="smcp text-xs" style="color: var(--brass)">∴ niveau A</span>
+          <span class="arrow display italic-soft text-2xl">→</span>
+        </div>
+      </li>
+
+      <li class="toc-row grid grid-cols-12 gap-8 items-baseline">
+        <div class="col-span-1 roman text-4xl text-[color:var(--oxblood)]">II.</div>
+        <div class="col-span-6">
+          <div class="text-[1.7rem] display leading-tight" style="font-variation-settings: 'opsz' 36">Système institutionnel & politique</div>
+          <div class="gloss text-base mt-1.5">— l'architecture de l'État</div>
+        </div>
+        <div class="col-span-3 italic-soft display text-base" style="color: var(--ink-muted)">58 questions · 22 fiches</div>
+        <div class="col-span-2 text-right flex items-center justify-end gap-3">
+          <span class="smcp text-xs" style="color: var(--brass)">∴ niveau B</span>
+          <span class="arrow display italic-soft text-2xl">→</span>
+        </div>
+      </li>
+
+      <li class="toc-row grid grid-cols-12 gap-8 items-baseline">
+        <div class="col-span-1 roman text-4xl text-[color:var(--oxblood)]">III.</div>
+        <div class="col-span-6">
+          <div class="text-[1.7rem] display leading-tight" style="font-variation-settings: 'opsz' 36">Droits & devoirs du citoyen</div>
+          <div class="gloss text-base mt-1.5">— l'équilibre républicain</div>
+        </div>
+        <div class="col-span-3 italic-soft display text-base" style="color: var(--ink-muted)">36 questions · 14 fiches</div>
+        <div class="col-span-2 text-right flex items-center justify-end gap-3">
+          <span class="smcp text-xs" style="color: var(--brass)">∴ niveau B</span>
+          <span class="arrow display italic-soft text-2xl">→</span>
+        </div>
+      </li>
+
+      <li class="toc-row grid grid-cols-12 gap-8 items-baseline">
+        <div class="col-span-1 roman text-4xl text-[color:var(--oxblood)]">IV.</div>
+        <div class="col-span-6">
+          <div class="text-[1.7rem] display leading-tight" style="font-variation-settings: 'opsz' 36">Histoire, géographie & culture</div>
+          <div class="gloss text-base mt-1.5">— la mémoire et le territoire</div>
+        </div>
+        <div class="col-span-3 italic-soft display text-base" style="color: var(--ink-muted)">94 questions · 38 fiches</div>
+        <div class="col-span-2 text-right flex items-center justify-end gap-3">
+          <span class="smcp text-xs" style="color: var(--brass)">∴ niveau C</span>
+          <span class="arrow display italic-soft text-2xl">→</span>
+        </div>
+      </li>
+
+      <li class="toc-row grid grid-cols-12 gap-8 items-baseline border-b hairline">
+        <div class="col-span-1 roman text-4xl text-[color:var(--oxblood)]">V.</div>
+        <div class="col-span-6">
+          <div class="text-[1.7rem] display leading-tight" style="font-variation-settings: 'opsz' 36">Vivre dans la société française</div>
+          <div class="gloss text-base mt-1.5">— l'intégration au quotidien</div>
+        </div>
+        <div class="col-span-3 italic-soft display text-base" style="color: var(--ink-muted)">48 questions · 19 fiches</div>
+        <div class="col-span-2 text-right flex items-center justify-end gap-3">
+          <span class="smcp text-xs" style="color: var(--brass)">∴ niveau B</span>
+          <span class="arrow display italic-soft text-2xl">→</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- auth -->
+<section id="auth">
+  <div class="max-w-[1340px] mx-auto px-10 py-28 grid grid-cols-12 gap-10">
+    <div class="col-span-5 pt-4">
+      <div class="section-mark mb-8">— Tome III. Carte d'accès</div>
+      <h2 class="display text-[clamp(2.5rem,4.5vw,3.75rem)] leading-[1.05] mb-7" style="font-variation-settings: 'opsz' 96, 'SOFT' 30">
+        Ouvrir votre <span class="italic-soft">dossier</span> de préparation.
+      </h2>
+      <p class="leading-[1.65] mb-8 max-w-md" style="color: var(--ink-muted)">
+        Quelques détails pour entrer dans l'atelier. Vos données restent strictement confidentielles, jamais partagées avec un tiers.
+      </p>
+      <ul class="space-y-3 text-[0.95rem]">
+        <li class="flex gap-3"><span class="ornament">·</span><span style="color: var(--ink-muted)">Reprise de session sur tous vos appareils</span></li>
+        <li class="flex gap-3"><span class="ornament">·</span><span style="color: var(--ink-muted)">Six langues d'accompagnement disponibles</span></li>
+        <li class="flex gap-3"><span class="ornament">·</span><span style="color: var(--ink-muted)">Aucune carte bancaire requise pour commencer</span></li>
+      </ul>
+    </div>
+
+    <div class="col-span-7">
+      <div class="card-paper p-12 pt-14">
+        <div class="flex items-baseline justify-between mb-12">
+          <span class="display text-[1.6rem]" style="font-variation-settings: 'opsz' 32">Connexion</span>
+          <div class="rule-ornament flex-1 mx-6">
+            <span class="ornament text-base">∞</span>
+          </div>
+          <span class="italic-soft display text-[0.95rem]" style="color: var(--ink-muted)">— retour parmi nous</span>
+        </div>
+
+        <form class="space-y-7">
+          <div>
+            <label class="field-label block mb-2">Adresse électronique</label>
+            <input type="email" class="field-input" placeholder="vous@exemple.fr" />
+          </div>
+          <div>
+            <label class="field-label block mb-2">Mot de passe</label>
+            <input type="password" class="field-input" placeholder="••••••••" />
+          </div>
+          <div class="flex items-center justify-between pt-3">
+            <button type="submit" class="btn-ink"><span>Entrer dans l'atelier →</span></button>
+            <a href="#" class="italic-soft display text-[0.95rem] draw-underline" style="color: var(--ink-muted)">Mot de passe oublié</a>
+          </div>
+        </form>
+
+        <div class="mt-12 pt-7 border-t hairline flex items-center justify-between">
+          <span class="text-[0.95rem]" style="color: var(--ink-muted)">Première visite ?</span>
+          <a href="#" class="display text-[0.95rem] draw-underline">Créer un dossier d'inscription →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t hairline">
+  <div class="max-w-[1340px] mx-auto px-10 py-7 flex justify-between text-sm">
+    <span class="smcp" style="color: var(--ink-muted)">Civique · Tous droits réservés · MMXXVI</span>
+    <span class="italic-soft display" style="color: var(--ink-muted)">— éditions Civique, Paris</span>
+  </div>
+</footer>
+
+</body>
+</html>
