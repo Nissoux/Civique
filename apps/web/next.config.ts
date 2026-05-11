@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   transpilePackages: ['@civique/shared'],
   // Pin workspace root to silence multi-lockfile warning in monorepo
   outputFileTracingRoot: path.join(__dirname, '../../'),
+  // ESLint runs separately (CI / pre-commit). Don't block production builds
+  // on it — the lint config in the repo references the Next.js plugin via
+  // eslint-config-next which is sometimes flaky in monorepo CI.
+  eslint: { ignoreDuringBuilds: true },
   env: {
     NEXT_PUBLIC_API_BASE_URL:
       process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://api.integrafle.fr/api',

@@ -153,7 +153,7 @@ export async function deleteAccountAction(
   const confirm = formData.get('confirm');
   if (typeof confirm !== 'string' || confirm.trim() !== DELETE_CONFIRM_PHRASE) {
     return {
-      error: `Veuillez saisir exactement « ${DELETE_CONFIRM_PHRASE} » pour confirmer.`,
+      error: `Veuillez saisir exactement « ${DELETE_CONFIRM_PHRASE} » pour confirmer.`,
     };
   }
 
