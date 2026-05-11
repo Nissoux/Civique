@@ -38,7 +38,11 @@ module.exports = {
         // same VPS. Use 3005 for civique-web. Nginx fronts both via
         // separate vhosts (civique.integrafle.fr → 3005, integrafle.fr → 3001).
         PORT: '3005',
-        HOSTNAME: '127.0.0.1',
+        // Bind to all interfaces; Nginx fronts us so external traffic
+        // can't reach this port directly (UFW + iptables block it).
+        // Setting HOSTNAME=127.0.0.1 made Next.js use that for redirect
+        // URL construction even when X-Forwarded-Host was present.
+        HOSTNAME: '0.0.0.0',
         NEXT_PUBLIC_API_BASE_URL: 'https://api.integrafle.fr/api',
       },
       autorestart: true,
