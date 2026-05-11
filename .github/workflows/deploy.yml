@@ -1,0 +1,134 @@
+# Auto-deploy Civique to the Hetzner VPS on every push to main.
+#
+# Required repo secrets (Settings > Secrets and variables > Actions):
+#   - HETZNER_SSH_PRIVATE_KEY : the private OpenSSH key whose public half
+#                                lives in /root/.ssh/authorized_keys on the VPS.
+#                                Generate locally with:
+#                                  ssh-keygen -t ed25519 -C "github-actions" -f deploy_key
+#                                then copy deploy_key.pub to the server's
+#                                authorized_keys, and paste the contents of
+#                                deploy_key (private) into this secret.
+#   - HETZNER_HOST            : hostname or IP. Defaults to api.integrafle.fr
+#                                if the secret is missing.
+#
+# Manual trigger: Actions tab > "Deploy" > Run workflow, choose target.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'What to deploy'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - server
+          - web
+          - all
+
+concurrency:
+  # Only one deploy at a time — newer pushes cancel queued runs but
+  # never interrupt an in-flight deploy (could leave the VPS in a
+  # half-built state).
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # ───────────────────────────────────────────────────────────────
+  # Gate: web must typecheck before we even try to deploy.
+  # If this fails, the deploy job is skipped.
+  # ───────────────────────────────────────────────────────────────
+  typecheck-web:
+    name: Typecheck apps/web
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install workspace deps
+        run: pnpm install --frozen-lockfile
+
+      - name: tsc --noEmit (apps/web)
+        run: pnpm --filter web exec tsc --noEmit
+
+  # ───────────────────────────────────────────────────────────────
+  # Deploy: SSH to the VPS and run the existing deploy.sh script.
+  # ───────────────────────────────────────────────────────────────
+  deploy:
+    name: Deploy to VPS
+    needs: typecheck-web
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout (for commit SHA)
+        uses: actions/checkout@v4
+
+      - name: Resolve target
+        id: target
+        run: |
+          # workflow_dispatch input wins; otherwise default to "all".
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ github.event.inputs.target }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=all" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.HETZNER_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.HETZNER_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          # Default to api.integrafle.fr when secret is missing.
+          HOST="${SSH_HOST:-api.integrafle.fr}"
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          echo "HOST=$HOST" >> "$GITHUB_ENV"
+
+      - name: Run deploy script over SSH
+        id: deploy
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o ConnectTimeout=15 \
+            "root@${HOST}" \
+            "bash /root/Civique/infra/deploy.sh ${{ steps.target.outputs.value }}"
+
+      - name: Comment on commit (success)
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `Deploy OK (target: \`${{ steps.target.outputs.value }}\`) — [run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
+            });
+
+      - name: Comment on commit (failure)
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `Deploy FAILED (target: \`${{ steps.target.outputs.value }}\`) — [logs](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`
+            });
