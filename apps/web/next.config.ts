@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
   // on it — the lint config in the repo references the Next.js plugin via
   // eslint-config-next which is sometimes flaky in monorepo CI.
   eslint: { ignoreDuringBuilds: true },
+  // Standalone output bundles a self-contained server.js. This sidesteps the
+  // pnpm-workspace duplicate-React resolution that crashes /404 prerender
+  // with "Cannot read properties of null (reading 'useContext')". The
+  // bundler dedupes React in the output traced graph.
+  output: 'standalone',
   env: {
     NEXT_PUBLIC_API_BASE_URL:
       process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://api.integrafle.fr/api',
