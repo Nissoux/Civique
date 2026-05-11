@@ -9,7 +9,7 @@ Scope: `apps/server`, `apps/web`, `infra/nginx`, root config
 
 ## Executive summary
 
-Overall posture is **moderate**. Most boring fundamentals are right (Drizzle parameterization, httpOnly cookies, JWT with strong secret enforcement, Stripe webhook signature verified with timing-safe + 5-min replay window, sound CORS allow-list, sane Zod input validation, no `.env` files committed). However there are **three critical issues** that must be fixed before launch:
+Overall posture is **moderate**. Most boring fundamentals are right (Drizzle parameterization, httpOnly cookies, JWT with strong secret enforcement, Stripe webhook signature verified with timing-safe + 5-min replay window, sound CORS allow-list, sane Zod input validation, no `.env` files committed). The three critical issues identified at audit time have since been fixed (see Status column and per-finding notes):
 
 1. **Apple Sign-In does not verify the JWT signature** (`apps/server/src/routes/auth/index.ts:550–577`). The code fetches Apple's JWKS but never uses the public key to verify the token — anyone can forge an `identityToken` with `iss=https://appleid.apple.com` and `aud=com.civique.app` and authenticate as **any** user (including arbitrary Anthropic-impersonation), creating an account-takeover and impersonation primitive.
 2. **Password-reset code entropy is only ~40 bits and effectively much less** (`apps/server/src/routes/auth/index.ts:454–460`). The 8-char hex code is stored *keyed by the code itself* with a 1-hour TTL and no per-attempt rate limit on `/reset-password`, allowing online brute force.
@@ -23,9 +23,9 @@ Top priorities: fix #1 today (single line of code: pass `matchingKey.kid` throug
 
 | # | Area | Severity | Status | Description |
 |---|------|----------|--------|-------------|
-| 1 | Auth — Apple Sign-In | **Critical** | Open | JWT signature not verified; trivial token forgery → account takeover |
-| 2 | Auth — Reset code | **Critical** | Open | 8-hex code (40-bit max), no per-attempt rate limit on `/reset-password` |
-| 3 | Email — Display name in HTML | **High** | Open | `displayName` injected raw in welcome email (`services/email.ts:94`) |
+| 1 | Auth — Apple Sign-In | **Critical** | **Fixed** (see commit XXX) | JWT signature not verified; trivial token forgery → account takeover |
+| 2 | Auth — Reset code | **Critical** | **Fixed** (see commit XXX) | 8-hex code (40-bit max), no per-attempt rate limit on `/reset-password` |
+| 3 | Email — Display name in HTML | **High** | **Fixed** (see commit XXX) | `displayName` injected raw in welcome email (`services/email.ts:94`) |
 | 4 | Auth — Google client default | **High** | Open | Hardcoded fallback `GOOGLE_CLIENT_ID` in source (`auth/index.ts:505`) |
 | 5 | Auth — Email enumeration | **Medium** | Open | `/users/search` returns matches by email → confirms registration |
 | 6 | Auth — Refresh token rotation | **Medium** | Open | Refresh tokens are not rotated/revoked on use; no jti tracking |
@@ -33,10 +33,10 @@ Top priorities: fix #1 today (single line of code: pass `matchingKey.kid` throug
 | 8 | Auth — Social abuse | **Medium** | Open | `POST /api/social/challenges` lets any user enqueue a challenge against any other user by UUID, no friendship requirement — spam / harassment vector |
 | 9 | Auth — Password policy | **Medium** | Open | 8-char minimum, no upper/lower/digit/symbol mix, no breach check |
 | 10 | Headers — CSP/HSTS missing | **Medium** | Open | `infra/nginx/civique.fr.conf` has no CSP, no HSTS; `helmet` started with `contentSecurityPolicy: false` |
-| 11 | Auth — Verification code TTL/attempts | **Medium** | Open | 6-digit verify code has no per-attempt limit on `/verify-email` — 1M codes / 15 min |
+| 11 | Auth — Verification code TTL/attempts | **Medium** | **Fixed** (see commit XXX) | 6-digit verify code has no per-attempt limit on `/verify-email` — 1M codes / 15 min |
 | 12 | DoS — In-memory token stores | **Medium** | Open | `passwordResetTokens` / `emailVerificationCodes` are unbounded `Map`s with no LRU/eviction beyond TTL on read; not multi-instance safe |
 | 13 | Auth — Token revocation on password change | **Medium** | Open | After `POST /auth/change-password`, existing refresh + access tokens stay valid |
-| 14 | PII — Stripe price IDs in source | **Low** | Open | Hardcoded fallback Stripe price IDs in `routes/payments/index.ts:16–18` |
+| 14 | PII — Stripe price IDs in source | **Low** | **Fixed** (see commit XXX) | Hardcoded fallback Stripe price IDs in `routes/payments/index.ts:16–18` |
 | 15 | Auth — JWT payload | **Low** | Open | Access token carries `email` — leaked through any XSS in a Bearer-token client (mobile) |
 | 16 | Disclosure — Body re-parsing | **Low** | Open | `rawBody` retained on every JSON request, not zeroed; minor memory side-channel |
 | 17 | Disclosure — Stack traces | **Info** | OK | Global error handler returns "Internal Server Error" for ≥500; no stack leakage |
@@ -56,6 +56,8 @@ Top priorities: fix #1 today (single line of code: pass `matchingKey.kid` throug
 ## Detailed findings
 
 ### F1 — Critical: Apple Sign-In signature is not verified
+**Status: Fixed (see commit XXX).** Apple `identityToken` is now verified with RS256 against Apple's JWKS using Node's `crypto.createPublicKey` + `crypto.createVerify`. The `alg` is enforced to `RS256` (no algorithm confusion), `kid` must be present in the JWKS (refreshed once on miss in case Apple rotated), and `iss` / `aud` / `exp` / `nonce` are all checked. The Expo Go fallback audience is now gated on `NODE_ENV !== 'production'`.
+
 **File:** `apps/server/src/routes/auth/index.ts:550–577`
 
 ```ts
@@ -92,6 +94,8 @@ This also fixes the silent acceptance of `host.exp.Exponent` (Expo Go dev audien
 ---
 
 ### F2 — Critical: Password-reset code brute-forceable
+**Status: Fixed (see commit XXX).** `/auth/reset-password` now carries a per-route rate limit (5 attempts / 15 min / IP). The reset-code TTL has been shrunk from 1 hour to 15 minutes. The `ResetEntry` record carries an `attempts` field for parity with the verification-code flow (note: brute-force against this endpoint can't increment a per-code counter because wrong codes never resolve a stored entry — the IP rate limit + short TTL are the effective defenses).
+
 **File:** `apps/server/src/routes/auth/index.ts:454–460, 469–494`
 
 ```ts
@@ -110,6 +114,8 @@ passwordResetTokens.set(code, { email: user.email, expiresAt });
 ---
 
 ### F3 — High: Stored XSS / HTML injection in welcome email
+**Status: Fixed (see commit XXX).** Added an `escapeHtml()` helper at the top of `apps/server/src/services/email.ts` (escapes `& < > " '`). All four email templates now run their user-controlled inputs through it: `sendWelcomeEmail` (displayName — the load-bearing fix), plus defensive escaping of `code`/`token` in `sendVerificationEmail` and `sendPasswordResetEmail` in case those call sites ever change.
+
 **File:** `apps/server/src/services/email.ts:92–108`
 
 ```ts
@@ -231,6 +237,8 @@ Then deploy in **report-only** mode first (`Content-Security-Policy-Report-Only`
 ---
 
 ### F11 — Medium: Verification code brute-forceable
+**Status: Fixed (see commit XXX).** `/auth/verify-email` now has a per-route rate limit (5 attempts / 15 min, keyed by `currentUser.id` since the route is `authGuard`-protected). Additionally, the `VerificationEntry` carries an `attempts` counter — after 5 wrong guesses against the same code the entry is deleted and the route returns 429, forcing the user to request a fresh code.
+
 **File:** `apps/server/src/routes/auth/index.ts:158–192`
 
 6-digit code, 15-min TTL, **no per-attempt rate limit** on `/verify-email`. An attacker who registers `victim@…` (or any account they want to verify) can guess 100 codes/min globally → ~3% chance of hitting a given 6-digit code per minute. After 15 min the window closes, but a patient attacker iterates registrations. Less severe than F2 because verification only unlocks `welcome-email`-style features (not auth — they're already authenticated), but it does allow bypassing the "email verified" gate.
@@ -261,6 +269,8 @@ Then deploy in **report-only** mode first (`Content-Security-Policy-Report-Only`
 ---
 
 ### F14 — Low: Hardcoded Stripe price IDs
+**Status: Fixed (see commit XXX).** Removed the hardcoded fallback price IDs in `apps/server/src/routes/payments/index.ts`. If `STRIPE_PRICE_{WEEKLY,MONTHLY,SEMIANNUAL}` is missing for the requested plan, `/create-checkout` now returns 503 and logs an error rather than silently falling back to a test-mode price ID that would charge the wrong amount.
+
 **File:** `apps/server/src/routes/payments/index.ts:16–18`
 
 ```ts
@@ -313,14 +323,14 @@ Brief evidence:
 ## Pre-launch security checklist for Anis
 
 **Must-fix before public launch (blocks #1, #2, #3 from exec summary):**
-- [ ] F1: Replace fake Apple JWT verify with real `jose.jwtVerify` against Apple JWKS. Test that a token signed with a wrong key is rejected.
-- [ ] F2: Add `rateLimit` config to `POST /auth/reset-password` (10/hour by IP and by token prefix) AND shrink TTL to 15 min, OR upgrade code to 12+ hex chars.
-- [ ] F3: HTML-escape `displayName` (and any future user-controlled string) in `apps/server/src/services/email.ts` templates.
+- [x] F1: Real Apple JWT signature verification via Node `crypto.createPublicKey` + `crypto.createVerify` (RS256 only, JWKS with refresh-on-miss, iss/aud/exp/nonce checks). See commit XXX.
+- [x] F2: `/auth/reset-password` per-route rate limit (5/15min/IP) + TTL shrunk to 15 min. See commit XXX.
+- [x] F3: `escapeHtml()` applied to `displayName` (and defensively to all other user-controllable interpolations) in email templates. See commit XXX.
 
 **Strongly recommended before launch:**
 - [ ] F4: Require `GOOGLE_CLIENT_ID` and `APPLE_BUNDLE_ID` as env vars; remove hardcoded fallbacks.
 - [ ] F10: Add CSP (report-only first) + HSTS to `infra/nginx/civique.fr.conf`. Also enable `helmet`'s CSP on `api.integrafle.fr` (since it returns HTML for `/privacy`, `/terms`, `/payment-success`).
-- [ ] F11: Per-attempt rate limit on `/auth/verify-email` (5/15min by user id).
+- [x] F11: Per-attempt rate limit on `/auth/verify-email` (5/15min by user id) + per-code attempt counter (5 → invalidate). See commit XXX.
 - [ ] Verify production `.env` on the VPS contains:
   - `JWT_SECRET` ≥ 32 random bytes (enforced by Zod, but check the actual value isn't `change-me-…`)
   - `STRIPE_SECRET_KEY` is a live key (`sk_live_…`), not test

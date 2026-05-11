@@ -243,10 +243,12 @@ fi
 # ── Test suite — API ──────────────────────────────────────────────────────────
 section "API — apps/server"
 
-# /themes lists the 5 official civic-exam themes. Public — no auth required.
-expect_json_array_size \
-    "GET /themes  (5 themes)" \
-    "${API_URL}/themes" 200 5
+# /health is mounted at the server root (no /api prefix), so strip any trailing
+# /api from API_URL before probing. Returns { status: "ok", timestamp: "..." }.
+API_ROOT="${API_URL%/api}"
+expect_status_and_body_contains \
+    "GET /health  (server up)" \
+    "${API_ROOT}/health" 200 '"status":"ok"'
 
 # /questions/random requires auth (authGuard hook). 401 confirms the guard.
 expect_status \

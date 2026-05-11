@@ -12,11 +12,26 @@ const createCheckoutSchema = z.object({
 });
 
 // Prices: Weekly 3.99€, Monthly 10.99€, 6 months 39.99€
-const STRIPE_PRICES: Record<string, { priceId: string; mode: 'subscription' | 'payment' }> = {
-  weekly: { priceId: process.env.STRIPE_PRICE_WEEKLY || 'price_1TG5ueQ2N6UyO2vPxFEV6yqN', mode: 'subscription' },
-  monthly: { priceId: process.env.STRIPE_PRICE_MONTHLY || 'price_1TG5ufQ2N6UyO2vP2vmSmaTX', mode: 'subscription' },
-  semiannual: { priceId: process.env.STRIPE_PRICE_SEMIANNUAL || 'price_1TG5ufQ2N6UyO2vPSuxsRTnj', mode: 'payment' },
+// SAFETY: no hardcoded fallback price IDs — if the env var is missing, the
+// `/create-checkout` route returns 503. The previous behaviour silently fell
+// back to test-mode IDs, which would charge the wrong amount in production.
+const STRIPE_PLAN_MODES: Record<string, 'subscription' | 'payment'> = {
+  weekly: 'subscription',
+  monthly: 'subscription',
+  semiannual: 'payment',
 };
+
+function getStripePriceConfig(
+  plan: 'weekly' | 'monthly' | 'semiannual',
+): { priceId: string; mode: 'subscription' | 'payment' } | null {
+  const envKey =
+    plan === 'weekly' ? 'STRIPE_PRICE_WEEKLY'
+    : plan === 'monthly' ? 'STRIPE_PRICE_MONTHLY'
+    : 'STRIPE_PRICE_SEMIANNUAL';
+  const priceId = process.env[envKey];
+  if (!priceId) return null;
+  return { priceId, mode: STRIPE_PLAN_MODES[plan] };
+}
 
 export default async function paymentRoutes(app: FastifyInstance) {
   // ── GET /subscription ───────────────────────────────────
@@ -61,9 +76,17 @@ export default async function paymentRoutes(app: FastifyInstance) {
       return reply.status(503).send({ error: 'Paiement non configuré' });
     }
 
-    const planConfig = STRIPE_PRICES[body.plan];
+    const planConfig = getStripePriceConfig(body.plan);
     if (!planConfig) {
-      return reply.status(400).send({ error: 'Plan invalide' });
+      // Env var missing for this plan — refuse rather than silently use the
+      // wrong price ID. Operator must set STRIPE_PRICE_{WEEKLY,MONTHLY,SEMIANNUAL}.
+      app.log.error(
+        { plan: body.plan },
+        `Stripe price env var missing for plan "${body.plan}" — refusing checkout`,
+      );
+      return reply.status(503).send({
+        error: 'Paiement non configuré pour ce plan',
+      });
     }
 
     // Create Stripe Checkout Session via API

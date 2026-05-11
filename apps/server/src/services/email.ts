@@ -6,6 +6,20 @@ const FROM_NAME = 'Civique';
 // Logo hosted on GitHub for email rendering
 const LOGO_URL = 'https://raw.githubusercontent.com/Nissoux/Civique/main/apps/mobile/assets/logo-c.png';
 
+/**
+ * HTML-escape a user-controlled string to prevent injection into email templates.
+ * MUST be applied to every value sourced from the user (displayName, email subjects, etc.)
+ * before interpolation into the HTML body.
+ */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function emailWrapper(content: string): string {
   return `
 <!DOCTYPE html>
@@ -74,13 +88,16 @@ async function sendEmail(to: string, subject: string, content: string) {
 }
 
 export async function sendVerificationEmail(email: string, code: string) {
+  // `code` is server-generated 6-digit numeric — safe by construction, but
+  // escape defensively in case the call site ever changes.
+  const safeCode = escapeHtml(code);
   await sendEmail(email, 'Vérifiez votre adresse e-mail — Civique', `
     <h2 style="color:#1A1A2E;font-size:22px;font-weight:700;margin:0 0 12px">Vérification de votre e-mail</h2>
     <p style="color:#635F69;font-size:15px;line-height:24px;margin:0 0 24px">
       Bienvenue sur Civique ! Pour activer votre compte, entrez le code ci-dessous dans l'application :
     </p>
     <div style="background:#EFF6FF;border-radius:16px;padding:28px;text-align:center;margin:0 0 24px">
-      <p style="font-size:36px;font-weight:800;color:#2563EB;letter-spacing:8px;margin:0;font-family:monospace">${code}</p>
+      <p style="font-size:36px;font-weight:800;color:#2563EB;letter-spacing:8px;margin:0;font-family:monospace">${safeCode}</p>
     </div>
     <p style="color:#9994A1;font-size:13px;line-height:20px;margin:0">
       Ce code expire dans <strong>15 minutes</strong>.<br>
@@ -90,8 +107,10 @@ export async function sendVerificationEmail(email: string, code: string) {
 }
 
 export async function sendWelcomeEmail(email: string, displayName: string) {
+  // `displayName` is user-controlled (registration / Apple / Google). Must escape.
+  const safeName = escapeHtml(displayName);
   await sendEmail(email, 'Bienvenue sur Civique ! 🎉', `
-    <h2 style="color:#1A1A2E;font-size:22px;font-weight:700;margin:0 0 12px">Bienvenue, ${displayName} !</h2>
+    <h2 style="color:#1A1A2E;font-size:22px;font-weight:700;margin:0 0 12px">Bienvenue, ${safeName} !</h2>
     <p style="color:#635F69;font-size:15px;line-height:24px;margin:0 0 24px">
       Votre compte est vérifié et prêt à l'emploi. Vous pouvez maintenant préparer votre examen civique français.
     </p>
@@ -109,7 +128,8 @@ export async function sendWelcomeEmail(email: string, displayName: string) {
 }
 
 export async function sendPasswordResetEmail(email: string, token: string) {
-  const code = token.substring(0, 8).toUpperCase();
+  // `token` is hex from crypto.randomBytes — safe by construction, but escape defensively.
+  const code = escapeHtml(token.substring(0, 8).toUpperCase());
   await sendEmail(email, 'Réinitialisation du mot de passe — Civique', `
     <h2 style="color:#1A1A2E;font-size:22px;font-weight:700;margin:0 0 12px">Réinitialisation du mot de passe</h2>
     <p style="color:#635F69;font-size:15px;line-height:24px;margin:0 0 24px">
@@ -119,7 +139,7 @@ export async function sendPasswordResetEmail(email: string, token: string) {
       <p style="font-size:36px;font-weight:800;color:#2563EB;letter-spacing:8px;margin:0;font-family:monospace">${code}</p>
     </div>
     <p style="color:#9994A1;font-size:13px;line-height:20px;margin:0">
-      Ce code expire dans <strong>1 heure</strong>.<br>
+      Ce code expire dans <strong>15 minutes</strong>.<br>
       Si vous n'avez pas demandé cette réinitialisation, ignorez ce message.
     </p>
   `);

@@ -51,6 +51,7 @@ const resetPasswordSchema = z.object({
 interface ResetEntry {
   email: string;
   expiresAt: Date;
+  attempts: number; // count of failed guesses against this code; 5 = invalidate
 }
 
 const passwordResetTokens = new Map<string, ResetEntry>();
@@ -59,9 +60,142 @@ interface VerificationEntry {
   email: string;
   code: string;
   expiresAt: Date;
+  attempts: number; // count of failed guesses against this code; 5 = invalidate
 }
 
 const emailVerificationCodes = new Map<string, VerificationEntry>();
+
+// ── Apple JWKS cache ─────────────────────────
+// Apple's signing keys rotate but rarely (months). Cache them in-memory with
+// a short TTL so we don't hit Apple's CDN on every login. On signature failure
+// we force-refresh once before giving up, in case Apple just rotated.
+interface AppleJwk {
+  kid: string;
+  alg: string;
+  kty: string;
+  use: string;
+  n: string;
+  e: string;
+  // Index signature so the value satisfies Node's JsonWebKey type when
+  // passed to crypto.createPublicKey({ key, format: 'jwk' }).
+  [k: string]: string;
+}
+
+let appleJwksCache: { keys: AppleJwk[]; fetchedAt: number } | null = null;
+const APPLE_JWKS_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+async function getAppleJwks(forceRefresh = false): Promise<AppleJwk[]> {
+  const now = Date.now();
+  if (
+    !forceRefresh &&
+    appleJwksCache &&
+    now - appleJwksCache.fetchedAt < APPLE_JWKS_TTL_MS
+  ) {
+    return appleJwksCache.keys;
+  }
+  const res = await fetch('https://appleid.apple.com/auth/keys');
+  if (!res.ok) throw new Error(`Apple JWKS fetch failed: ${res.status}`);
+  const data = (await res.json()) as { keys: AppleJwk[] };
+  if (!Array.isArray(data.keys) || data.keys.length === 0) {
+    throw new Error('Apple JWKS returned no keys');
+  }
+  appleJwksCache = { keys: data.keys, fetchedAt: now };
+  return data.keys;
+}
+
+/**
+ * Verify an Apple identity token's RS256 signature against Apple's published
+ * public keys (JWKS at https://appleid.apple.com/auth/keys), then validate
+ * the standard claims (iss, aud, exp, nonce if provided).
+ *
+ * Returns the decoded payload on success. Throws on any failure.
+ *
+ * References:
+ * - https://developer.apple.com/documentation/sign_in_with_apple/sign_in_with_apple_rest_api/authenticating_users_with_sign_in_with_apple
+ * - https://datatracker.ietf.org/doc/html/rfc7517 (JWK)
+ * - https://datatracker.ietf.org/doc/html/rfc7518#section-3.3 (RSASSA-PKCS1-v1_5 / RS256)
+ */
+async function verifyAppleIdentityToken(
+  token: string,
+  validAudiences: string[],
+  expectedNonce?: string,
+): Promise<{ email?: string; sub?: string; aud?: string; iss?: string; exp?: number; nonce?: string }> {
+  const parts = token.split('.');
+  if (parts.length !== 3) throw new Error('Invalid JWT format');
+
+  const [headerB64, payloadB64, signatureB64] = parts;
+
+  let header: { alg: string; kid: string; typ?: string };
+  try {
+    header = JSON.parse(Buffer.from(headerB64, 'base64url').toString('utf8'));
+  } catch {
+    throw new Error('Invalid JWT header');
+  }
+
+  // Only accept RS256. Reject "none" and any unexpected algorithm explicitly to
+  // close the well-known JWT algorithm-confusion family of bugs.
+  if (header.alg !== 'RS256') {
+    throw new Error(`Unsupported JWT algorithm: ${header.alg}`);
+  }
+  if (!header.kid || typeof header.kid !== 'string') {
+    throw new Error('JWT header missing kid');
+  }
+
+  // Find the matching public key. Refresh JWKS once if not found (Apple rotated).
+  let keys = await getAppleJwks(false);
+  let matching = keys.find((k) => k.kid === header.kid);
+  if (!matching) {
+    keys = await getAppleJwks(true);
+    matching = keys.find((k) => k.kid === header.kid);
+  }
+  if (!matching) throw new Error('No matching Apple signing key');
+  if (matching.kty !== 'RSA') throw new Error('Unexpected Apple key type');
+
+  // Build a PEM-compatible public key from the JWK and verify the signature.
+  const publicKey = crypto.createPublicKey({ key: matching, format: 'jwk' });
+  const signingInput = `${headerB64}.${payloadB64}`;
+  const signature = Buffer.from(signatureB64, 'base64url');
+
+  const verifier = crypto.createVerify('RSA-SHA256');
+  verifier.update(signingInput);
+  verifier.end();
+  const isValid = verifier.verify(publicKey, signature);
+  if (!isValid) throw new Error('Apple JWT signature verification failed');
+
+  // Signature OK — now decode the payload and validate claims.
+  let payload: Record<string, unknown>;
+  try {
+    payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'));
+  } catch {
+    throw new Error('Invalid JWT payload');
+  }
+
+  if (payload.iss !== 'https://appleid.apple.com') {
+    throw new Error('Invalid issuer');
+  }
+  if (typeof payload.aud !== 'string' || !validAudiences.includes(payload.aud)) {
+    throw new Error('Invalid audience');
+  }
+  if (typeof payload.exp !== 'number' || payload.exp * 1000 < Date.now()) {
+    throw new Error('Token expired');
+  }
+  // iat sanity: don't accept tokens issued in the future (allow 60s clock skew)
+  if (typeof payload.iat === 'number' && payload.iat * 1000 > Date.now() + 60 * 1000) {
+    throw new Error('Token issued in the future');
+  }
+  if (expectedNonce !== undefined && payload.nonce !== expectedNonce) {
+    throw new Error('Nonce mismatch');
+  }
+
+  return {
+    email: typeof payload.email === 'string' ? payload.email : undefined,
+    sub: typeof payload.sub === 'string' ? payload.sub : undefined,
+    aud: payload.aud,
+    iss: payload.iss as string,
+    exp: payload.exp,
+    nonce: typeof payload.nonce === 'string' ? payload.nonce : undefined,
+  };
+}
 
 // ── Helpers ────────────────────────────────────
 
@@ -143,6 +277,7 @@ export default async function authRoutes(app: FastifyInstance) {
       email: user.email,
       code: verifyCode,
       expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+      attempts: 0,
     });
 
     // Send verification email (non-blocking)
@@ -160,7 +295,19 @@ export default async function authRoutes(app: FastifyInstance) {
     code: z.string().length(6),
   });
 
-  app.post('/verify-email', { preHandler: authGuard }, async (request, reply) => {
+  app.post('/verify-email', {
+    preHandler: authGuard,
+    config: {
+      rateLimit: {
+        max: 5,
+        timeWindow: '15 minutes',
+        // Rate-limit per authenticated user. authGuard runs first, so currentUser
+        // is populated by the time this keyGenerator fires. Fall back to IP if
+        // somehow not set (shouldn't happen given preHandler).
+        keyGenerator: (req) => req.currentUser?.id ?? req.ip,
+      },
+    },
+  }, async (request, reply) => {
     const userId = request.currentUser!.id;
     const { code } = verifyEmailSchema.parse(request.body);
 
@@ -175,6 +322,15 @@ export default async function authRoutes(app: FastifyInstance) {
     }
 
     if (entry.code !== code) {
+      // Per-code attempt counter (defense-in-depth on top of the IP/user rate limit).
+      // After 5 wrong guesses, burn the code — user must request a new one.
+      entry.attempts += 1;
+      if (entry.attempts >= 5) {
+        emailVerificationCodes.delete(userId);
+        return reply.status(429).send({
+          error: 'Trop de tentatives incorrectes. Demandez un nouveau code.',
+        });
+      }
       return reply.status(401).send({ error: 'Code incorrect.' });
     }
 
@@ -204,6 +360,7 @@ export default async function authRoutes(app: FastifyInstance) {
       email: user.email,
       code: verifyCode,
       expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+      attempts: 0,
     });
 
     sendVerificationEmail(user.email, verifyCode).catch(() => {});
@@ -368,6 +525,7 @@ export default async function authRoutes(app: FastifyInstance) {
         email: newEmail,
         code: verifyCode,
         expiresAt: new Date(Date.now() + 15 * 60 * 1000),
+        attempts: 0,
       });
       sendVerificationEmail(newEmail, verifyCode).catch(() => {});
     }
@@ -455,9 +613,10 @@ export default async function authRoutes(app: FastifyInstance) {
     // Email shows token.substring(0, 8).toUpperCase() — store keyed by that
     // so user-typed codes match. Full token kept in entry for any future use.
     const code = token.substring(0, 8).toUpperCase();
-    const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+    // TTL shrunk from 1h to 15 min to tighten the brute-force window (F2).
+    const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
 
-    passwordResetTokens.set(code, { email: user.email, expiresAt });
+    passwordResetTokens.set(code, { email: user.email, expiresAt, attempts: 0 });
 
     // Send reset email (non-blocking)
     sendPasswordResetEmail(user.email, token).catch(() => {});
@@ -466,7 +625,17 @@ export default async function authRoutes(app: FastifyInstance) {
   });
 
   // ── POST /reset-password ─────────────────────
-  app.post('/reset-password', async (request, reply) => {
+  app.post('/reset-password', {
+    config: {
+      rateLimit: {
+        // 5 attempts per 15 min per IP — combined with the 15-min code TTL and
+        // the per-code attempt counter below, this makes online brute force of
+        // the 32-bit code space infeasible.
+        max: 5,
+        timeWindow: '15 minutes',
+      },
+    },
+  }, async (request, reply) => {
     const { token, password } = resetPasswordSchema.parse(request.body);
 
     // Tokens are stored keyed by the 8-char uppercase code that ships in the
@@ -481,6 +650,13 @@ export default async function authRoutes(app: FastifyInstance) {
       passwordResetTokens.delete(code);
       return reply.status(400).send({ error: 'Invalid or expired reset token' });
     }
+
+    // Note on the per-code attempt counter: since codes are stored keyed BY the
+    // code itself, a wrong guess never finds an entry — so we don't have a place
+    // to bump a counter on miss. The IP rate limit above + the 15-min TTL are
+    // the effective defenses against online brute force. The `attempts` field
+    // is kept for symmetry with the verification-code flow (where it does work).
+    entry.attempts += 1;
 
     const passwordHash = await bcrypt.hash(password, 12);
     await db
@@ -545,34 +721,24 @@ export default async function authRoutes(app: FastifyInstance) {
     const body = z.object({
       identityToken: z.string(),
       displayName: z.string().optional(),
+      nonce: z.string().optional(),
     }).parse(request.body);
 
-    // Verify Apple identity token with Apple's public keys
+    // Verify Apple identity token: RS256 signature against Apple's JWKS,
+    // plus iss/aud/exp/nonce claim checks. See verifyAppleIdentityToken.
+    //
+    // Audience: in production we only accept the production bundle ID. In
+    // non-production we also accept Expo Go's audience so dev builds keep
+    // working without weakening prod security.
+    const isProd = process.env.NODE_ENV === 'production';
+    const appleBundleId = process.env.APPLE_BUNDLE_ID || 'com.civique.app';
+    const validAudiences = isProd ? [appleBundleId] : [appleBundleId, 'host.exp.Exponent'];
+
     let payload: { email?: string; sub?: string };
     try {
-      const parts = body.identityToken.split('.');
-      if (parts.length !== 3) throw new Error('Invalid JWT');
-
-      // Fetch Apple's public keys and verify
-      const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString());
-      const keysRes = await fetch('https://appleid.apple.com/auth/keys');
-      const keysData = await keysRes.json() as { keys: Array<{ kid: string; alg: string }> };
-      const matchingKey = keysData.keys.find((k: { kid: string }) => k.kid === header.kid);
-
-      if (!matchingKey) throw new Error('No matching Apple key');
-
-      // Decode payload (signature verified by matching kid)
-      const decoded = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
-
-      // Verify issuer and audience
-      if (decoded.iss !== 'https://appleid.apple.com') throw new Error('Invalid issuer');
-      const validAudiences = ['com.civique.app', 'host.exp.Exponent'];
-      if (!validAudiences.includes(decoded.aud)) throw new Error('Invalid audience');
-      if (decoded.exp && decoded.exp * 1000 < Date.now()) throw new Error('Token expired');
-
-      payload = decoded;
+      payload = await verifyAppleIdentityToken(body.identityToken, validAudiences, body.nonce);
     } catch (err) {
-      app.log.warn({ err }, 'Apple token verification failed');
+      app.log.warn({ err: (err as Error).message }, 'Apple token verification failed');
       return reply.status(401).send({ error: 'Invalid Apple token' });
     }
 
