@@ -139,6 +139,8 @@ export default function MentionsLegalesPage() {
               <li>
                 <strong>Contact éditorial</strong> :{' '}
                 <a href="mailto:support@integrafle.fr">support@integrafle.fr</a>
+                {' · '}
+                <a href="tel:+33668843116">+33 6 68 84 31 16</a>
               </li>
             </ul>
           </Section>
@@ -173,11 +175,22 @@ export default function MentionsLegalesPage() {
           <Section id="contact" title="3. Contact">
             <p>
               Pour toute question relative au site ou au service Civique, vous
-              pouvez nous écrire à :
+              pouvez nous joindre par :
             </p>
-            <p>
-              <a href="mailto:support@integrafle.fr">support@integrafle.fr</a>
-            </p>
+            <ul>
+              <li>
+                <strong>Email</strong> :{' '}
+                <a href="mailto:support@integrafle.fr">support@integrafle.fr</a>
+              </li>
+              <li>
+                <strong>Téléphone</strong> :{' '}
+                <a href="tel:+33668843116">+33 6 68 84 31 16</a>
+              </li>
+              <li>
+                <strong>Courrier</strong> : 7 Rue Marie Sophie de la Briffe,
+                91610 Ballancourt-sur-Essonne, France
+              </li>
+            </ul>
             <p>
               Pour les questions relatives à la protection des données
               personnelles, contactez{' '}
