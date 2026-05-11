@@ -96,46 +96,49 @@ export default function MentionsLegalesPage() {
             </ol>
           </nav>
 
-          {/* TODO: À compléter par Anis — informations société manquantes */}
           <Section id="editeur" title="1. Éditeur du site">
-            <Placeholder>
-              Cette section doit être complétée avec les informations légales
-              de la société éditrice avant la mise en ligne définitive.
-            </Placeholder>
+            <p>
+              Le site Civique est édité par :
+            </p>
             <ul>
               <li>
-                <strong>Dénomination sociale</strong> :{' '}
-                <PlaceholderText>À compléter</PlaceholderText>
+                <strong>Anis DAHMANI</strong> — Entrepreneur individuel
+                exerçant sous le nom commercial <em>IntégraFLE</em>
               </li>
               <li>
-                <strong>Forme juridique</strong> :{' '}
-                <PlaceholderText>
-                  À compléter (SAS, SARL, EI, etc.)
-                </PlaceholderText>
+                <strong>Forme juridique</strong> : Entreprise individuelle
+                (régime de la micro-entreprise)
               </li>
               <li>
-                <strong>Siège social</strong> :{' '}
-                <PlaceholderText>
-                  À compléter (adresse complète)
-                </PlaceholderText>
+                <strong>Siège social</strong> : 7 Rue Marie Sophie de la Briffe,
+                91610 Ballancourt-sur-Essonne, France
               </li>
               <li>
-                <strong>Capital social</strong> :{' '}
-                <PlaceholderText>À compléter (montant en €)</PlaceholderText>
+                <strong>SIREN</strong> : 102 739 455
               </li>
               <li>
-                <strong>RCS / SIRET</strong> :{' '}
-                <PlaceholderText>
-                  À compléter (numéro d'immatriculation)
-                </PlaceholderText>
+                <strong>SIRET</strong> : 102 739 455 00016
               </li>
               <li>
-                <strong>Numéro de TVA intracommunautaire</strong> :{' '}
-                <PlaceholderText>À compléter le cas échéant</PlaceholderText>
+                <strong>Code APE</strong> : 8559B — Autres enseignements
               </li>
               <li>
-                <strong>Directeur de la publication</strong> :{' '}
-                <PlaceholderText>À compléter (nom et prénom)</PlaceholderText>
+                <strong>Nature de l'activité</strong> : Libérale non
+                réglementée (création et animation de cours en ligne,
+                accompagnement à l'apprentissage du français, préparation
+                aux certifications DELF et DALF)
+              </li>
+              <li>
+                <strong>TVA intracommunautaire</strong> : Non applicable —
+                TVA non applicable, article 293 B du Code général des impôts
+                (franchise en base de TVA, régime micro-entreprise)
+              </li>
+              <li>
+                <strong>Directeur de la publication</strong> : Anis DAHMANI
+              </li>
+              <li>
+                <strong>Contact éditorial</strong> :{' '}
+                <a href="mailto:support@integrafle.fr">support@integrafle.fr</a>
               </li>
             </ul>
           </Section>
