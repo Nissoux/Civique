@@ -32,6 +32,9 @@ case "$TARGET" in
         pnpm install --frozen-lockfile
         echo "▸ pnpm --filter web build"
         pnpm --filter web build
+        echo "▸ copy public + static into standalone output"
+        cp -r apps/web/public apps/web/.next/standalone/apps/web/
+        cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/
         echo "▸ pm2 restart civique-web"
         pm2 restart civique-web
         ;;
@@ -40,6 +43,9 @@ case "$TARGET" in
         pnpm install --frozen-lockfile
         echo "▸ pnpm --filter web build"
         pnpm --filter web build
+        echo "▸ copy public + static into standalone output"
+        cp -r apps/web/public apps/web/.next/standalone/apps/web/
+        cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/
         echo "▸ pm2 restart civique civique-web"
         pm2 restart civique civique-web
         ;;

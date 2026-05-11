@@ -1,8 +1,19 @@
 // PM2 config for the Civique web app.
+//
+// Strategy:
+// - We rely on `output: 'standalone'` in next.config.ts, which produces a
+//   self-contained server bundle at apps/web/.next/standalone/apps/web/server.js
+//   plus a copy of the node_modules it needs.
+// - PM2 runs that server.js directly with Node in fork mode (not cluster) —
+//   no pnpm wrapper, no recursive run failure.
+// - The static files (public/, .next/static) are NOT copied into the
+//   standalone output by Next.js. The post-build script below copies them.
+//
 // Run from the monorepo root on the production server:
 //   pm2 start apps/web/ecosystem.config.cjs
+//   pm2 save
 //
-// After the initial registration, redeploys only need:
+// After redeploys:
 //   pm2 restart civique-web
 //
 // CommonJS on purpose: PM2's config loader treats `.config.cjs` as
@@ -11,29 +22,33 @@ module.exports = {
   apps: [
     {
       name: 'civique-web',
-      // Run pnpm from the monorepo root so workspace deps resolve.
-      cwd: '/root/Civique',
-      script: 'pnpm',
-      args: '--filter web start',
+      // Standalone server bundle (Next.js 15 output: 'standalone')
+      script: '/root/Civique/apps/web/.next/standalone/apps/web/server.js',
+      // Important: run from the standalone subtree so Node resolves
+      // node_modules and the Next.js runtime correctly.
+      cwd: '/root/Civique/apps/web/.next/standalone',
+      // fork mode (not cluster) — server.js binds the port itself.
+      exec_mode: 'fork',
+      instances: 1,
+      // No interpreter args: use the system node directly.
+      interpreter: 'node',
       env: {
         NODE_ENV: 'production',
-        // PORT is read by Next.js. The "start" script already passes
-        // -p 3001, but PORT acts as belt-and-braces in case the script
-        // changes.
         PORT: '3001',
-        // The web reads this to know where to talk to the backend.
-        // Falls back to https://api.integrafle.fr/api in lib/env.ts,
-        // but it's safer to be explicit at the process level.
+        HOSTNAME: '127.0.0.1',
         NEXT_PUBLIC_API_BASE_URL: 'https://api.integrafle.fr/api',
       },
-      instances: 1,
       autorestart: true,
       // Restart if the process climbs past ~600 MB. Next.js prod
       // typically idles at 150-300 MB; a leak would show up here.
       max_memory_restart: '600M',
-      // Don't watch — we restart manually after deploy.
+      // Don't watch files — we restart manually after deploy.
       watch: false,
-      // PM2 logs land at ~/.pm2/logs/civique-web-{out,error}.log
+      // Brief delay so PM2 doesn't infinite-loop a failing process.
+      restart_delay: 2000,
+      // Cap rapid restarts.
+      max_restarts: 10,
+      min_uptime: '10s',
       merge_logs: true,
       time: true,
     },
