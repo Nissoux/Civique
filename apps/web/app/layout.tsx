@@ -23,9 +23,8 @@ export const metadata: Metadata = {
   description:
     "Civique vous accompagne dans la préparation de l'examen civique français : pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité. 5 thèmes officiels, 611 questions, 6 langues.",
   metadataBase: new URL('https://civique.integrafle.fr'),
-  icons: {
-    icon: '/favicon.png',
-  },
+  // Favicons are emitted automatically from `app/icon.svg` + `app/apple-icon.png`
+  // via Next.js' file-based metadata convention — no explicit icons block here.
   openGraph: {
     title: 'Civique — Préparez votre examen civique français',
     description:
