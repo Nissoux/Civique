@@ -8,6 +8,20 @@
       "when": 1774676339472,
       "tag": "0000_crazy_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1778976000000,
+      "tag": "0001_stripe_idempotency_and_auth_codes",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1779494400000,
+      "tag": "0002_add_en_tr_languages",
+      "breakpoints": true
     }
   ]
 }

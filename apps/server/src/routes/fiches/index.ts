@@ -11,7 +11,7 @@ const querySchema = z.object({
     .enum(['true', 'false'])
     .transform((v) => v === 'true')
     .optional(),
-  lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  lang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
   limit: z.coerce.number().min(1).max(100).default(50),
   offset: z.coerce.number().min(0).default(0),
 });
@@ -80,7 +80,7 @@ export default async function ficheRoutes(app: FastifyInstance) {
   app.get('/:id', async (request, reply) => {
     const { id } = idParamSchema.parse(request.params);
     const lang = (request.query as { lang?: string }).lang as
-      | 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi'
+      | 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr'
       | undefined;
 
     const fiche = await db.query.fiches.findFirst({

@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import type { Question } from '@civique/shared';
+import type { Question, Language } from '@civique/shared';
 import { THEMES } from '@civique/shared';
 import { shuffleChoices, getShuffledCorrectChoice } from '@/lib/shuffleChoices';
 import { useProgressionStore } from '@/lib/stores/progressionStore';
 import { recordPracticeAnswerAction } from '@/lib/actions/practice';
+import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
 import { QuestionComments } from './QuestionComments';
 
 type ChoiceLabel = 'a' | 'b' | 'c' | 'd';
@@ -17,6 +18,13 @@ interface Props {
   levelNum: number;
   totalLevels: number;
   questions: Question[];
+  /**
+   * Active translation language for this session. Used to surface a discreet
+   * "translation in progress" notice when the API returns no row for the
+   * picked language (today: `en`, `tr`). Defaults to `fr` so old call-sites
+   * stay valid.
+   */
+  currentLang?: Language;
 }
 
 export function TrainingSession({
@@ -24,6 +32,7 @@ export function TrainingSession({
   levelNum,
   totalLevels,
   questions,
+  currentLang = 'fr',
 }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>('question');
@@ -32,7 +41,10 @@ export function TrainingSession({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [questionStartedAt, setQuestionStartedAt] = useState<number>(Date.now());
-  const [paywall, setPaywall] = useState(false);
+  // True once we've hit the server quota: subsequent answers are still
+  // graded client-side (so the user can finish the session and see their
+  // score), but they don't reach the API and won't be counted in stats.
+  const [quotaExceeded, setQuotaExceeded] = useState(false);
 
   const completeLevel = useProgressionStore((s) => s.completeLevel);
   const loadProgress = useProgressionStore((s) => s.loadProgress);
@@ -61,8 +73,10 @@ export function TrainingSession({
 
   // When session finishes, persist progression once.
   // Skip for random training — not tied to a specific level.
+  // Skip if the user blew through their quota mid-session: the API never
+  // saw most of the answers, so locally-claimed progression would lie.
   useEffect(() => {
-    if (phase === 'finished' && !isRandom) {
+    if (phase === 'finished' && !isRandom && !quotaExceeded) {
       completeLevel(themeId, levelNum, correctCount, total);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,10 +99,6 @@ export function TrainingSession({
     [currentQ],
   );
 
-  if (paywall) {
-    return <Paywall />;
-  }
-
   if (phase === 'finished') {
     return (
       <SessionResults
@@ -99,6 +109,7 @@ export function TrainingSession({
         total={total}
         themeColor={theme.color}
         isRandom={isRandom}
+        quotaExceeded={quotaExceeded}
       />
     );
   }
@@ -112,13 +123,34 @@ export function TrainingSession({
   async function handleSelect(label: ChoiceLabel) {
     if (phase !== 'question' || submitting) return;
     setSelected(label);
-    setSubmitting(true);
     setError(null);
 
+    // CRITICAL: the UI uses *shuffled* labels (a/b/c/d in shuffle order), but
+    // the server compares the answer against the ORIGINAL `correctChoice`
+    // stored in DB. We must therefore reverse-map the clicked shuffled label
+    // back to its original id before sending it to /practice.
+    // `shuffled.originalToNew` maps original → shuffled, so we invert it.
+    const originalChoice =
+      (Object.entries(shuffled.originalToNew).find(
+        ([, newLabel]) => newLabel === label,
+      )?.[0] as ChoiceLabel | undefined) ?? label;
+
+    // Once we know the quota is blown, stop hitting the API for the rest
+    // of the session. We still grade the answer client-side so the user
+    // can keep going and see a real score at the end.
+    if (quotaExceeded) {
+      if (label === correctNewLabel) {
+        setCorrectCount((n) => n + 1);
+      }
+      setPhase('feedback');
+      return;
+    }
+
+    setSubmitting(true);
     const elapsed = Date.now() - questionStartedAt;
     const result = await recordPracticeAnswerAction({
       questionId: currentQ.id,
-      selectedChoice: label,
+      selectedChoice: originalChoice,
       timeSpentMs: elapsed,
     });
 
@@ -126,7 +158,13 @@ export function TrainingSession({
 
     if (!result.ok) {
       if (result.quotaExceeded) {
-        setPaywall(true);
+        // Switch to offline-grading mode and grade THIS question locally so
+        // the user doesn't lose their place mid-session.
+        setQuotaExceeded(true);
+        if (label === correctNewLabel) {
+          setCorrectCount((n) => n + 1);
+        }
+        setPhase('feedback');
         return;
       }
       setError(result.error ?? 'Erreur réseau');
@@ -218,8 +256,10 @@ export function TrainingSession({
           <h2 className="font-display text-xl sm:text-3xl leading-snug font-medium" style={{ fontVariationSettings: "'opsz' 36" }}>
             {currentQ.textFr}
           </h2>
-          {currentQ.translatedText ? (
+          {currentQ.translatedText && currentQ.translatedText !== currentQ.textFr ? (
             <p className="mt-3 text-sm sm:text-base text-ink-mute italic">{currentQ.translatedText}</p>
+          ) : currentLang !== 'fr' ? (
+            <TranslationPendingNotice lang={currentLang} className="mt-3" />
           ) : null}
         </div>
 
@@ -447,6 +487,7 @@ function SessionResults({
   total,
   themeColor,
   isRandom,
+  quotaExceeded,
 }: {
   themeId: number;
   levelNum: number;
@@ -455,6 +496,7 @@ function SessionResults({
   total: number;
   themeColor: string;
   isRandom: boolean;
+  quotaExceeded: boolean;
 }) {
   const scorePercent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
   const crowns = scorePercent >= 100 ? 3 : scorePercent >= 80 ? 2 : scorePercent >= 60 ? 1 : 0;
@@ -563,6 +605,37 @@ function SessionResults({
         ) : null}
       </div>
 
+      {quotaExceeded ? (
+        <div
+          role="status"
+          className="
+            mb-6 rounded-2xl bg-saffron/15 border-[1.5px] border-saffron/40
+            px-5 py-4 text-sm leading-relaxed
+          "
+        >
+          <p className="font-display italic text-aubergine font-medium mb-1">
+            Quota gratuit atteint
+          </p>
+          <p className="text-aubergine/90 mb-3">
+            Ces réponses ne comptent pas pour vos statistiques. Passez à
+            Civique Plein pour pratiquer sans limite et conserver toute votre
+            progression.
+          </p>
+          <Link
+            href="/app/settings/subscription"
+            className="
+              inline-flex items-center gap-1.5 text-sm font-semibold
+              text-terracotta hover:underline
+            "
+          >
+            Voir les offres Premium
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+        </div>
+      ) : null}
+
       <div className="flex flex-col sm:flex-row gap-3">
         {isRandom ? (
           <>
@@ -613,28 +686,3 @@ function SessionResults({
   );
 }
 
-function Paywall() {
-  return (
-    <div className="max-w-xl mx-auto px-6 py-16 text-center">
-      <p className="eyebrow mb-3">— Quota dépassé</p>
-      <h1
-        className="font-display text-4xl sm:text-5xl leading-[1.05] font-medium tracking-tight mb-5"
-        style={{ fontVariationSettings: "'opsz' 96" }}
-      >
-        Vous avez atteint la <span className="display-italic text-terracotta">limite gratuite</span>.
-      </h1>
-      <p className="text-ink-mute leading-relaxed mb-8">
-        Passez à Civique Plein pour continuer à pratiquer sans limite, débloquer
-        les examens blancs illimités et toutes les fiches premium.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-3 justify-center">
-        <Link href="/app/settings/subscription" className="btn-primary">
-          Voir les offres
-        </Link>
-        <Link href="/app" className="btn-secondary">
-          Retour
-        </Link>
-      </div>
-    </div>
-  );
-}

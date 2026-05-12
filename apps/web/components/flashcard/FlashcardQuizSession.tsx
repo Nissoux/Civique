@@ -2,15 +2,18 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import type { Question } from '@civique/shared';
+import type { Question, Language } from '@civique/shared';
 import { shuffleChoices, getShuffledCorrectChoice } from '@/lib/shuffleChoices';
 import { recordPracticeAnswerAction } from '@/lib/actions/practice';
+import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
 
 type ChoiceLabel = 'a' | 'b' | 'c' | 'd';
 type Phase = 'question' | 'feedback' | 'finished';
 
 interface Props {
   questions: Question[];
+  /** Active translation language — defaults to 'fr' so callers can opt in. */
+  currentLang?: Language;
 }
 
 /**
@@ -19,7 +22,7 @@ interface Props {
  * we still record practice via recordPracticeAnswerAction so streak +
  * stats stay coherent.
  */
-export function FlashcardQuizSession({ questions }: Props) {
+export function FlashcardQuizSession({ questions, currentLang = 'fr' }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>('question');
   const [selected, setSelected] = useState<ChoiceLabel | null>(null);
@@ -65,10 +68,20 @@ export function FlashcardQuizSession({ questions }: Props) {
     setSubmitting(true);
     setError(null);
 
+    // CRITICAL: the UI uses *shuffled* labels (a/b/c/d in shuffle order), but
+    // the server compares the answer against the ORIGINAL `correctChoice`
+    // stored in DB. We must therefore reverse-map the clicked shuffled label
+    // back to its original id before sending it to /practice.
+    // `shuffled.originalToNew` maps original → shuffled, so we invert it.
+    const originalChoice =
+      (Object.entries(shuffled.originalToNew).find(
+        ([, newLabel]) => newLabel === label,
+      )?.[0] as ChoiceLabel | undefined) ?? label;
+
     const elapsed = Date.now() - questionStartedAt;
     const result = await recordPracticeAnswerAction({
       questionId: currentQ.id,
-      selectedChoice: label,
+      selectedChoice: originalChoice,
       timeSpentMs: elapsed,
     });
 
@@ -139,8 +152,10 @@ export function FlashcardQuizSession({ questions }: Props) {
           >
             {currentQ.textFr}
           </h2>
-          {currentQ.translatedText ? (
+          {currentQ.translatedText && currentQ.translatedText !== currentQ.textFr ? (
             <p className="mt-3 text-base text-ink-mute italic">{currentQ.translatedText}</p>
+          ) : currentLang !== 'fr' ? (
+            <TranslationPendingNotice lang={currentLang} className="mt-3" />
           ) : null}
         </div>
 

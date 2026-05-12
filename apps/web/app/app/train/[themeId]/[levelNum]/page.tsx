@@ -65,6 +65,7 @@ export default async function TrainingLevelPage({ params }: PageProps) {
       levelNum={levelNum}
       totalLevels={totalLevels}
       questions={questions}
+      currentLang={lang}
     />
   );
 }

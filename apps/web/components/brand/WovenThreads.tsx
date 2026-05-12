@@ -27,6 +27,7 @@ export function WovenThreads({ className = '' }: { className?: string }) {
         d="M 30,80 Q 130,140 200,200 Q 260,260 200,340 Q 140,420 220,490"
         stroke={THREAD_COLORS.republic}
         className="weave-thread"
+        pathLength={1}
         style={{ animationDelay: '0.4s' }}
       />
       {/* Thread 2 — Institutions (top, red) */}
@@ -34,6 +35,7 @@ export function WovenThreads({ className = '' }: { className?: string }) {
         d="M 240,40 Q 280,140 220,210 Q 160,280 240,360 Q 320,440 260,510"
         stroke={THREAD_COLORS.institutions}
         className="weave-thread"
+        pathLength={1}
         style={{ animationDelay: '0.7s' }}
       />
       {/* Thread 3 — Droits (top-right, gold) */}
@@ -41,6 +43,7 @@ export function WovenThreads({ className = '' }: { className?: string }) {
         d="M 450,100 Q 360,180 290,210 Q 220,240 270,320 Q 320,400 240,470"
         stroke={THREAD_COLORS.rights}
         className="weave-thread"
+        pathLength={1}
         style={{ animationDelay: '1.0s' }}
       />
       {/* Thread 4 — Histoire (right, light blue) */}
@@ -48,6 +51,7 @@ export function WovenThreads({ className = '' }: { className?: string }) {
         d="M 460,300 Q 370,290 290,250 Q 210,210 240,310 Q 270,410 350,460"
         stroke={THREAD_COLORS.history}
         className="weave-thread"
+        pathLength={1}
         style={{ animationDelay: '1.3s' }}
       />
       {/* Thread 5 — Société (bottom, green) */}
@@ -55,6 +59,7 @@ export function WovenThreads({ className = '' }: { className?: string }) {
         d="M 60,440 Q 160,400 220,330 Q 280,260 220,180 Q 160,100 220,30"
         stroke={THREAD_COLORS.society}
         className="weave-thread"
+        pathLength={1}
         style={{ animationDelay: '1.6s' }}
       />
 

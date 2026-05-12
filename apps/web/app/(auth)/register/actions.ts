@@ -15,7 +15,7 @@ const schema = z.object({
     .string()
     .min(1, 'Nom requis')
     .max(100, 'Nom trop long (max. 100 caractères)'),
-  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
 });
 
 export async function registerAction(

@@ -18,7 +18,7 @@ import { relations } from 'drizzle-orm';
 // Enums
 // ──────────────────────────────────────────────
 
-export const languageEnum = pgEnum('language', ['fr', 'ar', 'fa', 'pt', 'es', 'hi']);
+export const languageEnum = pgEnum('language', ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']);
 export const questionTypeEnum = pgEnum('question_type', ['knowledge', 'situational']);
 export const choiceEnum = pgEnum('choice', ['a', 'b', 'c', 'd']);
 export const examTypeEnum = pgEnum('exam_type', ['csp', 'cr', 'nat']);
@@ -543,3 +543,46 @@ export const commentsRelations = relations(comments, ({ one, many }) => ({
   }),
   replies: many(comments, { relationName: 'replies' }),
 }));
+
+// ──────────────────────────────────────────────
+// Stripe webhook idempotency (P1-13)
+// ──────────────────────────────────────────────
+// Records every Stripe event we've already processed so that a retry
+// (timeout / network blip / Stripe replay) is a no-op instead of double-
+// granting premium days. event_id is unique per Stripe event globally.
+
+export const stripeEventsProcessed = pgTable('stripe_events_processed', {
+  eventId: varchar('event_id', { length: 255 }).primaryKey(),
+  eventType: varchar('event_type', { length: 255 }).notNull(),
+  processedAt: timestamp('processed_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ──────────────────────────────────────────────
+// Auth codes (P1-11) — email verification & password reset
+// ──────────────────────────────────────────────
+// Ephemeral codes that used to live in process memory (Map). Now persisted
+// so a `pm2 restart` doesn't invalidate every pending code mid-flight.
+// `key` is the lookup key (userId for email verification, the 8-char
+// uppercase user-typed code for password reset). `payload` carries the
+// flow-specific data (the 6-digit code + per-code attempt counter for
+// email verification; the target email + attempt counter for password
+// reset). Rows are deleted on success or expiry; a `expires_at` filter
+// in every read keeps stale entries out of band even before GC runs.
+
+export const authCodes = pgTable(
+  'auth_codes',
+  {
+    key: varchar('key', { length: 255 }).primaryKey(),
+    type: varchar('type', { length: 20 }).notNull(), // 'email_verify' | 'password_reset'
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    payload: jsonb('payload'),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    expiresIdx: index('auth_codes_expires_idx').on(table.expiresAt),
+    userIdx: index('auth_codes_user_idx').on(table.userId),
+  }),
+);

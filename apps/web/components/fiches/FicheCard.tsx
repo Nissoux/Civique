@@ -8,13 +8,23 @@ interface Props {
 }
 
 /**
- * Compact list card. Displays the title (translated if available) and a
- * short preview extracted from the first non-empty line of the content.
+ * Compact list card. The French title (source of truth) is always the
+ * primary headline; the translated title — when it differs and the user
+ * has picked a non-FR language — appears below in muted italic.
+ *
+ * The preview line is extracted from the FR content so it stays aligned
+ * with the primary title; we don't surface a translated preview here to
+ * keep the card scannable in any language.
+ *
  * Server Component — pure presentation, no client state.
  */
 export function FicheCard({ fiche, themeColor, themeName }: Props) {
-  const title = fiche.translatedTitle || fiche.titleFr;
-  const rawContent = fiche.translatedContent || fiche.contentFr || '';
+  const titleFr = fiche.titleFr;
+  const showTranslatedTitle =
+    Boolean(fiche.translatedTitle) &&
+    fiche.translatedTitle !== fiche.titleFr;
+
+  const rawContent = fiche.contentFr || '';
   const preview =
     rawContent
       .replace(/^#+\s*/gm, '')
@@ -44,9 +54,9 @@ export function FicheCard({ fiche, themeColor, themeName }: Props) {
           <h3
             className="font-display text-lg sm:text-xl font-medium text-aubergine flex-1 min-w-0 truncate"
             style={{ fontVariationSettings: "'opsz' 32" }}
-            title={title}
+            title={titleFr}
           >
-            {title}
+            {titleFr}
           </h3>
           {fiche.isPremium && (
             <span className="pill !text-[0.62rem] !px-2 !py-0.5 bg-saffron/30 border-saffron/60 text-aubergine">
@@ -62,6 +72,14 @@ export function FicheCard({ fiche, themeColor, themeName }: Props) {
             </span>
           )}
         </div>
+        {showTranslatedTitle ? (
+          <p
+            className="text-xs sm:text-sm text-ink-mute italic font-display leading-snug mb-1"
+            title={fiche.translatedTitle}
+          >
+            {fiche.translatedTitle}
+          </p>
+        ) : null}
         <p className="text-sm text-ink-mute line-clamp-2 leading-snug">
           {preview}
         </p>

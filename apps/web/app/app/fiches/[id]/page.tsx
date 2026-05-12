@@ -5,6 +5,7 @@ import { getCurrentUser } from '@/lib/server/me';
 import { getCurrentLang } from '@/lib/server/lang';
 import { getFiche, getFiches } from '@/lib/server/fiches';
 import { FicheContent } from '@/components/fiches/FicheContent';
+import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -163,7 +164,8 @@ export default async function FicheDetailPage({ params }: PageProps) {
               <FicheContent content={fiche.contentFr} variant="primary" />
             </article>
 
-            {/* Translated content */}
+            {/* Translated content — or a discreet "in progress" notice when
+                the user picked a language we don't yet have a row for. */}
             {showTranslation && fiche.translatedContent ? (
               <article
                 className="card-deep !rounded-2xl !p-6 sm:!p-8"
@@ -177,6 +179,8 @@ export default async function FicheDetailPage({ params }: PageProps) {
                   rtl={isRtl}
                 />
               </article>
+            ) : lang !== 'fr' ? (
+              <TranslationPendingNotice lang={lang} variant="boxed" />
             ) : null}
           </div>
         )}
@@ -197,8 +201,13 @@ export default async function FicheDetailPage({ params }: PageProps) {
               >
                 <p className="eyebrow mb-1.5 text-[0.65rem]">— Précédente</p>
                 <p className="font-display text-base sm:text-lg font-medium leading-snug text-aubergine line-clamp-2">
-                  {prev.translatedTitle || prev.titleFr}
+                  {prev.titleFr}
                 </p>
+                {prev.translatedTitle && prev.translatedTitle !== prev.titleFr ? (
+                  <p className="font-display italic text-xs sm:text-sm text-ink-mute leading-snug mt-1 line-clamp-1">
+                    {prev.translatedTitle}
+                  </p>
+                ) : null}
               </Link>
             ) : (
               <div aria-hidden />
@@ -215,8 +224,13 @@ export default async function FicheDetailPage({ params }: PageProps) {
               >
                 <p className="eyebrow mb-1.5 text-[0.65rem]">— Suivante</p>
                 <p className="font-display text-base sm:text-lg font-medium leading-snug text-aubergine line-clamp-2">
-                  {next.translatedTitle || next.titleFr}
+                  {next.titleFr}
                 </p>
+                {next.translatedTitle && next.translatedTitle !== next.titleFr ? (
+                  <p className="font-display italic text-xs sm:text-sm text-ink-mute leading-snug mt-1 line-clamp-1">
+                    {next.translatedTitle}
+                  </p>
+                ) : null}
               </Link>
             ) : (
               <div aria-hidden />

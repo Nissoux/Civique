@@ -76,7 +76,7 @@ export default async function FlashcardQuizPage() {
     );
   }
 
-  return <FlashcardQuizSession questions={mixed} />;
+  return <FlashcardQuizSession questions={mixed} currentLang={lang} />;
 }
 
 async function safeGetRandom(params: {

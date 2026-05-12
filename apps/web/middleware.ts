@@ -56,8 +56,10 @@ export async function middleware(req: NextRequest) {
     writeSessionCookies(response, nextTokens);
   }
   if (clearTokens) {
-    response.cookies.delete(COOKIE.access);
-    response.cookies.delete(COOKIE.refresh);
+    // Pin path so the delete matches the cookie's original scope (`/`).
+    // See lib/server/session.ts for the same reasoning.
+    response.cookies.delete({ name: COOKIE.access, path: '/' });
+    response.cookies.delete({ name: COOKIE.refresh, path: '/' });
   }
 
   return response;

@@ -37,6 +37,12 @@ export async function setSessionCookies(tokens: SessionTokens): Promise<void> {
 
 export async function clearSessionCookies(): Promise<void> {
   const c = await cookies();
-  c.delete(COOKIE.access);
-  c.delete(COOKIE.refresh);
+  // Pass an object so we can pin the path. Otherwise Next emits a Set-Cookie
+  // for the *current request* path, which doesn't match the path the cookie
+  // was originally set on (`/`) — the browser then keeps the stale cookie
+  // and the user has to click logout twice before middleware actually sees
+  // the empty session. Same applies to access/refresh which were both set
+  // with `path: '/'` in setSessionCookies above.
+  c.delete({ name: COOKIE.access, path: '/' });
+  c.delete({ name: COOKIE.refresh, path: '/' });
 }

@@ -184,9 +184,9 @@
 
   /* Animated thread */
   .weave-thread {
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: weave 2.4s 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: weave 2.4s 0.8s forwards;
   }
 }
 
@@ -220,4 +220,17 @@
   .rise-d-4 { animation-delay: 0.65s; }
   .rise-d-5 { animation-delay: 0.85s; }
   .rise-d-6 { animation-delay: 1.05s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-init,
+  .rise-d-1, .rise-d-2, .rise-d-3, .rise-d-4, .rise-d-5, .rise-d-6 {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .weave-thread {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
 }

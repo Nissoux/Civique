@@ -89,19 +89,16 @@ export default async function AppPage() {
                         : '—'
                     }
                     accent="saffron"
-                    dim={isNewUser}
                   />
                   <StatTile
                     label="Pratiquées"
                     value={totalPracticed.toString()}
                     accent="terracotta"
-                    dim={isNewUser}
                   />
                   <StatTile
                     label="Examens"
                     value={`${stats?.examsPassed ?? 0}/${examsTaken}`}
                     accent="teal"
-                    dim={isNewUser}
                   />
                 </div>
                 {isNewUser ? (

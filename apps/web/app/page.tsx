@@ -50,7 +50,7 @@ const STRUCTURED_DATA = {
   description:
     'Préparation indépendante à l\'examen civique français pour la carte de séjour pluriannuelle, la carte de résident et la nationalité. 5 thèmes officiels, 611 questions, accompagnement en 6 langues.',
   url: 'https://civique.integrafle.fr',
-  inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi'],
+  inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
   educationalLevel: 'Adult education',
   educationalProgramMode: 'online',
   programType: 'Civic education',
@@ -108,11 +108,11 @@ export default async function HomePage() {
       {/* Hero */}
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
       <section className="relative">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-16 sm:py-24 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-10 sm:py-14 grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7 relative z-10">
             <p className="rise-init rise-d-1 eyebrow mb-7">— Préparation à l'examen civique français</p>
 
-            <h1 className="font-display text-[clamp(3rem,8vw,6.75rem)] leading-[0.96] mb-8 font-medium tracking-tight">
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.96] mb-8 font-medium tracking-tight">
               <span className="rise-init rise-d-2 inline-block">Réussir votre</span><br />
               <span className="rise-init rise-d-3 inline-block">examen civique,</span><br />
               <span className="rise-init rise-d-4 inline-block underline-wavy">à votre rythme</span>
@@ -167,29 +167,31 @@ export default async function HomePage() {
           </div>
 
           {/* Right side: woven threads + floating testimonial */}
-          <div className="lg:col-span-5 flex items-center justify-center relative">
-            <WovenThreads />
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="relative inline-block max-h-[420px] lg:max-h-[480px]">
+              <WovenThreads />
 
-            {/* Floating testimonial sticker */}
-            <div
-              className="
-                absolute top-6 right-2 sm:right-4
-                px-4 py-3 rounded-3xl border-[1.5px] border-aubergine bg-saffron
-                max-w-[200px]
-                shadow-[0_4px_0_rgb(45_27_46)]
-              "
-              style={{
-                transform: 'rotate(8deg)',
-                animation: 'float 5s ease-in-out infinite',
-                animationDelay: '1s',
-              }}
-            >
-              <p className="font-display italic text-[0.95rem] leading-snug text-aubergine">
-                « J'ai eu mon entretien la semaine dernière. »
-              </p>
-              <p className="text-[0.72rem] mt-2 font-semibold text-aubergine-mid">
-                — Amina, Marseille
-              </p>
+              {/* Floating testimonial sticker — anchored to the SVG, not the flex parent */}
+              <div
+                className="
+                  absolute top-6 right-2 sm:right-4
+                  px-4 py-3 rounded-3xl border-[1.5px] border-aubergine bg-saffron
+                  max-w-[200px]
+                  shadow-[0_4px_0_rgb(45_27_46)]
+                "
+                style={{
+                  transform: 'rotate(8deg)',
+                  animation: 'float 5s ease-in-out infinite',
+                  animationDelay: '1s',
+                }}
+              >
+                <p className="font-display italic text-[0.95rem] leading-snug text-aubergine">
+                  « J'ai eu mon entretien la semaine dernière. »
+                </p>
+                <p className="text-[0.72rem] mt-2 font-semibold text-aubergine-mid">
+                  — Amina, Marseille
+                </p>
+              </div>
             </div>
           </div>
         </div>

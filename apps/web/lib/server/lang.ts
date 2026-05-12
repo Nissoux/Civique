@@ -4,7 +4,7 @@ import type { Language } from '@civique/shared';
 
 const COOKIE_KEY = 'civique_lang';
 const MAX_AGE = 60 * 60 * 24 * 365; // 1 year
-const VALID = new Set<Language>(['fr', 'ar', 'fa', 'pt', 'es', 'hi']);
+const VALID = new Set<Language>(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']);
 
 /**
  * Resolve the language for translation overlays.

@@ -2,10 +2,10 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import { OAuth2Client } from 'google-auth-library';
 import { db } from '../../config/database.js';
-import { users } from '../../db/schema.js';
+import { users, authCodes } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
 import { sendVerificationEmail, sendWelcomeEmail, sendPasswordResetEmail, sendPasswordChangedEmail } from '../../services/email.js';
@@ -17,8 +17,9 @@ const googleClient = new OAuth2Client();
 const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  displayName: z.string().min(1).max(100),
-  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  // P1-15: trim before length check so a whitespace-only displayName is rejected.
+  displayName: z.string().trim().min(1).max(100),
+  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
 });
 
 const loginSchema = z.object({
@@ -31,9 +32,10 @@ const refreshSchema = z.object({
 });
 
 const updateProfileSchema = z.object({
-  displayName: z.string().min(1).max(100).optional(),
+  // P1-15: trim before length check (rejects whitespace-only displayName).
+  displayName: z.string().trim().min(1).max(100).optional(),
   avatarUrl: z.string().url().nullable().optional(),
-  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi']).optional(),
+  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
   email: z.string().email().optional(),
 });
 
@@ -46,24 +48,147 @@ const resetPasswordSchema = z.object({
   password: z.string().min(8),
 });
 
-// ── In-memory stores ─────────────────────────
+// ── Auth code persistence (P1-11) ─────────────
+// Email-verification & password-reset codes used to live in process-local
+// Maps. A `pm2 restart` (or any deploy) invalidated every in-flight code,
+// confusing users mid-flow. We now persist them in `auth_codes`.
+//
+// Email verification: keyed by userId (1 active code per user, overwritten
+//   on resend). Payload: { code, attempts }. The user's email is stored
+//   denormalised so we can match against the user's *current* email even
+//   if it changes mid-flow (it shouldn't, but we don't depend on it).
+// Password reset: keyed by the 8-char uppercase code the user types from
+//   the email. Payload: { email, attempts }. Stored keyed by code so the
+//   lookup is O(1) and matches the user-typed string directly.
 
-interface ResetEntry {
-  email: string;
-  expiresAt: Date;
-  attempts: number; // count of failed guesses against this code; 5 = invalidate
+type EmailVerifyPayload = { email: string; code: string; attempts: number };
+type PasswordResetPayload = { email: string; attempts: number };
+
+async function setEmailVerifyCode(
+  userId: string,
+  payload: EmailVerifyPayload,
+  expiresAt: Date,
+): Promise<void> {
+  // Upsert: a resend / re-trigger should replace any pending code for this user.
+  await db
+    .insert(authCodes)
+    .values({
+      key: userId,
+      type: 'email_verify',
+      userId,
+      payload,
+      expiresAt,
+    })
+    .onConflictDoUpdate({
+      target: authCodes.key,
+      set: { payload, expiresAt, type: 'email_verify', userId, createdAt: new Date() },
+    });
 }
 
-const passwordResetTokens = new Map<string, ResetEntry>();
-
-interface VerificationEntry {
-  email: string;
-  code: string;
-  expiresAt: Date;
-  attempts: number; // count of failed guesses against this code; 5 = invalidate
+async function getEmailVerifyCode(
+  userId: string,
+): Promise<{ payload: EmailVerifyPayload; expiresAt: Date } | null> {
+  const row = await db.query.authCodes.findFirst({
+    where: and(eq(authCodes.key, userId), eq(authCodes.type, 'email_verify')),
+  });
+  if (!row) return null;
+  return {
+    payload: row.payload as EmailVerifyPayload,
+    expiresAt: new Date(row.expiresAt),
+  };
 }
 
-const emailVerificationCodes = new Map<string, VerificationEntry>();
+async function updateEmailVerifyAttempts(
+  userId: string,
+  payload: EmailVerifyPayload,
+): Promise<void> {
+  await db
+    .update(authCodes)
+    .set({ payload })
+    .where(and(eq(authCodes.key, userId), eq(authCodes.type, 'email_verify')));
+}
+
+async function deleteEmailVerifyCode(userId: string): Promise<void> {
+  await db
+    .delete(authCodes)
+    .where(and(eq(authCodes.key, userId), eq(authCodes.type, 'email_verify')));
+}
+
+async function setPasswordResetCode(
+  code: string,
+  payload: PasswordResetPayload,
+  expiresAt: Date,
+): Promise<void> {
+  // We need userId on the row for the FK. Look it up by email.
+  const user = await db.query.users.findFirst({
+    where: eq(users.email, payload.email),
+    columns: { id: true },
+  });
+  if (!user) return; // caller already verified user exists; defensive no-op
+  await db
+    .insert(authCodes)
+    .values({
+      key: code,
+      type: 'password_reset',
+      userId: user.id,
+      payload,
+      expiresAt,
+    })
+    .onConflictDoUpdate({
+      target: authCodes.key,
+      set: {
+        payload,
+        expiresAt,
+        type: 'password_reset',
+        userId: user.id,
+        createdAt: new Date(),
+      },
+    });
+}
+
+async function getPasswordResetCode(
+  code: string,
+): Promise<{ payload: PasswordResetPayload; expiresAt: Date } | null> {
+  const row = await db.query.authCodes.findFirst({
+    where: and(eq(authCodes.key, code), eq(authCodes.type, 'password_reset')),
+  });
+  if (!row) return null;
+  return {
+    payload: row.payload as PasswordResetPayload,
+    expiresAt: new Date(row.expiresAt),
+  };
+}
+
+async function deletePasswordResetCode(code: string): Promise<void> {
+  await db
+    .delete(authCodes)
+    .where(and(eq(authCodes.key, code), eq(authCodes.type, 'password_reset')));
+}
+
+// Best-effort cleanup of expired rows. Cheap — runs once at startup and
+// fire-and-forget on writes. Until we add a proper cron, this keeps the
+// table from growing unboundedly.
+async function gcExpiredAuthCodes(): Promise<void> {
+  try {
+    await db.delete(authCodes).where(sql`${authCodes.expiresAt} < now()`);
+  } catch {
+    // Never let GC break a request.
+  }
+}
+
+// ── OAuth displayName fallback (P1-14) ────────
+// OAuth providers may omit `name` (Apple notoriously skips it after the
+// first sign-in). Falling back to email.split('@')[0] gave names like
+// "anis.benhamida" — ugly. Capitalise the first letter to at least make
+// it presentable. Also strip dots/underscores/digits-only fragments so
+// "jdoe2025" → "Jdoe2025" stays usable.
+function fallbackDisplayNameFromEmail(email: string): string {
+  const local = email.split('@')[0] || 'user';
+  // Replace separators with a single space, trim, capitalise first letter.
+  const cleaned = local.replace(/[._-]+/g, ' ').trim();
+  if (!cleaned) return 'Utilisateur';
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+}
 
 // ── Apple JWKS cache ─────────────────────────
 // Apple's signing keys rotate but rarely (months). Cache them in-memory with
@@ -271,17 +396,18 @@ export default async function authRoutes(app: FastifyInstance) {
 
     const tokens = issueTokens(app, { id: user.id, email: user.email });
 
-    // Generate 6-digit verification code
+    // Generate 6-digit verification code (P1-11: persisted in auth_codes)
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-    emailVerificationCodes.set(user.id, {
-      email: user.email,
-      code: verifyCode,
-      expiresAt: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
-      attempts: 0,
-    });
+    await setEmailVerifyCode(
+      user.id,
+      { email: user.email, code: verifyCode, attempts: 0 },
+      new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    );
 
     // Send verification email (non-blocking)
     sendVerificationEmail(user.email, verifyCode).catch(() => {});
+    // Cheap GC of expired codes (best-effort, non-blocking).
+    void gcExpiredAuthCodes();
 
     return reply.status(201).send({
       ...tokens,
@@ -311,32 +437,33 @@ export default async function authRoutes(app: FastifyInstance) {
     const userId = request.currentUser!.id;
     const { code } = verifyEmailSchema.parse(request.body);
 
-    const entry = emailVerificationCodes.get(userId);
+    const entry = await getEmailVerifyCode(userId);
     if (!entry) {
       return reply.status(400).send({ error: 'Aucun code de vérification en attente. Demandez un nouveau code.' });
     }
 
     if (new Date() > entry.expiresAt) {
-      emailVerificationCodes.delete(userId);
+      await deleteEmailVerifyCode(userId);
       return reply.status(410).send({ error: 'Le code a expiré. Demandez un nouveau code.' });
     }
 
-    if (entry.code !== code) {
+    if (entry.payload.code !== code) {
       // Per-code attempt counter (defense-in-depth on top of the IP/user rate limit).
       // After 5 wrong guesses, burn the code — user must request a new one.
-      entry.attempts += 1;
-      if (entry.attempts >= 5) {
-        emailVerificationCodes.delete(userId);
+      const nextAttempts = entry.payload.attempts + 1;
+      if (nextAttempts >= 5) {
+        await deleteEmailVerifyCode(userId);
         return reply.status(429).send({
           error: 'Trop de tentatives incorrectes. Demandez un nouveau code.',
         });
       }
+      await updateEmailVerifyAttempts(userId, { ...entry.payload, attempts: nextAttempts });
       return reply.status(401).send({ error: 'Code incorrect.' });
     }
 
     // Mark email as verified
     await db.update(users).set({ emailVerified: true, updatedAt: new Date() }).where(eq(users.id, userId));
-    emailVerificationCodes.delete(userId);
+    await deleteEmailVerifyCode(userId);
 
     // Send welcome email now that email is verified
     const user = await db.query.users.findFirst({ where: eq(users.id, userId) });
@@ -356,12 +483,11 @@ export default async function authRoutes(app: FastifyInstance) {
     if (user.emailVerified) return reply.status(400).send({ error: 'Email déjà vérifié.' });
 
     const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-    emailVerificationCodes.set(userId, {
-      email: user.email,
-      code: verifyCode,
-      expiresAt: new Date(Date.now() + 15 * 60 * 1000),
-      attempts: 0,
-    });
+    await setEmailVerifyCode(
+      userId,
+      { email: user.email, code: verifyCode, attempts: 0 },
+      new Date(Date.now() + 15 * 60 * 1000),
+    );
 
     sendVerificationEmail(user.email, verifyCode).catch(() => {});
     return { message: 'Un nouveau code a été envoyé.' };
@@ -484,7 +610,7 @@ export default async function authRoutes(app: FastifyInstance) {
     const updateData: {
       displayName?: string;
       avatarUrl?: string | null;
-      preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi';
+      preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr';
       email?: string;
       emailVerified?: boolean;
       updatedAt: Date;
@@ -521,12 +647,11 @@ export default async function authRoutes(app: FastifyInstance) {
     // Si l'email a changé, génère un code et envoie un email de vérification
     if (emailChanged && newEmail) {
       const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
-      emailVerificationCodes.set(userId, {
-        email: newEmail,
-        code: verifyCode,
-        expiresAt: new Date(Date.now() + 15 * 60 * 1000),
-        attempts: 0,
-      });
+      await setEmailVerifyCode(
+        userId,
+        { email: newEmail, code: verifyCode, attempts: 0 },
+        new Date(Date.now() + 15 * 60 * 1000),
+      );
       sendVerificationEmail(newEmail, verifyCode).catch(() => {});
     }
 
@@ -616,10 +741,12 @@ export default async function authRoutes(app: FastifyInstance) {
     // TTL shrunk from 1h to 15 min to tighten the brute-force window (F2).
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
 
-    passwordResetTokens.set(code, { email: user.email, expiresAt, attempts: 0 });
+    // P1-11: persisted in auth_codes instead of in-memory Map.
+    await setPasswordResetCode(code, { email: user.email, attempts: 0 }, expiresAt);
 
     // Send reset email (non-blocking)
     sendPasswordResetEmail(user.email, token).catch(() => {});
+    void gcExpiredAuthCodes();
 
     return { message: 'Si cet email existe, un lien de réinitialisation a été envoyé.' };
   });
@@ -641,13 +768,13 @@ export default async function authRoutes(app: FastifyInstance) {
     // Tokens are stored keyed by the 8-char uppercase code that ships in the
     // email. Accept what the user typed, normalised to that shape.
     const code = token.trim().toUpperCase();
-    const entry = passwordResetTokens.get(code);
+    const entry = await getPasswordResetCode(code);
     if (!entry) {
       return reply.status(400).send({ error: 'Invalid or expired reset token' });
     }
 
     if (new Date() > entry.expiresAt) {
-      passwordResetTokens.delete(code);
+      await deletePasswordResetCode(code);
       return reply.status(400).send({ error: 'Invalid or expired reset token' });
     }
 
@@ -656,15 +783,14 @@ export default async function authRoutes(app: FastifyInstance) {
     // to bump a counter on miss. The IP rate limit above + the 15-min TTL are
     // the effective defenses against online brute force. The `attempts` field
     // is kept for symmetry with the verification-code flow (where it does work).
-    entry.attempts += 1;
 
     const passwordHash = await bcrypt.hash(password, 12);
     await db
       .update(users)
       .set({ passwordHash, updatedAt: new Date() })
-      .where(eq(users.email, entry.email));
+      .where(eq(users.email, entry.payload.email));
 
-    passwordResetTokens.delete(code);
+    await deletePasswordResetCode(code);
 
     return { message: 'Password has been reset successfully.' };
   });
@@ -697,13 +823,20 @@ export default async function authRoutes(app: FastifyInstance) {
     });
 
     if (!user) {
-      // Auto-register
+      // Auto-register. P1-14: Google has already verified the email (id_token
+      // is signed by Google over a verified address), so we set
+      // emailVerified=true and skip our own 6-digit code flow. Also guard
+      // against an empty Google `name` (falsy after trim) — fall back to a
+      // capitalised local-part of the email.
+      const trimmedName = (payload.name || '').trim();
+      const displayName = trimmedName !== '' ? trimmedName : fallbackDisplayNameFromEmail(email);
       const [newUser] = await db
         .insert(users)
         .values({
           email,
           passwordHash: '', // No password for OAuth users
-          displayName: payload.name || email.split('@')[0],
+          displayName,
+          emailVerified: true,
         })
         .returning();
       user = newUser;
@@ -752,12 +885,19 @@ export default async function authRoutes(app: FastifyInstance) {
     });
 
     if (!user) {
+      // P1-14: Apple verified the email server-side (identity token signed by
+      // Apple JWKS). Mark emailVerified=true on auto-create. Apple only
+      // sends `displayName` from the client on the FIRST sign-in — defend
+      // against an empty string by falling back to a capitalised local-part.
+      const trimmedName = (body.displayName || '').trim();
+      const displayName = trimmedName !== '' ? trimmedName : fallbackDisplayNameFromEmail(email);
       const [newUser] = await db
         .insert(users)
         .values({
           email,
           passwordHash: '',
-          displayName: body.displayName || email.split('@')[0],
+          displayName,
+          emailVerified: true,
         })
         .returning();
       user = newUser;

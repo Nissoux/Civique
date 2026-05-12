@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { LANGUAGES, type Language } from '@civique/shared';
 import type { Flashcard } from '@/lib/data/flashcards';
 import { useFlashcardStore } from '@/lib/stores/flashcardStore';
+import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
 
 interface Props {
   cards: Flashcard[];
@@ -58,6 +59,17 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
 
   const total = deck.length;
   const card = deck[index];
+
+  // The static flashcard set only carries ar/es/fa/hi/pt translations.
+  // Any other non-FR language (today: en, tr) falls back to FR — show a
+  // single discreet notice in the header rather than per-card.
+  const hasTranslationsForLang =
+    currentLang === 'fr' ||
+    currentLang === 'ar' ||
+    currentLang === 'es' ||
+    currentLang === 'fa' ||
+    currentLang === 'hi' ||
+    currentLang === 'pt';
 
   function handleAnswer(status: 'known' | 'unknown') {
     if (!card) return;
@@ -139,6 +151,13 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
           </span>
           <span className="text-ink-mute">Thème {themeId} · {themeName}</span>
         </div>
+        {!hasTranslationsForLang ? (
+          <TranslationPendingNotice
+            lang={currentLang}
+            variant="boxed"
+            className="mt-4"
+          />
+        ) : null}
       </header>
 
       <FlipCard

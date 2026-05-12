@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { THEMES, LANGUAGES, type Language } from '@civique/shared';
 import type { GlossaryTerm } from '@/lib/data/glossaire';
+import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
 
 interface Props {
   terms: GlossaryTerm[];
@@ -43,6 +44,17 @@ export function GlossaireList({ terms, currentLang }: Props) {
   const [themeFilter, setThemeFilter] = useState<number | null>(null);
 
   const rtl = isRtl(currentLang);
+
+  // We carry translations for ar/es/fa/hi/pt in the static glossary file.
+  // Any other non-FR language (today: en, tr) falls back to FR — surface a
+  // discreet notice so the user knows the choice was registered.
+  const hasTranslationsForLang =
+    currentLang === 'fr' ||
+    currentLang === 'ar' ||
+    currentLang === 'es' ||
+    currentLang === 'fa' ||
+    currentLang === 'hi' ||
+    currentLang === 'pt';
 
   const filtered = useMemo(() => {
     const q = normalize(query.trim());
@@ -89,6 +101,10 @@ export function GlossaireList({ terms, currentLang }: Props) {
 
   return (
     <div className="space-y-7">
+      {!hasTranslationsForLang ? (
+        <TranslationPendingNotice lang={currentLang} variant="boxed" />
+      ) : null}
+
       {/* Search bar */}
       <div className="relative">
         <input

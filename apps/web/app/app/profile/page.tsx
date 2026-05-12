@@ -6,6 +6,7 @@ import {
   getCurrentExamType,
   getExamTypeDefinition,
 } from '@/lib/server/examType';
+import { getCurrentLang } from '@/lib/server/lang';
 import { ProfileForm } from '@/components/profile/ProfileForm';
 import { ChangePasswordForm } from '@/components/profile/ChangePasswordForm';
 import { DangerZone } from '@/components/profile/DangerZone';
@@ -18,8 +19,14 @@ export default async function ProfilePage() {
   const examTypeCode = await getCurrentExamType();
   const examDef = examTypeCode ? getExamTypeDefinition(examTypeCode) : null;
 
+  // The sidebar picker writes to the cookie immediately; the DB sync is
+  // best-effort (see lib/actions/lang.ts). Show the cookie value here so
+  // the form always reflects what the user just picked, and a subsequent
+  // Save re-asserts that value to the DB.
+  const currentLang = await getCurrentLang(user.preferredLang);
+
   const initial = user.displayName.trim()[0]?.toUpperCase() ?? 'U';
-  const langDef = LANGUAGES.find((l) => l.code === user.preferredLang);
+  const langDef = LANGUAGES.find((l) => l.code === currentLang);
 
   return (
     <div className="min-h-screen">
@@ -89,7 +96,7 @@ export default async function ProfilePage() {
         >
           <ProfileForm
             initialDisplayName={user.displayName}
-            initialLang={user.preferredLang}
+            initialLang={currentLang}
             email={user.email}
             emailVerified={
               (user as { emailVerified?: boolean }).emailVerified !== false

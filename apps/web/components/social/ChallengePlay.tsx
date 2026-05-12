@@ -129,16 +129,26 @@ export function ChallengePlay({
   }
 
   async function handleSelect(label: ChoiceLabel) {
-    if (phase !== 'question' || submitting || !currentQ) return;
+    if (phase !== 'question' || submitting || !currentQ || !shuffled) return;
     setSelected(label);
     setSubmitting(true);
     setError(null);
+
+    // CRITICAL: the UI uses *shuffled* labels (a/b/c/d in shuffle order), but
+    // the server compares the answer against the ORIGINAL `correctChoice`
+    // stored in DB. We must therefore reverse-map the clicked shuffled label
+    // back to its original id before sending it to /challenges/.../answer.
+    // `shuffled.originalToNew` maps original → shuffled, so we invert it.
+    const originalChoice =
+      (Object.entries(shuffled.originalToNew).find(
+        ([, newLabel]) => newLabel === label,
+      )?.[0] as ChoiceLabel | undefined) ?? label;
 
     const elapsed = Date.now() - questionStartedAt;
     const result = await submitChallengeAnswerAction({
       challengeId,
       questionId: currentQ.questionId,
-      selectedChoice: label,
+      selectedChoice: originalChoice,
       timeSpentMs: elapsed,
     });
 

@@ -32,5 +32,8 @@ export async function setCurrentExamType(code: ExamTypeCode): Promise<void> {
 
 export async function clearCurrentExamType(): Promise<void> {
   const c = await cookies();
-  c.delete(COOKIE_KEY);
+  // Pin path so the delete matches the cookie's original scope (`/`).
+  // Bare-string delete would only scope the Set-Cookie to the current
+  // request path, leaving the root cookie untouched in the browser.
+  c.delete({ name: COOKIE_KEY, path: '/' });
 }

@@ -45,6 +45,7 @@ export default async function RandomTrainingPage() {
       levelNum={0}
       totalLevels={0}
       questions={questions}
+      currentLang={lang}
     />
   );
 }

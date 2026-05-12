@@ -3,7 +3,7 @@ import { z } from 'zod';
 import crypto from 'node:crypto';
 import { eq, and, sql } from 'drizzle-orm';
 import { db } from '../../config/database.js';
-import { users, promoCodes, promoRedemptions } from '../../db/schema.js';
+import { users, promoCodes, promoRedemptions, stripeEventsProcessed } from '../../db/schema.js';
 import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
 
@@ -183,6 +183,7 @@ export default async function paymentRoutes(app: FastifyInstance) {
     }
 
     const event = request.body as {
+      id: string;
       type: string;
       data: {
         object: {
@@ -193,7 +194,40 @@ export default async function paymentRoutes(app: FastifyInstance) {
       };
     };
 
-    app.log.info({ eventType: event.type }, 'Stripe webhook received');
+    app.log.info({ eventId: event.id, eventType: event.type }, 'Stripe webhook received');
+
+    // ── Idempotency guard (P1-13) ───────────────────────
+    // Stripe retries webhooks aggressively on timeout / non-2xx. Without
+    // this, a retry of `checkout.session.completed` doubles the premium
+    // duration (the handler simply re-adds 7/30/180 days). Insert the
+    // event_id; if it's already there, the PK collision tells us we
+    // already processed it and we short-circuit with 200.
+    if (!event.id || typeof event.id !== 'string') {
+      app.log.warn('Stripe webhook payload missing event id');
+      return reply.status(400).send({ error: 'Missing event id' });
+    }
+    try {
+      await db
+        .insert(stripeEventsProcessed)
+        .values({ eventId: event.id, eventType: event.type });
+    } catch (err) {
+      // Postgres unique violation = 23505. That's the "already processed"
+      // signal — reply 200 so Stripe stops retrying. Any other DB error
+      // we propagate as 500 so Stripe DOES retry (transient outage etc).
+      const pgCode = (err as { code?: string } | undefined)?.code;
+      if (pgCode === '23505') {
+        app.log.info(
+          { eventId: event.id, eventType: event.type },
+          'Stripe webhook idempotent replay — skipping',
+        );
+        return reply.status(200).send({ received: true, idempotent: true });
+      }
+      app.log.error(
+        { err, eventId: event.id, eventType: event.type },
+        'Failed to record Stripe event for idempotency',
+      );
+      return reply.status(500).send({ error: 'Internal error' });
+    }
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;

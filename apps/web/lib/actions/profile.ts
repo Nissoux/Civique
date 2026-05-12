@@ -6,6 +6,7 @@ import type { Language } from '@civique/shared';
 import { LANGUAGES } from '@civique/shared';
 import { ApiError, fastifyFetch } from '@/lib/server/api';
 import { getCurrentUser } from '@/lib/server/me';
+import { setCurrentLang } from '@/lib/server/lang';
 import { clearSessionCookies } from '@/lib/server/session';
 import { clearCurrentExamType } from '@/lib/server/examType';
 import type { FormState } from '@/lib/auth-types';
@@ -85,6 +86,17 @@ export async function updateProfileAction(
       return { error: err.userMessage };
     }
     return { error: 'Impossible de mettre à jour votre profil.' };
+  }
+
+  // If the user changed the translation language from the profile form,
+  // mirror that into the cookie so the sidebar picker and translated
+  // content stay in sync without a full reload.
+  if (payload.preferredLang) {
+    try {
+      await setCurrentLang(payload.preferredLang);
+    } catch {
+      // Cookie write is best-effort; the DB is the source of truth.
+    }
   }
 
   revalidatePath('/app/profile');
