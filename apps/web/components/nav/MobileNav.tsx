@@ -15,7 +15,7 @@ const PRIMARY_TABS: TabItem[] = [
   { href: '/app', label: 'Accueil', icon: <HomeIcon /> },
   { href: '/app/exams', label: 'Examens', icon: <DocIcon /> },
   { href: '/app/fiches', label: 'Fiches', icon: <BookIcon /> },
-  { href: '/app/flashcards', label: 'Mémo', icon: <CardsIcon /> },
+  { href: '/app/flashcards', label: 'Révisions', icon: <CardsIcon /> },
 ];
 
 const OVERFLOW_ITEMS: TabItem[] = [

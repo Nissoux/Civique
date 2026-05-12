@@ -159,7 +159,7 @@ export function GlossaireList({ terms, currentLang }: Props) {
             key={t.id}
             active={themeFilter === t.id}
             onClick={() => setThemeFilter(t.id)}
-            label={`Thème ${t.id}`}
+            label={t.nameFr}
             color={t.color}
           />
         ))}
