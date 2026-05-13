@@ -27,6 +27,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'جمهوری', definition: 'شکل حکومتی که قدرت متعلق به مردم است و نمایندگان خود را انتخاب می‌کنند.' },
       hi: { term: 'गणतंत्र', definition: 'शासन का वह रूप जिसमें सत्ता जनता की होती है जो अपने प्रतिनिधि चुनती है।' },
       pt: { term: 'República', definition: 'Forma de governo em que o poder pertence ao povo, que elege seus representantes.' },
+      en: { term: 'Republic', definition: 'A form of government in which power belongs to the people, who elect their representatives.' },
+      tr: { term: 'Cumhuriyet', definition: 'İktidarın temsilcilerini seçen halka ait olduğu bir yönetim biçimi.' },
     },
   },
   {
@@ -40,6 +42,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'لائیسیته', definition: 'اصل جدایی دین از دولت که آزادی وجدان را تضمین می‌کند.' },
       hi: { term: 'धर्मनिरपेक्षता', definition: 'धर्म और राज्य के अलगाव का सिद्धांत जो विवेक की स्वतंत्रता की गारंटी देता है।' },
       pt: { term: 'Laicidade', definition: 'Princípio de separação entre religiões e Estado que garante a liberdade de consciência.' },
+      en: { term: 'Secularism (Laïcité)', definition: 'Principle of separation between religions and the State that guarantees freedom of conscience.' },
+      tr: { term: 'Laiklik (Laïcité)', definition: 'Vicdan özgürlüğünü güvence altına alan, dinlerin ve devletin ayrılığı ilkesi.' },
     },
   },
   {
@@ -53,6 +57,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'آزادی', definition: 'حق بنیادین انجام هر کاری که به دیگران آسیب نرساند، تضمین‌شده توسط قانون.' },
       hi: { term: 'स्वतंत्रता', definition: 'वह मौलिक अधिकार जो दूसरों को हानि न पहुँचाने की सीमा में कानून द्वारा सुरक्षित है।' },
       pt: { term: 'Liberdade', definition: 'Direito fundamental de fazer tudo que não prejudique os outros, garantido por lei.' },
+      en: { term: 'Liberty', definition: 'Fundamental right to do anything that does not harm others, guaranteed by law.' },
+      tr: { term: 'Özgürlük', definition: 'Başkalarına zarar vermeyen her şeyi yapma temel hakkı, yasalarla güvence altındadır.' },
     },
   },
   {
@@ -66,6 +72,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'برابری', definition: 'اصلی که بر اساس آن همه شهروندان حقوق و وظایف یکسانی در برابر قانون دارند.' },
       hi: { term: 'समानता', definition: 'वह सिद्धांत जिसके अनुसार सभी नागरिकों के कानून के समक्ष समान अधिकार और कर्तव्य हैं।' },
       pt: { term: 'Igualdade', definition: 'Princípio segundo o qual todos os cidadãos têm os mesmos direitos e deveres perante a lei.' },
+      en: { term: 'Equality', definition: 'Principle according to which all citizens have the same rights and duties before the law.' },
+      tr: { term: 'Eşitlik', definition: 'Tüm vatandaşların yasa önünde aynı haklara ve görevlere sahip olduğu ilkesi.' },
     },
   },
   {
@@ -79,6 +87,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'برادری', definition: 'ارزش جمهوری که بیانگر همبستگی و پیوند میان همه شهروندان است.' },
       hi: { term: 'बंधुत्व', definition: 'गणतांत्रिक मूल्य जो सभी नागरिकों के बीच एकजुटता और बंधन को व्यक्त करता है।' },
       pt: { term: 'Fraternidade', definition: 'Valor republicano que expressa a solidariedade e o vínculo entre todos os cidadãos.' },
+      en: { term: 'Fraternity', definition: 'Republican value expressing solidarity and the bond between all citizens.' },
+      tr: { term: 'Kardeşlik', definition: 'Tüm vatandaşlar arasındaki dayanışmayı ve bağı ifade eden cumhuriyetçi değer.' },
     },
   },
   {
@@ -92,6 +102,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شعار ملی', definition: '«آزادی، برابری، برادری»، شعار رسمی جمهوری فرانسه.' },
       hi: { term: 'राष्ट्रीय आदर्श वाक्य', definition: '«स्वतंत्रता, समानता, बंधुत्व», फ्रांसीसी गणराज्य का आधिकारिक आदर्श वाक्य।' },
       pt: { term: 'Divisa nacional', definition: '«Liberdade, Igualdade, Fraternidade», divisa oficial da República Francesa.' },
+      en: { term: 'National motto', definition: '"Liberty, Equality, Fraternity", the official motto of the French Republic.' },
+      tr: { term: 'Ulusal slogan', definition: '"Özgürlük, Eşitlik, Kardeşlik", Fransız Cumhuriyeti\'nin resmi sloganı.' },
     },
   },
   {
@@ -105,6 +117,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ماریان', definition: 'نماد زنانه‌ای که نمایانگر جمهوری فرانسه و ارزش‌های آن است.' },
       hi: { term: 'मारिआन', definition: 'फ्रांसीसी गणराज्य और उसके मूल्यों का प्रतिनिधित्व करने वाली प्रतीकात्मक स्त्री आकृति।' },
       pt: { term: 'Marianne', definition: 'Figura alegórica feminina que representa a República Francesa e seus valores.' },
+      en: { term: 'Marianne', definition: 'Female allegorical figure representing the French Republic and its values.' },
+      tr: { term: 'Marianne', definition: 'Fransız Cumhuriyeti\'ni ve değerlerini temsil eden kadın alegorik figür.' },
     },
   },
   {
@@ -118,6 +132,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'پرچم سه‌رنگ', definition: 'نشان ملی متشکل از سه نوار عمودی: آبی، سفید، قرمز.' },
       hi: { term: 'तिरंगा झंडा', definition: 'तीन लंबवत पट्टियों से बना राष्ट्रीय प्रतीक: नीला, सफेद, लाल।' },
       pt: { term: 'Bandeira tricolor', definition: 'Emblema nacional composto por três faixas verticais: azul, branco e vermelho.' },
+      en: { term: 'Tricolour flag', definition: 'National emblem composed of three vertical bands: blue, white, red.' },
+      tr: { term: 'Üç renkli bayrak', definition: 'Üç dikey şeritten oluşan ulusal amblem: mavi, beyaz, kırmızı.' },
     },
   },
   {
@@ -131,6 +147,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'سرود ملی', definition: 'سرود رسمی میهنی یک کشور. در فرانسه، لامارسیز است.' },
       hi: { term: 'राष्ट्रगान', definition: 'किसी देश का आधिकारिक देशभक्ति गीत। फ्रांस में यह ला मार्सेयेज़ है।' },
       pt: { term: 'Hino nacional', definition: 'Canto patriótico oficial de um país. Na França, é A Marselhesa.' },
+      en: { term: 'National anthem', definition: 'A country\'s official patriotic song. In France, it is La Marseillaise.' },
+      tr: { term: 'Ulusal marş', definition: 'Bir ülkenin resmi vatanseverlik şarkısı. Fransa\'da bu La Marseillaise\'dir.' },
     },
   },
   {
@@ -144,6 +162,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'لامارسیز', definition: 'سرود ملی فرانسه ساخته‌شده در ۱۷۹۲، نماد انقلاب و آزادی.' },
       hi: { term: 'ला मार्सेयेज़', definition: 'फ्रांस का राष्ट्रगान जो 1792 में रचा गया, क्रांति और स्वतंत्रता का प्रतीक।' },
       pt: { term: 'A Marselhesa', definition: 'Hino nacional francês composto em 1792, símbolo da Revolução e da liberdade.' },
+      en: { term: 'La Marseillaise', definition: 'French national anthem composed in 1792, a symbol of the Revolution and freedom.' },
+      tr: { term: 'La Marseillaise', definition: '1792\'de bestelenen Fransız ulusal marşı, Devrim ve özgürlüğün simgesi.' },
     },
   },
   {
@@ -157,6 +177,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق رأی همگانی', definition: 'حق رأی اعطاشده به همه شهروندان بزرگسال بدون تبعیض جنسیتی یا مالی.' },
       hi: { term: 'सार्वभौमिक मताधिकार', definition: 'लिंग या संपत्ति के भेदभाव के बिना सभी वयस्क नागरिकों को दिया गया मतदान का अधिकार।' },
       pt: { term: 'Sufrágio universal', definition: 'Direito de voto concedido a todos os cidadãos maiores sem distinção de sexo ou riqueza.' },
+      en: { term: 'Universal suffrage', definition: 'Right to vote granted to all adult citizens without distinction of sex or wealth.' },
+      tr: { term: 'Genel oy hakkı', definition: 'Cinsiyet veya servet ayrımı yapılmaksızın tüm yetişkin vatandaşlara verilen oy hakkı.' },
     },
   },
   {
@@ -170,6 +192,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'دموکراسی', definition: 'نظام سیاسی که در آن قدرت توسط مردم یا نمایندگان منتخبشان اعمال می‌شود.' },
       hi: { term: 'लोकतंत्र', definition: 'राजनीतिक व्यवस्था जिसमें सत्ता जनता या उसके निर्वाचित प्रतिनिधियों द्वारा चलाई जाती है।' },
       pt: { term: 'Democracia', definition: 'Regime político em que o poder é exercido pelo povo ou seus representantes eleitos.' },
+      en: { term: 'Democracy', definition: 'Political system in which power is exercised by the people or their elected representatives.' },
+      tr: { term: 'Demokrasi', definition: 'İktidarın halk veya seçilmiş temsilcileri tarafından kullanıldığı siyasi rejim.' },
     },
   },
   {
@@ -183,6 +207,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'قانون اساسی', definition: 'بالاترین متن حقوقی که قوای دولت را سازماندهی و حقوق بنیادین را تضمین می‌کند.' },
       hi: { term: 'संविधान', definition: 'सर्वोच्च कानूनी दस्तावेज़ जो राज्य की शक्तियों को संगठित करता और मौलिक अधिकारों की गारंटी देता है।' },
       pt: { term: 'Constituição', definition: 'Texto jurídico supremo que organiza os poderes do Estado e garante os direitos fundamentais.' },
+      en: { term: 'Constitution', definition: 'Supreme legal text that organises the powers of the State and guarantees fundamental rights.' },
+      tr: { term: 'Anayasa', definition: 'Devletin yetkilerini düzenleyen ve temel hakları güvence altına alan en üst hukuki metin.' },
     },
   },
   {
@@ -196,6 +222,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حاکمیت قانون', definition: 'نظامی که در آن دولت و شهروندان همگی تابع قانون هستند.' },
       hi: { term: 'विधि का शासन', definition: 'ऐसी व्यवस्था जिसमें राज्य और नागरिक सभी कानून के अधीन होते हैं।' },
       pt: { term: 'Estado de direito', definition: 'Sistema em que o Estado e os cidadãos estão todos submetidos ao respeito das leis.' },
+      en: { term: 'Rule of law', definition: 'System in which the State and citizens are all subject to respect for the law.' },
+      tr: { term: 'Hukukun üstünlüğü', definition: 'Devletin ve vatandaşların tümünün yasalara uymakla yükümlü olduğu sistem.' },
     },
   },
   {
@@ -209,6 +237,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'تفکیک قوا', definition: 'اصل تقسیم قدرت به سه شاخه: قانون‌گذاری، اجرایی و قضایی.' },
       hi: { term: 'शक्तियों का पृथक्करण', definition: 'सत्ता को तीन शाखाओं में विभाजित करने का सिद्धांत: विधायी, कार्यकारी और न्यायिक।' },
       pt: { term: 'Separação dos poderes', definition: 'Princípio que divide o poder em três ramos: legislativo, executivo e judiciário.' },
+      en: { term: 'Separation of powers', definition: 'Principle dividing power into three branches: legislative, executive and judicial.' },
+      tr: { term: 'Kuvvetler ayrılığı', definition: 'İktidarı üç erke bölen ilke: yasama, yürütme ve yargı.' },
     },
   },
   {
@@ -222,6 +252,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شهروند', definition: 'فردی که دارای حقوق مدنی و سیاسی در کشوری است که تابعیت آن را دارد.' },
       hi: { term: 'नागरिक', definition: 'वह व्यक्ति जिसके पास उस राज्य में नागरिक और राजनीतिक अधिकार हैं जिसकी नागरिकता उसके पास है।' },
       pt: { term: 'Cidadão', definition: 'Pessoa que possui direitos cívicos e políticos em um Estado do qual tem a nacionalidade.' },
+      en: { term: 'Citizen', definition: 'Person holding civic and political rights in a State whose nationality they have.' },
+      tr: { term: 'Vatandaş', definition: 'Vatandaşlığını taşıdığı bir devlette medeni ve siyasi haklara sahip kişi.' },
     },
   },
   {
@@ -235,6 +267,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ملت', definition: 'جامعه انسانی با تاریخ، فرهنگ و سرزمین مشترک.' },
       hi: { term: 'राष्ट्र', definition: 'साझा इतिहास, संस्कृति और क्षेत्र वाला मानव समुदाय।' },
       pt: { term: 'Nação', definition: 'Comunidade humana que compartilha uma história, cultura e território comuns.' },
+      en: { term: 'Nation', definition: 'Human community sharing a common history, culture and territory.' },
+      tr: { term: 'Ulus', definition: 'Ortak bir tarih, kültür ve toprak paylaşan insan topluluğu.' },
     },
   },
   {
@@ -248,6 +282,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حاکمیت', definition: 'قدرت عالی دولت که در دموکراسی توسط مردم اعمال می‌شود.' },
       hi: { term: 'संप्रभुता', definition: 'राज्य की सर्वोच्च शक्ति, लोकतंत्र में जनता द्वारा प्रयोग की जाती है।' },
       pt: { term: 'Soberania', definition: 'Poder supremo do Estado, exercido pelo povo na democracia.' },
+      en: { term: 'Sovereignty', definition: 'Supreme power of the State, exercised by the people in a democracy.' },
+      tr: { term: 'Egemenlik', definition: 'Devletin yüce iktidarı; demokraside halk tarafından kullanılır.' },
     },
   },
   {
@@ -261,6 +297,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'کثرت‌گرایی', definition: 'اصل به رسمیت شناختن تنوع نظرات، احزاب و باورها در جامعه.' },
       hi: { term: 'बहुलवाद', definition: 'समाज में विचारों, दलों और विश्वासों की विविधता को मान्यता देने वाला सिद्धांत।' },
       pt: { term: 'Pluralismo', definition: 'Princípio que reconhece a diversidade de opiniões, partidos e crenças na sociedade.' },
+      en: { term: 'Pluralism', definition: 'Principle recognising the diversity of opinions, parties and beliefs in society.' },
+      tr: { term: 'Çoğulculuk', definition: 'Toplumda görüş, parti ve inançların çeşitliliğini tanıyan ilke.' },
     },
   },
   {
@@ -274,6 +312,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مدارا', definition: 'نگرش احترام‌آمیز نسبت به نظرات و شیوه‌های زندگی متفاوت.' },
       hi: { term: 'सहिष्णुता', definition: 'अपने से भिन्न विचारों और जीवनशैली के प्रति सम्मान का दृष्टिकोण।' },
       pt: { term: 'Tolerância', definition: 'Atitude de respeito para com opiniões e modos de vida diferentes dos seus.' },
+      en: { term: 'Tolerance', definition: 'Attitude of respect towards opinions and ways of life different from one\'s own.' },
+      tr: { term: 'Hoşgörü', definition: 'Kendinden farklı görüş ve yaşam biçimlerine karşı saygı tutumu.' },
     },
   },
   {
@@ -287,6 +327,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'کرامت انسانی', definition: 'اصل تأیید ارزش ذاتی هر انسان، بدون استثنا.' },
       hi: { term: 'मानवीय गरिमा', definition: 'हर मनुष्य के आंतरिक मूल्य की बिना अपवाद पुष्टि करने वाला सिद्धांत।' },
       pt: { term: 'Dignidade humana', definition: 'Princípio que afirma o valor intrínseco de cada ser humano, sem exceção.' },
+      en: { term: 'Human dignity', definition: 'Principle affirming the intrinsic value of every human being, without exception.' },
+      tr: { term: 'İnsan onuru', definition: 'Her insanın istisnasız içsel değerini doğrulayan ilke.' },
     },
   },
   {
@@ -300,6 +342,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مصلحت عمومی', definition: 'خیر مشترک جامعه که بر منافع خصوصی اولویت دارد.' },
       hi: { term: 'सामान्य हित', definition: 'समाज का साझा कल्याण जो व्यक्तिगत हितों पर प्राथमिकता रखता है।' },
       pt: { term: 'Interesse geral', definition: 'Bem comum da sociedade que prevalece sobre os interesses particulares.' },
+      en: { term: 'General interest', definition: 'Common good of society, which takes precedence over individual interests.' },
+      tr: { term: 'Genel çıkar', definition: 'Bireysel çıkarların üstünde tutulan toplumun ortak iyiliği.' },
     },
   },
   {
@@ -313,6 +357,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'قرارداد اجتماعی', definition: 'توافق ضمنی میان شهروندان و دولت که بنیان زندگی اجتماعی است.' },
       hi: { term: 'सामाजिक अनुबंध', definition: 'नागरिकों और राज्य के बीच निहित समझौता जो सामाजिक जीवन की नींव रखता है।' },
       pt: { term: 'Contrato social', definition: 'Acordo implícito entre os cidadãos e o Estado que funda a vida em sociedade.' },
+      en: { term: 'Social contract', definition: 'Implicit agreement between citizens and the State that founds life in society.' },
+      tr: { term: 'Toplumsal sözleşme', definition: 'Toplumsal yaşamın temelini atan, vatandaşlar ile devlet arasındaki örtük anlaşma.' },
     },
   },
   {
@@ -326,6 +372,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'تجزیه‌ناپذیری', definition: 'ویژگی جمهوری فرانسه که نمی‌توان آن را به نهادهای مستقل تقسیم کرد.' },
       hi: { term: 'अविभाज्यता', definition: 'फ्रांसीसी गणराज्य का वह स्वरूप जिसे संप्रभु इकाइयों में विभाजित नहीं किया जा सकता।' },
       pt: { term: 'Indivisibilidade', definition: 'Caráter da República Francesa que não pode ser dividida em entidades soberanas.' },
+      en: { term: 'Indivisibility', definition: 'Characteristic of the French Republic which cannot be divided into sovereign entities.' },
+      tr: { term: 'Bölünmezlik', definition: 'Fransız Cumhuriyeti\'nin egemen birimlere bölünemez olma niteliği.' },
     },
   },
   {
@@ -339,6 +387,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'رأی‌گیری', definition: 'فرایند رأی‌دهی که طی آن شهروندان نمایندگان خود را انتخاب می‌کنند.' },
       hi: { term: 'मतदान', definition: 'वह मतदान प्रक्रिया जिसके द्वारा नागरिक अपने प्रतिनिधि चुनते हैं।' },
       pt: { term: 'Escrutínio', definition: 'Operação de voto pela qual os cidadãos escolhem seus representantes.' },
+      en: { term: 'Ballot', definition: 'Voting procedure by which citizens choose their representatives.' },
+      tr: { term: 'Oylama', definition: 'Vatandaşların temsilcilerini seçtiği oy verme işlemi.' },
     },
   },
 
@@ -354,6 +404,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'رئیس‌جمهور', definition: 'رئیس دولت فرانسه، با رأی مستقیم مردم برای پنج سال انتخاب می‌شود.' },
       hi: { term: 'गणराज्य के राष्ट्रपति', definition: 'फ्रांस के राष्ट्राध्यक्ष, प्रत्यक्ष सार्वभौमिक मताधिकार से पाँच वर्षों के लिए निर्वाचित।' },
       pt: { term: 'Presidente da República', definition: 'Chefe do Estado francês, eleito por sufrágio universal direto por cinco anos.' },
+      en: { term: 'President of the Republic', definition: 'Head of the French State, elected by direct universal suffrage for five years.' },
+      tr: { term: 'Cumhurbaşkanı', definition: 'Fransız devletinin başı, beş yıllığına doğrudan genel oyla seçilir.' },
     },
   },
   {
@@ -367,6 +419,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'نخست‌وزیر', definition: 'رئیس دولت منصوب توسط رئیس‌جمهور که سیاست ملی را هدایت می‌کند.' },
       hi: { term: 'प्रधानमंत्री', definition: 'राष्ट्रपति द्वारा नियुक्त सरकार का प्रमुख जो राष्ट्र की नीति का संचालन करता है।' },
       pt: { term: 'Primeiro-ministro', definition: 'Chefe do governo nomeado pelo Presidente, dirige a política da nação.' },
+      en: { term: 'Prime Minister', definition: 'Head of government appointed by the President, who directs the policy of the nation.' },
+      tr: { term: 'Başbakan', definition: 'Cumhurbaşkanı tarafından atanan ve ulusun siyasetini yöneten hükümet başkanı.' },
     },
   },
   {
@@ -380,6 +434,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'پارلمان', definition: 'نهاد متشکل از مجلس ملی و سنا که قوانین را تصویب می‌کند.' },
       hi: { term: 'संसद', definition: 'राष्ट्रीय सभा और सीनेट से बनी संस्था जो कानूनों पर मतदान करती है।' },
       pt: { term: 'Parlamento', definition: 'Instituição composta pela Assembleia Nacional e pelo Senado, que vota as leis.' },
+      en: { term: 'Parliament', definition: 'Institution composed of the Assemblée nationale and the Sénat, which votes the laws.' },
+      tr: { term: 'Parlamento', definition: 'Assemblée nationale ve Sénat\'tan oluşan, yasaları oylayan kurum.' },
     },
   },
   {
@@ -393,6 +449,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مجلس ملی', definition: 'مجلس سفلی پارلمان متشکل از نمایندگان منتخب با رأی مستقیم مردم.' },
       hi: { term: 'राष्ट्रीय सभा', definition: 'संसद का निचला सदन जो प्रत्यक्ष सार्वभौमिक मताधिकार से निर्वाचित सांसदों से बना है।' },
       pt: { term: 'Assembleia Nacional', definition: 'Câmara baixa do Parlamento composta por deputados eleitos por sufrágio universal direto.' },
+      en: { term: 'Assemblée nationale (National Assembly)', definition: 'Lower house of Parliament composed of deputies elected by direct universal suffrage.' },
+      tr: { term: 'Assemblée nationale (Ulusal Meclis)', definition: 'Doğrudan genel oyla seçilen milletvekillerinden oluşan parlamentonun alt kanadı.' },
     },
   },
   {
@@ -406,6 +464,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'سنا', definition: 'مجلس علیای پارلمان که اعضای آن با رأی غیرمستقیم انتخاب می‌شوند.' },
       hi: { term: 'सीनेट', definition: 'संसद का ऊपरी सदन जिसके सदस्य अप्रत्यक्ष मताधिकार से निर्वाचित होते हैं।' },
       pt: { term: 'Senado', definition: 'Câmara alta do Parlamento cujos membros são eleitos por sufrágio indireto.' },
+      en: { term: 'Sénat (Senate)', definition: 'Upper house of Parliament whose members are elected by indirect suffrage.' },
+      tr: { term: 'Sénat (Senato)', definition: 'Üyeleri dolaylı oyla seçilen parlamentonun üst kanadı.' },
     },
   },
   {
@@ -419,6 +479,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'نماینده مجلس', definition: 'منتخبی در مجلس ملی که نماینده مردم است و قوانین را تصویب می‌کند.' },
       hi: { term: 'सांसद (निचला सदन)', definition: 'राष्ट्रीय सभा का निर्वाचित सदस्य जो जनता का प्रतिनिधित्व करता और कानूनों पर मतदान करता है।' },
       pt: { term: 'Deputado', definition: 'Eleito que ocupa assento na Assembleia Nacional, representa o povo e vota as leis.' },
+      en: { term: 'Deputy (Député)', definition: 'Elected member of the Assemblée nationale who represents the people and votes the laws.' },
+      tr: { term: 'Milletvekili (Député)', definition: 'Assemblée nationale\'da görev yapan, halkı temsil eden ve yasaları oylayan seçilmiş kişi.' },
     },
   },
   {
@@ -432,6 +494,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'سناتور', definition: 'منتخبی در سنا که نماینده نهادهای سرزمینی است.' },
       hi: { term: 'सीनेटर', definition: 'सीनेट का निर्वाचित सदस्य जो क्षेत्रीय निकायों का प्रतिनिधित्व करता है।' },
       pt: { term: 'Senador', definition: 'Eleito que ocupa assento no Senado, representa as coletividades territoriais.' },
+      en: { term: 'Senator', definition: 'Elected member of the Sénat who represents the local authorities.' },
+      tr: { term: 'Senatör', definition: 'Sénat\'ta görev yapan, yerel yönetimleri temsil eden seçilmiş kişi.' },
     },
   },
   {
@@ -445,6 +509,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'کمون', definition: 'کوچکترین واحد اداری فرانسه که توسط شهردار و شورای شهر اداره می‌شود.' },
       hi: { term: 'कम्यून', definition: 'फ्रांस की सबसे छोटी प्रशासनिक इकाई, जिसका नेतृत्व मेयर और नगर परिषद करती है।' },
       pt: { term: 'Município', definition: 'Menor divisão administrativa da França, dirigida por um prefeito e um conselho municipal.' },
+      en: { term: 'Commune', definition: 'Smallest administrative division of France, led by a mayor and a municipal council.' },
+      tr: { term: 'Belde (Commune)', definition: 'Fransa\'nın en küçük idari birimi, bir belediye başkanı ve belediye meclisi tarafından yönetilir.' },
     },
   },
   {
@@ -458,6 +524,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'دپارتمان', definition: 'واحد اداری میانی بین کمون و منطقه.' },
       hi: { term: 'विभाग', definition: 'कम्यून और क्षेत्र के बीच की मध्यवर्ती प्रशासनिक इकाई।' },
       pt: { term: 'Departamento', definition: 'Divisão administrativa intermediária entre o município e a região.' },
+      en: { term: 'Department (Département)', definition: 'Administrative division between the commune and the region.' },
+      tr: { term: 'Departman (Département)', definition: 'Belde ile bölge arasında yer alan idari birim.' },
     },
   },
   {
@@ -471,6 +539,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'منطقه', definition: 'بزرگترین نهاد سرزمینی؛ فرانسه اروپایی ۱۳ منطقه دارد.' },
       hi: { term: 'क्षेत्र', definition: 'सबसे बड़ी क्षेत्रीय इकाई; मुख्य भूमि फ्रांस में 13 क्षेत्र हैं।' },
       pt: { term: 'Região', definition: 'Maior coletividade territorial; a França metropolitana possui 13 regiões.' },
+      en: { term: 'Region', definition: 'Largest territorial authority; metropolitan France has 13.' },
+      tr: { term: 'Bölge', definition: 'En büyük yerel yönetim birimi; anakara Fransa\'da 13 bölge bulunur.' },
     },
   },
   {
@@ -484,6 +554,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شهردار', definition: 'منتخب محلی که کمون را اداره و شورای شهر را ریاست می‌کند.' },
       hi: { term: 'मेयर', definition: 'स्थानीय निर्वाचित अधिकारी जो कम्यून का प्रबंधन और नगर परिषद की अध्यक्षता करता है।' },
       pt: { term: 'Prefeito', definition: 'Eleito local que dirige o município e preside o conselho municipal.' },
+      en: { term: 'Mayor', definition: 'Local elected official who runs the commune and presides over the municipal council.' },
+      tr: { term: 'Belediye başkanı', definition: 'Beldeyi yöneten ve belediye meclisine başkanlık eden yerel seçilmiş yetkili.' },
     },
   },
   {
@@ -497,6 +569,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'استاندار', definition: 'نماینده دولت در دپارتمان، منصوب توسط رئیس‌جمهور.' },
       hi: { term: 'प्रीफ़े', definition: 'विभाग में राज्य का प्रतिनिधि, राष्ट्रपति द्वारा नियुक्त।' },
       pt: { term: 'Prefeito departamental', definition: 'Representante do Estado no departamento, nomeado pelo Presidente.' },
+      en: { term: 'Prefect (Préfet)', definition: 'Representative of the State in the department, appointed by the President.' },
+      tr: { term: 'Vali (Préfet)', definition: 'Cumhurbaşkanı tarafından atanan, departmandaki devlet temsilcisi.' },
     },
   },
   {
@@ -510,6 +584,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شورای شهر', definition: 'مجمع منتخبی که امور کمون را به همراه شهردار اداره می‌کند.' },
       hi: { term: 'नगर परिषद', definition: 'निर्वाचित सभा जो मेयर के साथ कम्यून के मामलों का प्रबंधन करती है।' },
       pt: { term: 'Conselho municipal', definition: 'Assembleia eleita que administra os assuntos do município junto com o prefeito.' },
+      en: { term: 'Municipal council', definition: 'Elected assembly that manages the affairs of the commune together with the mayor.' },
+      tr: { term: 'Belediye meclisi', definition: 'Belde işlerini belediye başkanıyla birlikte yöneten seçilmiş meclis.' },
     },
   },
   {
@@ -523,6 +599,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'دوره پنج‌ساله', definition: 'مدت ریاست‌جمهوری در فرانسه، از سال ۲۰۰۰ پنج سال تعیین شده.' },
       hi: { term: 'पंचवर्षीय कार्यकाल', definition: 'फ्रांस में राष्ट्रपति पद का कार्यकाल, 2000 से पाँच वर्ष निर्धारित।' },
       pt: { term: 'Quinquênio', definition: 'Duração do mandato presidencial na França, fixada em cinco anos desde 2000.' },
+      en: { term: 'Quinquennat (five-year term)', definition: 'Length of the presidential mandate in France, set at five years since 2000.' },
+      tr: { term: 'Beş yıllık dönem (Quinquennat)', definition: 'Fransa\'da cumhurbaşkanlığı görev süresi, 2000\'den beri beş yıl olarak belirlenmiştir.' },
     },
   },
   {
@@ -536,6 +614,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'همزیستی سیاسی', definition: 'وضعیتی که رئیس‌جمهور و نخست‌وزیر از احزاب سیاسی مخالف هستند.' },
       hi: { term: 'सह-अस्तित्व', definition: 'वह स्थिति जब राष्ट्रपति और प्रधानमंत्री विरोधी राजनीतिक दलों से होते हैं।' },
       pt: { term: 'Coabitação', definition: 'Situação em que o Presidente e o Primeiro-ministro são de partidos políticos opostos.' },
+      en: { term: 'Cohabitation', definition: 'Situation in which the President and the Prime Minister belong to opposing political parties.' },
+      tr: { term: 'Birlikte yaşam (Cohabitation)', definition: 'Cumhurbaşkanı ile başbakanın karşıt siyasi partilerden oldukları durum.' },
     },
   },
   {
@@ -549,6 +629,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'انحلال', definition: 'اختیار رئیس‌جمهور برای پایان دادن به دوره مجلس ملی.' },
       hi: { term: 'विघटन', definition: 'राष्ट्रीय सभा के कार्यकाल को समाप्त करने की राष्ट्रपति की शक्ति।' },
       pt: { term: 'Dissolução', definition: 'Poder do Presidente de encerrar o mandato da Assembleia Nacional.' },
+      en: { term: 'Dissolution', definition: 'Power of the President to end the mandate of the Assemblée nationale.' },
+      tr: { term: 'Fesih', definition: 'Cumhurbaşkanının Assemblée nationale\'in görev süresini sona erdirme yetkisi.' },
     },
   },
   {
@@ -562,6 +644,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'رأی عدم اعتماد', definition: 'رأی مجلس ملی که می‌تواند دولت را سرنگون کند.' },
       hi: { term: 'अविश्वास प्रस्ताव', definition: 'राष्ट्रीय सभा का वह मतदान जो सरकार को गिरा सकता है।' },
       pt: { term: 'Moção de censura', definition: 'Voto da Assembleia Nacional que pode derrubar o governo.' },
+      en: { term: 'Motion of censure', definition: 'Vote of the Assemblée nationale that can overthrow the government.' },
+      tr: { term: 'Gensoru', definition: 'Hükümeti düşürebilecek Assemblée nationale oylaması.' },
     },
   },
   {
@@ -575,6 +659,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شورای قانون اساسی', definition: 'نهادی که انطباق قوانین با قانون اساسی را بررسی می‌کند.' },
       hi: { term: 'संवैधानिक परिषद', definition: 'वह संस्था जो संविधान के साथ कानूनों की अनुरूपता की जाँच करती है।' },
       pt: { term: 'Conselho Constitucional', definition: 'Instituição que verifica a conformidade das leis com a Constituição.' },
+      en: { term: 'Conseil constitutionnel (Constitutional Council)', definition: 'Institution that verifies the conformity of laws with the Constitution.' },
+      tr: { term: 'Conseil constitutionnel (Anayasa Konseyi)', definition: 'Yasaların Anayasa\'ya uygunluğunu denetleyen kurum.' },
     },
   },
   {
@@ -588,6 +674,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'همه‌پرسی', definition: 'رأی‌گیری که در آن مردم مستقیماً درباره یک موضوع یا متن اظهارنظر می‌کنند.' },
       hi: { term: 'जनमत संग्रह', definition: 'वह मतदान जिसमें जनता सीधे किसी प्रश्न या पाठ पर अपनी राय देती है।' },
       pt: { term: 'Referendo', definition: 'Voto pelo qual o povo se pronuncia diretamente sobre uma questão ou um texto.' },
+      en: { term: 'Referendum', definition: 'Vote by which the people decide directly on a question or a text.' },
+      tr: { term: 'Referandum', definition: 'Halkın bir konu ya da metin hakkında doğrudan görüş bildirdiği oylama.' },
     },
   },
   {
@@ -601,6 +689,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'دولت', definition: 'مجموعه وزیران به رهبری نخست‌وزیر که سیاست ملی را هدایت می‌کند.' },
       hi: { term: 'सरकार', definition: 'प्रधानमंत्री के नेतृत्व में मंत्रियों का समूह जो राष्ट्रीय नीति का संचालन करता है।' },
       pt: { term: 'Governo', definition: 'Conjunto de ministros dirigido pelo Primeiro-ministro, conduz a política nacional.' },
+      en: { term: 'Government', definition: 'Body of ministers led by the Prime Minister; it conducts national policy.' },
+      tr: { term: 'Hükümet', definition: 'Başbakan tarafından yönetilen ve ulusal siyaseti yürüten bakanlar topluluğu.' },
     },
   },
 
@@ -616,6 +706,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'اعلامیه حقوق بشر و شهروند', definition: 'متن بنیادین ۱۷۸۹ که حقوق طبیعی و خدشه‌ناپذیر انسان را اعلام می‌کند.' },
       hi: { term: 'मानव और नागरिक अधिकारों की घोषणा', definition: '1789 का संस्थापक पाठ जो मनुष्य के प्राकृतिक और अक्षय अधिकारों की घोषणा करता है।' },
       pt: { term: 'Declaração dos direitos do homem e do cidadão', definition: 'Texto fundador de 1789 que proclama os direitos naturais e imprescritíveis do homem.' },
+      en: { term: 'Declaration of the Rights of Man and of the Citizen', definition: 'Founding text of 1789 proclaiming the natural and inalienable rights of man.' },
+      tr: { term: 'İnsan ve Yurttaş Hakları Bildirgesi', definition: 'İnsanın doğal ve devredilmez haklarını ilan eden 1789 tarihli kurucu metin.' },
     },
   },
   {
@@ -629,6 +721,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق رأی', definition: 'حق بنیادین شهروندان برای مشارکت در انتخابات و انتخاب نمایندگان.' },
       hi: { term: 'मतदान का अधिकार', definition: 'नागरिकों का मौलिक अधिकार कि वे चुनावों में भाग लेकर अपने प्रतिनिधि चुनें।' },
       pt: { term: 'Direito de voto', definition: 'Direito fundamental dos cidadãos de participar das eleições para escolher seus representantes.' },
+      en: { term: 'Right to vote', definition: 'Fundamental right of citizens to take part in elections to choose their representatives.' },
+      tr: { term: 'Oy hakkı', definition: 'Vatandaşların temsilcilerini seçmek için seçimlere katılma temel hakkı.' },
     },
   },
   {
@@ -642,6 +736,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'اصل برائت', definition: 'اصل حقوقی که بر اساس آن هر فرد تا اثبات خلاف بی‌گناه است.' },
       hi: { term: 'निर्दोषता का अनुमान', definition: 'कानूनी सिद्धांत जिसके अनुसार हर व्यक्ति विपरीत प्रमाण तक निर्दोष है।' },
       pt: { term: 'Presunção de inocência', definition: 'Princípio jurídico segundo o qual toda pessoa é inocente até prova em contrário.' },
+      en: { term: 'Presumption of innocence', definition: 'Legal principle according to which any person is innocent until proven otherwise.' },
+      tr: { term: 'Masumiyet karinesi', definition: 'Her kişinin aksi kanıtlanana kadar masum sayıldığı hukuk ilkesi.' },
     },
   },
   {
@@ -655,6 +751,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'برابری زن و مرد', definition: 'اصل تضمین حقوق و فرصت‌های برابر برای زنان و مردان.' },
       hi: { term: 'स्त्री-पुरुष समानता', definition: 'महिलाओं और पुरुषों को समान अधिकार और अवसर प्रदान करने वाला सिद्धांत।' },
       pt: { term: 'Igualdade mulheres-homens', definition: 'Princípio que garante os mesmos direitos e oportunidades a mulheres e homens.' },
+      en: { term: 'Gender equality', definition: 'Principle guaranteeing the same rights and opportunities to women and men.' },
+      tr: { term: 'Kadın-erkek eşitliği', definition: 'Kadınlara ve erkeklere aynı hak ve fırsatları güvence altına alan ilke.' },
     },
   },
   {
@@ -668,6 +766,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'آزادی بیان', definition: 'حق ابراز افکار و نظرات در چارچوب محدودیت‌های قانونی.' },
       hi: { term: 'अभिव्यक्ति की स्वतंत्रता', definition: 'कानून द्वारा निर्धारित सीमाओं में अपने विचार और राय व्यक्त करने का अधिकार।' },
       pt: { term: 'Liberdade de expressão', definition: 'Direito de comunicar pensamentos e opiniões, dentro dos limites fixados pela lei.' },
+      en: { term: 'Freedom of expression', definition: 'Right to communicate one\'s thoughts and opinions, within the limits set by law.' },
+      tr: { term: 'İfade özgürlüğü', definition: 'Düşüncelerini ve görüşlerini, yasanın belirlediği sınırlar içinde aktarma hakkı.' },
     },
   },
   {
@@ -681,6 +781,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'وظیفه مالیاتی', definition: 'تعهد هر شهروند به مشارکت در هزینه‌های عمومی از طریق پرداخت مالیات.' },
       hi: { term: 'कर कर्तव्य', definition: 'प्रत्येक नागरिक का कर भुगतान द्वारा सार्वजनिक व्यय में योगदान करने का दायित्व।' },
       pt: { term: 'Dever fiscal', definition: 'Obrigação de cada cidadão de contribuir com as despesas públicas pelo pagamento de impostos.' },
+      en: { term: 'Tax duty', definition: 'Obligation for every citizen to contribute to public expenditure by paying taxes.' },
+      tr: { term: 'Vergi yükümlülüğü', definition: 'Her vatandaşın vergi ödeyerek kamu harcamalarına katkıda bulunma yükümlülüğü.' },
     },
   },
   {
@@ -694,6 +796,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'روز دفاع و شهروندی', definition: 'روز اجباری برای جوانان ۱۶ ساله که مسائل دفاع ملی را معرفی می‌کند.' },
       hi: { term: 'रक्षा और नागरिकता दिवस', definition: '16 वर्षीय युवाओं के लिए अनिवार्य दिवस जो राष्ट्रीय रक्षा के मुद्दे प्रस्तुत करता है।' },
       pt: { term: 'Jornada de defesa e cidadania', definition: 'Jornada obrigatória para jovens de 16 anos que apresenta os desafios da defesa nacional.' },
+      en: { term: 'Defence and Citizenship Day (JDC)', definition: 'Compulsory day for 16-year-olds presenting the issues of national defence.' },
+      tr: { term: 'Savunma ve Vatandaşlık Günü (JDC)', definition: 'Ulusal savunma konularının tanıtıldığı, 16 yaşındaki gençler için zorunlu gün.' },
     },
   },
   {
@@ -707,6 +811,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مالیات', definition: 'وجه اجباری پرداختی به دولت یا نهادها برای تأمین مالی خدمات عمومی.' },
       hi: { term: 'कर', definition: 'सार्वजनिक सेवाओं के वित्तपोषण हेतु राज्य को दी जाने वाली अनिवार्य अदायगी।' },
       pt: { term: 'Imposto', definition: 'Contribuição obrigatória paga ao Estado ou às coletividades para financiar os serviços públicos.' },
+      en: { term: 'Tax', definition: 'Compulsory levy paid to the State or local authorities to fund public services.' },
+      tr: { term: 'Vergi', definition: 'Kamu hizmetlerini finanse etmek için devlete veya yerel idarelere ödenen zorunlu kesinti.' },
     },
   },
   {
@@ -720,6 +826,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'همبستگی ملی', definition: 'اصلی که بر اساس آن جامعه به آسیب‌پذیرترین اعضای خود کمک می‌کند.' },
       hi: { term: 'राष्ट्रीय एकजुटता', definition: 'वह सिद्धांत जिसके अनुसार समुदाय अपने सबसे कमज़ोर सदस्यों की सहायता करता है।' },
       pt: { term: 'Solidariedade nacional', definition: 'Princípio segundo o qual a coletividade ajuda seus membros mais vulneráveis.' },
+      en: { term: 'National solidarity', definition: 'Principle according to which the community helps its most vulnerable members.' },
+      tr: { term: 'Ulusal dayanışma', definition: 'Toplumun en kırılgan üyelerine yardım etmesi gerektiğini öngören ilke.' },
     },
   },
   {
@@ -733,6 +841,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق پناهندگی', definition: 'حمایتی که فرانسه به افراد تحت آزار در کشور مبدأشان اعطا می‌کند.' },
       hi: { term: 'शरण का अधिकार', definition: 'फ्रांस द्वारा अपने मूल देश में सताए गए लोगों को दी जाने वाली सुरक्षा।' },
       pt: { term: 'Direito de asilo', definition: 'Proteção concedida pela França às pessoas perseguidas em seu país de origem.' },
+      en: { term: 'Right of asylum', definition: 'Protection granted by France to people persecuted in their country of origin.' },
+      tr: { term: 'Sığınma hakkı', definition: 'Fransa\'nın kendi ülkesinde zulme uğrayan kişilere tanıdığı koruma.' },
     },
   },
   {
@@ -746,6 +856,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'آزادی وجدان', definition: 'حق هر فرد برای باور داشتن یا نداشتن، بدون اجبار.' },
       hi: { term: 'विवेक की स्वतंत्रता', definition: 'प्रत्येक व्यक्ति का बिना किसी बाध्यता के विश्वास करने या न करने का अधिकार।' },
       pt: { term: 'Liberdade de consciência', definition: 'Direito de cada pessoa de acreditar ou não acreditar, sem coerção.' },
+      en: { term: 'Freedom of conscience', definition: 'Right of every person to believe or not to believe, without constraint.' },
+      tr: { term: 'Vicdan özgürlüğü', definition: 'Her bireyin baskı altında olmadan inanma veya inanmama hakkı.' },
     },
   },
   {
@@ -759,6 +871,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق آموزش', definition: 'حق بنیادین تضمین دسترسی به آموزش برای همه کودکان.' },
       hi: { term: 'शिक्षा का अधिकार', definition: 'सभी बच्चों के लिए शिक्षा तक पहुँच की गारंटी देने वाला मौलिक अधिकार।' },
       pt: { term: 'Direito à educação', definition: 'Direito fundamental que garante o acesso à instrução para todas as crianças.' },
+      en: { term: 'Right to education', definition: 'Fundamental right guaranteeing access to instruction for all children.' },
+      tr: { term: 'Eğitim hakkı', definition: 'Tüm çocuklar için öğrenime erişimi güvence altına alan temel hak.' },
     },
   },
   {
@@ -772,6 +886,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'وظیفه دفاعی', definition: 'تعهد هر شهروند به مشارکت در دفاع از کشور در صورت لزوم.' },
       hi: { term: 'रक्षा कर्तव्य', definition: 'आवश्यकता पड़ने पर प्रत्येक नागरिक का राष्ट्र की रक्षा में योगदान करने का दायित्व।' },
       pt: { term: 'Dever de defesa', definition: 'Obrigação de cada cidadão de contribuir para a defesa da nação se necessário.' },
+      en: { term: 'Duty of defence', definition: 'Obligation for every citizen to contribute to the defence of the nation if necessary.' },
+      tr: { term: 'Savunma görevi', definition: 'Gerektiğinde her vatandaşın ulusun savunmasına katkıda bulunma yükümlülüğü.' },
     },
   },
   {
@@ -785,6 +901,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'احترام به قوانین', definition: 'تعهد مدنی به رعایت قواعد وضع‌شده توسط جامعه.' },
       hi: { term: 'कानून का सम्मान', definition: 'समाज द्वारा स्थापित नियमों का पालन करने का नागरिक दायित्व।' },
       pt: { term: 'Respeito às leis', definition: 'Obrigação cívica de cumprir as regras estabelecidas pela sociedade.' },
+      en: { term: 'Respect for the law', definition: 'Civic duty to comply with the rules established by society.' },
+      tr: { term: 'Yasalara saygı', definition: 'Toplumun koyduğu kurallara uyma vatandaşlık yükümlülüğü.' },
     },
   },
   {
@@ -798,6 +916,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'آزادی تجمع', definition: 'حق گردهمایی مسالمت‌آمیز برای تبادل نظر یا تظاهرات.' },
       hi: { term: 'सभा की स्वतंत्रता', definition: 'विचारों के आदान-प्रदान या प्रदर्शन के लिए शांतिपूर्वक एकत्र होने का अधिकार।' },
       pt: { term: 'Liberdade de reunião', definition: 'Direito de se reunir pacificamente para trocar ideias ou se manifestar.' },
+      en: { term: 'Freedom of assembly', definition: 'Right to gather peacefully to exchange ideas or demonstrate.' },
+      tr: { term: 'Toplanma özgürlüğü', definition: 'Fikir alışverişi yapmak ya da gösteri düzenlemek için barışçıl şekilde bir araya gelme hakkı.' },
     },
   },
   {
@@ -811,6 +931,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'عدم تبعیض', definition: 'اصل ممنوعیت هرگونه تبعیض بر اساس خاستگاه، جنسیت، مذهب یا معلولیت.' },
       hi: { term: 'गैर-भेदभाव', definition: 'मूल, लिंग, धर्म या विकलांगता पर आधारित किसी भी भेदभाव को निषिद्ध करने वाला सिद्धांत।' },
       pt: { term: 'Não discriminação', definition: 'Princípio que proíbe qualquer distinção baseada na origem, sexo, religião ou deficiência.' },
+      en: { term: 'Non-discrimination', definition: 'Principle prohibiting any distinction based on origin, sex, religion or disability.' },
+      tr: { term: 'Ayrımcılık yasağı', definition: 'Köken, cinsiyet, din veya engellilik temelinde her türlü ayrımcılığı yasaklayan ilke.' },
     },
   },
   {
@@ -824,6 +946,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق مسکن', definition: 'حق به رسمیت شناخته‌شده که به هر فرد امکان داشتن مسکن شایسته را می‌دهد.' },
       hi: { term: 'आवास का अधिकार', definition: 'मान्यता प्राप्त अधिकार जो प्रत्येक व्यक्ति को एक सभ्य आवास का लाभ देता है।' },
       pt: { term: 'Direito à moradia', definition: 'Direito reconhecido que permite a cada pessoa dispor de uma moradia digna.' },
+      en: { term: 'Right to housing', definition: 'Recognised right allowing everyone to have decent accommodation.' },
+      tr: { term: 'Konut hakkı', definition: 'Herkesin insanca bir konuta sahip olmasını sağlayan tanınmış hak.' },
     },
   },
   {
@@ -837,6 +961,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'خدمت مدنی', definition: 'تعهد داوطلبانه جوانان در خدمت مصلحت عمومی، به مدت ۶ تا ۱۲ ماه.' },
       hi: { term: 'नागरिक सेवा', definition: 'सामान्य हित की सेवा में युवाओं की 6 से 12 महीने की स्वैच्छिक प्रतिबद्धता।' },
       pt: { term: 'Serviço cívico', definition: 'Compromisso voluntário dos jovens a serviço do interesse geral, de 6 a 12 meses.' },
+      en: { term: 'Civic service (Service civique)', definition: 'Voluntary commitment of young people to the general interest, from 6 to 12 months.' },
+      tr: { term: 'Sivil hizmet (Service civique)', definition: 'Gençlerin genel çıkar hizmetinde 6 ila 12 ay süreyle gönüllü taahhüdü.' },
     },
   },
   {
@@ -850,6 +976,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'وظیفه تحصیل', definition: 'الزام آموزش برای همه کودکان ۳ تا ۱۶ ساله در فرانسه.' },
       hi: { term: 'शिक्षा का कर्तव्य', definition: 'फ्रांस में 3 से 16 वर्ष के सभी बच्चों के लिए शिक्षा का दायित्व।' },
       pt: { term: 'Dever de escolaridade', definition: 'Obrigação de instrução para todas as crianças de 3 a 16 anos na França.' },
+      en: { term: 'Compulsory schooling', definition: 'Obligation of instruction for all children aged 3 to 16 in France.' },
+      tr: { term: 'Zorunlu eğitim', definition: 'Fransa\'da 3 ila 16 yaş arası tüm çocuklar için öğrenim zorunluluğu.' },
     },
   },
   {
@@ -863,6 +991,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حق اعتصاب', definition: 'حق قانون اساسی که به کارگران اجازه توقف کار برای دفاع از منافعشان را می‌دهد.' },
       hi: { term: 'हड़ताल का अधिकार', definition: 'संवैधानिक अधिकार जो श्रमिकों को अपने हितों की रक्षा के लिए काम बंद करने की अनुमति देता है।' },
       pt: { term: 'Direito de greve', definition: 'Direito constitucional que permite aos trabalhadores cessar o trabalho para defender seus interesses.' },
+      en: { term: 'Right to strike', definition: 'Constitutional right allowing workers to stop work to defend their interests.' },
+      tr: { term: 'Grev hakkı', definition: 'Çalışanların çıkarlarını savunmak için işi bırakmalarına imkân tanıyan anayasal hak.' },
     },
   },
 
@@ -878,6 +1008,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'انقلاب فرانسه', definition: 'رویداد بزرگ ۱۷۸۹ که سلطنت را سرنگون و جمهوری را بنیان نهاد.' },
       hi: { term: 'फ्रांसीसी क्रांति', definition: '1789 की प्रमुख घटना जिसने राजशाही को उखाड़ फेंका और गणराज्य की स्थापना की।' },
       pt: { term: 'Revolução Francesa', definition: 'Acontecimento importante de 1789 que derrubou a monarquia e fundou a República.' },
+      en: { term: 'French Revolution', definition: 'Major event of 1789 that overthrew the monarchy and founded the Republic.' },
+      tr: { term: 'Fransız Devrimi', definition: '1789\'da monarşiyi deviren ve Cumhuriyet\'i kuran büyük olay.' },
     },
   },
   {
@@ -891,6 +1023,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'سقوط باستیل', definition: 'در ۱۴ ژوئیه ۱۷۸۹ پاریسی‌ها قلعه را تصرف کردند، نماد انقلاب.' },
       hi: { term: 'बास्तील का पतन', definition: '14 जुलाई 1789 को पेरिसवासियों ने किले पर कब्ज़ा किया, क्रांति का प्रतीक।' },
       pt: { term: 'Tomada da Bastilha', definition: 'Em 14 de julho de 1789, os parisienses tomam a fortaleza, símbolo da Revolução.' },
+      en: { term: 'Storming of the Bastille', definition: 'On 14 July 1789, Parisians seized the fortress, a symbol of the Revolution.' },
+      tr: { term: 'Bastille\'in zaptı', definition: '14 Temmuz 1789\'da Parisliler kaleyi ele geçirdi; Devrim\'in simgesi.' },
     },
   },
   {
@@ -904,6 +1038,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'عصر روشنگری', definition: 'جنبش فکری قرن هجدهم که خرد، علم و مدارا را ترویج می‌کرد.' },
       hi: { term: 'प्रबोधन काल', definition: 'अठारहवीं सदी का बौद्धिक आंदोलन जो तर्क, विज्ञान और सहिष्णुता का समर्थक था।' },
       pt: { term: 'O Iluminismo', definition: 'Movimento intelectual do século XVIII que promovia a razão, a ciência e a tolerância.' },
+      en: { term: 'The Enlightenment (Les Lumières)', definition: 'Intellectual movement of the 18th century advocating reason, science and tolerance.' },
+      tr: { term: 'Aydınlanma (Les Lumières)', definition: 'Aklı, bilimi ve hoşgörüyü savunan 18. yüzyıl fikir akımı.' },
     },
   },
   {
@@ -917,6 +1053,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ولتر', definition: 'فیلسوف روشنگری، مدافع آزادی بیان و مدارا.' },
       hi: { term: 'वॉल्तेयर', definition: 'प्रबोधन काल के दार्शनिक, अभिव्यक्ति की स्वतंत्रता और सहिष्णुता के रक्षक।' },
       pt: { term: 'Voltaire', definition: 'Filósofo do Iluminismo, defensor da liberdade de expressão e da tolerância.' },
+      en: { term: 'Voltaire', definition: 'Enlightenment philosopher, defender of freedom of expression and tolerance.' },
+      tr: { term: 'Voltaire', definition: 'Aydınlanma filozofu, ifade özgürlüğünün ve hoşgörünün savunucusu.' },
     },
   },
   {
@@ -930,6 +1068,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ژان ژاک روسو', definition: 'فیلسوف نویسنده قرارداد اجتماعی، اندیشمند حاکمیت مردمی.' },
       hi: { term: 'ज़ाँ-ज़ाक रूसो', definition: 'सामाजिक अनुबंध के लेखक दार्शनिक, लोकप्रिय संप्रभुता के विचारक।' },
       pt: { term: 'Jean-Jacques Rousseau', definition: 'Filósofo autor do Contrato social, pensador da soberania popular.' },
+      en: { term: 'Jean-Jacques Rousseau', definition: 'Philosopher, author of The Social Contract, theorist of popular sovereignty.' },
+      tr: { term: 'Jean-Jacques Rousseau', definition: 'Toplumsal Sözleşme\'nin yazarı filozof, halk egemenliği düşünürü.' },
     },
   },
   {
@@ -943,6 +1083,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'لغو بردگی', definition: 'حذف قطعی بردگی در فرانسه در سال ۱۸۴۸ در دوره جمهوری دوم.' },
       hi: { term: 'दासता का उन्मूलन', definition: '1848 में द्वितीय गणराज्य के तहत फ्रांस में दासता का निश्चित उन्मूलन।' },
       pt: { term: 'Abolição da escravatura', definition: 'Supressão definitiva da escravatura na França em 1848, sob a Segunda República.' },
+      en: { term: 'Abolition of slavery', definition: 'Definitive abolition of slavery in France in 1848, under the Second Republic.' },
+      tr: { term: 'Köleliğin kaldırılması', definition: '1848\'de İkinci Cumhuriyet döneminde Fransa\'da köleliğin kesin olarak kaldırılması.' },
     },
   },
   {
@@ -956,6 +1098,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مقاومت', definition: 'جنبش مبارزه علیه اشغال نازی در جنگ جهانی دوم.' },
       hi: { term: 'प्रतिरोध', definition: 'द्वितीय विश्व युद्ध के दौरान नाज़ी कब्ज़े के विरुद्ध संघर्ष आंदोलन।' },
       pt: { term: 'Resistência', definition: 'Movimento de luta contra a ocupação nazista durante a Segunda Guerra Mundial.' },
+      en: { term: 'Resistance', definition: 'Movement of struggle against the Nazi occupation during the Second World War.' },
+      tr: { term: 'Direniş', definition: 'İkinci Dünya Savaşı sırasında Nazi işgaline karşı mücadele hareketi.' },
     },
   },
   {
@@ -969,6 +1113,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'اتحادیه اروپا', definition: 'سازمان سیاسی و اقتصادی متشکل از ۲۷ کشور اروپایی.' },
       hi: { term: 'यूरोपीय संघ', definition: '27 यूरोपीय राज्यों को एकजुट करने वाला राजनीतिक और आर्थिक संगठन।' },
       pt: { term: 'União Europeia', definition: 'Organização política e econômica que reúne 27 Estados europeus.' },
+      en: { term: 'European Union', definition: 'Political and economic organisation bringing together 27 European States.' },
+      tr: { term: 'Avrupa Birliği', definition: '27 Avrupa ülkesini bir araya getiren siyasi ve ekonomik örgüt.' },
     },
   },
   {
@@ -982,6 +1128,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'میراث', definition: 'مجموعه دارایی‌های فرهنگی، تاریخی و طبیعی به ارث رسیده و قابل انتقال.' },
       hi: { term: 'विरासत', definition: 'विरासत में मिली और आगे सौंपी जाने वाली सांस्कृतिक, ऐतिहासिक और प्राकृतिक संपत्तियों का समूह।' },
       pt: { term: 'Patrimônio', definition: 'Conjunto de bens culturais, históricos e naturais herdados e a serem transmitidos.' },
+      en: { term: 'Heritage', definition: 'Set of cultural, historical and natural goods inherited and to be passed on.' },
+      tr: { term: 'Miras', definition: 'Devralınan ve gelecek kuşaklara aktarılacak kültürel, tarihî ve doğal varlıkların bütünü.' },
     },
   },
   {
@@ -995,6 +1143,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'فرانکوفونی', definition: 'مجموعه کشورها و جوامعی که زبان فرانسه را به اشتراک می‌گذارند.' },
       hi: { term: 'फ्रैंकोफोनी', definition: 'फ्रांसीसी भाषा के उपयोग को साझा करने वाले देशों और समुदायों का समूह।' },
       pt: { term: 'Francofonia', definition: 'Conjunto de países e comunidades que compartilham o uso da língua francesa.' },
+      en: { term: 'Francophonie', definition: 'All the countries and communities sharing the use of the French language.' },
+      tr: { term: 'Frankofoni', definition: 'Fransızcanın kullanımını paylaşan tüm ülke ve toplulukların bütünü.' },
     },
   },
   {
@@ -1008,6 +1158,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: '۱۴ ژوئیه', definition: 'جشن ملی فرانسه به یاد سقوط باستیل و وحدت ملی.' },
       hi: { term: '14 जुलाई', definition: 'फ्रांस का राष्ट्रीय पर्व जो बास्तील के पतन और राष्ट्रीय एकता की याद में मनाया जाता है।' },
       pt: { term: '14 de julho', definition: 'Festa nacional francesa que comemora a tomada da Bastilha e a unidade nacional.' },
+      en: { term: '14 July', definition: 'French national holiday commemorating the storming of the Bastille and national unity.' },
+      tr: { term: '14 Temmuz', definition: 'Bastille\'in zaptını ve ulusal birliği anan Fransa\'nın ulusal bayramı.' },
     },
   },
   {
@@ -1021,6 +1173,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ناپلئون بناپارت', definition: 'ژنرالی که امپراتور شد و حقوق فرانسه را با قانون مدنی نوسازی کرد.' },
       hi: { term: 'नेपोलियन बोनापार्ट', definition: 'सेनापति से सम्राट बने, जिन्होंने सिविल कोड से फ्रांसीसी कानून का आधुनिकीकरण किया।' },
       pt: { term: 'Napoleão Bonaparte', definition: 'General que se tornou imperador, modernizou o direito francês com o Código Civil.' },
+      en: { term: 'Napoleon Bonaparte', definition: 'General who became emperor; he modernised French law with the Civil Code.' },
+      tr: { term: 'Napolyon Bonapart', definition: 'Generalken imparator olan ve Medeni Kanun ile Fransız hukukunu modernleştiren lider.' },
     },
   },
   {
@@ -1034,6 +1188,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'قانون مدنی', definition: 'مجموعه قوانین تنظیم‌کننده روابط بین افراد، تدوین‌شده در ۱۸۰۴.' },
       hi: { term: 'सिविल कोड', definition: 'व्यक्तियों के बीच संबंधों को नियंत्रित करने वाला कानून संग्रह, 1804 में बनाया गया।' },
       pt: { term: 'Código Civil', definition: 'Conjunto de leis que regem as relações entre as pessoas, criado em 1804.' },
+      en: { term: 'Civil Code', definition: 'Collection of laws governing relations between persons, created in 1804.' },
+      tr: { term: 'Medeni Kanun', definition: 'Kişiler arasındaki ilişkileri düzenleyen, 1804\'te oluşturulmuş yasa derlemesi.' },
     },
   },
   {
@@ -1047,6 +1203,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'جنگ جهانی دوم', definition: 'درگیری جهانی ۱۹۳۹ تا ۱۹۴۵. فرانسه اشغال و سپس آزاد شد.' },
       hi: { term: 'द्वितीय विश्व युद्ध', definition: '1939-1945 का विश्व संघर्ष। फ्रांस पर कब्ज़ा हुआ फिर मुक्त किया गया।' },
       pt: { term: 'Segunda Guerra Mundial', definition: 'Conflito mundial de 1939-1945. A França foi ocupada e depois libertada.' },
+      en: { term: 'Second World War', definition: 'World conflict of 1939-1945. France was occupied and then liberated.' },
+      tr: { term: 'İkinci Dünya Savaşı', definition: '1939-1945 dünya çatışması. Fransa önce işgal edildi, sonra kurtarıldı.' },
     },
   },
   {
@@ -1060,6 +1218,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شارل دوگل', definition: 'رهبر فرانسه آزاد در جنگ، بنیان‌گذار جمهوری پنجم در ۱۹۵۸.' },
       hi: { term: 'शार्ल द गॉल', definition: 'युद्ध के दौरान स्वतंत्र फ्रांस के नेता, 1958 में पंचम गणराज्य के संस्थापक।' },
       pt: { term: 'Charles de Gaulle', definition: 'Líder da França Livre durante a guerra, fundador da Quinta República em 1958.' },
+      en: { term: 'Charles de Gaulle', definition: 'Leader of Free France during the war, founder of the Fifth Republic in 1958.' },
+      tr: { term: 'Charles de Gaulle', definition: 'Savaş sırasında Özgür Fransa\'nın lideri, 1958\'de Beşinci Cumhuriyet\'in kurucusu.' },
     },
   },
   {
@@ -1073,6 +1233,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'جمهوری پنجم', definition: 'نظام سیاسی فعلی فرانسه، برقرارشده توسط قانون اساسی ۱۹۵۸.' },
       hi: { term: 'पंचम गणराज्य', definition: 'फ्रांस की वर्तमान राजनीतिक व्यवस्था, 1958 के संविधान द्वारा स्थापित।' },
       pt: { term: 'Quinta República', definition: 'Regime político atual da França, instaurado pela Constituição de 1958.' },
+      en: { term: 'Fifth Republic', definition: 'Current political regime of France, established by the Constitution of 1958.' },
+      tr: { term: 'Beşinci Cumhuriyet', definition: 'Fransa\'nın 1958 Anayasası ile kurulan mevcut siyasi rejimi.' },
     },
   },
   {
@@ -1086,6 +1248,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'پیمان رم', definition: 'پیمان بنیان‌گذار جامعه اروپایی امضاشده در ۱۹۵۷ توسط شش کشور.' },
       hi: { term: 'रोम की संधि', definition: 'यूरोपीय समुदाय की संस्थापक संधि जो 1957 में छह देशों ने हस्ताक्षर की।' },
       pt: { term: 'Tratado de Roma', definition: 'Tratado fundador da Comunidade Europeia assinado em 1957 por seis países.' },
+      en: { term: 'Treaty of Rome', definition: 'Founding treaty of the European Community signed in 1957 by six countries.' },
+      tr: { term: 'Roma Antlaşması', definition: '1957\'de altı ülke tarafından imzalanan, Avrupa Topluluğu\'nun kurucu antlaşması.' },
     },
   },
   {
@@ -1099,6 +1263,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'قانون ۱۹۰۵', definition: 'قانون جدایی کلیسا و دولت، بنیان لائیسیته فرانسه.' },
       hi: { term: '1905 का कानून', definition: 'चर्च और राज्य के अलगाव का कानून, फ्रांसीसी धर्मनिरपेक्षता की नींव।' },
       pt: { term: 'Lei de 1905', definition: 'Lei de separação das Igrejas e do Estado, fundamento da laicidade francesa.' },
+      en: { term: 'Law of 1905', definition: 'Law separating Churches and the State, the foundation of French secularism.' },
+      tr: { term: '1905 Yasası', definition: 'Kiliseleri ve devleti ayıran, Fransız laikliğinin temelini oluşturan yasa.' },
     },
   },
   {
@@ -1112,6 +1278,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ویکتور هوگو', definition: 'نویسنده بزرگ قرن نوزدهم، مدافع حقوق بشر و جمهوری.' },
       hi: { term: 'विक्टर ह्यूगो', definition: 'उन्नीसवीं सदी के प्रमुख लेखक, मानवाधिकारों और गणराज्य के रक्षक।' },
       pt: { term: 'Victor Hugo', definition: 'Escritor importante do século XIX, defensor dos direitos humanos e da República.' },
+      en: { term: 'Victor Hugo', definition: 'Major 19th-century writer, defender of human rights and the Republic.' },
+      tr: { term: 'Victor Hugo', definition: '19. yüzyılın önde gelen yazarı, insan haklarının ve Cumhuriyet\'in savunucusu.' },
     },
   },
   {
@@ -1125,6 +1293,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'سیمون وی', definition: 'سیاستمدار زنی که از حق سقط جنین و یادبود هولوکاست دفاع کرد.' },
       hi: { term: 'सिमोन वेय', definition: 'गर्भपात के अधिकार और होलोकॉस्ट की स्मृति की रक्षा करने वाली राजनीतिज्ञ।' },
       pt: { term: 'Simone Veil', definition: 'Política que defendeu o direito ao aborto e a memória do Holocausto.' },
+      en: { term: 'Simone Veil', definition: 'Politician who defended the right to abortion and the memory of the Shoah.' },
+      tr: { term: 'Simone Veil', definition: 'Kürtaj hakkını ve Shoah\'ın anısını savunan kadın siyasetçi.' },
     },
   },
 
@@ -1140,6 +1310,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'تأمین اجتماعی', definition: 'نظام حمایتی پوشش‌دهنده بیماری، بازنشستگی، خانواده و حوادث کار.' },
       hi: { term: 'सामाजिक सुरक्षा', definition: 'बीमारी, सेवानिवृत्ति, परिवार और कार्य दुर्घटनाओं को कवर करने वाली सुरक्षा प्रणाली।' },
       pt: { term: 'Seguridade Social', definition: 'Sistema de proteção que cobre doença, aposentadoria, família e acidentes de trabalho.' },
+      en: { term: 'Sécurité sociale (French social security)', definition: 'Protection system covering illness, retirement, family and workplace accidents.' },
+      tr: { term: 'Sécurité sociale (Fransız sosyal güvenlik sistemi)', definition: 'Hastalık, emeklilik, aile ve iş kazalarını kapsayan koruma sistemi.' },
     },
   },
   {
@@ -1153,6 +1325,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'کارت ویتال', definition: 'کارت بیمه درمانی که امکان بازپرداخت هزینه‌های پزشکی را فراهم می‌کند.' },
       hi: { term: 'कार्ट विताल', definition: 'स्वास्थ्य बीमा कार्ड जो चिकित्सा खर्चों की प्रतिपूर्ति की अनुमति देता है।' },
       pt: { term: 'Cartão Vitale', definition: 'Cartão de seguro saúde que permite o reembolso dos cuidados médicos.' },
+      en: { term: 'Carte Vitale', definition: 'Health insurance card enabling reimbursement of medical care.' },
+      tr: { term: 'Carte Vitale', definition: 'Tıbbi bakım masraflarının geri ödenmesini sağlayan sağlık sigortası kartı.' },
     },
   },
   {
@@ -1166,6 +1340,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'حداقل دستمزد', definition: 'حداقل دستمزد ساعتی قانونی در فرانسه.' },
       hi: { term: 'न्यूनतम वेतन', definition: 'फ्रांस में कानूनी न्यूनतम प्रति घंटा वेतन।' },
       pt: { term: 'Salário mínimo', definition: 'Salário mínimo legal por hora na França.' },
+      en: { term: 'SMIC (minimum wage)', definition: 'Statutory minimum hourly wage in France.' },
+      tr: { term: 'SMIC (asgari ücret)', definition: 'Fransa\'da yasal asgari saatlik ücret.' },
     },
   },
   {
@@ -1179,6 +1355,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'فرانس تراوای', definition: 'خدمات عمومی اشتغال که جویندگان کار را در جستجویشان همراهی می‌کند.' },
       hi: { term: 'फ्रांस ट्रावाय', definition: 'सार्वजनिक रोज़गार सेवा जो नौकरी चाहने वालों को उनकी खोज में सहायता करती है।' },
       pt: { term: 'France Travail', definition: 'Serviço público de emprego que acompanha os candidatos a emprego em sua busca.' },
+      en: { term: 'France Travail', definition: 'Public employment service that supports job-seekers in their search.' },
+      tr: { term: 'France Travail', definition: 'İş arayanlara arayışlarında destek olan kamu istihdam hizmeti.' },
     },
   },
   {
@@ -1192,6 +1370,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'صندوق کمک خانواده', definition: 'نهادی که کمک‌های اجتماعی به خانواده‌ها پرداخت می‌کند.' },
       hi: { term: 'पारिवारिक भत्ता कोष', definition: 'परिवारों को सामाजिक सहायता प्रदान करने वाला संगठन।' },
       pt: { term: 'CAF (Caixa de alocações familiares)', definition: 'Organismo que paga auxílios sociais às famílias.' },
+      en: { term: 'CAF (family allowance fund)', definition: 'Organisation that pays social benefits to families.' },
+      tr: { term: 'CAF (aile yardımları sandığı)', definition: 'Ailelere sosyal yardım ödemeleri yapan kurum.' },
     },
   },
   {
@@ -1205,6 +1385,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'قرارداد ادغام جمهوری', definition: 'قراردادی که خارجیان مقیم فرانسه امضا می‌کنند شامل آموزش مدنی و زبانی.' },
       hi: { term: 'गणतांत्रिक एकीकरण अनुबंध', definition: 'फ्रांस में बसने वाले विदेशियों द्वारा हस्ताक्षरित अनुबंध जिसमें नागरिक और भाषाई प्रशिक्षण शामिल है।' },
       pt: { term: 'Contrato de integração republicana', definition: 'Contrato assinado por estrangeiros que se instalam na França, incluindo formação cívica e linguística.' },
+      en: { term: 'Republican Integration Contract (CIR)', definition: 'Contract signed by foreigners settling in France, including civic and language training.' },
+      tr: { term: 'Cumhuriyetçi Uyum Sözleşmesi (CIR)', definition: 'Fransa\'ya yerleşen yabancıların imzaladığı, vatandaşlık ve dil eğitimini kapsayan sözleşme.' },
     },
   },
   {
@@ -1218,6 +1400,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'دفتر مهاجرت و ادغام فرانسه', definition: 'دفتری که پذیرش خارجیان در فرانسه را مدیریت می‌کند.' },
       hi: { term: 'फ्रांसीसी आप्रवासन कार्यालय', definition: 'फ्रांस में विदेशियों के स्वागत का प्रबंधन करने वाला कार्यालय।' },
       pt: { term: 'OFII (Escritório de imigração e integração)', definition: 'Escritório que administra o acolhimento dos estrangeiros na França.' },
+      en: { term: 'OFII (French immigration and integration office)', definition: 'Office that manages the reception of foreigners in France.' },
+      tr: { term: 'OFII (Fransız göç ve uyum ofisi)', definition: 'Fransa\'da yabancıların kabulünü yöneten ofis.' },
     },
   },
   {
@@ -1231,6 +1415,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'استانداری', definition: 'مقر اداره دولت در دپارتمان که توسط استاندار اداره می‌شود.' },
       hi: { term: 'प्रीफ़ेक्चर', definition: 'विभाग में राज्य प्रशासन का मुख्यालय, प्रीफ़े द्वारा संचालित।' },
       pt: { term: 'Prefeitura departamental', definition: 'Sede da administração do Estado no departamento, dirigida pelo prefeito departamental.' },
+      en: { term: 'Prefecture (Préfecture)', definition: 'Seat of State administration in the department, headed by the prefect.' },
+      tr: { term: 'Valilik (Préfecture)', definition: 'Departmandaki devlet idaresinin merkezi, vali tarafından yönetilir.' },
     },
   },
   {
@@ -1244,6 +1430,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'اجازه اقامت', definition: 'سندی که به یک خارجی اجازه اقامت قانونی در فرانسه را می‌دهد.' },
       hi: { term: 'निवास परमिट', definition: 'वह दस्तावेज़ जो एक विदेशी को फ्रांस में कानूनी रूप से रहने की अनुमति देता है।' },
       pt: { term: 'Título de residência', definition: 'Documento que autoriza um estrangeiro a residir legalmente na França.' },
+      en: { term: 'Residence permit', definition: 'Document authorising a foreigner to reside legally in France.' },
+      tr: { term: 'Oturma izni', definition: 'Bir yabancının Fransa\'da yasal olarak ikamet etmesine izin veren belge.' },
     },
   },
   {
@@ -1257,6 +1445,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'تابعیت‌یابی', definition: 'فرآیندی که به یک خارجی امکان کسب تابعیت فرانسه را از طریق حکم می‌دهد.' },
       hi: { term: 'देशीयकरण', definition: 'वह प्रक्रिया जो किसी विदेशी को डिक्री द्वारा फ्रांसीसी नागरिकता प्राप्त करने की अनुमति देती है।' },
       pt: { term: 'Naturalização', definition: 'Procedimento que permite a um estrangeiro adquirir a nacionalidade francesa por decreto.' },
+      en: { term: 'Naturalisation', definition: 'Procedure allowing a foreigner to acquire French nationality by decree.' },
+      tr: { term: 'Vatandaşlığa kabul', definition: 'Bir yabancının kararname yoluyla Fransız vatandaşlığını edinmesini sağlayan prosedür.' },
     },
   },
   {
@@ -1270,6 +1460,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مدرسه دولتی', definition: 'مؤسسه آموزشی رایگان، لائیک و اجباری که توسط دولت تأمین مالی می‌شود.' },
       hi: { term: 'सार्वजनिक विद्यालय', definition: 'राज्य द्वारा वित्तपोषित निःशुल्क, धर्मनिरपेक्ष और अनिवार्य शैक्षिक संस्थान।' },
       pt: { term: 'Escola pública', definition: 'Estabelecimento escolar gratuito, laico e obrigatório, financiado pelo Estado.' },
+      en: { term: 'Public school', definition: 'Free, secular and compulsory school institution, funded by the State.' },
+      tr: { term: 'Devlet okulu', definition: 'Devlet tarafından finanse edilen ücretsiz, laik ve zorunlu okul kurumu.' },
     },
   },
   {
@@ -1283,6 +1475,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'شهرداری', definition: 'ساختمانی که اداره شهری و خدمات عمومی محلی در آن ارائه می‌شود.' },
       hi: { term: 'नगरपालिका भवन', definition: 'वह भवन जिसमें नगर प्रशासन स्थित है और स्थानीय सार्वजनिक सेवाएँ प्रदान की जाती हैं।' },
       pt: { term: 'Prefeitura', definition: 'Edifício que abriga a administração municipal onde são prestados os serviços públicos locais.' },
+      en: { term: 'Town hall (Mairie)', definition: 'Building housing the municipal administration where local public services are provided.' },
+      tr: { term: 'Belediye binası (Mairie)', definition: 'Yerel kamu hizmetlerinin sunulduğu, belediye idaresinin bulunduğu bina.' },
     },
   },
   {
@@ -1296,6 +1490,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'ثبت احوال', definition: 'خدماتی که تولد، ازدواج و فوت شهروندان را ثبت می‌کند.' },
       hi: { term: 'सिविल रजिस्ट्री', definition: 'नागरिकों के जन्म, विवाह और मृत्यु का पंजीकरण करने वाली सेवा।' },
       pt: { term: 'Registro civil', definition: 'Serviço que registra os nascimentos, casamentos e óbitos dos cidadãos.' },
+      en: { term: 'Civil registry', definition: 'Service that records the births, marriages and deaths of citizens.' },
+      tr: { term: 'Nüfus kayıt birimi', definition: 'Vatandaşların doğum, evlilik ve ölümlerini kayda geçiren hizmet.' },
     },
   },
   {
@@ -1309,6 +1505,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'مسکن اجتماعی', definition: 'مسکن با اجاره معقول ویژه افراد کم‌درآمد.' },
       hi: { term: 'सामाजिक आवास', definition: 'कम आय वाले लोगों के लिए किफायती किराये का आवास।' },
       pt: { term: 'Habitação social', definition: 'Moradia com aluguel moderado destinada a pessoas com renda modesta.' },
+      en: { term: 'Social housing', definition: 'Moderate-rent housing (HLM) intended for people on modest incomes.' },
+      tr: { term: 'Sosyal konut', definition: 'Düşük gelirli kişilere yönelik düşük kiralı konut (HLM).' },
     },
   },
   {
@@ -1322,6 +1520,8 @@ export const GLOSSARY: GlossaryTerm[] = [
       fa: { term: 'پزشک معالج', definition: 'پزشک عمومی انتخاب‌شده توسط بیمار، اولین مرجع برای درمان.' },
       hi: { term: 'पारिवारिक चिकित्सक', definition: 'रोगी द्वारा चुना गया सामान्य चिकित्सक, देखभाल के लिए पहला संपर्क।' },
       pt: { term: 'Médico de família', definition: 'Médico generalista escolhido pelo paciente, primeiro interlocutor para os cuidados.' },
+      en: { term: 'Attending physician', definition: 'General practitioner chosen by the patient, first point of contact for medical care.' },
+      tr: { term: 'Aile hekimi', definition: 'Hasta tarafından seçilen, tıbbi bakım için ilk başvurulacak pratisyen hekim.' },
     },
   },
 ];
