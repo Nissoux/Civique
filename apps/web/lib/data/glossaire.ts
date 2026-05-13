@@ -5,10 +5,12 @@ export interface GlossaryTerm {
   themeId: number;
   translations: {
     ar?: { term: string; definition: string };
+    en?: { term: string; definition: string };
     es?: { term: string; definition: string };
     fa?: { term: string; definition: string };
     hi?: { term: string; definition: string };
     pt?: { term: string; definition: string };
+    tr?: { term: string; definition: string };
   };
 }
 

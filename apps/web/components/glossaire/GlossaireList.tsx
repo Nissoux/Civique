@@ -32,8 +32,18 @@ function getTranslation(
   lang: Language,
 ): { term: string; definition: string } | undefined {
   if (lang === 'fr') return undefined;
-  // Narrow to the languages with translation data (matches the type).
-  if (lang === 'ar' || lang === 'es' || lang === 'fa' || lang === 'hi' || lang === 'pt') {
+  // Narrow to the languages we accept in the translations map (matches the
+  // type). Per-term presence is still optional — a missing translation falls
+  // through to the FR primary text plus the "translation pending" notice.
+  if (
+    lang === 'ar' ||
+    lang === 'en' ||
+    lang === 'es' ||
+    lang === 'fa' ||
+    lang === 'hi' ||
+    lang === 'pt' ||
+    lang === 'tr'
+  ) {
     return term.translations[lang];
   }
   return undefined;
@@ -45,16 +55,14 @@ export function GlossaireList({ terms, currentLang }: Props) {
 
   const rtl = isRtl(currentLang);
 
-  // We carry translations for ar/es/fa/hi/pt in the static glossary file.
-  // Any other non-FR language (today: en, tr) falls back to FR — surface a
-  // discreet notice so the user knows the choice was registered.
+  // Dynamic check: do we actually have translation data for the active
+  // language in this glossary file? Static once the file is built, but lets
+  // us extend the language list (e.g. add en/tr later via the translation
+  // script) without touching this component. FR is the source and always
+  // counts as "translated".
   const hasTranslationsForLang =
     currentLang === 'fr' ||
-    currentLang === 'ar' ||
-    currentLang === 'es' ||
-    currentLang === 'fa' ||
-    currentLang === 'hi' ||
-    currentLang === 'pt';
+    terms.some((t) => getTranslation(t, currentLang) !== undefined);
 
   const filtered = useMemo(() => {
     const q = normalize(query.trim());
