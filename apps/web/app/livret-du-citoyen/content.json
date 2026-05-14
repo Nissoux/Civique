@@ -1,0 +1,636 @@
+{
+  "title": "Livret du Citoyen — Contenu de référence",
+  "subtitle": "Synthèse pédagogique des cinq grands thèmes du programme civique français",
+  "version": "2026",
+  "disclaimer": "Cette synthèse couvre les faits, dates, noms et institutions abordés par le programme civique officiel. Elle est rédigée en formulations originales à des fins pédagogiques. Le livret officiel du Ministère de l'Intérieur reste la référence légale.",
+  "sources": [
+    "Constitution française du 4 octobre 1958",
+    "Déclaration des droits de l'homme et du citoyen du 26 août 1789",
+    "Loi de séparation des Églises et de l'État du 9 décembre 1905",
+    "Programme civique du Ministère de l'Intérieur (livret du citoyen, édition 2022 et mises à jour 2026)",
+    "INSEE — données démographiques et territoriales 2024-2025",
+    "Vie-publique.fr — fiches institutionnelles",
+    "Légifrance — textes consolidés"
+  ],
+  "sections": [
+    {
+      "id": "principes-valeurs",
+      "number": 1,
+      "title": "Principes et valeurs de la République",
+      "summary": "La République française repose sur une devise, des symboles et un principe central de laïcité, hérités d'une histoire de plus de deux siècles.",
+      "blocks": [
+        { "type": "h3", "text": "La devise : Liberté, Égalité, Fraternité" },
+        {
+          "type": "p",
+          "text": "La devise de la République française se compose de trois mots, gravés au fronton des mairies, des écoles publiques et de la plupart des bâtiments officiels. Elle apparaît pendant la Révolution française et devient officielle sous la IIIe République, puis est inscrite dans la Constitution de 1958."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Liberté : chaque personne peut penser, s'exprimer, circuler, se réunir et croire (ou ne pas croire) librement, dans le respect de la loi et d'autrui.",
+            "Égalité : tous les citoyens sont égaux devant la loi, sans distinction d'origine, de race, de sexe, de religion ou de fortune. L'égalité des droits ne signifie pas l'uniformité des situations, mais l'absence de privilèges.",
+            "Fraternité : ce principe appelle à la solidarité entre les habitants du pays, à l'entraide et au respect mutuel. Il fonde notamment la protection sociale et le devoir d'assistance aux personnes en danger."
+          ]
+        },
+        { "type": "h3", "text": "Les symboles de la République" },
+        {
+          "type": "p",
+          "text": "Plusieurs symboles incarnent la République et figurent sur les documents officiels, dans les institutions et lors des cérémonies nationales."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Le drapeau tricolore — bandes verticales bleue, blanche et rouge. Né pendant la Révolution (1789-1790), il associe les couleurs de Paris (bleu et rouge) au blanc de la monarchie. Aujourd'hui, il flotte sur tous les bâtiments publics.",
+            "Marianne — figure féminine coiffée d'un bonnet phrygien, allégorie de la République. Son buste est présent dans toutes les mairies. De nombreuses personnalités françaises lui ont prêté leurs traits au fil du temps.",
+            "La Marseillaise — hymne national. Le texte et la musique sont composés en 1792 à Strasbourg par Claude Joseph Rouget de Lisle, alors officier du génie. D'abord baptisé « Chant de guerre pour l'armée du Rhin », il est repris par les fédérés marseillais en route vers Paris, d'où son nom. Devenu hymne national en 1795, puis confirmé dans ce rôle sous la IIIe République.",
+            "Le coq gaulois — symbole apparu dès l'Antiquité (jeu de mots latin entre gallus, le coq, et Gallus, le Gaulois). Présent sur les grilles de l'Élysée, sur les maillots sportifs et sur certaines pièces de monnaie.",
+            "La fête nationale du 14 juillet — commémore deux événements : la prise de la Bastille en 1789, symbole de la fin de l'absolutisme, et la Fête de la Fédération de 1790, symbole de l'unité nationale. Officialisée comme fête nationale par une loi de 1880. Elle s'accompagne d'un défilé militaire sur les Champs-Élysées, de bals et de feux d'artifice partout en France.",
+            "La devise et les sceaux de l'État — le grand sceau de France représente la Liberté assise tenant un faisceau de licteurs. Il sert pour les actes les plus solennels (promulgation de la Constitution, traités)."
+          ]
+        },
+        { "type": "h3", "text": "La Marseillaise : repères" },
+        {
+          "type": "p",
+          "text": "L'hymne est chanté lors des cérémonies officielles, des compétitions sportives internationales et des commémorations. Le premier couplet et le refrain sont les passages les plus connus. Le refrain appelle les citoyens à défendre la patrie. L'hymne comporte sept couplets à l'origine, mais seul le premier est régulièrement interprété en public."
+        },
+        { "type": "h3", "text": "La laïcité" },
+        {
+          "type": "p",
+          "text": "La laïcité est l'un des principes fondamentaux de la République. Elle repose sur trois piliers : la liberté de conscience, la séparation des institutions publiques et des organisations religieuses, et l'égalité de tous les citoyens devant la loi quelle que soit leur conviction."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Texte fondateur : la loi du 9 décembre 1905 de séparation des Églises et de l'État. Elle pose deux principes (article 1 : la République assure la liberté de conscience et garantit le libre exercice des cultes ; article 2 : la République ne reconnaît, ne salarie ni ne subventionne aucun culte).",
+            "Conséquences pour l'État : neutralité des services publics, financement public des cultes interdit (à l'exception de quelques régimes particuliers comme l'Alsace-Moselle, héritage historique antérieur à 1905).",
+            "Conséquences pour les agents publics : obligation de neutralité ; interdiction de porter des signes religieux ostentatoires dans l'exercice de leurs fonctions.",
+            "À l'école publique : la loi du 15 mars 2004 interdit aux élèves de porter des signes ou tenues manifestant ostensiblement une appartenance religieuse. Les programmes, eux, doivent respecter une stricte neutralité.",
+            "Pour les usagers : on peut exprimer sa religion dans l'espace public, mais le visage doit rester découvert dans les lieux publics depuis la loi du 11 octobre 2010.",
+            "Liberté de conscience : chacun peut croire, ne pas croire, changer de religion ou n'en avoir aucune. Aucune discrimination fondée sur la religion n'est tolérée."
+          ]
+        },
+        { "type": "h3", "text": "Les caractères de la République (article 1 de la Constitution)" },
+        {
+          "type": "p",
+          "text": "L'article 1er de la Constitution de 1958 énonce les quatre caractères de la République : « La France est une République indivisible, laïque, démocratique et sociale. »"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Indivisible : la souveraineté appartient à la Nation tout entière, le territoire ne peut être divisé, la loi est la même pour tous sur l'ensemble du territoire.",
+            "Laïque : voir ci-dessus. L'État est séparé des religions et garantit la liberté de conscience.",
+            "Démocratique : le pouvoir vient du peuple, qui l'exerce par ses représentants élus et par voie de référendum. Le suffrage est universel, direct ou indirect, toujours secret.",
+            "Sociale : la République garantit des droits sociaux (protection sociale, santé, éducation, travail, logement) et veille à corriger les inégalités."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "institutions-politique",
+      "number": 2,
+      "title": "Système institutionnel et politique",
+      "summary": "La Ve République, instaurée par la Constitution de 1958, organise les pouvoirs publics autour d'un exécutif fort, d'un Parlement bicaméral et d'une justice indépendante, à l'échelle de la France et de l'Union européenne.",
+      "blocks": [
+        { "type": "h3", "text": "La Constitution de 1958 et la Ve République" },
+        {
+          "type": "p",
+          "text": "La Constitution actuelle, promulguée le 4 octobre 1958, fonde la Ve République. Elle a été préparée sous la direction du général Charles de Gaulle pour remédier à l'instabilité gouvernementale des IIIe et IVe Républiques. Elle a été révisée à de nombreuses reprises, notamment en 1962 (élection du président au suffrage universel direct), 2000 (passage du mandat présidentiel de 7 à 5 ans, dit quinquennat) et 2008 (renforcement des pouvoirs du Parlement, question prioritaire de constitutionnalité, limitation à deux mandats consécutifs pour le président)."
+        },
+        { "type": "h3", "text": "La séparation des pouvoirs" },
+        {
+          "type": "p",
+          "text": "La Constitution distingue trois pouvoirs, conformément à la doctrine de Montesquieu : l'exécutif, le législatif et le judiciaire."
+        },
+        { "type": "h4", "text": "Le pouvoir exécutif" },
+        {
+          "type": "ul",
+          "items": [
+            "Le président de la République est le chef de l'État. Il est élu pour 5 ans au suffrage universel direct, à deux tours, et son mandat est renouvelable une seule fois consécutivement (limite introduite en 2008). Il réside au palais de l'Élysée à Paris.",
+            "Ses pouvoirs : il nomme le Premier ministre, préside le Conseil des ministres, promulgue les lois, est le chef des armées, négocie et ratifie les traités, peut soumettre certains textes à référendum, peut dissoudre l'Assemblée nationale et dispose de pouvoirs exceptionnels (article 16) en cas de crise grave.",
+            "Le Premier ministre dirige le Gouvernement. Il est nommé par le président et conduit la politique de la Nation, avec son équipe ministérielle. Il réside à l'hôtel de Matignon.",
+            "Le Gouvernement, formé de ministres et de secrétaires d'État, met en œuvre la politique décidée. Chaque ministre dirige une administration (Intérieur, Justice, Économie, Éducation nationale, etc.)."
+          ]
+        },
+        { "type": "h4", "text": "Le pouvoir législatif" },
+        {
+          "type": "ul",
+          "items": [
+            "Le Parlement vote les lois, autorise les dépenses de l'État et contrôle le Gouvernement. Il est bicaméral : il comprend deux chambres.",
+            "L'Assemblée nationale : 577 députés élus pour 5 ans au suffrage universel direct à deux tours, dans des circonscriptions. Elle siège au palais Bourbon à Paris. C'est elle qui peut, en dernier ressort, voter la loi et renverser le Gouvernement par une motion de censure.",
+            "Le Sénat : 348 sénateurs élus pour 6 ans au suffrage universel indirect par un collège d'environ 162 000 grands électeurs (élus locaux). Le Sénat est renouvelé par moitié tous les 3 ans. Il siège au palais du Luxembourg à Paris et représente notamment les collectivités territoriales.",
+            "Le processus de la loi : un projet de loi (déposé par le Gouvernement) ou une proposition de loi (déposée par un parlementaire) est examiné successivement par les deux assemblées. En cas de désaccord persistant, l'Assemblée nationale a le dernier mot."
+          ]
+        },
+        { "type": "h4", "text": "Le pouvoir judiciaire" },
+        {
+          "type": "ul",
+          "items": [
+            "La justice est rendue au nom du peuple français par des magistrats indépendants. Le président de la République est garant de cette indépendance.",
+            "Deux ordres de juridiction : l'ordre judiciaire (litiges entre particuliers et infractions pénales) et l'ordre administratif (litiges avec l'administration).",
+            "Ordre judiciaire — civil : tribunal de proximité, tribunal judiciaire, cour d'appel, Cour de cassation (juridiction suprême).",
+            "Ordre judiciaire — pénal : tribunal de police (contraventions), tribunal correctionnel (délits), cour d'assises et cour criminelle départementale (crimes).",
+            "Ordre administratif : tribunal administratif, cour administrative d'appel, Conseil d'État (juridiction suprême).",
+            "Le Conseil constitutionnel veille à la conformité des lois à la Constitution. Il compte 9 membres nommés pour 9 ans et inclut les anciens présidents de la République.",
+            "Le Défenseur des droits, autorité indépendante créée en 2008, défend les droits et libertés face aux administrations et lutte contre les discriminations."
+          ]
+        },
+        { "type": "h3", "text": "Les élections en France" },
+        {
+          "type": "p",
+          "text": "Le vote est le moyen principal pour les citoyens d'exercer leur souveraineté. Plusieurs scrutins rythment la vie politique nationale et locale."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Élection présidentielle : tous les 5 ans, au suffrage universel direct, à deux tours.",
+            "Élections législatives : tous les 5 ans, désignent les 577 députés à l'Assemblée nationale, au scrutin uninominal majoritaire à deux tours par circonscription.",
+            "Élections sénatoriales : tous les 6 ans (renouvellement par moitié tous les 3 ans), suffrage universel indirect par les grands électeurs.",
+            "Élections municipales : tous les 6 ans, désignent les conseillers municipaux qui élisent ensuite le maire. Les ressortissants de l'Union européenne résidant en France peuvent y voter et y être candidats sur les listes (sauf au poste de maire et d'adjoint).",
+            "Élections départementales : tous les 6 ans, élisent les conseillers départementaux par binôme paritaire (un homme, une femme) dans chaque canton.",
+            "Élections régionales : tous les 6 ans, désignent les conseillers régionaux.",
+            "Élections européennes : tous les 5 ans, élisent les députés français au Parlement européen au scrutin proportionnel de liste."
+          ]
+        },
+        { "type": "h3", "text": "Le suffrage universel et le droit de vote" },
+        {
+          "type": "p",
+          "text": "Le suffrage universel signifie que tout citoyen majeur a le droit de vote, sans condition de fortune, d'instruction ou de sexe. Il est acquis aux hommes en 1848 (deuxième République) et aux femmes par l'ordonnance du 21 avril 1944, signée par le général de Gaulle. Les femmes votent pour la première fois aux élections municipales du 29 avril 1945."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Conditions pour voter : être de nationalité française (ou ressortissante d'un autre État membre de l'UE pour les élections municipales et européennes), avoir au moins 18 ans, être inscrit sur les listes électorales, jouir de ses droits civils et politiques.",
+            "Caractères du vote : universel, égal (un citoyen = une voix), secret, libre et personnel. Le vote par procuration est possible si on ne peut pas se déplacer.",
+            "L'inscription sur les listes électorales se fait en mairie ou en ligne. Pour les jeunes recensés, l'inscription est automatique à 18 ans."
+          ]
+        },
+        { "type": "h3", "text": "L'organisation territoriale" },
+        {
+          "type": "p",
+          "text": "La France est un État unitaire mais décentralisé. Plusieurs niveaux de collectivités territoriales s'articulent sur le territoire."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "La commune : niveau de base, dirigée par un maire et un conseil municipal élu pour 6 ans. La France compte environ 35 000 communes. Le maire est à la fois élu local et agent de l'État (état civil, élections).",
+            "Le département : 101 départements (96 en métropole et 5 outre-mer : Guadeloupe, Martinique, Guyane, La Réunion, Mayotte). Dirigé par un conseil départemental et son président. Compétences : action sociale, collèges, routes départementales.",
+            "La région : 18 régions au total — 13 régions métropolitaines depuis la réforme territoriale entrée en vigueur le 1er janvier 2016, et 5 régions ultramarines (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte). Dirigée par un conseil régional et son président. Compétences : développement économique, lycées, transports régionaux, formation professionnelle.",
+            "Collectivités à statut particulier : Corse (collectivité de Corse depuis 2018), métropole de Lyon, Paris (commune et département confondus), Saint-Pierre-et-Miquelon, Saint-Barthélemy, Saint-Martin, Wallis-et-Futuna, Polynésie française, Nouvelle-Calédonie, Terres australes et antarctiques françaises."
+          ]
+        },
+        { "type": "h3", "text": "Maire, préfet et président de région" },
+        {
+          "type": "ul",
+          "items": [
+            "Le maire est élu par le conseil municipal après les élections municipales. Il représente la commune, dirige les services municipaux, célèbre les mariages civils, et exerce des compétences d'officier d'état civil et de police municipale.",
+            "Le préfet est nommé par le président de la République en Conseil des ministres. Il représente l'État dans le département (préfet de département) ou la région (préfet de région). Il veille à l'application des lois, contrôle la légalité des actes des collectivités et dirige les services déconcentrés de l'État.",
+            "Le président du conseil départemental et le président du conseil régional sont élus par leurs assemblées respectives. Ils dirigent l'action de la collectivité."
+          ]
+        },
+        { "type": "h3", "text": "L'Union européenne" },
+        {
+          "type": "p",
+          "text": "La France est l'un des six pays fondateurs de la construction européenne (avec l'Allemagne, l'Italie, la Belgique, les Pays-Bas et le Luxembourg), à l'origine de la Communauté européenne du charbon et de l'acier (CECA) en 1951 et de la Communauté économique européenne (CEE) en 1957 par le traité de Rome."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Composition : l'Union européenne compte 27 États membres au 1er janvier 2025, après le retrait du Royaume-Uni (Brexit) effectif le 31 janvier 2020.",
+            "Monnaie : l'euro, monnaie unique, mis en circulation sous forme fiduciaire le 1er janvier 2002 dans 12 pays initiaux. Aujourd'hui partagé par 20 pays de la zone euro.",
+            "Drapeau et hymne : le drapeau européen (douze étoiles dorées sur fond bleu, symbole d'unité) et l'hymne européen (l'Ode à la joie tirée de la Neuvième Symphonie de Beethoven).",
+            "Devise : « Unie dans la diversité ».",
+            "Institutions principales : le Parlement européen (élu au suffrage universel direct par les citoyens européens), le Conseil européen (chefs d'État et de gouvernement), le Conseil de l'Union européenne (ministres), la Commission européenne (organe exécutif qui propose les textes), la Cour de justice de l'Union européenne (Luxembourg), la Banque centrale européenne (Francfort).",
+            "Siège du Parlement européen : Strasbourg (siège officiel) et Bruxelles (réunions complémentaires).",
+            "Libertés européennes : libre circulation des personnes, des marchandises, des services et des capitaux à l'intérieur de l'UE. L'espace Schengen (26 pays en 2024-2025) supprime les contrôles aux frontières intérieures.",
+            "Citoyenneté européenne : tout ressortissant d'un État membre est aussi citoyen européen. Cela donne notamment le droit de circuler et de séjourner librement, de voter aux élections municipales et européennes du pays de résidence, et de bénéficier de la protection consulaire d'un autre État membre hors UE."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "droits-devoirs",
+      "number": 3,
+      "title": "Droits et devoirs",
+      "summary": "Devenir citoyen, c'est se voir reconnaître des droits fondamentaux et accepter des devoirs envers la collectivité, dans le respect de la loi commune.",
+      "blocks": [
+        { "type": "h3", "text": "La Déclaration des droits de l'homme et du citoyen (1789)" },
+        {
+          "type": "p",
+          "text": "Adoptée par l'Assemblée nationale constituante le 26 août 1789, la Déclaration des droits de l'homme et du citoyen est un texte fondateur de la France républicaine. Elle pose, en 17 articles, des principes universels considérés comme « naturels, inaliénables et sacrés » : liberté, propriété, sûreté, résistance à l'oppression, égalité devant la loi, présomption d'innocence, libertés d'opinion et de conscience, liberté d'expression. Elle est intégrée au bloc de constitutionnalité par le préambule de la Constitution de 1958 et possède aujourd'hui la même valeur juridique que la Constitution."
+        },
+        { "type": "h3", "text": "Les droits fondamentaux" },
+        {
+          "type": "p",
+          "text": "Les droits reconnus aux personnes en France découlent de la Déclaration de 1789, du préambule de la Constitution de 1946, de la Constitution de 1958, de la Charte de l'environnement de 2004, ainsi que de la Convention européenne des droits de l'homme et du droit de l'Union européenne."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Liberté d'expression : chacun peut exprimer ses opinions, y compris par la presse, sous réserve de ne pas commettre d'infraction (diffamation, injure, incitation à la haine, apologie du terrorisme).",
+            "Liberté de conscience et de religion : chacun peut croire, ne pas croire, pratiquer ou changer de religion, dans le respect de l'ordre public.",
+            "Liberté d'association : depuis la loi du 1er juillet 1901, on peut créer librement une association à but non lucratif, en deux personnes minimum.",
+            "Liberté syndicale : reconnue depuis la loi Waldeck-Rousseau du 21 mars 1884. On peut adhérer ou non au syndicat de son choix.",
+            "Droit de grève : reconnu par le préambule de la Constitution de 1946 et organisé dans le cadre de la loi.",
+            "Liberté de réunion et de manifestation : encadrée par des règles de déclaration préalable en mairie ou en préfecture.",
+            "Respect de la vie privée et du domicile : protégé par la loi (article 9 du Code civil) et la Convention européenne des droits de l'homme.",
+            "Protection des données personnelles : encadrée par le RGPD (depuis 2018) et la CNIL en France.",
+            "Droit à la sûreté : nul ne peut être arrêté ou détenu arbitrairement.",
+            "Droit à un procès équitable, présomption d'innocence, droits de la défense."
+          ]
+        },
+        { "type": "h3", "text": "Le droit de vote et l'éligibilité" },
+        {
+          "type": "ul",
+          "items": [
+            "Droit de vote (électorat) : être Français, majeur (18 ans), jouir de ses droits civils et politiques, être inscrit sur les listes électorales.",
+            "Éligibilité : conditions d'âge variables selon le scrutin. 18 ans pour être candidat aux élections municipales, départementales, régionales, législatives ; 24 ans pour le Sénat ; 18 ans aussi pour la présidence de la République (depuis 2011), avec présentation par 500 élus.",
+            "Inéligibilité : peut résulter d'une condamnation pénale, d'une incompatibilité de fonction ou d'une déchéance prononcée par un juge."
+          ]
+        },
+        { "type": "h3", "text": "L'égalité entre les femmes et les hommes" },
+        {
+          "type": "p",
+          "text": "L'égalité entre les femmes et les hommes est un principe constitutionnel rappelé dès le préambule de la Constitution de 1946 et explicité par la loi sur la parité de 1999, qui modifie la Constitution pour favoriser l'accès égal des femmes et des hommes aux mandats électoraux et fonctions électives."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "1944 : droit de vote et d'éligibilité accordé aux femmes.",
+            "1965 : les femmes mariées peuvent exercer une profession, ouvrir un compte bancaire et disposer de leurs biens sans autorisation du mari.",
+            "1967 : loi Neuwirth autorisant la contraception.",
+            "1975 : loi Veil dépénalisant l'avortement (loi du 17 janvier 1975).",
+            "1983 : loi Roudy sur l'égalité professionnelle.",
+            "2000-2014 : lois successives renforçant la parité dans les fonctions électives et les responsabilités professionnelles.",
+            "2018 : loi sur les violences sexuelles et sexistes (verbalisation du harcèlement de rue).",
+            "Égalité salariale à travail égal : posée dans le Code du travail, encadrée par un index annuel obligatoire dans les entreprises de plus de 50 salariés depuis 2019."
+          ]
+        },
+        { "type": "h3", "text": "Les devoirs du citoyen" },
+        {
+          "type": "p",
+          "text": "À l'engagement de la République envers ses citoyens répondent des devoirs que chacun assume envers la collectivité."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Respecter la loi : chacun est tenu de connaître et de respecter les lois et règlements de la République. « Nul n'est censé ignorer la loi. »",
+            "Participer à la vie démocratique : voter, s'informer, débattre. Le vote n'est pas obligatoire en France, mais il est considéré comme un devoir civique majeur.",
+            "Contribuer aux dépenses publiques (les impôts) : conformément à l'article 13 de la Déclaration de 1789, la contribution commune est répartie entre tous les citoyens en raison de leurs facultés.",
+            "Participer à la défense nationale : le service militaire obligatoire a été suspendu par la loi du 28 octobre 1997. À sa place, le recensement à 16 ans (obligatoire pour les filles et les garçons) et la Journée Défense et Citoyenneté (JDC) restent obligatoires pour pouvoir passer le permis de conduire, les concours et les examens.",
+            "Concourir à l'œuvre de justice : participer comme juré d'assises lorsqu'on est tiré au sort sur les listes électorales (à partir de 23 ans). Témoigner si l'on est appelé à la barre.",
+            "Respecter autrui : la fraternité républicaine impose le respect des autres, dans leur dignité, leur intégrité, leurs droits et leur diversité.",
+            "Porter assistance à personne en danger : la non-assistance à personne en danger est un délit, sauf si l'on se met soi-même en péril.",
+            "Respecter les symboles de la République et les biens publics : un drapeau, un hymne, un monument, ou un service public ne se profanent pas. Outrager publiquement la Marseillaise ou le drapeau est une infraction (article 433-5-1 du Code pénal)."
+          ]
+        },
+        { "type": "h3", "text": "Sanctions et infractions" },
+        {
+          "type": "p",
+          "text": "Le droit pénal français distingue trois catégories d'infractions, en fonction de la gravité des faits et des peines encourues."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "La contravention : infraction la moins grave (excès de vitesse, tapage nocturne, dégradation légère). Sanctionnée par une amende. Jugée par le tribunal de police.",
+            "Le délit : infraction d'une gravité intermédiaire (vol, escroquerie, conduite en état d'ivresse, violences sans incapacité grave, harcèlement). Peines : amende et/ou emprisonnement jusqu'à 10 ans. Jugé par le tribunal correctionnel.",
+            "Le crime : infraction la plus grave (meurtre, viol, vol à main armée, actes de terrorisme). Peines : réclusion criminelle (jusqu'à perpétuité). Jugé par la cour d'assises ou la cour criminelle départementale."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Toute personne soupçonnée a droit à un avocat, à la présomption d'innocence et à un procès équitable. Les peines doivent être nécessaires et proportionnées, conformément à la Déclaration de 1789."
+        }
+      ]
+    },
+    {
+      "id": "histoire-geographie-culture",
+      "number": 4,
+      "title": "Histoire, géographie et culture",
+      "summary": "Comprendre la France, c'est connaître les dates qui ont façonné sa République, les figures qui l'ont incarnée, son territoire et son héritage culturel.",
+      "blocks": [
+        { "type": "h3", "text": "Grandes dates de l'histoire de France" },
+        {
+          "type": "ul",
+          "items": [
+            "Antiquité : la Gaule romaine (Ier siècle av. J.-C. à Ve siècle ap. J.-C.). Conquête par Jules César (52 av. J.-C., bataille d'Alésia, défaite de Vercingétorix).",
+            "496 : baptême de Clovis, roi des Francs, à Reims. Naissance progressive du royaume de France.",
+            "800 : couronnement de Charlemagne comme empereur d'Occident.",
+            "987 : avènement d'Hugues Capet, début de la dynastie des Capétiens.",
+            "1431 : Jeanne d'Arc, qui avait contribué au sacre de Charles VII à Reims (1429), est brûlée à Rouen.",
+            "1539 : ordonnance de Villers-Cotterêts, le français devient la langue officielle de l'administration.",
+            "1598 : édit de Nantes, signé par Henri IV, accorde la liberté de culte aux protestants.",
+            "1685 : révocation de l'édit de Nantes par Louis XIV.",
+            "1789 : Révolution française. 14 juillet : prise de la Bastille. 26 août : Déclaration des droits de l'homme et du citoyen.",
+            "1792 : proclamation de la Première République (21 septembre).",
+            "1804 : Napoléon Bonaparte se fait sacrer empereur. Promulgation du Code civil (Code Napoléon).",
+            "1815 : défaite de Waterloo, fin de l'Empire. Restauration de la monarchie.",
+            "1848 : Deuxième République (février). Abolition définitive de l'esclavage dans les colonies françaises par le décret du 27 avril 1848, à l'initiative de Victor Schoelcher. Suffrage universel masculin.",
+            "1870-1871 : guerre franco-prussienne, défaite de Sedan, proclamation de la Troisième République (4 septembre 1870). Commune de Paris (mars-mai 1871).",
+            "1881-1882 : lois Jules Ferry instaurant l'école primaire gratuite (1881), puis obligatoire et laïque (1882) pour les enfants de 6 à 13 ans.",
+            "1905 : loi de séparation des Églises et de l'État (9 décembre).",
+            "1914-1918 : Première Guerre mondiale. Armistice signé le 11 novembre 1918.",
+            "1936 : Front populaire, dirigé par Léon Blum. Congés payés (15 jours), semaine de 40 heures, conventions collectives.",
+            "1939-1945 : Seconde Guerre mondiale. Défaite et occupation allemande. Régime de Vichy collaborateur, dirigé par Pétain. Appel du général de Gaulle à la résistance le 18 juin 1940 depuis Londres. Libération de Paris : 25 août 1944. Capitulation allemande : 8 mai 1945. Shoah : extermination des Juifs d'Europe par le régime nazi, qui a fait environ 6 millions de victimes, dont près de 76 000 Juifs déportés depuis la France.",
+            "1944 : ordonnance du 21 avril donnant le droit de vote et d'éligibilité aux femmes.",
+            "1945 : création de la Sécurité sociale (ordonnance du 4 octobre).",
+            "1946 : Quatrième République. Préambule constitutionnel énonçant des droits économiques et sociaux.",
+            "1957 : traité de Rome, fondation de la Communauté économique européenne.",
+            "1958 : retour au pouvoir du général de Gaulle. Constitution du 4 octobre. Naissance de la Cinquième République.",
+            "1962 : indépendance de l'Algérie après une guerre commencée en 1954. Référendum instaurant l'élection du président au suffrage universel direct.",
+            "1968 : crise de mai-juin 1968, mouvement social et étudiant.",
+            "1974 : Valéry Giscard d'Estaing élu président. Majorité abaissée à 18 ans. Création du ministère de la Condition féminine confié à Françoise Giroud.",
+            "1981 : François Mitterrand élu président. Abolition de la peine de mort, à l'initiative de Robert Badinter, par la loi du 9 octobre 1981.",
+            "1992 : traité de Maastricht créant l'Union européenne.",
+            "1995 : Jacques Chirac, président, reconnaît la responsabilité de l'État français dans la rafle du Vél' d'Hiv et la déportation des Juifs.",
+            "2000 : référendum sur le quinquennat (passage du mandat présidentiel de 7 à 5 ans).",
+            "2002 : mise en circulation de l'euro fiduciaire le 1er janvier.",
+            "2008 : révision constitutionnelle (renforcement du Parlement, question prioritaire de constitutionnalité, limitation des mandats présidentiels consécutifs).",
+            "2013 : loi du 17 mai 2013 ouvrant le mariage aux couples de même sexe.",
+            "2015 : attentats de Paris (Charlie Hebdo, janvier ; Bataclan et terrasses, 13 novembre). Réaction d'unité nationale.",
+            "2017-2018 : entrée en vigueur de l'Accord de Paris sur le climat (négocié en 2015).",
+            "2024 : Jeux olympiques et paralympiques d'été de Paris.",
+            "2024 : loi du 8 mars constitutionnalisant la liberté de recourir à l'interruption volontaire de grossesse (IVG)."
+          ]
+        },
+        { "type": "h3", "text": "Personnages marquants" },
+        {
+          "type": "ul",
+          "items": [
+            "Vercingétorix (Ier siècle av. J.-C.) : chef gaulois, symbole de la résistance contre César.",
+            "Clovis (vers 466-511) : premier roi des Francs baptisé chrétien.",
+            "Charlemagne (vers 742-814) : empereur d'Occident, fondateur d'un vaste empire et bâtisseur d'une renaissance culturelle.",
+            "Jeanne d'Arc (vers 1412-1431) : figure de la résistance pendant la guerre de Cent Ans, canonisée en 1920.",
+            "Henri IV (1553-1610) : roi de France qui mit fin aux guerres de religion par l'édit de Nantes (1598).",
+            "Louis XIV (1638-1715) : « Roi-Soleil », monarque absolu, fait construire Versailles, règne 72 ans (le plus long de l'histoire de France).",
+            "Voltaire (1694-1778) et les Lumières : philosophes qui préparent intellectuellement la Révolution (Rousseau, Montesquieu, Diderot).",
+            "Napoléon Ier (1769-1821) : général puis empereur des Français (1804-1815). Code civil (1804), réorganisation administrative (préfets), création des lycées et de la Légion d'honneur.",
+            "Victor Hugo (1802-1885) : écrivain et homme politique, figure du romantisme. Auteur des Misérables, Notre-Dame de Paris. Engagé contre la peine de mort et pour la République.",
+            "Louis Pasteur (1822-1895) : scientifique, met au point le vaccin contre la rage et fonde la microbiologie moderne.",
+            "Jules Ferry (1832-1893) : ministre, à l'origine des lois sur l'école laïque, gratuite et obligatoire.",
+            "Émile Zola (1840-1902) : écrivain, auteur du « J'accuse » lors de l'affaire Dreyfus.",
+            "Marie Curie (1867-1934) : physicienne, double prix Nobel (physique 1903, chimie 1911). Première femme entrée au Panthéon pour ses propres mérites (en 1995).",
+            "Jean Jaurès (1859-1914) : leader socialiste, fondateur du quotidien L'Humanité, défenseur de la paix. Assassiné à la veille de la Première Guerre mondiale.",
+            "Georges Clemenceau (1841-1929) : « Père la Victoire », président du Conseil pendant la Première Guerre mondiale.",
+            "Léon Blum (1872-1950) : président du Conseil du Front populaire (1936). Instaure les congés payés et la semaine de 40 heures.",
+            "Charles de Gaulle (1890-1970) : général, chef de la France libre, fondateur de la Ve République, premier président élu au suffrage universel direct.",
+            "Jean Moulin (1899-1943) : héros de la Résistance, organisateur du Conseil national de la Résistance, mort en déportation.",
+            "Simone de Beauvoir (1908-1986) : philosophe et écrivaine, autrice du Deuxième Sexe, figure majeure du féminisme.",
+            "Simone Veil (1927-2017) : déportée à Auschwitz, ministre de la Santé, fait adopter la loi sur l'IVG (1975), première présidente du Parlement européen élu au suffrage universel direct (1979). Entrée au Panthéon en 2018.",
+            "Robert Badinter (1928-2024) : avocat puis garde des Sceaux, artisan de l'abolition de la peine de mort en 1981. Entrera au Panthéon en 2025.",
+            "Aimé Césaire (1913-2008) : écrivain et homme politique martiniquais, théoricien de la négritude."
+           ]
+        },
+        { "type": "h3", "text": "Conflits majeurs et mémoire" },
+        {
+          "type": "ul",
+          "items": [
+            "Première Guerre mondiale (1914-1918) : conflit mondial déclenché par l'assassinat de l'archiduc François-Ferdinand. La France y perd environ 1,4 million de soldats. Armistice signé le 11 novembre 1918 à Rethondes. Jour férié et de commémoration.",
+            "Seconde Guerre mondiale (1939-1945) : la France entre en guerre contre l'Allemagne nazie le 3 septembre 1939. Défaite militaire et armistice de juin 1940. Régime de Vichy au sud, occupation au nord. Le général de Gaulle organise depuis Londres la France libre. La Résistance intérieure s'organise (réseaux, maquis, presse clandestine). Libération en 1944, capitulation allemande le 8 mai 1945. Jour férié et de commémoration.",
+            "La Shoah : extermination systématique des Juifs d'Europe par l'Allemagne nazie. Environ 6 millions de victimes. Près de 76 000 Juifs ont été déportés depuis la France ; environ 2 500 sont revenus. La France a reconnu officiellement sa responsabilité dans la rafle du Vél' d'Hiv (juillet 1942) par le discours du président Jacques Chirac le 16 juillet 1995.",
+            "La colonisation et la décolonisation : la France a constitué un vaste empire colonial à partir du XVIIe siècle, principalement en Afrique, en Asie et dans les Caraïbes. La décolonisation s'opère après 1945. Indépendances notables : Indochine (1954, après la défaite de Diên Biên Phu et les accords de Genève), Maroc et Tunisie (1956), Algérie (1962, après une guerre de huit ans, par les accords d'Évian).",
+            "Guerre d'Algérie (1954-1962) : conflit majeur de décolonisation. Reconnaissance officielle du terme « guerre » par le Parlement français en 1999.",
+            "Conflits récents : engagement militaire de la France en ex-Yougoslavie (années 1990), Afghanistan (2001-2014), Mali (2013-2022 dans le cadre des opérations Serval puis Barkhane), opérations en bande sahélo-saharienne."
+          ]
+        },
+        { "type": "h3", "text": "Géographie de la France" },
+        {
+          "type": "p",
+          "text": "La France métropolitaine s'étend sur environ 552 000 km². Avec les outre-mer, la superficie totale atteint près de 670 000 km². La population française est d'environ 68 millions d'habitants (estimations 2024-2025), dont près de 2,2 millions dans les territoires ultramarins."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Capitale : Paris, environ 2,1 millions d'habitants intra-muros, près de 11 millions pour l'aire urbaine.",
+            "Grandes villes : Marseille, Lyon, Toulouse, Nice, Nantes, Strasbourg, Montpellier, Bordeaux, Lille, Rennes.",
+            "Fleuves principaux : la Seine (qui traverse Paris et se jette dans la Manche au Havre), la Loire (le plus long fleuve français, environ 1 010 km, de l'Ardèche à Saint-Nazaire), le Rhône (qui descend du lac Léman vers la Méditerranée à Marseille), la Garonne (qui prend sa source dans les Pyrénées et rejoint l'Atlantique au niveau de la Gironde), le Rhin (frontière naturelle avec l'Allemagne).",
+            "Massifs montagneux : les Alpes (à l'est, frontière avec l'Italie et la Suisse ; le mont Blanc culmine à 4 808 mètres et constitue le plus haut sommet de l'Union européenne), les Pyrénées (au sud, frontière avec l'Espagne et l'Andorre), le Massif central (au centre-sud), le Jura (à l'est, frontière avec la Suisse), les Vosges (au nord-est).",
+            "Mers et océans : la Manche au nord (en face du Royaume-Uni), l'océan Atlantique à l'ouest, la mer du Nord au nord-est, la mer Méditerranée au sud.",
+            "Pays frontaliers (en métropole) : Belgique, Luxembourg, Allemagne, Suisse, Italie, Monaco, Espagne, Andorre.",
+            "Outre-mer (DROM-COM) : Guadeloupe, Martinique, Guyane (en Amérique du Sud), La Réunion, Mayotte (océan Indien), Saint-Pierre-et-Miquelon (Atlantique nord), Saint-Barthélemy, Saint-Martin (Caraïbes), Wallis-et-Futuna, Polynésie française (avec Tahiti), Nouvelle-Calédonie, les Terres australes et antarctiques françaises.",
+            "Climats : océanique à l'ouest, continental à l'est, méditerranéen au sud, montagnard en altitude, tropical et équatorial outre-mer."
+          ]
+        },
+        { "type": "h3", "text": "Patrimoine et culture" },
+        {
+          "type": "ul",
+          "items": [
+            "Monuments emblématiques : la tour Eiffel (Paris, construite pour l'Exposition universelle de 1889 par Gustave Eiffel, haute de 330 mètres avec les antennes), le Louvre (ancien palais royal devenu musée en 1793, abritant La Joconde de Léonard de Vinci), le château de Versailles (résidence des rois Louis XIV, XV et XVI, classé au patrimoine mondial de l'Unesco), la cathédrale Notre-Dame de Paris (architecture gothique commencée au XIIe siècle, restaurée après l'incendie de 2019, rouverte au public en décembre 2024), le mont Saint-Michel (abbaye et village fortifié dans la baie entre Bretagne et Normandie, classé Unesco), l'Arc de triomphe (Paris), le Panthéon (Paris, où reposent les grandes figures de la Nation).",
+            "Autres sites majeurs : la grotte de Lascaux (Dordogne, peintures préhistoriques), le pont du Gard (Languedoc, aqueduc romain), Carcassonne (cité médiévale fortifiée), les châteaux de la Loire (Chambord, Chenonceau, Amboise).",
+            "Écrivains et poètes : Molière (XVIIe siècle, comédien et dramaturge, Le Bourgeois gentilhomme, Tartuffe), Jean de La Fontaine (Fables), Voltaire et Jean-Jacques Rousseau (Lumières), Victor Hugo (romantisme), Charles Baudelaire (Les Fleurs du mal), Marcel Proust (À la recherche du temps perdu), Albert Camus (L'Étranger, La Peste, prix Nobel 1957), Marguerite Duras, Annie Ernaux (prix Nobel 2022).",
+            "Peintres : Nicolas Poussin (XVIIe siècle, classicisme), Eugène Delacroix (La Liberté guidant le peuple, 1830), Claude Monet (Impression, soleil levant, fondateur de l'impressionnisme), Paul Cézanne (post-impressionnisme), Auguste Renoir, Edgar Degas, Berthe Morisot, Henri Matisse, Paul Gauguin.",
+            "Cinéma : les frères Lumière (invention du cinématographe en 1895 à Lyon), réalisateurs reconnus comme François Truffaut, Jean-Luc Godard, Agnès Varda. Festival international de Cannes depuis 1946.",
+            "Musique : compositeurs classiques (Hector Berlioz, Claude Debussy, Maurice Ravel, Camille Saint-Saëns), chanson française (Édith Piaf, Jacques Brel, Georges Brassens, Charles Aznavour), scènes contemporaines variées.",
+            "Gastronomie : repas gastronomique des Français inscrit au patrimoine immatériel de l'Unesco en 2010. Diversité régionale (cuisine méditerranéenne, du Sud-Ouest, alsacienne, lyonnaise, antillaise, etc.).",
+            "Le Panthéon : monument parisien dédié aux grandes figures de la Nation. Y reposent notamment Voltaire, Rousseau, Hugo, Zola, Jaurès, Marie et Pierre Curie, Jean Moulin, Simone Veil, Joséphine Baker (depuis 2021), Missak Manouchian (depuis 2024)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivre-en-france",
+      "number": 5,
+      "title": "Vivre dans la société française",
+      "summary": "Au quotidien, la République s'incarne dans des services publics, des droits sociaux et des règles communes : santé, école, travail, famille, urgences, engagement.",
+      "blocks": [
+        { "type": "h3", "text": "Les numéros d'urgence" },
+        {
+          "type": "p",
+          "text": "Certains numéros sont gratuits et accessibles 24 heures sur 24, y compris depuis un téléphone bloqué. Ils permettent de joindre les secours adaptés à la situation."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "15 : SAMU — urgences médicales graves, malaise, douleur thoracique, accident, intoxication.",
+            "17 : Police-secours — délit ou crime en cours, agression, vol, accident de la route.",
+            "18 : Sapeurs-pompiers — incendie, fuite de gaz, accident, sauvetage, secours à personne.",
+            "112 : numéro d'urgence européen — fonctionne dans toute l'Union européenne, utile pour les voyageurs.",
+            "114 : numéro d'urgence pour les personnes sourdes ou malentendantes (par SMS, fax ou tchat).",
+            "115 : Samu social — accueil et hébergement des personnes sans abri.",
+            "116 117 : médecin de garde en dehors des heures d'ouverture des cabinets.",
+            "119 : Allô Enfance en danger — protection de l'enfance.",
+            "3919 : Violences Femmes Info — écoute, information et orientation pour les femmes victimes de violences."
+          ]
+        },
+        { "type": "h3", "text": "La santé et la protection sociale" },
+        {
+          "type": "p",
+          "text": "La France dispose d'un système de santé universel financé essentiellement par les cotisations sociales et l'impôt. La Sécurité sociale, créée par les ordonnances du 4 octobre 1945, couvre les principaux risques de la vie : maladie, maternité, accidents du travail, retraite, famille."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "La carte Vitale : carte à puce remise à chaque assuré social, qui prouve les droits à l'Assurance maladie et facilite le remboursement des soins (tiers payant). Elle se renouvelle au fil du temps et doit être mise à jour régulièrement en pharmacie ou en borne dédiée.",
+            "Le médecin traitant : médecin généraliste de référence, déclaré à l'Assurance maladie. Le parcours de soins passe en principe par lui, sauf pour certaines spécialités (gynécologue, ophtalmologue, etc.). Consulter sans déclaration de médecin traitant entraîne un moindre remboursement.",
+            "La mutuelle (ou complémentaire santé) : couvre la part non remboursée par la Sécurité sociale. Elle peut être individuelle ou collective (souscrite par l'employeur). Depuis 2016, l'employeur du secteur privé doit proposer une mutuelle d'entreprise à ses salariés.",
+            "La Complémentaire santé solidaire (C2S) : aide accessible aux personnes aux revenus modestes, sans avance de frais ni reste à charge sur la plupart des soins.",
+            "Les vaccinations obligatoires pour les enfants nés depuis 2018 : 11 vaccins (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+            "L'Aide médicale d'État (AME) : prise en charge des soins pour les personnes étrangères en situation irrégulière sous conditions de ressources."
+          ]
+        },
+        { "type": "h3", "text": "Le travail et la vie professionnelle" },
+        {
+          "type": "ul",
+          "items": [
+            "Le SMIC (Salaire minimum interprofessionnel de croissance) : salaire minimum légal, revalorisé chaque année au 1er janvier et automatiquement lorsque l'inflation dépasse un certain seuil. En 2025, il s'élève à environ 1 802 € bruts mensuels pour 35 heures hebdomadaires (soit environ 11,88 € bruts de l'heure).",
+            "La durée légale du travail : 35 heures par semaine depuis les lois Aubry (1998 et 2000). Au-delà, les heures supplémentaires sont rémunérées avec une majoration.",
+            "Les principaux contrats : CDI (Contrat à durée indéterminée), CDD (Contrat à durée déterminée), contrat d'apprentissage, contrat de professionnalisation, intérim.",
+            "Les congés payés : 5 semaines par an (2,5 jours ouvrables par mois de travail effectif).",
+            "Les jours fériés : 11 jours fériés légaux (1er janvier, lundi de Pâques, 1er mai, 8 mai, jeudi de l'Ascension, lundi de Pentecôte, 14 juillet, 15 août, 1er novembre, 11 novembre, 25 décembre). Le 1er mai est le seul jour férié obligatoirement chômé et payé pour tous les salariés.",
+            "France Travail : service public de l'emploi né en 2024 du regroupement de Pôle emploi et d'autres acteurs. Inscription pour bénéficier de l'allocation chômage, d'un accompagnement, de formations, d'offres d'emploi.",
+            "La représentation des salariés : élections professionnelles, comité social et économique (CSE) obligatoire dans les entreprises d'au moins 11 salariés.",
+            "Les syndicats : libres et pluralistes. Principaux : CFDT, CGT, FO, CFE-CGC, CFTC, et d'autres selon les secteurs.",
+            "Lutte contre les discriminations à l'embauche et au travail : interdiction de toute différence de traitement fondée sur l'origine, le sexe, l'âge, la religion, l'orientation sexuelle, le handicap, l'état de santé, etc."
+          ]
+        },
+        { "type": "h3", "text": "La famille et la vie privée" },
+        {
+          "type": "ul",
+          "items": [
+            "Le mariage civil : célébré en mairie par le maire (ou un adjoint), en présence de témoins, après publication des bans. Le mariage religieux n'a pas de valeur juridique tant que le mariage civil n'a pas été célébré. Depuis la loi du 17 mai 2013, le mariage est ouvert aux couples de personnes de même sexe.",
+            "Le PACS (Pacte civil de solidarité) : créé en 1999, contrat conclu entre deux personnes majeures qui souhaitent organiser leur vie commune. Enregistré en mairie ou chez un notaire.",
+            "Le concubinage : union de fait entre deux personnes vivant ensemble, sans formalité administrative.",
+            "Le divorce : possible par consentement mutuel (procédure simplifiée chez le notaire depuis 2017) ou contentieux (devant le juge aux affaires familiales).",
+            "L'autorité parentale : exercée conjointement par les deux parents, qu'ils soient mariés, pacsés, divorcés ou séparés. Elle inclut les décisions concernant la santé, l'éducation, la résidence et la sécurité de l'enfant.",
+            "La déclaration de naissance : obligatoire dans les 5 jours qui suivent l'accouchement (jour de l'accouchement non compté), à la mairie du lieu de naissance. Au-delà, une décision de justice est nécessaire.",
+            "La reconnaissance d'un enfant : pour les couples non mariés, le père doit reconnaître l'enfant en mairie (avant ou après la naissance). La mère est automatiquement désignée par l'acte de naissance.",
+            "L'adoption : possible pour un couple marié ou une personne seule, sous conditions. Deux formes : adoption plénière (filiation d'origine remplacée) et adoption simple (filiation d'origine maintenue).",
+            "Les allocations familiales et la CAF (Caisse d'allocations familiales) : prestations versées sous conditions (composition du foyer, ressources) pour soutenir les familles."
+          ]
+        },
+        { "type": "h3", "text": "L'école et l'éducation" },
+        {
+          "type": "p",
+          "text": "L'école est l'un des piliers de la République. Depuis la rentrée 2019, l'instruction est obligatoire pour tous les enfants de 3 à 16 ans (auparavant, 6 à 16 ans). L'enseignement public est gratuit et laïque."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les principes : gratuité, laïcité, obligation, mixité, égalité des chances.",
+            "L'école maternelle : de 3 à 6 ans, désormais obligatoire. Trois sections : petite, moyenne, grande.",
+            "L'école élémentaire : du CP au CM2, de 6 à 10-11 ans. Apprentissages fondamentaux (lire, écrire, compter, respecter autrui).",
+            "Le collège : de la 6e à la 3e, de 11 à 14-15 ans. Se conclut par le Diplôme national du brevet (DNB).",
+            "Le lycée : seconde, première, terminale, de 15 à 17-18 ans. Trois voies : générale, technologique, professionnelle. Se conclut par le baccalauréat (créé en 1808 sous Napoléon).",
+            "L'enseignement supérieur : universités, classes préparatoires aux grandes écoles, BTS, IUT/BUT, instituts de formation, grandes écoles. Inscription via la plateforme Parcoursup à partir du lycée.",
+            "L'obligation d'instruction : peut être assurée à l'école (publique ou privée) ou, par dérogation, à la maison sous conditions (autorisation préalable depuis 2022).",
+            "Les acteurs de l'école : ministre de l'Éducation nationale, recteur d'académie, directeur académique des services départementaux, inspecteurs, chefs d'établissement, professeurs.",
+            "Le rôle des parents : les représentants de parents d'élèves siègent au conseil d'école (premier degré) et au conseil d'administration (collège, lycée).",
+            "Les valeurs républicaines à l'école : laïcité, respect, lutte contre le harcèlement, contre le racisme et l'antisémitisme, éducation morale et civique (EMC)."
+          ]
+        },
+        { "type": "h3", "text": "Le logement" },
+        {
+          "type": "ul",
+          "items": [
+            "Le bail (contrat de location) : conclu pour 3 ans en location vide (renouvelable tacitement), 1 an en location meublée (9 mois pour un étudiant). Encadré par la loi du 6 juillet 1989.",
+            "Le dépôt de garantie : un mois de loyer hors charges (vide) ou deux mois (meublé). Restitué après l'état des lieux de sortie.",
+            "Les aides au logement (CAF) : APL (Aide personnalisée au logement), ALS, ALF. Soumises à conditions de ressources et de logement.",
+            "Le logement social (HLM) : géré par des organismes publics ou parapublics. Attribué sous conditions de ressources, avec demande à formuler en ligne ou en mairie.",
+            "Le DALO (Droit au logement opposable) : depuis 2007, permet à certains demandeurs sans logement ou mal-logés de faire valoir leur droit auprès de l'État.",
+            "Le 115 : hébergement d'urgence pour les personnes sans abri.",
+            "Les devoirs du locataire : payer le loyer et les charges, entretenir le logement, respecter le règlement de copropriété et le voisinage (tapage, nuisances).",
+            "Les obligations du propriétaire : délivrer un logement décent, assurer les grosses réparations, fournir un dossier de diagnostic technique (DPE, plomb, amiante, etc.)."
+          ]
+        },
+        { "type": "h3", "text": "La citoyenneté et les documents officiels" },
+        {
+          "type": "ul",
+          "items": [
+            "La carte nationale d'identité (CNI) : document officiel d'identité, gratuit, valable 15 ans pour les majeurs (10 ans pour les mineurs). Délivrée en mairie équipée d'un dispositif de recueil. Permet de circuler dans l'Union européenne et certains pays voisins.",
+            "Le passeport : document de voyage international, payant, valable 10 ans pour les majeurs (5 ans pour les mineurs).",
+            "Le titre de séjour : document permettant à un étranger de résider en France. Plusieurs catégories selon la situation (étudiant, salarié, vie privée et familiale, etc.).",
+            "La naturalisation : procédure permettant à un étranger de devenir français. Plusieurs voies : par décret (sur demande, après notamment 5 ans de résidence régulière, conditions d'intégration et de ressources, niveau B1 de français — relevé à B2 par la loi de 2024), par déclaration (mariage avec un Français après 4 ans d'union, frères et sœurs de Français), automatique pour les enfants nés en France de parents étrangers à 18 ans sous conditions (« double droit du sol » pour les nés en France de parents nés en France).",
+            "L'acquisition par mariage : possible par déclaration après 4 ans de mariage avec un conjoint français et de communauté de vie effective.",
+            "La cérémonie d'accueil dans la citoyenneté française : organisée par le préfet pour les nouveaux Français, marque solennellement leur entrée dans la communauté nationale."
+          ]
+        },
+        { "type": "h3", "text": "L'engagement et la vie associative" },
+        {
+          "type": "ul",
+          "items": [
+            "La loi de 1901 sur les associations : permet à toute personne majeure ou mineure de créer une association à but non lucratif. Plus d'1,5 million d'associations actives en France.",
+            "Le bénévolat : engagement libre et non rémunéré. Permet de participer à la vie associative, sportive, culturelle, sociale, environnementale.",
+            "Le service civique : engagement volontaire pour des jeunes de 16 à 25 ans (jusqu'à 30 ans pour les personnes en situation de handicap), d'une durée de 6 à 12 mois, indemnisé.",
+            "Le service national universel (SNU) : dispositif d'engagement et de citoyenneté pour les jeunes, comprenant un séjour de cohésion et une mission d'intérêt général.",
+            "La réserve civique et la réserve opérationnelle : possibilités pour les citoyens de participer à des missions ponctuelles d'intérêt général ou de renfort des forces armées et de sécurité.",
+            "Le don du sang et le don d'organes : actes de solidarité reconnus. En France, le consentement au don d'organes est présumé sauf opposition inscrite sur le registre national des refus.",
+            "La participation aux élections : exercice premier de la citoyenneté.",
+            "L'engagement politique, syndical, mutualiste, religieux, philanthropique, environnemental : libre dans le respect de la loi."
+          ]
+        }
+      ]
+    }
+  ],
+  "appendix": {
+    "id": "annexes",
+    "title": "Repères chiffrés et institutionnels",
+    "blocks": [
+      { "type": "h3", "text": "Chiffres clés à connaître" },
+      {
+        "type": "ul",
+        "items": [
+          "27 États membres de l'Union européenne au 1er janvier 2025",
+          "20 États de la zone euro",
+          "18 régions françaises (13 métropolitaines + 5 ultramarines)",
+          "101 départements (96 métropolitains + 5 ultramarins)",
+          "Environ 35 000 communes",
+          "577 députés à l'Assemblée nationale",
+          "348 sénateurs au Sénat",
+          "9 membres du Conseil constitutionnel + anciens présidents de la République",
+          "Mandat présidentiel : 5 ans, renouvelable une seule fois consécutivement",
+          "Majorité civile et électorale : 18 ans",
+          "Instruction obligatoire : 3 à 16 ans",
+          "Semaine de travail légale : 35 heures",
+          "Congés payés annuels : 5 semaines (30 jours ouvrables)",
+          "SMIC 2025 : environ 1 802 € bruts mensuels pour 35 h",
+          "Population française : environ 68 millions d'habitants"
+        ]
+      },
+      { "type": "h3", "text": "Dates utiles à retenir" },
+      {
+        "type": "ul",
+        "items": [
+          "26 août 1789 : Déclaration des droits de l'homme et du citoyen",
+          "14 juillet 1789 : prise de la Bastille (fête nationale)",
+          "9 décembre 1905 : loi de séparation des Églises et de l'État",
+          "21 avril 1944 : droit de vote des femmes (ordonnance)",
+          "4 octobre 1958 : Constitution de la Ve République",
+          "9 octobre 1981 : abolition de la peine de mort",
+          "1er janvier 2002 : entrée en circulation de l'euro fiduciaire",
+          "17 mai 2013 : ouverture du mariage aux couples de même sexe",
+          "8 mars 2024 : constitutionnalisation de la liberté de recourir à l'IVG"
+        ]
+      },
+      { "type": "h3", "text": "Jours fériés en France" },
+      {
+        "type": "ul",
+        "items": [
+          "1er janvier — Jour de l'An",
+          "Lundi de Pâques",
+          "1er mai — Fête du Travail",
+          "8 mai — Victoire 1945",
+          "Jeudi de l'Ascension",
+          "Lundi de Pentecôte",
+          "14 juillet — Fête nationale",
+          "15 août — Assomption",
+          "1er novembre — Toussaint",
+          "11 novembre — Armistice 1918",
+          "25 décembre — Noël"
+        ]
+      },
+      { "type": "h3", "text": "Présidents de la Ve République" },
+      {
+        "type": "ul",
+        "items": [
+          "Charles de Gaulle (1959-1969)",
+          "Georges Pompidou (1969-1974)",
+          "Valéry Giscard d'Estaing (1974-1981)",
+          "François Mitterrand (1981-1995)",
+          "Jacques Chirac (1995-2007)",
+          "Nicolas Sarkozy (2007-2012)",
+          "François Hollande (2012-2017)",
+          "Emmanuel Macron (depuis 2017)"
+        ]
+      }
+    ]
+  }
+}
