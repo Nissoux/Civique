@@ -18,10 +18,16 @@ const createCheckoutSchema = z.object({
 // production.
 type Plan = 'weekly' | 'monthly' | 'semiannual';
 
+// All three plans are subscription-mode. Earlier the semiannual was
+// declared `payment` (one-time) but the actual Stripe price was created
+// as a recurring 6-month price → Stripe rejected the checkout with
+// "You specified `payment` mode but passed a recurring price." If we
+// ever want a true one-time semiannual, create a non-recurring Stripe
+// price and flip this back to 'payment'.
 const STRIPE_PLAN_MODES: Record<Plan, 'subscription' | 'payment'> = {
   weekly: 'subscription',
   monthly: 'subscription',
-  semiannual: 'payment',
+  semiannual: 'subscription',
 };
 
 function getStripePriceConfig(

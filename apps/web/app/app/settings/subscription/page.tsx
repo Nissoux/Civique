@@ -9,8 +9,10 @@ import { SubscriptionStatus } from '@/components/payment/SubscriptionStatus';
 import { PromoCodeForm } from '@/components/payment/PromoCodeForm';
 
 // Subscription plans — keep aligned with apps/server/src/routes/payments/index.ts
-// (STRIPE_PRICES). Prices are documented there: weekly 3.99€, monthly 10.99€,
-// 6 months 39.99€ (one-time payment, not auto-renew).
+// (STRIPE_PRICES). Prices: weekly 3.99€, monthly 10.99€, 6 months 39.99€.
+// All three are subscription-mode (recurring) because the Stripe price IDs
+// were created as recurring on the Stripe side. If we want a one-time 6-month,
+// create a non-recurring price and flip STRIPE_PLAN_MODES.semiannual back.
 const COMMON_FEATURES = [
   "Questions d'entraînement illimitées",
   'Examens blancs illimités',
@@ -172,7 +174,7 @@ export default async function SubscriptionPage({ searchParams }: PageProps) {
                   name="6 mois"
                   price="39,99 €"
                   period="/ 6 mois"
-                  detail="Paiement unique, pas de renouvellement automatique. Économisez 39 %."
+                  detail="Renouvellement automatique tous les 6 mois. Économisez 39 % sur la durée."
                   badge="Meilleure offre"
                   features={COMMON_FEATURES}
                 />
