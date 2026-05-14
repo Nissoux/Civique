@@ -15,7 +15,7 @@ import { fastifyFetch } from './api';
  * in apps/web/app/app/settings/subscription/page.tsx.
  */
 
-export type SubscriptionPlan = 'weekly' | 'monthlyLite' | 'monthly' | 'semiannual';
+export type SubscriptionPlan = 'weekly' | 'monthly' | 'semiannual';
 
 export interface SubscriptionInfo {
   isPremium: boolean;

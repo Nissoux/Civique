@@ -8,25 +8,18 @@ import { authGuard } from '../../middleware/auth.js';
 import { env } from '../../config/env.js';
 
 const createCheckoutSchema = z.object({
-  plan: z.enum(['weekly', 'monthlyLite', 'monthly', 'semiannual']),
+  plan: z.enum(['weekly', 'monthly', 'semiannual']),
 });
 
-// Prices: Weekly 3.99€, Monthly Lite 9.99€, Monthly Standard 10.99€,
-// 6 months 39.99€. Two monthly tiers because the audit found 10.99€
-// just above the €10 psychological threshold, hurting conversion of
-// cost-sensitive users. The Lite tier ships the same content access
-// — it's a deliberate "price-anchor" plan, not a feature-stripped one.
-//
+// Prices: Weekly 3.99€, Monthly 10.99€, 6 months 39.99€.
 // SAFETY: no hardcoded fallback price IDs — if the env var is missing,
 // `/create-checkout` returns 503. The previous behaviour silently fell
 // back to test-mode IDs, which would charge the wrong amount in
-// production. The Lite plan therefore stays opt-in until the operator
-// creates the Stripe price and sets STRIPE_PRICE_MONTHLY_LITE.
-type Plan = 'weekly' | 'monthlyLite' | 'monthly' | 'semiannual';
+// production.
+type Plan = 'weekly' | 'monthly' | 'semiannual';
 
 const STRIPE_PLAN_MODES: Record<Plan, 'subscription' | 'payment'> = {
   weekly: 'subscription',
-  monthlyLite: 'subscription',
   monthly: 'subscription',
   semiannual: 'payment',
 };
@@ -36,7 +29,6 @@ function getStripePriceConfig(
 ): { priceId: string; mode: 'subscription' | 'payment' } | null {
   const envKey: Record<Plan, string> = {
     weekly: 'STRIPE_PRICE_WEEKLY',
-    monthlyLite: 'STRIPE_PRICE_MONTHLY_LITE',
     monthly: 'STRIPE_PRICE_MONTHLY',
     semiannual: 'STRIPE_PRICE_SEMIANNUAL',
   };

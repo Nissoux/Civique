@@ -9,11 +9,8 @@ import { SubscriptionStatus } from '@/components/payment/SubscriptionStatus';
 import { PromoCodeForm } from '@/components/payment/PromoCodeForm';
 
 // Subscription plans — keep aligned with apps/server/src/routes/payments/index.ts
-// (STRIPE_PRICES). Prices documented there: weekly 3,99€, monthly lite 9,99€,
-// monthly 10,99€, 6 months 39,99€ (one-time payment, not auto-renew).
-// The "Lite" tier is a deliberate price-anchor at the <€10 psychological
-// threshold — same content, lower entry barrier. It only renders once the
-// operator sets STRIPE_PRICE_MONTHLY_LITE.
+// (STRIPE_PRICES). Prices are documented there: weekly 3.99€, monthly 10.99€,
+// 6 months 39.99€ (one-time payment, not auto-renew).
 const COMMON_FEATURES = [
   "Questions d'entraînement illimitées",
   'Examens blancs illimités',
@@ -151,7 +148,7 @@ export default async function SubscriptionPage({ searchParams }: PageProps) {
                 </h2>
               </header>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <PlanCard
                   plan="weekly"
                   name="Hebdomadaire"
@@ -161,22 +158,14 @@ export default async function SubscriptionPage({ searchParams }: PageProps) {
                   features={COMMON_FEATURES}
                 />
                 <PlanCard
-                  plan="monthlyLite"
-                  name="Essentiel"
-                  price="9,99 €"
-                  period="/ mois"
-                  detail="Mensuel à moins de 10 €. Toutes les fonctionnalités, prix accessible."
-                  badge="Populaire"
-                  features={COMMON_FEATURES}
-                  highlight
-                />
-                <PlanCard
                   plan="monthly"
                   name="Mensuel"
                   price="10,99 €"
                   period="/ mois"
-                  detail="Renouvellement automatique chaque mois. Formule standard."
+                  detail="Renouvellement automatique chaque mois. La formule la plus choisie."
+                  badge="Populaire"
                   features={COMMON_FEATURES}
+                  highlight
                 />
                 <PlanCard
                   plan="semiannual"
