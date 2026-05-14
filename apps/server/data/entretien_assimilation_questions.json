@@ -1,0 +1,2426 @@
+{
+  "generated_at": "2026-05-14",
+  "sources": [
+    "https://www.alerte-rdv-prefecture.fr/naturalisation-francaise/entretien-naturalisation",
+    "https://franceprefecture.fr/questions-entretien-de-naturalisation-2025/",
+    "https://www.franova.fr/blog/questions-entretien-naturalisation-2026",
+    "https://franceaccueil.com/200-questions-de-lentretien-de-naturalisation/",
+    "https://www.prepacivique.fr/articles/100-questions-entretien-naturalisation",
+    "https://www.prepacivique.fr/guide/entretien-naturalisation",
+    "https://www.testciviquefrance.fr/articles/entretien-naturalisation-2026-preparation-assimilation-prefecture",
+    "https://blog.natification.fr/2020/04/entretien-naturalisation/",
+    "Circulaire Retailleau du 2 mai 2025 (NOR INTK2511758J)",
+    "Décret n° 93-1362 du 30 décembre 1993 relatif aux déclarations de nationalité et aux décisions de naturalisation"
+  ],
+  "total": 240,
+  "categories": {
+    "motivations": "Motivations personnelles et parcours",
+    "institutions": "Géographie, institutions et gouvernement",
+    "histoire": "Histoire de France",
+    "valeurs": "Valeurs civiques et symboles",
+    "vie_quotidienne": "Vie quotidienne et intégration",
+    "culture": "Culture, langue et traditions"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "category": "motivations",
+      "text_fr": "Pourquoi souhaitez-vous devenir français(e) ?",
+      "answer_hint": "Réponse personnelle et sincère. Évoquez votre attachement aux valeurs républicaines, votre projet de vie, votre intégration. Évitez les motifs purement utilitaires (passeport, voyages).",
+      "translations": {
+        "en": { "text": "Why do you wish to become French?", "answer_hint": "Personal, sincere answer. Mention your attachment to republican values, life project, integration. Avoid purely practical reasons (passport, travel)." },
+        "tr": { "text": "Neden Fransız vatandaşı olmak istiyorsunuz?", "answer_hint": "Kişisel ve içten cevap. Cumhuriyet değerlerine bağlılığınızı, hayat projenizi, entegrasyonunuzu belirtin. Sadece pratik nedenlerden (pasaport, seyahat) kaçının." }
+      }
+    },
+    {
+      "id": 2,
+      "category": "motivations",
+      "text_fr": "Pourquoi avoir choisi la France et pas un autre pays ?",
+      "answer_hint": "Mettez en avant ce qui vous a attiré : valeurs, mode de vie, opportunités professionnelles, attaches familiales, sécurité, culture. Personnalisez selon votre histoire.",
+      "translations": {
+        "en": { "text": "Why did you choose France and not another country?", "answer_hint": "Highlight what attracted you: values, lifestyle, career opportunities, family ties, safety, culture. Personalize based on your story." },
+        "tr": { "text": "Neden başka bir ülke değil de Fransa'yı seçtiniz?", "answer_hint": "Sizi neyin çektiğini vurgulayın: değerler, yaşam tarzı, kariyer fırsatları, aile bağları, güvenlik, kültür. Kendi hikayenize göre kişiselleştirin." }
+      }
+    },
+    {
+      "id": 3,
+      "category": "motivations",
+      "text_fr": "Depuis combien de temps vivez-vous en France ?",
+      "answer_hint": "Donnez la date exacte de votre arrivée et la durée totale. Rappel : 5 ans de résidence régulière sont en principe exigés (réductions possibles : études supérieures en France, service militaire, etc.).",
+      "translations": {
+        "en": { "text": "How long have you been living in France?", "answer_hint": "Give the exact date of arrival and total duration. Reminder: 5 years of regular residence are normally required (reductions possible: higher studies in France, military service, etc.)." },
+        "tr": { "text": "Fransa'da ne kadar süredir yaşıyorsunuz?", "answer_hint": "Geliş tarihinizi ve toplam süreyi belirtin. Hatırlatma: Genellikle 5 yıl düzenli ikamet gerekir (yüksek öğrenim, askerlik gibi durumlarda indirim mümkün)." }
+      }
+    },
+    {
+      "id": 4,
+      "category": "motivations",
+      "text_fr": "Racontez votre parcours depuis votre arrivée en France.",
+      "answer_hint": "Récit chronologique : arrivée, logement, apprentissage du français, études/emploi, famille. Montrez votre progression et votre stabilité.",
+      "translations": {
+        "en": { "text": "Tell us about your journey since arriving in France.", "answer_hint": "Chronological account: arrival, housing, learning French, studies/work, family. Show your progress and stability." },
+        "tr": { "text": "Fransa'ya geldiğinizden bu yana hikayenizi anlatın.", "answer_hint": "Kronolojik anlatı: geliş, konut, Fransızca öğrenme, eğitim/iş, aile. İlerlemenizi ve istikrarınızı gösterin." }
+      }
+    },
+    {
+      "id": 5,
+      "category": "motivations",
+      "text_fr": "Quel est votre pays d'origine ?",
+      "answer_hint": "Nommez votre pays. Vous pouvez ajouter une phrase sur la région, la ville natale. Restez factuel.",
+      "translations": {
+        "en": { "text": "What is your country of origin?", "answer_hint": "Name your country. You may add a sentence about the region or hometown. Stay factual." },
+        "tr": { "text": "Memleketiniz neresidir?", "answer_hint": "Ülkenizi söyleyin. Bölge veya doğduğunuz şehir hakkında bir cümle ekleyebilirsiniz. Olgusal kalın." }
+      }
+    },
+    {
+      "id": 6,
+      "category": "motivations",
+      "text_fr": "Pourquoi avez-vous quitté votre pays d'origine ?",
+      "answer_hint": "Soyez sincère : études, travail, mariage, regroupement familial, asile politique. Évitez de dénigrer votre pays d'origine.",
+      "translations": {
+        "en": { "text": "Why did you leave your country of origin?", "answer_hint": "Be sincere: studies, work, marriage, family reunification, political asylum. Avoid disparaging your home country." },
+        "tr": { "text": "Memleketinizden neden ayrıldınız?", "answer_hint": "İçten olun: eğitim, iş, evlilik, aile birleşimi, siyasi sığınma. Memleketinizi kötülemeyin." }
+      }
+    },
+    {
+      "id": 7,
+      "category": "motivations",
+      "text_fr": "Comment êtes-vous arrivé(e) en France (visa, regroupement, études) ?",
+      "answer_hint": "Précisez le type de visa initial (étudiant, salarié, conjoint de Français, regroupement familial). Mentionnez l'évolution de votre titre de séjour.",
+      "translations": {
+        "en": { "text": "How did you arrive in France (visa, family reunification, studies)?", "answer_hint": "Specify the initial visa type (student, employee, French spouse, family reunification). Mention how your residence permit evolved." },
+        "tr": { "text": "Fransa'ya nasıl geldiniz (vize, aile birleşimi, eğitim)?", "answer_hint": "İlk vize türünü belirtin (öğrenci, çalışan, Fransız eş, aile birleşimi). Oturma izninizin nasıl geliştiğini anlatın." }
+      }
+    },
+    {
+      "id": 8,
+      "category": "motivations",
+      "text_fr": "Quel projet professionnel avez-vous en France ?",
+      "answer_hint": "Décrivez votre situation actuelle (CDI, CDD, entrepreneur, étudiant) et vos perspectives. Montrez une stabilité économique et une vision claire.",
+      "translations": {
+        "en": { "text": "What is your professional project in France?", "answer_hint": "Describe your current situation (permanent contract, fixed-term, self-employed, student) and prospects. Show economic stability and a clear vision." },
+        "tr": { "text": "Fransa'daki mesleki projeniz nedir?", "answer_hint": "Mevcut durumunuzu (CDI süresiz iş sözleşmesi, CDD belirli süreli, girişimci, öğrenci) ve geleceğinizi anlatın. Ekonomik istikrar ve net bir vizyon gösterin." }
+      }
+    },
+    {
+      "id": 9,
+      "category": "motivations",
+      "text_fr": "Avez-vous de la famille en France ? Et dans votre pays d'origine ?",
+      "answer_hint": "Précisez votre situation familiale : conjoint, enfants, parents, fratrie, en France comme à l'étranger. Si famille en France, mettez l'accent sur l'ancrage.",
+      "translations": {
+        "en": { "text": "Do you have family in France? And in your country of origin?", "answer_hint": "Specify your family situation: spouse, children, parents, siblings, in France and abroad. If family is in France, emphasize your roots." },
+        "tr": { "text": "Fransa'da aileniz var mı? Memleketinizde?", "answer_hint": "Aile durumunuzu belirtin: eş, çocuklar, ebeveynler, kardeşler, Fransa'da ve yurtdışında. Aileniz Fransa'daysa kök salmanızı vurgulayın." }
+      }
+    },
+    {
+      "id": 10,
+      "category": "motivations",
+      "text_fr": "Avez-vous des enfants ? Sont-ils scolarisés en France ?",
+      "answer_hint": "Précisez le nombre d'enfants, leur âge, leur école/collège/lycée. L'éducation à la française est un signe fort d'intégration.",
+      "translations": {
+        "en": { "text": "Do you have children? Are they educated in France?", "answer_hint": "State the number, ages, and school/collège/lycée (middle/high school). French schooling is a strong sign of integration." },
+        "tr": { "text": "Çocuklarınız var mı? Fransa'da okuyorlar mı?", "answer_hint": "Sayısını, yaşlarını ve okullarını (école/collège/lycée) belirtin. Fransız okul sistemi güçlü bir entegrasyon işaretidir." }
+      }
+    },
+    {
+      "id": 11,
+      "category": "motivations",
+      "text_fr": "Quelle est votre profession actuelle ?",
+      "answer_hint": "Donnez votre poste, secteur, employeur, type de contrat (CDI/CDD/intérim/indépendant). Soyez précis et concis.",
+      "translations": {
+        "en": { "text": "What is your current profession?", "answer_hint": "State your position, sector, employer, type of contract (permanent/fixed-term/temp/self-employed). Be precise and concise." },
+        "tr": { "text": "Mevcut mesleğiniz nedir?", "answer_hint": "Pozisyon, sektör, işveren, sözleşme türü (CDI/CDD/geçici/serbest meslek) belirtin. Net ve öz olun." }
+      }
+    },
+    {
+      "id": 12,
+      "category": "motivations",
+      "text_fr": "Quel est votre niveau de revenus ?",
+      "answer_hint": "Donnez une fourchette mensuelle nette. L'autonomie financière est un critère essentiel (revenus stables au moins équivalents au SMIC).",
+      "translations": {
+        "en": { "text": "What is your income level?", "answer_hint": "Give a monthly net range. Financial autonomy is an essential criterion (stable income at least equivalent to the SMIC — French minimum wage)." },
+        "tr": { "text": "Gelir seviyeniz nedir?", "answer_hint": "Aylık net bir aralık verin. Mali bağımsızlık temel bir kriterdir (en azından SMIC — Fransa asgari ücretine eşit istikrarlı gelir)." }
+      }
+    },
+    {
+      "id": 13,
+      "category": "motivations",
+      "text_fr": "Quels sont vos diplômes ?",
+      "answer_hint": "Listez vos diplômes du plus élevé au plus récent, en précisant le pays d'obtention et l'équivalence éventuelle.",
+      "translations": {
+        "en": { "text": "What are your qualifications/degrees?", "answer_hint": "List your diplomas from highest to most recent, specifying country of issue and any French equivalence." },
+        "tr": { "text": "Diploma ve sertifikalarınız neler?", "answer_hint": "Diplomalarınızı en yüksekten en yenisine sıralayın, hangi ülkede alındığını ve varsa Fransa'daki denkliğini belirtin." }
+      }
+    },
+    {
+      "id": 14,
+      "category": "motivations",
+      "text_fr": "Avez-vous déjà été condamné(e) ou avez-vous un casier judiciaire ?",
+      "answer_hint": "La sincérité est obligatoire (votre B2 sera vérifié). Une condamnation récente ou grave peut bloquer la naturalisation. En cas de doute, consultez un avocat avant le rendez-vous.",
+      "translations": {
+        "en": { "text": "Have you ever been convicted or do you have a criminal record?", "answer_hint": "Honesty is mandatory (your B2 criminal record will be checked). A recent or serious conviction can block naturalization. If in doubt, consult a lawyer before the appointment." },
+        "tr": { "text": "Hiç mahkum oldunuz mu, sabıka kaydınız var mı?", "answer_hint": "Dürüstlük zorunludur (B2 sabıka kaydınız kontrol edilecek). Yakın tarihli veya ağır bir mahkumiyet vatandaşlığı engelleyebilir. Şüphedeyseniz randevudan önce bir avukata danışın." }
+      }
+    },
+    {
+      "id": 15,
+      "category": "motivations",
+      "text_fr": "Avez-vous déjà demandé la nationalité d'un autre pays ?",
+      "answer_hint": "La France autorise la double nationalité. Soyez transparent sur d'autres procédures en cours ou abouties.",
+      "translations": {
+        "en": { "text": "Have you ever applied for citizenship of another country?", "answer_hint": "France allows dual citizenship. Be transparent about other procedures, ongoing or completed." },
+        "tr": { "text": "Daha önce başka bir ülke vatandaşlığı için başvurdunuz mu?", "answer_hint": "Fransa çifte vatandaşlığa izin verir. Devam eden veya tamamlanmış başka prosedürler hakkında şeffaf olun." }
+      }
+    },
+    {
+      "id": 16,
+      "category": "motivations",
+      "text_fr": "Allez-vous renoncer à votre nationalité d'origine ?",
+      "answer_hint": "La France n'exige pas la renonciation. Précisez si votre pays d'origine vous l'imposerait. Sinon, indiquez votre choix personnel (souvent conservation).",
+      "translations": {
+        "en": { "text": "Will you renounce your original nationality?", "answer_hint": "France does not require renunciation. State whether your home country would require it. Otherwise, indicate your personal choice (often: keeping both)." },
+        "tr": { "text": "Eski vatandaşlığınızdan vazgeçecek misiniz?", "answer_hint": "Fransa vazgeçmeyi şart koşmaz. Memleketinizin gerektirip gerektirmediğini belirtin. Aksi halde kişisel tercihinizi söyleyin (genellikle her ikisini de korumak)." }
+      }
+    },
+    {
+      "id": 17,
+      "category": "motivations",
+      "text_fr": "Que représente pour vous la France ?",
+      "answer_hint": "Réponse personnelle et émotionnelle : valeurs (liberté, égalité, fraternité), culture, mode de vie, démocratie, droits humains.",
+      "translations": {
+        "en": { "text": "What does France represent for you?", "answer_hint": "Personal, emotional answer: values (liberty, equality, fraternity), culture, lifestyle, democracy, human rights." },
+        "tr": { "text": "Fransa sizin için ne ifade ediyor?", "answer_hint": "Kişisel ve duygusal cevap: değerler (özgürlük, eşitlik, kardeşlik), kültür, yaşam tarzı, demokrasi, insan hakları." }
+      }
+    },
+    {
+      "id": 18,
+      "category": "motivations",
+      "text_fr": "Vous sentez-vous français(e) ? Pourquoi ?",
+      "answer_hint": "Donnez des exemples concrets : langue parlée au quotidien, repères culturels, votes, engagement associatif, sentiment d'appartenance.",
+      "translations": {
+        "en": { "text": "Do you feel French? Why?", "answer_hint": "Give concrete examples: French as everyday language, cultural reference points, voting plans, community involvement, sense of belonging." },
+        "tr": { "text": "Kendinizi Fransız hissediyor musunuz? Neden?", "answer_hint": "Somut örnekler verin: günlük Fransızca, kültürel referanslar, oy planları, dernek üyeliği, aidiyet duygusu." }
+      }
+    },
+    {
+      "id": 19,
+      "category": "motivations",
+      "text_fr": "Que feriez-vous si votre demande était refusée ?",
+      "answer_hint": "Restez positif : déposer un recours gracieux (auprès du ministre de l'Intérieur, sous 2 mois) ou refaire une demande plus tard. Soulignez que vous continueriez à vivre en France.",
+      "translations": {
+        "en": { "text": "What would you do if your application were refused?", "answer_hint": "Stay positive: file an appeal (recours gracieux with the Minister of the Interior, within 2 months) or reapply later. Emphasize you would continue living in France." },
+        "tr": { "text": "Başvurunuz reddedilirse ne yaparsınız?", "answer_hint": "Olumlu kalın: itiraz (recours gracieux — İçişleri Bakanı'na, 2 ay içinde) veya daha sonra yeniden başvuru. Fransa'da yaşamaya devam edeceğinizi vurgulayın." }
+      }
+    },
+    {
+      "id": 20,
+      "category": "motivations",
+      "text_fr": "Comment envisagez-vous votre avenir en France ?",
+      "answer_hint": "Projet à 5-10 ans : stabilité professionnelle, famille, logement, contribution citoyenne (vote, engagement local).",
+      "translations": {
+        "en": { "text": "How do you envision your future in France?", "answer_hint": "5-10-year plan: career stability, family, housing, civic contribution (voting, local involvement)." },
+        "tr": { "text": "Fransa'daki geleceğinizi nasıl görüyorsunuz?", "answer_hint": "5-10 yıllık plan: kariyer istikrarı, aile, konut, sivil katkı (oy verme, yerel katılım)." }
+      }
+    },
+    {
+      "id": 21,
+      "category": "motivations",
+      "text_fr": "Êtes-vous engagé(e) dans une association ou bénévolat ?",
+      "answer_hint": "Si oui, précisez (nom, mission, fréquence). C'est un atout fort. Sinon, mentionnez votre disponibilité ou intérêt pour le bénévolat futur.",
+      "translations": {
+        "en": { "text": "Are you involved in any association or volunteering?", "answer_hint": "If yes, specify (name, mission, frequency). Strong asset. If not, mention availability or interest for future volunteering." },
+        "tr": { "text": "Bir dernek veya gönüllülük faaliyetine katılıyor musunuz?", "answer_hint": "Evetse belirtin (isim, görev, sıklık). Güçlü bir avantajdır. Hayırsa müsaitliğinizi veya gelecekteki ilginizi belirtin." }
+      }
+    },
+    {
+      "id": 22,
+      "category": "motivations",
+      "text_fr": "Avez-vous déjà participé à une élection française ?",
+      "answer_hint": "Si vous êtes ressortissant UE, vous pouvez voter aux élections municipales et européennes. Sinon, exprimez votre impatience de pouvoir voter une fois français.",
+      "translations": {
+        "en": { "text": "Have you ever participated in a French election?", "answer_hint": "If EU national, you can vote in municipal and European elections. Otherwise, express your eagerness to vote once French." },
+        "tr": { "text": "Hiç Fransız seçimine katıldınız mı?", "answer_hint": "AB vatandaşıysanız belediye ve Avrupa seçimlerinde oy verebilirsiniz. Değilseniz Fransız olunca oy verme isteğinizi belirtin." }
+      }
+    },
+    {
+      "id": 23,
+      "category": "motivations",
+      "text_fr": "Comment avez-vous appris le français ?",
+      "answer_hint": "Cours, école, immersion, conjoint francophone, autodidacte. Mentionnez votre niveau (B2 minimum requis depuis 2026) et certifications (TCF, DELF).",
+      "translations": {
+        "en": { "text": "How did you learn French?", "answer_hint": "Classes, school, immersion, French-speaking partner, self-taught. Mention level (B2 minimum required since 2026) and certifications (TCF, DELF)." },
+        "tr": { "text": "Fransızcayı nasıl öğrendiniz?", "answer_hint": "Kurslar, okul, kapsamlı maruziyet, Fransızca konuşan eş, kendi kendine. Seviyenizi (2026'dan beri en az B2) ve sertifikaları (TCF, DELF) belirtin." }
+      }
+    },
+    {
+      "id": 24,
+      "category": "motivations",
+      "text_fr": "Avez-vous passé un examen de français (TCF, DELF) ?",
+      "answer_hint": "Donnez le nom, le niveau obtenu et la date. Le niveau B2 oral est exigé depuis le 1er janvier 2026 (circulaire Retailleau).",
+      "translations": {
+        "en": { "text": "Have you taken a French language exam (TCF, DELF)?", "answer_hint": "Give the name, level obtained, and date. B2 oral level is required since 1 January 2026 (Retailleau circular)." },
+        "tr": { "text": "Fransızca dil sınavı (TCF, DELF) verdiniz mi?", "answer_hint": "İsim, alınan seviye ve tarih. 1 Ocak 2026'dan beri sözlü B2 seviyesi zorunludur (Retailleau genelgesi)." }
+      }
+    },
+    {
+      "id": 25,
+      "category": "motivations",
+      "text_fr": "Quel est votre niveau actuel de français ?",
+      "answer_hint": "B2 minimum requis. Décrivez vos compétences (comprendre, parler, lire, écrire). Donnez des exemples concrets d'usage (travail, démarches).",
+      "translations": {
+        "en": { "text": "What is your current level of French?", "answer_hint": "B2 minimum required. Describe your skills (understanding, speaking, reading, writing). Give concrete usage examples (work, paperwork)." },
+        "tr": { "text": "Şu anki Fransızca seviyeniz nedir?", "answer_hint": "En az B2 gerekli. Yetkinliklerinizi (anlama, konuşma, okuma, yazma) anlatın. Somut kullanım örnekleri verin (iş, evrak işleri)." }
+      }
+    },
+    {
+      "id": 26,
+      "category": "motivations",
+      "text_fr": "Avez-vous voyagé dans d'autres régions de France ?",
+      "answer_hint": "Citez 3-5 régions/villes visitées, brève impression. Montre votre curiosité et votre attachement au territoire.",
+      "translations": {
+        "en": { "text": "Have you traveled to other regions of France?", "answer_hint": "Mention 3-5 regions/cities visited, brief impressions. Shows curiosity and attachment to the territory." },
+        "tr": { "text": "Fransa'nın diğer bölgelerine seyahat ettiniz mi?", "answer_hint": "3-5 bölge/şehir adı, kısa izlenim. Meraklılığınızı ve ülkeye bağlılığınızı gösterir." }
+      }
+    },
+    {
+      "id": 27,
+      "category": "motivations",
+      "text_fr": "Quelle est votre ville préférée en France ?",
+      "answer_hint": "Personnalisez : ville de résidence ou ville visitée. Citez 1-2 raisons (architecture, ambiance, gastronomie, paysage).",
+      "translations": {
+        "en": { "text": "What is your favorite city in France?", "answer_hint": "Personalize: city of residence or visited city. State 1-2 reasons (architecture, atmosphere, food, landscape)." },
+        "tr": { "text": "Fransa'daki favori şehriniz hangisi?", "answer_hint": "Kişiselleştirin: ikamet ettiğiniz veya ziyaret ettiğiniz şehir. 1-2 neden belirtin (mimari, atmosfer, mutfak, manzara)." }
+      }
+    },
+    {
+      "id": 28,
+      "category": "motivations",
+      "text_fr": "Que pensez-vous du mode de vie français ?",
+      "answer_hint": "Aspects positifs : qualité de vie, gastronomie, art de vivre, équilibre travail-vie privée, vacances. Soyez nuancé et sincère.",
+      "translations": {
+        "en": { "text": "What do you think of the French lifestyle?", "answer_hint": "Positive aspects: quality of life, gastronomy, art of living, work-life balance, vacations. Be nuanced and sincere." },
+        "tr": { "text": "Fransız yaşam tarzı hakkında ne düşünüyorsunuz?", "answer_hint": "Olumlu yönler: yaşam kalitesi, mutfak, yaşam sanatı, iş-yaşam dengesi, tatiller. Nüanslı ve içten olun." }
+      }
+    },
+    {
+      "id": 29,
+      "category": "motivations",
+      "text_fr": "Qu'est-ce qui vous plaît le plus en France ?",
+      "answer_hint": "Trois éléments concrets : santé publique, éducation, gastronomie, libertés individuelles, paysages, art, etc.",
+      "translations": {
+        "en": { "text": "What do you like most about France?", "answer_hint": "Three concrete elements: public healthcare, education, gastronomy, individual freedoms, landscapes, arts, etc." },
+        "tr": { "text": "Fransa'da en çok ne hoşunuza gidiyor?", "answer_hint": "Üç somut unsur: kamu sağlığı, eğitim, mutfak, bireysel özgürlükler, manzaralar, sanat, vb." }
+      }
+    },
+    {
+      "id": 30,
+      "category": "motivations",
+      "text_fr": "Y a-t-il des choses qui vous déplaisent en France ?",
+      "answer_hint": "Soyez mesuré : embouteillages, démarches administratives, complexité fiscale. Évitez les critiques radicales ou polémiques.",
+      "translations": {
+        "en": { "text": "Is there anything you dislike about France?", "answer_hint": "Be moderate: traffic jams, paperwork, tax complexity. Avoid radical or polemical criticism." },
+        "tr": { "text": "Fransa'da hoşlanmadığınız şeyler var mı?", "answer_hint": "Ölçülü olun: trafik, bürokrasi, vergi karmaşıklığı. Sert veya polemik eleştirilerden kaçının." }
+      }
+    },
+    {
+      "id": 31,
+      "category": "motivations",
+      "text_fr": "Avez-vous des amis français ?",
+      "answer_hint": "Précisez le contexte (travail, voisinage, école des enfants, sport). L'intégration sociale est un indicateur fort.",
+      "translations": {
+        "en": { "text": "Do you have French friends?", "answer_hint": "Mention the context (work, neighbors, children's school, sports). Social integration is a strong indicator." },
+        "tr": { "text": "Fransız arkadaşlarınız var mı?", "answer_hint": "Bağlamı belirtin (iş, komşular, çocuk okulu, spor). Sosyal entegrasyon güçlü bir göstergedir." }
+      }
+    },
+    {
+      "id": 32,
+      "category": "motivations",
+      "text_fr": "Que feriez-vous le jour de votre cérémonie de naturalisation ?",
+      "answer_hint": "Émotion sincère : moment fort, fierté, présence de la famille. Évoquez la signature de la charte des droits et devoirs.",
+      "translations": {
+        "en": { "text": "What would you do on the day of your naturalization ceremony?", "answer_hint": "Sincere emotion: meaningful moment, pride, family presence. Mention signing the charter of rights and duties." },
+        "tr": { "text": "Vatandaşlık töreni gününüzde ne yapardınız?", "answer_hint": "İçten duygu: anlamlı an, gurur, ailenizin varlığı. Hak ve görevler şartını (charte) imzalamaktan bahsedin." }
+      }
+    },
+    {
+      "id": 33,
+      "category": "motivations",
+      "text_fr": "Qu'attendez-vous concrètement de la naturalisation ?",
+      "answer_hint": "Droit de vote, accès à la fonction publique, libre circulation UE, transmission à vos enfants, sécurité juridique.",
+      "translations": {
+        "en": { "text": "What do you concretely expect from naturalization?", "answer_hint": "Right to vote, access to civil service jobs, EU free movement, transmission to children, legal security." },
+        "tr": { "text": "Vatandaşlıktan somut olarak ne bekliyorsunuz?", "answer_hint": "Oy hakkı, kamu hizmetlerine erişim, AB serbest dolaşımı, çocuklarınıza aktarım, hukuki güvence." }
+      }
+    },
+    {
+      "id": 34,
+      "category": "motivations",
+      "text_fr": "Comment contribuez-vous à la société française ?",
+      "answer_hint": "Travail, impôts, cotisations sociales, bénévolat, transmission culturelle, parentalité. Concret et factuel.",
+      "translations": {
+        "en": { "text": "How do you contribute to French society?", "answer_hint": "Work, taxes, social contributions, volunteering, cultural transmission, parenting. Concrete and factual." },
+        "tr": { "text": "Fransız toplumuna nasıl katkıda bulunuyorsunuz?", "answer_hint": "İş, vergiler, sosyal güvenlik primleri, gönüllülük, kültürel aktarım, ebeveynlik. Somut ve olgusal." }
+      }
+    },
+    {
+      "id": 35,
+      "category": "motivations",
+      "text_fr": "Êtes-vous prêt(e) à défendre la France si nécessaire ?",
+      "answer_hint": "Oui — c'est un devoir civique. Précisez : service civique, réserve opérationnelle, voter, respecter la loi.",
+      "translations": {
+        "en": { "text": "Are you ready to defend France if necessary?", "answer_hint": "Yes — it is a civic duty. Specify: civic service, operational reserve, voting, respecting the law." },
+        "tr": { "text": "Gerekirse Fransa'yı savunmaya hazır mısınız?", "answer_hint": "Evet — bu bir sivil görevdir. Belirtin: sivil hizmet, operasyonel rezerv, oy verme, yasaya uyma." }
+      }
+    },
+    {
+      "id": 36,
+      "category": "motivations",
+      "text_fr": "Avez-vous une activité sportive ou culturelle ?",
+      "answer_hint": "Sport, musique, lecture, théâtre, association. Personnalisez. Cela illustre votre vie quotidienne et votre intégration.",
+      "translations": {
+        "en": { "text": "Do you have a sports or cultural activity?", "answer_hint": "Sports, music, reading, theater, club. Personalize. Illustrates your daily life and integration." },
+        "tr": { "text": "Bir spor veya kültürel etkinliğiniz var mı?", "answer_hint": "Spor, müzik, okuma, tiyatro, dernek. Kişiselleştirin. Günlük hayatınızı ve entegrasyonunuzu gösterir." }
+      }
+    },
+    {
+      "id": 37,
+      "category": "motivations",
+      "text_fr": "Quel a été votre moment le plus marquant en France ?",
+      "answer_hint": "Personnalisez : naissance d'un enfant, obtention d'un emploi, voyage, cérémonie, moment de partage. Authentique et bref.",
+      "translations": {
+        "en": { "text": "What was your most memorable moment in France?", "answer_hint": "Personalize: birth of a child, getting a job, a trip, a ceremony, a shared moment. Authentic and brief." },
+        "tr": { "text": "Fransa'daki en unutulmaz anınız neydi?", "answer_hint": "Kişiselleştirin: çocuk doğumu, iş bulma, seyahat, tören, paylaşılan bir an. Özgün ve kısa." }
+      }
+    },
+    {
+      "id": 38,
+      "category": "motivations",
+      "text_fr": "Quels sont vos liens avec votre pays d'origine aujourd'hui ?",
+      "answer_hint": "Famille, voyages occasionnels, langue, culture. Soyez honnête : un lien avec le pays d'origine est normal, l'essentiel est votre projet en France.",
+      "translations": {
+        "en": { "text": "What are your ties to your country of origin today?", "answer_hint": "Family, occasional trips, language, culture. Be honest: ties to origin are normal; what matters is your project in France." },
+        "tr": { "text": "Bugün memleketinizle olan bağlarınız neler?", "answer_hint": "Aile, ara sıra ziyaretler, dil, kültür. Dürüst olun: memleketle bağ normaldir; önemli olan Fransa'daki projenizdir." }
+      }
+    },
+    {
+      "id": 39,
+      "category": "motivations",
+      "text_fr": "Avez-vous déjà eu un problème avec l'administration française ?",
+      "answer_hint": "Soyez factuel. Si oui, expliquez sans dénigrer : malentendu, dossier incomplet, lenteur. Restez positif sur la suite.",
+      "translations": {
+        "en": { "text": "Have you ever had a problem with French administration?", "answer_hint": "Be factual. If yes, explain without disparaging: misunderstanding, incomplete file, delays. Stay positive about resolution." },
+        "tr": { "text": "Fransız idaresiyle hiç sorun yaşadınız mı?", "answer_hint": "Olgusal olun. Evetse kötülemeden açıklayın: yanlış anlama, eksik dosya, gecikme. Çözüm konusunda olumlu kalın." }
+      }
+    },
+    {
+      "id": 40,
+      "category": "motivations",
+      "text_fr": "Que diriez-vous à un proche qui hésite à demander la nationalité française ?",
+      "answer_hint": "Conseils personnels : préparer le dossier, apprendre l'histoire et les valeurs, parler français au quotidien, croire au projet.",
+      "translations": {
+        "en": { "text": "What would you say to a relative hesitating to apply for French citizenship?", "answer_hint": "Personal advice: prepare the file, learn history and values, speak French daily, believe in the project." },
+        "tr": { "text": "Fransız vatandaşlığına başvurmakta tereddüt eden bir yakınınıza ne söylersiniz?", "answer_hint": "Kişisel tavsiye: dosyayı hazırlayın, tarih ve değerleri öğrenin, günlük Fransızca konuşun, projeye inanın." }
+      }
+    },
+    {
+      "id": 41,
+      "category": "institutions",
+      "text_fr": "Quelle est la capitale de la France ?",
+      "answer_hint": "Paris. Vous pouvez ajouter : ~2,1 millions d'habitants intra-muros, ~12 millions en Île-de-France.",
+      "translations": {
+        "en": { "text": "What is the capital of France?", "answer_hint": "Paris. You can add: ~2.1 million inhabitants in the city, ~12 million in the Île-de-France region." },
+        "tr": { "text": "Fransa'nın başkenti neresidir?", "answer_hint": "Paris. Şehir merkezinde yaklaşık 2,1 milyon, Île-de-France bölgesinde yaklaşık 12 milyon kişi." }
+      }
+    },
+    {
+      "id": 42,
+      "category": "institutions",
+      "text_fr": "Combien y a-t-il de régions en France métropolitaine ?",
+      "answer_hint": "13 régions métropolitaines depuis la réforme de 2016 (loi NOTRe), plus 5 régions d'outre-mer = 18 au total.",
+      "translations": {
+        "en": { "text": "How many regions are there in mainland France?", "answer_hint": "13 mainland regions since the 2016 reform (NOTRe law), plus 5 overseas regions = 18 total." },
+        "tr": { "text": "Fransa'nın anakarasında kaç bölge var?", "answer_hint": "2016 reformundan (NOTRe yasası) bu yana 13 anakara bölgesi, ayrıca 5 denizaşırı bölge = toplam 18." }
+      }
+    },
+    {
+      "id": 43,
+      "category": "institutions",
+      "text_fr": "Pouvez-vous citer quelques régions françaises ?",
+      "answer_hint": "Île-de-France, Provence-Alpes-Côte d'Azur, Auvergne-Rhône-Alpes, Occitanie, Nouvelle-Aquitaine, Bretagne, Normandie, Hauts-de-France, Grand Est, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Corse.",
+      "translations": {
+        "en": { "text": "Can you name some French regions?", "answer_hint": "Île-de-France, Provence-Alpes-Côte d'Azur, Auvergne-Rhône-Alpes, Occitanie, Nouvelle-Aquitaine, Brittany, Normandy, Hauts-de-France, Grand Est, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Corsica." },
+        "tr": { "text": "Bazı Fransa bölgelerini sayabilir misiniz?", "answer_hint": "Île-de-France, Provence-Alpes-Côte d'Azur, Auvergne-Rhône-Alpes, Occitanie, Nouvelle-Aquitaine, Bretagne, Normandiya, Hauts-de-France, Grand Est, Pays de la Loire, Centre-Val de Loire, Bourgogne-Franche-Comté, Korsika." }
+      }
+    },
+    {
+      "id": 44,
+      "category": "institutions",
+      "text_fr": "Quelles sont les régions ou territoires d'outre-mer ?",
+      "answer_hint": "5 DROM : Guadeloupe, Martinique, Guyane, La Réunion, Mayotte. Plus les COM : Polynésie française, Nouvelle-Calédonie, Saint-Barthélemy, Saint-Martin, Saint-Pierre-et-Miquelon, Wallis-et-Futuna.",
+      "translations": {
+        "en": { "text": "What are the overseas regions or territories?", "answer_hint": "5 DROM (overseas departments and regions): Guadeloupe, Martinique, French Guiana, Réunion, Mayotte. Plus COM (overseas collectivities): French Polynesia, New Caledonia, Saint-Barthélemy, Saint-Martin, Saint-Pierre-et-Miquelon, Wallis and Futuna." },
+        "tr": { "text": "Denizaşırı bölge veya topraklar nelerdir?", "answer_hint": "5 DROM (denizaşırı il ve bölge): Guadeloupe, Martinique, Fransız Guyanası, Réunion, Mayotte. Ayrıca COM (denizaşırı topluluklar): Fransız Polinezyası, Yeni Kaledonya, Saint-Barthélemy, Saint-Martin, Saint-Pierre-et-Miquelon, Wallis ve Futuna." }
+      }
+    },
+    {
+      "id": 45,
+      "category": "institutions",
+      "text_fr": "Combien de départements compte la France ?",
+      "answer_hint": "101 départements : 96 en métropole + 5 en outre-mer (971 Guadeloupe, 972 Martinique, 973 Guyane, 974 Réunion, 976 Mayotte).",
+      "translations": {
+        "en": { "text": "How many departments does France have?", "answer_hint": "101 departments: 96 in mainland France + 5 overseas (971 Guadeloupe, 972 Martinique, 973 Guiana, 974 Réunion, 976 Mayotte)." },
+        "tr": { "text": "Fransa'nın kaç ili (département) var?", "answer_hint": "101 il: 96 anakarada + 5 denizaşırı (971 Guadeloupe, 972 Martinique, 973 Guyana, 974 Réunion, 976 Mayotte)." }
+      }
+    },
+    {
+      "id": 46,
+      "category": "institutions",
+      "text_fr": "Quels sont les pays frontaliers de la France ?",
+      "answer_hint": "8 pays : Belgique, Luxembourg, Allemagne, Suisse, Italie, Monaco, Espagne, Andorre. Plus le Royaume-Uni par la Manche.",
+      "translations": {
+        "en": { "text": "Which countries border France?", "answer_hint": "8 countries: Belgium, Luxembourg, Germany, Switzerland, Italy, Monaco, Spain, Andorra. Plus the UK across the Channel." },
+        "tr": { "text": "Fransa hangi ülkelerle komşudur?", "answer_hint": "8 ülke: Belçika, Lüksemburg, Almanya, İsviçre, İtalya, Monako, İspanya, Andorra. Ayrıca Manş Denizi üzerinden İngiltere." }
+      }
+    },
+    {
+      "id": 47,
+      "category": "institutions",
+      "text_fr": "Quels sont les principaux fleuves de France ?",
+      "answer_hint": "Loire (le plus long, 1006 km), Seine, Rhône, Garonne, Rhin (frontière avec l'Allemagne).",
+      "translations": {
+        "en": { "text": "What are the main rivers of France?", "answer_hint": "Loire (longest, 1006 km), Seine, Rhône, Garonne, Rhine (border with Germany)." },
+        "tr": { "text": "Fransa'nın başlıca nehirleri hangileridir?", "answer_hint": "Loire (en uzun, 1006 km), Seine, Rhône, Garonne, Ren (Almanya sınırı)." }
+      }
+    },
+    {
+      "id": 48,
+      "category": "institutions",
+      "text_fr": "Quelles sont les principales chaînes de montagnes en France ?",
+      "answer_hint": "Alpes (frontière Italie/Suisse, Mont Blanc 4809 m), Pyrénées (frontière Espagne), Jura, Vosges, Massif central.",
+      "translations": {
+        "en": { "text": "What are the main mountain ranges in France?", "answer_hint": "Alps (Italy/Switzerland border, Mont Blanc 4809 m), Pyrenees (Spain border), Jura, Vosges, Massif Central." },
+        "tr": { "text": "Fransa'nın başlıca dağ sıraları hangileridir?", "answer_hint": "Alpler (İtalya/İsviçre sınırı, Mont Blanc 4809 m), Pireneler (İspanya sınırı), Jura, Vosges, Massif Central." }
+      }
+    },
+    {
+      "id": 49,
+      "category": "institutions",
+      "text_fr": "Quelles sont les principales mers et océans bordant la France ?",
+      "answer_hint": "Océan Atlantique (ouest), Manche (nord), mer du Nord (extrême nord), mer Méditerranée (sud).",
+      "translations": {
+        "en": { "text": "What are the main seas and oceans bordering France?", "answer_hint": "Atlantic Ocean (west), English Channel (north), North Sea (far north), Mediterranean Sea (south)." },
+        "tr": { "text": "Fransa hangi deniz ve okyanuslarla çevrilidir?", "answer_hint": "Atlas Okyanusu (batı), Manş Denizi (kuzey), Kuzey Denizi (uzak kuzey), Akdeniz (güney)." }
+      }
+    },
+    {
+      "id": 50,
+      "category": "institutions",
+      "text_fr": "Combien d'habitants compte la France ?",
+      "answer_hint": "Environ 68 millions d'habitants (2026), dont ~65 en métropole et ~2,7 en outre-mer.",
+      "translations": {
+        "en": { "text": "What is the population of France?", "answer_hint": "About 68 million inhabitants (2026), including ~65 million in mainland France and ~2.7 million overseas." },
+        "tr": { "text": "Fransa'nın nüfusu ne kadardır?", "answer_hint": "Yaklaşık 68 milyon kişi (2026), bunun ~65 milyonu anakarada, ~2,7 milyonu denizaşırı bölgelerde." }
+      }
+    },
+    {
+      "id": 51,
+      "category": "institutions",
+      "text_fr": "Quel est le régime politique de la France ?",
+      "answer_hint": "République démocratique, indivisible, laïque, sociale (article 1 de la Constitution). Régime semi-présidentiel sous la Ve République (depuis 1958).",
+      "translations": {
+        "en": { "text": "What is France's political system?", "answer_hint": "Democratic, indivisible, secular, social republic (Article 1 of the Constitution). Semi-presidential system under the Fifth Republic (since 1958)." },
+        "tr": { "text": "Fransa'nın siyasi rejimi nedir?", "answer_hint": "Demokratik, bölünmez, laik, sosyal cumhuriyet (Anayasa madde 1). 1958'den beri Beşinci Cumhuriyet altında yarı-başkanlık sistemi." }
+      }
+    },
+    {
+      "id": 52,
+      "category": "institutions",
+      "text_fr": "Qui est l'actuel président de la République française ?",
+      "answer_hint": "Emmanuel Macron (depuis le 14 mai 2017, réélu le 24 avril 2022, mandat jusqu'en 2027).",
+      "translations": {
+        "en": { "text": "Who is the current President of the French Republic?", "answer_hint": "Emmanuel Macron (since 14 May 2017, re-elected 24 April 2022, term until 2027)." },
+        "tr": { "text": "Fransa Cumhurbaşkanı şu anda kimdir?", "answer_hint": "Emmanuel Macron (14 Mayıs 2017'den beri, 24 Nisan 2022'de yeniden seçildi, görev süresi 2027'ye kadar)." }
+      }
+    },
+    {
+      "id": 53,
+      "category": "institutions",
+      "text_fr": "Comment est élu le président de la République ?",
+      "answer_hint": "Au suffrage universel direct, à deux tours, pour un mandat de 5 ans (quinquennat depuis 2000). Maximum 2 mandats consécutifs.",
+      "translations": {
+        "en": { "text": "How is the President of the Republic elected?", "answer_hint": "By direct universal suffrage, two rounds, for a 5-year term (quinquennat since 2000). Maximum 2 consecutive terms." },
+        "tr": { "text": "Cumhurbaşkanı nasıl seçilir?", "answer_hint": "Doğrudan genel oyla, iki turda, 5 yıllık görev süresi için (2000'den beri quinquennat). En fazla 2 ardışık dönem." }
+      }
+    },
+    {
+      "id": 54,
+      "category": "institutions",
+      "text_fr": "Quelle est la durée du mandat présidentiel ?",
+      "answer_hint": "5 ans, renouvelable une fois consécutivement (depuis la réforme de 2000 ; auparavant 7 ans, le septennat).",
+      "translations": {
+        "en": { "text": "How long is the presidential term?", "answer_hint": "5 years, renewable once consecutively (since the 2000 reform; previously 7 years, the septennat)." },
+        "tr": { "text": "Cumhurbaşkanlığı görev süresi ne kadardır?", "answer_hint": "5 yıl, ardışık olarak bir kez yenilenebilir (2000 reformundan beri; daha önce 7 yıl olan septennat)." }
+      }
+    },
+    {
+      "id": 55,
+      "category": "institutions",
+      "text_fr": "Qui est le Premier ministre actuel ?",
+      "answer_hint": "Vérifiez avant l'entretien : la composition du gouvernement change. Préparez le nom et donnez la date de nomination.",
+      "translations": {
+        "en": { "text": "Who is the current Prime Minister?", "answer_hint": "Check before the interview: government composition changes. Prepare the name and give the date of appointment." },
+        "tr": { "text": "Şu anki Başbakan kimdir?", "answer_hint": "Mülakat öncesi kontrol edin: hükümet bileşimi değişir. İsmi hazırlayın ve atanma tarihini belirtin." }
+      }
+    },
+    {
+      "id": 56,
+      "category": "institutions",
+      "text_fr": "Qui nomme le Premier ministre ?",
+      "answer_hint": "Le président de la République nomme le Premier ministre (article 8 de la Constitution). Le PM doit en pratique être issu de la majorité parlementaire.",
+      "translations": {
+        "en": { "text": "Who appoints the Prime Minister?", "answer_hint": "The President of the Republic appoints the Prime Minister (Article 8 of the Constitution). In practice, the PM must come from the parliamentary majority." },
+        "tr": { "text": "Başbakanı kim atar?", "answer_hint": "Başbakanı Cumhurbaşkanı atar (Anayasa madde 8). Pratikte Başbakan parlamento çoğunluğundan gelmelidir." }
+      }
+    },
+    {
+      "id": 57,
+      "category": "institutions",
+      "text_fr": "Quel est le rôle du président de la République ?",
+      "answer_hint": "Chef de l'État, garant des institutions, chef des armées, conduit la diplomatie, peut dissoudre l'Assemblée nationale, nomme le Premier ministre.",
+      "translations": {
+        "en": { "text": "What is the role of the President of the Republic?", "answer_hint": "Head of state, guarantor of institutions, commander-in-chief of the armed forces, leads diplomacy, can dissolve the National Assembly, appoints the Prime Minister." },
+        "tr": { "text": "Cumhurbaşkanının rolü nedir?", "answer_hint": "Devlet başkanı, kurumların güvencesi, ordunun başkomutanı, diplomasiyi yürütür, Ulusal Meclisi feshedebilir, Başbakanı atar." }
+      }
+    },
+    {
+      "id": 58,
+      "category": "institutions",
+      "text_fr": "Quel est le rôle du Premier ministre ?",
+      "answer_hint": "Dirige le gouvernement, propose les lois, applique la politique du président, dispose de l'administration et de la force armée (en gestion courante).",
+      "translations": {
+        "en": { "text": "What is the role of the Prime Minister?", "answer_hint": "Leads the government, proposes laws, implements the President's policy, has authority over administration and armed forces (in routine management)." },
+        "tr": { "text": "Başbakanın rolü nedir?", "answer_hint": "Hükümeti yönetir, yasaları önerir, Cumhurbaşkanı'nın politikasını uygular, idari ve askeri güçler üzerinde yetkilidir (rutin yönetimde)." }
+      }
+    },
+    {
+      "id": 59,
+      "category": "institutions",
+      "text_fr": "Quel est le rôle d'un ministre ?",
+      "answer_hint": "Membre du gouvernement, dirige un ministère (Intérieur, Économie, Éducation, etc.), met en œuvre la politique gouvernementale dans son domaine.",
+      "translations": {
+        "en": { "text": "What is the role of a minister?", "answer_hint": "Member of the government, leads a ministry (Interior, Economy, Education, etc.), implements government policy in their field." },
+        "tr": { "text": "Bir bakanın rolü nedir?", "answer_hint": "Hükümet üyesi, bir bakanlığı (İçişleri, Ekonomi, Eğitim, vb.) yönetir, kendi alanında hükümet politikasını uygular." }
+      }
+    },
+    {
+      "id": 60,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que l'Assemblée nationale ?",
+      "answer_hint": "Chambre basse du Parlement, 577 députés élus au suffrage universel direct pour 5 ans. Siège : Palais Bourbon, Paris. Vote les lois, peut renverser le gouvernement.",
+      "translations": {
+        "en": { "text": "What is the National Assembly?", "answer_hint": "Lower house of Parliament, 577 deputies elected by direct universal suffrage for 5 years. Seat: Palais Bourbon, Paris. Votes laws, can overthrow the government." },
+        "tr": { "text": "Ulusal Meclis (Assemblée nationale) nedir?", "answer_hint": "Parlamentonun alt kanadı, doğrudan genel oyla 5 yıllığına seçilen 577 milletvekili. Merkez: Palais Bourbon, Paris. Yasaları onaylar, hükümeti devirebilir." }
+      }
+    },
+    {
+      "id": 61,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que le Sénat ?",
+      "answer_hint": "Chambre haute du Parlement, 348 sénateurs élus au suffrage indirect (par des grands électeurs), pour 6 ans, renouvelables par moitié tous les 3 ans. Siège : Palais du Luxembourg.",
+      "translations": {
+        "en": { "text": "What is the Senate?", "answer_hint": "Upper house of Parliament, 348 senators elected by indirect suffrage (by grand electors), for 6 years, renewed by half every 3 years. Seat: Palais du Luxembourg." },
+        "tr": { "text": "Senato nedir?", "answer_hint": "Parlamentonun üst kanadı, dolaylı oyla (büyük seçicilerle) 6 yıllığına seçilen 348 senatör, her 3 yılda bir yarısı yenilenir. Merkez: Palais du Luxembourg." }
+      }
+    },
+    {
+      "id": 62,
+      "category": "institutions",
+      "text_fr": "Qui élit les députés ?",
+      "answer_hint": "Les citoyens français âgés de 18 ans et plus, au suffrage universel direct, à deux tours, dans 577 circonscriptions.",
+      "translations": {
+        "en": { "text": "Who elects the deputies?", "answer_hint": "French citizens aged 18 and over, by direct universal suffrage, in two rounds, in 577 constituencies." },
+        "tr": { "text": "Milletvekillerini kim seçer?", "answer_hint": "18 yaş ve üzeri Fransız vatandaşları, doğrudan genel oyla, iki turda, 577 seçim bölgesinde." }
+      }
+    },
+    {
+      "id": 63,
+      "category": "institutions",
+      "text_fr": "Qui élit les sénateurs ?",
+      "answer_hint": "Les grands électeurs (députés, conseillers régionaux et départementaux, conseillers municipaux des grandes villes), ~150 000 personnes au total.",
+      "translations": {
+        "en": { "text": "Who elects the senators?", "answer_hint": "Grand electors (deputies, regional and departmental councilors, municipal councilors of major cities), about 150,000 people in total." },
+        "tr": { "text": "Senatörleri kim seçer?", "answer_hint": "Büyük seçiciler (milletvekilleri, bölgesel ve il meclisi üyeleri, büyük şehir belediye meclisi üyeleri), toplam yaklaşık 150 000 kişi." }
+      }
+    },
+    {
+      "id": 64,
+      "category": "institutions",
+      "text_fr": "Combien y a-t-il de députés à l'Assemblée nationale ?",
+      "answer_hint": "577 députés, dont 11 représentent les Français de l'étranger.",
+      "translations": {
+        "en": { "text": "How many deputies are in the National Assembly?", "answer_hint": "577 deputies, including 11 representing French citizens abroad." },
+        "tr": { "text": "Ulusal Meclis'te kaç milletvekili var?", "answer_hint": "577 milletvekili, bunların 11'i yurtdışındaki Fransız vatandaşlarını temsil eder." }
+      }
+    },
+    {
+      "id": 65,
+      "category": "institutions",
+      "text_fr": "Combien y a-t-il de sénateurs ?",
+      "answer_hint": "348 sénateurs, dont 12 pour les Français établis hors de France.",
+      "translations": {
+        "en": { "text": "How many senators are there?", "answer_hint": "348 senators, including 12 for French citizens established abroad." },
+        "tr": { "text": "Kaç senatör vardır?", "answer_hint": "348 senatör, bunların 12'si yurtdışında yerleşik Fransız vatandaşları için." }
+      }
+    },
+    {
+      "id": 66,
+      "category": "institutions",
+      "text_fr": "Quel âge doit-on avoir pour voter en France ?",
+      "answer_hint": "18 ans révolus, être de nationalité française (sauf pour les municipales et européennes : citoyens UE résidant en France).",
+      "translations": {
+        "en": { "text": "What age must you be to vote in France?", "answer_hint": "18 years old, French nationality (except municipal and European elections: EU citizens residing in France can vote)." },
+        "tr": { "text": "Fransa'da oy vermek için kaç yaşında olmak gerekir?", "answer_hint": "Tamamlanmış 18 yaş, Fransız vatandaşlığı (belediye ve Avrupa seçimleri hariç: Fransa'da yaşayan AB vatandaşları oy verebilir)." }
+      }
+    },
+    {
+      "id": 67,
+      "category": "institutions",
+      "text_fr": "Quelles sont les principales élections en France ?",
+      "answer_hint": "Présidentielles, législatives (députés), sénatoriales, européennes, régionales, départementales, municipales.",
+      "translations": {
+        "en": { "text": "What are the main elections in France?", "answer_hint": "Presidential, legislative (deputies), senatorial, European, regional, departmental, municipal." },
+        "tr": { "text": "Fransa'daki başlıca seçimler nelerdir?", "answer_hint": "Cumhurbaşkanlığı, milletvekili, senato, Avrupa, bölgesel, il, belediye seçimleri." }
+      }
+    },
+    {
+      "id": 68,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que le Conseil constitutionnel ?",
+      "answer_hint": "Institution créée en 1958. Vérifie la constitutionnalité des lois. 9 membres nommés (3 par le président, 3 par l'Assemblée, 3 par le Sénat) pour 9 ans, plus les anciens présidents à vie.",
+      "translations": {
+        "en": { "text": "What is the Constitutional Council?", "answer_hint": "Institution created in 1958. Checks constitutionality of laws. 9 members appointed (3 by the President, 3 by the National Assembly, 3 by the Senate) for 9 years, plus former presidents for life." },
+        "tr": { "text": "Anayasa Konseyi (Conseil constitutionnel) nedir?", "answer_hint": "1958'de kurulan kurum. Yasaların anayasaya uygunluğunu denetler. 9 yıllığına atanan 9 üye (3'ü Cumhurbaşkanı, 3'ü Ulusal Meclis, 3'ü Senato tarafından), ayrıca ömür boyu eski cumhurbaşkanları." }
+      }
+    },
+    {
+      "id": 69,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que le Conseil d'État ?",
+      "answer_hint": "Plus haute juridiction administrative française. Conseille le gouvernement sur les projets de loi et juge les litiges entre les citoyens et l'administration. Créé par Napoléon en 1799.",
+      "translations": {
+        "en": { "text": "What is the Council of State (Conseil d'État)?", "answer_hint": "Highest administrative court in France. Advises the government on bills and judges disputes between citizens and the administration. Created by Napoleon in 1799." },
+        "tr": { "text": "Danıştay (Conseil d'État) nedir?", "answer_hint": "Fransa'nın en yüksek idari mahkemesi. Hükümete yasa tasarıları hakkında danışmanlık yapar ve vatandaşlarla idare arasındaki uyuşmazlıkları çözer. 1799'da Napolyon tarafından kurulmuştur." }
+      }
+    },
+    {
+      "id": 70,
+      "category": "institutions",
+      "text_fr": "Quelle est la différence entre une commune, un département et une région ?",
+      "answer_hint": "Trois niveaux de collectivités territoriales : commune (mairie), département (conseil départemental), région (conseil régional). Chacune a ses compétences (école, transports, etc.).",
+      "translations": {
+        "en": { "text": "What is the difference between a commune, a department, and a region?", "answer_hint": "Three levels of local government: commune (town hall), department (departmental council), region (regional council). Each has its own competencies (schools, transport, etc.)." },
+        "tr": { "text": "Belediye (commune), il (département) ve bölge (région) arasındaki fark nedir?", "answer_hint": "Üç yerel yönetim seviyesi: belediye (commune — belediye binası), il (département — il meclisi), bölge (région — bölge meclisi). Her birinin kendi yetkileri vardır (okullar, ulaşım, vb.)." }
+      }
+    },
+    {
+      "id": 71,
+      "category": "institutions",
+      "text_fr": "Qui est le maire de votre commune ?",
+      "answer_hint": "Connaissez le nom de votre maire (vérifier avant l'entretien). Vous pouvez mentionner depuis quand il/elle est en poste.",
+      "translations": {
+        "en": { "text": "Who is the mayor of your commune?", "answer_hint": "Know the name of your mayor (verify before interview). You can mention since when they are in office." },
+        "tr": { "text": "Belediyenizin başkanı kimdir?", "answer_hint": "Belediye başkanınızın adını bilin (mülakat öncesi kontrol edin). Ne zamandır görevde olduğunu da belirtebilirsiniz." }
+      }
+    },
+    {
+      "id": 72,
+      "category": "institutions",
+      "text_fr": "Quel est le rôle du maire ?",
+      "answer_hint": "Représentant de la commune, exécute les décisions du conseil municipal, officier d'état civil (mariages), gère école, urbanisme, sécurité locale (police municipale).",
+      "translations": {
+        "en": { "text": "What is the role of the mayor?", "answer_hint": "Represents the commune, executes municipal council decisions, civil registry officer (marriages), manages schools, urban planning, local security (municipal police)." },
+        "tr": { "text": "Belediye başkanının rolü nedir?", "answer_hint": "Belediyeyi temsil eder, belediye meclisi kararlarını uygular, nüfus müdürüdür (evlilikler), okul, şehir planlama, yerel güvenliği (belediye polisi) yönetir." }
+      }
+    },
+    {
+      "id": 73,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce qu'une préfecture ?",
+      "answer_hint": "Représentation de l'État dans le département, dirigée par le préfet. S'occupe des titres de séjour, permis de conduire, cartes grises, naturalisations.",
+      "translations": {
+        "en": { "text": "What is a prefecture?", "answer_hint": "State representation in the department, headed by the prefect. Handles residence permits, driving licenses, vehicle registration, naturalizations." },
+        "tr": { "text": "Valilik (préfecture) nedir?", "answer_hint": "İlçede devletin temsili, vali (préfet) tarafından yönetilir. Oturma izni, ehliyet, araç ruhsatı, vatandaşlık işlemleriyle ilgilenir." }
+      }
+    },
+    {
+      "id": 74,
+      "category": "institutions",
+      "text_fr": "Qui nomme les préfets ?",
+      "answer_hint": "Les préfets sont nommés par décret du président de la République en Conseil des ministres, sur proposition du Premier ministre et du ministre de l'Intérieur.",
+      "translations": {
+        "en": { "text": "Who appoints prefects?", "answer_hint": "Prefects are appointed by decree of the President of the Republic in the Council of Ministers, on the proposal of the Prime Minister and Minister of the Interior." },
+        "tr": { "text": "Valileri kim atar?", "answer_hint": "Valiler, Başbakan ve İçişleri Bakanı'nın önerisiyle Bakanlar Kurulu'nda Cumhurbaşkanı kararnamesiyle atanır." }
+      }
+    },
+    {
+      "id": 75,
+      "category": "institutions",
+      "text_fr": "Quelle est la devise de la France ?",
+      "answer_hint": "Liberté, Égalité, Fraternité. Elle figure sur les bâtiments publics, les pièces de monnaie, et est inscrite à l'article 2 de la Constitution.",
+      "translations": {
+        "en": { "text": "What is the motto of France?", "answer_hint": "Liberty, Equality, Fraternity. Found on public buildings, coins, and inscribed in Article 2 of the Constitution." },
+        "tr": { "text": "Fransa'nın sloganı nedir?", "answer_hint": "Özgürlük, Eşitlik, Kardeşlik (Liberté, Égalité, Fraternité). Kamu binalarında, sikkelerde bulunur ve Anayasa madde 2'de yer alır." }
+      }
+    },
+    {
+      "id": 76,
+      "category": "institutions",
+      "text_fr": "Quel est l'hymne national français ?",
+      "answer_hint": "La Marseillaise, écrite par Rouget de Lisle en 1792 à Strasbourg. Hymne officiel depuis 1795.",
+      "translations": {
+        "en": { "text": "What is the French national anthem?", "answer_hint": "La Marseillaise, written by Rouget de Lisle in 1792 in Strasbourg. Official anthem since 1795." },
+        "tr": { "text": "Fransa'nın milli marşı nedir?", "answer_hint": "Rouget de Lisle tarafından 1792'de Strazburg'da yazılan La Marseillaise. 1795'ten beri resmi marş." }
+      }
+    },
+    {
+      "id": 77,
+      "category": "institutions",
+      "text_fr": "Quel est le drapeau de la France ?",
+      "answer_hint": "Tricolore : bleu, blanc, rouge. Bandes verticales d'égale largeur. Adopté en 1794, symbolise l'union du roi (blanc) et de la ville de Paris (bleu et rouge).",
+      "translations": {
+        "en": { "text": "What is the flag of France?", "answer_hint": "Tricolor: blue, white, red. Vertical stripes of equal width. Adopted in 1794, symbolizes the union of the king (white) and the city of Paris (blue and red)." },
+        "tr": { "text": "Fransa'nın bayrağı nasıldır?", "answer_hint": "Üç renkli: mavi, beyaz, kırmızı. Eşit genişlikte dikey şeritler. 1794'te kabul edildi, kralın (beyaz) ve Paris şehrinin (mavi ve kırmızı) birliğini simgeler." }
+      }
+    },
+    {
+      "id": 78,
+      "category": "institutions",
+      "text_fr": "Quelle est la monnaie de la France ?",
+      "answer_hint": "L'euro (€) depuis le 1er janvier 2002. Avant : le franc. Monnaie commune à 20 pays de la zone euro.",
+      "translations": {
+        "en": { "text": "What is the currency of France?", "answer_hint": "The euro (€) since 1 January 2002. Before: the franc. Common currency for 20 eurozone countries." },
+        "tr": { "text": "Fransa'nın para birimi nedir?", "answer_hint": "1 Ocak 2002'den beri euro (€). Öncesi: frank. 20 euro bölgesi ülkesinin ortak para birimi." }
+      }
+    },
+    {
+      "id": 79,
+      "category": "institutions",
+      "text_fr": "Quelle est la fête nationale française et que commémore-t-elle ?",
+      "answer_hint": "Le 14 juillet. Commémore la prise de la Bastille en 1789 et la Fête de la Fédération de 1790 (loi du 6 juillet 1880).",
+      "translations": {
+        "en": { "text": "What is the French national holiday and what does it commemorate?", "answer_hint": "14 July. Commemorates the storming of the Bastille in 1789 and the Festival of the Federation of 1790 (law of 6 July 1880)." },
+        "tr": { "text": "Fransa'nın ulusal bayramı nedir ve neyi anar?", "answer_hint": "14 Temmuz. 1789'da Bastille'in fethini ve 1790 Federasyon Bayramı'nı anar (6 Temmuz 1880 yasası)." }
+      }
+    },
+    {
+      "id": 80,
+      "category": "institutions",
+      "text_fr": "Que représente Marianne ?",
+      "answer_hint": "Allégorie de la République française, symbole de liberté et de raison. Portée par un bonnet phrygien. Présente dans toutes les mairies.",
+      "translations": {
+        "en": { "text": "What does Marianne represent?", "answer_hint": "Allegory of the French Republic, symbol of freedom and reason. Wears a Phrygian cap. Present in every town hall." },
+        "tr": { "text": "Marianne neyi temsil eder?", "answer_hint": "Fransız Cumhuriyeti'nin alegorisi, özgürlük ve aklın simgesi. Frigya başlığı giyer. Her belediye binasında bulunur." }
+      }
+    },
+    {
+      "id": 81,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que la Constitution ?",
+      "answer_hint": "Texte fondamental qui organise les pouvoirs publics. La Constitution actuelle est celle de la Ve République, adoptée le 4 octobre 1958, à l'initiative du général de Gaulle.",
+      "translations": {
+        "en": { "text": "What is the Constitution?", "answer_hint": "Fundamental text organizing public powers. The current Constitution is that of the Fifth Republic, adopted on 4 October 1958, at the initiative of General de Gaulle." },
+        "tr": { "text": "Anayasa nedir?", "answer_hint": "Kamu yetkilerini düzenleyen temel metin. Mevcut Anayasa, General de Gaulle'ün girişimiyle 4 Ekim 1958'de kabul edilen Beşinci Cumhuriyet Anayasasıdır." }
+      }
+    },
+    {
+      "id": 82,
+      "category": "institutions",
+      "text_fr": "Quand a été adoptée la Constitution actuelle ?",
+      "answer_hint": "Le 4 octobre 1958, par référendum, sous l'impulsion du général de Gaulle. Elle a fondé la Ve République.",
+      "translations": {
+        "en": { "text": "When was the current Constitution adopted?", "answer_hint": "4 October 1958, by referendum, under the impetus of General de Gaulle. It founded the Fifth Republic." },
+        "tr": { "text": "Mevcut Anayasa ne zaman kabul edildi?", "answer_hint": "General de Gaulle'ün öncülüğünde 4 Ekim 1958'de halk oylamasıyla. Beşinci Cumhuriyet'i kurdu." }
+      }
+    },
+    {
+      "id": 83,
+      "category": "institutions",
+      "text_fr": "Quels sont les trois pouvoirs en France ?",
+      "answer_hint": "Pouvoir exécutif (président, gouvernement), pouvoir législatif (Parlement : Assemblée nationale + Sénat), pouvoir judiciaire (tribunaux). Séparation des pouvoirs (Montesquieu).",
+      "translations": {
+        "en": { "text": "What are the three powers in France?", "answer_hint": "Executive (President, government), legislative (Parliament: National Assembly + Senate), judicial (courts). Separation of powers (Montesquieu)." },
+        "tr": { "text": "Fransa'daki üç güç nedir?", "answer_hint": "Yürütme (Cumhurbaşkanı, hükümet), yasama (Parlamento: Ulusal Meclis + Senato), yargı (mahkemeler). Kuvvetler ayrılığı (Montesquieu)." }
+      }
+    },
+    {
+      "id": 84,
+      "category": "institutions",
+      "text_fr": "Qui peut proposer une loi ?",
+      "answer_hint": "Le gouvernement (projet de loi) ou les parlementaires : députés ou sénateurs (proposition de loi). Le texte est ensuite débattu et voté.",
+      "translations": {
+        "en": { "text": "Who can propose a law?", "answer_hint": "The government (projet de loi — government bill) or parliamentarians, deputies or senators (proposition de loi — private bill). The text is then debated and voted." },
+        "tr": { "text": "Bir yasayı kim önerebilir?", "answer_hint": "Hükümet (projet de loi — hükümet tasarısı) veya parlamenterler, milletvekili ya da senatörler (proposition de loi — özel teklif). Metin sonra tartışılır ve oylanır." }
+      }
+    },
+    {
+      "id": 85,
+      "category": "institutions",
+      "text_fr": "Comment une loi est-elle adoptée ?",
+      "answer_hint": "Vote par l'Assemblée nationale et le Sénat (texte identique), puis promulgation par le président dans les 15 jours. Contrôle possible par le Conseil constitutionnel.",
+      "translations": {
+        "en": { "text": "How is a law adopted?", "answer_hint": "Voted by National Assembly and Senate (identical text), then promulgated by the President within 15 days. Possible review by Constitutional Council." },
+        "tr": { "text": "Bir yasa nasıl kabul edilir?", "answer_hint": "Ulusal Meclis ve Senato tarafından (aynı metin) oylanır, sonra Cumhurbaşkanı tarafından 15 gün içinde yayımlanır. Anayasa Konseyi'nce denetim mümkündür." }
+      }
+    },
+    {
+      "id": 86,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que l'Union européenne et depuis quand la France en fait-elle partie ?",
+      "answer_hint": "Union politique et économique. La France est l'un des 6 pays fondateurs (Traité de Rome, 25 mars 1957). 27 États membres aujourd'hui.",
+      "translations": {
+        "en": { "text": "What is the European Union and since when has France been a member?", "answer_hint": "Political and economic union. France is one of the 6 founding countries (Treaty of Rome, 25 March 1957). 27 member states today." },
+        "tr": { "text": "Avrupa Birliği nedir ve Fransa ne zamandır üyesi?", "answer_hint": "Siyasi ve ekonomik birlik. Fransa 6 kurucu ülkeden biridir (Roma Antlaşması, 25 Mart 1957). Bugün 27 üye devlet." }
+      }
+    },
+    {
+      "id": 87,
+      "category": "institutions",
+      "text_fr": "Combien de pays membres compte l'Union européenne ?",
+      "answer_hint": "27 pays depuis le Brexit (sortie du Royaume-Uni en 2020).",
+      "translations": {
+        "en": { "text": "How many member states does the European Union have?", "answer_hint": "27 countries since Brexit (UK left in 2020)." },
+        "tr": { "text": "Avrupa Birliği'nin kaç üye devleti var?", "answer_hint": "Brexit'ten beri (Birleşik Krallık 2020'de ayrıldı) 27 ülke." }
+      }
+    },
+    {
+      "id": 88,
+      "category": "institutions",
+      "text_fr": "Quelles sont les institutions principales de l'Union européenne ?",
+      "answer_hint": "Parlement européen (Strasbourg/Bruxelles), Commission européenne (Bruxelles), Conseil de l'UE, Conseil européen, Cour de justice (Luxembourg), Banque centrale européenne (Francfort).",
+      "translations": {
+        "en": { "text": "What are the main institutions of the European Union?", "answer_hint": "European Parliament (Strasbourg/Brussels), European Commission (Brussels), Council of the EU, European Council, Court of Justice (Luxembourg), European Central Bank (Frankfurt)." },
+        "tr": { "text": "Avrupa Birliği'nin başlıca kurumları nelerdir?", "answer_hint": "Avrupa Parlamentosu (Strazburg/Brüksel), Avrupa Komisyonu (Brüksel), AB Konseyi, Avrupa Konseyi, Adalet Divanı (Lüksemburg), Avrupa Merkez Bankası (Frankfurt)." }
+      }
+    },
+    {
+      "id": 89,
+      "category": "institutions",
+      "text_fr": "Où siège le Parlement européen ?",
+      "answer_hint": "Strasbourg (siège officiel, sessions plénières) et Bruxelles (commissions et sessions plénières additionnelles). Secrétariat à Luxembourg.",
+      "translations": {
+        "en": { "text": "Where does the European Parliament sit?", "answer_hint": "Strasbourg (official seat, plenary sessions) and Brussels (committees and additional plenary sessions). Secretariat in Luxembourg." },
+        "tr": { "text": "Avrupa Parlamentosu nerede bulunur?", "answer_hint": "Strazburg (resmi merkez, genel kurul) ve Brüksel (komiteler ve ek genel kurul). Sekretarya Lüksemburg'da." }
+      }
+    },
+    {
+      "id": 90,
+      "category": "institutions",
+      "text_fr": "Quels sont les pays fondateurs de l'Union européenne ?",
+      "answer_hint": "Les 6 : France, Allemagne, Italie, Belgique, Pays-Bas, Luxembourg. Signature du Traité de Rome le 25 mars 1957.",
+      "translations": {
+        "en": { "text": "Which are the founding countries of the European Union?", "answer_hint": "The 6: France, Germany, Italy, Belgium, Netherlands, Luxembourg. Signing of the Treaty of Rome on 25 March 1957." },
+        "tr": { "text": "Avrupa Birliği'nin kurucu ülkeleri hangileridir?", "answer_hint": "6 ülke: Fransa, Almanya, İtalya, Belçika, Hollanda, Lüksemburg. Roma Antlaşması 25 Mart 1957'de imzalandı." }
+      }
+    },
+    {
+      "id": 91,
+      "category": "institutions",
+      "text_fr": "Quel est le drapeau de l'Union européenne ?",
+      "answer_hint": "Fond bleu avec 12 étoiles dorées disposées en cercle. Les 12 étoiles ne représentent pas le nombre de pays mais l'unité, la perfection et la plénitude.",
+      "translations": {
+        "en": { "text": "What is the flag of the European Union?", "answer_hint": "Blue background with 12 gold stars in a circle. The 12 stars do not represent the number of countries but unity, perfection, and completeness." },
+        "tr": { "text": "Avrupa Birliği'nin bayrağı nasıldır?", "answer_hint": "Mavi zemin üzerinde halka şeklinde 12 altın yıldız. 12 yıldız ülke sayısını değil birlik, mükemmellik ve bütünlüğü temsil eder." }
+      }
+    },
+    {
+      "id": 92,
+      "category": "institutions",
+      "text_fr": "Quelle est la devise de l'Union européenne ?",
+      "answer_hint": "« Unie dans la diversité », adoptée en 2000.",
+      "translations": {
+        "en": { "text": "What is the motto of the European Union?", "answer_hint": "\"United in diversity\", adopted in 2000." },
+        "tr": { "text": "Avrupa Birliği'nin sloganı nedir?", "answer_hint": "\"Çeşitlilik içinde birlik\" (Unie dans la diversité), 2000'de kabul edildi." }
+      }
+    },
+    {
+      "id": 93,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que l'espace Schengen ?",
+      "answer_hint": "Zone de libre circulation sans contrôle aux frontières intérieures, créée en 1985. 27 États (dont 25 de l'UE + Suisse, Norvège, Islande, Liechtenstein).",
+      "translations": {
+        "en": { "text": "What is the Schengen area?", "answer_hint": "Zone of free movement without internal border controls, created in 1985. 27 states (including 25 EU + Switzerland, Norway, Iceland, Liechtenstein)." },
+        "tr": { "text": "Schengen alanı nedir?", "answer_hint": "1985'te kurulan, iç sınır kontrolü olmadan serbest dolaşım bölgesi. 27 devlet (25 AB ülkesi + İsviçre, Norveç, İzlanda, Liechtenstein)." }
+      }
+    },
+    {
+      "id": 94,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que l'ONU ?",
+      "answer_hint": "Organisation des Nations unies, créée en 1945 après la WWII. Siège à New York. La France est membre permanent du Conseil de sécurité (droit de veto).",
+      "translations": {
+        "en": { "text": "What is the UN?", "answer_hint": "United Nations Organization, created in 1945 after WWII. Headquarters in New York. France is a permanent member of the Security Council (veto power)." },
+        "tr": { "text": "BM nedir?", "answer_hint": "Birleşmiş Milletler, II. Dünya Savaşı'ndan sonra 1945'te kuruldu. Merkezi New York'tadır. Fransa, Güvenlik Konseyi'nin daimi üyesidir (veto hakkı)." }
+      }
+    },
+    {
+      "id": 95,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que l'OTAN ?",
+      "answer_hint": "Organisation du traité de l'Atlantique Nord, alliance militaire créée en 1949. La France en est membre fondateur. Siège : Bruxelles.",
+      "translations": {
+        "en": { "text": "What is NATO?", "answer_hint": "North Atlantic Treaty Organization, military alliance created in 1949. France is a founding member. Headquarters: Brussels." },
+        "tr": { "text": "NATO nedir?", "answer_hint": "1949'da kurulan Kuzey Atlantik Antlaşması Örgütü, askeri ittifak. Fransa kurucu üyedir. Merkezi: Brüksel." }
+      }
+    },
+    {
+      "id": 96,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que la francophonie ?",
+      "answer_hint": "Communauté des pays ayant le français en partage. Organisation internationale de la Francophonie (OIF) regroupe 88 États et gouvernements. Journée internationale : 20 mars.",
+      "translations": {
+        "en": { "text": "What is the Francophonie?", "answer_hint": "Community of countries sharing the French language. The International Organisation of La Francophonie (OIF) gathers 88 states and governments. International Day: 20 March." },
+        "tr": { "text": "Frankofoni nedir?", "answer_hint": "Fransızcayı paylaşan ülkeler topluluğu. Uluslararası Frankofoni Örgütü (OIF) 88 devlet ve hükümeti bir araya getirir. Uluslararası Gün: 20 Mart." }
+      }
+    },
+    {
+      "id": 97,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que la justice en France ?",
+      "answer_hint": "Pouvoir indépendant. Deux ordres : judiciaire (litiges privés, infractions) et administratif (litiges avec l'administration). Garante par les magistrats.",
+      "translations": {
+        "en": { "text": "What is justice in France?", "answer_hint": "Independent power. Two orders: judicial (private disputes, offenses) and administrative (disputes with administration). Upheld by magistrates." },
+        "tr": { "text": "Fransa'da yargı nedir?", "answer_hint": "Bağımsız bir güçtür. İki düzen vardır: adli (özel uyuşmazlıklar, suçlar) ve idari (idareyle uyuşmazlıklar). Hakimler tarafından güvence altına alınır." }
+      }
+    },
+    {
+      "id": 98,
+      "category": "institutions",
+      "text_fr": "Quelle est la juridiction suprême en matière judiciaire ?",
+      "answer_hint": "La Cour de cassation, à Paris. Plus haute juridiction de l'ordre judiciaire. Elle ne juge pas les faits mais le droit appliqué.",
+      "translations": {
+        "en": { "text": "What is the supreme judicial court?", "answer_hint": "The Court of Cassation (Cour de cassation), in Paris. Highest court of the judicial order. It does not judge facts but the application of law." },
+        "tr": { "text": "Adli düzendeki en yüksek mahkeme nedir?", "answer_hint": "Yargıtay (Cour de cassation), Paris'tedir. Adli düzenin en yüksek mahkemesi. Olayları değil, hukukun uygulanmasını denetler." }
+      }
+    },
+    {
+      "id": 99,
+      "category": "institutions",
+      "text_fr": "Qu'est-ce que la Défenseure des droits ?",
+      "answer_hint": "Autorité administrative indépendante créée en 2011. Défend les droits et libertés des citoyens face aux administrations. Mandat de 6 ans non renouvelable.",
+      "translations": {
+        "en": { "text": "What is the Defender of Rights (Défenseur des droits)?", "answer_hint": "Independent administrative authority created in 2011. Defends citizens' rights and freedoms against administrations. 6-year non-renewable term." },
+        "tr": { "text": "Haklar Savunucusu (Défenseur des droits) nedir?", "answer_hint": "2011'de kurulan bağımsız idari otorite. Vatandaşların idareye karşı hak ve özgürlüklerini savunur. 6 yıllık yenilenemez görev süresi." }
+      }
+    },
+    {
+      "id": 100,
+      "category": "institutions",
+      "text_fr": "Quels sont les services publics français ?",
+      "answer_hint": "Éducation, santé (hôpitaux, Sécurité sociale), justice, police, pompiers, transports (SNCF), poste, défense nationale. Financés par les impôts et cotisations.",
+      "translations": {
+        "en": { "text": "What are the French public services?", "answer_hint": "Education, healthcare (hospitals, Social Security), justice, police, firefighters, transport (SNCF — French railways), post office, national defense. Funded by taxes and contributions." },
+        "tr": { "text": "Fransız kamu hizmetleri nelerdir?", "answer_hint": "Eğitim, sağlık (hastaneler, Sosyal Güvenlik), adalet, polis, itfaiyeciler, ulaşım (SNCF — Fransız demiryolları), posta, ulusal savunma. Vergiler ve primlerle finanse edilir." }
+      }
+    },
+    {
+      "id": 101,
+      "category": "histoire",
+      "text_fr": "En quelle année a eu lieu la Révolution française ?",
+      "answer_hint": "1789. La prise de la Bastille a lieu le 14 juillet 1789. La Déclaration des droits de l'homme et du citoyen est adoptée le 26 août 1789.",
+      "translations": {
+        "en": { "text": "In what year did the French Revolution take place?", "answer_hint": "1789. The storming of the Bastille happened on 14 July 1789. The Declaration of the Rights of Man and of the Citizen was adopted on 26 August 1789." },
+        "tr": { "text": "Fransız Devrimi hangi yıl gerçekleşti?", "answer_hint": "1789. Bastille'in fethi 14 Temmuz 1789'da gerçekleşti. İnsan ve Yurttaş Hakları Bildirgesi 26 Ağustos 1789'da kabul edildi." }
+      }
+    },
+    {
+      "id": 102,
+      "category": "histoire",
+      "text_fr": "Que s'est-il passé le 14 juillet 1789 ?",
+      "answer_hint": "Prise de la Bastille (prison royale, symbole de l'arbitraire). Événement déclencheur de la Révolution. Devenue fête nationale en 1880.",
+      "translations": {
+        "en": { "text": "What happened on 14 July 1789?", "answer_hint": "Storming of the Bastille (royal prison, symbol of arbitrary power). Triggering event of the Revolution. Became the national holiday in 1880." },
+        "tr": { "text": "14 Temmuz 1789'da ne oldu?", "answer_hint": "Bastille'in fethi (kraliyet hapishanesi, keyfi gücün simgesi). Devrimi tetikleyen olay. 1880'de ulusal bayram oldu." }
+      }
+    },
+    {
+      "id": 103,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Déclaration des droits de l'homme et du citoyen ?",
+      "answer_hint": "Texte fondamental adopté le 26 août 1789. Proclame des droits universels : liberté, égalité, propriété, sûreté, résistance à l'oppression. Préambule de la Constitution actuelle.",
+      "translations": {
+        "en": { "text": "What is the Declaration of the Rights of Man and of the Citizen?", "answer_hint": "Fundamental text adopted on 26 August 1789. Proclaims universal rights: liberty, equality, property, security, resistance to oppression. Preamble to the current Constitution." },
+        "tr": { "text": "İnsan ve Yurttaş Hakları Bildirgesi nedir?", "answer_hint": "26 Ağustos 1789'da kabul edilen temel metin. Evrensel hakları ilan eder: özgürlük, eşitlik, mülkiyet, güvenlik, baskıya direniş. Mevcut Anayasanın önsözüdür." }
+      }
+    },
+    {
+      "id": 104,
+      "category": "histoire",
+      "text_fr": "Qui était Louis XIV ?",
+      "answer_hint": "Le Roi Soleil. Règne le plus long de France (1643-1715, 72 ans). Monarchie absolue, construction du château de Versailles, expansion militaire et culturelle.",
+      "translations": {
+        "en": { "text": "Who was Louis XIV?", "answer_hint": "The Sun King. Longest reign in France (1643-1715, 72 years). Absolute monarchy, construction of the Palace of Versailles, military and cultural expansion." },
+        "tr": { "text": "XIV. Louis kimdi?", "answer_hint": "Güneş Kral. Fransa'nın en uzun saltanatı (1643-1715, 72 yıl). Mutlak monarşi, Versailles Sarayı'nın inşası, askeri ve kültürel genişleme." }
+      }
+    },
+    {
+      "id": 105,
+      "category": "histoire",
+      "text_fr": "Qui était Napoléon Bonaparte ?",
+      "answer_hint": "Général puis empereur des Français (1804-1814, 1815). A modernisé la France : Code civil (1804), lycées, préfectures, Légion d'honneur. Défaite à Waterloo (1815).",
+      "translations": {
+        "en": { "text": "Who was Napoleon Bonaparte?", "answer_hint": "General then Emperor of the French (1804-1814, 1815). Modernized France: Civil Code (1804), lycées (state secondary schools), prefectures, Legion of Honor. Defeated at Waterloo (1815)." },
+        "tr": { "text": "Napolyon Bonapart kimdi?", "answer_hint": "Önce general, sonra Fransa İmparatoru (1804-1814, 1815). Fransa'yı modernleştirdi: Medeni Kanun (1804), liseler (lycées — devlet ortaöğretim), valilikler, Légion d'honneur. Waterloo'da yenildi (1815)." }
+      }
+    },
+    {
+      "id": 106,
+      "category": "histoire",
+      "text_fr": "Qui était Charles de Gaulle ?",
+      "answer_hint": "Général, chef de la France libre durant la WWII (Appel du 18 juin 1940). Fondateur de la Ve République (1958), premier président élu au suffrage universel direct (1965). Décédé en 1970.",
+      "translations": {
+        "en": { "text": "Who was Charles de Gaulle?", "answer_hint": "General, leader of Free France during WWII (Appeal of 18 June 1940). Founder of the Fifth Republic (1958), first president elected by direct universal suffrage (1965). Died in 1970." },
+        "tr": { "text": "Charles de Gaulle kimdi?", "answer_hint": "General, II. Dünya Savaşı sırasında Özgür Fransa'nın lideri (18 Haziran 1940 Çağrısı). Beşinci Cumhuriyet'in kurucusu (1958), doğrudan genel oyla seçilen ilk cumhurbaşkanı (1965). 1970'te öldü." }
+      }
+    },
+    {
+      "id": 107,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que l'appel du 18 juin 1940 ?",
+      "answer_hint": "Discours du général de Gaulle depuis Londres, appelant les Français à résister à l'occupation nazie. Acte fondateur de la Résistance.",
+      "translations": {
+        "en": { "text": "What was the appeal of 18 June 1940?", "answer_hint": "Speech by General de Gaulle from London, calling on the French to resist Nazi occupation. Founding act of the Resistance." },
+        "tr": { "text": "18 Haziran 1940 Çağrısı nedir?", "answer_hint": "General de Gaulle'ün Londra'dan Fransızları Nazi işgaline direnmeye çağıran konuşması. Direnişin kurucu eylemi." }
+      }
+    },
+    {
+      "id": 108,
+      "category": "histoire",
+      "text_fr": "Quand a eu lieu la Seconde Guerre mondiale ?",
+      "answer_hint": "1939-1945. La France entre en guerre en septembre 1939. Occupation allemande de 1940 à 1944. Libération de Paris : 25 août 1944.",
+      "translations": {
+        "en": { "text": "When did World War II take place?", "answer_hint": "1939-1945. France entered the war in September 1939. German occupation from 1940 to 1944. Liberation of Paris: 25 August 1944." },
+        "tr": { "text": "II. Dünya Savaşı ne zaman yaşandı?", "answer_hint": "1939-1945. Fransa Eylül 1939'da savaşa girdi. 1940-1944 Alman işgali. Paris'in kurtuluşu: 25 Ağustos 1944." }
+      }
+    },
+    {
+      "id": 109,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Shoah ?",
+      "answer_hint": "Génocide des Juifs d'Europe perpétré par l'Allemagne nazie (1941-1945). Environ 6 millions de victimes. En France, ~76 000 Juifs déportés, dont 11 400 enfants. Rafle du Vél' d'Hiv (16-17 juillet 1942).",
+      "translations": {
+        "en": { "text": "What was the Shoah?", "answer_hint": "Genocide of European Jews perpetrated by Nazi Germany (1941-1945). About 6 million victims. In France, ~76,000 Jews were deported, including 11,400 children. Vél' d'Hiv Roundup (16-17 July 1942)." },
+        "tr": { "text": "Şoah nedir?", "answer_hint": "Nazi Almanyası tarafından gerçekleştirilen Avrupa Yahudilerinin soykırımı (1941-1945). Yaklaşık 6 milyon kurban. Fransa'da ~76 000 Yahudi sürgün edildi, bunların 11 400'ü çocuktu. Vél' d'Hiv Baskını (16-17 Temmuz 1942)." }
+      }
+    },
+    {
+      "id": 110,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la rafle du Vél' d'Hiv ?",
+      "answer_hint": "Arrestation massive de Juifs (13 152 personnes dont 4 115 enfants) les 16-17 juillet 1942 par la police française à Paris, sur ordre de l'occupant nazi. Reconnue comme crime de la France par Jacques Chirac en 1995.",
+      "translations": {
+        "en": { "text": "What was the Vél' d'Hiv Roundup?", "answer_hint": "Mass arrest of Jews (13,152 people including 4,115 children) on 16-17 July 1942 by French police in Paris, on orders of the Nazi occupier. Recognized as a French state crime by Jacques Chirac in 1995." },
+        "tr": { "text": "Vél' d'Hiv Baskını nedir?", "answer_hint": "16-17 Temmuz 1942'de Fransız polisinin Nazi işgalcinin emriyle Paris'te yaptığı toplu Yahudi tutuklaması (4115'i çocuk olmak üzere 13 152 kişi). 1995'te Jacques Chirac tarafından Fransız devlet suçu olarak tanındı." }
+      }
+    },
+    {
+      "id": 111,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Résistance ?",
+      "answer_hint": "Mouvement de lutte contre l'occupation allemande et le régime de Vichy entre 1940 et 1944. Personnages clés : de Gaulle, Jean Moulin (unificateur, mort en martyr en 1943), Lucie Aubrac.",
+      "translations": {
+        "en": { "text": "What was the Resistance?", "answer_hint": "Movement against German occupation and the Vichy regime between 1940 and 1944. Key figures: de Gaulle, Jean Moulin (unifier, martyred in 1943), Lucie Aubrac." },
+        "tr": { "text": "Direniş (Résistance) nedir?", "answer_hint": "1940-1944 arasında Alman işgaline ve Vichy rejimine karşı mücadele hareketi. Kilit figürler: de Gaulle, Jean Moulin (birleştirici, 1943'te şehit), Lucie Aubrac." }
+      }
+    },
+    {
+      "id": 112,
+      "category": "histoire",
+      "text_fr": "Quand la France a-t-elle été libérée ?",
+      "answer_hint": "Paris libéré le 25 août 1944. Capitulation allemande : 8 mai 1945 (V-E Day). Le 8 mai est jour férié en France.",
+      "translations": {
+        "en": { "text": "When was France liberated?", "answer_hint": "Paris liberated on 25 August 1944. German surrender: 8 May 1945 (V-E Day). 8 May is a public holiday in France." },
+        "tr": { "text": "Fransa ne zaman kurtarıldı?", "answer_hint": "Paris 25 Ağustos 1944'te kurtarıldı. Almanya'nın teslimi: 8 Mayıs 1945 (Zafer Günü). 8 Mayıs Fransa'da resmi tatildir." }
+      }
+    },
+    {
+      "id": 113,
+      "category": "histoire",
+      "text_fr": "Quand la Première Guerre mondiale a-t-elle eu lieu ?",
+      "answer_hint": "1914-1918. Armistice signé le 11 novembre 1918 à Rethondes. Environ 1,4 million de soldats français tués. Jour férié : 11 novembre.",
+      "translations": {
+        "en": { "text": "When did World War I take place?", "answer_hint": "1914-1918. Armistice signed on 11 November 1918 at Rethondes. About 1.4 million French soldiers killed. Public holiday: 11 November." },
+        "tr": { "text": "I. Dünya Savaşı ne zaman yaşandı?", "answer_hint": "1914-1918. Ateşkes 11 Kasım 1918'de Rethondes'te imzalandı. Yaklaşık 1,4 milyon Fransız asker hayatını kaybetti. Resmi tatil: 11 Kasım." }
+      }
+    },
+    {
+      "id": 114,
+      "category": "histoire",
+      "text_fr": "Quand la peine de mort a-t-elle été abolie en France ?",
+      "answer_hint": "Le 9 octobre 1981, sous la présidence de François Mitterrand, à l'initiative du garde des Sceaux Robert Badinter. Inscrite dans la Constitution en 2007.",
+      "translations": {
+        "en": { "text": "When was the death penalty abolished in France?", "answer_hint": "9 October 1981, under President François Mitterrand, at the initiative of Justice Minister Robert Badinter. Enshrined in the Constitution in 2007." },
+        "tr": { "text": "Fransa'da idam cezası ne zaman kaldırıldı?", "answer_hint": "9 Ekim 1981'de, Cumhurbaşkanı François Mitterrand döneminde, Adalet Bakanı Robert Badinter'in girişimiyle. 2007'de Anayasa'ya eklendi." }
+      }
+    },
+    {
+      "id": 115,
+      "category": "histoire",
+      "text_fr": "Quand les femmes ont-elles obtenu le droit de vote en France ?",
+      "answer_hint": "Le 21 avril 1944 par ordonnance du général de Gaulle (Comité français de libération nationale, Alger). Premier vote féminin : 29 avril 1945, élections municipales.",
+      "translations": {
+        "en": { "text": "When did women obtain the right to vote in France?", "answer_hint": "21 April 1944 by ordinance of General de Gaulle (French Committee of National Liberation, Algiers). First women's vote: 29 April 1945, municipal elections." },
+        "tr": { "text": "Fransa'da kadınlar oy hakkını ne zaman kazandı?", "answer_hint": "21 Nisan 1944'te General de Gaulle'ün kararnamesiyle (Fransız Ulusal Kurtuluş Komitesi, Cezayir). İlk kadın oyu: 29 Nisan 1945, belediye seçimleri." }
+      }
+    },
+    {
+      "id": 116,
+      "category": "histoire",
+      "text_fr": "Qui était Simone Veil ?",
+      "answer_hint": "Femme politique, survivante d'Auschwitz, ministre de la Santé qui a fait adopter la loi sur l'IVG (17 janvier 1975). Première présidente du Parlement européen (1979). Panthéonisée en 2018.",
+      "translations": {
+        "en": { "text": "Who was Simone Veil?", "answer_hint": "Politician, Auschwitz survivor, Health Minister who passed the abortion law (17 January 1975). First female president of the European Parliament (1979). Entered the Pantheon in 2018." },
+        "tr": { "text": "Simone Veil kimdi?", "answer_hint": "Politikacı, Auschwitz hayatta kalanı, kürtaj yasasını çıkartan Sağlık Bakanı (17 Ocak 1975). Avrupa Parlamentosu'nun ilk kadın başkanı (1979). 2018'de Panthéon'a defnedildi." }
+      }
+    },
+    {
+      "id": 117,
+      "category": "histoire",
+      "text_fr": "Qui était Jeanne d'Arc ?",
+      "answer_hint": "Héroïne nationale française (1412-1431). A libéré Orléans face aux Anglais durant la Guerre de Cent Ans. Brûlée à Rouen en 1431. Canonisée en 1920. Symbole patriotique.",
+      "translations": {
+        "en": { "text": "Who was Joan of Arc?", "answer_hint": "French national heroine (1412-1431). Liberated Orléans from the English during the Hundred Years' War. Burned at Rouen in 1431. Canonized in 1920. Patriotic symbol." },
+        "tr": { "text": "Jeanne d'Arc kimdi?", "answer_hint": "Fransız ulusal kahramanı (1412-1431). Yüz Yıl Savaşları sırasında Orléans'ı İngilizlerden kurtardı. 1431'de Rouen'de yakıldı. 1920'de aziz ilan edildi. Vatansever sembol." }
+      }
+    },
+    {
+      "id": 118,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Guerre de Cent Ans ?",
+      "answer_hint": "Conflit entre la France et l'Angleterre, 1337-1453. Causes : succession au trône de France. Jeanne d'Arc joue un rôle clé. La France récupère ses territoires (sauf Calais).",
+      "translations": {
+        "en": { "text": "What was the Hundred Years' War?", "answer_hint": "Conflict between France and England, 1337-1453. Cause: succession to the French throne. Joan of Arc plays a key role. France recovered its territories (except Calais)." },
+        "tr": { "text": "Yüz Yıl Savaşları nedir?", "answer_hint": "Fransa ile İngiltere arasında 1337-1453 çatışması. Nedeni: Fransa tahtına veraset. Jeanne d'Arc kilit rol oynar. Fransa topraklarını geri aldı (Calais hariç)." }
+      }
+    },
+    {
+      "id": 119,
+      "category": "histoire",
+      "text_fr": "Qui était Vercingétorix ?",
+      "answer_hint": "Chef gaulois, premier héros national. A uni les tribus gauloises contre Jules César. Vaincu à Alésia en 52 av. J.-C. Symbole de résistance.",
+      "translations": {
+        "en": { "text": "Who was Vercingetorix?", "answer_hint": "Gallic chief, first national hero. United Gallic tribes against Julius Caesar. Defeated at Alesia in 52 BCE. Symbol of resistance." },
+        "tr": { "text": "Vercingetorix kimdi?", "answer_hint": "Galli şefi, ilk ulusal kahraman. Galli kabileleri Jül Sezar'a karşı birleştirdi. MÖ 52'de Alesia'da yenildi. Direniş simgesi." }
+      }
+    },
+    {
+      "id": 120,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la colonisation française ?",
+      "answer_hint": "Expansion territoriale du XVIIe au XXe siècle (Afrique, Asie, Amériques). Empire colonial parmi les plus vastes. Décolonisation principalement après 1945. Mémoire douloureuse (Algérie notamment).",
+      "translations": {
+        "en": { "text": "What was French colonization?", "answer_hint": "Territorial expansion from the 17th to 20th centuries (Africa, Asia, Americas). One of the largest colonial empires. Decolonization mainly after 1945. Painful memory (notably Algeria)." },
+        "tr": { "text": "Fransız sömürgeciliği nedir?", "answer_hint": "17. ila 20. yüzyıllarda toprak genişlemesi (Afrika, Asya, Amerika). En büyük sömürge imparatorluklarından biri. Sömürgesizleşme esas olarak 1945'ten sonra. Acılı bir hatıra (özellikle Cezayir)." }
+      }
+    },
+    {
+      "id": 121,
+      "category": "histoire",
+      "text_fr": "Quand l'Algérie a-t-elle obtenu son indépendance ?",
+      "answer_hint": "Le 5 juillet 1962, après une guerre d'indépendance (1954-1962). Accords d'Évian signés le 18 mars 1962. Mémoire encore vive (harkis, pieds-noirs).",
+      "translations": {
+        "en": { "text": "When did Algeria gain independence?", "answer_hint": "5 July 1962, after a war of independence (1954-1962). Évian Accords signed on 18 March 1962. Still vivid memory (harkis, pieds-noirs)." },
+        "tr": { "text": "Cezayir bağımsızlığını ne zaman kazandı?", "answer_hint": "Bir bağımsızlık savaşının (1954-1962) ardından 5 Temmuz 1962'de. Évian Anlaşması 18 Mart 1962'de imzalandı. Hâlâ canlı bir hatıra (harkiler, pieds-noirs)." }
+      }
+    },
+    {
+      "id": 122,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Ve République ?",
+      "answer_hint": "Régime politique actuel, fondé en 1958 par le général de Gaulle. Constitution renforçant les pouvoirs du président. Quinquennat depuis 2000.",
+      "translations": {
+        "en": { "text": "What is the Fifth Republic?", "answer_hint": "Current political regime, founded in 1958 by General de Gaulle. Constitution strengthening presidential powers. 5-year term since 2000." },
+        "tr": { "text": "Beşinci Cumhuriyet nedir?", "answer_hint": "Mevcut siyasi rejim, 1958'de General de Gaulle tarafından kuruldu. Cumhurbaşkanı yetkilerini güçlendiren anayasa. 2000'den beri 5 yıllık görev süresi." }
+      }
+    },
+    {
+      "id": 123,
+      "category": "histoire",
+      "text_fr": "Combien de Républiques la France a-t-elle connues ?",
+      "answer_hint": "Cinq Républiques : Ire (1792-1804), IIe (1848-1852), IIIe (1870-1940), IVe (1946-1958), Ve (depuis 1958).",
+      "translations": {
+        "en": { "text": "How many Republics has France had?", "answer_hint": "Five Republics: 1st (1792-1804), 2nd (1848-1852), 3rd (1870-1940), 4th (1946-1958), 5th (since 1958)." },
+        "tr": { "text": "Fransa kaç cumhuriyet gördü?", "answer_hint": "Beş Cumhuriyet: 1. (1792-1804), 2. (1848-1852), 3. (1870-1940), 4. (1946-1958), 5. (1958'den beri)." }
+      }
+    },
+    {
+      "id": 124,
+      "category": "histoire",
+      "text_fr": "Qui était Victor Schoelcher ?",
+      "answer_hint": "Homme politique abolitionniste. Auteur du décret du 27 avril 1848 abolissant définitivement l'esclavage en France et dans les colonies. Panthéonisé en 1949.",
+      "translations": {
+        "en": { "text": "Who was Victor Schoelcher?", "answer_hint": "Abolitionist politician. Author of the decree of 27 April 1848 definitively abolishing slavery in France and its colonies. Entered the Pantheon in 1949." },
+        "tr": { "text": "Victor Schoelcher kimdi?", "answer_hint": "Köleliği kaldırma yanlısı politikacı. Fransa ve sömürgelerinde köleliği kesin olarak kaldıran 27 Nisan 1848 kararnamesinin yazarı. 1949'da Panthéon'a defnedildi." }
+      }
+    },
+    {
+      "id": 125,
+      "category": "histoire",
+      "text_fr": "Quand l'esclavage a-t-il été aboli en France ?",
+      "answer_hint": "Une première fois en 1794, rétabli par Napoléon en 1802, définitivement aboli par le décret du 27 avril 1848 (Schoelcher). Journée commémorative : 10 mai (loi Taubira, 2001).",
+      "translations": {
+        "en": { "text": "When was slavery abolished in France?", "answer_hint": "First in 1794, reinstated by Napoleon in 1802, definitively abolished by the decree of 27 April 1848 (Schoelcher). Commemoration day: 10 May (Taubira law, 2001)." },
+        "tr": { "text": "Fransa'da kölelik ne zaman kaldırıldı?", "answer_hint": "İlk olarak 1794'te, Napolyon tarafından 1802'de yeniden getirildi, 27 Nisan 1848 kararnamesiyle (Schoelcher) kesin olarak kaldırıldı. Anma günü: 10 Mayıs (Taubira yasası, 2001)." }
+      }
+    },
+    {
+      "id": 126,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la loi de séparation des Églises et de l'État ?",
+      "answer_hint": "Loi du 9 décembre 1905, fondement de la laïcité française. L'État ne reconnaît, ne salarie ni ne subventionne aucun culte. Liberté de conscience garantie.",
+      "translations": {
+        "en": { "text": "What is the law of separation of Church and State?", "answer_hint": "Law of 9 December 1905, foundation of French laïcité (secularism). The state neither recognizes, pays salaries to, nor subsidizes any religion. Freedom of conscience guaranteed." },
+        "tr": { "text": "Kilise ve Devletin Ayrılması Yasası nedir?", "answer_hint": "9 Aralık 1905 yasası, Fransız laïcité (laiklik) temeli. Devlet hiçbir dini tanımaz, maaş ödemez veya desteklemez. Vicdan özgürlüğü güvence altındadır." }
+      }
+    },
+    {
+      "id": 127,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que les Trente Glorieuses ?",
+      "answer_hint": "Période de forte croissance économique en France, 1945-1975. Expression de l'économiste Jean Fourastié. Plein emploi, baby-boom, modernisation, consommation de masse.",
+      "translations": {
+        "en": { "text": "What were the Trente Glorieuses?", "answer_hint": "Period of strong economic growth in France, 1945-1975. Expression by economist Jean Fourastié. Full employment, baby boom, modernization, mass consumption." },
+        "tr": { "text": "\"Trente Glorieuses\" (Otuz Şanlı Yıl) nedir?", "answer_hint": "Fransa'da 1945-1975 arası güçlü ekonomik büyüme dönemi. Ekonomist Jean Fourastié'nin ifadesi. Tam istihdam, baby boom, modernleşme, kitle tüketimi." }
+      }
+    },
+    {
+      "id": 128,
+      "category": "histoire",
+      "text_fr": "Qu'était Mai 68 ?",
+      "answer_hint": "Mouvement social et culturel de mai-juin 1968 : grève générale, occupations universitaires, contestation du pouvoir gaullien. Marque la libéralisation des mœurs.",
+      "translations": {
+        "en": { "text": "What was May 68?", "answer_hint": "Social and cultural movement of May-June 1968: general strike, university occupations, protest against Gaullist power. Marks the liberalization of morals." },
+        "tr": { "text": "Mayıs 68 nedir?", "answer_hint": "Mayıs-Haziran 1968 sosyal ve kültürel hareketi: genel grev, üniversite işgalleri, Gaulle iktidarına itiraz. Ahlakın liberalleşmesini işaret eder." }
+      }
+    },
+    {
+      "id": 129,
+      "category": "histoire",
+      "text_fr": "Qui a écrit La Marseillaise ?",
+      "answer_hint": "Rouget de Lisle, officier français, en 1792 à Strasbourg. Chant de guerre destiné aux soldats de l'armée du Rhin. Devenu hymne national en 1795.",
+      "translations": {
+        "en": { "text": "Who wrote La Marseillaise?", "answer_hint": "Rouget de Lisle, French officer, in 1792 in Strasbourg. War song for soldiers of the Army of the Rhine. Became the national anthem in 1795." },
+        "tr": { "text": "La Marseillaise'i kim yazdı?", "answer_hint": "1792'de Strazburg'da Fransız subayı Rouget de Lisle. Ren Ordusu askerleri için savaş şarkısı. 1795'te ulusal marş oldu." }
+      }
+    },
+    {
+      "id": 130,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que le Panthéon ?",
+      "answer_hint": "Monument du Quartier latin à Paris. Nécropole des grands hommes de la République. Y reposent : Voltaire, Rousseau, Hugo, Zola, Curie, Schoelcher, Veil, Manouchian, etc.",
+      "translations": {
+        "en": { "text": "What is the Pantheon?", "answer_hint": "Monument in the Latin Quarter of Paris. Necropolis of great figures of the Republic. Resting place of: Voltaire, Rousseau, Hugo, Zola, Curie, Schoelcher, Veil, Manouchian, etc." },
+        "tr": { "text": "Panthéon nedir?", "answer_hint": "Paris Quartier latin'deki anıt. Cumhuriyetin büyük şahsiyetlerinin türbesi. Burada gömülüler: Voltaire, Rousseau, Hugo, Zola, Curie, Schoelcher, Veil, Manouchian, vb." }
+      }
+    },
+    {
+      "id": 131,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que les Lumières ?",
+      "answer_hint": "Mouvement intellectuel du XVIIIe siècle. Penseurs majeurs : Voltaire, Rousseau, Diderot, Montesquieu. Valeurs : raison, liberté, tolérance, progrès. Influence sur la Révolution.",
+      "translations": {
+        "en": { "text": "What was the Enlightenment (Les Lumières)?", "answer_hint": "Intellectual movement of the 18th century. Major thinkers: Voltaire, Rousseau, Diderot, Montesquieu. Values: reason, freedom, tolerance, progress. Influence on the Revolution." },
+        "tr": { "text": "Aydınlanma (Les Lumières) nedir?", "answer_hint": "18. yüzyıl entelektüel hareketi. Başlıca düşünürler: Voltaire, Rousseau, Diderot, Montesquieu. Değerler: akıl, özgürlük, hoşgörü, ilerleme. Devrim üzerinde etki." }
+      }
+    },
+    {
+      "id": 132,
+      "category": "histoire",
+      "text_fr": "Quels sont les présidents marquants de la Ve République ?",
+      "answer_hint": "Charles de Gaulle (1959-1969), Georges Pompidou (1969-1974), Valéry Giscard d'Estaing (1974-1981), François Mitterrand (1981-1995), Jacques Chirac (1995-2007), Nicolas Sarkozy (2007-2012), François Hollande (2012-2017), Emmanuel Macron (2017-).",
+      "translations": {
+        "en": { "text": "Who are the notable presidents of the Fifth Republic?", "answer_hint": "Charles de Gaulle (1959-1969), Georges Pompidou (1969-1974), Valéry Giscard d'Estaing (1974-1981), François Mitterrand (1981-1995), Jacques Chirac (1995-2007), Nicolas Sarkozy (2007-2012), François Hollande (2012-2017), Emmanuel Macron (2017-)." },
+        "tr": { "text": "Beşinci Cumhuriyet'in önde gelen cumhurbaşkanları kimlerdir?", "answer_hint": "Charles de Gaulle (1959-1969), Georges Pompidou (1969-1974), Valéry Giscard d'Estaing (1974-1981), François Mitterrand (1981-1995), Jacques Chirac (1995-2007), Nicolas Sarkozy (2007-2012), François Hollande (2012-2017), Emmanuel Macron (2017-)." }
+      }
+    },
+    {
+      "id": 133,
+      "category": "histoire",
+      "text_fr": "Quand l'euro est-il devenu monnaie en France ?",
+      "answer_hint": "1er janvier 1999 (en comptabilité), 1er janvier 2002 (pièces et billets en circulation). Remplace le franc français.",
+      "translations": {
+        "en": { "text": "When did the euro become French currency?", "answer_hint": "1 January 1999 (in accounting), 1 January 2002 (coins and notes in circulation). Replaced the French franc." },
+        "tr": { "text": "Euro Fransa'da ne zaman para birimi oldu?", "answer_hint": "1 Ocak 1999 (muhasebede), 1 Ocak 2002 (dolaşımda madeni ve banknotlar). Fransız frangının yerini aldı." }
+      }
+    },
+    {
+      "id": 134,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que le débarquement du 6 juin 1944 ?",
+      "answer_hint": "Débarquement allié en Normandie (D-Day). Plus grande opération amphibie de l'histoire. ~156 000 soldats. Début de la libération de la France. Plages : Utah, Omaha, Gold, Juno, Sword.",
+      "translations": {
+        "en": { "text": "What was the landing of 6 June 1944?", "answer_hint": "Allied landing in Normandy (D-Day). Largest amphibious operation in history. ~156,000 soldiers. Beginning of France's liberation. Beaches: Utah, Omaha, Gold, Juno, Sword." },
+        "tr": { "text": "6 Haziran 1944 çıkarması nedir?", "answer_hint": "Normandiya'da Müttefik çıkarması (D-Day). Tarihin en büyük amfibi operasyonu. ~156 000 asker. Fransa'nın kurtuluşunun başlangıcı. Plajlar: Utah, Omaha, Gold, Juno, Sword." }
+      }
+    },
+    {
+      "id": 135,
+      "category": "histoire",
+      "text_fr": "Qui était Robert Schuman ?",
+      "answer_hint": "Homme politique français, ministre des Affaires étrangères, à l'origine de la Déclaration du 9 mai 1950 (création de la CECA, embryon de l'UE). « Père de l'Europe ».",
+      "translations": {
+        "en": { "text": "Who was Robert Schuman?", "answer_hint": "French statesman, Minister of Foreign Affairs, origin of the Declaration of 9 May 1950 (creation of the ECSC, embryo of the EU). \"Father of Europe\"." },
+        "tr": { "text": "Robert Schuman kimdi?", "answer_hint": "Fransız devlet adamı, Dışişleri Bakanı, 9 Mayıs 1950 Bildirgesinin (AKÇT'nin kurulması, AB'nin embriyosu) kaynağı. \"Avrupa'nın Babası\"." }
+      }
+    },
+    {
+      "id": 136,
+      "category": "histoire",
+      "text_fr": "Que célèbre-t-on le 8 mai et le 11 novembre ?",
+      "answer_hint": "8 mai : victoire de 1945 (fin WWII en Europe). 11 novembre : armistice de 1918 (fin WWI). Tous deux jours fériés.",
+      "translations": {
+        "en": { "text": "What is celebrated on 8 May and 11 November?", "answer_hint": "8 May: victory of 1945 (end of WWII in Europe). 11 November: armistice of 1918 (end of WWI). Both public holidays." },
+        "tr": { "text": "8 Mayıs ve 11 Kasım'da ne kutlanır?", "answer_hint": "8 Mayıs: 1945 zaferi (Avrupa'da II. Dünya Savaşı'nın sonu). 11 Kasım: 1918 ateşkesi (I. Dünya Savaşı'nın sonu). İkisi de resmi tatil." }
+      }
+    },
+    {
+      "id": 137,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que l'Empire colonial français ?",
+      "answer_hint": "Vaste ensemble de territoires sous domination française (XVIIe-XXe s.) : Maghreb, Afrique subsaharienne, Indochine, Antilles, Polynésie. ~12 millions de km² à son apogée (1920-1930).",
+      "translations": {
+        "en": { "text": "What was the French colonial empire?", "answer_hint": "Vast set of territories under French domination (17th-20th c.): Maghreb, sub-Saharan Africa, Indochina, Antilles, Polynesia. ~12 million km² at its peak (1920-1930)." },
+        "tr": { "text": "Fransız sömürge imparatorluğu nedir?", "answer_hint": "Fransız egemenliği altındaki geniş topraklar (17-20. yy): Mağrip, Sahra altı Afrika, Hindiçin, Antiller, Polinezya. Zirvesinde ~12 milyon km² (1920-1930)." }
+      }
+    },
+    {
+      "id": 138,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que les accords d'Évian ?",
+      "answer_hint": "Accords signés le 18 mars 1962 entre la France et le FLN algérien, mettant fin à la guerre d'Algérie. Ratifiés par référendum le 8 avril. Indépendance le 5 juillet 1962.",
+      "translations": {
+        "en": { "text": "What are the Évian Accords?", "answer_hint": "Agreements signed on 18 March 1962 between France and the Algerian FLN, ending the Algerian War. Ratified by referendum on 8 April. Independence on 5 July 1962." },
+        "tr": { "text": "Évian Anlaşması nedir?", "answer_hint": "18 Mart 1962'de Fransa ile Cezayirli FLN arasında imzalanan, Cezayir Savaşı'nı sonlandıran anlaşma. 8 Nisan'da halk oylamasıyla onaylandı. 5 Temmuz 1962'de bağımsızlık." }
+      }
+    },
+    {
+      "id": 139,
+      "category": "histoire",
+      "text_fr": "Qu'est-ce que la Déclaration Schuman du 9 mai 1950 ?",
+      "answer_hint": "Discours fondateur de la construction européenne, proposant la mise en commun du charbon et de l'acier français et allemands. À l'origine de la CECA puis de l'UE. 9 mai : Journée de l'Europe.",
+      "translations": {
+        "en": { "text": "What is the Schuman Declaration of 9 May 1950?", "answer_hint": "Founding speech of European construction, proposing pooling of French and German coal and steel. Origin of the ECSC then the EU. 9 May: Europe Day." },
+        "tr": { "text": "9 Mayıs 1950 Schuman Bildirgesi nedir?", "answer_hint": "Avrupa inşasının kurucu konuşması, Fransız ve Alman kömür ile çeliğin birleştirilmesini önerir. AKÇT'nin ve sonra AB'nin kaynağı. 9 Mayıs: Avrupa Günü." }
+      }
+    },
+    {
+      "id": 140,
+      "category": "histoire",
+      "text_fr": "Quand le mariage pour tous a-t-il été adopté en France ?",
+      "answer_hint": "Loi du 17 mai 2013 (loi Taubira). Ouvre le mariage civil et l'adoption aux couples de même sexe. La France est le 9e pays européen, 14e mondial.",
+      "translations": {
+        "en": { "text": "When was same-sex marriage adopted in France?", "answer_hint": "Law of 17 May 2013 (Taubira law). Opens civil marriage and adoption to same-sex couples. France is the 9th European, 14th world country." },
+        "tr": { "text": "Eşcinsel evlilik Fransa'da ne zaman kabul edildi?", "answer_hint": "17 Mayıs 2013 yasası (Taubira yasası). Eşcinsel çiftlere medeni evlilik ve evlat edinme hakkı tanır. Fransa Avrupa'nın 9., dünyanın 14. ülkesidir." }
+      }
+    },
+    {
+      "id": 141,
+      "category": "valeurs",
+      "text_fr": "Quels sont les trois mots de la devise française et que signifient-ils ?",
+      "answer_hint": "Liberté (faire ce qui ne nuit pas à autrui), Égalité (en droits, devant la loi), Fraternité (solidarité entre citoyens). Devise née de la Révolution.",
+      "translations": {
+        "en": { "text": "What are the three words of the French motto and what do they mean?", "answer_hint": "Liberty (doing what does not harm others), Equality (in rights, before the law), Fraternity (solidarity between citizens). Motto born of the Revolution." },
+        "tr": { "text": "Fransız sloganının üç kelimesi nedir ve ne anlama gelir?", "answer_hint": "Özgürlük (başkasına zarar vermeyeni yapmak), Eşitlik (haklarda, yasa önünde), Kardeşlik (vatandaşlar arasında dayanışma). Devrimden doğan slogan." }
+      }
+    },
+    {
+      "id": 142,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la laïcité ?",
+      "answer_hint": "Principe de séparation des Églises et de l'État (loi 1905). Garantit la liberté de conscience, l'égalité des cultes, la neutralité de l'État. Ne s'oppose pas aux religions, organise leur coexistence.",
+      "translations": {
+        "en": { "text": "What is laïcité (French secularism)?", "answer_hint": "Principle of separation of Church and State (1905 law). Guarantees freedom of conscience, equality of religions, state neutrality. Does not oppose religions but organizes their coexistence." },
+        "tr": { "text": "Laïcité (Fransız laikliği) nedir?", "answer_hint": "Kilise ve Devletin ayrılması ilkesi (1905 yasası). Vicdan özgürlüğünü, dinlerin eşitliğini, devletin tarafsızlığını güvence altına alır. Dinlere karşı değildir, birarada yaşamalarını düzenler." }
+      }
+    },
+    {
+      "id": 143,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la liberté d'expression en France ?",
+      "answer_hint": "Droit fondamental (article 11 de la Déclaration de 1789). On peut dire et écrire ce qu'on veut, sous réserve de respecter la loi (pas d'injure, de diffamation, d'incitation à la haine ou au terrorisme).",
+      "translations": {
+        "en": { "text": "What is freedom of expression in France?", "answer_hint": "Fundamental right (Article 11 of the 1789 Declaration). One may say and write what one wishes, subject to law (no insult, defamation, incitement to hatred or terrorism)." },
+        "tr": { "text": "Fransa'da ifade özgürlüğü nedir?", "answer_hint": "Temel hak (1789 Bildirgesi madde 11). İstediğini söyleyip yazabilirsin, yasaya uymak şartıyla (hakaret, iftira, nefret veya terör kışkırtması yasaktır)." }
+      }
+    },
+    {
+      "id": 144,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la démocratie ?",
+      "answer_hint": "Régime politique où le peuple est souverain : il choisit ses représentants par des élections libres. Implique séparation des pouvoirs, État de droit, libertés fondamentales, alternance.",
+      "translations": {
+        "en": { "text": "What is democracy?", "answer_hint": "Political regime where the people are sovereign: they choose their representatives through free elections. Implies separation of powers, rule of law, fundamental freedoms, peaceful transfers of power." },
+        "tr": { "text": "Demokrasi nedir?", "answer_hint": "Halkın egemen olduğu siyasi rejim: özgür seçimlerle temsilcilerini seçer. Kuvvetler ayrılığı, hukukun üstünlüğü, temel özgürlükler, iktidar değişimi gerektirir." }
+      }
+    },
+    {
+      "id": 145,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que l'égalité hommes-femmes ?",
+      "answer_hint": "Principe constitutionnel. La loi garantit aux femmes des droits égaux à ceux des hommes (préambule 1946). Parité en politique (2000), égalité salariale (en progrès). Lutte contre les violences faites aux femmes.",
+      "translations": {
+        "en": { "text": "What is gender equality?", "answer_hint": "Constitutional principle. The law guarantees women equal rights to men (1946 preamble). Political parity (2000), salary equality (progressing). Fight against violence against women." },
+        "tr": { "text": "Cinsiyet eşitliği nedir?", "answer_hint": "Anayasal ilke. Yasa kadınlara erkeklerle eşit hak güvence verir (1946 önsözü). Siyasette eşitlik (2000), maaş eşitliği (gelişiyor). Kadına şiddetle mücadele." }
+      }
+    },
+    {
+      "id": 146,
+      "category": "valeurs",
+      "text_fr": "Quels sont les droits fondamentaux des citoyens français ?",
+      "answer_hint": "Libertés (expression, réunion, association, religion), droits sociaux (éducation, santé, travail), droits civiques (vote, éligibilité). Inscrits dans la Constitution et la Déclaration de 1789.",
+      "translations": {
+        "en": { "text": "What are the fundamental rights of French citizens?", "answer_hint": "Freedoms (expression, assembly, association, religion), social rights (education, health, work), civic rights (voting, eligibility for office). Enshrined in the Constitution and 1789 Declaration." },
+        "tr": { "text": "Fransız vatandaşlarının temel hakları nelerdir?", "answer_hint": "Özgürlükler (ifade, toplanma, dernek, din), sosyal haklar (eğitim, sağlık, çalışma), sivil haklar (oy verme, seçilme). Anayasa ve 1789 Bildirgesinde yer alır." }
+      }
+    },
+    {
+      "id": 147,
+      "category": "valeurs",
+      "text_fr": "Quels sont les devoirs des citoyens français ?",
+      "answer_hint": "Respecter la loi, payer ses impôts, respecter les droits d'autrui, servir le pays si nécessaire, participer à la vie démocratique (voter), respecter les valeurs républicaines.",
+      "translations": {
+        "en": { "text": "What are the duties of French citizens?", "answer_hint": "Obey the law, pay taxes, respect others' rights, serve the country if necessary, participate in democracy (vote), respect republican values." },
+        "tr": { "text": "Fransız vatandaşlarının görevleri nelerdir?", "answer_hint": "Yasaya uymak, vergi ödemek, başkalarının haklarına saygı, gerekirse ülkeye hizmet, demokratik yaşama katılmak (oy vermek), cumhuriyet değerlerine saygı." }
+      }
+    },
+    {
+      "id": 148,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la charte des droits et devoirs du citoyen français ?",
+      "answer_hint": "Document signé lors de la cérémonie de naturalisation. Récapitule les principes de la République, les valeurs et les engagements du nouveau citoyen. Instituée en 2012.",
+      "translations": {
+        "en": { "text": "What is the charter of rights and duties of the French citizen?", "answer_hint": "Document signed at the naturalization ceremony. Recaps the principles of the Republic, values, and commitments of the new citizen. Instituted in 2012." },
+        "tr": { "text": "Fransız vatandaşının hak ve görevler bildirgesi nedir?", "answer_hint": "Vatandaşlık töreninde imzalanan belge. Cumhuriyet ilkelerini, değerleri ve yeni vatandaşın taahhütlerini özetler. 2012'de kurulmuştur." }
+      }
+    },
+    {
+      "id": 149,
+      "category": "valeurs",
+      "text_fr": "Quels sont les symboles de la République française ?",
+      "answer_hint": "Drapeau tricolore, hymne (La Marseillaise), devise (Liberté, Égalité, Fraternité), Marianne, fête nationale (14 juillet), coq gaulois, sceau de la République.",
+      "translations": {
+        "en": { "text": "What are the symbols of the French Republic?", "answer_hint": "Tricolor flag, anthem (La Marseillaise), motto (Liberty, Equality, Fraternity), Marianne, national holiday (14 July), Gallic rooster, seal of the Republic." },
+        "tr": { "text": "Fransa Cumhuriyeti'nin sembolleri nelerdir?", "answer_hint": "Üç renkli bayrak, marş (La Marseillaise), slogan (Özgürlük, Eşitlik, Kardeşlik), Marianne, ulusal bayram (14 Temmuz), Galya horozu, Cumhuriyet mührü." }
+      }
+    },
+    {
+      "id": 150,
+      "category": "valeurs",
+      "text_fr": "Que représente le coq gaulois ?",
+      "answer_hint": "Symbole de la France et du peuple français, hérité de l'Antiquité (jeu de mots latin gallus = coq et gaulois). Présent sur les maillots des équipes sportives nationales.",
+      "translations": {
+        "en": { "text": "What does the Gallic rooster represent?", "answer_hint": "Symbol of France and the French people, inherited from Antiquity (Latin pun: gallus = rooster and Gaul). Present on national sports team jerseys." },
+        "tr": { "text": "Galya horozu neyi temsil eder?", "answer_hint": "Antik Çağ'dan miras, Fransa ve Fransız halkının sembolü (Latince kelime oyunu: gallus = horoz ve Galyalı). Ulusal spor takımı formalarında bulunur." }
+      }
+    },
+    {
+      "id": 151,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la liberté de religion en France ?",
+      "answer_hint": "Chaque personne peut pratiquer la religion de son choix (ou aucune), en privé et publiquement, sous réserve de respecter la loi et l'ordre public. Pas de signes religieux ostentatoires à l'école publique (loi 2004).",
+      "translations": {
+        "en": { "text": "What is freedom of religion in France?", "answer_hint": "Each person may practice the religion of their choice (or none), privately and publicly, subject to law and public order. No ostentatious religious signs in public schools (2004 law)." },
+        "tr": { "text": "Fransa'da din özgürlüğü nedir?", "answer_hint": "Herkes seçtiği dini (veya hiçbirini) özel ve kamusal alanda yaşayabilir, yasaya ve kamu düzenine uymak şartıyla. Devlet okullarında belirgin dini semboller yasak (2004 yasası)." }
+      }
+    },
+    {
+      "id": 152,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que l'égalité devant la loi ?",
+      "answer_hint": "Tous les citoyens sont égaux devant la loi, sans distinction d'origine, de race, de religion (article 1 de la Constitution). La justice est rendue de manière identique pour tous.",
+      "translations": {
+        "en": { "text": "What is equality before the law?", "answer_hint": "All citizens are equal before the law, regardless of origin, race, religion (Article 1 of the Constitution). Justice is rendered identically for all." },
+        "tr": { "text": "Yasa önünde eşitlik nedir?", "answer_hint": "Tüm vatandaşlar köken, ırk, din ayrımı olmaksızın yasa önünde eşittir (Anayasa madde 1). Adalet herkes için aynı şekilde uygulanır." }
+      }
+    },
+    {
+      "id": 153,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la fraternité ?",
+      "answer_hint": "Solidarité entre les citoyens, devoir d'aider et de respecter autrui. Inscrite dans la devise. Concrétisée par les services publics (Sécurité sociale, RSA), le bénévolat, l'accueil des plus démunis.",
+      "translations": {
+        "en": { "text": "What is fraternity?", "answer_hint": "Solidarity between citizens, duty to help and respect others. Inscribed in the motto. Concretized through public services (Social Security, RSA — minimum income), volunteering, welcoming the most vulnerable." },
+        "tr": { "text": "Kardeşlik nedir?", "answer_hint": "Vatandaşlar arasında dayanışma, başkalarına yardım ve saygı görevi. Sloganda yer alır. Kamu hizmetleri (Sosyal Güvenlik, RSA — asgari gelir), gönüllülük ve en savunmasızları kabul etmekle somutlaşır." }
+      }
+    },
+    {
+      "id": 154,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que l'État de droit ?",
+      "answer_hint": "Système où tous, y compris l'État, sont soumis au droit. Garanti par l'indépendance de la justice, la hiérarchie des normes, le respect des droits fondamentaux.",
+      "translations": {
+        "en": { "text": "What is the rule of law?", "answer_hint": "System where all, including the state, are subject to the law. Guaranteed by judicial independence, hierarchy of norms, respect for fundamental rights." },
+        "tr": { "text": "Hukukun üstünlüğü nedir?", "answer_hint": "Devlet dahil herkesin hukuka tabi olduğu sistem. Yargı bağımsızlığı, normlar hiyerarşisi ve temel haklara saygıyla güvence altındadır." }
+      }
+    },
+    {
+      "id": 155,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce qui distingue la République française des autres formes de gouvernement ?",
+      "answer_hint": "Souveraineté du peuple, démocratie représentative, laïcité, droits humains, séparation des pouvoirs. Pas de monarchie héréditaire. Indivisible et sociale.",
+      "translations": {
+        "en": { "text": "What distinguishes the French Republic from other forms of government?", "answer_hint": "Popular sovereignty, representative democracy, laïcité, human rights, separation of powers. No hereditary monarchy. Indivisible and social." },
+        "tr": { "text": "Fransa Cumhuriyeti'ni diğer hükümet biçimlerinden ne ayırır?", "answer_hint": "Halk egemenliği, temsili demokrasi, laïcité, insan hakları, kuvvetler ayrılığı. Kalıtsal monarşi yok. Bölünmez ve sosyal." }
+      }
+    },
+    {
+      "id": 156,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que le service national universel (SNU) ?",
+      "answer_hint": "Dispositif pour les 15-17 ans : séjour de cohésion (12 jours) + mission d'intérêt général. Vise à transmettre les valeurs républicaines et favoriser l'engagement. Volontaire.",
+      "translations": {
+        "en": { "text": "What is the Universal National Service (SNU)?", "answer_hint": "Program for 15-17 year-olds: cohesion stay (12 days) + general interest mission. Aims to transmit republican values and encourage engagement. Voluntary." },
+        "tr": { "text": "Evrensel Ulusal Hizmet (SNU) nedir?", "answer_hint": "15-17 yaş arası program: birliktelik kampı (12 gün) + genel çıkar görevi. Cumhuriyet değerlerini aktarmayı ve katılımı teşvik etmeyi amaçlar. Gönüllüdür." }
+      }
+    },
+    {
+      "id": 157,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la solidarité nationale ?",
+      "answer_hint": "Mécanismes financés collectivement (impôts, cotisations) pour aider les personnes en difficulté : maladie, chômage, vieillesse, handicap, famille. Concrétise la fraternité.",
+      "translations": {
+        "en": { "text": "What is national solidarity?", "answer_hint": "Collectively funded mechanisms (taxes, contributions) to help people in difficulty: illness, unemployment, old age, disability, family. Embodies fraternity." },
+        "tr": { "text": "Ulusal dayanışma nedir?", "answer_hint": "Zor durumdaki kişilere yardım için toplu olarak finanse edilen (vergi, prim) mekanizmalar: hastalık, işsizlik, yaşlılık, engellilik, aile. Kardeşliği somutlaştırır." }
+      }
+    },
+    {
+      "id": 158,
+      "category": "valeurs",
+      "text_fr": "Quelles sont les principales discriminations interdites en France ?",
+      "answer_hint": "Origine, sexe, âge, handicap, orientation sexuelle, religion, opinions politiques, appartenance syndicale, état de santé. ~25 critères au total (article 225-1 du Code pénal).",
+      "translations": {
+        "en": { "text": "What are the main prohibited discriminations in France?", "answer_hint": "Origin, sex, age, disability, sexual orientation, religion, political opinions, union membership, health. ~25 criteria total (Article 225-1 of the Penal Code)." },
+        "tr": { "text": "Fransa'da yasak olan başlıca ayrımcılıklar nelerdir?", "answer_hint": "Köken, cinsiyet, yaş, engellilik, cinsel yönelim, din, siyasi görüş, sendika üyeliği, sağlık durumu. Toplam ~25 kriter (Ceza Kanunu madde 225-1)." }
+      }
+    },
+    {
+      "id": 159,
+      "category": "valeurs",
+      "text_fr": "Quel est le rôle de la justice dans une démocratie ?",
+      "answer_hint": "Faire respecter la loi, garantir les droits individuels, sanctionner les infractions, arbitrer les conflits. Indépendante des autres pouvoirs (Constitution).",
+      "translations": {
+        "en": { "text": "What is the role of justice in a democracy?", "answer_hint": "Enforce the law, guarantee individual rights, sanction offenses, arbitrate disputes. Independent from other powers (Constitution)." },
+        "tr": { "text": "Demokrasilerde yargının rolü nedir?", "answer_hint": "Yasayı uygulatmak, bireysel hakları güvence altına almak, suçları cezalandırmak, anlaşmazlıkları çözmek. Diğer güçlerden bağımsızdır (Anayasa)." }
+      }
+    },
+    {
+      "id": 160,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la présomption d'innocence ?",
+      "answer_hint": "Principe selon lequel toute personne est considérée innocente tant qu'elle n'a pas été déclarée coupable par un tribunal. Article 9 de la Déclaration de 1789, article préliminaire du Code de procédure pénale.",
+      "translations": {
+        "en": { "text": "What is the presumption of innocence?", "answer_hint": "Principle that every person is considered innocent until declared guilty by a court. Article 9 of the 1789 Declaration, preliminary article of the Code of Criminal Procedure." },
+        "tr": { "text": "Masumiyet karinesi nedir?", "answer_hint": "Bir kişinin bir mahkeme tarafından suçlu ilan edilene kadar masum sayılması ilkesi. 1789 Bildirgesi madde 9, Ceza Muhakemesi Kanunu önsöz maddesi." }
+      }
+    },
+    {
+      "id": 161,
+      "category": "valeurs",
+      "text_fr": "Que symbolisent le bleu, le blanc et le rouge du drapeau ?",
+      "answer_hint": "Bleu et rouge : couleurs de Paris. Blanc : couleur de la monarchie. Réunis par La Fayette pendant la Révolution comme symbole de réconciliation. Couleurs de la République depuis 1794.",
+      "translations": {
+        "en": { "text": "What do the blue, white, and red of the flag symbolize?", "answer_hint": "Blue and red: colors of Paris. White: color of the monarchy. Joined by La Fayette during the Revolution as a symbol of reconciliation. Colors of the Republic since 1794." },
+        "tr": { "text": "Bayraktaki mavi, beyaz ve kırmızı neyi simgeler?", "answer_hint": "Mavi ve kırmızı: Paris'in renkleri. Beyaz: monarşinin rengi. Devrim sırasında La Fayette tarafından uzlaşma sembolü olarak birleştirildi. 1794'ten beri Cumhuriyetin renkleri." }
+      }
+    },
+    {
+      "id": 162,
+      "category": "valeurs",
+      "text_fr": "Quels sont les principes de la République inscrits dans la Constitution ?",
+      "answer_hint": "Indivisible, laïque, démocratique et sociale (article 1). Gouvernement du peuple, par le peuple et pour le peuple (article 2, formule reprise de Lincoln).",
+      "translations": {
+        "en": { "text": "What are the principles of the Republic enshrined in the Constitution?", "answer_hint": "Indivisible, secular, democratic, and social (Article 1). Government of the people, by the people, for the people (Article 2, formula from Lincoln)." },
+        "tr": { "text": "Anayasada yer alan Cumhuriyet ilkeleri nelerdir?", "answer_hint": "Bölünmez, laik, demokratik ve sosyal (madde 1). Halkın, halk tarafından, halk için hükümeti (madde 2, Lincoln'ün formülünden alınmıştır)." }
+      }
+    },
+    {
+      "id": 163,
+      "category": "valeurs",
+      "text_fr": "Que signifie « République indivisible » ?",
+      "answer_hint": "Pas de division territoriale en États fédérés. La loi est la même partout. Pas de communauté reconnue juridiquement : seuls les citoyens existent (universalisme républicain).",
+      "translations": {
+        "en": { "text": "What does \"indivisible Republic\" mean?", "answer_hint": "No territorial division into federated states. The law is the same everywhere. No community legally recognized: only citizens exist (republican universalism)." },
+        "tr": { "text": "\"Bölünmez Cumhuriyet\" ne anlama gelir?", "answer_hint": "Federe devletlere toprak bölünmesi yok. Yasa her yerde aynıdır. Hukuken tanınmış topluluk yok: sadece vatandaşlar vardır (cumhuriyetçi evrenselcilik)." }
+      }
+    },
+    {
+      "id": 164,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que l'IVG en France ?",
+      "answer_hint": "Interruption volontaire de grossesse, légalisée par la loi Veil du 17 janvier 1975. Droit à l'avortement inscrit dans la Constitution le 4 mars 2024 (1er pays au monde).",
+      "translations": {
+        "en": { "text": "What is abortion (IVG) in France?", "answer_hint": "Voluntary termination of pregnancy, legalized by the Veil law of 17 January 1975. Right to abortion enshrined in the Constitution on 4 March 2024 (1st country in the world)." },
+        "tr": { "text": "Fransa'da kürtaj (IVG) nedir?", "answer_hint": "Gönüllü gebelik sonlandırma, 17 Ocak 1975 Veil yasasıyla yasallaştı. Kürtaj hakkı 4 Mart 2024'te Anayasa'ya eklendi (dünyada 1. ülke)." }
+      }
+    },
+    {
+      "id": 165,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la liberté d'association ?",
+      "answer_hint": "Droit de créer ou d'adhérer à une association à but non lucratif. Loi du 1er juillet 1901, fondamentale. ~1,5 million d'associations en France.",
+      "translations": {
+        "en": { "text": "What is freedom of association?", "answer_hint": "Right to create or join a non-profit association. Law of 1 July 1901, fundamental. ~1.5 million associations in France." },
+        "tr": { "text": "Dernek özgürlüğü nedir?", "answer_hint": "Kâr amacı gütmeyen dernek kurma veya katılma hakkı. 1 Temmuz 1901 yasası, temeldir. Fransa'da ~1,5 milyon dernek var." }
+      }
+    },
+    {
+      "id": 166,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la liberté de la presse ?",
+      "answer_hint": "Droit fondamental, loi du 29 juillet 1881. La presse peut publier sans censure préalable, sous réserve de respecter la loi (pas de diffamation, d'incitation à la haine).",
+      "translations": {
+        "en": { "text": "What is freedom of the press?", "answer_hint": "Fundamental right, law of 29 July 1881. The press can publish without prior censorship, subject to law (no defamation, no incitement to hatred)." },
+        "tr": { "text": "Basın özgürlüğü nedir?", "answer_hint": "Temel hak, 29 Temmuz 1881 yasası. Basın önceden sansür olmaksızın yayın yapabilir, yasaya uymak şartıyla (iftira, nefret kışkırtması yasak)." }
+      }
+    },
+    {
+      "id": 167,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que le pacte civil de solidarité (PACS) ?",
+      "answer_hint": "Contrat entre deux personnes majeures pour organiser leur vie commune (loi du 15 novembre 1999). Moins formel que le mariage, plus protecteur que le concubinage. Ouvert à tous les couples.",
+      "translations": {
+        "en": { "text": "What is the civil solidarity pact (PACS)?", "answer_hint": "Contract between two adults to organize their life together (law of 15 November 1999). Less formal than marriage, more protective than cohabitation. Open to all couples." },
+        "tr": { "text": "Medeni dayanışma paktı (PACS) nedir?", "answer_hint": "İki yetişkin arasında ortak yaşamı düzenleyen sözleşme (15 Kasım 1999 yasası). Evlilikten daha az resmi, gayri resmi birlikteliğe göre daha koruyucu. Tüm çiftlere açık." }
+      }
+    },
+    {
+      "id": 168,
+      "category": "valeurs",
+      "text_fr": "Que signifie « République laïque » ?",
+      "answer_hint": "L'État est neutre vis-à-vis des religions, ne reconnaît ni ne finance aucun culte (loi 1905). Garantit la liberté de croire ou de ne pas croire. Pas de religion d'État.",
+      "translations": {
+        "en": { "text": "What does \"secular Republic\" mean?", "answer_hint": "The state is neutral toward religions, recognizes or funds no religion (1905 law). Guarantees freedom to believe or not. No state religion." },
+        "tr": { "text": "\"Laik Cumhuriyet\" ne anlama gelir?", "answer_hint": "Devlet dinler karşısında tarafsızdır, hiçbir dini tanımaz veya finanse etmez (1905 yasası). İnanma veya inanmama özgürlüğünü güvence altına alır. Devlet dini yoktur." }
+      }
+    },
+    {
+      "id": 169,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que le principe d'égalité homme-femme ?",
+      "answer_hint": "Inscrit dans le préambule de la Constitution de 1946. La loi garantit la parité (politique, salariale, droits civils). Les violences faites aux femmes sont une grande cause nationale.",
+      "translations": {
+        "en": { "text": "What is the principle of gender equality?", "answer_hint": "Enshrined in the 1946 Constitution preamble. The law guarantees parity (political, salary, civil rights). Violence against women is a national cause." },
+        "tr": { "text": "Cinsiyet eşitliği ilkesi nedir?", "answer_hint": "1946 Anayasası önsözünde yer alır. Yasa eşitliği güvence altına alır (siyasi, maaş, sivil haklar). Kadına şiddet ulusal bir davadır." }
+      }
+    },
+    {
+      "id": 170,
+      "category": "valeurs",
+      "text_fr": "Qu'est-ce que la liberté de circulation ?",
+      "answer_hint": "Droit d'aller et venir librement sur le territoire et de le quitter. Au sein de l'UE, libre circulation des personnes (espace Schengen). Limitée par la loi en cas d'état d'urgence.",
+      "translations": {
+        "en": { "text": "What is freedom of movement?", "answer_hint": "Right to come and go freely on the territory and leave it. Within the EU, free movement of persons (Schengen area). Limited by law in case of state of emergency." },
+        "tr": { "text": "Dolaşım özgürlüğü nedir?", "answer_hint": "Ülke içinde özgürce gidip gelme ve onu terk etme hakkı. AB içinde kişilerin serbest dolaşımı (Schengen alanı). Olağanüstü hâl durumunda yasayla sınırlandırılabilir." }
+      }
+    },
+    {
+      "id": 171,
+      "category": "vie_quotidienne",
+      "text_fr": "Quel est l'âge légal du mariage en France ?",
+      "answer_hint": "18 ans révolus pour les deux époux. Une dispense exceptionnelle peut être accordée par le procureur de la République pour motifs graves. Mariage forcé interdit (loi 2010).",
+      "translations": {
+        "en": { "text": "What is the legal age of marriage in France?", "answer_hint": "18 years old for both spouses. Exceptional dispensation possible by the public prosecutor for serious reasons. Forced marriage forbidden (2010 law)." },
+        "tr": { "text": "Fransa'da yasal evlilik yaşı nedir?", "answer_hint": "Her iki eş için tamamlanmış 18 yaş. Cumhuriyet savcısı ciddi nedenlerle istisnai izin verebilir. Zorla evlendirme yasaktır (2010 yasası)." }
+      }
+    },
+    {
+      "id": 172,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la Sécurité sociale ?",
+      "answer_hint": "Système de protection sociale créé en 1945 (ordonnance Laroque). Branches : maladie, famille, vieillesse (retraite), accidents du travail. Financée par cotisations sociales et CSG.",
+      "translations": {
+        "en": { "text": "What is Social Security?", "answer_hint": "Social protection system created in 1945 (Laroque ordinance). Branches: health, family, old age (retirement), workplace accidents. Funded by social contributions and CSG (general social contribution)." },
+        "tr": { "text": "Sosyal Güvenlik nedir?", "answer_hint": "1945'te kurulan sosyal koruma sistemi (Laroque kararnamesi). Kollar: sağlık, aile, yaşlılık (emeklilik), iş kazaları. Sosyal primler ve CSG (genel sosyal katkı) ile finanse edilir." }
+      }
+    },
+    {
+      "id": 173,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la carte Vitale ?",
+      "answer_hint": "Carte d'assurance maladie permettant le remboursement des soins. Délivrée par l'Assurance maladie aux personnes affiliées. À présenter chez le médecin, à la pharmacie.",
+      "translations": {
+        "en": { "text": "What is the Carte Vitale?", "answer_hint": "Health insurance card allowing reimbursement of medical care. Issued by Assurance Maladie (French health insurance) to affiliated persons. Present at the doctor, pharmacy." },
+        "tr": { "text": "Carte Vitale nedir?", "answer_hint": "Tıbbi bakımın geri ödenmesini sağlayan sağlık sigortası kartı. Sigortalı kişilere Assurance Maladie (Fransız sağlık sigortası) tarafından verilir. Doktorda, eczanede gösterilir." }
+      }
+    },
+    {
+      "id": 174,
+      "category": "vie_quotidienne",
+      "text_fr": "Que faire en cas d'urgence médicale ?",
+      "answer_hint": "Appeler le 15 (SAMU). Aussi : 112 (numéro européen d'urgence), 18 (pompiers, peuvent intervenir aussi), 114 (urgences pour personnes sourdes ou malentendantes par SMS).",
+      "translations": {
+        "en": { "text": "What to do in case of a medical emergency?", "answer_hint": "Call 15 (SAMU — emergency medical service). Also: 112 (European emergency number), 18 (firefighters, also intervene), 114 (SMS emergencies for deaf or hearing-impaired)." },
+        "tr": { "text": "Tıbbi acil durumda ne yapmalı?", "answer_hint": "15'i (SAMU — acil tıbbi hizmet) arayın. Ayrıca: 112 (Avrupa acil numarası), 18 (itfaiye, müdahale edebilir), 114 (sağır veya işitme engelliler için SMS acil)." }
+      }
+    },
+    {
+      "id": 175,
+      "category": "vie_quotidienne",
+      "text_fr": "Quels sont les principaux numéros d'urgence ?",
+      "answer_hint": "15 (SAMU médical), 17 (police), 18 (pompiers), 112 (urgence européen), 119 (enfance en danger), 3919 (violences femmes), 3977 (maltraitance personnes âgées).",
+      "translations": {
+        "en": { "text": "What are the main emergency numbers?", "answer_hint": "15 (medical), 17 (police), 18 (firefighters), 112 (European emergency), 119 (children in danger), 3919 (violence against women), 3977 (elder abuse)." },
+        "tr": { "text": "Başlıca acil numaralar nelerdir?", "answer_hint": "15 (tıbbi), 17 (polis), 18 (itfaiye), 112 (Avrupa acil), 119 (tehlikedeki çocuk), 3919 (kadına şiddet), 3977 (yaşlı istismarı)." }
+      }
+    },
+    {
+      "id": 176,
+      "category": "vie_quotidienne",
+      "text_fr": "Quel est l'âge légal pour conduire en France ?",
+      "answer_hint": "18 ans pour le permis B (voiture). Conduite accompagnée possible dès 15 ans, conduite supervisée dès 18 ans. Permis AM (cyclomoteur) à 14 ans.",
+      "translations": {
+        "en": { "text": "What is the legal driving age in France?", "answer_hint": "18 for the B license (car). Accompanied driving from 15, supervised driving from 18. AM license (moped) from 14." },
+        "tr": { "text": "Fransa'da yasal sürüş yaşı nedir?", "answer_hint": "B ehliyeti (otomobil) için 18. 15 yaşından itibaren refakatli sürüş, 18 yaşından itibaren denetimli sürüş mümkün. AM ehliyeti (moped) 14 yaşında." }
+      }
+    },
+    {
+      "id": 177,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que le SMIC ?",
+      "answer_hint": "Salaire minimum interprofessionnel de croissance. Salaire horaire minimum légal en France. Revalorisé au moins chaque 1er janvier. ~1 800 € brut mensuel pour 35 h/semaine (en 2026).",
+      "translations": {
+        "en": { "text": "What is the SMIC?", "answer_hint": "Salaire minimum interprofessionnel de croissance — French national minimum hourly wage. Reassessed at least every 1 January. ~1,800 € gross monthly for 35 h/week (in 2026)." },
+        "tr": { "text": "SMIC nedir?", "answer_hint": "Salaire minimum interprofessionnel de croissance — Fransa'nın yasal asgari saatlik ücreti. En az her 1 Ocak'ta yeniden değerlendirilir. 35 saatlik haftalık çalışma için ~1 800 € brüt aylık (2026'da)." }
+      }
+    },
+    {
+      "id": 178,
+      "category": "vie_quotidienne",
+      "text_fr": "Combien d'heures travaille-t-on légalement en France ?",
+      "answer_hint": "35 heures par semaine (durée légale depuis loi Aubry 2000). Heures au-delà sont des heures supplémentaires (majorées). Durée maximale : 48 h/semaine, 10 h/jour.",
+      "translations": {
+        "en": { "text": "How many hours do people legally work in France?", "answer_hint": "35 hours per week (legal duration since Aubry law 2000). Hours beyond are overtime (with extra pay). Maximum: 48 h/week, 10 h/day." },
+        "tr": { "text": "Fransa'da yasal olarak kaç saat çalışılır?", "answer_hint": "Haftada 35 saat (2000 Aubry yasasından beri yasal süre). Üstündeki saatler ek mesaidir (artırımlı ödenir). Maksimum: 48 sa/hafta, 10 sa/gün." }
+      }
+    },
+    {
+      "id": 179,
+      "category": "vie_quotidienne",
+      "text_fr": "Combien de semaines de congés payés par an ?",
+      "answer_hint": "5 semaines minimum (2,5 jours ouvrables par mois travaillé). Plus jours fériés (11 légaux), RTT éventuels, congés pour événements familiaux.",
+      "translations": {
+        "en": { "text": "How many weeks of paid leave per year?", "answer_hint": "5 weeks minimum (2.5 working days per month worked). Plus public holidays (11 statutory), possible RTT (reduction in working time days), family-event leave." },
+        "tr": { "text": "Yılda kaç hafta ücretli izin var?", "answer_hint": "En az 5 hafta (çalışılan ay başına 2,5 iş günü). Ayrıca resmi tatiller (11 yasal), olası RTT (çalışma süresinin azaltılması günleri), aile olayı izinleri." }
+      }
+    },
+    {
+      "id": 180,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que Pôle emploi (devenu France Travail) ?",
+      "answer_hint": "Service public de l'emploi. Aide à la recherche d'emploi, verse les allocations chômage. Renommé « France Travail » en 2024. Inscription obligatoire pour percevoir l'allocation.",
+      "translations": {
+        "en": { "text": "What is Pôle emploi (now France Travail)?", "answer_hint": "Public employment service. Helps with job searching, pays unemployment benefits. Renamed \"France Travail\" in 2024. Registration mandatory to receive benefits." },
+        "tr": { "text": "Pôle emploi (şimdi France Travail) nedir?", "answer_hint": "Kamu istihdam servisi. İş arama desteği verir, işsizlik tazminatı öder. 2024'te \"France Travail\" olarak yeniden adlandırıldı. Tazminat almak için kayıt zorunludur." }
+      }
+    },
+    {
+      "id": 181,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce qu'un CDI et un CDD ?",
+      "answer_hint": "CDI : Contrat à durée indéterminée (sans terme prévu, contrat standard). CDD : Contrat à durée déterminée (avec date de fin, motif précis, durée maximale).",
+      "translations": {
+        "en": { "text": "What are a CDI and a CDD?", "answer_hint": "CDI: Contrat à durée indéterminée (permanent contract, no end date, standard). CDD: Contrat à durée déterminée (fixed-term, end date, specific reason, maximum duration)." },
+        "tr": { "text": "CDI ve CDD nedir?", "answer_hint": "CDI: Contrat à durée indéterminée (süresiz sözleşme, bitiş tarihi yok, standart). CDD: Contrat à durée déterminée (belirli süreli, bitiş tarihi, belirli gerekçe, maksimum süre)." }
+      }
+    },
+    {
+      "id": 182,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que l'école obligatoire en France ?",
+      "answer_hint": "Instruction obligatoire de 3 à 16 ans (loi 2019). Gratuite et laïque dans le public. Cycle : maternelle, élémentaire, collège, lycée. Plus formation jusqu'à 18 ans.",
+      "translations": {
+        "en": { "text": "What is compulsory schooling in France?", "answer_hint": "Compulsory instruction from 3 to 16 (2019 law). Free and secular in public. Cycle: nursery (maternelle), elementary, collège (middle school), lycée (high school). Plus training until 18." },
+        "tr": { "text": "Fransa'da zorunlu eğitim nedir?", "answer_hint": "3 ile 16 yaş arası zorunlu eğitim (2019 yasası). Devlette ücretsiz ve laik. Döngü: anaokulu (maternelle), ilköğretim, collège (ortaokul), lycée (lise). Ayrıca 18 yaşa kadar eğitim." }
+      }
+    },
+    {
+      "id": 183,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que le baccalauréat ?",
+      "answer_hint": "Diplôme de fin d'études secondaires, sanctionne le lycée. Donne accès aux études supérieures. Trois voies : générale, technologique, professionnelle. Créé par Napoléon en 1808.",
+      "translations": {
+        "en": { "text": "What is the baccalauréat?", "answer_hint": "End-of-secondary-school diploma, marks completion of lycée. Gives access to higher education. Three streams: general, technological, vocational. Created by Napoleon in 1808." },
+        "tr": { "text": "Baccalauréat nedir?", "answer_hint": "Ortaöğretim sonu diploması, lise sonunu işaretler. Yükseköğretime erişim sağlar. Üç dal: genel, teknolojik, meslek. 1808'de Napolyon tarafından oluşturuldu." }
+      }
+    },
+    {
+      "id": 184,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la CAF ?",
+      "answer_hint": "Caisse d'allocations familiales. Verse les aides aux familles : allocations familiales (à partir du 2e enfant), prime d'activité, RSA, APL (aide au logement).",
+      "translations": {
+        "en": { "text": "What is the CAF?", "answer_hint": "Caisse d'allocations familiales — family allowance fund. Pays family aid: family allowances (from 2nd child), activity bonus (prime d'activité), RSA (minimum income), APL (housing aid)." },
+        "tr": { "text": "CAF nedir?", "answer_hint": "Caisse d'allocations familiales — aile yardım sandığı. Aile yardımlarını öder: aile yardımı (2. çocuktan itibaren), faaliyet primi (prime d'activité), RSA (asgari gelir), APL (konut yardımı)." }
+      }
+    },
+    {
+      "id": 185,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que le RSA ?",
+      "answer_hint": "Revenu de solidarité active. Allocation versée aux personnes sans revenus ou à faibles revenus, à partir de 25 ans (ou jeunes parents). Sous condition de ressources. ~635 € pour une personne seule.",
+      "translations": {
+        "en": { "text": "What is the RSA?", "answer_hint": "Revenu de solidarité active — active solidarity income. Allowance paid to persons without income or with low income, from age 25 (or young parents). Means-tested. ~635 € for a single person." },
+        "tr": { "text": "RSA nedir?", "answer_hint": "Revenu de solidarité active — aktif dayanışma geliri. 25 yaşından itibaren (veya genç ebeveynler) geliri olmayan veya düşük gelirli kişilere ödenen yardım. Gelire bağlı. Tek kişi için ~635 €." }
+      }
+    },
+    {
+      "id": 186,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce qu'un médecin traitant ?",
+      "answer_hint": "Médecin déclaré auprès de l'Assurance maladie comme référent principal. Premier interlocuteur pour les soins. Permet un meilleur remboursement (parcours de soins coordonnés).",
+      "translations": {
+        "en": { "text": "What is a médecin traitant (referring physician)?", "answer_hint": "Doctor declared to Assurance Maladie as main referrer. First point of contact for care. Allows better reimbursement (coordinated care pathway)." },
+        "tr": { "text": "Médecin traitant (aile hekimi) nedir?", "answer_hint": "Assurance Maladie'ye ana yönlendirici olarak bildirilen doktor. Bakım için ilk muhatap. Daha iyi geri ödeme sağlar (koordineli bakım yolu)." }
+      }
+    },
+    {
+      "id": 187,
+      "category": "vie_quotidienne",
+      "text_fr": "Quels sont les principaux impôts en France ?",
+      "answer_hint": "Impôt sur le revenu (progressif, ~50% des ménages), TVA (20% standard, applicable à la consommation), impôts locaux (taxe foncière, taxe d'habitation supprimée pour résidences principales), CSG.",
+      "translations": {
+        "en": { "text": "What are the main taxes in France?", "answer_hint": "Income tax (progressive, ~50% of households), VAT (20% standard, on consumption), local taxes (property tax; housing tax abolished for primary residences), CSG." },
+        "tr": { "text": "Fransa'daki başlıca vergiler nelerdir?", "answer_hint": "Gelir vergisi (artan oranlı, hanelerin ~%50'si), KDV (TVA — %20 standart, tüketim üzerinden), yerel vergiler (emlak vergisi; ana konut için konut vergisi kaldırıldı), CSG." }
+      }
+    },
+    {
+      "id": 188,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la déclaration de revenus ?",
+      "answer_hint": "Obligation annuelle de déclarer ses revenus à l'administration fiscale (impots.gouv.fr). Permet de calculer l'impôt. Déclaration en ligne en mai-juin.",
+      "translations": {
+        "en": { "text": "What is the income tax declaration?", "answer_hint": "Annual obligation to declare income to the tax administration (impots.gouv.fr). Used to calculate tax. Online declaration in May-June." },
+        "tr": { "text": "Gelir beyannamesi nedir?", "answer_hint": "Vergi idaresine (impots.gouv.fr) gelirleri beyan etme yıllık yükümlülüğü. Vergi hesabı için kullanılır. Mayıs-Haziran'da çevrimiçi beyan." }
+      }
+    },
+    {
+      "id": 189,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que l'APL ?",
+      "answer_hint": "Aide personnalisée au logement. Versée par la CAF pour aider à payer son loyer ou son emprunt immobilier. Sous condition de ressources et de logement conventionné.",
+      "translations": {
+        "en": { "text": "What is APL?", "answer_hint": "Aide personnalisée au logement — personalized housing aid. Paid by CAF to help pay rent or housing loan. Subject to means-testing and conventioned housing." },
+        "tr": { "text": "APL nedir?", "answer_hint": "Aide personnalisée au logement — kişiselleştirilmiş konut yardımı. Kira veya konut kredisini ödemeye yardım için CAF tarafından ödenir. Gelir ve sözleşmeli konut şartına tabidir." }
+      }
+    },
+    {
+      "id": 190,
+      "category": "vie_quotidienne",
+      "text_fr": "Comment trouve-t-on un logement en France ?",
+      "answer_hint": "Plusieurs voies : agences immobilières, sites en ligne (LeBonCoin, SeLoger), particuliers, logement social (HLM via les bailleurs et la préfecture). Caution + garant souvent demandés.",
+      "translations": {
+        "en": { "text": "How do you find housing in France?", "answer_hint": "Several routes: real-estate agencies, online sites (LeBonCoin, SeLoger), private owners, social housing (HLM through landlords and prefecture). Deposit + guarantor often required." },
+        "tr": { "text": "Fransa'da konut nasıl bulunur?", "answer_hint": "Çeşitli yollar: emlak ofisleri, çevrimiçi siteler (LeBonCoin, SeLoger), bireyler, sosyal konut (HLM — ev sahipleri ve valilik üzerinden). Depozito + kefil sıkça istenir." }
+      }
+    },
+    {
+      "id": 191,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la retraite en France ?",
+      "answer_hint": "Pension versée aux personnes ayant cessé leur activité professionnelle. Système par répartition (actifs cotisent pour les retraités). Âge légal : 64 ans (depuis réforme 2023).",
+      "translations": {
+        "en": { "text": "What is retirement in France?", "answer_hint": "Pension paid to people who have ceased professional activity. Pay-as-you-go system (workers contribute for retirees). Legal age: 64 (since 2023 reform)." },
+        "tr": { "text": "Fransa'da emeklilik nedir?", "answer_hint": "Mesleki faaliyetini bırakan kişilere ödenen emekli maaşı. Dağıtım sistemi (çalışanlar emekliler için prim öder). Yasal yaş: 64 (2023 reformundan beri)." }
+      }
+    },
+    {
+      "id": 192,
+      "category": "vie_quotidienne",
+      "text_fr": "Comment ouvre-t-on un compte bancaire en France ?",
+      "answer_hint": "Présenter une pièce d'identité, un justificatif de domicile et un justificatif de revenus. Banques classiques ou en ligne. Droit au compte garanti par la Banque de France si refus.",
+      "translations": {
+        "en": { "text": "How do you open a bank account in France?", "answer_hint": "Present an ID, proof of address, proof of income. Traditional or online banks. Right to a bank account guaranteed by the Banque de France in case of refusal." },
+        "tr": { "text": "Fransa'da banka hesabı nasıl açılır?", "answer_hint": "Kimlik, ikametgah belgesi, gelir belgesi sunun. Geleneksel veya çevrimiçi bankalar. Ret durumunda Banque de France tarafından hesap hakkı güvence altındadır." }
+      }
+    },
+    {
+      "id": 193,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la carte d'identité française ?",
+      "answer_hint": "Document officiel attestant la nationalité et l'identité. Gratuite, valable 15 ans (10 pour les mineurs). Format carte bancaire depuis 2021 (eIDAS).",
+      "translations": {
+        "en": { "text": "What is the French ID card?", "answer_hint": "Official document attesting nationality and identity. Free, valid 15 years (10 for minors). Bank-card format since 2021 (eIDAS)." },
+        "tr": { "text": "Fransız kimlik kartı nedir?", "answer_hint": "Vatandaşlığı ve kimliği belgeleyen resmi belge. Ücretsiz, 15 yıl geçerli (reşit olmayanlar için 10 yıl). 2021'den beri banka kartı formatında (eIDAS)." }
+      }
+    },
+    {
+      "id": 194,
+      "category": "vie_quotidienne",
+      "text_fr": "Comment obtient-on un passeport français ?",
+      "answer_hint": "À la mairie (équipée de bornes biométriques), sur rendez-vous. Documents : pré-demande en ligne, photo, justificatifs. Délai : ~3 semaines. Tarif : 86 € adulte.",
+      "translations": {
+        "en": { "text": "How do you get a French passport?", "answer_hint": "At the town hall (equipped with biometric terminals), by appointment. Documents: online pre-application, photo, supporting documents. Delay: ~3 weeks. Cost: €86 adult." },
+        "tr": { "text": "Fransız pasaportu nasıl alınır?", "answer_hint": "Belediye binasında (biyometrik terminalle donatılmış), randevuyla. Belgeler: çevrimiçi ön başvuru, fotoğraf, kanıt belgeler. Süre: ~3 hafta. Ücret: 86 € yetişkin." }
+      }
+    },
+    {
+      "id": 195,
+      "category": "vie_quotidienne",
+      "text_fr": "Quel est le calendrier scolaire français ?",
+      "answer_hint": "Année scolaire : septembre à juillet. 5 zones (A, B, C, Corse, DOM) avec vacances décalées : Toussaint (oct.), Noël, hiver, printemps, été. Adaptations en cas de Réforme.",
+      "translations": {
+        "en": { "text": "What is the French school calendar?", "answer_hint": "School year: September to July. 5 zones (A, B, C, Corsica, overseas) with staggered holidays: Toussaint (Oct.), Christmas, winter, spring, summer. Adaptable in case of reform." },
+        "tr": { "text": "Fransız okul takvimi nasıldır?", "answer_hint": "Eğitim yılı: Eylül-Temmuz. Farklı tatil dönemleriyle 5 bölge (A, B, C, Korsika, denizaşırı): Toussaint (Ekim), Noel, kış, ilkbahar, yaz. Reform durumunda uyarlanabilir." }
+      }
+    },
+    {
+      "id": 196,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce qu'un titre de séjour ?",
+      "answer_hint": "Document autorisant un étranger à résider en France. Différents types : carte de séjour temporaire (1 an), pluriannuelle, carte de résident (10 ans), titre permanent.",
+      "translations": {
+        "en": { "text": "What is a residence permit (titre de séjour)?", "answer_hint": "Document authorizing a foreigner to reside in France. Different types: temporary residence card (1 year), multi-year, resident card (10 years), permanent card." },
+        "tr": { "text": "Oturma izni (titre de séjour) nedir?", "answer_hint": "Bir yabancının Fransa'da ikametine izin veren belge. Farklı türler: geçici oturma kartı (1 yıl), çok yıllık, mukim kartı (10 yıl), daimi belge." }
+      }
+    },
+    {
+      "id": 197,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que l'OFII ?",
+      "answer_hint": "Office français de l'immigration et de l'intégration. Accompagne les étrangers : visites médicales, formation civique, formation linguistique (CIR). Sous tutelle du ministère de l'Intérieur.",
+      "translations": {
+        "en": { "text": "What is OFII?", "answer_hint": "Office français de l'immigration et de l'intégration — French Office of Immigration and Integration. Supports foreigners: medical visits, civic training, language training (CIR — Republican Integration Contract). Under the Ministry of the Interior." },
+        "tr": { "text": "OFII nedir?", "answer_hint": "Office français de l'immigration et de l'intégration — Fransız Göç ve Entegrasyon Ofisi. Yabancılara destek olur: sağlık muayeneleri, sivil eğitim, dil eğitimi (CIR — Cumhuriyetçi Entegrasyon Sözleşmesi). İçişleri Bakanlığı'na bağlıdır." }
+      }
+    },
+    {
+      "id": 198,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que le contrat d'intégration républicaine (CIR) ?",
+      "answer_hint": "Contrat signé entre un étranger primo-arrivant et l'État. Engagement à suivre une formation civique et linguistique. Préalable à l'obtention de certains titres et à la naturalisation.",
+      "translations": {
+        "en": { "text": "What is the Republican Integration Contract (CIR)?", "answer_hint": "Contract signed between a newly arrived foreigner and the state. Commitment to follow civic and language training. Prerequisite for certain residency permits and naturalization." },
+        "tr": { "text": "Cumhuriyetçi Entegrasyon Sözleşmesi (CIR) nedir?", "answer_hint": "Yeni gelen bir yabancı ile devlet arasında imzalanan sözleşme. Sivil ve dil eğitimi alma taahhüdü. Bazı oturma izinleri ve vatandaşlık için ön koşul." }
+      }
+    },
+    {
+      "id": 199,
+      "category": "vie_quotidienne",
+      "text_fr": "Quelles sont les démarches pour devenir français par naturalisation ?",
+      "answer_hint": "Dépôt en ligne sur l'ANEF, dossier complet (justificatifs, casier judiciaire, niveau B2), entretien d'assimilation en préfecture, décision ministérielle, cérémonie. Délai : 18-24 mois.",
+      "translations": {
+        "en": { "text": "What are the steps to become French by naturalization?", "answer_hint": "Online submission on ANEF (digital platform), complete file (supporting documents, criminal record, B2 level), prefecture interview, ministerial decision, ceremony. Timeline: 18-24 months." },
+        "tr": { "text": "Vatandaşlığa kabul ile Fransız olma adımları nelerdir?", "answer_hint": "ANEF'te (dijital platform) çevrimiçi başvuru, tam dosya (kanıt belgeleri, sabıka kaydı, B2 seviyesi), valilik mülakatı, bakanlık kararı, tören. Süre: 18-24 ay." }
+      }
+    },
+    {
+      "id": 200,
+      "category": "vie_quotidienne",
+      "text_fr": "Combien d'années de présence en France faut-il pour demander la nationalité ?",
+      "answer_hint": "En principe 5 ans de résidence régulière et continue. Réductions : 2 ans si études supérieures en France, ou contribution exceptionnelle. Conjoint de Français : 4 ans (mariage), 5 ans si non cohabitation.",
+      "translations": {
+        "en": { "text": "How many years of presence in France are needed to apply for citizenship?", "answer_hint": "In principle 5 years of regular and continuous residence. Reductions: 2 years if higher studies in France, or exceptional contribution. Spouse of French citizen: 4 years (marriage), 5 if no cohabitation." },
+        "tr": { "text": "Vatandaşlık başvurusu için Fransa'da kaç yıl kalmak gerekir?", "answer_hint": "Genellikle 5 yıl düzenli ve sürekli ikamet. İndirimler: Fransa'da yükseköğrenim varsa 2 yıl, veya istisnai katkı. Fransız eşi: 4 yıl (evlilik), birlikte yaşam yoksa 5 yıl." }
+      }
+    },
+    {
+      "id": 201,
+      "category": "vie_quotidienne",
+      "text_fr": "Que peut-on faire en cas de perte ou vol de papiers ?",
+      "answer_hint": "Déclarer le vol au commissariat ou la gendarmerie (récépissé). Pour les pièces d'identité, demander un duplicata à la mairie/préfecture. Pour les cartes bancaires, contacter sa banque immédiatement.",
+      "translations": {
+        "en": { "text": "What to do in case of loss or theft of papers?", "answer_hint": "Report theft at the police station (commissariat) or gendarmerie (receipt). For ID cards, request a duplicate at the town hall/prefecture. For bank cards, contact your bank immediately." },
+        "tr": { "text": "Belge kaybı veya hırsızlığı durumunda ne yapılır?", "answer_hint": "Karakolda (commissariat) veya jandarmada (gendarmerie) hırsızlığı bildirin (makbuz). Kimlik kartları için belediye/valilikten kopya talep edin. Banka kartları için derhal bankanızı arayın." }
+      }
+    },
+    {
+      "id": 202,
+      "category": "vie_quotidienne",
+      "text_fr": "Qu'est-ce que la médecine du travail ?",
+      "answer_hint": "Service obligatoire en entreprise pour surveiller la santé des salariés. Visite d'embauche, visites périodiques, visite de reprise après arrêt prolongé. Préventive et confidentielle.",
+      "translations": {
+        "en": { "text": "What is occupational medicine (médecine du travail)?", "answer_hint": "Mandatory company service to monitor employee health. Hiring visit, periodic visits, return-to-work visit after extended leave. Preventive and confidential." },
+        "tr": { "text": "İşyeri hekimliği (médecine du travail) nedir?", "answer_hint": "Çalışan sağlığını izlemek için zorunlu şirket hizmeti. İşe giriş muayenesi, periyodik muayeneler, uzun raporlu izin sonrası işe dönüş muayenesi. Önleyici ve gizlidir." }
+      }
+    },
+    {
+      "id": 203,
+      "category": "vie_quotidienne",
+      "text_fr": "Comment fonctionne l'école maternelle ?",
+      "answer_hint": "École publique gratuite, accueille les enfants de 3 à 6 ans (obligatoire depuis 2019). Trois sections : petite, moyenne, grande. Préparation au CP. Apprentissage par le jeu.",
+      "translations": {
+        "en": { "text": "How does nursery school (école maternelle) work?", "answer_hint": "Free public school, takes children aged 3 to 6 (compulsory since 2019). Three sections: small, medium, large. Preparation for CP (Cours préparatoire, 1st grade). Learning through play." },
+        "tr": { "text": "Anaokulu (école maternelle) nasıl işler?", "answer_hint": "Ücretsiz devlet okulu, 3-6 yaş çocuklarını kabul eder (2019'dan beri zorunlu). Üç bölüm: küçük, orta, büyük. CP'ye (Cours préparatoire, 1. sınıf) hazırlık. Oyunla öğrenme." }
+      }
+    },
+    {
+      "id": 204,
+      "category": "vie_quotidienne",
+      "text_fr": "Quels sont les principaux médias français ?",
+      "answer_hint": "Télévision : TF1, France 2, France 3, Arte, M6. Radios : France Inter, RTL, Europe 1, France Info. Presse écrite : Le Monde, Le Figaro, Libération, L'Équipe.",
+      "translations": {
+        "en": { "text": "What are the main French media?", "answer_hint": "TV: TF1, France 2, France 3, Arte, M6. Radio: France Inter, RTL, Europe 1, France Info. Print press: Le Monde, Le Figaro, Libération, L'Équipe." },
+        "tr": { "text": "Başlıca Fransız medyaları nelerdir?", "answer_hint": "TV: TF1, France 2, France 3, Arte, M6. Radyo: France Inter, RTL, Europe 1, France Info. Yazılı basın: Le Monde, Le Figaro, Libération, L'Équipe." }
+      }
+    },
+    {
+      "id": 205,
+      "category": "culture",
+      "text_fr": "Quels sont les écrivains français les plus connus ?",
+      "answer_hint": "Victor Hugo (Les Misérables), Marcel Proust (À la recherche du temps perdu), Émile Zola (Germinal), Albert Camus (L'Étranger), Simone de Beauvoir, Molière (théâtre), Voltaire, Annie Ernaux (Nobel 2022).",
+      "translations": {
+        "en": { "text": "Who are the best-known French writers?", "answer_hint": "Victor Hugo (Les Misérables), Marcel Proust (In Search of Lost Time), Émile Zola (Germinal), Albert Camus (The Stranger), Simone de Beauvoir, Molière (theater), Voltaire, Annie Ernaux (Nobel 2022)." },
+        "tr": { "text": "En tanınmış Fransız yazarları kimlerdir?", "answer_hint": "Victor Hugo (Sefiller), Marcel Proust (Kayıp Zamanın İzinde), Émile Zola (Germinal), Albert Camus (Yabancı), Simone de Beauvoir, Molière (tiyatro), Voltaire, Annie Ernaux (2022 Nobel)." }
+      }
+    },
+    {
+      "id": 206,
+      "category": "culture",
+      "text_fr": "Qui était Victor Hugo ?",
+      "answer_hint": "Écrivain et homme politique du XIXe siècle (1802-1885). Auteur des Misérables, Notre-Dame de Paris. Figure majeure du romantisme. Exilé sous Napoléon III. Panthéonisé en 1885.",
+      "translations": {
+        "en": { "text": "Who was Victor Hugo?", "answer_hint": "Writer and politician of the 19th century (1802-1885). Author of Les Misérables, The Hunchback of Notre-Dame. Major Romantic figure. Exiled under Napoleon III. Entered the Pantheon in 1885." },
+        "tr": { "text": "Victor Hugo kimdi?", "answer_hint": "19. yüzyıl yazarı ve politikacı (1802-1885). Sefiller, Notre-Dame'ın Kamburu yazarı. Romantizmin büyük figürü. Napolyon III döneminde sürgün edildi. 1885'te Panthéon'a defnedildi." }
+      }
+    },
+    {
+      "id": 207,
+      "category": "culture",
+      "text_fr": "Qui a peint « La Joconde » ?",
+      "answer_hint": "Léonard de Vinci (vers 1503-1519). Tableau exposé au musée du Louvre à Paris. Le plus célèbre tableau du monde. Modèle : probablement Lisa Gherardini, épouse de Francesco del Giocondo.",
+      "translations": {
+        "en": { "text": "Who painted the Mona Lisa (La Joconde)?", "answer_hint": "Leonardo da Vinci (circa 1503-1519). Painting displayed at the Louvre museum in Paris. World's most famous painting. Model: probably Lisa Gherardini, wife of Francesco del Giocondo." },
+        "tr": { "text": "Mona Lisa'yı (La Joconde) kim yaptı?", "answer_hint": "Leonardo da Vinci (yaklaşık 1503-1519). Paris'teki Louvre müzesinde sergilenen tablo. Dünyanın en ünlü tablosu. Model: muhtemelen Francesco del Giocondo'nun eşi Lisa Gherardini." }
+      }
+    },
+    {
+      "id": 208,
+      "category": "culture",
+      "text_fr": "Quels sont les peintres français célèbres ?",
+      "answer_hint": "Claude Monet (impressionnisme, Nymphéas), Auguste Renoir, Édouard Manet, Paul Cézanne, Edgar Degas, Henri Matisse (fauvisme), Marc Chagall, Eugène Delacroix.",
+      "translations": {
+        "en": { "text": "Who are some famous French painters?", "answer_hint": "Claude Monet (Impressionism, Water Lilies), Auguste Renoir, Édouard Manet, Paul Cézanne, Edgar Degas, Henri Matisse (Fauvism), Marc Chagall, Eugène Delacroix." },
+        "tr": { "text": "Ünlü Fransız ressamlar kimlerdir?", "answer_hint": "Claude Monet (İzlenimcilik, Nilüferler), Auguste Renoir, Édouard Manet, Paul Cézanne, Edgar Degas, Henri Matisse (Fauvizm), Marc Chagall, Eugène Delacroix." }
+      }
+    },
+    {
+      "id": 209,
+      "category": "culture",
+      "text_fr": "Quels sont les musées les plus célèbres de Paris ?",
+      "answer_hint": "Louvre (le plus visité au monde), musée d'Orsay (impressionnistes), Centre Pompidou (art moderne), musée Rodin, musée Picasso, musée Quai Branly.",
+      "translations": {
+        "en": { "text": "What are the most famous museums in Paris?", "answer_hint": "Louvre (most visited in the world), Musée d'Orsay (Impressionists), Centre Pompidou (modern art), Musée Rodin, Musée Picasso, Musée du Quai Branly." },
+        "tr": { "text": "Paris'in en ünlü müzeleri hangileridir?", "answer_hint": "Louvre (dünyada en çok ziyaret edilen), Musée d'Orsay (İzlenimciler), Centre Pompidou (modern sanat), Musée Rodin, Musée Picasso, Musée du Quai Branly." }
+      }
+    },
+    {
+      "id": 210,
+      "category": "culture",
+      "text_fr": "Quels sont les monuments les plus emblématiques de France ?",
+      "answer_hint": "Tour Eiffel (Paris, 1889), Arc de Triomphe, Notre-Dame de Paris, château de Versailles, Mont-Saint-Michel, châteaux de la Loire (Chambord, Chenonceau), Sacré-Cœur.",
+      "translations": {
+        "en": { "text": "What are the most iconic monuments in France?", "answer_hint": "Eiffel Tower (Paris, 1889), Arc de Triomphe, Notre-Dame de Paris, Palace of Versailles, Mont-Saint-Michel, Loire Valley castles (Chambord, Chenonceau), Sacré-Cœur." },
+        "tr": { "text": "Fransa'nın en simgesel anıtları nelerdir?", "answer_hint": "Eyfel Kulesi (Paris, 1889), Zafer Takı, Notre-Dame de Paris, Versay Sarayı, Mont-Saint-Michel, Loire Vadisi şatoları (Chambord, Chenonceau), Sacré-Cœur." }
+      }
+    },
+    {
+      "id": 211,
+      "category": "culture",
+      "text_fr": "Qui a fait construire la Tour Eiffel et quand ?",
+      "answer_hint": "Gustave Eiffel, ingénieur. Construite pour l'Exposition universelle de 1889 à Paris (centenaire de la Révolution). Hauteur : 330 m. Devait être démontée après 20 ans.",
+      "translations": {
+        "en": { "text": "Who built the Eiffel Tower and when?", "answer_hint": "Gustave Eiffel, engineer. Built for the 1889 Universal Exhibition in Paris (centenary of the Revolution). Height: 330 m. Was to be dismantled after 20 years." },
+        "tr": { "text": "Eyfel Kulesi'ni kim ve ne zaman inşa etti?", "answer_hint": "Mühendis Gustave Eiffel. 1889 Paris Evrensel Sergisi (Devrim'in yüzüncü yılı) için inşa edildi. Yükseklik: 330 m. 20 yıl sonra sökülmesi planlanıyordu." }
+      }
+    },
+    {
+      "id": 212,
+      "category": "culture",
+      "text_fr": "Qui était Molière ?",
+      "answer_hint": "Auteur et comédien du XVIIe siècle (1622-1673), de son vrai nom Jean-Baptiste Poquelin. Maître de la comédie. Œuvres : Le Misanthrope, Tartuffe, L'Avare, Le Bourgeois gentilhomme.",
+      "translations": {
+        "en": { "text": "Who was Molière?", "answer_hint": "17th-century author and actor (1622-1673), real name Jean-Baptiste Poquelin. Master of comedy. Works: The Misanthrope, Tartuffe, The Miser, The Bourgeois Gentleman." },
+        "tr": { "text": "Molière kimdi?", "answer_hint": "17. yüzyıl yazar ve oyuncusu (1622-1673), gerçek adı Jean-Baptiste Poquelin. Komedinin ustası. Eserleri: Misanthrope, Tartuffe, Cimri, Kibarlık Budalası." }
+      }
+    },
+    {
+      "id": 213,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que la gastronomie française ?",
+      "answer_hint": "Reconnue patrimoine immatériel UNESCO en 2010. Repas gastronomique, art de vivre, vins, fromages (~1200 variétés), pain, pâtisseries, cuisine régionale.",
+      "translations": {
+        "en": { "text": "What is French gastronomy?", "answer_hint": "Recognized as UNESCO intangible heritage in 2010. The gastronomic meal, art of living, wines, cheeses (~1200 varieties), bread, pastries, regional cuisine." },
+        "tr": { "text": "Fransız mutfağı nedir?", "answer_hint": "2010'da UNESCO somut olmayan mirası olarak tanındı. Gastronomik yemek, yaşam sanatı, şaraplar, peynirler (~1200 çeşit), ekmek, hamur işleri, bölgesel mutfak." }
+      }
+    },
+    {
+      "id": 214,
+      "category": "culture",
+      "text_fr": "Citez quelques plats typiquement français.",
+      "answer_hint": "Baguette, croissant, bœuf bourguignon, coq au vin, ratatouille, cassoulet, choucroute, raclette, fondue savoyarde, crêpes, macarons, mille-feuille, crème brûlée.",
+      "translations": {
+        "en": { "text": "Name some typically French dishes.", "answer_hint": "Baguette, croissant, beef bourguignon, coq au vin, ratatouille, cassoulet, choucroute (sauerkraut), raclette, Savoyard fondue, crêpes, macarons, mille-feuille, crème brûlée." },
+        "tr": { "text": "Tipik Fransız yemekleri söyleyin.", "answer_hint": "Baget, kruvasan, bœuf bourguignon (sığır eti yahnisi), coq au vin (şarapta horoz), ratatouille, cassoulet, lahana turşusu (choucroute), raclette, Savoyard fondü, krep, makaron, mille-feuille, crème brûlée." }
+      }
+    },
+    {
+      "id": 215,
+      "category": "culture",
+      "text_fr": "Quels sont les vins français célèbres ?",
+      "answer_hint": "Bordeaux (Médoc, Saint-Émilion), Bourgogne (Côte de Nuits), Champagne, Alsace, Côtes-du-Rhône, Beaujolais, Loire (Sancerre, Vouvray), Provence (rosés).",
+      "translations": {
+        "en": { "text": "What are the famous French wines?", "answer_hint": "Bordeaux (Médoc, Saint-Émilion), Burgundy (Côte de Nuits), Champagne, Alsace, Côtes-du-Rhône, Beaujolais, Loire (Sancerre, Vouvray), Provence (rosés)." },
+        "tr": { "text": "Ünlü Fransız şarapları hangileridir?", "answer_hint": "Bordeaux (Médoc, Saint-Émilion), Burgundy (Côte de Nuits), Şampanya, Alsace, Côtes-du-Rhône, Beaujolais, Loire (Sancerre, Vouvray), Provence (rozeler)." }
+      }
+    },
+    {
+      "id": 216,
+      "category": "culture",
+      "text_fr": "Quels sont les fromages français célèbres ?",
+      "answer_hint": "Camembert, Brie, Roquefort, Comté, Reblochon, Munster, Chèvre, Bleu d'Auvergne, Saint-Nectaire. La France compte ~1200 variétés.",
+      "translations": {
+        "en": { "text": "What are the famous French cheeses?", "answer_hint": "Camembert, Brie, Roquefort, Comté, Reblochon, Munster, goat cheese, Bleu d'Auvergne, Saint-Nectaire. France has ~1200 varieties." },
+        "tr": { "text": "Ünlü Fransız peynirleri hangileridir?", "answer_hint": "Camembert, Brie, Roquefort, Comté, Reblochon, Munster, keçi peyniri, Bleu d'Auvergne, Saint-Nectaire. Fransa'da ~1200 çeşit var." }
+      }
+    },
+    {
+      "id": 217,
+      "category": "culture",
+      "text_fr": "Quelle est la langue officielle de la France ?",
+      "answer_hint": "Le français (article 2 de la Constitution depuis 1992). Il existe des langues régionales (breton, corse, basque, occitan, alsacien, créoles) reconnues mais non officielles.",
+      "translations": {
+        "en": { "text": "What is the official language of France?", "answer_hint": "French (Article 2 of the Constitution since 1992). Regional languages exist (Breton, Corsican, Basque, Occitan, Alsatian, creoles), recognized but not official." },
+        "tr": { "text": "Fransa'nın resmi dili nedir?", "answer_hint": "Fransızca (1992'den beri Anayasa madde 2). Bölgesel diller vardır (Brötonca, Korsikaca, Baskça, Oksitanca, Alzasça, kreoller), tanınmış ama resmi değil." }
+      }
+    },
+    {
+      "id": 218,
+      "category": "culture",
+      "text_fr": "Quelles sont les principales fêtes religieuses en France ?",
+      "answer_hint": "Noël (25 décembre), Pâques (printemps), Ascension, Pentecôte, Toussaint (1er nov.), Assomption (15 août). Influence catholique historique. Jours fériés mais laïcité respectée.",
+      "translations": {
+        "en": { "text": "What are the main religious holidays in France?", "answer_hint": "Christmas (25 December), Easter (spring), Ascension, Pentecost, All Saints (1 November), Assumption (15 August). Historical Catholic influence. Public holidays but laïcité respected." },
+        "tr": { "text": "Fransa'daki başlıca dini bayramlar nelerdir?", "answer_hint": "Noel (25 Aralık), Paskalya (ilkbahar), Göğe Yükseliş, Hamsin Yortusu, Azizler Yortusu (1 Kasım), Meryem Ana'nın Göğe Çıkışı (15 Ağustos). Tarihi Katolik etkisi. Resmi tatiller ama laïcité'ye saygı duyulur." }
+      }
+    },
+    {
+      "id": 219,
+      "category": "culture",
+      "text_fr": "Quelles sont les fêtes laïques importantes ?",
+      "answer_hint": "Jour de l'an (1er janv.), fête du Travail (1er mai), Victoire 1945 (8 mai), fête nationale (14 juillet), Armistice 1918 (11 nov.). Toutes jours fériés.",
+      "translations": {
+        "en": { "text": "What are the important secular holidays?", "answer_hint": "New Year's Day (1 January), Labor Day (1 May), V-E Day (8 May), National Day (14 July), Armistice Day (11 November). All public holidays." },
+        "tr": { "text": "Önemli laik bayramlar nelerdir?", "answer_hint": "Yılbaşı (1 Ocak), İşçi Bayramı (1 Mayıs), Zafer Günü (8 Mayıs), Ulusal Bayram (14 Temmuz), Ateşkes Günü (11 Kasım). Tümü resmi tatil." }
+      }
+    },
+    {
+      "id": 220,
+      "category": "culture",
+      "text_fr": "Quels sont les sports les plus populaires en France ?",
+      "answer_hint": "Football (le plus populaire, Coupe du monde 1998 et 2018), rugby (XV de France, Coupe du monde 2023), cyclisme (Tour de France), tennis (Roland-Garros), handball, basket.",
+      "translations": {
+        "en": { "text": "What are the most popular sports in France?", "answer_hint": "Football (most popular, World Cup 1998 and 2018), rugby (XV de France, World Cup 2023), cycling (Tour de France), tennis (Roland-Garros), handball, basketball." },
+        "tr": { "text": "Fransa'da en popüler sporlar nelerdir?", "answer_hint": "Futbol (en popüler, 1998 ve 2018 Dünya Kupası), ragbi (XV de France, 2023 Dünya Kupası), bisiklet (Tour de France), tenis (Roland-Garros), hentbol, basketbol." }
+      }
+    },
+    {
+      "id": 221,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que le Tour de France ?",
+      "answer_hint": "Course cycliste annuelle créée en 1903 par Henri Desgrange. Trois semaines en juillet, ~3500 km à travers la France. Maillot jaune au leader. Mythe populaire.",
+      "translations": {
+        "en": { "text": "What is the Tour de France?", "answer_hint": "Annual cycling race created in 1903 by Henri Desgrange. Three weeks in July, ~3,500 km across France. Yellow jersey for the leader. Popular legend." },
+        "tr": { "text": "Tour de France nedir?", "answer_hint": "1903'te Henri Desgrange tarafından kurulan yıllık bisiklet yarışı. Temmuz ayında üç hafta, Fransa boyunca ~3500 km. Lidere sarı forma. Popüler bir efsane." }
+      }
+    },
+    {
+      "id": 222,
+      "category": "culture",
+      "text_fr": "Qui était Édith Piaf ?",
+      "answer_hint": "Chanteuse française (1915-1963), icône de la chanson populaire. Chansons célèbres : La Vie en rose, Non, je ne regrette rien, Hymne à l'amour, Milord.",
+      "translations": {
+        "en": { "text": "Who was Édith Piaf?", "answer_hint": "French singer (1915-1963), icon of popular song. Famous songs: La Vie en rose, Non, je ne regrette rien, Hymne à l'amour, Milord." },
+        "tr": { "text": "Édith Piaf kimdi?", "answer_hint": "Fransız şarkıcı (1915-1963), popüler şarkı simgesi. Ünlü şarkıları: La Vie en rose, Non, je ne regrette rien, Hymne à l'amour, Milord." }
+      }
+    },
+    {
+      "id": 223,
+      "category": "culture",
+      "text_fr": "Quels sont les acteurs et réalisateurs français célèbres ?",
+      "answer_hint": "Acteurs : Jean Gabin, Catherine Deneuve, Gérard Depardieu, Marion Cotillard, Vincent Cassel, Omar Sy. Réalisateurs : Truffaut, Godard, Jean-Pierre Jeunet (Amélie Poulain).",
+      "translations": {
+        "en": { "text": "Who are some famous French actors and directors?", "answer_hint": "Actors: Jean Gabin, Catherine Deneuve, Gérard Depardieu, Marion Cotillard, Vincent Cassel, Omar Sy. Directors: Truffaut, Godard, Jean-Pierre Jeunet (Amélie)." },
+        "tr": { "text": "Ünlü Fransız oyuncular ve yönetmenler kimlerdir?", "answer_hint": "Oyuncular: Jean Gabin, Catherine Deneuve, Gérard Depardieu, Marion Cotillard, Vincent Cassel, Omar Sy. Yönetmenler: Truffaut, Godard, Jean-Pierre Jeunet (Amélie)." }
+      }
+    },
+    {
+      "id": 224,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que le Festival de Cannes ?",
+      "answer_hint": "Festival international de cinéma créé en 1946, sur la Croisette à Cannes (Côte d'Azur). Prix suprême : la Palme d'or. Une référence mondiale.",
+      "translations": {
+        "en": { "text": "What is the Cannes Film Festival?", "answer_hint": "International film festival created in 1946, on the Croisette in Cannes (French Riviera). Top prize: the Palme d'Or. A global reference." },
+        "tr": { "text": "Cannes Film Festivali nedir?", "answer_hint": "1946'da kurulan, Cannes'daki Croisette'te (Fransız Rivierası) uluslararası film festivali. En büyük ödül: Palme d'Or. Küresel bir referans." }
+      }
+    },
+    {
+      "id": 225,
+      "category": "culture",
+      "text_fr": "Quels sont les artistes français célèbres dans la musique classique ?",
+      "answer_hint": "Hector Berlioz, Camille Saint-Saëns, Claude Debussy, Maurice Ravel (Boléro), Georges Bizet (Carmen), Erik Satie. Influence majeure sur la musique mondiale.",
+      "translations": {
+        "en": { "text": "Who are the famous French classical composers?", "answer_hint": "Hector Berlioz, Camille Saint-Saëns, Claude Debussy, Maurice Ravel (Boléro), Georges Bizet (Carmen), Erik Satie. Major influence on world music." },
+        "tr": { "text": "Ünlü Fransız klasik müzik bestecileri kimlerdir?", "answer_hint": "Hector Berlioz, Camille Saint-Saëns, Claude Debussy, Maurice Ravel (Boléro), Georges Bizet (Carmen), Erik Satie. Dünya müziğine büyük etki." }
+      }
+    },
+    {
+      "id": 226,
+      "category": "culture",
+      "text_fr": "Citez quelques philosophes français.",
+      "answer_hint": "Descartes (« Je pense, donc je suis »), Rousseau (Contrat social), Voltaire, Montesquieu, Sartre (existentialisme), Simone de Beauvoir, Camus, Foucault, Derrida.",
+      "translations": {
+        "en": { "text": "Name some French philosophers.", "answer_hint": "Descartes (\"I think, therefore I am\"), Rousseau (Social Contract), Voltaire, Montesquieu, Sartre (existentialism), Simone de Beauvoir, Camus, Foucault, Derrida." },
+        "tr": { "text": "Bazı Fransız filozofları sayın.", "answer_hint": "Descartes (\"Düşünüyorum, öyleyse varım\"), Rousseau (Toplum Sözleşmesi), Voltaire, Montesquieu, Sartre (varoluşçuluk), Simone de Beauvoir, Camus, Foucault, Derrida." }
+      }
+    },
+    {
+      "id": 227,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que l'Académie française ?",
+      "answer_hint": "Institution créée par Richelieu en 1635. Composée de 40 membres (« les Immortels »). Veille sur la langue française, publie le Dictionnaire.",
+      "translations": {
+        "en": { "text": "What is the Académie française?", "answer_hint": "Institution created by Richelieu in 1635. Composed of 40 members (\"the Immortals\"). Watches over the French language, publishes the Dictionary." },
+        "tr": { "text": "Académie française nedir?", "answer_hint": "1635'te Richelieu tarafından kurulan kurum. 40 üyeden oluşur (\"Ölümsüzler\"). Fransızca diline gözcülük eder, Sözlüğü yayınlar." }
+      }
+    },
+    {
+      "id": 228,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que la mode française ?",
+      "answer_hint": "Industrie majeure, Paris capitale mondiale du luxe. Maisons : Chanel, Dior, Louis Vuitton, Hermès, Yves Saint Laurent. Fashion Weeks à Paris (haute couture et prêt-à-porter).",
+      "translations": {
+        "en": { "text": "What is French fashion?", "answer_hint": "Major industry, Paris world capital of luxury. Houses: Chanel, Dior, Louis Vuitton, Hermès, Yves Saint Laurent. Paris Fashion Weeks (haute couture and ready-to-wear)." },
+        "tr": { "text": "Fransız modası nedir?", "answer_hint": "Önemli endüstri, Paris lüksün dünya başkenti. Markalar: Chanel, Dior, Louis Vuitton, Hermès, Yves Saint Laurent. Paris Moda Haftaları (haute couture ve hazır giyim)." }
+      }
+    },
+    {
+      "id": 229,
+      "category": "culture",
+      "text_fr": "Quelle est la place du français dans le monde ?",
+      "answer_hint": "5e langue la plus parlée au monde, ~321 millions de locuteurs (2022). Langue officielle dans 29 pays. L'une des 6 langues officielles de l'ONU.",
+      "translations": {
+        "en": { "text": "What is the place of French in the world?", "answer_hint": "5th most spoken language in the world, ~321 million speakers (2022). Official in 29 countries. One of the 6 official UN languages." },
+        "tr": { "text": "Fransızcanın dünyadaki yeri nedir?", "answer_hint": "Dünyada en çok konuşulan 5. dil, ~321 milyon konuşur (2022). 29 ülkede resmi dildir. BM'nin 6 resmi dilinden biri." }
+      }
+    },
+    {
+      "id": 230,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que Versailles ?",
+      "answer_hint": "Château construit par Louis XIV (XVIIe s.), résidence des rois de France jusqu'en 1789. Symbole de l'absolutisme. Galerie des Glaces, jardins de Le Nôtre. Patrimoine UNESCO.",
+      "translations": {
+        "en": { "text": "What is Versailles?", "answer_hint": "Castle built by Louis XIV (17th c.), royal residence until 1789. Symbol of absolutism. Hall of Mirrors, Le Nôtre gardens. UNESCO heritage." },
+        "tr": { "text": "Versailles nedir?", "answer_hint": "XIV. Louis tarafından inşa edilen şato (17. yy), 1789'a kadar kraliyet ikametgâhı. Mutlakiyetin simgesi. Aynalar Salonu, Le Nôtre bahçeleri. UNESCO mirası." }
+      }
+    },
+    {
+      "id": 231,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que Notre-Dame de Paris ?",
+      "answer_hint": "Cathédrale gothique sur l'île de la Cité, construite du XIIe au XIVe s. Incendiée le 15 avril 2019, restaurée et rouverte en décembre 2024. Roman de Hugo célèbre.",
+      "translations": {
+        "en": { "text": "What is Notre-Dame de Paris?", "answer_hint": "Gothic cathedral on the Île de la Cité, built from the 12th to 14th century. Burned on 15 April 2019, restored and reopened in December 2024. Famous Hugo novel." },
+        "tr": { "text": "Notre-Dame de Paris nedir?", "answer_hint": "Île de la Cité'deki Gotik katedral, 12-14. yüzyıllar arasında inşa edildi. 15 Nisan 2019'da yandı, restore edildi ve Aralık 2024'te yeniden açıldı. Ünlü Hugo romanı." }
+      }
+    },
+    {
+      "id": 232,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que la Sorbonne ?",
+      "answer_hint": "Université historique de Paris (fondée vers 1257 par Robert de Sorbon). Symbole de l'enseignement supérieur. Aujourd'hui plusieurs universités héritières (Sorbonne Université, Paris 1, etc.).",
+      "translations": {
+        "en": { "text": "What is the Sorbonne?", "answer_hint": "Historic university of Paris (founded c. 1257 by Robert de Sorbon). Symbol of higher education. Today several heir universities (Sorbonne Université, Paris 1, etc.)." },
+        "tr": { "text": "Sorbonne nedir?", "answer_hint": "Paris'in tarihi üniversitesi (yaklaşık 1257'de Robert de Sorbon tarafından kuruldu). Yüksek öğretimin simgesi. Bugün birçok varis üniversite (Sorbonne Université, Paris 1, vb.)." }
+      }
+    },
+    {
+      "id": 233,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que la baguette française ?",
+      "answer_hint": "Pain traditionnel emblématique. Inscrite au patrimoine immatériel UNESCO en novembre 2022. ~6 milliards consommées par an. Symbole de la culture quotidienne.",
+      "translations": {
+        "en": { "text": "What is the French baguette?", "answer_hint": "Iconic traditional bread. Listed on UNESCO intangible heritage in November 2022. ~6 billion eaten per year. Symbol of daily culture." },
+        "tr": { "text": "Fransız bageti nedir?", "answer_hint": "Simgesel geleneksel ekmek. Kasım 2022'de UNESCO somut olmayan mirasına alındı. Yılda ~6 milyar tüketilir. Günlük kültürün simgesi." }
+      }
+    },
+    {
+      "id": 234,
+      "category": "culture",
+      "text_fr": "Qui était Marie Curie ?",
+      "answer_hint": "Physicienne et chimiste française d'origine polonaise (1867-1934). Pionnière de la radioactivité. Deux prix Nobel (physique 1903, chimie 1911). Première femme au Panthéon (1995).",
+      "translations": {
+        "en": { "text": "Who was Marie Curie?", "answer_hint": "Polish-born French physicist and chemist (1867-1934). Pioneer of radioactivity. Two Nobel Prizes (physics 1903, chemistry 1911). First woman in the Pantheon (1995)." },
+        "tr": { "text": "Marie Curie kimdi?", "answer_hint": "Polonya doğumlu Fransız fizikçi ve kimyager (1867-1934). Radyoaktivitenin öncüsü. İki Nobel Ödülü (fizik 1903, kimya 1911). Panthéon'a giren ilk kadın (1995)." }
+      }
+    },
+    {
+      "id": 235,
+      "category": "culture",
+      "text_fr": "Qui était Louis Pasteur ?",
+      "answer_hint": "Chimiste et microbiologiste (1822-1895). Découvertes majeures : pasteurisation, vaccin contre la rage (1885), bases de la microbiologie. Institut Pasteur encore actif aujourd'hui.",
+      "translations": {
+        "en": { "text": "Who was Louis Pasteur?", "answer_hint": "Chemist and microbiologist (1822-1895). Major discoveries: pasteurization, rabies vaccine (1885), foundations of microbiology. Pasteur Institute still active today." },
+        "tr": { "text": "Louis Pasteur kimdi?", "answer_hint": "Kimyager ve mikrobiyolog (1822-1895). Önemli keşifler: pastörizasyon, kuduz aşısı (1885), mikrobiyolojinin temelleri. Pasteur Enstitüsü bugün hâlâ aktif." }
+      }
+    },
+    {
+      "id": 236,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que la Comédie-Française ?",
+      "answer_hint": "Plus ancienne troupe de théâtre toujours en activité au monde, fondée en 1680 par Louis XIV. « La Maison de Molière ». Salle Richelieu, Paris.",
+      "translations": {
+        "en": { "text": "What is the Comédie-Française?", "answer_hint": "Oldest still-active theater company in the world, founded in 1680 by Louis XIV. \"The House of Molière\". Salle Richelieu, Paris." },
+        "tr": { "text": "Comédie-Française nedir?", "answer_hint": "Dünyada hâlâ faaliyetteki en eski tiyatro topluluğu, 1680'de XIV. Louis tarafından kuruldu. \"Molière'in Evi\". Salle Richelieu, Paris." }
+      }
+    },
+    {
+      "id": 237,
+      "category": "culture",
+      "text_fr": "Quelles régions sont célèbres pour leur gastronomie ?",
+      "answer_hint": "Provence (huile d'olive, ratatouille), Bourgogne (vins, bœuf bourguignon), Alsace (choucroute), Bretagne (galettes, crêpes), Sud-Ouest (foie gras, cassoulet).",
+      "translations": {
+        "en": { "text": "Which regions are famous for their cuisine?", "answer_hint": "Provence (olive oil, ratatouille), Burgundy (wines, boeuf bourguignon), Alsace (choucroute), Brittany (galettes, crêpes), Southwest (foie gras, cassoulet)." },
+        "tr": { "text": "Hangi bölgeler mutfaklarıyla ünlüdür?", "answer_hint": "Provence (zeytinyağı, ratatouille), Burgundy (şaraplar, boeuf bourguignon), Alsace (choucroute), Bretagne (galette, krep), Güneybatı (foie gras, cassoulet)." }
+      }
+    },
+    {
+      "id": 238,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que les Jeux olympiques de Paris 2024 ?",
+      "answer_hint": "33e olympiade d'été (26 juillet - 11 août 2024). Cérémonie d'ouverture sur la Seine, inédite. Plus de 10 000 athlètes, 32 sports. Mascotte : la Phryge. Grand succès populaire.",
+      "translations": {
+        "en": { "text": "What were the Paris 2024 Olympic Games?", "answer_hint": "33rd Summer Olympiad (26 July - 11 August 2024). Opening ceremony on the Seine, unprecedented. Over 10,000 athletes, 32 sports. Mascot: Phryge. Major popular success." },
+        "tr": { "text": "Paris 2024 Olimpiyat Oyunları neydi?", "answer_hint": "33. Yaz Olimpiyatı (26 Temmuz - 11 Ağustos 2024). Seine üzerindeki açılış töreni, eşi görülmemiş. 10 000'den fazla sporcu, 32 spor dalı. Maskot: Phryge. Büyük halk başarısı." }
+      }
+    },
+    {
+      "id": 239,
+      "category": "culture",
+      "text_fr": "Quels sont les principaux festivals culturels en France ?",
+      "answer_hint": "Festival de Cannes (cinéma, mai), Festival d'Avignon (théâtre, juillet), Vieilles Charrues (musique, Carhaix), Festival international de la BD d'Angoulême, Festival du film d'Animation d'Annecy.",
+      "translations": {
+        "en": { "text": "What are the main cultural festivals in France?", "answer_hint": "Cannes Film Festival (May), Avignon Festival (theater, July), Vieilles Charrues (music, Carhaix), Angoulême International Comics Festival, Annecy Animation Film Festival." },
+        "tr": { "text": "Fransa'nın başlıca kültürel festivalleri hangileridir?", "answer_hint": "Cannes Film Festivali (Mayıs), Avignon Festivali (tiyatro, Temmuz), Vieilles Charrues (müzik, Carhaix), Angoulême Uluslararası Çizgi Roman Festivali, Annecy Animasyon Film Festivali." }
+      }
+    },
+    {
+      "id": 240,
+      "category": "culture",
+      "text_fr": "Qu'est-ce que le patrimoine UNESCO en France ?",
+      "answer_hint": "La France a 53 sites inscrits (un des pays les plus représentés). Exemples : Mont-Saint-Michel, châteaux de la Loire, Versailles, rives de la Seine à Paris, vignobles de Saint-Émilion.",
+      "translations": {
+        "en": { "text": "What is UNESCO heritage in France?", "answer_hint": "France has 53 listed sites (one of the most represented countries). Examples: Mont-Saint-Michel, Loire Valley castles, Versailles, Banks of the Seine in Paris, Saint-Émilion vineyards." },
+        "tr": { "text": "Fransa'daki UNESCO mirası nedir?", "answer_hint": "Fransa'nın 53 listelenmiş alanı var (en çok temsil edilen ülkelerden biri). Örnekler: Mont-Saint-Michel, Loire Vadisi şatoları, Versailles, Paris'te Seine kıyıları, Saint-Émilion bağları." }
+      }
+    }
+  ]
+}
