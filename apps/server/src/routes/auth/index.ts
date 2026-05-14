@@ -37,6 +37,9 @@ const updateProfileSchema = z.object({
   avatarUrl: z.string().url().nullable().optional(),
   preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
   email: z.string().email().optional(),
+  // Persisted exam target. Nullable so the client can unset (rare,
+  // but legal — a user might restart onboarding).
+  preferredExamType: z.enum(['csp', 'cr', 'nat']).nullable().optional(),
 });
 
 const forgotPasswordSchema = z.object({
@@ -336,6 +339,7 @@ function sanitizeUser(user: {
   displayName: string;
   avatarUrl: string | null;
   preferredLang: string;
+  preferredExamType?: string | null;
   emailVerified?: boolean;
   isPremium: boolean;
   createdAt: Date;
@@ -346,6 +350,7 @@ function sanitizeUser(user: {
     displayName: user.displayName,
     avatarUrl: user.avatarUrl,
     preferredLang: user.preferredLang,
+    preferredExamType: user.preferredExamType ?? null,
     emailVerified: user.emailVerified ?? false,
     isPremium: user.isPremium,
     createdAt: user.createdAt,
@@ -390,6 +395,7 @@ export default async function authRoutes(app: FastifyInstance) {
         displayName: users.displayName,
         avatarUrl: users.avatarUrl,
         preferredLang: users.preferredLang,
+        preferredExamType: users.preferredExamType,
         isPremium: users.isPremium,
         createdAt: users.createdAt,
       });
@@ -560,6 +566,7 @@ export default async function authRoutes(app: FastifyInstance) {
         displayName: true,
         avatarUrl: true,
         preferredLang: true,
+        preferredExamType: true,
         isPremium: true,
         premiumExpires: true,
         createdAt: true,
@@ -611,6 +618,7 @@ export default async function authRoutes(app: FastifyInstance) {
       displayName?: string;
       avatarUrl?: string | null;
       preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr';
+      preferredExamType?: 'csp' | 'cr' | 'nat' | null;
       email?: string;
       emailVerified?: boolean;
       updatedAt: Date;
@@ -620,6 +628,7 @@ export default async function authRoutes(app: FastifyInstance) {
     if (body.displayName !== undefined) updateData.displayName = body.displayName;
     if (body.avatarUrl !== undefined) updateData.avatarUrl = body.avatarUrl;
     if (body.preferredLang !== undefined) updateData.preferredLang = body.preferredLang;
+    if (body.preferredExamType !== undefined) updateData.preferredExamType = body.preferredExamType;
     if (emailChanged && newEmail) {
       updateData.email = newEmail;
       updateData.emailVerified = false;
@@ -635,6 +644,7 @@ export default async function authRoutes(app: FastifyInstance) {
         displayName: users.displayName,
         avatarUrl: users.avatarUrl,
         preferredLang: users.preferredLang,
+        preferredExamType: users.preferredExamType,
         emailVerified: users.emailVerified,
         isPremium: users.isPremium,
         createdAt: users.createdAt,

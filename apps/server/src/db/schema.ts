@@ -49,6 +49,11 @@ export const users = pgTable(
     displayName: varchar('display_name', { length: 100 }).notNull(),
     avatarUrl: text('avatar_url'),
     preferredLang: languageEnum('preferred_lang').notNull().default('fr'),
+    // Persisted exam target (CSP / CR / NAT). Nullable until the user
+    // completes onboarding. Replaces the device-scoped
+    // `civique_exam_type` cookie as the source of truth — the cookie
+    // is kept as a fallback for the pre-auth onboarding step only.
+    preferredExamType: varchar('preferred_exam_type', { length: 10 }),
     emailVerified: boolean('email_verified').notNull().default(false),
     isPremium: boolean('is_premium').notNull().default(false),
     premiumExpires: timestamp('premium_expires', { withTimezone: true }),
