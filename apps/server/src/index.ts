@@ -13,6 +13,7 @@ import statsRoutes from './routes/stats/index.js';
 import socialRoutes from './routes/social/index.js';
 import paymentRoutes from './routes/payments/index.js';
 import userRoutes from './routes/users/index.js';
+import publicRoutes from './routes/public/index.js';
 
 async function main() {
   const app = Fastify({
@@ -114,6 +115,8 @@ async function main() {
   await app.register(socialRoutes, { prefix: '/api/social' });
   await app.register(paymentRoutes, { prefix: '/api/payments' });
   await app.register(userRoutes, { prefix: '/api/users' });
+  // Public, no-auth endpoints — landing / methodology page signals.
+  await app.register(publicRoutes, { prefix: '/api/public' });
 
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));

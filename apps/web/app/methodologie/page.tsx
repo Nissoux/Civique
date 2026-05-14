@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/brand/Logo';
+import { env } from '@/lib/env';
 
 export const metadata = {
   title: 'Méthodologie — Civique',
@@ -7,7 +8,38 @@ export const metadata = {
     "Comment Civique prépare l'examen civique 2026 conformément à l'arrêté du 10 octobre 2025 : pool officiel du Ministère de l'Intérieur, distribution prescrite 11/6/11/8/4, mises en situation, et pédagogie sous-jacente.",
 };
 
-export default function MethodologiePage() {
+interface Coverage {
+  total: number;
+  official: number;
+  official_csp: number;
+  official_cr: number;
+  official_nat: number;
+  official_pct: number;
+}
+
+/**
+ * Live coverage stats — backs the "X% traçable au pool officiel" claim
+ * with a real number rather than a frozen quote. Fails open: if the API
+ * call fails (network blip, server down), we hide the live stats and
+ * fall back to a static description. The page still renders.
+ */
+async function fetchCoverage(): Promise<Coverage | null> {
+  try {
+    const res = await fetch(`${env.apiBaseUrl}/public/coverage`, {
+      // Refresh hourly — the underlying data changes only when we re-run
+      // the flagging script, which is a manual operation.
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as { data: Coverage };
+    return json.data;
+  } catch {
+    return null;
+  }
+}
+
+export default async function MethodologiePage() {
+  const coverage = await fetchCoverage();
   return (
     <main className="min-h-screen bg-bone">
       <header className="border-b border-aubergine/15">
@@ -150,12 +182,23 @@ export default function MethodologiePage() {
             .
           </p>
           <p className="mt-3">
-            Notre corpus de plus de <strong>600 questions</strong> est aligné
-            ligne par ligne sur ces listes officielles. Chaque question taggée{' '}
+            Notre corpus est aligné ligne par ligne sur ces listes officielles.
+            Chaque question taggée{' '}
             <code className="px-1.5 py-0.5 rounded bg-bone-deep text-aubergine text-[0.85em]">is_official</code>{' '}
             dans notre base est traçable à son entrée dans la liste publique du
-            Ministère.
+            Ministère — texte exact, sous-thème, et numéro d'ordre.
           </p>
+          {coverage ? (
+            <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Card label="Questions au total" value={coverage.total.toString()} />
+              <Card
+                label="Officielles"
+                value={`${coverage.official} (${coverage.official_pct} %)`}
+              />
+              <Card label="Pool CSP couvert" value={`${coverage.official_csp} / 191`} />
+              <Card label="Pool NAT couvert" value={`${coverage.official_nat} / 258`} />
+            </div>
+          ) : null}
           <p className="mt-3">
             Les <strong>mises en situation</strong> ne sont pas rendues publiques
             par le Ministère (volontairement, pour préserver la valeur du test).

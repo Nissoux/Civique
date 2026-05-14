@@ -172,6 +172,15 @@ export const questions = pgTable(
       { id: 'a' | 'b' | 'c' | 'd'; text: string }[]
     >(),
     correctChoice: choiceEnum('correct_choice').notNull(),
+    // Provenance flags — set by apps/server/scripts/flag-official-questions.mjs
+    // after cross-referencing with the Ministry of the Interior's published
+    // pools (formation-civique.interieur.gouv.fr for CSP/CR, data.gouv.fr
+    // dataset for NAT). See migration 0005 + the /methodologie page for the
+    // user-facing story.
+    isOfficial: boolean('is_official').notNull().default(false),
+    officialCspOrder: integer('official_csp_order'),
+    officialCrOrder: integer('official_cr_order'),
+    officialNatOrder: integer('official_nat_order'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
@@ -180,6 +189,7 @@ export const questions = pgTable(
     difficultyIdx: index('questions_difficulty_idx').on(table.difficulty),
     premiumIdx: index('questions_premium_idx').on(table.isPremium),
     typeIdx: index('questions_type_idx').on(table.type),
+    isOfficialIdx: index('questions_is_official_idx').on(table.isOfficial),
   }),
 );
 
