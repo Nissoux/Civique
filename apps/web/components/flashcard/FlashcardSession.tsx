@@ -24,7 +24,15 @@ function getCardTranslation(
   lang: Language,
 ): { front: string; back: string } | undefined {
   if (lang === 'fr') return undefined;
-  if (lang === 'ar' || lang === 'es' || lang === 'fa' || lang === 'hi' || lang === 'pt') {
+  if (
+    lang === 'ar' ||
+    lang === 'en' ||
+    lang === 'es' ||
+    lang === 'fa' ||
+    lang === 'hi' ||
+    lang === 'pt' ||
+    lang === 'tr'
+  ) {
     return card.translations[lang];
   }
   return undefined;
@@ -60,16 +68,13 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
   const total = deck.length;
   const card = deck[index];
 
-  // The static flashcard set only carries ar/es/fa/hi/pt translations.
-  // Any other non-FR language (today: en, tr) falls back to FR — show a
-  // single discreet notice in the header rather than per-card.
+  // Dynamic check: do we have translation data for the active lang on any
+  // card in this deck? Lets us extend the supported language set (e.g. add
+  // en/tr later) without re-touching this component. Notice auto-hides as
+  // soon as the data file is populated.
   const hasTranslationsForLang =
     currentLang === 'fr' ||
-    currentLang === 'ar' ||
-    currentLang === 'es' ||
-    currentLang === 'fa' ||
-    currentLang === 'hi' ||
-    currentLang === 'pt';
+    cards.some((c) => getCardTranslation(c, currentLang) !== undefined);
 
   function handleAnswer(status: 'known' | 'unknown') {
     if (!card) return;

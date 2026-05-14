@@ -5,10 +5,12 @@ export interface Flashcard {
   back: string;
   translations: {
     ar?: { front: string; back: string };
+    en?: { front: string; back: string };
     es?: { front: string; back: string };
     fa?: { front: string; back: string };
     hi?: { front: string; back: string };
     pt?: { front: string; back: string };
+    tr?: { front: string; back: string };
   };
 }
 
@@ -27,6 +29,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شعار جمهوری فرانسه چیست؟", back: "آزادی، برابری، برادری." },
       hi: { front: "फ्रांसीसी गणराज्य का आदर्श वाक्य क्या है?", back: "स्वतंत्रता, समानता, बंधुत्व।" },
       pt: { front: "Qual é o lema da República Francesa?", back: "Liberdade, Igualdade, Fraternidade." },
+      en: { front: 'What is the motto of the French Republic?', back: 'Liberty, Equality, Fraternity.' },
+      tr: { front: 'Fransız Cumhuriyeti\'nin sloganı nedir?', back: 'Özgürlük, Eşitlik, Kardeşlik.' },
     },
   },
   {
@@ -40,6 +44,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "رنگ‌های پرچم فرانسه چیست؟", back: "آبی، سفید، قرمز، در سه نوار عمودی." },
       hi: { front: "फ्रांसीसी झंडे के रंग क्या हैं?", back: "नीला, सफ़ेद, लाल, तीन खड़ी पट्टियों में।" },
       pt: { front: "Quais são as cores da bandeira francesa?", back: "Azul, branco, vermelho, dispostas em três faixas verticais." },
+      en: { front: 'What are the colors of the French flag?', back: 'Blue, white, red, arranged in three vertical stripes.' },
+      tr: { front: 'Fransız bayrağının renkleri nelerdir?', back: 'Mavi, beyaz, kırmızı; üç dikey şerit halinde.' },
     },
   },
   {
@@ -53,6 +59,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "سرود ملی فرانسه چیست؟", back: "لا مارسیز، ساخته روژه دو لیل در ۱۷۹۲." },
       hi: { front: "फ्रांस का राष्ट्रगान क्या है?", back: "ला मार्सिलेज़, 1792 में रूजे दो लील द्वारा रचित।" },
       pt: { front: "Qual é o hino nacional francês?", back: "A Marselhesa, composta por Rouget de Lisle em 1792." },
+      en: { front: 'What is the French national anthem?', back: 'La Marseillaise, composed by Rouget de Lisle in 1792.' },
+      tr: { front: 'Fransa\'nın ulusal marşı nedir?', back: 'La Marseillaise, 1792\'de Rouget de Lisle tarafından bestelendi.' },
     },
   },
   {
@@ -66,6 +74,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "ماریان نماد چیست؟", back: "نماد جمهوری فرانسه و ارزش‌های آن." },
       hi: { front: "मारियान क्या दर्शाती है?", back: "फ्रांसीसी गणराज्य और उसके मूल्यों का प्रतीक।" },
       pt: { front: "O que representa Marianne?", back: "A alegoria da República Francesa e seus valores." },
+      en: { front: 'What does Marianne represent?', back: 'The allegory of the French Republic and its values.' },
+      tr: { front: 'Marianne neyi temsil eder?', back: 'Fransız Cumhuriyeti\'nin ve değerlerinin alegorisi.' },
     },
   },
   {
@@ -79,6 +89,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "لائیسیته (جدایی دین از دولت) چیست؟", back: "جدایی کلیسا از دولت، با تضمین آزادی وجدان." },
       hi: { front: "लाइसिते (धर्मनिरपेक्षता) क्या है?", back: "चर्च और राज्य का पृथक्करण, अंतरात्मा की स्वतंत्रता की गारंटी।" },
       pt: { front: "O que é a laicidade?", back: "A separação entre Igreja e Estado, garantindo a liberdade de consciência." },
+      en: { front: 'What is laïcité (French secularism)?', back: 'The separation of Churches and the State, guaranteeing freedom of conscience.' },
+      tr: { front: 'Laiklik (laïcité) nedir?', back: 'Kilise ile Devlet\'in ayrılması; vicdan özgürlüğünü güvence altına alır.' },
     },
   },
   {
@@ -92,6 +104,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام قانون لائیسیته را در فرانسه برقرار کرد؟", back: "قانون ۹ دسامبر ۱۹۰۵ درباره جدایی کلیسا از دولت." },
       hi: { front: "फ्रांस में धर्मनिरपेक्षता कौन से कानून ने स्थापित की?", back: "9 दिसंबर 1905 का कानून, चर्च और राज्य के पृथक्करण से संबंधित।" },
       pt: { front: "Qual lei instituiu a laicidade na França?", back: "A lei de 9 de dezembro de 1905 sobre a separação entre Igreja e Estado." },
+      en: { front: 'Which law established laïcité in France?', back: 'The law of 9 December 1905 on the separation of Churches and the State.' },
+      tr: { front: 'Fransa\'da laikliği hangi yasa kurdu?', back: 'Kilise ile Devlet\'in ayrılmasına ilişkin 9 Aralık 1905 yasası.' },
     },
   },
   {
@@ -105,6 +119,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام حیوان نماد غیررسمی فرانسه است؟", back: "خروس گُلی." },
       hi: { front: "कौन सा जानवर फ्रांस का अनौपचारिक प्रतीक है?", back: "गॉलिश मुर्गा।" },
       pt: { front: "Qual animal é um símbolo não oficial da França?", back: "O galo gaulês." },
+      en: { front: 'Which animal is an unofficial symbol of France?', back: 'The Gallic rooster.' },
+      tr: { front: 'Fransa\'nın gayri resmi sembolü olan hayvan nedir?', back: 'Galya horozu.' },
     },
   },
   {
@@ -118,6 +134,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "«آزادی» در شعار به چه معناست؟", back: "حق انجام هر کاری که به دیگران آسیب نرساند." },
       hi: { front: "आदर्श वाक्य में «स्वतंत्रता» का क्या अर्थ है?", back: "वह सब करने का अधिकार जो दूसरों को हानि न पहुँचाए।" },
       pt: { front: "O que significa «Liberdade» no lema?", back: "O direito de fazer tudo o que não prejudique os outros." },
+      en: { front: 'What does «Liberty» mean in the motto?', back: 'The right to do anything that does not harm others.' },
+      tr: { front: 'Slogandaki «Özgürlük» ne anlama gelir?', back: 'Başkalarına zarar vermeyen her şeyi yapma hakkı.' },
     },
   },
   {
@@ -131,6 +149,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "«برابری» در شعار به چه معناست؟", back: "همه شهروندان حقوق و وظایف یکسان در برابر قانون دارند." },
       hi: { front: "आदर्श वाक्य में «समानता» का क्या अर्थ है?", back: "सभी नागरिकों के कानून के समक्ष समान अधिकार और कर्तव्य हैं।" },
       pt: { front: "O que significa «Igualdade» no lema?", back: "Todos os cidadãos têm os mesmos direitos e deveres perante a lei." },
+      en: { front: 'What does «Equality» mean in the motto?', back: 'All citizens have the same rights and duties before the law.' },
+      tr: { front: 'Slogandaki «Eşitlik» ne anlama gelir?', back: 'Tüm yurttaşların yasa önünde aynı hak ve görevlere sahip olması.' },
     },
   },
   {
@@ -144,6 +164,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "«برادری» در شعار به چه معناست؟", back: "همبستگی میان شهروندان و وظیفه یاری متقابل." },
       hi: { front: "आदर्श वाक्य में «बंधुत्व» का क्या अर्थ है?", back: "नागरिकों के बीच एकजुटता और पारस्परिक सहायता का कर्तव्य।" },
       pt: { front: "O que significa «Fraternidade» no lema?", back: "A solidariedade entre os cidadãos e o dever de ajuda mútua." },
+      en: { front: 'What does «Fraternity» mean in the motto?', back: 'Solidarity among citizens and the duty of mutual aid.' },
+      tr: { front: 'Slogandaki «Kardeşlik» ne anlama gelir?', back: 'Yurttaşlar arasındaki dayanışma ve karşılıklı yardım görevi.' },
     },
   },
   {
@@ -157,6 +179,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "روز ملی فرانسه چه روزی است؟", back: "۱۴ ژوئیه، یادبود سقوط باستیل (۱۷۸۹) و جشن فدراسیون (۱۷۹۰)." },
       hi: { front: "फ्रांस का राष्ट्रीय दिवस कौन सा है?", back: "14 जुलाई, बास्तील के पतन (1789) और संघ उत्सव (1790) की स्मृति में।" },
       pt: { front: "Qual é a festa nacional francesa?", back: "14 de julho, comemorando a tomada da Bastilha (1789) e a Festa da Federação (1790)." },
+      en: { front: 'What is the French national holiday?', back: '14 July, commemorating the storming of the Bastille (1789) and the Fête de la Fédération (1790).' },
+      tr: { front: 'Fransa\'nın ulusal bayramı nedir?', back: '14 Temmuz; Bastille\'in alınışını (1789) ve Federasyon Bayramı\'nı (1790) anar.' },
     },
   },
   {
@@ -170,6 +194,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شعار کجا نوشته شده است؟", back: "روی ساختمان‌های عمومی (شهرداری‌ها، مدارس، دادگاه‌ها) و سکه‌ها." },
       hi: { front: "आदर्श वाक्य कहाँ अंकित है?", back: "सार्वजनिक भवनों (नगर भवन, स्कूल, अदालतें) और सिक्कों पर।" },
       pt: { front: "Onde o lema está inscrito?", back: "Nos edifícios públicos (prefeituras, escolas, tribunais) e nas moedas." },
+      en: { front: 'Where is the motto inscribed?', back: 'On public buildings (town halls, schools, courts) and on coins.' },
+      tr: { front: 'Slogan nerede yazılıdır?', back: 'Kamu binalarında (belediyeler, okullar, mahkemeler) ve madeni paralarda.' },
     },
   },
   {
@@ -183,6 +209,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا فرانسه یک جمهوری لائیک است؟", back: "بله، اصل اول قانون اساسی تأکید می‌کند فرانسه جمهوری لائیک است." },
       hi: { front: "क्या फ्रांस एक धर्मनिरपेक्ष गणराज्य है?", back: "हाँ, संविधान का अनुच्छेद 1 पुष्टि करता है कि फ्रांस एक धर्मनिरपेक्ष गणराज्य है।" },
       pt: { front: "A França é uma república laica?", back: "Sim, o artigo 1.º da Constituição afirma que a França é uma República laica." },
+      en: { front: 'Is France a secular republic?', back: 'Yes, Article 1 of the Constitution states that France is a secular Republic.' },
+      tr: { front: 'Fransa laik bir cumhuriyet midir?', back: 'Evet, Anayasa\'nın 1. maddesi Fransa\'nın laik bir Cumhuriyet olduğunu belirtir.' },
     },
   },
   {
@@ -196,6 +224,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مُهر جمهوری چیست؟", back: "ماریان نشسته با دسته تبرهای لیکتور را نشان می‌دهد." },
       hi: { front: "गणराज्य की मुहर क्या है?", back: "यह बैठी हुई मारियान को लिक्टर का गट्ठा पकड़े दिखाती है।" },
       pt: { front: "Qual é o selo da República?", back: "Representa Marianne sentada segurando um feixe de lictor." },
+      en: { front: 'What is the seal of the Republic?', back: 'It depicts Marianne seated, holding a lictor\'s fasces.' },
+      tr: { front: 'Cumhuriyetin mührü nedir?', back: 'Oturmuş Marianne\'i, elinde liktor demeti tutarken gösterir.' },
     },
   },
   {
@@ -209,6 +239,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "زبان رسمی جمهوری کدام است؟", back: "فرانسوی (اصل ۲ قانون اساسی)." },
       hi: { front: "गणराज्य की आधिकारिक भाषा कौन सी है?", back: "फ्रेंच (संविधान का अनुच्छेद 2)।" },
       pt: { front: "Qual é a língua oficial da República?", back: "O francês (artigo 2 da Constituição)." },
+      en: { front: 'What is the official language of the Republic?', back: 'French (Article 2 of the Constitution).' },
+      tr: { front: 'Cumhuriyetin resmi dili nedir?', back: 'Fransızca (Anayasa\'nın 2. maddesi).' },
     },
   },
   {
@@ -222,6 +254,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "لائیسیته چه چیزی را در خدمات عمومی ممنوع می‌کند؟", back: "حمل نشانه‌های مذهبی آشکار توسط کارکنان دولت و دانش‌آموزان مدارس دولتی." },
       hi: { front: "सार्वजनिक सेवाओं में धर्मनिरपेक्षता क्या प्रतिबंधित करती है?", back: "सरकारी कर्मचारियों और सार्वजनिक स्कूलों के छात्रों द्वारा प्रत्यक्ष धार्मिक चिह्न पहनना।" },
       pt: { front: "O que a laicidade proíbe nos serviços públicos?", back: "O uso de sinais religiosos ostensivos por funcionários públicos e alunos nas escolas públicas." },
+      en: { front: 'What does laïcité prohibit in public services?', back: 'The wearing of conspicuous religious symbols by public officials and by pupils in state schools.' },
+      tr: { front: 'Laiklik, kamu hizmetlerinde neyi yasaklar?', back: 'Kamu görevlilerinin ve devlet okulu öğrencilerinin belirgin dini simgeler taşımasını.' },
     },
   },
   {
@@ -235,6 +269,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا لائیسیته انجام مناسک دینی را ممنوع می‌کند؟", back: "نه، آزادی باور داشتن یا نداشتن را تضمین می‌کند." },
       hi: { front: "क्या धर्मनिरपेक्षता धर्म पालन पर रोक लगाती है?", back: "नहीं, यह विश्वास करने या न करने की स्वतंत्रता की गारंटी देती है।" },
       pt: { front: "A laicidade proíbe praticar sua religião?", back: "Não, ela garante a liberdade de crer ou de não crer." },
+      en: { front: 'Does laïcité forbid practicing one\'s religion?', back: 'No, it guarantees the freedom to believe or not to believe.' },
+      tr: { front: 'Laiklik dini inancı uygulamayı yasaklar mı?', back: 'Hayır, inanma veya inanmama özgürlüğünü güvence altına alır.' },
     },
   },
   {
@@ -248,6 +284,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "درخت نماد جمهوری کدام است؟", back: "درخت آزادی، معمولاً بلوط یا چنار." },
       hi: { front: "गणराज्य का प्रतीक वृक्ष कौन सा है?", back: "स्वतंत्रता का वृक्ष, आमतौर पर बलूत या चिनार।" },
       pt: { front: "Qual é a árvore símbolo da República?", back: "A árvore da liberdade, geralmente um carvalho ou um plátano." },
+      en: { front: 'What is the tree symbol of the Republic?', back: 'The tree of liberty, often an oak or a plane tree.' },
+      tr: { front: 'Cumhuriyetin sembolü olan ağaç nedir?', back: 'Özgürlük ağacı; genellikle meşe veya çınar.' },
     },
   },
   {
@@ -261,6 +299,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کلاه فریگی ماریان نماد چیست؟", back: "آزادی، میراث روم باستان که به بردگان آزادشده داده می‌شد." },
       hi: { front: "मारियान की फ्रिजियन टोपी किसका प्रतीक है?", back: "स्वतंत्रता, प्राचीन रोम से विरासत जहाँ यह मुक्त दासों को दी जाती थी।" },
       pt: { front: "O que simboliza o barrete frígio usado por Marianne?", back: "A liberdade, herdado da Antiguidade romana onde era dado aos escravos libertos." },
+      en: { front: 'What does the Phrygian cap worn by Marianne symbolize?', back: 'Liberty, inherited from Roman antiquity, when it was given to freed slaves.' },
+      tr: { front: 'Marianne\'in giydiği Frigya başlığı neyi simgeler?', back: 'Özgürlüğü; Roma çağından miras, azat edilen kölelere verilirdi.' },
     },
   },
   {
@@ -274,6 +314,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اصل تجزیه‌ناپذیری جمهوری چیست؟", back: "قانون به‌طور یکسان در تمام سرزمین اعمال می‌شود؛ حاکمیت واحد است." },
       hi: { front: "गणराज्य की अविभाज्यता का सिद्धांत क्या है?", back: "कानून पूरे क्षेत्र में एक समान लागू होता है; संप्रभुता एक है।" },
       pt: { front: "O que é o princípio da indivisibilidade da República?", back: "A lei se aplica de forma uniforme em todo o território; a soberania é una." },
+      en: { front: 'What is the principle of indivisibility of the Republic?', back: 'The law applies uniformly across the entire territory; sovereignty is one.' },
+      tr: { front: 'Cumhuriyetin bölünmezlik ilkesi nedir?', back: 'Yasa tüm ülke topraklarında aynı şekilde uygulanır; egemenlik tektir.' },
     },
   },
   {
@@ -287,6 +329,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا جمهوری فرانسه اجتماعی است؟", back: "بله، اصل اول قانون اساسی تأکید می‌کند فرانسه جمهوری اجتماعی است." },
       hi: { front: "क्या फ्रांसीसी गणराज्य सामाजिक है?", back: "हाँ, संविधान का अनुच्छेद 1 पुष्टि करता है कि फ्रांस एक सामाजिक गणराज्य है।" },
       pt: { front: "A República Francesa é social?", back: "Sim, o artigo 1.º da Constituição afirma que a França é uma República social." },
+      en: { front: 'Is the French Republic social?', back: 'Yes, Article 1 of the Constitution states that France is a social Republic.' },
+      tr: { front: 'Fransız Cumhuriyeti sosyal midir?', back: 'Evet, Anayasa\'nın 1. maddesi Fransa\'nın sosyal bir Cumhuriyet olduğunu belirtir.' },
     },
   },
   {
@@ -300,6 +344,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اصل برابری چه چیزی را تضمین می‌کند؟", back: "برابری همه شهروندان در برابر قانون، بدون تبعیض نژادی، قومی یا مذهبی." },
       hi: { front: "समानता का सिद्धांत क्या गारंटी देता है?", back: "सभी नागरिकों की कानून के समक्ष समानता, मूल, नस्ल या धर्म के भेदभाव के बिना।" },
       pt: { front: "O que garante o princípio da igualdade?", back: "A igualdade de todos os cidadãos perante a lei, sem distinção de origem, raça ou religião." },
+      en: { front: 'What does the principle of equality guarantee?', back: 'Equality of all citizens before the law, without distinction of origin, race or religion.' },
+      tr: { front: 'Eşitlik ilkesi neyi güvence altına alır?', back: 'Tüm yurttaşların köken, ırk veya din ayrımı gözetilmeksizin yasa önünde eşitliğini.' },
     },
   },
   {
@@ -313,6 +359,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق رأی همگانی چیست؟", back: "حق رأی برای همه شهروندان بالغ، بدون شرط ثروت یا جنسیت." },
       hi: { front: "सार्वभौमिक मताधिकार क्या है?", back: "सभी वयस्क नागरिकों को दिया गया मतदान का अधिकार, धन या लिंग की शर्त के बिना।" },
       pt: { front: "O que é o sufrágio universal?", back: "O direito de voto concedido a todos os cidadãos maiores de idade, sem condição de riqueza ou sexo." },
+      en: { front: 'What is universal suffrage?', back: 'The right to vote granted to all adult citizens, regardless of wealth or sex.' },
+      tr: { front: 'Genel oy hakkı nedir?', back: 'Tüm yetişkin yurttaşlara, servet veya cinsiyet ayrımı olmaksızın tanınan oy hakkı.' },
     },
   },
   {
@@ -326,6 +374,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "زنان از چه زمانی در فرانسه رأی می‌دهند؟", back: "از ۱۹۴۴ (فرمان ۲۱ آوریل ۱۹۴۴)، اولین رأی‌گیری در ۱۹۴۵." },
       hi: { front: "फ्रांस में महिलाएँ कब से मतदान करती हैं?", back: "1944 से (21 अप्रैल 1944 का अध्यादेश), पहला मतदान 1945 में।" },
       pt: { front: "Desde quando as mulheres votam na França?", back: "Desde 1944 (decreto de 21 de abril de 1944), primeira votação em 1945." },
+      en: { front: 'Since when have women been able to vote in France?', back: 'Since 1944 (ordinance of 21 April 1944), first vote in 1945.' },
+      tr: { front: 'Fransa\'da kadınlar ne zamandan beri oy kullanıyor?', back: '1944\'ten beri (21 Nisan 1944 kararnamesi); ilk oy 1945\'te.' },
     },
   },
   {
@@ -339,6 +389,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "«جمهوری دموکراتیک» به چه معناست؟", back: "قدرت متعلق به مردم است که آن را از طریق رأی و نمایندگانشان اعمال می‌کنند." },
       hi: { front: "«लोकतांत्रिक गणराज्य» का क्या अर्थ है?", back: "सत्ता जनता की है, जो इसे मतदान और अपने प्रतिनिधियों के माध्यम से प्रयोग करती है।" },
       pt: { front: "O que significa «República democrática»?", back: "O poder pertence ao povo, que o exerce pelo voto e por seus representantes." },
+      en: { front: 'What does «democratic Republic» mean?', back: 'Power belongs to the people, who exercise it through voting and their representatives.' },
+      tr: { front: '«Demokratik Cumhuriyet» ne anlama gelir?', back: 'Egemenlik halka aittir; halk bunu oylama ve temsilcileri aracılığıyla kullanır.' },
     },
   },
   {
@@ -352,6 +404,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شکل حکومت فرانسه چیست؟", back: "جمهوری تجزیه‌ناپذیر، لائیک، دموکراتیک و اجتماعی (اصل اول قانون اساسی)." },
       hi: { front: "फ्रांसीसी राज्य का स्वरूप क्या है?", back: "एक अविभाज्य, धर्मनिरपेक्ष, लोकतांत्रिक और सामाजिक गणराज्य (संविधान का अनुच्छेद 1)।" },
       pt: { front: "Qual é a forma do Estado francês?", back: "Uma República indivisível, laica, democrática e social (artigo 1.º da Constituição)." },
+      en: { front: 'What is the form of the French State?', back: 'An indivisible, secular, democratic and social Republic (Article 1 of the Constitution).' },
+      tr: { front: 'Fransız Devleti\'nin biçimi nedir?', back: 'Bölünmez, laik, demokratik ve sosyal bir Cumhuriyet (Anayasa\'nın 1. maddesi).' },
     },
   },
   {
@@ -365,6 +419,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام متن بنیادین حقوق طبیعی را اعلام می‌کند؟", back: "اعلامیه حقوق بشر و شهروند، ۲۶ اوت ۱۷۸۹." },
       hi: { front: "कौन सा संस्थापक पाठ प्राकृतिक अधिकारों की घोषणा करता है?", back: "26 अगस्त 1789 की मानव और नागरिक अधिकारों की घोषणा।" },
       pt: { front: "Qual texto fundador proclama os direitos naturais?", back: "A Declaração dos Direitos do Homem e do Cidadão de 26 de agosto de 1789." },
+      en: { front: 'Which founding text proclaims natural rights?', back: 'The Declaration of the Rights of Man and of the Citizen of 26 August 1789.' },
+      tr: { front: 'Doğal hakları ilan eden kurucu metin hangisidir?', back: '26 Ağustos 1789 tarihli İnsan ve Yurttaş Hakları Bildirgesi.' },
     },
   },
   {
@@ -378,6 +434,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اصل حاکمیت ملی چیست؟", back: "حاکمیت متعلق به مردم است که از طریق نمایندگان یا همه‌پرسی اعمال می‌شود." },
       hi: { front: "राष्ट्रीय संप्रभुता का सिद्धांत क्या है?", back: "संप्रभुता जनता की है, जो इसे अपने प्रतिनिधियों या जनमत संग्रह द्वारा प्रयोग करती है।" },
       pt: { front: "Qual é o princípio da soberania nacional?", back: "A soberania pertence ao povo, que a exerce por seus representantes ou por referendo." },
+      en: { front: 'What is the principle of national sovereignty?', back: 'Sovereignty belongs to the people, who exercise it through their representatives or by referendum.' },
+      tr: { front: 'Ulusal egemenlik ilkesi nedir?', back: 'Egemenlik halka aittir; halk bunu temsilcileri veya referandum yoluyla kullanır.' },
     },
   },
   {
@@ -391,6 +449,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی لا مارسیز را ساخت؟", back: "کلود ژوزف روژه دو لیل، در ۱۷۹۲ در استراسبورگ." },
       hi: { front: "ला मार्सिलेज़ किसने रचा?", back: "क्लाउड जोसेफ रूजे दो लील, 1792 में स्ट्रासबर्ग में।" },
       pt: { front: "Quem compôs A Marselhesa?", back: "Claude Joseph Rouget de Lisle, em 1792 em Estrasburgo." },
+      en: { front: 'Who composed La Marseillaise?', back: 'Claude Joseph Rouget de Lisle, in 1792 in Strasbourg.' },
+      tr: { front: 'La Marseillaise\'i kim besteledi?', back: 'Claude Joseph Rouget de Lisle, 1792\'de Strazburg\'da.' },
     },
   },
   {
@@ -404,6 +464,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "دسته تبرهای لیکتور نماد چیست؟", back: "اتحاد و قدرت جمهوری، نمادی به ارث رسیده از روم باستان." },
       hi: { front: "लिक्टर का गट्ठा क्या दर्शाता है?", back: "गणराज्य की एकता और शक्ति, प्राचीन रोम से विरासत में मिला प्रतीक।" },
       pt: { front: "O que representa o feixe de lictor?", back: "A unidade e a força da República, símbolo herdado da Roma antiga." },
+      en: { front: 'What does the lictor\'s fasces represent?', back: 'The unity and strength of the Republic, a symbol inherited from ancient Rome.' },
+      tr: { front: 'Liktor demeti neyi temsil eder?', back: 'Cumhuriyetin birliğini ve gücünü; Antik Roma\'dan miras bir simge.' },
     },
   },
   {
@@ -417,6 +479,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اصل تکثرگرایی سیاسی چیست؟", back: "چندین حزب سیاسی می‌توانند وجود داشته و آزادانه در انتخابات رقابت کنند." },
       hi: { front: "राजनीतिक बहुलवाद का सिद्धांत क्या है?", back: "कई राजनीतिक दल अस्तित्व में रह सकते हैं और चुनावों में स्वतंत्र रूप से प्रतिस्पर्धा कर सकते हैं।" },
       pt: { front: "Qual é o princípio do pluralismo político?", back: "Vários partidos políticos podem existir e concorrer livremente nas eleições." },
+      en: { front: 'What is the principle of political pluralism?', back: 'Several political parties may exist and compete freely in elections.' },
+      tr: { front: 'Siyasi çoğulculuk ilkesi nedir?', back: 'Birden fazla siyasi parti var olabilir ve seçimlerde özgürce yarışabilir.' },
     },
   },
   {
@@ -430,6 +494,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "جمهوری فرانسه حامل چه ارزش‌هایی است؟", back: "آزادی، برابری، برادری، لائیسیته، دموکراسی، همبستگی، احترام به حقوق بشر." },
       hi: { front: "फ्रांसीसी गणराज्य कौन से मूल्य धारण करता है?", back: "स्वतंत्रता, समानता, बंधुत्व, धर्मनिरपेक्षता, लोकतंत्र, एकजुटता, मानवाधिकारों का सम्मान।" },
       pt: { front: "Quais valores a República Francesa defende?", back: "Liberdade, Igualdade, Fraternidade, laicidade, democracia, solidariedade, respeito aos direitos humanos." },
+      en: { front: 'What values does the French Republic uphold?', back: 'Liberty, Equality, Fraternity, secularism, democracy, solidarity, respect for human rights.' },
+      tr: { front: 'Fransız Cumhuriyeti hangi değerleri taşır?', back: 'Özgürlük, Eşitlik, Kardeşlik, laiklik, demokrasi, dayanışma, insan haklarına saygı.' },
     },
   },
   {
@@ -443,6 +509,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چرا پرچم آبی-سفید-قرمز است؟", back: "آبی و قرمز رنگ‌های پاریس و سفید رنگ پادشاه است، نماد اتحاد." },
       hi: { front: "झंडा नीला-सफ़ेद-लाल क्यों है?", back: "नीला और लाल पेरिस के रंग हैं, सफ़ेद राजा का रंग है, जो एकता का प्रतीक है।" },
       pt: { front: "Por que a bandeira azul-branco-vermelho?", back: "O azul e o vermelho são as cores de Paris, o branco a cor do rei, simbolizando a união." },
+      en: { front: 'Why is the flag blue-white-red?', back: 'Blue and red are the colors of Paris, white the color of the king, symbolizing union.' },
+      tr: { front: 'Bayrak neden mavi-beyaz-kırmızıdır?', back: 'Mavi ve kırmızı Paris\'in renkleri, beyaz ise kralın rengidir; birliği simgeler.' },
     },
   },
   {
@@ -456,6 +524,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا فرانسه جوامع را به رسمیت می‌شناسد یا فقط افراد را؟", back: "جمهوری فقط شهروندان فردی را به رسمیت می‌شناسد، بدون تمایز اجتماعی." },
       hi: { front: "क्या फ्रांस समुदायों को मान्यता देता है या केवल व्यक्तियों को?", back: "गणराज्य केवल व्यक्ति नागरिकों को मान्यता देता है, बिना किसी सामुदायिक भेद के।" },
       pt: { front: "A França reconhece comunidades ou apenas indivíduos?", back: "A República reconhece apenas indivíduos cidadãos, sem distinção de comunidade." },
+      en: { front: 'Does France recognize communities or only individuals?', back: 'The Republic recognizes only individual citizens, with no community distinction.' },
+      tr: { front: 'Fransa toplulukları mı yoksa yalnızca bireyleri mi tanır?', back: 'Cumhuriyet yalnızca birey yurttaşları tanır; topluluk ayrımı yapmaz.' },
     },
   },
   {
@@ -469,6 +539,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام اصل هرگونه تبعیض را ممنوع می‌کند؟", back: "اصل برابری در برابر قانون (اصل اول قانون اساسی)." },
       hi: { front: "कौन सा सिद्धांत सभी भेदभाव को प्रतिबंधित करता है?", back: "कानून के समक्ष समानता का सिद्धांत (संविधान का अनुच्छेद 1)।" },
       pt: { front: "Qual princípio proíbe toda discriminação?", back: "O princípio da igualdade perante a lei (artigo 1.º da Constituição)." },
+      en: { front: 'Which principle prohibits all discrimination?', back: 'The principle of equality before the law (Article 1 of the Constitution).' },
+      tr: { front: 'Her türlü ayrımcılığı yasaklayan ilke nedir?', back: 'Yasa önünde eşitlik ilkesi (Anayasa\'nın 1. maddesi).' },
     },
   },
 
@@ -486,6 +558,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "رئیس کشور فرانسه کیست؟", back: "رئیس‌جمهور." },
       hi: { front: "फ्रांस में राज्य प्रमुख कौन है?", back: "गणराज्य के राष्ट्रपति।" },
       pt: { front: "Quem é o chefe de Estado na França?", back: "O presidente da República." },
+      en: { front: 'Who is the head of State in France?', back: 'The President of the Republic.' },
+      tr: { front: 'Fransa\'da devlet başkanı kimdir?', back: 'Cumhurbaşkanı.' },
     },
   },
   {
@@ -499,6 +573,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "رئیس‌جمهور برای چند سال انتخاب می‌شود؟", back: "۵ سال (دوره پنج‌ساله)، قابل تمدید یک بار." },
       hi: { front: "राष्ट्रपति कितने वर्षों के लिए चुने जाते हैं?", back: "5 वर्ष (पंचवर्षीय कार्यकाल), एक बार नवीकरणीय।" },
       pt: { front: "Por quantos anos o presidente é eleito?", back: "5 anos (quinquênio), renovável uma vez." },
+      en: { front: 'For how many years is the President elected?', back: '5 years (quinquennat), renewable once.' },
+      tr: { front: 'Cumhurbaşkanı kaç yıllığına seçilir?', back: '5 yıl (quinquennat); bir kez yenilenebilir.' },
     },
   },
   {
@@ -512,6 +588,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی نخست‌وزیر را منصوب می‌کند؟", back: "رئیس‌جمهور." },
       hi: { front: "प्रधानमंत्री की नियुक्ति कौन करता है?", back: "गणराज्य के राष्ट्रपति।" },
       pt: { front: "Quem nomeia o Primeiro-ministro?", back: "O presidente da República." },
+      en: { front: 'Who appoints the Prime Minister?', back: 'The President of the Republic.' },
+      tr: { front: 'Başbakanı kim atar?', back: 'Cumhurbaşkanı.' },
     },
   },
   {
@@ -525,6 +603,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی در فرانسه قوانین را تصویب می‌کند؟", back: "پارلمان، متشکل از مجلس ملی و سنا." },
       hi: { front: "फ्रांस में कानून कौन पारित करता है?", back: "संसद, जो राष्ट्रीय सभा और सीनेट से मिलकर बनी है।" },
       pt: { front: "Quem vota as leis na França?", back: "O Parlamento, composto pela Assembleia Nacional e o Senado." },
+      en: { front: 'Who passes the laws in France?', back: 'Parliament, made up of the National Assembly and the Senate.' },
+      tr: { front: 'Fransa\'da yasaları kim çıkarır?', back: 'Ulusal Meclis ve Senato\'dan oluşan Parlamento.' },
     },
   },
   {
@@ -538,6 +618,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چند نماینده در مجلس ملی حضور دارند؟", back: "۵۷۷ نماینده." },
       hi: { front: "राष्ट्रीय सभा में कितने सांसद हैं?", back: "577 सांसद।" },
       pt: { front: "Quantos deputados há na Assembleia Nacional?", back: "577 deputados." },
+      en: { front: 'How many deputies sit in the National Assembly?', back: '577 deputies.' },
+      tr: { front: 'Ulusal Meclis\'te kaç milletvekili bulunur?', back: '577 milletvekili.' },
     },
   },
   {
@@ -551,6 +633,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "نماینده برای چند سال انتخاب می‌شود؟", back: "۵ سال، با رأی مستقیم همگانی." },
       hi: { front: "एक सांसद कितने वर्षों के लिए चुना जाता है?", back: "5 वर्ष, प्रत्यक्ष सार्वभौमिक मताधिकार द्वारा।" },
       pt: { front: "Por quantos anos um deputado é eleito?", back: "5 anos, por sufrágio universal direto." },
+      en: { front: 'For how many years is a deputy elected?', back: '5 years, by direct universal suffrage.' },
+      tr: { front: 'Bir milletvekili kaç yıllığına seçilir?', back: '5 yıl, doğrudan genel oyla.' },
     },
   },
   {
@@ -564,6 +648,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چند سناتور در سنا حضور دارند؟", back: "۳۴۸ سناتور." },
       hi: { front: "सीनेट में कितने सीनेटर हैं?", back: "348 सीनेटर।" },
       pt: { front: "Quantos senadores há no Senado?", back: "348 senadores." },
+      en: { front: 'How many senators sit in the Senate?', back: '348 senators.' },
+      tr: { front: 'Senato\'da kaç senatör bulunur?', back: '348 senatör.' },
     },
   },
   {
@@ -577,6 +663,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "سناتورها چگونه انتخاب می‌شوند؟", back: "با رأی غیرمستقیم همگانی، توسط الکتورها، برای ۶ سال." },
       hi: { front: "सीनेटर कैसे चुने जाते हैं?", back: "अप्रत्यक्ष सार्वभौमिक मताधिकार द्वारा, निर्वाचकों के माध्यम से, 6 वर्षों के लिए।" },
       pt: { front: "Como os senadores são eleitos?", back: "Por sufrágio universal indireto, pelos grandes eleitores, por 6 anos." },
+      en: { front: 'How are senators elected?', back: 'By indirect universal suffrage, by an electoral college, for 6 years.' },
+      tr: { front: 'Senatörler nasıl seçilir?', back: 'Dolaylı genel oyla, büyük seçmenler tarafından, 6 yıl için.' },
     },
   },
   {
@@ -590,6 +678,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مجلس ملی کجا واقع است؟", back: "در کاخ بوربون، در پاریس." },
       hi: { front: "राष्ट्रीय सभा कहाँ स्थित है?", back: "पैलेस बूर्बोन में, पेरिस में।" },
       pt: { front: "Onde fica a Assembleia Nacional?", back: "No Palácio Bourbon, em Paris." },
+      en: { front: 'Where does the National Assembly sit?', back: 'At the Palais Bourbon, in Paris.' },
+      tr: { front: 'Ulusal Meclis nerede toplanır?', back: 'Paris\'teki Palais Bourbon\'da.' },
     },
   },
   {
@@ -603,6 +693,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "سنا کجا واقع است؟", back: "در کاخ لوکزامبورگ، در پاریس." },
       hi: { front: "सीनेट कहाँ स्थित है?", back: "पैलेस डू लक्ज़मबर्ग में, पेरिस में।" },
       pt: { front: "Onde fica o Senado?", back: "No Palácio de Luxemburgo, em Paris." },
+      en: { front: 'Where does the Senate sit?', back: 'At the Palais du Luxembourg, in Paris.' },
+      tr: { front: 'Senato nerede toplanır?', back: 'Paris\'teki Lüksemburg Sarayı\'nda.' },
     },
   },
   {
@@ -616,6 +708,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تاریخ قانون اساسی فعلی چیست؟", back: "۴ اکتبر ۱۹۵۸ (قانون اساسی جمهوری پنجم)." },
       hi: { front: "वर्तमान संविधान की तिथि क्या है?", back: "4 अक्टूबर 1958 (पाँचवें गणराज्य का संविधान)।" },
       pt: { front: "Qual é a data da Constituição atual?", back: "4 de outubro de 1958 (Constituição da V República)." },
+      en: { front: 'What is the date of the current Constitution?', back: '4 October 1958 (Constitution of the Fifth Republic).' },
+      tr: { front: 'Yürürlükteki Anayasa\'nın tarihi nedir?', back: '4 Ekim 1958 (Beşinci Cumhuriyet Anayasası).' },
     },
   },
   {
@@ -629,6 +723,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی جمهوری پنجم را بنیان‌گذاری کرد؟", back: "ژنرال شارل دوگل." },
       hi: { front: "पाँचवें गणराज्य की स्थापना किसने की?", back: "जनरल शार्ल दो गॉल।" },
       pt: { front: "Quem fundou a V República?", back: "O general Charles de Gaulle." },
+      en: { front: 'Who founded the Fifth Republic?', back: 'General Charles de Gaulle.' },
+      tr: { front: 'Beşinci Cumhuriyet\'i kim kurdu?', back: 'General Charles de Gaulle.' },
     },
   },
   {
@@ -642,6 +738,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شورای قانون اساسی چیست؟", back: "نهادی که مطابقت قوانین با قانون اساسی را بررسی می‌کند." },
       hi: { front: "संवैधानिक परिषद क्या है?", back: "वह संस्था जो कानूनों की संविधान के अनुरूपता की जाँच करती है।" },
       pt: { front: "O que é o Conselho Constitucional?", back: "A instituição que verifica a conformidade das leis com a Constituição." },
+      en: { front: 'What is the Constitutional Council?', back: 'The institution that verifies the conformity of laws with the Constitution.' },
+      tr: { front: 'Anayasa Konseyi nedir?', back: 'Yasaların Anayasa\'ya uygunluğunu denetleyen kurum.' },
     },
   },
   {
@@ -655,6 +753,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شورای قانون اساسی چند عضو دارد؟", back: "۹ عضو منصوب برای ۹ سال، به اضافه رؤسای‌جمهور سابق." },
       hi: { front: "संवैधानिक परिषद में कितने सदस्य हैं?", back: "9 सदस्य 9 वर्षों के लिए नामित, और गणराज्य के पूर्व राष्ट्रपति।" },
       pt: { front: "Quantos membros tem o Conselho Constitucional?", back: "9 membros nomeados por 9 anos, mais os ex-presidentes da República." },
+      en: { front: 'How many members does the Constitutional Council have?', back: '9 members appointed for 9 years, plus the former Presidents of the Republic.' },
+      tr: { front: 'Anayasa Konseyi\'nin kaç üyesi vardır?', back: '9 yıllığına atanmış 9 üye, artı eski cumhurbaşkanları.' },
     },
   },
   {
@@ -668,6 +768,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "نقش نخست‌وزیر چیست؟", back: "هدایت اقدامات دولت و تضمین اجرای قوانین." },
       hi: { front: "प्रधानमंत्री की भूमिका क्या है?", back: "सरकार की कार्रवाई का नेतृत्व करना और कानूनों के निष्पादन को सुनिश्चित करना।" },
       pt: { front: "Qual é o papel do Primeiro-ministro?", back: "Ele dirige a ação do Governo e assegura a execução das leis." },
+      en: { front: 'What is the role of the Prime Minister?', back: 'He directs the action of the Government and ensures the execution of the laws.' },
+      tr: { front: 'Başbakanın görevi nedir?', back: 'Hükümetin eylemini yönetir ve yasaların uygulanmasını sağlar.' },
     },
   },
   {
@@ -681,6 +783,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی می‌تواند مجلس ملی را منحل کند؟", back: "رئیس‌جمهور." },
       hi: { front: "राष्ट्रीय सभा को कौन भंग कर सकता है?", back: "गणराज्य के राष्ट्रपति।" },
       pt: { front: "Quem pode dissolver a Assembleia Nacional?", back: "O presidente da República." },
+      en: { front: 'Who can dissolve the National Assembly?', back: 'The President of the Republic.' },
+      tr: { front: 'Ulusal Meclis\'i kim feshedebilir?', back: 'Cumhurbaşkanı.' },
     },
   },
   {
@@ -694,6 +798,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "همه‌پرسی چیست؟", back: "مشورت مستقیم با شهروندان برای تصویب یا رد یک متن." },
       hi: { front: "जनमत संग्रह क्या है?", back: "किसी पाठ को स्वीकृत या अस्वीकृत करने के लिए नागरिकों से प्रत्यक्ष परामर्श।" },
       pt: { front: "O que é um referendo?", back: "Uma consulta direta aos cidadãos para aprovar ou rejeitar um texto." },
+      en: { front: 'What is a referendum?', back: 'A direct consultation of citizens to approve or reject a text.' },
+      tr: { front: 'Referandum nedir?', back: 'Bir metnin kabul ya da reddi için yurttaşlara doğrudan danışılması.' },
     },
   },
   {
@@ -707,6 +813,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شهردار کیست و چگونه انتخاب می‌شود؟", back: "رئیس شهرداری، توسط شورای شهر برای ۶ سال انتخاب می‌شود." },
       hi: { front: "मेयर कौन है और कैसे चुना जाता है?", back: "नगर का प्रमुख, नगर परिषद द्वारा 6 वर्षों के लिए चुना जाता है।" },
       pt: { front: "Quem é o prefeito e como é eleito?", back: "O chefe do município, eleito pela câmara municipal por 6 anos." },
+      en: { front: 'Who is the mayor and how is he elected?', back: 'The head of the commune, elected by the municipal council for 6 years.' },
+      tr: { front: 'Belediye başkanı kimdir ve nasıl seçilir?', back: 'Belediyenin başıdır; belediye meclisi tarafından 6 yıllığına seçilir.' },
     },
   },
   {
@@ -720,6 +828,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "سه واحد تقسیمات کشوری کدامند؟", back: "شهرداری‌ها، دپارتمان‌ها و مناطق." },
       hi: { front: "तीन क्षेत्रीय निकाय कौन से हैं?", back: "कम्यून (नगर), विभाग और क्षेत्र।" },
       pt: { front: "Quais são as três coletividades territoriais?", back: "Os municípios, os departamentos e as regiões." },
+      en: { front: 'What are the three territorial collectivities?', back: 'The communes, the departments and the regions.' },
+      tr: { front: 'Üç yerel yönetim birimi nedir?', back: 'Komünler (belediyeler), departmanlar ve bölgeler.' },
     },
   },
   {
@@ -733,6 +843,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانسه چند دپارتمان دارد؟", back: "۱۰۱ دپارتمان (۹۶ متروپل + ۵ فرادریایی)." },
       hi: { front: "फ्रांस में कितने विभाग हैं?", back: "101 विभाग (96 मुख्य भूमि + 5 समुद्रपार)।" },
       pt: { front: "Quantos departamentos a França tem?", back: "101 departamentos (96 metropolitanos + 5 ultramarinos)." },
+      en: { front: 'How many departments does France have?', back: '101 departments (96 in mainland France + 5 overseas).' },
+      tr: { front: 'Fransa\'da kaç departman vardır?', back: '101 departman (96 anakara + 5 denizaşırı).' },
     },
   },
   {
@@ -746,6 +858,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "نقش فرماندار (پرفه) چیست؟", back: "نماینده دولت در دپارتمان و ناظر بر اجرای قوانین." },
       hi: { front: "प्रीफ़े (प्रान्तपाल) की भूमिका क्या है?", back: "विभाग में राज्य का प्रतिनिधित्व करना और कानूनों के लागू होने की निगरानी करना।" },
       pt: { front: "Qual é o papel do prefeito departamental?", back: "Ele representa o Estado no departamento e zela pela aplicação das leis." },
+      en: { front: 'What is the role of the prefect?', back: 'He represents the State in the department and oversees the application of the laws.' },
+      tr: { front: 'Valinin (préfet) görevi nedir?', back: 'Departmanda Devleti temsil eder ve yasaların uygulanmasını gözetir.' },
     },
   },
   {
@@ -759,6 +873,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "طرح استیضاح چیست؟", back: "رأی‌گیری در مجلس ملی که می‌تواند دولت را سرنگون کند." },
       hi: { front: "अविश्वास प्रस्ताव क्या है?", back: "राष्ट्रीय सभा का एक मत जो सरकार को गिरा सकता है।" },
       pt: { front: "O que é a moção de censura?", back: "Uma votação da Assembleia Nacional que pode derrubar o Governo." },
+      en: { front: 'What is a motion of censure?', back: 'A vote in the National Assembly that can bring down the Government.' },
+      tr: { front: 'Gensoru (motion de censure) nedir?', back: 'Hükümeti düşürebilen Ulusal Meclis oylaması.' },
     },
   },
   {
@@ -772,6 +888,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "هم‌زیستی سیاسی چیست؟", back: "وقتی رئیس‌جمهور و نخست‌وزیر از جناح‌های سیاسی مخالف باشند." },
       hi: { front: "सहअस्तित्व (कोहैबिटेशन) क्या है?", back: "जब राष्ट्रपति और प्रधानमंत्री विरोधी राजनीतिक पक्षों से हों।" },
       pt: { front: "O que é a coabitação?", back: "Quando o presidente e o Primeiro-ministro são de orientações políticas opostas." },
+      en: { front: 'What is cohabitation?', back: 'When the President and the Prime Minister come from opposing political sides.' },
+      tr: { front: 'Birlikte yaşama (cohabitation) nedir?', back: 'Cumhurbaşkanı ile Başbakan\'ın karşıt siyasi kanatlardan olması durumu.' },
     },
   },
   {
@@ -785,6 +903,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "قوه مجریه در فرانسه چیست؟", back: "رئیس‌جمهور و دولت (نخست‌وزیر + وزیران)." },
       hi: { front: "फ्रांस में कार्यकारी शक्ति क्या है?", back: "गणराज्य के राष्ट्रपति और सरकार (प्रधानमंत्री + मंत्री)।" },
       pt: { front: "Qual é o poder executivo na França?", back: "O presidente da República e o Governo (Primeiro-ministro + ministros)." },
+      en: { front: 'What is the executive power in France?', back: 'The President of the Republic and the Government (Prime Minister + ministers).' },
+      tr: { front: 'Fransa\'da yürütme erki nedir?', back: 'Cumhurbaşkanı ve Hükümet (Başbakan + bakanlar).' },
     },
   },
   {
@@ -798,6 +918,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "قوه قضاییه در فرانسه چیست؟", back: "دادگاه‌ها و محاکم، ضامن اجرای حقوق." },
       hi: { front: "फ्रांस में न्यायिक शक्ति क्या है?", back: "न्यायालय और अदालतें, कानून के अनुप्रयोग की गारंटीकर्ता।" },
       pt: { front: "Qual é o poder judiciário na França?", back: "Os tribunais e as cortes de justiça, garantes da aplicação do direito." },
+      en: { front: 'What is the judicial power in France?', back: 'The tribunals and the courts of justice, guarantors of the application of the law.' },
+      tr: { front: 'Fransa\'da yargı erki nedir?', back: 'Mahkemeler ve adalet divanları; hukukun uygulanmasının güvencesidir.' },
     },
   },
   {
@@ -811,6 +933,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "از چه سنی می‌توان در فرانسه رأی داد؟", back: "از ۱۸ سالگی." },
       hi: { front: "फ्रांस में किस उम्र में मतदान कर सकते हैं?", back: "18 वर्ष की आयु से।" },
       pt: { front: "Com que idade se pode votar na França?", back: "A partir dos 18 anos." },
+      en: { front: 'At what age can one vote in France?', back: 'From the age of 18.' },
+      tr: { front: 'Fransa\'da kaç yaşında oy kullanılabilir?', back: '18 yaşından itibaren.' },
     },
   },
   {
@@ -824,6 +948,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شورای دولت چیست؟", back: "عالی‌ترین نهاد قضایی اداری که به دولت نیز مشاوره می‌دهد." },
       hi: { front: "राज्य परिषद (कॉन्सेय देता) क्या है?", back: "सर्वोच्च प्रशासनिक न्यायालय, जो सरकार को भी सलाह देती है।" },
       pt: { front: "O que é o Conselho de Estado?", back: "A mais alta jurisdição administrativa, que também assessora o Governo." },
+      en: { front: 'What is the Council of State (Conseil d\'État)?', back: 'The highest administrative court, which also advises the Government.' },
+      tr: { front: 'Devlet Şûrası (Conseil d\'État) nedir?', back: 'En yüksek idari mahkeme; aynı zamanda hükümete danışmanlık yapar.' },
     },
   },
   {
@@ -837,6 +963,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تضمین‌کننده استقلال قوه قضاییه کیست؟", back: "رئیس‌جمهور (اصل ۶۴ قانون اساسی)." },
       hi: { front: "न्यायपालिका की स्वतंत्रता का गारंटर कौन है?", back: "गणराज्य के राष्ट्रपति (संविधान का अनुच्छेद 64)।" },
       pt: { front: "Quem é o garante da independência da justiça?", back: "O presidente da República (artigo 64 da Constituição)." },
+      en: { front: 'Who is the guarantor of the independence of the judiciary?', back: 'The President of the Republic (Article 64 of the Constitution).' },
+      tr: { front: 'Yargı bağımsızlığının güvencesi kimdir?', back: 'Cumhurbaşkanı (Anayasa\'nın 64. maddesi).' },
     },
   },
   {
@@ -850,6 +978,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تفکیک قوا چیست؟", back: "اصلی که طبق آن قوای مجریه، مقننه و قضاییه مستقل هستند." },
       hi: { front: "शक्तियों का पृथक्करण क्या है?", back: "वह सिद्धांत जिसके अनुसार कार्यकारी, विधायी और न्यायिक शक्तियाँ स्वतंत्र हैं।" },
       pt: { front: "O que é a separação dos poderes?", back: "O princípio segundo o qual os poderes executivo, legislativo e judiciário são independentes." },
+      en: { front: 'What is the separation of powers?', back: 'The principle under which executive, legislative and judicial powers are independent.' },
+      tr: { front: 'Kuvvetler ayrılığı nedir?', back: 'Yürütme, yasama ve yargı erklerinin birbirinden bağımsız olduğu ilke.' },
     },
   },
   {
@@ -863,6 +993,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تمرکززدایی چیست؟", back: "انتقال اختیارات از دولت مرکزی به نهادهای محلی." },
       hi: { front: "विकेंद्रीकरण क्या है?", back: "राज्य से क्षेत्रीय निकायों को शक्तियों का हस्तांतरण।" },
       pt: { front: "O que é a descentralização?", back: "A transferência de competências do Estado para as coletividades territoriais." },
+      en: { front: 'What is decentralization?', back: 'The transfer of powers from the State to local authorities.' },
+      tr: { front: 'Yerinden yönetim (decentralization) nedir?', back: 'Yetkilerin merkezi devletten yerel yönetimlere aktarılmasıdır.' },
     },
   },
 
@@ -880,6 +1012,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "DDHC چیست؟", back: "اعلامیه حقوق بشر و شهروند، مصوب ۲۶ اوت ۱۷۸۹." },
       hi: { front: "DDHC क्या है?", back: "मानव और नागरिक अधिकारों की घोषणा, 26 अगस्त 1789 को अपनाई गई।" },
       pt: { front: "O que é a DDHC?", back: "A Declaração dos Direitos do Homem e do Cidadão, adotada em 26 de agosto de 1789." },
+      en: { front: 'What is the DDHC?', back: 'The Declaration of the Rights of Man and of the Citizen, adopted on 26 August 1789.' },
+      tr: { front: 'DDHC nedir?', back: '26 Ağustos 1789\'da kabul edilen İnsan ve Yurttaş Hakları Bildirgesi.' },
     },
   },
   {
@@ -893,6 +1027,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چهار حق طبیعی طبق DDHC کدامند؟", back: "آزادی، مالکیت، امنیت و مقاومت در برابر ظلم." },
       hi: { front: "DDHC के अनुसार चार प्राकृतिक अधिकार कौन से हैं?", back: "स्वतंत्रता, संपत्ति, सुरक्षा और उत्पीड़न के विरुद्ध प्रतिरोध।" },
       pt: { front: "Quais são os quatro direitos naturais segundo a DDHC?", back: "A liberdade, a propriedade, a segurança e a resistência à opressão." },
+      en: { front: 'What are the four natural rights according to the DDHC?', back: 'Liberty, property, security and resistance to oppression.' },
+      tr: { front: 'DDHC\'ye göre dört doğal hak nedir?', back: 'Özgürlük, mülkiyet, güvenlik ve baskıya karşı direnme.' },
     },
   },
   {
@@ -906,6 +1042,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "رأی دادن حق است یا وظیفه؟", back: "یک حق مدنی و یک وظیفه اخلاقی برای هر شهروند بالغ." },
       hi: { front: "मतदान एक अधिकार है या कर्तव्य?", back: "यह प्रत्येक वयस्क नागरिक का नागरिक अधिकार और नैतिक कर्तव्य है।" },
       pt: { front: "O voto é um direito ou um dever?", back: "É um direito cívico e um dever moral para todo cidadão maior de idade." },
+      en: { front: 'Is voting a right or a duty?', back: 'It is a civic right and a moral duty for every adult citizen.' },
+      tr: { front: 'Oy vermek bir hak mıdır yoksa bir görev midir?', back: 'Yetişkin her yurttaş için hem yurttaşlık hakkı hem de ahlaki bir görevdir.' },
     },
   },
   {
@@ -919,6 +1057,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مهم‌ترین وظیفه مالیاتی شهروند چیست؟", back: "پرداخت مالیات برای تأمین مالی خدمات عمومی." },
       hi: { front: "नागरिक का मुख्य कर कर्तव्य क्या है?", back: "सार्वजनिक सेवाओं के वित्तपोषण के लिए कर चुकाना।" },
       pt: { front: "Qual é o principal dever fiscal do cidadão?", back: "Pagar seus impostos para financiar os serviços públicos." },
+      en: { front: 'What is the citizen\'s main fiscal duty?', back: 'Paying taxes to fund public services.' },
+      tr: { front: 'Yurttaşın başlıca vergi görevi nedir?', back: 'Kamu hizmetlerini finanse etmek için vergi ödemek.' },
     },
   },
   {
@@ -932,6 +1072,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "JDC چیست؟", back: "روز دفاع و شهروندی، اجباری برای همه جوانان ۱۶ تا ۲۵ ساله." },
       hi: { front: "JDC क्या है?", back: "रक्षा और नागरिकता दिवस, 16 से 25 वर्ष के सभी युवाओं के लिए अनिवार्य।" },
       pt: { front: "O que é a JDC?", back: "A Jornada de defesa e cidadania, obrigatória para todos os jovens de 16 a 25 anos." },
+      en: { front: 'What is the JDC?', back: 'The Defense and Citizenship Day (Journée défense et citoyenneté), compulsory for all young people aged 16 to 25.' },
+      tr: { front: 'JDC nedir?', back: 'Savunma ve Yurttaşlık Günü (Journée défense et citoyenneté); 16-25 yaş arası tüm gençler için zorunlu.' },
     },
   },
   {
@@ -945,6 +1087,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "از چه سنی می‌توان در فرانسه ازدواج کرد؟", back: "از ۱۸ سالگی برای زنان و مردان." },
       hi: { front: "फ्रांस में किस उम्र से विवाह कर सकते हैं?", back: "18 वर्ष की आयु से, पुरुषों और महिलाओं दोनों के लिए।" },
       pt: { front: "A partir de que idade se pode casar na França?", back: "A partir dos 18 anos para homens e mulheres." },
+      en: { front: 'From what age can one marry in France?', back: 'From the age of 18 for both men and women.' },
+      tr: { front: 'Fransa\'da kaç yaşından itibaren evlenilebilir?', back: 'Kadın ve erkek için 18 yaşından itibaren.' },
     },
   },
   {
@@ -958,6 +1102,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا برابری زن و مرد تضمین شده است؟", back: "بله، توسط قانون اساسی و قوانین متعدد (کار، خانواده، سیاست)." },
       hi: { front: "क्या पुरुष-महिला समानता की गारंटी है?", back: "हाँ, संविधान और कई कानूनों द्वारा (श्रम, परिवार, राजनीति)।" },
       pt: { front: "A igualdade homem-mulher é garantida?", back: "Sim, pela Constituição e numerosas leis (trabalho, família, política)." },
+      en: { front: 'Is equality between men and women guaranteed?', back: 'Yes, by the Constitution and many laws (work, family, politics).' },
+      tr: { front: 'Kadın-erkek eşitliği güvence altında mıdır?', back: 'Evet; Anayasa ve pek çok yasayla (iş, aile, siyaset).' },
     },
   },
   {
@@ -971,6 +1117,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آزادی بیان چیست؟", back: "حق اندیشیدن، نوشتن و آزادانه بیان کردن، در چارچوب قانون." },
       hi: { front: "अभिव्यक्ति की स्वतंत्रता क्या है?", back: "कानून के सम्मान में स्वतंत्र रूप से सोचने, लिखने और अभिव्यक्त करने का अधिकार।" },
       pt: { front: "O que é a liberdade de expressão?", back: "O direito de pensar, escrever e se expressar livremente, respeitando a lei." },
+      en: { front: 'What is freedom of expression?', back: 'The right to think, write and express oneself freely, within the limits of the law.' },
+      tr: { front: 'İfade özgürlüğü nedir?', back: 'Yasa çerçevesinde özgürce düşünme, yazma ve kendini ifade etme hakkı.' },
     },
   },
   {
@@ -984,6 +1132,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "محدودیت‌های آزادی بیان چیست؟", back: "توهین، افترا، تحریک به نفرت و انکار هولوکاست ممنوع است." },
       hi: { front: "अभिव्यक्ति की स्वतंत्रता की सीमाएँ क्या हैं?", back: "अपमान, मानहानि, नफ़रत भड़काना और नरसंहार इनकार निषिद्ध हैं।" },
       pt: { front: "Quais são os limites da liberdade de expressão?", back: "A injúria, a difamação, a incitação ao ódio e o negacionismo são proibidos." },
+      en: { front: 'What are the limits of freedom of expression?', back: 'Insult, defamation, incitement to hatred and Holocaust denial are prohibited.' },
+      tr: { front: 'İfade özgürlüğünün sınırları nelerdir?', back: 'Hakaret, iftira, nefrete kışkırtma ve soykırım inkârı yasaktır.' },
     },
   },
   {
@@ -997,6 +1147,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اصل برائت چیست؟", back: "هر شخصی بی‌گناه فرض می‌شود تا زمانی که مجرم شناخته نشده باشد." },
       hi: { front: "निर्दोषता का अनुमान क्या है?", back: "हर व्यक्ति को तब तक निर्दोष माना जाता है जब तक दोषी सिद्ध न हो।" },
       pt: { front: "O que é a presunção de inocência?", back: "Toda pessoa é considerada inocente até que seja julgada culpada." },
+      en: { front: 'What is the presumption of innocence?', back: 'Every person is considered innocent until proven guilty.' },
+      tr: { front: 'Masumiyet karinesi nedir?', back: 'Suçlu olduğu kanıtlanmadıkça herkes masum kabul edilir.' },
     },
   },
   {
@@ -1010,6 +1162,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا کودکان موظف به رفتن به مدرسه هستند؟", back: "بله، آموزش از ۳ تا ۱۶ سالگی اجباری است." },
       hi: { front: "क्या बच्चों को स्कूल जाना अनिवार्य है?", back: "हाँ, 3 से 16 वर्ष तक शिक्षा अनिवार्य है।" },
       pt: { front: "As crianças são obrigadas a ir à escola?", back: "Sim, a instrução é obrigatória dos 3 aos 16 anos." },
+      en: { front: 'Are children required to go to school?', back: 'Yes, instruction is compulsory from age 3 to 16.' },
+      tr: { front: 'Çocukların okula gitme zorunluluğu var mıdır?', back: 'Evet, eğitim 3 ile 16 yaş arası zorunludur.' },
     },
   },
   {
@@ -1023,6 +1177,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق پناهندگی چیست؟", back: "حمایتی که فرانسه به افراد تحت آزار در کشورشان ارائه می‌دهد." },
       hi: { front: "शरण का अधिकार क्या है?", back: "अपने देश में उत्पीड़ित लोगों को फ्रांस द्वारा दी गई सुरक्षा।" },
       pt: { front: "O que é o direito de asilo?", back: "A proteção concedida pela França às pessoas perseguidas em seu país." },
+      en: { front: 'What is the right of asylum?', back: 'The protection granted by France to people persecuted in their country.' },
+      tr: { front: 'Sığınma hakkı nedir?', back: 'Fransa\'nın, kendi ülkesinde zulme uğrayanlara tanıdığı koruma.' },
     },
   },
   {
@@ -1036,6 +1192,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آزادی گردهمایی چیست؟", back: "حق تجمع مسالمت‌آمیز در مکان عمومی یا خصوصی." },
       hi: { front: "सभा की स्वतंत्रता क्या है?", back: "सार्वजनिक या निजी स्थान पर शांतिपूर्वक एकत्रित होने का अधिकार।" },
       pt: { front: "O que é a liberdade de reunião?", back: "O direito de se reunir pacificamente em local público ou privado." },
+      en: { front: 'What is the freedom of assembly?', back: 'The right to gather peacefully in a public or private place.' },
+      tr: { front: 'Toplanma özgürlüğü nedir?', back: 'Kamuya açık veya özel bir yerde barışçıl biçimde toplanma hakkı.' },
     },
   },
   {
@@ -1049,6 +1207,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آزادی انجمن چیست؟", back: "حق ایجاد یا عضویت در یک انجمن (قانون ۱۹۰۱)." },
       hi: { front: "संघ बनाने की स्वतंत्रता क्या है?", back: "संघ बनाने या उसमें शामिल होने का अधिकार (1901 का कानून)।" },
       pt: { front: "O que é a liberdade de associação?", back: "O direito de criar ou aderir a uma associação (lei de 1901)." },
+      en: { front: 'What is the freedom of association?', back: 'The right to create or join an association (1901 law).' },
+      tr: { front: 'Dernek kurma özgürlüğü nedir?', back: 'Bir dernek kurma veya derneğe katılma hakkı (1901 yasası).' },
     },
   },
   {
@@ -1062,6 +1222,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق اعتصاب چیست؟", back: "حق کارکنان برای توقف کار جهت دفاع از مطالباتشان." },
       hi: { front: "हड़ताल का अधिकार क्या है?", back: "कर्मचारियों का अपनी माँगों की रक्षा के लिए काम बंद करने का अधिकार।" },
       pt: { front: "O que é o direito de greve?", back: "O direito dos trabalhadores de parar o trabalho para defender suas reivindicações." },
+      en: { front: 'What is the right to strike?', back: 'The right of employees to stop work to defend their demands.' },
+      tr: { front: 'Grev hakkı nedir?', back: 'Çalışanların taleplerini savunmak için işi bırakma hakkı.' },
     },
   },
   {
@@ -1075,6 +1237,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "وظیفه دفاع ملی چیست؟", back: "هر شهروندی در دفاع از ملت مشارکت می‌کند، به‌ویژه از طریق JDC." },
       hi: { front: "राष्ट्रीय रक्षा का कर्तव्य क्या है?", back: "हर नागरिक राष्ट्र की रक्षा में योगदान देता है, विशेषकर JDC के माध्यम से।" },
       pt: { front: "Qual é o dever de defesa nacional?", back: "Todo cidadão contribui para a defesa da nação, especialmente pela JDC." },
+      en: { front: 'What is the duty of national defense?', back: 'Every citizen contributes to the defense of the nation, in particular through the JDC.' },
+      tr: { front: 'Ulusal savunma görevi nedir?', back: 'Her yurttaş, özellikle JDC aracılığıyla ulusun savunmasına katkıda bulunur.' },
     },
   },
   {
@@ -1088,6 +1252,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "وظیفه احترام به قانون چیست؟", back: "هر شهروندی باید از قوانین مصوب پارلمان اطاعت کند." },
       hi: { front: "कानून का सम्मान करने का कर्तव्य क्या है?", back: "हर नागरिक को संसद द्वारा पारित कानूनों का पालन करना चाहिए।" },
       pt: { front: "O que é o dever de respeitar a lei?", back: "Todo cidadão deve obedecer às leis votadas pelo Parlamento." },
+      en: { front: 'What is the duty to respect the law?', back: 'Every citizen must obey the laws passed by Parliament.' },
+      tr: { front: 'Yasalara uyma görevi nedir?', back: 'Her yurttaş, Parlamento\'nun çıkardığı yasalara uymak zorundadır.' },
     },
   },
   {
@@ -1101,6 +1267,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق حریم خصوصی چیست؟", back: "هر شخصی حق احترام به زندگی خصوصی و خانوادگی خود را دارد." },
       hi: { front: "निजता का अधिकार क्या है?", back: "हर व्यक्ति को अपनी निजी और पारिवारिक जीवन के सम्मान का अधिकार है।" },
       pt: { front: "O que é o direito à vida privada?", back: "Toda pessoa tem direito ao respeito de sua vida privada e familiar." },
+      en: { front: 'What is the right to private life?', back: 'Every person has the right to respect for their private and family life.' },
+      tr: { front: 'Özel hayat hakkı nedir?', back: 'Her birey, özel ve aile yaşamına saygı gösterilmesi hakkına sahiptir.' },
     },
   },
   {
@@ -1114,6 +1282,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا مجازات اعدام در فرانسه وجود دارد؟", back: "نه، در ۹ اکتبر ۱۹۸۱ توسط روبر بادنتر لغو شد." },
       hi: { front: "क्या फ्रांस में मृत्युदंड मौजूद है?", back: "नहीं, इसे 9 अक्टूबर 1981 को रॉबर्ट बादिंतेर द्वारा समाप्त किया गया।" },
       pt: { front: "A pena de morte existe na França?", back: "Não, foi abolida em 9 de outubro de 1981 por Robert Badinter." },
+      en: { front: 'Does the death penalty exist in France?', back: 'No, it was abolished on 9 October 1981 by Robert Badinter.' },
+      tr: { front: 'Fransa\'da idam cezası var mıdır?', back: 'Hayır, 9 Ekim 1981\'de Robert Badinter tarafından kaldırılmıştır.' },
     },
   },
   {
@@ -1127,6 +1297,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق مسکن چیست؟", back: "یک حق بنیادین: دولت به افراد نیازمند برای یافتن مسکن کمک می‌کند." },
       hi: { front: "आवास का अधिकार क्या है?", back: "एक मौलिक अधिकार: राज्य कठिनाई में लोगों को आवास खोजने में मदद करता है।" },
       pt: { front: "O que é o direito à moradia?", back: "Um direito fundamental: o Estado ajuda as pessoas em dificuldade a encontrar moradia." },
+      en: { front: 'What is the right to housing?', back: 'A fundamental right: the State helps people in difficulty to find housing.' },
+      tr: { front: 'Konut hakkı nedir?', back: 'Temel bir hak: Devlet, güçlük içindeki kişilere barınma konusunda yardım eder.' },
     },
   },
   {
@@ -1140,6 +1312,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آزادی سندیکایی چیست؟", back: "حق پیوستن به اتحادیه‌ای به انتخاب خود یا نپیوستن." },
       hi: { front: "संघ स्वतंत्रता क्या है?", back: "अपनी पसंद की यूनियन में शामिल होने या न होने का अधिकार।" },
       pt: { front: "O que é a liberdade sindical?", back: "O direito de aderir ao sindicato de sua escolha ou de não aderir." },
+      en: { front: 'What is the freedom to join a union?', back: 'The right to join the union of one\'s choice or not to join one.' },
+      tr: { front: 'Sendika özgürlüğü nedir?', back: 'Dilediği sendikaya üye olma veya hiçbirine üye olmama hakkı.' },
     },
   },
   {
@@ -1153,6 +1327,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "وظیفه یاری متقابل بین زوجین چیست؟", back: "زوجین به یکدیگر کمک و یاری بدهکارند." },
       hi: { front: "पति-पत्नी के बीच सहायता का कर्तव्य क्या है?", back: "पति-पत्नी एक-दूसरे को पारस्परिक सहायता और सहारा देने के लिए बाध्य हैं।" },
       pt: { front: "O que é o dever de socorro entre cônjuges?", back: "Os cônjuges devem mutuamente assistência e socorro." },
+      en: { front: 'What is the duty of mutual assistance between spouses?', back: 'Spouses owe each other mutual assistance and support.' },
+      tr: { front: 'Eşler arasındaki yardım görevi nedir?', back: 'Eşler birbirine karşılıklı yardım ve destekle yükümlüdür.' },
     },
   },
   {
@@ -1166,6 +1342,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا مدرسه دولتی در فرانسه رایگان است؟", back: "بله، آموزش دولتی رایگان، لائیک و اجباری است." },
       hi: { front: "क्या फ्रांस में सार्वजनिक स्कूल निःशुल्क है?", back: "हाँ, सार्वजनिक शिक्षा निःशुल्क, धर्मनिरपेक्ष और अनिवार्य है।" },
       pt: { front: "A escola pública é gratuita na França?", back: "Sim, o ensino público é gratuito, laico e obrigatório." },
+      en: { front: 'Is public school free in France?', back: 'Yes, public education is free, secular and compulsory.' },
+      tr: { front: 'Fransa\'da devlet okulu ücretsiz midir?', back: 'Evet, devlet eğitimi ücretsiz, laik ve zorunludur.' },
     },
   },
   {
@@ -1179,6 +1357,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا ازدواج همجنس‌گرایان در فرانسه قانونی است؟", back: "بله، از قانون ۱۷ مه ۲۰۱۳." },
       hi: { front: "क्या फ्रांस में सबके लिए विवाह कानूनी है?", back: "हाँ, 17 मई 2013 के कानून से।" },
       pt: { front: "O casamento para todos é legal na França?", back: "Sim, desde a lei de 17 de maio de 2013." },
+      en: { front: 'Is same-sex marriage legal in France?', back: 'Yes, since the law of 17 May 2013.' },
+      tr: { front: 'Fransa\'da eşcinsel evlilik yasal mıdır?', back: 'Evet, 17 Mayıs 2013 yasasından beri.' },
     },
   },
   {
@@ -1192,6 +1372,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مدافع حقوق شهروندان کیست؟", back: "نهاد مستقلی که حقوق و آزادی‌های شهروندان را حمایت می‌کند." },
       hi: { front: "अधिकार रक्षक क्या है?", back: "एक स्वतंत्र प्राधिकरण जो नागरिकों के अधिकारों और स्वतंत्रताओं की रक्षा करता है।" },
       pt: { front: "O que é o Defensor dos direitos?", back: "Uma autoridade independente que protege os direitos e liberdades dos cidadãos." },
+      en: { front: 'What is the Defender of Rights (Défenseur des droits)?', back: 'An independent authority that protects the rights and freedoms of citizens.' },
+      tr: { front: 'Haklar Savunucusu (Défenseur des droits) nedir?', back: 'Yurttaşların hak ve özgürlüklerini koruyan bağımsız bir makam.' },
     },
   },
   {
@@ -1205,6 +1387,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حق محاکمه عادلانه چیست؟", back: "هر شخصی حق دارد توسط دادگاه مستقل و بی‌طرف محاکمه شود." },
       hi: { front: "निष्पक्ष मुकदमे का अधिकार क्या है?", back: "हर व्यक्ति को स्वतंत्र और निष्पक्ष न्यायालय द्वारा न्याय पाने का अधिकार है।" },
       pt: { front: "O que é o direito a um julgamento justo?", back: "Toda pessoa tem direito a ser julgada por um tribunal independente e imparcial." },
+      en: { front: 'What is the right to a fair trial?', back: 'Every person has the right to be judged by an independent and impartial tribunal.' },
+      tr: { front: 'Adil yargılanma hakkı nedir?', back: 'Her birey, bağımsız ve tarafsız bir mahkemece yargılanma hakkına sahiptir.' },
     },
   },
   {
@@ -1218,6 +1402,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا کار اجباری در فرانسه ممنوع است؟", back: "بله، طبق قانون و کنوانسیون‌های بین‌المللی ممنوع است." },
       hi: { front: "क्या फ्रांस में बंधुआ मजदूरी प्रतिबंधित है?", back: "हाँ, यह कानून और अंतरराष्ट्रीय संधियों द्वारा प्रतिबंधित है।" },
       pt: { front: "O trabalho forçado é proibido na França?", back: "Sim, é proibido pela lei e pelas convenções internacionais." },
+      en: { front: 'Is forced labor prohibited in France?', back: 'Yes, it is prohibited by law and by international conventions.' },
+      tr: { front: 'Fransa\'da zorla çalıştırma yasak mıdır?', back: 'Evet, yasa ve uluslararası sözleşmelerle yasaklanmıştır.' },
     },
   },
   {
@@ -1231,6 +1417,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "PACS چیست؟", back: "پیمان همبستگی مدنی، قراردادی بین دو فرد بالغ (از ۱۹۹۹)." },
       hi: { front: "PACS क्या है?", back: "नागरिक एकजुटता समझौता, दो वयस्कों के बीच अनुबंध (1999 से)।" },
       pt: { front: "O que é o PACS?", back: "O Pacto civil de solidariedade, um contrato entre duas pessoas maiores de idade (desde 1999)." },
+      en: { front: 'What is the PACS?', back: 'The Civil Solidarity Pact, a contract between two adults (since 1999).' },
+      tr: { front: 'PACS nedir?', back: 'Sivil Dayanışma Sözleşmesi; iki yetişkin arasında yapılan sözleşme (1999\'dan beri).' },
     },
   },
   {
@@ -1244,6 +1432,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "وظیفه هیئت منصفه چیست؟", back: "هر شهروندی ممکن است به عنوان عضو هیئت منصفه در دادگاه جنایی فراخوانده شود." },
       hi: { front: "जूरी कर्तव्य क्या है?", back: "किसी भी नागरिक को आपराधिक अदालत में जूरी सदस्य के रूप में बुलाया जा सकता है।" },
       pt: { front: "O que é o dever de júri?", back: "Todo cidadão pode ser convocado a participar como jurado em um tribunal criminal." },
+      en: { front: 'What is jury duty?', back: 'Any citizen may be called to serve as a juror in a criminal court (cour d\'assises).' },
+      tr: { front: 'Jüri üyeliği görevi nedir?', back: 'Her yurttaş, ağır ceza mahkemesinde (cour d\'assises) jüri üyesi olarak çağrılabilir.' },
     },
   },
   {
@@ -1257,6 +1447,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام متن اروپایی از حقوق بنیادین حمایت می‌کند؟", back: "کنوانسیون اروپایی حقوق بشر (۱۹۵۰)." },
       hi: { front: "कौन सा यूरोपीय पाठ मौलिक अधिकारों की रक्षा करता है?", back: "यूरोपीय मानवाधिकार सम्मेलन (1950)।" },
       pt: { front: "Qual texto europeu protege os direitos fundamentais?", back: "A Convenção Europeia dos Direitos Humanos (1950)." },
+      en: { front: 'Which European text protects fundamental rights?', back: 'The European Convention on Human Rights (1950).' },
+      tr: { front: 'Temel hakları koruyan Avrupa metni nedir?', back: 'Avrupa İnsan Hakları Sözleşmesi (1950).' },
     },
   },
 
@@ -1274,6 +1466,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تاریخ انقلاب فرانسه چه زمانی است؟", back: "۱۷۸۹ (سقوط باستیل در ۱۴ ژوئیه ۱۷۸۹)." },
       hi: { front: "फ्रांसीसी क्रांति की तिथि क्या है?", back: "1789 (14 जुलाई 1789 को बास्तील का पतन)।" },
       pt: { front: "Qual é a data da Revolução Francesa?", back: "1789 (tomada da Bastilha em 14 de julho de 1789)." },
+      en: { front: 'What is the date of the French Revolution?', back: '1789 (storming of the Bastille on 14 July 1789).' },
+      tr: { front: 'Fransız Devrimi\'nin tarihi nedir?', back: '1789 (14 Temmuz 1789\'da Bastille\'in alınışı).' },
     },
   },
   {
@@ -1287,6 +1481,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "چه کسی بردگی را به‌طور قطعی در فرانسه لغو کرد؟", back: "ویکتور شولشر، با فرمان ۲۷ آوریل ۱۸۴۸." },
       hi: { front: "फ्रांस में दासता को निश्चित रूप से किसने समाप्त किया?", back: "विक्टर शोएल्शर, 27 अप्रैल 1848 के आदेश द्वारा।" },
       pt: { front: "Quem aboliu definitivamente a escravidão na França?", back: "Victor Schœlcher, pelo decreto de 27 de abril de 1848." },
+      en: { front: 'Who definitively abolished slavery in France?', back: 'Victor Schœlcher, by the decree of 27 April 1848.' },
+      tr: { front: 'Fransa\'da köleliği kesin olarak kim kaldırdı?', back: 'Victor Schœlcher, 27 Nisan 1848 kararnamesiyle.' },
     },
   },
   {
@@ -1300,6 +1496,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "جنگ جهانی اول چه زمانی رخ داد؟", back: "از ۱۹۱۴ تا ۱۹۱۸." },
       hi: { front: "प्रथम विश्व युद्ध कब हुआ?", back: "1914 से 1918 तक।" },
       pt: { front: "Quando ocorreu a Primeira Guerra Mundial?", back: "De 1914 a 1918." },
+      en: { front: 'When did the First World War take place?', back: 'From 1914 to 1918.' },
+      tr: { front: 'Birinci Dünya Savaşı ne zaman gerçekleşti?', back: '1914\'ten 1918\'e kadar.' },
     },
   },
   {
@@ -1313,6 +1511,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "جنگ جهانی دوم چه زمانی رخ داد؟", back: "از ۱۹۳۹ تا ۱۹۴۵." },
       hi: { front: "द्वितीय विश्व युद्ध कब हुआ?", back: "1939 से 1945 तक।" },
       pt: { front: "Quando ocorreu a Segunda Guerra Mundial?", back: "De 1939 a 1945." },
+      en: { front: 'When did the Second World War take place?', back: 'From 1939 to 1945.' },
+      tr: { front: 'İkinci Dünya Savaşı ne zaman gerçekleşti?', back: '1939\'dan 1945\'e kadar.' },
     },
   },
   {
@@ -1326,6 +1526,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "عصر روشنگری چیست؟", back: "قرن هجدهم، مشخص با خرد، آزادی و پیشرفت (ولتر، روسو، مونتسکیو)." },
       hi: { front: "प्रबोधन काल क्या है?", back: "18वीं शताब्दी, तर्क, स्वतंत्रता और प्रगति से चिह्नित (वॉल्तेर, रूसो, मॉन्तेस्क्यू)।" },
       pt: { front: "O que é o Século das Luzes?", back: "O século XVIII, marcado pela razão, liberdade e progresso (Voltaire, Rousseau, Montesquieu)." },
+      en: { front: 'What is the Age of Enlightenment?', back: 'The 18th century, marked by reason, liberty and progress (Voltaire, Rousseau, Montesquieu).' },
+      tr: { front: 'Aydınlanma Çağı nedir?', back: 'Akıl, özgürlük ve ilerleme ile öne çıkan 18. yüzyıl (Voltaire, Rousseau, Montesquieu).' },
     },
   },
   {
@@ -1339,6 +1541,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "ولتر که بود؟", back: "فیلسوف عصر روشنگری، مدافع آزادی بیان و تساهل." },
       hi: { front: "वॉल्तेर कौन थे?", back: "प्रबोधन काल के दार्शनिक, अभिव्यक्ति की स्वतंत्रता और सहिष्णुता के समर्थक।" },
       pt: { front: "Quem era Voltaire?", back: "Um filósofo do Iluminismo, defensor da liberdade de expressão e da tolerância." },
+      en: { front: 'Who was Voltaire?', back: 'An Enlightenment philosopher, defender of freedom of expression and tolerance.' },
+      tr: { front: 'Voltaire kimdi?', back: 'Aydınlanma çağı filozofu; ifade özgürlüğünün ve hoşgörünün savunucusu.' },
     },
   },
   {
@@ -1352,6 +1556,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "ژان ژاک روسو که بود؟", back: "فیلسوف عصر روشنگری، نویسنده قرارداد اجتماعی، مدافع حاکمیت مردمی." },
       hi: { front: "ज्यां-ज़ाक रूसो कौन थे?", back: "प्रबोधन काल के दार्शनिक, सामाजिक अनुबंध के लेखक, जनसंप्रभुता के समर्थक।" },
       pt: { front: "Quem era Jean-Jacques Rousseau?", back: "Um filósofo do Iluminismo, autor do Contrato social, defensor da soberania popular." },
+      en: { front: 'Who was Jean-Jacques Rousseau?', back: 'An Enlightenment philosopher, author of The Social Contract, defender of popular sovereignty.' },
+      tr: { front: 'Jean-Jacques Rousseau kimdi?', back: 'Aydınlanma filozofu; Toplum Sözleşmesi\'nin yazarı, halk egemenliğinin savunucusu.' },
     },
   },
   {
@@ -1365,6 +1571,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مونتسکیو که بود؟", back: "فیلسوفی که تفکیک قوا را نظریه‌پردازی کرد (روح القوانین، ۱۷۴۸)." },
       hi: { front: "मॉन्तेस्क्यू कौन थे?", back: "एक दार्शनिक जिन्होंने शक्तियों के पृथक्करण का सिद्धांत दिया (कानूनों की आत्मा, 1748)।" },
       pt: { front: "Quem era Montesquieu?", back: "Um filósofo que teorizou a separação dos poderes (O Espírito das Leis, 1748)." },
+      en: { front: 'Who was Montesquieu?', back: 'A philosopher who theorized the separation of powers (The Spirit of the Laws, 1748).' },
+      tr: { front: 'Montesquieu kimdi?', back: 'Kuvvetler ayrılığını kuramlaştıran filozof (Yasaların Ruhu, 1748).' },
     },
   },
   {
@@ -1378,6 +1586,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانسه چند منطقه دارد؟", back: "۱۸ منطقه: ۱۳ متروپل + ۵ فرادریایی." },
       hi: { front: "फ्रांस में कितने क्षेत्र हैं?", back: "18 क्षेत्र: 13 मुख्य भूमि + 5 समुद्रपार।" },
       pt: { front: "Quantas regiões a França tem?", back: "18 regiões: 13 metropolitanas + 5 ultramarinas." },
+      en: { front: 'How many regions does France have?', back: '18 regions: 13 in mainland France + 5 overseas.' },
+      tr: { front: 'Fransa\'da kaç bölge vardır?', back: '18 bölge: 13 anakara + 5 denizaşırı.' },
     },
   },
   {
@@ -1391,6 +1601,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "پایتخت فرانسه کجاست؟", back: "پاریس." },
       hi: { front: "फ्रांस की राजधानी क्या है?", back: "पेरिस।" },
       pt: { front: "Qual é a capital da França?", back: "Paris." },
+      en: { front: 'What is the capital of France?', back: 'Paris.' },
+      tr: { front: 'Fransa\'nın başkenti neresidir?', back: 'Paris.' },
     },
   },
   {
@@ -1404,6 +1616,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "سرزمین‌های فرادریایی فرانسه کدامند؟", back: "گوادلوپ، مارتینیک، گویان، رئونیون، مایوت و سایر نهادها." },
       hi: { front: "फ्रांस के समुद्रपार प्रदेश कौन से हैं?", back: "ग्वाडेलूप, मार्टीनिक, गयाना, ला रेयूनियन, मायोट और अन्य निकाय।" },
       pt: { front: "Quais são os territórios franceses ultramarinos?", back: "Guadalupe, Martinica, Guiana, Reunião, Mayotte e outras coletividades." },
+      en: { front: 'What are the French overseas territories?', back: 'Guadeloupe, Martinique, Guyana, La Réunion, Mayotte and other collectivities.' },
+      tr: { front: 'Fransa\'nın denizaşırı toprakları nelerdir?', back: 'Guadeloupe, Martinique, Guyana, La Réunion, Mayotte ve diğer birimler.' },
     },
   },
   {
@@ -1417,6 +1631,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کدام رود از پاریس عبور می‌کند؟", back: "رود سِن." },
       hi: { front: "कौन सी नदी पेरिस से होकर बहती है?", back: "सीन नदी।" },
       pt: { front: "Qual rio atravessa Paris?", back: "O Sena." },
+      en: { front: 'Which river flows through Paris?', back: 'The Seine.' },
+      tr: { front: 'Paris\'in içinden geçen nehir hangisidir?', back: 'Sen Nehri.' },
     },
   },
   {
@@ -1430,6 +1646,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "طولانی‌ترین رود فرانسه کدام است؟", back: "رود لوآر (حدود ۱۰۱۲ کیلومتر)." },
       hi: { front: "फ्रांस की सबसे लंबी नदी कौन सी है?", back: "लोयर (लगभग 1,012 किमी)।" },
       pt: { front: "Qual é o rio mais longo da França?", back: "O Loire (aproximadamente 1.012 km)." },
+      en: { front: 'What is the longest river in France?', back: 'The Loire (about 1,012 km).' },
+      tr: { front: 'Fransa\'nın en uzun nehri hangisidir?', back: 'Loire (yaklaşık 1.012 km).' },
     },
   },
   {
@@ -1443,6 +1661,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "بلندترین نقطه فرانسه کجاست؟", back: "مون‌بلان (۴۸۰۸ متر)، در آلپ." },
       hi: { front: "फ्रांस का सबसे ऊँचा बिंदु कौन सा है?", back: "मोन ब्लां (4,808 मी), आल्प्स में।" },
       pt: { front: "Qual é o ponto mais alto da França?", back: "O Mont Blanc (4.808 m), nos Alpes." },
+      en: { front: 'What is the highest point in France?', back: 'Mont Blanc (4,808 m), in the Alps.' },
+      tr: { front: 'Fransa\'nın en yüksek noktası neresidir?', back: 'Alpler\'deki Mont Blanc (4.808 m).' },
     },
   },
   {
@@ -1456,6 +1676,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "۱۱ نوامبر یادبود چیست؟", back: "آتش‌بس ۱۹۱۸، پایان جنگ جهانی اول." },
       hi: { front: "11 नवंबर किसकी स्मृति में है?", back: "1918 का युद्धविराम, प्रथम विश्व युद्ध की समाप्ति।" },
       pt: { front: "O que comemora o 11 de novembro?", back: "O armistício de 1918, fim da Primeira Guerra Mundial." },
+      en: { front: 'What does 11 November commemorate?', back: 'The armistice of 1918, the end of the First World War.' },
+      tr: { front: '11 Kasım neyi anar?', back: '1918 Mütarekesi\'ni, Birinci Dünya Savaşı\'nın sona erişini.' },
     },
   },
   {
@@ -1469,6 +1691,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "۸ مه یادبود چیست؟", back: "پیروزی متفقین بر آلمان نازی در ۱۹۴۵." },
       hi: { front: "8 मई किसकी स्मृति में है?", back: "1945 में नाज़ी जर्मनी पर मित्र राष्ट्रों की विजय।" },
       pt: { front: "O que comemora o 8 de maio?", back: "A vitória dos Aliados sobre a Alemanha nazista em 1945." },
+      en: { front: 'What does 8 May commemorate?', back: 'The victory of the Allies over Nazi Germany in 1945.' },
+      tr: { front: '8 Mayıs neyi anar?', back: 'Müttefiklerin 1945\'te Nazi Almanyası\'na karşı zaferini.' },
     },
   },
   {
@@ -1482,6 +1706,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "ژاندارک که بود؟", back: "قهرمان ملی که در جنگ صدساله (قرن پانزدهم) به آزادسازی فرانسه کمک کرد." },
       hi: { front: "जोन ऑफ आर्क कौन थीं?", back: "एक राष्ट्रीय वीरांगना जिन्होंने सौ साल के युद्ध (15वीं शताब्दी) में फ्रांस को मुक्त कराने में मदद की।" },
       pt: { front: "Quem era Joana d'Arc?", back: "Uma heroína nacional que ajudou a libertar a França durante a Guerra dos Cem Anos (século XV)." },
+      en: { front: 'Who was Joan of Arc?', back: 'A national heroine who helped liberate France during the Hundred Years\' War (15th century).' },
+      tr: { front: 'Jeanne d\'Arc kimdi?', back: 'Yüzyıl Savaşı sırasında Fransa\'nın özgürleşmesine yardım eden ulusal kahraman (15. yüzyıl).' },
     },
   },
   {
@@ -1495,6 +1721,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "ناپلئون بناپارت که بود؟", back: "ژنرالی که امپراتور شد (۱۸۰۴-۱۸۱۵)، اداره کشور را مدرن و قانون مدنی را تدوین کرد." },
       hi: { front: "नेपोलियन बोनापार्ट कौन थे?", back: "एक जनरल जो सम्राट बने (1804-1815), प्रशासन का आधुनिकीकरण किया और नागरिक संहिता बनाई।" },
       pt: { front: "Quem era Napoleão Bonaparte?", back: "Um general que se tornou imperador (1804-1815), modernizou a administração e criou o Código civil." },
+      en: { front: 'Who was Napoleon Bonaparte?', back: 'A general who became emperor (1804-1814/1815), who modernized the administration and created the Civil Code.' },
+      tr: { front: 'Napoléon Bonaparte kimdi?', back: 'İmparator olan general (1804-1814/1815); yönetimi modernleştirdi ve Medeni Kanun\'u oluşturdu.' },
     },
   },
   {
@@ -1508,6 +1736,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "قانون مدنی چیست؟", back: "مجموعه قوانینی که در ۱۸۰۴ تحت حکومت ناپلئون تدوین شد و زندگی مدنی فرانسویان را تنظیم می‌کند." },
       hi: { front: "नागरिक संहिता क्या है?", back: "1804 में नेपोलियन के शासनकाल में बनाया गया कानूनों का संग्रह, जो फ्रांसीसियों के नागरिक जीवन को नियंत्रित करता है।" },
       pt: { front: "O que é o Código civil?", back: "Uma coletânea de leis criada em 1804 sob Napoleão, que rege a vida civil dos franceses." },
+      en: { front: 'What is the Civil Code?', back: 'A body of laws created in 1804 under Napoleon, governing the civil life of the French.' },
+      tr: { front: 'Medeni Kanun (Code civil) nedir?', back: '1804\'te Napoléon döneminde oluşturulan, Fransızların medeni yaşamını düzenleyen yasa derlemesi.' },
     },
   },
   {
@@ -1521,6 +1751,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شارل دوگل که بود؟", back: "رهبر فرانسه آزاد در جنگ جهانی دوم و بنیان‌گذار جمهوری پنجم." },
       hi: { front: "शार्ल दो गॉल कौन थे?", back: "द्वितीय विश्व युद्ध में स्वतंत्र फ्रांस के नेता और पाँचवें गणराज्य के संस्थापक।" },
       pt: { front: "Quem era Charles de Gaulle?", back: "Líder da França Livre durante a Segunda Guerra Mundial e fundador da V República." },
+      en: { front: 'Who was Charles de Gaulle?', back: 'Leader of Free France during the Second World War and founder of the Fifth Republic.' },
+      tr: { front: 'Charles de Gaulle kimdi?', back: 'İkinci Dünya Savaşı\'nda Özgür Fransa\'nın lideri ve Beşinci Cumhuriyet\'in kurucusu.' },
     },
   },
   {
@@ -1534,6 +1766,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانسه اولین بار چه زمانی جمهوری شد؟", back: "۲۲ سپتامبر ۱۷۹۲ (جمهوری اول)." },
       hi: { front: "फ्रांस पहली बार कब गणराज्य बना?", back: "22 सितंबर 1792 (प्रथम गणराज्य)।" },
       pt: { front: "Quando a França se tornou uma República pela primeira vez?", back: "22 de setembro de 1792 (I República)." },
+      en: { front: 'When did France become a Republic for the first time?', back: '22 September 1792 (First Republic).' },
+      tr: { front: 'Fransa ilk kez ne zaman Cumhuriyet oldu?', back: '22 Eylül 1792 (Birinci Cumhuriyet).' },
     },
   },
   {
@@ -1547,6 +1781,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مقاومت فرانسه چیست؟", back: "جنبش مبارزه با اشغال نازی و رژیم ویشی (۱۹۴۰-۱۹۴۴)." },
       hi: { front: "प्रतिरोध (रेजिस्तांस) क्या है?", back: "नाज़ी कब्ज़े और विशी शासन के खिलाफ संघर्ष आंदोलन (1940-1944)।" },
       pt: { front: "O que é a Resistência?", back: "O movimento de luta contra a ocupação nazista e o regime de Vichy (1940-1944)." },
+      en: { front: 'What was the Resistance?', back: 'The movement that fought against the Nazi occupation and the Vichy regime (1940-1944).' },
+      tr: { front: 'Direniş (Résistance) nedir?', back: 'Nazi işgaline ve Vichy rejimine karşı savaşan hareket (1940-1944).' },
     },
   },
   {
@@ -1560,6 +1796,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "اتحادیه اروپا چیست؟", back: "اتحادیه سیاسی و اقتصادی ۲۷ کشور عضو که فرانسه عضو مؤسس آن است." },
       hi: { front: "यूरोपीय संघ क्या है?", back: "27 सदस्य देशों का राजनीतिक और आर्थिक संघ, जिसमें फ्रांस संस्थापक सदस्य है।" },
       pt: { front: "O que é a União Europeia?", back: "Uma união política e econômica de 27 Estados-membros da qual a França é membro fundador." },
+      en: { front: 'What is the European Union?', back: 'A political and economic union of 27 member states, of which France is a founding member.' },
+      tr: { front: 'Avrupa Birliği nedir?', back: '27 üye devletten oluşan siyasi ve ekonomik birlik; Fransa kurucu üyedir.' },
     },
   },
   {
@@ -1573,6 +1811,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "پیمان رُم چه زمانی امضا شد؟", back: "۲۵ مارس ۱۹۵۷، با ایجاد جامعه اقتصادی اروپا." },
       hi: { front: "रोम की संधि कब हस्ताक्षरित हुई?", back: "25 मार्च 1957, यूरोपीय आर्थिक समुदाय की स्थापना करते हुए।" },
       pt: { front: "Quando o Tratado de Roma foi assinado?", back: "25 de março de 1957, criando a Comunidade Econômica Europeia." },
+      en: { front: 'When was the Treaty of Rome signed?', back: 'On 25 March 1957, creating the European Economic Community.' },
+      tr: { front: 'Roma Antlaşması ne zaman imzalandı?', back: '25 Mart 1957\'de; Avrupa Ekonomik Topluluğu\'nu kurdu.' },
     },
   },
   {
@@ -1586,6 +1826,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانسه از چه واحد پولی استفاده می‌کند؟", back: "یورو (€)، از اول ژانویه ۲۰۰۲." },
       hi: { front: "फ्रांस कौन सी मुद्रा उपयोग करता है?", back: "यूरो (€), 1 जनवरी 2002 से।" },
       pt: { front: "Qual moeda a França utiliza?", back: "O euro (€), desde 1.º de janeiro de 2002." },
+      en: { front: 'Which currency does France use?', back: 'The euro (€), since 1 January 2002.' },
+      tr: { front: 'Fransa hangi parayı kullanır?', back: 'Avro (€), 1 Ocak 2002\'den beri.' },
     },
   },
   {
@@ -1599,6 +1841,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "بزرگ‌ترین کشور همسایه فرانسه کدام است؟", back: "اسپانیا در جنوب، با حدود ۶۲۳ کیلومتر مرز." },
       hi: { front: "फ्रांस का सबसे बड़ा सीमावर्ती देश कौन सा है?", back: "दक्षिण में स्पेन, लगभग 623 किमी सीमा के साथ।" },
       pt: { front: "Qual é o maior país limítrofe da França?", back: "A Espanha ao sul, com aproximadamente 623 km de fronteira." },
+      en: { front: 'Which is France\'s largest neighboring country?', back: 'Spain to the south, with about 623 km of border.' },
+      tr: { front: 'Fransa\'nın en geniş sınırdaş ülkesi hangisidir?', back: 'Güneyde İspanya; yaklaşık 623 km sınırla.' },
     },
   },
   {
@@ -1612,6 +1856,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "جمعیت تقریبی فرانسه چقدر است؟", back: "حدود ۶۸ میلیون نفر." },
       hi: { front: "फ्रांस की अनुमानित जनसंख्या कितनी है?", back: "लगभग 68 मिलियन निवासी।" },
       pt: { front: "Qual é a população aproximada da França?", back: "Aproximadamente 68 milhões de habitantes." },
+      en: { front: 'What is the approximate population of France?', back: 'About 68 million inhabitants.' },
+      tr: { front: 'Fransa\'nın yaklaşık nüfusu nedir?', back: 'Yaklaşık 68 milyon kişi.' },
     },
   },
   {
@@ -1625,6 +1871,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شکل جغرافیایی فرانسه متروپل چیست؟", back: "شش‌ضلعی، به همین دلیل لقب «هگزاگون» دارد." },
       hi: { front: "मुख्य भूमि फ्रांस का भौगोलिक आकार क्या है?", back: "एक षट्भुज, इसीलिए इसका उपनाम «हेक्सागोन» है।" },
       pt: { front: "Qual é a forma geográfica da França metropolitana?", back: "Um hexágono, daí o apelido «o Hexágono»." },
+      en: { front: 'What is the geographical shape of metropolitan France?', back: 'A hexagon, hence the nickname «the Hexagon».' },
+      tr: { front: 'Anakara Fransa\'sının coğrafi biçimi nedir?', back: 'Altıgen; bu nedenle «Hexagone» (Altıgen) lakabıyla anılır.' },
     },
   },
   {
@@ -1638,6 +1886,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مشهورترین بنای پاریس کدام است؟", back: "برج ایفل، ساخته گوستاو ایفل برای نمایشگاه جهانی ۱۸۸۹." },
       hi: { front: "पेरिस का सबसे प्रसिद्ध स्मारक कौन सा है?", back: "एफ़िल टावर, 1889 की विश्व प्रदर्शनी के लिए गुस्ताव एफ़िल द्वारा निर्मित।" },
       pt: { front: "Qual é o monumento mais famoso de Paris?", back: "A Torre Eiffel, construída por Gustave Eiffel para a Exposição Universal de 1889." },
+      en: { front: 'What is the most famous monument in Paris?', back: 'The Eiffel Tower, built by Gustave Eiffel for the 1889 World\'s Fair.' },
+      tr: { front: 'Paris\'in en ünlü anıtı nedir?', back: '1889 Dünya Fuarı için Gustave Eiffel tarafından inşa edilen Eyfel Kulesi.' },
     },
   },
   {
@@ -1651,6 +1901,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانکوفونی چیست؟", back: "مجموعه کشورها و جوامعی که زبان فرانسوی را مشترک دارند (۸۸ کشور و دولت)." },
       hi: { front: "फ्रैंकोफ़ोनी क्या है?", back: "फ्रेंच भाषा साझा करने वाले देशों और समुदायों का समूह (88 राज्य और सरकारें)।" },
       pt: { front: "O que é a Francofonia?", back: "O conjunto de países e comunidades que compartilham o francês (88 Estados e governos)." },
+      en: { front: 'What is the Francophonie?', back: 'The community of countries and groups sharing the French language (88 states and governments).' },
+      tr: { front: 'Frankofoni nedir?', back: 'Fransızcayı ortak paylaşan ülkelerin ve toplulukların bütünü (88 devlet ve hükümet).' },
     },
   },
 
@@ -1668,6 +1920,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "در فوریت پزشکی با چه شماره‌ای تماس بگیرید؟", back: "۱۵ (سامو — اورژانس پزشکی)." },
       hi: { front: "चिकित्सा आपातकाल में कौन सा नंबर कॉल करें?", back: "15 (SAMU)।" },
       pt: { front: "Qual número ligar em caso de urgência médica?", back: "O 15 (SAMU)." },
+      en: { front: 'Which number to call in case of a medical emergency?', back: '15 (SAMU, the medical emergency service).' },
+      tr: { front: 'Tıbbi acil durumda hangi numara aranır?', back: '15 (SAMU; tıbbi acil servisi).' },
     },
   },
   {
@@ -1681,6 +1935,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شماره آتش‌نشانی چیست؟", back: "۱۸." },
       hi: { front: "दमकल का नंबर क्या है?", back: "18।" },
       pt: { front: "Qual é o número dos bombeiros?", back: "O 18." },
+      en: { front: 'What is the fire brigade number?', back: '18.' },
+      tr: { front: 'İtfaiyenin numarası nedir?', back: '18.' },
     },
   },
   {
@@ -1694,6 +1950,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شماره پلیس/ژاندارمری چیست؟", back: "۱۷." },
       hi: { front: "पुलिस/जेंडरमरी का नंबर क्या है?", back: "17।" },
       pt: { front: "Qual é o número da polícia/gendarmaria?", back: "O 17." },
+      en: { front: 'What is the number for the police/gendarmerie?', back: '17.' },
+      tr: { front: 'Polis/jandarma numarası nedir?', back: '17.' },
     },
   },
   {
@@ -1707,6 +1965,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شماره اورژانس اروپایی چیست؟", back: "۱۱۲، در سراسر اتحادیه اروپا قابل دسترسی." },
       hi: { front: "यूरोपीय आपातकालीन नंबर क्या है?", back: "112, पूरे यूरोपीय संघ में उपलब्ध।" },
       pt: { front: "Qual é o número de emergência europeu?", back: "O 112, acessível em toda a União Europeia." },
+      en: { front: 'What is the European emergency number?', back: '112, available throughout the European Union.' },
+      tr: { front: 'Avrupa acil durum numarası nedir?', back: '112; Avrupa Birliği genelinde erişilebilir.' },
     },
   },
   {
@@ -1720,6 +1980,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کارت ویتال چیست؟", back: "کارت بیمه بهداشتی که بازپرداخت هزینه درمان را ممکن می‌سازد." },
       hi: { front: "कार्ट विटाल क्या है?", back: "स्वास्थ्य बीमा कार्ड जो उपचार की प्रतिपूर्ति की अनुमति देता है।" },
       pt: { front: "O que é o cartão Vitale?", back: "O cartão de seguro saúde que permite o reembolso dos cuidados." },
+      en: { front: 'What is the Carte Vitale?', back: 'The health insurance card that allows the reimbursement of medical care.' },
+      tr: { front: 'Carte Vitale nedir?', back: 'Sağlık masraflarının geri ödenmesini sağlayan sağlık sigortası kartı.' },
     },
   },
   {
@@ -1733,6 +1995,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تأمین اجتماعی چیست؟", back: "نظام حمایت اجتماعی که بیماری، بازنشستگی، خانواده و حوادث کار را پوشش می‌دهد." },
       hi: { front: "सामाजिक सुरक्षा क्या है?", back: "सामाजिक सुरक्षा प्रणाली जो बीमारी, सेवानिवृत्ति, परिवार और कार्य दुर्घटनाओं को कवर करती है।" },
       pt: { front: "O que é a Seguridade social?", back: "O sistema de proteção social que cobre doença, aposentadoria, família e acidentes de trabalho." },
+      en: { front: 'What is the Sécurité sociale (French social security)?', back: 'The social protection system that covers illness, retirement, family and workplace accidents.' },
+      tr: { front: 'Sécurité sociale (Fransız sosyal güvenliği) nedir?', back: 'Hastalık, emeklilik, aile ve iş kazalarını kapsayan sosyal koruma sistemi.' },
     },
   },
   {
@@ -1746,6 +2010,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "تأمین اجتماعی چه زمانی ایجاد شد؟", back: "در ۱۹۴۵، پس از آزادسازی." },
       hi: { front: "सामाजिक सुरक्षा कब बनाई गई?", back: "1945 में, मुक्ति के बाद।" },
       pt: { front: "Quando a Seguridade social foi criada?", back: "Em 1945, após a Libertação." },
+      en: { front: 'When was the Sécurité sociale created?', back: 'In 1945, after the Liberation.' },
+      tr: { front: 'Sécurité sociale ne zaman kuruldu?', back: 'Kurtuluş\'tan sonra, 1945\'te.' },
     },
   },
   {
@@ -1759,6 +2025,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "فرانس تراوای (پُل آمپلوا سابق) چیست؟", back: "سازمان دولتی که به جویندگان کار در یافتن شغل کمک می‌کند." },
       hi: { front: "फ्रांस ट्रावाय (पूर्व में पोल आंप्लुआ) क्या है?", back: "सरकारी संस्था जो नौकरी चाहने वालों को रोजगार खोजने में मदद करती है।" },
       pt: { front: "O que é France Travail (antigo Pôle emploi)?", back: "O órgão público que ajuda os candidatos a emprego a encontrar trabalho." },
+      en: { front: 'What is France Travail (formerly Pôle emploi)?', back: 'The public agency that helps jobseekers find work.' },
+      tr: { front: 'France Travail (eski adıyla Pôle emploi) nedir?', back: 'İş arayanlara iş bulmada yardım eden kamu kurumu.' },
     },
   },
   {
@@ -1772,6 +2040,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مبلغ تقریبی حداقل دستمزد خالص ماهانه چقدر است؟", back: "حدود ۱۴۰۰ یورو خالص در ماه (۲۰۲۴)." },
       hi: { front: "SMIC का अनुमानित मासिक शुद्ध वेतन कितना है?", back: "लगभग 1,400 यूरो शुद्ध प्रति माह (2024)।" },
       pt: { front: "Qual é o valor aproximado do SMIC líquido mensal?", back: "Aproximadamente 1.400 euros líquidos por mês (2024)." },
+      en: { front: 'What is the approximate monthly net SMIC?', back: 'About 1,400 euros net per month (2024).' },
+      tr: { front: 'Aylık net SMIC yaklaşık ne kadardır?', back: 'Ayda yaklaşık 1.400 avro net (2024).' },
     },
   },
   {
@@ -1785,6 +2055,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "SMIC چیست؟", back: "حداقل دستمزد بین‌حرفه‌ای رشد، حداقل دستمزد قانونی ساعتی." },
       hi: { front: "SMIC क्या है?", back: "न्यूनतम अंतर-व्यावसायिक वृद्धि वेतन, कानूनी न्यूनतम प्रति घंटा वेतन।" },
       pt: { front: "O que é o SMIC?", back: "O Salário Mínimo Interprofissional de Crescimento, o salário mínimo legal por hora." },
+      en: { front: 'What is the SMIC?', back: 'The Interprofessional Minimum Growth Wage (Salaire Minimum Interprofessionnel de Croissance), the legal minimum hourly wage.' },
+      tr: { front: 'SMIC nedir?', back: 'Meslekler Arası Asgari Büyüme Ücreti (Salaire Minimum Interprofessionnel de Croissance); yasal asgari saatlik ücret.' },
     },
   },
   {
@@ -1798,6 +2070,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "قرارداد ادغام جمهوری (CIR) چیست؟", back: "قراردادی که مهاجران تازه‌وارد امضا می‌کنند شامل آموزش زبانی و مدنی." },
       hi: { front: "CIR (गणतांत्रिक एकीकरण अनुबंध) क्या है?", back: "नए आने वाले विदेशियों द्वारा हस्ताक्षरित अनुबंध जिसमें भाषाई और नागरिक प्रशिक्षण शामिल है।" },
       pt: { front: "O que é o CIR (Contrato de Integração Republicana)?", back: "Um contrato assinado pelos estrangeiros recém-chegados incluindo formação linguística e cívica." },
+      en: { front: 'What is the CIR (Republican Integration Contract)?', back: 'A contract signed by newly arrived foreigners, including language and civic training.' },
+      tr: { front: 'CIR (Cumhuriyet Uyum Sözleşmesi) nedir?', back: 'Yeni gelen yabancılar tarafından imzalanan, dil ve yurttaşlık eğitimini içeren sözleşme.' },
     },
   },
   {
@@ -1811,6 +2085,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا مهدکودک اجباری است؟", back: "بله، آموزش از ۳ سالگی از سال ۲۰۱۹ اجباری است." },
       hi: { front: "क्या नर्सरी स्कूल अनिवार्य है?", back: "हाँ, 2019 से 3 वर्ष की आयु से शिक्षा अनिवार्य है।" },
       pt: { front: "A escola maternal é obrigatória?", back: "Sim, a instrução é obrigatória a partir dos 3 anos desde 2019." },
+      en: { front: 'Is preschool (école maternelle) compulsory?', back: 'Yes, instruction has been compulsory from age 3 since 2019.' },
+      tr: { front: 'Anaokulu (école maternelle) zorunlu mudur?', back: 'Evet, 2019\'dan beri eğitim 3 yaşından itibaren zorunludur.' },
     },
   },
   {
@@ -1824,6 +2100,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "مدت قانونی کار هفتگی در فرانسه چقدر است؟", back: "۳۵ ساعت در هفته." },
       hi: { front: "फ्रांस में साप्ताहिक कानूनी कार्य अवधि कितनी है?", back: "प्रति सप्ताह 35 घंटे।" },
       pt: { front: "Qual é a duração legal do trabalho semanal na França?", back: "35 horas por semana." },
+      en: { front: 'What is the legal weekly working time in France?', back: '35 hours per week.' },
+      tr: { front: 'Fransa\'da haftalık yasal çalışma süresi nedir?', back: 'Haftada 35 saat.' },
     },
   },
   {
@@ -1837,6 +2115,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "CAF چیست؟", back: "صندوق کمک‌هزینه خانوادگی که یارانه به خانواده‌ها و افراد پرداخت می‌کند." },
       hi: { front: "CAF क्या है?", back: "पारिवारिक भत्ता कोष, जो परिवारों और व्यक्तियों को सहायता देता है।" },
       pt: { front: "O que é a CAF?", back: "A Caixa de alocações familiares, que paga auxílios às famílias e pessoas." },
+      en: { front: 'What is the CAF?', back: 'The Family Allowances Fund (Caisse d\'allocations familiales), which pays benefits to families and individuals.' },
+      tr: { front: 'CAF nedir?', back: 'Aile Yardımları Sandığı (Caisse d\'allocations familiales); ailelere ve bireylere yardım ödemesi yapar.' },
     },
   },
   {
@@ -1850,6 +2130,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کجا در لیست انتخاباتی ثبت‌نام کنید؟", back: "در شهرداری محل سکونت یا آنلاین در service-public.fr." },
       hi: { front: "मतदाता सूची में कहाँ पंजीकरण करें?", back: "अपने निवास की नगरपालिका में या ऑनलाइन service-public.fr पर।" },
       pt: { front: "Onde se inscrever nas listas eleitorais?", back: "Na prefeitura de seu domicílio ou online em service-public.fr." },
+      en: { front: 'Where to register on the electoral rolls?', back: 'At the town hall of one\'s place of residence or online at service-public.fr.' },
+      tr: { front: 'Seçmen listelerine nerede kayıt yapılır?', back: 'İkamet edilen yerin belediyesinde ya da çevrimiçi olarak service-public.fr adresinde.' },
     },
   },
   {
@@ -1863,6 +2145,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "کارت اقامت چیست؟", back: "مجوز اقامتی که به یک خارجی اجازه سکونت در فرانسه را می‌دهد." },
       hi: { front: "निवास कार्ड (कार्ट दो सेजूर) क्या है?", back: "एक निवास परमिट जो विदेशी को फ्रांस में रहने का अधिकार देता है।" },
       pt: { front: "O que é o cartão de residência?", back: "Um título de residência que autoriza um estrangeiro a residir na França." },
+      en: { front: 'What is the residence card (carte de séjour)?', back: 'A residence permit authorizing a foreigner to live in France.' },
+      tr: { front: 'Oturma kartı (carte de séjour) nedir?', back: 'Bir yabancıya Fransa\'da ikamet izni veren oturma belgesi.' },
     },
   },
   {
@@ -1876,6 +2160,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "RSA چیست؟", back: "درآمد همبستگی فعال، کمک مالی برای افراد بدون منابع کافی." },
       hi: { front: "RSA क्या है?", back: "सक्रिय एकजुटता आय, अपर्याप्त संसाधनों वाले लोगों के लिए वित्तीय सहायता।" },
       pt: { front: "O que é o RSA?", back: "A Renda de Solidariedade Ativa, ajuda financeira para pessoas sem recursos suficientes." },
+      en: { front: 'What is the RSA?', back: 'The Active Solidarity Income (Revenu de Solidarité Active), financial aid for people without sufficient resources.' },
+      tr: { front: 'RSA nedir?', back: 'Aktif Dayanışma Geliri (Revenu de Solidarité Active); yeterli geliri olmayan kişilere yapılan mali yardım.' },
     },
   },
   {
@@ -1889,6 +2175,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "نقش شهرداری چیست؟", back: "اداره شهرک: ثبت احوال، شهرسازی، مدارس، امور اجتماعی و زندگی محلی." },
       hi: { front: "नगरपालिका (मैरी) की भूमिका क्या है?", back: "नगर का प्रशासन: सिविल रजिस्ट्री, शहरी नियोजन, स्कूल, सामाजिक सेवाएँ और स्थानीय जीवन।" },
       pt: { front: "Qual é o papel da prefeitura?", back: "Administrar o município: registro civil, urbanismo, escolas, assistência social e vida local." },
+      en: { front: 'What is the role of the mairie (town hall)?', back: 'To administer the commune: civil registry, urban planning, schools, social affairs and local life.' },
+      tr: { front: 'Belediyenin (mairie) görevi nedir?', back: 'Komünü yönetmek: nüfus kayıtları, kentsel planlama, okullar, sosyal işler ve yerel yaşam.' },
     },
   },
   {
@@ -1902,6 +2190,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "حداقل مرخصی با حقوق سالانه چند روز است؟", back: "۵ هفته، یعنی ۲۵ روز کاری." },
       hi: { front: "प्रति वर्ष न्यूनतम कितने सवैतनिक अवकाश दिवस हैं?", back: "5 सप्ताह, यानी 25 कार्य दिवस।" },
       pt: { front: "Quantos dias de férias pagas no mínimo por ano?", back: "5 semanas, ou seja, 25 dias úteis." },
+      en: { front: 'What is the minimum number of paid leave days per year?', back: '5 weeks, or 25 working days.' },
+      tr: { front: 'Yıllık asgari ücretli izin kaç gündür?', back: '5 hafta, yani 25 iş günü.' },
     },
   },
   {
@@ -1915,6 +2205,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "OFII چیست؟", back: "دفتر فرانسوی مهاجرت و ادغام که پذیرش خارجیان را مدیریت می‌کند." },
       hi: { front: "OFII क्या है?", back: "फ्रांसीसी आप्रवासन और एकीकरण कार्यालय, जो विदेशियों के स्वागत का प्रबंधन करता है।" },
       pt: { front: "O que é o OFII?", back: "O Escritório francês de imigração e integração, que gerencia o acolhimento de estrangeiros." },
+      en: { front: 'What is the OFII?', back: 'The French Office of Immigration and Integration, which manages the reception of foreigners.' },
+      tr: { front: 'OFII nedir?', back: 'Fransız Göç ve Uyum Ofisi; yabancıların kabulünü yönetir.' },
     },
   },
   {
@@ -1928,6 +2220,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "گواهی تولد چیست؟", back: "سند رسمی صادره از شهرداری که تولد یک فرد را تأیید می‌کند." },
       hi: { front: "जन्म प्रमाण पत्र क्या है?", back: "नगरपालिका द्वारा जारी आधिकारिक दस्तावेज़ जो किसी व्यक्ति के जन्म को प्रमाणित करता है।" },
       pt: { front: "O que é uma certidão de nascimento?", back: "Um documento oficial emitido pela prefeitura que atesta o nascimento de uma pessoa." },
+      en: { front: 'What is a birth certificate?', back: 'An official document issued by the mairie certifying a person\'s birth.' },
+      tr: { front: 'Doğum belgesi (acte de naissance) nedir?', back: 'Belediye tarafından düzenlenen, bir kişinin doğumunu belgeleyen resmi belge.' },
     },
   },
   {
@@ -1941,6 +2235,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "آیا گواهینامه رانندگی برای رانندگی اجباری است؟", back: "بله، رانندگی بدون گواهینامه جرم است و مجازات قانونی دارد." },
       hi: { front: "क्या गाड़ी चलाने के लिए ड्राइविंग लाइसेंस अनिवार्य है?", back: "हाँ, बिना लाइसेंस गाड़ी चलाना कानून द्वारा दंडनीय अपराध है।" },
       pt: { front: "A carteira de motorista é obrigatória para dirigir?", back: "Sim, dirigir sem carteira é um delito punido por lei." },
+      en: { front: 'Is a driving license required to drive?', back: 'Yes, driving without a license is an offense punishable by law.' },
+      tr: { front: 'Araç kullanmak için ehliyet zorunlu mudur?', back: 'Evet, ehliyetsiz araç kullanmak yasayla cezalandırılan bir suçtur.' },
     },
   },
   {
@@ -1954,6 +2250,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "برای خشونت خانگی با چه شماره‌ای تماس بگیرید؟", back: "۳۹۱۹ (اطلاعات خشونت علیه زنان)." },
       hi: { front: "घरेलू हिंसा के लिए कौन सा नंबर कॉल करें?", back: "3919 (महिला हिंसा सूचना)।" },
       pt: { front: "Qual número ligar para violência conjugal?", back: "O 3919 (Violências Mulheres Info)." },
+      en: { front: 'Which number to call for domestic violence?', back: '3919 (Violences Femmes Info).' },
+      tr: { front: 'Aile içi şiddet için hangi numara aranır?', back: '3919 (Violences Femmes Info; kadına yönelik şiddet bilgi hattı).' },
     },
   },
   {
@@ -1967,6 +2265,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "شماره تماس برای کودکان در خطر چیست؟", back: "۱۱۹ (الو کودکی در خطر)." },
       hi: { front: "खतरे में बच्चों के लिए कौन सा नंबर है?", back: "119 (हैलो बचपन खतरे में)।" },
       pt: { front: "Qual número para crianças em perigo?", back: "O 119 (Alô Infância em perigo)." },
+      en: { front: 'Which number for children in danger?', back: '119 (Allô Enfance en danger).' },
+      tr: { front: 'Tehlikedeki çocuklar için hangi numara aranır?', back: '119 (Allô Enfance en danger; tehlikedeki çocuk hattı).' },
     },
   },
   {
@@ -1980,6 +2280,8 @@ export const FLASHCARDS: Flashcard[] = [
       fa: { front: "دفترچه خانوادگی چیست؟", back: "سند رسمی که هنگام ازدواج یا تولد فرزند اول ارائه می‌شود و وضعیت مدنی را خلاصه می‌کند." },
       hi: { front: "पारिवारिक रजिस्टर (लिव्रे दो फ़ामिय) क्या है?", back: "विवाह या पहले बच्चे के जन्म पर दिया जाने वाला आधिकारिक दस्तावेज़ जो सिविल स्थिति का सार देता है।" },
       pt: { front: "O que é a caderneta de família?", back: "Um documento oficial entregue no casamento ou no nascimento do primeiro filho, resumindo o estado civil." },
+      en: { front: 'What is the family record book (livret de famille)?', back: 'An official document issued upon marriage or the birth of the first child, summarizing civil status.' },
+      tr: { front: 'Aile kütüğü (livret de famille) nedir?', back: 'Evlilikte veya ilk çocuğun doğumunda verilen ve medeni durumu özetleyen resmi belge.' },
     },
   },
 ];
