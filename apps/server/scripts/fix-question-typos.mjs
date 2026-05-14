@@ -161,11 +161,11 @@ async function main() {
 
   try {
     const { rows } = await client.query(
-      `SELECT id, question_text FROM questions ORDER BY id ASC`,
+      `SELECT id, text_fr FROM questions ORDER BY id ASC`,
     );
 
     for (const row of rows) {
-      const { out, applied } = fixText(row.question_text);
+      const { out, applied } = fixText(row.text_fr);
       if (applied.length === 0) {
         untouched++;
         continue;
@@ -177,12 +177,12 @@ async function main() {
 
       // Always log the change so the operator can verify in dry run.
       console.log(`  #${row.id} [${applied.join(', ')}]`);
-      console.log(`    – ${row.question_text}`);
+      console.log(`    – ${row.text_fr}`);
       console.log(`    + ${out}`);
 
       if (APPLY) {
         await client.query(
-          `UPDATE questions SET question_text = $1 WHERE id = $2`,
+          `UPDATE questions SET text_fr = $1 WHERE id = $2`,
           [out, row.id],
         );
       }
