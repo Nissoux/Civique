@@ -174,6 +174,55 @@ export default async function AppPage() {
             <ArrowIcon />
           </Link>
         </div>
+
+        {/* NAT-specific second step: the oral assimilation interview.
+            The QCM is only one half of the naturalisation gauntlet —
+            after the dossier, candidates face a 20-40 min oral at the
+            préfecture. We surface the dedicated 240-question module
+            here only when the user targets NAT, so CSP/CR candidates
+            aren't distracted by content irrelevant to their path. */}
+        {examType === 'nat' ? (
+          <Link
+            href="/app/entretien"
+            className="
+              mt-4 card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
+              bg-aubergine !border-aubergine text-bone
+              transition-all hover:-translate-y-1 hover:shadow-clay-lg cursor-pointer
+              shadow-[0_3px_0_rgb(45_27_46)]
+            "
+          >
+            <div
+              className="
+                flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl
+                bg-saffron text-aubergine shadow-[0_2px_0_rgba(0,0,0,0.15)]
+              "
+              aria-hidden
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.8}
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.7rem] font-display italic uppercase tracking-wider text-saffron/90 mb-0.5">
+                — Étape orale naturalisation
+              </p>
+              <h3 className="font-display text-lg sm:text-xl font-medium" style={{ fontVariationSettings: "'opsz' 32" }}>
+                Entretien d'assimilation
+              </h3>
+              <p className="text-xs sm:text-sm text-bone/70">
+                240 questions types · niveau B2 oral · 20 à 40 min en préfecture
+              </p>
+            </div>
+            <svg className="shrink-0 h-5 w-5 text-bone/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        ) : null}
       </section>
 
       {/* Theme paths (client component for progression hydration) */}

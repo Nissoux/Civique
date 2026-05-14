@@ -306,7 +306,7 @@ export default async function HomePage() {
               Préparation indépendante à l'examen civique français. Sans affiliation officielle avec l'État.
             </p>
           </div>
-          <div className="col-span-1 md:col-span-2 md:col-start-7">
+          <div className="col-span-1 md:col-span-2 md:col-start-6">
             <p className="font-semibold mb-3 text-bone">Produit</p>
             <ul className="space-y-2 text-sm text-bone/70">
               <li><a href="#programme" className="hover:text-saffron">Le programme</a></li>
@@ -320,11 +320,16 @@ export default async function HomePage() {
               </li>
             </ul>
           </div>
-          <div className="col-span-1 md:col-span-2">
-            <p className="font-semibold mb-3 text-bone">Support</p>
+          <div className="col-span-1 md:col-span-3">
+            {/* Reference content — back-links the public documentation
+                pages we ship to crawlers and to anyone vetting our
+                compliance story. Big SEO + credibility win. */}
+            <p className="font-semibold mb-3 text-bone">Référence</p>
             <ul className="space-y-2 text-sm text-bone/70">
+              <li><Link href="/methodologie" className="hover:text-saffron">Méthodologie & cadre légal</Link></li>
+              <li><Link href="/livret-du-citoyen" className="hover:text-saffron">Livret du Citoyen</Link></li>
+              <li><Link href="/charte" className="hover:text-saffron">Charte des droits et devoirs</Link></li>
               <li><a href="mailto:contact@integrafle.fr" className="hover:text-saffron">Contact</a></li>
-              <li><a href="#" className="hover:text-saffron">FAQ</a></li>
             </ul>
           </div>
           <div className="col-span-2 md:col-span-2">
