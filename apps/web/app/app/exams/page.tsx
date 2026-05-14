@@ -211,7 +211,10 @@ function Stat({
       >
         {value}
       </p>
-      <p className="text-[0.6rem] sm:text-[0.7rem] uppercase tracking-wider text-ink-mute mt-1 truncate">
+      {/* Floor uppercase mini-labels at 11px (0.7rem) — below that the
+          tracking + uppercase combo becomes unreadable on small screens.
+          Mobile audit flagged the previous 0.6rem floor. */}
+      <p className="text-[0.7rem] sm:text-[0.75rem] uppercase tracking-wider text-ink-mute mt-1 truncate">
         {label}
       </p>
     </div>

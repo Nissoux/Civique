@@ -312,7 +312,10 @@ function QuestionGrid({
   return (
     <div className="card !rounded-2xl !p-4 sm:!p-5 mb-5">
       <p className="eyebrow mb-3">— Navigation</p>
-      <div className="grid grid-cols-8 sm:grid-cols-10 gap-2">
+      {/* Mobile (≤ 360px Android Chrome): keep tiles a real touch target.
+          Previous grid-cols-8 produced ~25 px squares — too small. cols-6
+          gives ~50 px per tile at 360 px viewport, comfortably > 44 px. */}
+      <div className="grid grid-cols-6 sm:grid-cols-10 gap-2">
         {Array.from({ length: total }, (_, i) => {
           const q = questions[i];
           const answered = q && q.id in answers;
