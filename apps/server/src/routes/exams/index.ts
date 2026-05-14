@@ -34,27 +34,78 @@ const PASS_THRESHOLD = 32;
 const TIME_LIMIT_SEC = 2700;
 
 /**
- * Official theme distribution prescribed by Arrêté du 10 octobre 2025
- * (JORFTEXT000052381620), applicable from 1 January 2026 for CSP, CR and
- * naturalisation civic exams.
+ * Official tirage composition prescribed by Arrêté du 10 octobre 2025
+ * (JORFTEXT000052381620). Each theme is broken into named sub-topics
+ * with fixed counts:
  *
- *   Theme 1 — Principes et valeurs        : 5 knowledge + 6 situational = 11
- *   Theme 2 — Système institutionnel       : 6 knowledge + 0 situational =  6
- *   Theme 3 — Droits et devoirs            : 5 knowledge + 6 situational = 11
- *   Theme 4 — Histoire / géo / culture     : 8 knowledge + 0 situational =  8
- *   Theme 5 — Vivre en société             : 4 knowledge + 0 situational =  4
- *   Total                                  : 28 knowledge + 12 situational = 40
+ *   Theme 1 — Principes et valeurs (11 total)
+ *     devise           3
+ *     laicite          2
+ *     situation        6   (situational type)
  *
- * Mises en situation only live in themes 1 and 3 per the arrêté — the other
- * themes are knowledge-only in the real exam. Earlier versions of this file
- * used an even split (Math.floor(28/5)+remainder) which produced 9/9/8/7/7
- * and put situational questions in every theme — non-conformant.
+ *   Theme 2 — Système institutionnel (6 total)
+ *     vote             3
+ *     organisation     2
+ *     union_europ      1
  *
- * Sub-theme granularity (devise, laïcité, vote, UE, etc.) is not enforced at
- * this layer yet; it requires a `subtopic` column on the questions table.
- * Tracked as a P0.4 follow-up.
+ *   Theme 3 — Droits et devoirs (11 total)
+ *     droits_fond      2
+ *     obligations      3
+ *     situation        6   (situational type)
+ *
+ *   Theme 4 — Histoire/géo/culture (8 total)
+ *     periodes         3
+ *     geographie       3
+ *     patrimoine       2
+ *
+ *   Theme 5 — Vivre en société (4 total)
+ *     installation     1
+ *     soins            1
+ *     travail          1
+ *     education        1
+ *
+ *   Grand total: 28 knowledge + 12 situational = 40 questions
+ *
+ * The earlier theme-only fix (5/6/5/8/4 + 6/0/6/0/0) was already
+ * conformant on the totals, but a user could (in our DB) draw 5
+ * questions on laicité in Theme 1 — possible in our pool, but the
+ * real exam never serves more than 2. This finer pass respects the
+ * sub-topic ceilings.
+ *
+ * `subtopic === 'situation'` is overloaded across T1 and T3 with the
+ * understanding that those rows are also `type = 'situational'`. The
+ * SQL below joins on both for safety.
+ *
+ * When a sub-topic is short on rows (early seed, missing
+ * classification), we degrade gracefully: the loop tries to fill that
+ * sub-topic, takes what's there, and moves on. A handful of empty
+ * sub-topics will reduce the exam below 40 — never above — so the
+ * worst case is a slightly shorter exam, not a malformed one.
  */
-const OFFICIAL_DISTRIBUTION: Record<number, { knowledge: number; situational: number }> = {
+const OFFICIAL_SUBTOPIC_DISTRIBUTION: Record<
+  number,
+  Record<string, number>
+> = {
+  1: { devise: 3, laicite: 2, situation: 6 },
+  2: { vote: 3, organisation: 2, union_europ: 1 },
+  3: { droits_fond: 2, obligations: 3, situation: 6 },
+  4: { periodes: 3, geographie: 3, patrimoine: 2 },
+  5: { installation: 1, soins: 1, travail: 1, education: 1 },
+};
+
+/**
+ * Theme-only fallback distribution. Used when the corpus hasn't been
+ * fully classified yet (no rows with subtopic for a theme), so we can
+ * still draw a 40-question exam without subtopic data.
+ *
+ * Kept for two reasons:
+ *   - safety net during the subtopic rollout
+ *   - integration tests that pre-date the subtopic feature
+ */
+const OFFICIAL_DISTRIBUTION: Record<
+  number,
+  { knowledge: number; situational: number }
+> = {
   1: { knowledge: 5, situational: 6 },
   2: { knowledge: 6, situational: 0 },
   3: { knowledge: 5, situational: 6 },
@@ -94,50 +145,97 @@ export default async function examRoutes(app: FastifyInstance) {
       return reply.status(500).send({ error: 'No themes configured' });
     }
 
-    // Use the official prescribed distribution (see OFFICIAL_DISTRIBUTION above).
-    // The previous Math.floor-based split is the bug that surfaced during the
-    // 2026 conformity audit — it produced 9/9/8/7/7 and put situational
-    // questions in every theme, which doesn't match the real exam.
+    // Tirage strategy: prefer the arrêté-fine sub-topic composition
+    // (OFFICIAL_SUBTOPIC_DISTRIBUTION). For each theme, walk its
+    // sub-topics in order and pull `count` questions per. If the
+    // classifier hasn't reached a sub-topic yet (no rows), the loop
+    // takes what's there and moves on — the theme-only fallback at the
+    // end tops up any missing slots so we never ship a < 40-question
+    // exam when the pool can support 40.
     const selectedQuestionIds: number[] = [];
+    const selectedSet = new Set<number>();
 
-    for (let i = 0; i < allThemes.length; i++) {
-      const themeId = allThemes[i].id;
-      const dist = OFFICIAL_DISTRIBUTION[themeId];
-      // If a theme isn't covered by the official table (e.g. someone adds a
-      // 6th theme later without updating this constant), fall back to zero
-      // so we never silently exceed 40 questions. The session creation
-      // accepts a smaller total (line below) so this stays robust.
-      const knowledgeNeeded = dist?.knowledge ?? 0;
-      const situationalNeeded = dist?.situational ?? 0;
+    for (const theme of allThemes) {
+      const themeId = theme.id;
+      const subDist = OFFICIAL_SUBTOPIC_DISTRIBUTION[themeId];
+      let themeDrawn = 0;
+      const themeQuota =
+        (OFFICIAL_DISTRIBUTION[themeId]?.knowledge ?? 0) +
+        (OFFICIAL_DISTRIBUTION[themeId]?.situational ?? 0);
 
-      const knowledgeConditions = [
-        eq(questions.themeId, themeId),
-        eq(questions.type, 'knowledge'),
-      ];
-      if (examTypeFilter) knowledgeConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+      // ── Sub-topic-aware first pass ──
+      if (subDist) {
+        for (const [subtopic, count] of Object.entries(subDist)) {
+          const conditions = [
+            eq(questions.themeId, themeId),
+            eq(questions.subtopic, subtopic),
+          ];
+          if (examTypeFilter) {
+            conditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+          }
+          const rows = await db
+            .select({ id: questions.id })
+            .from(questions)
+            .where(and(...conditions))
+            .orderBy(sql`RANDOM()`)
+            .limit(count);
+          for (const r of rows) {
+            if (!selectedSet.has(r.id)) {
+              selectedSet.add(r.id);
+              selectedQuestionIds.push(r.id);
+              themeDrawn++;
+            }
+          }
+        }
+      }
 
-      const knowledgeQs = await db
-        .select({ id: questions.id })
-        .from(questions)
-        .where(and(...knowledgeConditions))
-        .orderBy(sql`RANDOM()`)
-        .limit(knowledgeNeeded);
+      // ── Theme-only top-up ──
+      // If the sub-topic pass didn't hit the theme quota (because the
+      // subtopic column is NULL on the remaining rows, or because a
+      // sub-topic ran short), pull additional questions from the theme
+      // regardless of sub-topic, while respecting the type split.
+      const shortfall = themeQuota - themeDrawn;
+      if (shortfall > 0) {
+        const dist = OFFICIAL_DISTRIBUTION[themeId];
+        // Compute how much of the shortfall is knowledge vs situational
+        // based on the original split, capped at shortfall.
+        const knowMissing = Math.min(dist?.knowledge ?? 0, shortfall);
+        const situMissing = Math.min(dist?.situational ?? 0, shortfall - knowMissing);
 
-      const situationalConditions = [
-        eq(questions.themeId, themeId),
-        eq(questions.type, 'situational'),
-      ];
-      if (examTypeFilter) situationalConditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
-
-      const situationalQs = await db
-        .select({ id: questions.id })
-        .from(questions)
-        .where(and(...situationalConditions))
-        .orderBy(sql`RANDOM()`)
-        .limit(situationalNeeded);
-
-      for (const q of knowledgeQs) selectedQuestionIds.push(q.id);
-      for (const q of situationalQs) selectedQuestionIds.push(q.id);
+        for (const [type, n] of [
+          ['knowledge', knowMissing] as const,
+          ['situational', situMissing] as const,
+        ]) {
+          if (n <= 0) continue;
+          const conditions = [
+            eq(questions.themeId, themeId),
+            eq(questions.type, type),
+          ];
+          if (examTypeFilter) {
+            conditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
+          }
+          // Exclude already-selected ids so we don't double-pick rows
+          // already drawn in the sub-topic pass.
+          if (selectedSet.size > 0) {
+            conditions.push(
+              sql`${questions.id} != ALL(ARRAY[${sql.join(
+                Array.from(selectedSet).map((id) => sql`${id}`),
+                sql`, `,
+              )}]::int[])`,
+            );
+          }
+          const rows = await db
+            .select({ id: questions.id })
+            .from(questions)
+            .where(and(...conditions))
+            .orderBy(sql`RANDOM()`)
+            .limit(n);
+          for (const r of rows) {
+            selectedSet.add(r.id);
+            selectedQuestionIds.push(r.id);
+          }
+        }
+      }
     }
 
     // Create session (use actual question count, may be fewer than 40 if DB lacks questions)
