@@ -1,0 +1,1710 @@
+{
+  "generated_at": "2026-05-14",
+  "source": "Cross-référencé avec prepacivique.fr + Livret du Citoyen (Min Intérieur) + questions-naturalisation.fr + blog.natification.fr + franceaccueil.com + letestcivique.fr",
+  "note": "Identifié 8 questions CR + 39 questions NAT manquantes dans la DB Civique. La question Maastricht (CR#77 / NAT#88) est unifiée en une seule entrée [cr, nat]. Total: 46 entrées uniques.",
+  "count": 46,
+  "questions": [
+    {
+      "official_ref": "CR#1",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "Qu'est-ce que la formation civique ?",
+      "choices_fr": [
+        { "id": "a", "text": "Une formation obligatoire dans le cadre du contrat d'intégration républicaine (CIR) pour les étrangers admis au séjour" },
+        { "id": "b", "text": "Une formation facultative que peuvent suivre les citoyens français" },
+        { "id": "c", "text": "Une formation réservée aux fonctionnaires de l'État" },
+        { "id": "d", "text": "Une formation universitaire spécialisée en droit public" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La formation civique est une formation obligatoire prévue par le contrat d'intégration républicaine (CIR), signé par les étrangers admis à séjourner durablement en France. Elle présente les valeurs et principes de la République, son organisation et son fonctionnement.",
+      "translations": {
+        "en": {
+          "text": "What is civic training (formation civique) ?",
+          "explanation": "The formation civique (civic training) is a mandatory training under the contrat d'intégration républicaine (CIR — Republican Integration Contract), signed by foreigners granted long-term residence in France. It presents the values and principles of the Republic, its organisation and how it works.",
+          "choices": [
+            { "id": "a", "text": "A mandatory training under the contrat d'intégration républicaine (CIR — Republican Integration Contract) for foreigners admitted to stay" },
+            { "id": "b", "text": "An optional training that French citizens may follow" },
+            { "id": "c", "text": "A training reserved for State civil servants" },
+            { "id": "d", "text": "A specialised university course in public law" }
+          ]
+        },
+        "tr": {
+          "text": "Yurttaşlık eğitimi (formation civique) nedir ?",
+          "explanation": "Formation civique (yurttaşlık eğitimi), Fransa'da uzun süreli oturum izni verilen yabancıların imzaladığı contrat d'intégration républicaine (CIR — Cumhuriyetçi Entegrasyon Sözleşmesi) çerçevesinde zorunlu olan bir eğitimdir. Cumhuriyetin değerlerini, ilkelerini, örgütlenmesini ve işleyişini tanıtır.",
+          "choices": [
+            { "id": "a", "text": "Oturum hakkı verilen yabancılar için contrat d'intégration républicaine (CIR — Cumhuriyetçi Entegrasyon Sözleşmesi) kapsamındaki zorunlu eğitim" },
+            { "id": "b", "text": "Fransız vatandaşlarının isteğe bağlı olarak katılabileceği bir eğitim" },
+            { "id": "c", "text": "Sadece devlet memurlarına ayrılmış bir eğitim" },
+            { "id": "d", "text": "Kamu hukukunda uzmanlaşmış bir üniversite eğitimi" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#6",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "En application de la liberté individuelle, quelle proposition est correcte ?",
+      "choices_fr": [
+        { "id": "a", "text": "Une personne peut choisir de se marier ou non" },
+        { "id": "b", "text": "Une personne peut refuser de respecter la loi" },
+        { "id": "c", "text": "Une personne peut imposer ses opinions à autrui" },
+        { "id": "d", "text": "Une personne peut conduire sans permis" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La liberté individuelle permet à chacun de faire des choix personnels comme se marier, choisir son travail, sa religion ou son lieu de résidence, dans le respect de la loi et des libertés des autres.",
+      "translations": {
+        "en": {
+          "text": "Applying individual liberty (liberté individuelle), which statement is correct ?",
+          "explanation": "Individual liberty allows everyone to make personal choices such as getting married or not, choosing one's job, religion, or place of residence — while respecting the law and the freedoms of others.",
+          "choices": [
+            { "id": "a", "text": "A person can choose whether to get married or not" },
+            { "id": "b", "text": "A person can refuse to obey the law" },
+            { "id": "c", "text": "A person can impose their opinions on others" },
+            { "id": "d", "text": "A person can drive without a licence" }
+          ]
+        },
+        "tr": {
+          "text": "Bireysel özgürlük (liberté individuelle) uygulamasında hangi önerme doğrudur ?",
+          "explanation": "Bireysel özgürlük, herkesin evlenip evlenmemek, mesleğini, dinini veya ikametgâhını seçmek gibi kişisel tercihleri yasalara ve başkalarının özgürlüklerine saygılı kalarak yapmasına imkân tanır.",
+          "choices": [
+            { "id": "a", "text": "Kişi evlenip evlenmemeyi seçebilir" },
+            { "id": "b", "text": "Kişi yasaya uymayı reddedebilir" },
+            { "id": "c", "text": "Kişi görüşlerini başkalarına dayatabilir" },
+            { "id": "d", "text": "Kişi ehliyetsiz araç kullanabilir" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#9",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "Quelle est la devise de la France ?",
+      "choices_fr": [
+        { "id": "a", "text": "Liberté, égalité, fraternité" },
+        { "id": "b", "text": "Unité, dignité, justice" },
+        { "id": "c", "text": "Travail, famille, patrie" },
+        { "id": "d", "text": "Honneur et patrie" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La devise de la France est « Liberté, égalité, fraternité ». Elle est inscrite à l'article 2 de la Constitution et figure sur les bâtiments publics, les pièces d'euros françaises et de nombreux documents officiels.",
+      "translations": {
+        "en": {
+          "text": "What is the motto of France ?",
+          "explanation": "France's motto is « Liberté, égalité, fraternité » (Liberty, equality, fraternity). It is enshrined in Article 2 of the Constitution and appears on public buildings, French euro coins and many official documents.",
+          "choices": [
+            { "id": "a", "text": "Liberté, égalité, fraternité (Liberty, equality, fraternity)" },
+            { "id": "b", "text": "Unity, dignity, justice" },
+            { "id": "c", "text": "Travail, famille, patrie (Work, family, fatherland — the Vichy regime motto)" },
+            { "id": "d", "text": "Honneur et patrie (Honour and fatherland)" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'nın sloganı (devise) nedir ?",
+          "explanation": "Fransa'nın sloganı « Liberté, égalité, fraternité » (Özgürlük, eşitlik, kardeşlik)'tir. Anayasa'nın 2. maddesinde yer alır ve kamu binalarında, Fransız euro madeni paralarında ve pek çok resmi belgede bulunur.",
+          "choices": [
+            { "id": "a", "text": "Liberté, égalité, fraternité (Özgürlük, eşitlik, kardeşlik)" },
+            { "id": "b", "text": "Birlik, onur, adalet" },
+            { "id": "c", "text": "Travail, famille, patrie (Çalışma, aile, vatan — Vichy rejiminin sloganı)" },
+            { "id": "d", "text": "Honneur et patrie (Onur ve vatan)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#47",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "Qu'est-ce que le pouvoir législatif ?",
+      "choices_fr": [
+        { "id": "a", "text": "Le pouvoir de voter les lois" },
+        { "id": "b", "text": "Le pouvoir de faire appliquer les lois" },
+        { "id": "c", "text": "Le pouvoir de juger les infractions" },
+        { "id": "d", "text": "Le pouvoir de nommer les ministres" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Le pouvoir législatif est le pouvoir de voter et d'adopter les lois. En France, il est exercé par le Parlement, composé de l'Assemblée nationale et du Sénat.",
+      "translations": {
+        "en": {
+          "text": "What is legislative power (pouvoir législatif) ?",
+          "explanation": "Legislative power is the power to vote and pass laws. In France, it is exercised by the Parlement (Parliament), made up of the Assemblée nationale (National Assembly) and the Sénat (Senate).",
+          "choices": [
+            { "id": "a", "text": "The power to vote laws" },
+            { "id": "b", "text": "The power to enforce laws" },
+            { "id": "c", "text": "The power to judge offences" },
+            { "id": "d", "text": "The power to appoint ministers" }
+          ]
+        },
+        "tr": {
+          "text": "Yasama gücü (pouvoir législatif) nedir ?",
+          "explanation": "Yasama gücü, yasaları oylama ve çıkarma gücüdür. Fransa'da bu güç Assemblée nationale (Millet Meclisi) ile Sénat (Senato)'tan oluşan Parlement (Parlamento) tarafından kullanılır.",
+          "choices": [
+            { "id": "a", "text": "Yasaları oylama gücü" },
+            { "id": "b", "text": "Yasaları uygulatma gücü" },
+            { "id": "c", "text": "Suçları yargılama gücü" },
+            { "id": "d", "text": "Bakanları atama gücü" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#67",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "Depuis quand l'euro est-elle la monnaie unique ?",
+      "choices_fr": [
+        { "id": "a", "text": "Depuis 1999" },
+        { "id": "b", "text": "Depuis 1992" },
+        { "id": "c", "text": "Depuis 2002" },
+        { "id": "d", "text": "Depuis 2007" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'euro est la monnaie unique européenne depuis le 1er janvier 1999, date à laquelle il a été introduit sous forme scripturale (virements, chèques). Les billets et pièces ont circulé à partir du 1er janvier 2002.",
+      "translations": {
+        "en": {
+          "text": "Since when has the euro been the single currency ?",
+          "explanation": "The euro has been the single European currency since 1 January 1999, when it was introduced as scriptural money (bank transfers, cheques). Notes and coins entered circulation on 1 January 2002.",
+          "choices": [
+            { "id": "a", "text": "Since 1999" },
+            { "id": "b", "text": "Since 1992" },
+            { "id": "c", "text": "Since 2002" },
+            { "id": "d", "text": "Since 2007" }
+          ]
+        },
+        "tr": {
+          "text": "Euro ne zamandan beri tek para birimidir ?",
+          "explanation": "Euro, 1 Ocak 1999'dan beri Avrupa'nın tek para birimidir; o tarihte kaydi para (havale, çek) olarak kullanılmaya başlandı. Banknot ve madeni paralar 1 Ocak 2002'den itibaren dolaşıma girdi.",
+          "choices": [
+            { "id": "a", "text": "1999'dan beri" },
+            { "id": "b", "text": "1992'den beri" },
+            { "id": "c", "text": "2002'den beri" },
+            { "id": "d", "text": "2007'den beri" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#77 + NAT#88",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["cr", "nat"],
+      "text_fr": "En quelle année le traité de Maastricht, qui marque la fondation de l'Union européenne, a-t-il été signé ?",
+      "choices_fr": [
+        { "id": "a", "text": "En 1992" },
+        { "id": "b", "text": "En 1957" },
+        { "id": "c", "text": "En 2002" },
+        { "id": "d", "text": "En 1981" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Le traité de Maastricht a été signé le 7 février 1992. Il marque la fondation de l'Union européenne (UE), instaure la citoyenneté européenne et pose les bases de la monnaie unique, l'euro.",
+      "translations": {
+        "en": {
+          "text": "In what year was the Treaty of Maastricht, which marks the founding of the European Union, signed ?",
+          "explanation": "The Treaty of Maastricht was signed on 7 February 1992. It marks the founding of the European Union (EU), establishes European citizenship and lays the groundwork for the single currency, the euro.",
+          "choices": [
+            { "id": "a", "text": "In 1992" },
+            { "id": "b", "text": "In 1957" },
+            { "id": "c", "text": "In 2002" },
+            { "id": "d", "text": "In 1981" }
+          ]
+        },
+        "tr": {
+          "text": "Avrupa Birliği'nin kurulduğunu işaret eden Maastricht Antlaşması hangi yılda imzalandı ?",
+          "explanation": "Maastricht Antlaşması 7 Şubat 1992'de imzalandı. Avrupa Birliği'nin (AB) kuruluşunu, Avrupa vatandaşlığının ortaya çıkışını ve tek para birimi olan euronun temellerini belirler.",
+          "choices": [
+            { "id": "a", "text": "1992'de" },
+            { "id": "b", "text": "1957'de" },
+            { "id": "c", "text": "2002'de" },
+            { "id": "d", "text": "1981'de" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#114",
+      "theme_id": 3,
+      "type": "situational",
+      "exam_types": ["cr"],
+      "text_fr": "Quelle est l'attitude à avoir lorsque qu'on est témoin de violences ?",
+      "choices_fr": [
+        { "id": "a", "text": "Appeler les forces de l'ordre (17) ou les secours et porter assistance si on le peut" },
+        { "id": "b", "text": "Ne rien faire et continuer son chemin" },
+        { "id": "c", "text": "Intervenir physiquement seul contre l'agresseur" },
+        { "id": "d", "text": "Filmer la scène pour la diffuser sur les réseaux sociaux" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Toute personne témoin de violences doit alerter les forces de l'ordre (17 ou 112) et porter secours, sans se mettre en danger. La non-assistance à personne en danger est punie par la loi.",
+      "translations": {
+        "en": {
+          "text": "What attitude should you have when you witness violence ?",
+          "explanation": "Anyone who witnesses violence must alert the police (17 or 112) and give assistance, without endangering themselves. Failure to assist a person in danger is punishable by law.",
+          "choices": [
+            { "id": "a", "text": "Call the police (17) or emergency services and help if you can" },
+            { "id": "b", "text": "Do nothing and walk away" },
+            { "id": "c", "text": "Physically intervene alone against the attacker" },
+            { "id": "d", "text": "Film the scene to post on social media" }
+          ]
+        },
+        "tr": {
+          "text": "Şiddete tanık olduğunuzda nasıl davranmak gerekir ?",
+          "explanation": "Şiddete tanık olan herkes, kendini tehlikeye atmadan kolluk kuvvetlerini (17 veya 112) uyarmalı ve yardım sağlamalıdır. Tehlikedeki kişiye yardım etmemek (non-assistance à personne en danger) yasayla cezalandırılır.",
+          "choices": [
+            { "id": "a", "text": "Polisi (17) veya acil servisleri çağırmak ve mümkünse yardım etmek" },
+            { "id": "b", "text": "Hiçbir şey yapmadan yoluna devam etmek" },
+            { "id": "c", "text": "Saldırgana tek başına fiziksel olarak müdahale etmek" },
+            { "id": "d", "text": "Sosyal medyada yayınlamak için olayı çekmek" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "CR#136",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["cr"],
+      "text_fr": "En quelle année l'euro est-elle devenue la monnaie utilisée en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "En 2002" },
+        { "id": "b", "text": "En 1999" },
+        { "id": "c", "text": "En 1992" },
+        { "id": "d", "text": "En 2007" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'euro est devenu la monnaie utilisée en France le 1er janvier 2002, date de la mise en circulation des billets et des pièces. Le franc a alors disparu de la circulation.",
+      "translations": {
+        "en": {
+          "text": "In what year did the euro become the currency used in France ?",
+          "explanation": "The euro became the currency used in France on 1 January 2002, when notes and coins entered circulation. The French franc was then withdrawn.",
+          "choices": [
+            { "id": "a", "text": "In 2002" },
+            { "id": "b", "text": "In 1999" },
+            { "id": "c", "text": "In 1992" },
+            { "id": "d", "text": "In 2007" }
+          ]
+        },
+        "tr": {
+          "text": "Euro Fransa'da hangi yılda kullanılan para birimi oldu ?",
+          "explanation": "Euro, banknotların ve madeni paraların tedavüle çıktığı 1 Ocak 2002'de Fransa'da kullanılan para birimi oldu. O tarihte Fransız frangı dolaşımdan kalktı.",
+          "choices": [
+            { "id": "a", "text": "2002'de" },
+            { "id": "b", "text": "1999'da" },
+            { "id": "c", "text": "1992'de" },
+            { "id": "d", "text": "2007'de" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#4",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "En France, les impôts permettent de financer les dépenses publiques. Quelle proposition est correcte ?",
+      "choices_fr": [
+        { "id": "a", "text": "Les impôts financent notamment l'école, les hôpitaux, la police et la justice" },
+        { "id": "b", "text": "Les impôts servent uniquement à payer les salaires des ministres" },
+        { "id": "c", "text": "Les impôts sont versés directement aux entreprises privées" },
+        { "id": "d", "text": "Les impôts servent à rembourser les dettes des particuliers" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les impôts financent les services publics : éducation, santé, sécurité, justice, transports, défense, culture. Toute personne résidant en France a l'obligation de payer l'impôt si ses revenus l'imposent.",
+      "translations": {
+        "en": {
+          "text": "In France, taxes are used to fund public spending. Which statement is correct ?",
+          "explanation": "Taxes fund public services: education, health, security, justice, transport, defence and culture. Anyone residing in France must pay taxes when their income requires it.",
+          "choices": [
+            { "id": "a", "text": "Taxes fund schools, hospitals, the police and the justice system, among other things" },
+            { "id": "b", "text": "Taxes are only used to pay ministers' salaries" },
+            { "id": "c", "text": "Taxes are paid directly to private companies" },
+            { "id": "d", "text": "Taxes are used to repay the debts of private individuals" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da vergiler kamu harcamalarını finanse etmeye yarar. Hangi önerme doğrudur ?",
+          "explanation": "Vergiler kamu hizmetlerini finanse eder: eğitim, sağlık, güvenlik, adalet, ulaşım, savunma, kültür. Fransa'da ikamet eden her kişi geliri gerektiriyorsa vergi ödemek zorundadır.",
+          "choices": [
+            { "id": "a", "text": "Vergiler özellikle okulları, hastaneleri, polisi ve adaleti finanse eder" },
+            { "id": "b", "text": "Vergiler sadece bakanların maaşlarını ödemeye yarar" },
+            { "id": "c", "text": "Vergiler doğrudan özel şirketlere ödenir" },
+            { "id": "d", "text": "Vergiler bireylerin borçlarını ödemeye yarar" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#8",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Lequel de ces symboles représente la République française ?",
+      "choices_fr": [
+        { "id": "a", "text": "Marianne" },
+        { "id": "b", "text": "L'aigle impérial" },
+        { "id": "c", "text": "La couronne royale" },
+        { "id": "d", "text": "Le lion" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Marianne est l'un des symboles officiels de la République française. Elle incarne la République et la liberté. Son buste figure dans toutes les mairies de France.",
+      "translations": {
+        "en": {
+          "text": "Which of these symbols represents the French Republic ?",
+          "explanation": "Marianne is one of the official symbols of the French Republic. She embodies the Republic and liberty. Her bust is displayed in every mairie (town hall) in France.",
+          "choices": [
+            { "id": "a", "text": "Marianne" },
+            { "id": "b", "text": "The imperial eagle" },
+            { "id": "c", "text": "The royal crown" },
+            { "id": "d", "text": "The lion" }
+          ]
+        },
+        "tr": {
+          "text": "Bu sembollerden hangisi Fransız Cumhuriyeti'ni temsil eder ?",
+          "explanation": "Marianne, Fransız Cumhuriyeti'nin resmi sembollerinden biridir. Cumhuriyeti ve özgürlüğü simgeler. Büstü Fransa'nın tüm belediye binalarında (mairie) yer alır.",
+          "choices": [
+            { "id": "a", "text": "Marianne" },
+            { "id": "b", "text": "İmparatorluk kartalı" },
+            { "id": "c", "text": "Kraliyet tacı" },
+            { "id": "d", "text": "Aslan" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#10",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Lesquels sont des symboles officiels de la République française ?",
+      "choices_fr": [
+        { "id": "a", "text": "Le drapeau tricolore, la Marseillaise, Marianne et la devise « Liberté, égalité, fraternité »" },
+        { "id": "b", "text": "La couronne, le sceptre et la fleur de lys" },
+        { "id": "c", "text": "L'aigle impérial et la croix de Lorraine" },
+        { "id": "d", "text": "Le coq gaulois uniquement" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les symboles officiels de la République française sont le drapeau tricolore (bleu, blanc, rouge), l'hymne national (la Marseillaise), Marianne et la devise « Liberté, égalité, fraternité ». Le 14 juillet est la fête nationale.",
+      "translations": {
+        "en": {
+          "text": "Which of these are official symbols of the French Republic ?",
+          "explanation": "The official symbols of the French Republic are the tricolour flag (blue, white, red), the national anthem (la Marseillaise), Marianne, and the motto « Liberté, égalité, fraternité ». 14 July is the national holiday.",
+          "choices": [
+            { "id": "a", "text": "The tricolour flag, la Marseillaise, Marianne and the motto « Liberté, égalité, fraternité »" },
+            { "id": "b", "text": "The crown, the sceptre and the fleur-de-lys" },
+            { "id": "c", "text": "The imperial eagle and the Cross of Lorraine" },
+            { "id": "d", "text": "The Gallic rooster only" }
+          ]
+        },
+        "tr": {
+          "text": "Bunlardan hangileri Fransız Cumhuriyeti'nin resmi sembolleridir ?",
+          "explanation": "Fransız Cumhuriyeti'nin resmi sembolleri üç renkli bayrak (mavi, beyaz, kırmızı), millî marş (la Marseillaise), Marianne ve « Liberté, égalité, fraternité » sloganıdır. 14 Temmuz millî bayramdır.",
+          "choices": [
+            { "id": "a", "text": "Üç renkli bayrak, la Marseillaise, Marianne ve « Liberté, égalité, fraternité » sloganı" },
+            { "id": "b", "text": "Taç, asa ve zambak çiçeği" },
+            { "id": "c", "text": "İmparatorluk kartalı ve Lorraine haçı" },
+            { "id": "d", "text": "Sadece Galya horozu" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#21",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Selon la Constitution, la France est une République...",
+      "choices_fr": [
+        { "id": "a", "text": "Indivisible, laïque, démocratique et sociale" },
+        { "id": "b", "text": "Confédérale, religieuse et monarchique" },
+        { "id": "c", "text": "Fédérale et autoritaire" },
+        { "id": "d", "text": "Aristocratique et héréditaire" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'article 1er de la Constitution de 1958 dispose : « La France est une République indivisible, laïque, démocratique et sociale ». Ces quatre adjectifs sont les principes fondamentaux du régime républicain français.",
+      "translations": {
+        "en": {
+          "text": "According to the Constitution, France is a Republic...",
+          "explanation": "Article 1 of the 1958 Constitution states: « La France est une République indivisible, laïque, démocratique et sociale » (France is an indivisible, secular, democratic and social Republic). These four adjectives are the founding principles of the French republican regime.",
+          "choices": [
+            { "id": "a", "text": "Indivisible, secular (laïque), democratic and social" },
+            { "id": "b", "text": "Confederal, religious and monarchical" },
+            { "id": "c", "text": "Federal and authoritarian" },
+            { "id": "d", "text": "Aristocratic and hereditary" }
+          ]
+        },
+        "tr": {
+          "text": "Anayasaya göre, Fransa nasıl bir Cumhuriyettir...",
+          "explanation": "1958 Anayasası'nın 1. maddesi şöyle der : « La France est une République indivisible, laïque, démocratique et sociale » (Fransa bölünmez, laik, demokratik ve sosyal bir Cumhuriyettir). Bu dört sıfat Fransız cumhuriyet rejiminin temel ilkeleridir.",
+          "choices": [
+            { "id": "a", "text": "Bölünmez, laik (laïque), demokratik ve sosyal" },
+            { "id": "b", "text": "Konfederal, dini ve monarşik" },
+            { "id": "c", "text": "Federal ve otoriter" },
+            { "id": "d", "text": "Aristokratik ve kalıtsal" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#24",
+      "theme_id": 1,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Une personne peut-elle changer librement de religion en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "Oui, c'est garanti par la liberté de conscience" },
+        { "id": "b", "text": "Non, c'est interdit par la loi" },
+        { "id": "c", "text": "Oui, mais seulement avec l'accord d'un juge" },
+        { "id": "d", "text": "Non, sauf pour les mineurs" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Oui, toute personne peut librement changer de religion en France, ou ne pas en avoir. Cette liberté est garantie par la liberté de conscience et le principe de laïcité, inscrits dans la Constitution et la loi de 1905.",
+      "translations": {
+        "en": {
+          "text": "Can a person freely change religion in France ?",
+          "explanation": "Yes, anyone can freely change their religion in France, or have none. This right is guaranteed by liberté de conscience (freedom of conscience) and the principle of laïcité (secularism), enshrined in the Constitution and the 1905 Act.",
+          "choices": [
+            { "id": "a", "text": "Yes, it is guaranteed by freedom of conscience" },
+            { "id": "b", "text": "No, it is forbidden by law" },
+            { "id": "c", "text": "Yes, but only with the consent of a judge" },
+            { "id": "d", "text": "No, except for minors" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da bir kişi serbestçe din değiştirebilir mi ?",
+          "explanation": "Evet, Fransa'da herkes serbestçe din değiştirebilir veya hiçbir dine bağlı olmayabilir. Bu hak Anayasa ve 1905 yasasında yer alan liberté de conscience (vicdan özgürlüğü) ve laïcité (laiklik) ilkesiyle güvence altındadır.",
+          "choices": [
+            { "id": "a", "text": "Evet, vicdan özgürlüğüyle güvence altındadır" },
+            { "id": "b", "text": "Hayır, kanunen yasaktır" },
+            { "id": "c", "text": "Evet, ama yalnızca bir hâkimin onayıyla" },
+            { "id": "d", "text": "Hayır, reşit olmayanlar dışında" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#49",
+      "theme_id": 2,
+      "type": "situational",
+      "exam_types": ["nat"],
+      "text_fr": "Une personne, n'ayant pas d'accès à internet, veut s'inscrire sur les listes électorales pour pouvoir voter aux prochaines élections politiques. Où peut-elle s'inscrire ?",
+      "choices_fr": [
+        { "id": "a", "text": "À la mairie de son domicile" },
+        { "id": "b", "text": "Au commissariat de police" },
+        { "id": "c", "text": "À la préfecture uniquement" },
+        { "id": "d", "text": "Auprès de son employeur" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Sans accès à internet, on peut s'inscrire sur les listes électorales en se rendant directement à la mairie de son domicile, muni d'une pièce d'identité et d'un justificatif de domicile. L'inscription est aussi possible par courrier.",
+      "translations": {
+        "en": {
+          "text": "A person who has no access to the internet wants to register on the electoral roll (listes électorales) to vote in the next political elections. Where can they register ?",
+          "explanation": "Without internet access, you can register on the electoral roll by going directly to the mairie (town hall) of your home, with proof of identity and proof of address. Registration is also possible by post.",
+          "choices": [
+            { "id": "a", "text": "At the mairie (town hall) of their home" },
+            { "id": "b", "text": "At the police station" },
+            { "id": "c", "text": "Only at the préfecture" },
+            { "id": "d", "text": "Through their employer" }
+          ]
+        },
+        "tr": {
+          "text": "İnternet erişimi olmayan bir kişi, bir sonraki siyasi seçimde oy verebilmek için seçmen kütüğüne (listes électorales) kaydolmak istiyor. Nereye başvurabilir ?",
+          "explanation": "İnternet erişimi olmadan, kimlik belgesi ve ikametgâh belgesiyle ikamet ettiği belediyeye (mairie) doğrudan giderek seçmen kütüğüne kaydolunabilir. Posta yoluyla da kayıt yapılabilir.",
+          "choices": [
+            { "id": "a", "text": "İkamet ettiği belediyede (mairie)" },
+            { "id": "b", "text": "Polis karakolunda" },
+            { "id": "c", "text": "Sadece valilikte (préfecture)" },
+            { "id": "d", "text": "İşvereninde" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#57",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelles sont les durées du mandat du conseil municipal et du maire ?",
+      "choices_fr": [
+        { "id": "a", "text": "6 ans pour les deux" },
+        { "id": "b", "text": "5 ans pour les deux" },
+        { "id": "c", "text": "4 ans pour le conseil et 6 ans pour le maire" },
+        { "id": "d", "text": "7 ans pour les deux" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Le conseil municipal et le maire sont élus pour un mandat de 6 ans. Le maire est élu par les conseillers municipaux lors de la première réunion du conseil après les élections municipales.",
+      "translations": {
+        "en": {
+          "text": "What are the term lengths of the conseil municipal (town council) and of the maire (mayor) ?",
+          "explanation": "Both the conseil municipal (town council) and the maire (mayor) are elected for a 6-year term. The mayor is elected by the council members at the first council meeting after the municipal elections.",
+          "choices": [
+            { "id": "a", "text": "6 years for both" },
+            { "id": "b", "text": "5 years for both" },
+            { "id": "c", "text": "4 years for the council, 6 years for the mayor" },
+            { "id": "d", "text": "7 years for both" }
+          ]
+        },
+        "tr": {
+          "text": "Belediye meclisinin (conseil municipal) ve belediye başkanının (maire) görev süreleri nedir ?",
+          "explanation": "Belediye meclisi (conseil municipal) ve belediye başkanı (maire) 6 yıllık bir görev süresi için seçilir. Belediye başkanı, belediye seçimlerinin ardından meclisin ilk toplantısında meclis üyeleri tarafından seçilir.",
+          "choices": [
+            { "id": "a", "text": "İkisi de 6 yıl" },
+            { "id": "b", "text": "İkisi de 5 yıl" },
+            { "id": "c", "text": "Meclis 4 yıl, başkan 6 yıl" },
+            { "id": "d", "text": "İkisi de 7 yıl" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#59",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle est la durée du mandat du Président de la République française ?",
+      "choices_fr": [
+        { "id": "a", "text": "5 ans" },
+        { "id": "b", "text": "7 ans" },
+        { "id": "c", "text": "4 ans" },
+        { "id": "d", "text": "6 ans" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Depuis la révision constitutionnelle de 2000, le président de la République est élu pour un mandat de 5 ans (quinquennat), renouvelable une seule fois consécutivement.",
+      "translations": {
+        "en": {
+          "text": "How long is the term of office of the President of the French Republic ?",
+          "explanation": "Since the 2000 constitutional amendment, the President of the Republic is elected for a 5-year term (quinquennat), renewable only once consecutively.",
+          "choices": [
+            { "id": "a", "text": "5 years" },
+            { "id": "b", "text": "7 years" },
+            { "id": "c", "text": "4 years" },
+            { "id": "d", "text": "6 years" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa Cumhurbaşkanı'nın (Président de la République) görev süresi ne kadardır ?",
+          "explanation": "2000 anayasa değişikliğinden bu yana Cumhurbaşkanı 5 yıllık bir görev süresi için seçilir (quinquennat) ve görev yalnızca art arda bir kez yenilenebilir.",
+          "choices": [
+            { "id": "a", "text": "5 yıl" },
+            { "id": "b", "text": "7 yıl" },
+            { "id": "c", "text": "4 yıl" },
+            { "id": "d", "text": "6 yıl" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#60",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle est la durée du mandat des députés ?",
+      "choices_fr": [
+        { "id": "a", "text": "5 ans" },
+        { "id": "b", "text": "4 ans" },
+        { "id": "c", "text": "6 ans" },
+        { "id": "d", "text": "7 ans" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les députés sont élus pour 5 ans à l'Assemblée nationale, au suffrage universel direct, à raison d'un député par circonscription (scrutin uninominal majoritaire à deux tours).",
+      "translations": {
+        "en": {
+          "text": "How long is the term of office of députés (members of the National Assembly) ?",
+          "explanation": "Députés (members of the Assemblée nationale) are elected for 5 years by direct universal suffrage, one député per circonscription (constituency), using a two-round majority single-member vote.",
+          "choices": [
+            { "id": "a", "text": "5 years" },
+            { "id": "b", "text": "4 years" },
+            { "id": "c", "text": "6 years" },
+            { "id": "d", "text": "7 years" }
+          ]
+        },
+        "tr": {
+          "text": "Milletvekillerinin (députés) görev süresi ne kadardır ?",
+          "explanation": "Milletvekilleri (députés), Assemblée nationale'de 5 yıl için, doğrudan genel oyla, her seçim bölgesinden (circonscription) bir milletvekili olmak üzere iki turlu çoğunluk usulüyle seçilir.",
+          "choices": [
+            { "id": "a", "text": "5 yıl" },
+            { "id": "b", "text": "4 yıl" },
+            { "id": "c", "text": "6 yıl" },
+            { "id": "d", "text": "7 yıl" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#61",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle est la durée du mandat des sénateurs ?",
+      "choices_fr": [
+        { "id": "a", "text": "6 ans" },
+        { "id": "b", "text": "5 ans" },
+        { "id": "c", "text": "9 ans" },
+        { "id": "d", "text": "4 ans" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les sénateurs sont élus pour 6 ans au suffrage universel indirect par un collège de grands électeurs (élus locaux). Le Sénat est renouvelé par moitié tous les 3 ans.",
+      "translations": {
+        "en": {
+          "text": "How long is the term of office of sénateurs (senators) ?",
+          "explanation": "Sénateurs (senators) are elected for 6 years by indirect universal suffrage through a college of grands électeurs (elected local officials). The Sénat (Senate) is renewed by half every 3 years.",
+          "choices": [
+            { "id": "a", "text": "6 years" },
+            { "id": "b", "text": "5 years" },
+            { "id": "c", "text": "9 years" },
+            { "id": "d", "text": "4 years" }
+          ]
+        },
+        "tr": {
+          "text": "Senatörlerin (sénateurs) görev süresi ne kadardır ?",
+          "explanation": "Senatörler (sénateurs), büyük seçmenlerden (grands électeurs — yerel seçilmiş yetkililer) oluşan bir kurul tarafından dolaylı genel oyla 6 yıllık görev için seçilir. Senato (Sénat) her 3 yılda bir yarı yarıya yenilenir.",
+          "choices": [
+            { "id": "a", "text": "6 yıl" },
+            { "id": "b", "text": "5 yıl" },
+            { "id": "c", "text": "9 yıl" },
+            { "id": "d", "text": "4 yıl" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#80",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel est le dernier Etat à avoir intégré l'Union Européenne en 2013 ?",
+      "choices_fr": [
+        { "id": "a", "text": "La Croatie" },
+        { "id": "b", "text": "La Roumanie" },
+        { "id": "c", "text": "La Bulgarie" },
+        { "id": "d", "text": "La Pologne" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La Croatie est le dernier État à avoir rejoint l'Union européenne, le 1er juillet 2013. L'UE compte 27 États membres au 1er janvier 2025 (après le retrait du Royaume-Uni en 2020).",
+      "translations": {
+        "en": {
+          "text": "Which is the most recent State to have joined the European Union, in 2013 ?",
+          "explanation": "Croatia is the most recent State to have joined the European Union, on 1 July 2013. The EU has 27 member States as of 1 January 2025 (after the United Kingdom withdrew in 2020).",
+          "choices": [
+            { "id": "a", "text": "Croatia" },
+            { "id": "b", "text": "Romania" },
+            { "id": "c", "text": "Bulgaria" },
+            { "id": "d", "text": "Poland" }
+          ]
+        },
+        "tr": {
+          "text": "Avrupa Birliği'ne en son hangi devlet 2013'te katıldı ?",
+          "explanation": "Hırvatistan, 1 Temmuz 2013'te Avrupa Birliği'ne katılan en son devlettir. AB'nin 1 Ocak 2025 itibarıyla 27 üye devleti vardır (Birleşik Krallık'ın 2020'de ayrılmasının ardından).",
+          "choices": [
+            { "id": "a", "text": "Hırvatistan" },
+            { "id": "b", "text": "Romanya" },
+            { "id": "c", "text": "Bulgaristan" },
+            { "id": "d", "text": "Polonya" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#82",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quand est célébrée la journée de l'Europe ?",
+      "choices_fr": [
+        { "id": "a", "text": "Le 9 mai" },
+        { "id": "b", "text": "Le 1er mai" },
+        { "id": "c", "text": "Le 14 juillet" },
+        { "id": "d", "text": "Le 8 mai" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La journée de l'Europe est célébrée le 9 mai, date anniversaire de la déclaration Schuman de 1950, considérée comme l'acte fondateur de la construction européenne.",
+      "translations": {
+        "en": {
+          "text": "When is Europe Day (journée de l'Europe) celebrated ?",
+          "explanation": "Europe Day is celebrated on 9 May, the anniversary of the 1950 Schuman Declaration, considered the founding act of European construction.",
+          "choices": [
+            { "id": "a", "text": "On 9 May" },
+            { "id": "b", "text": "On 1 May" },
+            { "id": "c", "text": "On 14 July" },
+            { "id": "d", "text": "On 8 May" }
+          ]
+        },
+        "tr": {
+          "text": "Avrupa Günü (journée de l'Europe) ne zaman kutlanır ?",
+          "explanation": "Avrupa Günü 9 Mayıs'ta kutlanır; bu tarih, Avrupa inşasının kurucu eylemi sayılan 1950 Schuman Deklarasyonu'nun yıldönümüdür.",
+          "choices": [
+            { "id": "a", "text": "9 Mayıs'ta" },
+            { "id": "b", "text": "1 Mayıs'ta" },
+            { "id": "c", "text": "14 Temmuz'da" },
+            { "id": "d", "text": "8 Mayıs'ta" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#86",
+      "theme_id": 2,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Les citoyens de l'Union européenne peuvent-ils voter aux élections locales dans un autre Etat de l'Union ?",
+      "choices_fr": [
+        { "id": "a", "text": "Oui, aux élections municipales et européennes de leur pays de résidence" },
+        { "id": "b", "text": "Non, jamais" },
+        { "id": "c", "text": "Oui, à toutes les élections, y compris présidentielles" },
+        { "id": "d", "text": "Seulement après 10 ans de résidence" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les citoyens européens résidant dans un autre État de l'UE peuvent voter et être éligibles aux élections municipales et aux élections européennes de leur pays de résidence. Ils ne peuvent pas voter aux élections nationales (présidentielles, législatives).",
+      "translations": {
+        "en": {
+          "text": "Can EU citizens vote in local elections in another EU State ?",
+          "explanation": "EU citizens residing in another EU State can vote and stand as candidates in municipal elections and European elections of their country of residence. They cannot vote in national elections (presidential, legislative).",
+          "choices": [
+            { "id": "a", "text": "Yes, in the municipal and European elections of their country of residence" },
+            { "id": "b", "text": "No, never" },
+            { "id": "c", "text": "Yes, in all elections, including presidential" },
+            { "id": "d", "text": "Only after 10 years of residence" }
+          ]
+        },
+        "tr": {
+          "text": "Avrupa Birliği vatandaşları başka bir AB ülkesinde yerel seçimlerde oy kullanabilir mi ?",
+          "explanation": "Başka bir AB ülkesinde yaşayan Avrupa vatandaşları, ikamet ettikleri ülkenin belediye seçimlerinde ve Avrupa seçimlerinde oy kullanabilir ve aday olabilir. Ancak ulusal seçimlerde (cumhurbaşkanlığı, milletvekili) oy kullanamazlar.",
+          "choices": [
+            { "id": "a", "text": "Evet, ikamet ettikleri ülkenin belediye ve Avrupa seçimlerinde" },
+            { "id": "b", "text": "Hayır, asla" },
+            { "id": "c", "text": "Evet, cumhurbaşkanlığı dahil tüm seçimlerde" },
+            { "id": "d", "text": "Sadece 10 yıl ikametten sonra" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#115",
+      "theme_id": 3,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Est-ce légal d'être marié à plusieurs personnes en même temps ?",
+      "choices_fr": [
+        { "id": "a", "text": "Non, la polygamie est interdite en France" },
+        { "id": "b", "text": "Oui, dans certaines conditions" },
+        { "id": "c", "text": "Oui, si la religion l'autorise" },
+        { "id": "d", "text": "Oui, mais uniquement à l'étranger" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Non, la polygamie est interdite en France. Le Code civil prévoit que nul ne peut contracter un second mariage avant la dissolution du premier. La polygamie est un délit puni d'un an d'emprisonnement et 45 000 € d'amende.",
+      "translations": {
+        "en": {
+          "text": "Is it legal to be married to several people at the same time ?",
+          "explanation": "No, polygamy is forbidden in France. The Code civil (Civil Code) states that no one may enter a second marriage before the first is dissolved. Polygamy is an offence punishable by one year's imprisonment and a €45,000 fine.",
+          "choices": [
+            { "id": "a", "text": "No, polygamy is forbidden in France" },
+            { "id": "b", "text": "Yes, under certain conditions" },
+            { "id": "c", "text": "Yes, if religion permits it" },
+            { "id": "d", "text": "Yes, but only abroad" }
+          ]
+        },
+        "tr": {
+          "text": "Aynı anda birden fazla kişiyle evli olmak yasal mıdır ?",
+          "explanation": "Hayır, çok eşlilik (polygamie) Fransa'da yasaktır. Code civil (Medeni Kanun), kimsenin ilk evliliği sona ermeden ikinci bir evlilik yapamayacağını öngörür. Çok eşlilik, bir yıl hapis ve 45.000 € para cezasıyla yargılanan bir suçtur.",
+          "choices": [
+            { "id": "a", "text": "Hayır, çok eşlilik Fransa'da yasaktır" },
+            { "id": "b", "text": "Evet, belirli koşullarda" },
+            { "id": "c", "text": "Evet, din izin veriyorsa" },
+            { "id": "d", "text": "Evet, ama yalnızca yurt dışında" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#130",
+      "theme_id": 3,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Qui peut être appelé à faire partie d'un jury d'assises en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "Tout citoyen français majeur inscrit sur les listes électorales" },
+        { "id": "b", "text": "Uniquement les magistrats professionnels" },
+        { "id": "c", "text": "Uniquement les anciens militaires" },
+        { "id": "d", "text": "Les personnes ayant fait des études de droit" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Tout citoyen français âgé d'au moins 23 ans, sachant lire et écrire le français, inscrit sur les listes électorales et n'ayant pas été condamné, peut être tiré au sort pour siéger comme juré en cour d'assises. C'est un devoir civique.",
+      "translations": {
+        "en": {
+          "text": "Who can be called to serve on a jury d'assises (criminal court jury) in France ?",
+          "explanation": "Any French citizen aged at least 23, able to read and write French, registered on the electoral roll and with no criminal record, can be drawn by lot to sit as a juror in the cour d'assises (criminal court). It is a civic duty.",
+          "choices": [
+            { "id": "a", "text": "Any adult French citizen registered on the electoral roll" },
+            { "id": "b", "text": "Only professional magistrates" },
+            { "id": "c", "text": "Only former military personnel" },
+            { "id": "d", "text": "People who have studied law" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da kimler jury d'assises'e (ağır ceza mahkemesi jürisi) çağrılabilir ?",
+          "explanation": "En az 23 yaşında, Fransızca okuyup yazabilen, seçmen kütüğüne kayıtlı ve sabıkası olmayan her Fransız vatandaşı kura ile cour d'assises (ağır ceza mahkemesi) jürisi olarak görev yapmak üzere seçilebilir. Bu bir yurttaşlık görevidir.",
+          "choices": [
+            { "id": "a", "text": "Seçmen kütüğüne kayıtlı, reşit her Fransız vatandaşı" },
+            { "id": "b", "text": "Sadece meslekten hâkimler" },
+            { "id": "c", "text": "Sadece eski askerler" },
+            { "id": "d", "text": "Hukuk eğitimi almış kişiler" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#131",
+      "theme_id": 3,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Une personne est privée de ses droits civils et politiques pendant 5 ans suite à une condamnation. Parmi ces propositions laquelle est correcte ? Pendant 5 ans,...",
+      "choices_fr": [
+        { "id": "a", "text": "Elle ne peut pas voter ni se présenter à une élection" },
+        { "id": "b", "text": "Elle perd la nationalité française" },
+        { "id": "c", "text": "Elle ne peut plus travailler" },
+        { "id": "d", "text": "Elle ne peut plus se marier" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La privation des droits civils et politiques entraîne notamment l'interdiction de voter, d'être éligible et d'exercer une fonction publique pendant la durée de la peine. La nationalité, le droit au travail et le droit au mariage ne sont pas concernés.",
+      "translations": {
+        "en": {
+          "text": "A person is deprived of their civil and political rights for 5 years following a conviction. Which statement is correct ? For 5 years,...",
+          "explanation": "Deprivation of civil and political rights notably entails a ban on voting, on standing for election, and on holding public office for the duration of the sentence. Nationality, the right to work and the right to marry are not affected.",
+          "choices": [
+            { "id": "a", "text": "They cannot vote or stand for election" },
+            { "id": "b", "text": "They lose French nationality" },
+            { "id": "c", "text": "They can no longer work" },
+            { "id": "d", "text": "They can no longer marry" }
+          ]
+        },
+        "tr": {
+          "text": "Bir kişi mahkûmiyet sonucu 5 yıl boyunca medeni ve siyasi haklarından yoksun bırakılıyor. Hangi önerme doğrudur ? 5 yıl boyunca,...",
+          "explanation": "Medeni ve siyasi haklardan yoksun bırakma, ceza süresince oy kullanma, aday olma ve kamu görevinde bulunma yasağını kapsar. Vatandaşlık, çalışma hakkı ve evlenme hakkı etkilenmez.",
+          "choices": [
+            { "id": "a", "text": "Oy kullanamaz ve seçimlerde aday olamaz" },
+            { "id": "b", "text": "Fransız vatandaşlığını kaybeder" },
+            { "id": "c", "text": "Artık çalışamaz" },
+            { "id": "d", "text": "Artık evlenemez" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#134",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel est l'objectif des lois scolaires de la IIIe République ?",
+      "choices_fr": [
+        { "id": "a", "text": "Rendre l'école gratuite, laïque et obligatoire" },
+        { "id": "b", "text": "Imposer l'enseignement religieux à tous" },
+        { "id": "c", "text": "Réserver l'école aux garçons" },
+        { "id": "d", "text": "Privatiser l'enseignement" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les lois Jules Ferry (1881-1882), votées sous la IIIe République, ont rendu l'enseignement primaire gratuit, laïque et obligatoire pour les enfants des deux sexes. Elles sont un pilier de l'école républicaine.",
+      "translations": {
+        "en": {
+          "text": "What was the aim of the IIIe République (Third Republic) school laws ?",
+          "explanation": "The lois Jules Ferry (Ferry laws, 1881-1882), passed under the IIIe République (Third Republic), made primary education free, secular (laïque) and compulsory for children of both sexes. They are a pillar of the republican school.",
+          "choices": [
+            { "id": "a", "text": "Make school free, secular (laïque) and compulsory" },
+            { "id": "b", "text": "Impose religious teaching on everyone" },
+            { "id": "c", "text": "Reserve school for boys" },
+            { "id": "d", "text": "Privatise education" }
+          ]
+        },
+        "tr": {
+          "text": "Üçüncü Cumhuriyet (IIIe République) okul yasalarının amacı neydi ?",
+          "explanation": "Üçüncü Cumhuriyet döneminde çıkan lois Jules Ferry (Jules Ferry yasaları, 1881-1882), ilkokulu her iki cinsiyetten çocuklar için ücretsiz, laik (laïque) ve zorunlu hale getirdi. Cumhuriyetçi okulun temel taşıdır.",
+          "choices": [
+            { "id": "a", "text": "Okulu ücretsiz, laik (laïque) ve zorunlu kılmak" },
+            { "id": "b", "text": "Herkese dini eğitimi dayatmak" },
+            { "id": "c", "text": "Okulu sadece erkeklere ayırmak" },
+            { "id": "d", "text": "Eğitimi özelleştirmek" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#138",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Simone Veil est une figure importante de l'histoire française. Elle a notamment :",
+      "choices_fr": [
+        { "id": "a", "text": "Fait adopter la loi de 1975 légalisant l'avortement" },
+        { "id": "b", "text": "Aboli la peine de mort" },
+        { "id": "c", "text": "Instauré la Sécurité sociale" },
+        { "id": "d", "text": "Fondé la Ve République" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Simone Veil (1927-2017), rescapée d'Auschwitz et ministre de la Santé, a fait adopter la loi du 17 janvier 1975 dépénalisant l'avortement (interruption volontaire de grossesse, IVG). Elle a aussi présidé le Parlement européen (1979-1982) et siégé au Conseil constitutionnel.",
+      "translations": {
+        "en": {
+          "text": "Simone Veil is an important figure in French history. She notably :",
+          "explanation": "Simone Veil (1927-2017), an Auschwitz survivor and Minister of Health, had the law of 17 January 1975 decriminalising abortion (interruption volontaire de grossesse — IVG) adopted. She also presided over the European Parliament (1979-1982) and sat on the Conseil constitutionnel (Constitutional Council).",
+          "choices": [
+            { "id": "a", "text": "Had the 1975 law legalising abortion adopted" },
+            { "id": "b", "text": "Abolished the death penalty" },
+            { "id": "c", "text": "Established Sécurité sociale (Social Security)" },
+            { "id": "d", "text": "Founded the Ve République (Fifth Republic)" }
+          ]
+        },
+        "tr": {
+          "text": "Simone Veil, Fransa tarihinin önemli bir simasıdır. Özellikle :",
+          "explanation": "Simone Veil (1927-2017), Auschwitz'ten kurtulan ve Sağlık Bakanı olan kişi, kürtajı (interruption volontaire de grossesse — IVG) suç olmaktan çıkaran 17 Ocak 1975 yasasını kabul ettirdi. Ayrıca Avrupa Parlamentosu Başkanlığı (1979-1982) yaptı ve Conseil constitutionnel (Anayasa Konseyi) üyeliğinde bulundu.",
+          "choices": [
+            { "id": "a", "text": "Kürtajı yasallaştıran 1975 yasasını kabul ettirdi" },
+            { "id": "b", "text": "Ölüm cezasını kaldırdı" },
+            { "id": "c", "text": "Sécurité sociale'i (Sosyal Güvenlik) kurdu" },
+            { "id": "d", "text": "Beşinci Cumhuriyet'i (Ve République) kurdu" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#139",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Dans quelle région est située une partie des plages du débarquement ayant permis d'engager la libération de la France ?",
+      "choices_fr": [
+        { "id": "a", "text": "En Normandie" },
+        { "id": "b", "text": "En Bretagne" },
+        { "id": "c", "text": "Dans les Hauts-de-France" },
+        { "id": "d", "text": "En Provence-Alpes-Côte d'Azur" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Une partie des plages du débarquement allié du 6 juin 1944 (D-Day) se trouve en Normandie, dans les départements du Calvados et de la Manche (Omaha Beach, Utah Beach, Sword Beach, Juno Beach, Gold Beach). Ce débarquement a marqué le début de la libération de la France.",
+      "translations": {
+        "en": {
+          "text": "In which region are some of the landing beaches (plages du débarquement) that started the liberation of France ?",
+          "explanation": "Some of the Allied landing beaches of 6 June 1944 (D-Day) are in Normandie (Normandy), in the départements of Calvados and Manche (Omaha Beach, Utah Beach, Sword Beach, Juno Beach, Gold Beach). This landing began the liberation of France.",
+          "choices": [
+            { "id": "a", "text": "In Normandie (Normandy)" },
+            { "id": "b", "text": "In Bretagne (Brittany)" },
+            { "id": "c", "text": "In Hauts-de-France" },
+            { "id": "d", "text": "In Provence-Alpes-Côte d'Azur" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'nın kurtuluşunu başlatan çıkarma plajlarının (plages du débarquement) bir bölümü hangi bölgededir ?",
+          "explanation": "6 Haziran 1944 (D-Day) Müttefik çıkarma plajlarının bir bölümü, Calvados ve Manche bölgelerindeki Normandie (Normandiya) bölgesindedir (Omaha Beach, Utah Beach, Sword Beach, Juno Beach, Gold Beach). Bu çıkarma Fransa'nın kurtuluşunun başlangıcıdır.",
+          "choices": [
+            { "id": "a", "text": "Normandiya (Normandie)" },
+            { "id": "b", "text": "Bretanya (Bretagne)" },
+            { "id": "c", "text": "Hauts-de-France" },
+            { "id": "d", "text": "Provence-Alpes-Côte d'Azur" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#141",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel roi de France a été guillotiné pendant la Révolution française ?",
+      "choices_fr": [
+        { "id": "a", "text": "Louis XVI" },
+        { "id": "b", "text": "Louis XIV" },
+        { "id": "c", "text": "Henri IV" },
+        { "id": "d", "text": "François Ier" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Louis XVI a été guillotiné le 21 janvier 1793, place de la Révolution (actuelle place de la Concorde) à Paris, après avoir été jugé et condamné par la Convention nationale. Son exécution marque la fin de la monarchie en France.",
+      "translations": {
+        "en": {
+          "text": "Which king of France was guillotined during the French Revolution ?",
+          "explanation": "Louis XVI was guillotined on 21 January 1793 on the Place de la Révolution (now Place de la Concorde) in Paris, after being tried and convicted by the Convention nationale. His execution marks the end of the monarchy in France.",
+          "choices": [
+            { "id": "a", "text": "Louis XVI" },
+            { "id": "b", "text": "Louis XIV" },
+            { "id": "c", "text": "Henri IV" },
+            { "id": "d", "text": "François Ier" }
+          ]
+        },
+        "tr": {
+          "text": "Fransız Devrimi sırasında hangi Fransa kralı giyotinle idam edildi ?",
+          "explanation": "Louis XVI, 21 Ocak 1793'te, Convention nationale tarafından yargılanıp mahkûm edildikten sonra Paris'teki Place de la Révolution'da (bugünkü Place de la Concorde) giyotinle idam edildi. Bu idam, Fransa'da monarşinin sonunu işaret eder.",
+          "choices": [
+            { "id": "a", "text": "Louis XVI" },
+            { "id": "b", "text": "Louis XIV" },
+            { "id": "c", "text": "Henri IV" },
+            { "id": "d", "text": "François Ier" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#147",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel pays a été une colonie française ?",
+      "choices_fr": [
+        { "id": "a", "text": "L'Algérie" },
+        { "id": "b", "text": "La Suisse" },
+        { "id": "c", "text": "L'Espagne" },
+        { "id": "d", "text": "Le Brésil" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'Algérie a été une colonie française de 1830 à 1962, date de son indépendance après une guerre de huit ans (1954-1962). De nombreux autres pays d'Afrique, d'Asie et des Caraïbes ont été des colonies françaises.",
+      "translations": {
+        "en": {
+          "text": "Which country was a French colony ?",
+          "explanation": "Algeria was a French colony from 1830 to 1962, the year of its independence after an eight-year war (1954-1962). Many other countries in Africa, Asia and the Caribbean were also French colonies.",
+          "choices": [
+            { "id": "a", "text": "Algeria" },
+            { "id": "b", "text": "Switzerland" },
+            { "id": "c", "text": "Spain" },
+            { "id": "d", "text": "Brazil" }
+          ]
+        },
+        "tr": {
+          "text": "Hangi ülke bir Fransız sömürgesiydi ?",
+          "explanation": "Cezayir, 1830'dan sekiz yıllık bir savaşın (1954-1962) ardından bağımsızlığını kazandığı 1962'ye kadar Fransız sömürgesiydi. Afrika, Asya ve Karayipler'de daha pek çok ülke de Fransız sömürgesi olmuştu.",
+          "choices": [
+            { "id": "a", "text": "Cezayir" },
+            { "id": "b", "text": "İsviçre" },
+            { "id": "c", "text": "İspanya" },
+            { "id": "d", "text": "Brezilya" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#153",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Sous quel président a été abolie la peine de mort en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "François Mitterrand" },
+        { "id": "b", "text": "Charles de Gaulle" },
+        { "id": "c", "text": "Jacques Chirac" },
+        { "id": "d", "text": "Valéry Giscard d'Estaing" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La peine de mort a été abolie en France le 9 octobre 1981 sous la présidence de François Mitterrand, à l'initiative du garde des Sceaux Robert Badinter. Depuis 2007, cette abolition est inscrite dans la Constitution.",
+      "translations": {
+        "en": {
+          "text": "Under which President was the death penalty abolished in France ?",
+          "explanation": "The death penalty was abolished in France on 9 October 1981 under the presidency of François Mitterrand, on the initiative of Justice Minister (garde des Sceaux) Robert Badinter. Since 2007, this abolition has been enshrined in the Constitution.",
+          "choices": [
+            { "id": "a", "text": "François Mitterrand" },
+            { "id": "b", "text": "Charles de Gaulle" },
+            { "id": "c", "text": "Jacques Chirac" },
+            { "id": "d", "text": "Valéry Giscard d'Estaing" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da ölüm cezası hangi Cumhurbaşkanı döneminde kaldırıldı ?",
+          "explanation": "Ölüm cezası, Adalet Bakanı (garde des Sceaux) Robert Badinter'in girişimiyle Cumhurbaşkanı François Mitterrand döneminde, 9 Ekim 1981'de Fransa'da kaldırıldı. 2007'den bu yana bu kaldırılış Anayasa'da yer alır.",
+          "choices": [
+            { "id": "a", "text": "François Mitterrand" },
+            { "id": "b", "text": "Charles de Gaulle" },
+            { "id": "c", "text": "Jacques Chirac" },
+            { "id": "d", "text": "Valéry Giscard d'Estaing" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#154",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Que célèbre-t-on le 8 mai ?",
+      "choices_fr": [
+        { "id": "a", "text": "La victoire des Alliés et la fin de la Seconde Guerre mondiale en Europe en 1945" },
+        { "id": "b", "text": "La prise de la Bastille" },
+        { "id": "c", "text": "L'armistice de la Première Guerre mondiale" },
+        { "id": "d", "text": "La fête du Travail" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Le 8 mai commémore la victoire des Alliés sur l'Allemagne nazie et la fin de la Seconde Guerre mondiale en Europe en 1945. C'est un jour férié en France.",
+      "translations": {
+        "en": {
+          "text": "What is celebrated on 8 May ?",
+          "explanation": "8 May commemorates the Allied victory over Nazi Germany and the end of the Second World War in Europe in 1945. It is a public holiday in France.",
+          "choices": [
+            { "id": "a", "text": "The Allied victory and the end of the Second World War in Europe in 1945" },
+            { "id": "b", "text": "The storming of the Bastille" },
+            { "id": "c", "text": "The First World War armistice" },
+            { "id": "d", "text": "Labour Day" }
+          ]
+        },
+        "tr": {
+          "text": "8 Mayıs'ta ne kutlanır ?",
+          "explanation": "8 Mayıs, Müttefiklerin Nazi Almanyası karşısındaki zaferini ve 1945'te Avrupa'da İkinci Dünya Savaşı'nın sona ermesini anar. Fransa'da resmi tatildir.",
+          "choices": [
+            { "id": "a", "text": "Müttefiklerin zaferi ve 1945'te Avrupa'da İkinci Dünya Savaşı'nın sona ermesi" },
+            { "id": "b", "text": "Bastille'in zaptı" },
+            { "id": "c", "text": "Birinci Dünya Savaşı ateşkesi" },
+            { "id": "d", "text": "İşçi Bayramı" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#158",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Depuis quand l'esclavage a-t-il été aboli en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "Depuis 1848" },
+        { "id": "b", "text": "Depuis 1789" },
+        { "id": "c", "text": "Depuis 1905" },
+        { "id": "d", "text": "Depuis 1944" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'esclavage a été aboli définitivement en France le 27 avril 1848, par un décret porté par Victor Schœlcher sous la IIe République. Une première abolition décrétée en 1794 avait été rétablie par Napoléon Bonaparte en 1802.",
+      "translations": {
+        "en": {
+          "text": "Since when has slavery been abolished in France ?",
+          "explanation": "Slavery was definitively abolished in France on 27 April 1848, by a decree promoted by Victor Schœlcher under the IIe République (Second Republic). An earlier abolition decreed in 1794 had been reinstated by Napoléon Bonaparte in 1802.",
+          "choices": [
+            { "id": "a", "text": "Since 1848" },
+            { "id": "b", "text": "Since 1789" },
+            { "id": "c", "text": "Since 1905" },
+            { "id": "d", "text": "Since 1944" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da kölelik ne zamandan beri kaldırılmıştır ?",
+          "explanation": "Kölelik, Fransa'da IIe République (İkinci Cumhuriyet) döneminde Victor Schœlcher'in öncülüğündeki bir kararnameyle 27 Nisan 1848'de kesin olarak kaldırıldı. 1794'te yapılan ilk kaldırma, 1802'de Napoléon Bonaparte tarafından geri alınmıştı.",
+          "choices": [
+            { "id": "a", "text": "1848'den beri" },
+            { "id": "b", "text": "1789'dan beri" },
+            { "id": "c", "text": "1905'ten beri" },
+            { "id": "d", "text": "1944'ten beri" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#162",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle organisation a été créée en 1945 après la Seconde Guerre mondiale ?",
+      "choices_fr": [
+        { "id": "a", "text": "L'Organisation des Nations Unies (ONU)" },
+        { "id": "b", "text": "L'Union européenne (UE)" },
+        { "id": "c", "text": "L'OTAN" },
+        { "id": "d", "text": "La Société des Nations (SDN)" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'Organisation des Nations Unies (ONU) a été créée le 24 octobre 1945, après la Seconde Guerre mondiale, pour maintenir la paix et la sécurité internationales. La France est l'un des cinq membres permanents du Conseil de sécurité.",
+      "translations": {
+        "en": {
+          "text": "Which organisation was created in 1945 after the Second World War ?",
+          "explanation": "The United Nations Organization (Organisation des Nations Unies — ONU) was created on 24 October 1945, after the Second World War, to maintain international peace and security. France is one of the five permanent members of the Security Council.",
+          "choices": [
+            { "id": "a", "text": "The United Nations (Organisation des Nations Unies — ONU)" },
+            { "id": "b", "text": "The European Union (Union européenne — UE)" },
+            { "id": "c", "text": "NATO" },
+            { "id": "d", "text": "The League of Nations (Société des Nations — SDN)" }
+          ]
+        },
+        "tr": {
+          "text": "İkinci Dünya Savaşı'nın ardından 1945'te hangi örgüt kuruldu ?",
+          "explanation": "Birleşmiş Milletler Örgütü (Organisation des Nations Unies — ONU), 24 Ekim 1945'te, İkinci Dünya Savaşı'nın ardından uluslararası barış ve güvenliği korumak için kuruldu. Fransa, Güvenlik Konseyi'nin beş daimi üyesinden biridir.",
+          "choices": [
+            { "id": "a", "text": "Birleşmiş Milletler (Organisation des Nations Unies — ONU)" },
+            { "id": "b", "text": "Avrupa Birliği (Union européenne — UE)" },
+            { "id": "c", "text": "NATO" },
+            { "id": "d", "text": "Milletler Cemiyeti (Société des Nations — SDN)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#163",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "En quelle année l'euro est-il devenu la monnaie officielle de la France ?",
+      "choices_fr": [
+        { "id": "a", "text": "En 2002" },
+        { "id": "b", "text": "En 1999" },
+        { "id": "c", "text": "En 1992" },
+        { "id": "d", "text": "En 1958" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "L'euro est devenu la monnaie officielle utilisée par les Français le 1er janvier 2002, avec la mise en circulation des billets et des pièces. Le franc français a alors été retiré de la circulation.",
+      "translations": {
+        "en": {
+          "text": "In what year did the euro become the official currency of France ?",
+          "explanation": "The euro became the official currency used by the French on 1 January 2002, when notes and coins entered circulation. The French franc was then withdrawn from circulation.",
+          "choices": [
+            { "id": "a", "text": "In 2002" },
+            { "id": "b", "text": "In 1999" },
+            { "id": "c", "text": "In 1992" },
+            { "id": "d", "text": "In 1958" }
+          ]
+        },
+        "tr": {
+          "text": "Euro hangi yılda Fransa'nın resmi para birimi oldu ?",
+          "explanation": "Euro, banknot ve madeni paraların tedavüle çıktığı 1 Ocak 2002'de Fransızların kullandığı resmi para birimi oldu. Fransız frangı o tarihte dolaşımdan kaldırıldı.",
+          "choices": [
+            { "id": "a", "text": "2002'de" },
+            { "id": "b", "text": "1999'da" },
+            { "id": "c", "text": "1992'de" },
+            { "id": "d", "text": "1958'de" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#164",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Lors de la seconde guerre mondiale, à quelle date la ville de Paris a-t-elle été libérée ?",
+      "choices_fr": [
+        { "id": "a", "text": "Le 25 août 1944" },
+        { "id": "b", "text": "Le 8 mai 1945" },
+        { "id": "c", "text": "Le 6 juin 1944" },
+        { "id": "d", "text": "Le 11 novembre 1918" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Paris a été libérée le 25 août 1944 par la 2e division blindée du général Leclerc et la résistance intérieure, soutenues par les troupes alliées. Le général de Gaulle prononce le lendemain son célèbre discours à l'Hôtel de Ville.",
+      "translations": {
+        "en": {
+          "text": "During the Second World War, on what date was Paris liberated ?",
+          "explanation": "Paris was liberated on 25 August 1944 by the 2nd Armoured Division of General Leclerc and the internal resistance, supported by Allied troops. General de Gaulle gave his famous speech at the Hôtel de Ville the next day.",
+          "choices": [
+            { "id": "a", "text": "On 25 August 1944" },
+            { "id": "b", "text": "On 8 May 1945" },
+            { "id": "c", "text": "On 6 June 1944" },
+            { "id": "d", "text": "On 11 November 1918" }
+          ]
+        },
+        "tr": {
+          "text": "İkinci Dünya Savaşı sırasında Paris hangi tarihte kurtarıldı ?",
+          "explanation": "Paris, 25 Ağustos 1944'te, Müttefik kuvvetlerin desteğiyle General Leclerc'in 2. Zırhlı Tümeni ve iç direniş tarafından kurtarıldı. General de Gaulle ertesi gün Hôtel de Ville'de meşhur konuşmasını yaptı.",
+          "choices": [
+            { "id": "a", "text": "25 Ağustos 1944" },
+            { "id": "b", "text": "8 Mayıs 1945" },
+            { "id": "c", "text": "6 Haziran 1944" },
+            { "id": "d", "text": "11 Kasım 1918" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#167",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle oeuvre a été écrite par Victor Hugo ?",
+      "choices_fr": [
+        { "id": "a", "text": "Les Misérables" },
+        { "id": "b", "text": "Madame Bovary" },
+        { "id": "c", "text": "Le Petit Prince" },
+        { "id": "d", "text": "L'Étranger" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Victor Hugo (1802-1885) a écrit Les Misérables (1862), un roman emblématique de la littérature française. Il est également l'auteur de Notre-Dame de Paris et de nombreux poèmes. Madame Bovary est de Flaubert, Le Petit Prince de Saint-Exupéry, L'Étranger de Camus.",
+      "translations": {
+        "en": {
+          "text": "Which work was written by Victor Hugo ?",
+          "explanation": "Victor Hugo (1802-1885) wrote Les Misérables (1862), a landmark novel of French literature. He also wrote Notre-Dame de Paris and many poems. Madame Bovary is by Flaubert, Le Petit Prince by Saint-Exupéry, L'Étranger by Camus.",
+          "choices": [
+            { "id": "a", "text": "Les Misérables" },
+            { "id": "b", "text": "Madame Bovary" },
+            { "id": "c", "text": "Le Petit Prince" },
+            { "id": "d", "text": "L'Étranger" }
+          ]
+        },
+        "tr": {
+          "text": "Hangi eser Victor Hugo tarafından yazıldı ?",
+          "explanation": "Victor Hugo (1802-1885), Fransız edebiyatının başyapıtlarından biri olan Les Misérables (Sefiller, 1862) romanını yazdı. Ayrıca Notre-Dame de Paris ve pek çok şiirin de yazarıdır. Madame Bovary Flaubert'in, Le Petit Prince Saint-Exupéry'nin, L'Étranger Camus'nün eseridir.",
+          "choices": [
+            { "id": "a", "text": "Les Misérables (Sefiller)" },
+            { "id": "b", "text": "Madame Bovary" },
+            { "id": "c", "text": "Le Petit Prince (Küçük Prens)" },
+            { "id": "d", "text": "L'Étranger (Yabancı)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#176",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Pendant quelles journées peut-on visiter gratuitement des lieux culturels en France ?",
+      "choices_fr": [
+        { "id": "a", "text": "Lors des Journées européennes du patrimoine, en septembre" },
+        { "id": "b", "text": "Uniquement le 14 juillet" },
+        { "id": "c", "text": "Tous les week-ends de l'année" },
+        { "id": "d", "text": "Pendant les vacances de Noël" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les Journées européennes du patrimoine, organisées chaque année le troisième week-end de septembre, permettent de visiter gratuitement de nombreux lieux culturels et monuments habituellement fermés ou payants (palais de l'Élysée, Sénat, etc.).",
+      "translations": {
+        "en": {
+          "text": "During which days can you visit cultural sites for free in France ?",
+          "explanation": "The Journées européennes du patrimoine (European Heritage Days), held every year on the third weekend of September, give free access to many cultural sites and monuments that are usually closed or charge an entry fee (Élysée Palace, the Sénat, and others).",
+          "choices": [
+            { "id": "a", "text": "During the Journées européennes du patrimoine (European Heritage Days), in September" },
+            { "id": "b", "text": "Only on 14 July" },
+            { "id": "c", "text": "Every weekend of the year" },
+            { "id": "d", "text": "During the Christmas holidays" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa'da kültürel mekânlar hangi günlerde ücretsiz ziyaret edilebilir ?",
+          "explanation": "Her yıl Eylül ayının üçüncü hafta sonunda düzenlenen Journées européennes du patrimoine (Avrupa Miras Günleri), genellikle kapalı veya ücretli olan birçok kültürel mekân ile anıtın (Élysée Sarayı, Sénat vb.) ücretsiz ziyaret edilmesine imkân tanır.",
+          "choices": [
+            { "id": "a", "text": "Eylül ayındaki Journées européennes du patrimoine (Avrupa Miras Günleri) sırasında" },
+            { "id": "b", "text": "Sadece 14 Temmuz'da" },
+            { "id": "c", "text": "Yılın her hafta sonunda" },
+            { "id": "d", "text": "Noel tatili sırasında" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#180",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle chaîne de montagne est située entre la France et l'Espagne ?",
+      "choices_fr": [
+        { "id": "a", "text": "Les Pyrénées" },
+        { "id": "b", "text": "Les Alpes" },
+        { "id": "c", "text": "Le Jura" },
+        { "id": "d", "text": "Le Massif central" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les Pyrénées forment la frontière naturelle entre la France et l'Espagne, sur environ 430 km. Le pic d'Aneto, en Espagne, est le sommet le plus élevé (3 404 m). En France, le pic du Vignemale culmine à 3 298 m.",
+      "translations": {
+        "en": {
+          "text": "Which mountain range is located between France and Spain ?",
+          "explanation": "The Pyrenees (Pyrénées) form the natural border between France and Spain over about 430 km. Pic d'Aneto in Spain is the highest peak (3,404 m). In France, Pic du Vignemale rises to 3,298 m.",
+          "choices": [
+            { "id": "a", "text": "The Pyrenees (Pyrénées)" },
+            { "id": "b", "text": "The Alps (Alpes)" },
+            { "id": "c", "text": "The Jura" },
+            { "id": "d", "text": "The Massif central" }
+          ]
+        },
+        "tr": {
+          "text": "Fransa ile İspanya arasında hangi dağ silsilesi yer alır ?",
+          "explanation": "Pireneler (Pyrénées) yaklaşık 430 km boyunca Fransa ile İspanya arasındaki doğal sınırı oluşturur. İspanya'daki Pic d'Aneto en yüksek zirvedir (3.404 m). Fransa'da Pic du Vignemale 3.298 m'ye ulaşır.",
+          "choices": [
+            { "id": "a", "text": "Pireneler (Pyrénées)" },
+            { "id": "b", "text": "Alpler (Alpes)" },
+            { "id": "c", "text": "Jura" },
+            { "id": "d", "text": "Massif central" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#198",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle île française est située dans l'océan indien ?",
+      "choices_fr": [
+        { "id": "a", "text": "La Réunion" },
+        { "id": "b", "text": "La Martinique" },
+        { "id": "c", "text": "La Guadeloupe" },
+        { "id": "d", "text": "La Corse" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La Réunion est une île française située dans l'océan Indien, à l'est de Madagascar. C'est un département et une région d'outre-mer (DROM). Mayotte est également située dans l'océan Indien.",
+      "translations": {
+        "en": {
+          "text": "Which French island is located in the Indian Ocean ?",
+          "explanation": "La Réunion is a French island in the Indian Ocean, east of Madagascar. It is an overseas department and region (département et région d'outre-mer — DROM). Mayotte is also located in the Indian Ocean.",
+          "choices": [
+            { "id": "a", "text": "La Réunion" },
+            { "id": "b", "text": "Martinique" },
+            { "id": "c", "text": "Guadeloupe" },
+            { "id": "d", "text": "Corsica (Corse)" }
+          ]
+        },
+        "tr": {
+          "text": "Hangi Fransız adası Hint Okyanusu'nda yer alır ?",
+          "explanation": "La Réunion, Madagaskar'ın doğusunda, Hint Okyanusu'nda bulunan bir Fransız adasıdır. Bir denizaşırı il ve bölgedir (département et région d'outre-mer — DROM). Mayotte de Hint Okyanusu'nda yer alır.",
+          "choices": [
+            { "id": "a", "text": "La Réunion" },
+            { "id": "b", "text": "Martinik (Martinique)" },
+            { "id": "c", "text": "Guadeloupe" },
+            { "id": "d", "text": "Korsika (Corse)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#208",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quelle île française se trouve au sud-est du continent africain ?",
+      "choices_fr": [
+        { "id": "a", "text": "La Réunion" },
+        { "id": "b", "text": "La Guadeloupe" },
+        { "id": "c", "text": "La Martinique" },
+        { "id": "d", "text": "La Nouvelle-Calédonie" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La Réunion est une île française située au sud-est du continent africain, à l'est de Madagascar, dans l'océan Indien. Elle est un département et une région d'outre-mer (DROM).",
+      "translations": {
+        "en": {
+          "text": "Which French island is located to the south-east of the African continent ?",
+          "explanation": "La Réunion is a French island located to the south-east of the African continent, east of Madagascar, in the Indian Ocean. It is an overseas department and region (DROM).",
+          "choices": [
+            { "id": "a", "text": "La Réunion" },
+            { "id": "b", "text": "Guadeloupe" },
+            { "id": "c", "text": "Martinique" },
+            { "id": "d", "text": "New Caledonia (Nouvelle-Calédonie)" }
+          ]
+        },
+        "tr": {
+          "text": "Hangi Fransız adası Afrika kıtasının güneydoğusunda yer alır ?",
+          "explanation": "La Réunion, Afrika kıtasının güneydoğusunda, Madagaskar'ın doğusunda, Hint Okyanusu'nda yer alan bir Fransız adasıdır. Denizaşırı il ve bölgedir (DROM).",
+          "choices": [
+            { "id": "a", "text": "La Réunion" },
+            { "id": "b", "text": "Guadeloupe" },
+            { "id": "c", "text": "Martinik (Martinique)" },
+            { "id": "d", "text": "Yeni Kaledonya (Nouvelle-Calédonie)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#212",
+      "theme_id": 4,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel est le 101ème département français depuis 2011 ?",
+      "choices_fr": [
+        { "id": "a", "text": "Mayotte" },
+        { "id": "b", "text": "La Réunion" },
+        { "id": "c", "text": "La Guyane" },
+        { "id": "d", "text": "La Nouvelle-Calédonie" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Mayotte est devenue le 101e département français le 31 mars 2011. Située dans l'océan Indien, c'est le plus récent département d'outre-mer (DROM).",
+      "translations": {
+        "en": {
+          "text": "Which is the 101st French département since 2011 ?",
+          "explanation": "Mayotte became the 101st French département on 31 March 2011. Located in the Indian Ocean, it is the most recent overseas département (DROM).",
+          "choices": [
+            { "id": "a", "text": "Mayotte" },
+            { "id": "b", "text": "La Réunion" },
+            { "id": "c", "text": "French Guiana (Guyane)" },
+            { "id": "d", "text": "New Caledonia (Nouvelle-Calédonie)" }
+          ]
+        },
+        "tr": {
+          "text": "2011'den beri Fransa'nın 101. ili (département) hangisidir ?",
+          "explanation": "Mayotte, 31 Mart 2011'de Fransa'nın 101. ili (département) oldu. Hint Okyanusu'nda yer alan en yeni denizaşırı ildir (DROM).",
+          "choices": [
+            { "id": "a", "text": "Mayotte" },
+            { "id": "b", "text": "La Réunion" },
+            { "id": "c", "text": "Fransız Guyanası (Guyane)" },
+            { "id": "d", "text": "Yeni Kaledonya (Nouvelle-Calédonie)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#217",
+      "theme_id": 5,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quel mariage est reconnu légalement ?",
+      "choices_fr": [
+        { "id": "a", "text": "Le mariage civil célébré à la mairie" },
+        { "id": "b", "text": "Le mariage religieux uniquement" },
+        { "id": "c", "text": "Le mariage coutumier" },
+        { "id": "d", "text": "Le mariage célébré à l'étranger sans transcription" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Seul le mariage civil, célébré à la mairie par un officier d'état civil, est reconnu légalement en France. Le mariage religieux n'a pas de valeur juridique : il ne peut être célébré qu'après le mariage civil.",
+      "translations": {
+        "en": {
+          "text": "Which marriage is legally recognised ?",
+          "explanation": "Only the civil marriage (mariage civil), held at the mairie (town hall) by a registrar (officier d'état civil), is legally recognised in France. Religious marriage has no legal value: it can only take place after the civil marriage.",
+          "choices": [
+            { "id": "a", "text": "The civil marriage (mariage civil) held at the mairie" },
+            { "id": "b", "text": "Religious marriage only" },
+            { "id": "c", "text": "Customary marriage" },
+            { "id": "d", "text": "A marriage held abroad without transcription" }
+          ]
+        },
+        "tr": {
+          "text": "Hangi evlilik yasal olarak tanınır ?",
+          "explanation": "Fransa'da yalnızca belediyede (mairie) bir nüfus memuru (officier d'état civil) tarafından yapılan resmi evlilik (mariage civil) yasal olarak tanınır. Dini nikâhın hukuki geçerliliği yoktur ve ancak resmi nikâhtan sonra kıyılabilir.",
+          "choices": [
+            { "id": "a", "text": "Belediyede (mairie) yapılan resmi evlilik (mariage civil)" },
+            { "id": "b", "text": "Sadece dini nikâh" },
+            { "id": "c", "text": "Örf-âdete dayalı evlilik" },
+            { "id": "d", "text": "Yurt dışında yapılmış ve tescil edilmemiş evlilik" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#221",
+      "theme_id": 5,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Quand faut-il déclarer son enfant au service d'état civil ?",
+      "choices_fr": [
+        { "id": "a", "text": "Dans les 5 jours suivant la naissance" },
+        { "id": "b", "text": "Dans le mois suivant la naissance" },
+        { "id": "c", "text": "Avant le premier anniversaire" },
+        { "id": "d", "text": "Aucun délai obligatoire" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "La déclaration de naissance d'un enfant doit être faite dans les 5 jours qui suivent l'accouchement, à la mairie du lieu de naissance. Ce délai peut être étendu à 8 jours dans certains territoires d'outre-mer.",
+      "translations": {
+        "en": {
+          "text": "When must you declare a child to the état civil (civil registry) service ?",
+          "explanation": "The birth declaration of a child must be made within the 5 days following the birth, at the mairie (town hall) of the place of birth. This deadline can be extended to 8 days in some overseas territories.",
+          "choices": [
+            { "id": "a", "text": "Within 5 days of the birth" },
+            { "id": "b", "text": "Within a month of the birth" },
+            { "id": "c", "text": "Before the first birthday" },
+            { "id": "d", "text": "No mandatory deadline" }
+          ]
+        },
+        "tr": {
+          "text": "Çocuk nüfus müdürlüğüne (service d'état civil) ne zaman bildirilmelidir ?",
+          "explanation": "Çocuğun doğum bildirimi, doğumu izleyen 5 gün içinde, doğum yerinin belediyesine (mairie) yapılmalıdır. Bu süre bazı denizaşırı topraklarda 8 güne kadar uzatılabilir.",
+          "choices": [
+            { "id": "a", "text": "Doğumdan sonraki 5 gün içinde" },
+            { "id": "b", "text": "Doğumdan sonraki bir ay içinde" },
+            { "id": "c", "text": "İlk yaş gününden önce" },
+            { "id": "d", "text": "Zorunlu bir süre yoktur" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#224",
+      "theme_id": 5,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Auprès de quelle institution les parents peuvent inscrire leurs enfants à l'école publique ?",
+      "choices_fr": [
+        { "id": "a", "text": "À la mairie de leur domicile" },
+        { "id": "b", "text": "Directement à l'école" },
+        { "id": "c", "text": "À la préfecture" },
+        { "id": "d", "text": "Au ministère de l'Éducation nationale" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Les parents inscrivent leur enfant à l'école publique à la mairie de leur lieu de résidence. La mairie délivre un certificat d'inscription précisant l'école d'affectation. Une seconde étape se fait ensuite directement auprès de l'école.",
+      "translations": {
+        "en": {
+          "text": "With which institution can parents enrol their children in the public school (école publique) ?",
+          "explanation": "Parents enrol their child at the public school at the mairie (town hall) of their place of residence. The mairie issues a registration certificate (certificat d'inscription) stating the assigned school. A second step is then taken directly with the school.",
+          "choices": [
+            { "id": "a", "text": "At the mairie (town hall) of their home" },
+            { "id": "b", "text": "Directly at the school" },
+            { "id": "c", "text": "At the préfecture" },
+            { "id": "d", "text": "At the Ministry of National Education (ministère de l'Éducation nationale)" }
+          ]
+        },
+        "tr": {
+          "text": "Veliler çocuklarını devlet okuluna (école publique) hangi kuruma kaydettirebilir ?",
+          "explanation": "Veliler, çocuklarını devlet okuluna ikamet ettikleri belediyede (mairie) kaydettirir. Belediye, çocuğun gideceği okulu belirten bir kayıt belgesi (certificat d'inscription) verir. İkinci adım daha sonra doğrudan okulda yapılır.",
+          "choices": [
+            { "id": "a", "text": "İkamet ettikleri belediyede (mairie)" },
+            { "id": "b", "text": "Doğrudan okulda" },
+            { "id": "c", "text": "Valilikte (préfecture)" },
+            { "id": "d", "text": "Millî Eğitim Bakanlığı'nda (ministère de l'Éducation nationale)" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#236",
+      "theme_id": 5,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Travailler sans être déclaré est :",
+      "choices_fr": [
+        { "id": "a", "text": "Interdit et puni par la loi" },
+        { "id": "b", "text": "Autorisé pour les petits revenus" },
+        { "id": "c", "text": "Autorisé pour les étrangers" },
+        { "id": "d", "text": "Autorisé pendant les vacances scolaires" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Le travail dissimulé (non déclaré) est interdit et puni par la loi. Il prive le salarié de ses droits (protection sociale, retraite, chômage) et est passible pour l'employeur de 45 000 € d'amende et 3 ans d'emprisonnement.",
+      "translations": {
+        "en": {
+          "text": "Working without being declared is :",
+          "explanation": "Undeclared work (travail dissimulé) is forbidden and punishable by law. It deprives the employee of their rights (social protection, retirement, unemployment) and the employer faces a €45,000 fine and 3 years' imprisonment.",
+          "choices": [
+            { "id": "a", "text": "Forbidden and punishable by law" },
+            { "id": "b", "text": "Allowed for low incomes" },
+            { "id": "c", "text": "Allowed for foreigners" },
+            { "id": "d", "text": "Allowed during school holidays" }
+          ]
+        },
+        "tr": {
+          "text": "Bildirim yapılmadan (kayıt dışı) çalışmak :",
+          "explanation": "Kayıt dışı çalışma (travail dissimulé) yasaktır ve yasayla cezalandırılır. Çalışanı haklarından (sosyal güvence, emeklilik, işsizlik) yoksun bırakır; işveren için 45.000 € para cezası ve 3 yıl hapis cezası söz konusudur.",
+          "choices": [
+            { "id": "a", "text": "Yasaktır ve yasayla cezalandırılır" },
+            { "id": "b", "text": "Düşük gelirler için serbesttir" },
+            { "id": "c", "text": "Yabancılar için serbesttir" },
+            { "id": "d", "text": "Okul tatillerinde serbesttir" }
+          ]
+        }
+      }
+    },
+    {
+      "official_ref": "NAT#253",
+      "theme_id": 5,
+      "type": "knowledge",
+      "exam_types": ["nat"],
+      "text_fr": "Comment s'appellent les établissements scolaires que les élèves intègrent après l'école élémentaire ?",
+      "choices_fr": [
+        { "id": "a", "text": "Les collèges" },
+        { "id": "b", "text": "Les lycées" },
+        { "id": "c", "text": "Les universités" },
+        { "id": "d", "text": "Les écoles maternelles" }
+      ],
+      "correct_choice": "a",
+      "explanation_fr": "Après l'école élémentaire (CP à CM2), les élèves entrent au collège (de la 6e à la 3e), de 11 à 15 ans environ. Le collège débouche sur le diplôme national du brevet (DNB). Ils poursuivent ensuite au lycée.",
+      "translations": {
+        "en": {
+          "text": "What are the schools called that pupils attend after primary school (école élémentaire) ?",
+          "explanation": "After primary school (école élémentaire, from CP to CM2), pupils enter the collège (from 6e to 3e, ages 11 to about 15). The collège leads to the diplôme national du brevet (DNB — national brevet diploma). They then continue at the lycée (high school).",
+          "choices": [
+            { "id": "a", "text": "Collèges (middle schools)" },
+            { "id": "b", "text": "Lycées (high schools)" },
+            { "id": "c", "text": "Universities" },
+            { "id": "d", "text": "Écoles maternelles (nursery schools)" }
+          ]
+        },
+        "tr": {
+          "text": "Öğrencilerin ilkokuldan (école élémentaire) sonra gittikleri okullar nasıl adlandırılır ?",
+          "explanation": "İlkokuldan (CP'den CM2'ye) sonra öğrenciler 11-15 yaş arasında collège'e (6e'den 3e'ye) başlar. Collège, diplôme national du brevet (DNB — ulusal brevet diploması) ile sona erer. Ardından lycée'ye (lise) devam ederler.",
+          "choices": [
+            { "id": "a", "text": "Collèges (ortaokullar)" },
+            { "id": "b", "text": "Lycées (liseler)" },
+            { "id": "c", "text": "Üniversiteler" },
+            { "id": "d", "text": "Écoles maternelles (anaokulları)" }
+          ]
+        }
+      }
+    }
+  ]
+}
