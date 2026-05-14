@@ -6,6 +6,7 @@ import { LANGUAGES, type Language } from '@civique/shared';
 import type { Flashcard } from '@/lib/data/flashcards';
 import { useFlashcardStore } from '@/lib/stores/flashcardStore';
 import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
+import { submitSrsReview } from '@/lib/actions/srs';
 
 interface Props {
   cards: Flashcard[];
@@ -78,12 +79,27 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
 
   function handleAnswer(status: 'known' | 'unknown') {
     if (!card) return;
+    // Local progress: still kept (Zustand → localStorage). Drives the
+    // in-session "X / Y connues" pill and the per-theme dashboard tile,
+    // both of which need synchronous reads. The SRS server-side state
+    // is the long-term truth for next-due scheduling; we update both.
     markCard(card.id, status);
     if (status === 'known') {
       setKnownIds((arr) => [...arr, card.id]);
     } else {
       setUnknownIds((arr) => [...arr, card.id]);
     }
+
+    // Fire-and-forget: record the SM-2 review on the server. Failures
+    // are swallowed inside submitSrsReview() so a network blip never
+    // breaks the user's session — they'd still see their local
+    // progression and the card would be retried automatically on the
+    // next review when next_review_at stays unchanged.
+    void submitSrsReview(
+      'flashcard',
+      card.id,
+      status === 'known' ? 'good' : 'lapse',
+    );
 
     if (index + 1 >= total) {
       setPhase('finished');
