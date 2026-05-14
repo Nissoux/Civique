@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FLASHCARDS } from '@/lib/data/flashcards';
 import { ThemeSelector } from '@/components/flashcard/ThemeSelector';
+import { fetchSrsStats } from '@/lib/actions/srs';
 
 export const metadata = {
   title: 'Révisions — Civique',
@@ -8,8 +9,12 @@ export const metadata = {
     'Cartes mémo et quiz de révision pour préparer votre examen civique.',
 };
 
-export default function FlashcardsHubPage() {
+export default async function FlashcardsHubPage() {
   const totalCards = FLASHCARDS.length;
+  // SRS counters power the "Révisions du jour" banner at the top of
+  // the hub. Best-effort: API down ⇒ banner hidden, themes still render.
+  const srsStats = await fetchSrsStats();
+  const dueCount = srsStats?.flashcards.due ?? 0;
 
   return (
     <div className="min-h-screen">
@@ -39,6 +44,49 @@ export default function FlashcardsHubPage() {
           </p>
         </div>
       </section>
+
+      {/* Daily SRS banner — only when SM-2 has scheduled at least one
+          card for today. Placed above the two main CTAs because doing
+          your due reviews is always the most valuable thing to do
+          when there *is* something due. */}
+      {dueCount > 0 ? (
+        <section className="max-w-5xl mx-auto px-6 sm:px-10 pt-8">
+          <Link
+            href="/app/flashcards/due"
+            className="
+              card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
+              bg-saffron/20 !border-saffron/50
+              transition-all hover:-translate-y-1 hover:shadow-clay-lg cursor-pointer
+            "
+          >
+            <div
+              className="
+                flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl
+                bg-saffron text-aubergine shadow-[0_2px_0_rgba(0,0,0,0.15)]
+              "
+              aria-hidden
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.7rem] font-display italic uppercase tracking-wider text-aubergine/70 mb-0.5">
+                — Programmé pour aujourd'hui
+              </p>
+              <h3 className="font-display text-lg sm:text-xl font-medium text-aubergine" style={{ fontVariationSettings: "'opsz' 32" }}>
+                {dueCount} {dueCount > 1 ? 'cartes' : 'carte'} à revoir maintenant
+              </h3>
+              <p className="text-xs sm:text-sm text-aubergine/70">
+                Répétition espacée — les cartes que votre mémoire est prête à oublier
+              </p>
+            </div>
+            <svg className="shrink-0 h-5 w-5 text-aubergine/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </section>
+      ) : null}
 
       {/* Two main CTAs */}
       <section className="max-w-5xl mx-auto px-6 sm:px-10 pt-8">

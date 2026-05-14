@@ -185,7 +185,7 @@ export default async function AppPage() {
             loop running improves retention massively vs cramming. */}
         {srsStats && srsStats.flashcards.due > 0 ? (
           <Link
-            href="/app/flashcards"
+            href="/app/flashcards/due"
             className="
               mt-4 card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
               bg-saffron/15 !border-saffron/40
