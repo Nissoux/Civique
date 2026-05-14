@@ -72,23 +72,76 @@ async function loadPool(file) {
   }
 }
 
+/**
+ * Normalize a French question text for comparison purposes.
+ *
+ * Why
+ * ---
+ * Min Intérieur publishes questions with typographic apostrophes (U+2019 `'`)
+ * and sometimes drops accents on capital letters ("Etat" instead of "État").
+ * Our DB rows have ASCII apostrophes and full accents. Strict equality misses
+ * these pairs, but they're semantically the same question. We normalize both
+ * sides before comparison so the matching catches them.
+ *
+ * Steps:
+ *   1. NFD-decompose (separates base char from combining accents)
+ *   2. Drop common combining diacritics — only for the *match key*, never
+ *      for the stored text (we don't want to lose accents in the DB)
+ *   3. Map all apostrophe variants → ASCII '
+ *   4. Map em-dash, ellipsis variants → simple equivalents
+ *   5. Collapse all whitespace runs to single spaces
+ *   6. Lowercase + trim
+ *
+ * This is *only* used to find the matching row in the DB; the row's
+ * text_fr is left untouched.
+ */
+function normalizeForMatch(s) {
+  if (!s) return '';
+  return s
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // strip combining marks
+    .replace(/[‘’‚‛ʼ′]/g, "'") // typographic apostrophes → '
+    .replace(/[“”]/g, '"') // smart quotes → "
+    .replace(/[–—]/g, '-') // en/em dash → -
+    .replace(/[…]/g, '...') // ellipsis → ...
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+    .trim();
+}
+
 async function flagMention(client, { mention, column, questions }) {
+  // Load all DB rows once, index them by normalized text. O(n+m) instead of
+  // O(n*m), and tolerant to typographic differences.
+  const allRows = await client.query(`SELECT id, text_fr FROM questions`);
+  const byNorm = new Map();
+  for (const row of allRows.rows) {
+    const key = normalizeForMatch(row.text_fr);
+    if (!byNorm.has(key)) byNorm.set(key, []);
+    byNorm.get(key).push(row.id);
+  }
+
   let matched = 0;
   const unmatched = [];
   for (const q of questions) {
-    const res = await client.query(
+    const key = normalizeForMatch(q.text);
+    const ids = byNorm.get(key);
+    if (!ids || ids.length === 0) {
+      unmatched.push({ n: q.n, theme: q.theme, text: q.text.slice(0, 80) });
+      continue;
+    }
+    // Multiple DB rows can share the same normalized key (e.g. two slight
+    // variants of the same question). We flag all of them — same official
+    // index, same provenance. Cheaper to be inclusive than to ship two
+    // "identical-looking" questions where only one counts as official.
+    const idList = ids.map((id) => Number(id));
+    await client.query(
       `UPDATE questions
           SET is_official = true,
               ${column} = $1
-        WHERE text_fr = $2
-        RETURNING id`,
-      [q.n, q.text],
+        WHERE id = ANY($2::int[])`,
+      [q.n, idList],
     );
-    if (res.rowCount > 0) {
-      matched++;
-    } else {
-      unmatched.push({ n: q.n, theme: q.theme, text: q.text.slice(0, 80) });
-    }
+    matched++;
   }
   return { matched, unmatched };
 }
