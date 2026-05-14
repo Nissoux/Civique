@@ -10,7 +10,12 @@ import {
 } from '@/lib/server/payments';
 import type { FormState } from '@/lib/auth-types';
 
-const VALID_PLANS = new Set<SubscriptionPlan>(['weekly', 'monthly', 'semiannual']);
+const VALID_PLANS = new Set<SubscriptionPlan>([
+  'weekly',
+  'monthlyLite',
+  'monthly',
+  'semiannual',
+]);
 
 // ── Start Stripe checkout ────────────────────────────────
 // Form action: <form action={startCheckoutAction}><input name="plan" value="monthly" .../>
