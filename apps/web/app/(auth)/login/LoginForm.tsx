@@ -51,7 +51,7 @@ export function LoginForm({ next }: { next: string }) {
       <SubmitButton pendingLabel="Connexion…">Se connecter</SubmitButton>
 
       <Divider />
-      <SocialButtons />
+      <SocialButtons next={next} intent="signin" />
     </form>
   );
 }

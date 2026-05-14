@@ -90,7 +90,7 @@ export function RegisterForm() {
       </p>
 
       <Divider />
-      <SocialButtons />
+      <SocialButtons intent="signup" />
     </form>
   );
 }
