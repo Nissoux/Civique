@@ -8,8 +8,10 @@ import {
   serial,
   uuid,
   jsonb,
+  real,
   index,
   uniqueIndex,
+  primaryKey,
   pgEnum,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
@@ -594,5 +596,40 @@ export const authCodes = pgTable(
   (table) => ({
     expiresIdx: index('auth_codes_expires_idx').on(table.expiresAt),
     userIdx: index('auth_codes_user_idx').on(table.userId),
+  }),
+);
+
+// ──────────────────────────────────────────────
+// SRS — Spaced Repetition System (P2)
+// ──────────────────────────────────────────────
+// Per-(user, item) state for the SM-2 algorithm. Polymorphic on
+// `itemType` so the same row layout serves both questions (in DB) and
+// flashcards (in the static TS file). See migration 0006 for the
+// rationale + algorithm sketch.
+
+export const srsProgress = pgTable(
+  'srs_progress',
+  {
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    itemType: varchar('item_type', { length: 20 }).notNull(), // 'question' | 'flashcard'
+    itemId: integer('item_id').notNull(),
+    easeFactor: real('ease_factor').notNull().default(2.5),
+    intervalDays: integer('interval_days').notNull().default(0),
+    consecutiveCorrect: integer('consecutive_correct').notNull().default(0),
+    nextReviewAt: timestamp('next_review_at', { withTimezone: true }),
+    lastReviewedAt: timestamp('last_reviewed_at', { withTimezone: true }),
+    totalReviews: integer('total_reviews').notNull().default(0),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    pk: primaryKey({ columns: [table.userId, table.itemType, table.itemId] }),
+    dueIdx: index('srs_progress_due_idx').on(
+      table.userId,
+      table.itemType,
+      table.nextReviewAt,
+    ),
   }),
 );

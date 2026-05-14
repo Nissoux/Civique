@@ -14,6 +14,7 @@ import socialRoutes from './routes/social/index.js';
 import paymentRoutes from './routes/payments/index.js';
 import userRoutes from './routes/users/index.js';
 import publicRoutes from './routes/public/index.js';
+import srsRoutes from './routes/srs/index.js';
 
 async function main() {
   const app = Fastify({
@@ -117,6 +118,9 @@ async function main() {
   await app.register(userRoutes, { prefix: '/api/users' });
   // Public, no-auth endpoints — landing / methodology page signals.
   await app.register(publicRoutes, { prefix: '/api/public' });
+  // SM-2 spaced repetition state per user — backs flashcard reviews
+  // and (post-P2) question reviews.
+  await app.register(srsRoutes, { prefix: '/api/srs' });
 
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));
