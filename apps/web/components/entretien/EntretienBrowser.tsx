@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Link from 'next/link';
 import { LANGUAGES, type Language } from '@civique/shared';
 
 interface Question {
@@ -124,6 +125,26 @@ export function EntretienBrowser({ data, currentLang }: Props) {
             la circulaire Retailleau du 2 mai 2025. Pas de réponse-type
             rigide : chaque question s'accompagne d'un conseil de réponse.
           </p>
+
+          {/* Simulation CTA. Surfaced in the hero rather than below the
+              search because the simulation is the high-engagement mode
+              that differentiates Civique from a passive PDF — we want
+              candidates to see it the moment they land. */}
+          <Link
+            href="/app/entretien/simulation"
+            className="
+              mt-6 inline-flex items-center gap-2 rounded-full
+              bg-saffron text-aubergine px-5 py-2.5 text-sm font-semibold
+              border-[1.5px] border-saffron
+              shadow-[0_2px_0_rgb(45_27_46)]
+              hover:bg-saffron/90 hover:-translate-y-0.5 transition-all
+            "
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Lancer une simulation d'entretien
+          </Link>
         </div>
       </section>
 
@@ -153,7 +174,10 @@ export function EntretienBrowser({ data, currentLang }: Props) {
               type="button"
               onClick={() => setQuery('')}
               aria-label="Effacer la recherche"
-              className="absolute right-3 top-1/2 -translate-y-1/2 h-7 w-7 flex items-center justify-center rounded-full text-ink-mute hover:bg-bone-deep hover:text-aubergine"
+              // Bump to h-9 w-9 (36 px hit area) and add an invisible 4 px
+              // pad through padding so the touch target meets the 44 px
+              // guideline on mobile without enlarging the visible chip.
+              className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 flex items-center justify-center rounded-full text-ink-mute hover:bg-bone-deep hover:text-aubergine"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
