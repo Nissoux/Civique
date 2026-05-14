@@ -33,6 +33,35 @@ const SITUATIONAL_COUNT = 12;
 const PASS_THRESHOLD = 32;
 const TIME_LIMIT_SEC = 2700;
 
+/**
+ * Official theme distribution prescribed by Arrêté du 10 octobre 2025
+ * (JORFTEXT000052381620), applicable from 1 January 2026 for CSP, CR and
+ * naturalisation civic exams.
+ *
+ *   Theme 1 — Principes et valeurs        : 5 knowledge + 6 situational = 11
+ *   Theme 2 — Système institutionnel       : 6 knowledge + 0 situational =  6
+ *   Theme 3 — Droits et devoirs            : 5 knowledge + 6 situational = 11
+ *   Theme 4 — Histoire / géo / culture     : 8 knowledge + 0 situational =  8
+ *   Theme 5 — Vivre en société             : 4 knowledge + 0 situational =  4
+ *   Total                                  : 28 knowledge + 12 situational = 40
+ *
+ * Mises en situation only live in themes 1 and 3 per the arrêté — the other
+ * themes are knowledge-only in the real exam. Earlier versions of this file
+ * used an even split (Math.floor(28/5)+remainder) which produced 9/9/8/7/7
+ * and put situational questions in every theme — non-conformant.
+ *
+ * Sub-theme granularity (devise, laïcité, vote, UE, etc.) is not enforced at
+ * this layer yet; it requires a `subtopic` column on the questions table.
+ * Tracked as a P0.4 follow-up.
+ */
+const OFFICIAL_DISTRIBUTION: Record<number, { knowledge: number; situational: number }> = {
+  1: { knowledge: 5, situational: 6 },
+  2: { knowledge: 6, situational: 0 },
+  3: { knowledge: 5, situational: 6 },
+  4: { knowledge: 8, situational: 0 },
+  5: { knowledge: 4, situational: 0 },
+};
+
 export default async function examRoutes(app: FastifyInstance) {
   app.addHook('onRequest', authGuard);
 
@@ -65,20 +94,21 @@ export default async function examRoutes(app: FastifyInstance) {
       return reply.status(500).send({ error: 'No themes configured' });
     }
 
-    // Distribution: ~6 knowledge + ~2-3 situational per theme
-    // Total: 28 knowledge + 12 situational = 40
-    const themeCount = allThemes.length; // expected 5
-    const knowledgePerTheme = Math.floor(KNOWLEDGE_COUNT / themeCount); // 5
-    const situationalPerTheme = Math.floor(SITUATIONAL_COUNT / themeCount); // 2
-    const knowledgeRemainder = KNOWLEDGE_COUNT % themeCount; // 3
-    const situationalRemainder = SITUATIONAL_COUNT % themeCount; // 2
-
+    // Use the official prescribed distribution (see OFFICIAL_DISTRIBUTION above).
+    // The previous Math.floor-based split is the bug that surfaced during the
+    // 2026 conformity audit — it produced 9/9/8/7/7 and put situational
+    // questions in every theme, which doesn't match the real exam.
     const selectedQuestionIds: number[] = [];
 
     for (let i = 0; i < allThemes.length; i++) {
       const themeId = allThemes[i].id;
-      const knowledgeNeeded = knowledgePerTheme + (i < knowledgeRemainder ? 1 : 0);
-      const situationalNeeded = situationalPerTheme + (i < situationalRemainder ? 1 : 0);
+      const dist = OFFICIAL_DISTRIBUTION[themeId];
+      // If a theme isn't covered by the official table (e.g. someone adds a
+      // 6th theme later without updating this constant), fall back to zero
+      // so we never silently exceed 40 questions. The session creation
+      // accepts a smaller total (line below) so this stays robust.
+      const knowledgeNeeded = dist?.knowledge ?? 0;
+      const situationalNeeded = dist?.situational ?? 0;
 
       const knowledgeConditions = [
         eq(questions.themeId, themeId),
