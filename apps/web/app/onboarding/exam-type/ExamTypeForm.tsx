@@ -4,9 +4,18 @@ import { useState, useTransition } from 'react';
 import { EXAM_TYPES, type ExamTypeCode } from '@/lib/examType.types';
 import { selectExamTypeAction } from '@/lib/actions/examType';
 
-export function ExamTypeForm() {
+interface Props {
+  /** Pre-selected option when the user re-opens the picker to change
+   * their target. `null` on the first-run funnel. */
+  currentExamType?: ExamTypeCode | null;
+}
+
+export function ExamTypeForm({ currentExamType = null }: Props) {
   const [pending, startTransition] = useTransition();
-  const [selected, setSelected] = useState<ExamTypeCode | null>(null);
+  // Seed the selection from the existing cookie so the user sees their
+  // current pick highlighted before tapping anything. We *don't* commit
+  // anything until they explicitly tap a card (handleSelect).
+  const [selected, setSelected] = useState<ExamTypeCode | null>(currentExamType);
 
   function handleSelect(code: ExamTypeCode) {
     setSelected(code);

@@ -151,7 +151,7 @@ export default async function SettingsPage() {
               description="Plan en cours, facturation, gérer ou résilier."
             />
             <SettingsCard
-              href="/onboarding/exam-type"
+              href="/onboarding/exam-type?change=1"
               icon="🎯"
               title="Mon examen"
               description="Changer d'examen ciblé (CSP, carte de résident, nationalité)."

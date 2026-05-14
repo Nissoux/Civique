@@ -136,7 +136,7 @@ export default async function ProfilePage() {
                 {examDef ? `${examDef.emoji} ${examDef.label}` : 'Non défini'}
               </p>
             </div>
-            <Link href="/onboarding/exam-type" className="btn-secondary">
+            <Link href="/onboarding/exam-type?change=1" className="btn-secondary">
               Changer d'examen
             </Link>
           </div>

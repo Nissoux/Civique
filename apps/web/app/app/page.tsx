@@ -56,7 +56,12 @@ export default async function AppPage() {
             </div>
             {examDef ? (
               <Link
-                href="/onboarding/exam-type"
+                // `?change=1` tells the exam-type page we're switching post-
+                // onboarding, so it doesn't bounce us back to /app (which
+                // is the correct first-run behaviour for users who already
+                // have a choice set).
+                href="/onboarding/exam-type?change=1"
+                aria-label={`Examen ciblé : ${examDef.shortLabel}. Cliquez pour changer.`}
                 className="
                   inline-flex items-center gap-2 sm:gap-3 rounded-full
                   bg-bone/10 hover:bg-bone/15 backdrop-blur

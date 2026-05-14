@@ -108,7 +108,10 @@ export function Sidebar({ user, examLabel, currentLang }: SidebarProps) {
         <LanguagePicker currentLang={currentLang} />
         {examLabel ? (
           <Link
-            href="/onboarding/exam-type"
+            // `?change=1` lets the exam-type page know we're switching
+            // post-onboarding so it doesn't bounce us back to /app.
+            href="/onboarding/exam-type?change=1"
+            aria-label={`Examen ciblé : ${examLabel}. Cliquez pour changer.`}
             className="block px-3 py-1.5 rounded-xl bg-bone-deep border border-aubergine/15 text-xs hover:border-aubergine/30 transition-colors"
           >
             <p className="font-display italic text-ink-mute text-[0.7rem]">— Examen ciblé</p>
