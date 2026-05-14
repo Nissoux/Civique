@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/brand/Logo';
+import { ReadAloudButton } from '@/components/audio/ReadAloudButton';
 import content from './content.json';
 
 export const metadata = {
@@ -92,13 +93,19 @@ export default function LivretPage() {
             {typedContent.subtitle}
           </p>
         ) : null}
-        <p className="text-ink-mute text-[1.05rem] leading-[1.6] mb-8">
+        <p className="text-ink-mute text-[1.05rem] leading-[1.6] mb-6">
           Publié par le Ministère de l'Intérieur, le Livret du Citoyen est{' '}
           <strong>le référentiel officiel</strong> que les candidats à la
           naturalisation française doivent maîtriser pour l'examen civique et
           l'entretien d'assimilation. Ci-dessous, une synthèse navigable de
           son contenu, mise à jour pour 2026.
         </p>
+
+        {/* Audio fallback for accessibility + candidates who study while
+            commuting. Web Speech API — see ReadAloudButton.tsx. */}
+        <div className="mb-8">
+          <ReadAloudButton target="article" label="Écouter le Livret" />
+        </div>
 
         {typedContent.disclaimer ? (
           <aside className="mb-12 rounded-2xl border-[1.5px] border-aubergine/15 bg-bone-deep px-5 py-4 text-sm text-ink-mute leading-relaxed font-display italic">

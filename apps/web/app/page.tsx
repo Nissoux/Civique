@@ -10,14 +10,14 @@ import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
 export const metadata: Metadata = {
   title: 'Civique — Préparez votre examen civique français',
   description:
-    "Civique vous accompagne dans la préparation de l'examen civique français : pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité. 5 thèmes officiels, 611 questions, 6 langues d'accompagnement.",
+    "Préparation à l'examen civique français 2026 conforme à l'arrêté du 10 octobre 2025. Pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité : 611 questions QCM officielles, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Civique — Préparez votre examen civique français',
     description:
-      "Préparation à l'examen civique pour la carte de séjour pluriannuelle, la carte de résident et la nationalité française.",
+      "Préparation à l'examen civique 2026 (arrêté du 10 octobre 2025) pour CSP, CR et nationalité française. 851 questions au total, 8 langues.",
     url: '/',
     type: 'website',
     locale: 'fr_FR',
@@ -48,7 +48,7 @@ const STRUCTURED_DATA = {
   name: 'Civique',
   alternateName: 'Préparation à l\'examen civique français',
   description:
-    'Préparation indépendante à l\'examen civique français pour la carte de séjour pluriannuelle, la carte de résident et la nationalité. 5 thèmes officiels, 611 questions, accompagnement en 6 langues.',
+    "Préparation indépendante à l'examen civique français 2026, conforme à l'arrêté du 10 octobre 2025. CSP, CR et naturalisation : 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
   url: 'https://civique.integrafle.fr',
   inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
   educationalLevel: 'Adult education',
@@ -110,7 +110,16 @@ export default async function HomePage() {
       <section className="relative">
         <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-10 sm:py-14 grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-7 relative z-10">
-            <p className="rise-init rise-d-1 eyebrow mb-7">— Préparation à l'examen civique français</p>
+            <p className="rise-init rise-d-1 eyebrow mb-3">— Préparation à l'examen civique français</p>
+            {/* Compliance badge — surfaces the legal hook the competitive
+                audit (2026-05-15) showed competitors using to anchor
+                credibility. Cited inline so it's also SEO-indexed. */}
+            <p className="rise-init rise-d-1 mb-7 inline-flex items-center gap-2 text-xs font-medium text-aubergine bg-saffron/15 border-[1.5px] border-saffron/40 rounded-full px-3 py-1">
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Conforme à l'arrêté du 10 octobre 2025
+            </p>
 
             <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.96] mb-8 font-medium tracking-tight">
               <span className="rise-init rise-d-2 inline-block">Réussir votre</span><br />
@@ -120,7 +129,7 @@ export default async function HomePage() {
             </h1>
 
             <p className="rise-init rise-d-4 max-w-[34rem] text-[1.15rem] leading-[1.65] text-ink-mute mb-9">
-              La préparation officielle pour la <em className="display-italic text-aubergine">carte de séjour pluriannuelle</em>, la <em className="display-italic text-aubergine">carte de résident</em> et la <em className="display-italic text-aubergine">nationalité française</em>. 5 thèmes, 611 questions, 6 langues d'accompagnement.
+              La préparation indépendante pour la <em className="display-italic text-aubergine">carte de séjour pluriannuelle</em>, la <em className="display-italic text-aubergine">carte de résident</em> et la <em className="display-italic text-aubergine">nationalité française</em>. 5 thèmes, 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.
             </p>
 
             <div className="rise-init rise-d-5 mb-9">
@@ -166,17 +175,21 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Right side: woven threads + floating testimonial */}
-          <div className="lg:col-span-5 flex items-center justify-center">
+          {/* Right side: woven threads + floating testimonial.
+              overflow-hidden on the outer column kills the horizontal scroll
+              the rotated sticker caused on 360px viewports — the rotate(8deg)
+              transform combined with right:2 was pushing the sticker past
+              the viewport's right edge. */}
+          <div className="lg:col-span-5 flex items-center justify-center overflow-hidden lg:overflow-visible">
             <div className="relative inline-block max-h-[420px] lg:max-h-[480px]">
               <WovenThreads />
 
               {/* Floating testimonial sticker — anchored to the SVG, not the flex parent */}
               <div
                 className="
-                  absolute top-6 right-2 sm:right-4
+                  absolute top-6 right-4 sm:right-6
                   px-4 py-3 rounded-3xl border-[1.5px] border-aubergine bg-saffron
-                  max-w-[200px]
+                  max-w-[180px] sm:max-w-[200px]
                   shadow-[0_4px_0_rgb(45_27_46)]
                 "
                 style={{
@@ -311,6 +324,7 @@ export default async function HomePage() {
             <ul className="space-y-2 text-sm text-bone/70">
               <li><a href="#programme" className="hover:text-saffron">Le programme</a></li>
               <li><a href="#methode" className="hover:text-saffron">Méthode</a></li>
+              <li><Link href="/pourquoi-civique" className="hover:text-saffron">Pourquoi Civique</Link></li>
               <li>
                 {user ? (
                   <Link href="/app" className="hover:text-saffron">Mon tableau de bord</Link>
@@ -329,6 +343,7 @@ export default async function HomePage() {
               <li><Link href="/methodologie" className="hover:text-saffron">Méthodologie & cadre légal</Link></li>
               <li><Link href="/livret-du-citoyen" className="hover:text-saffron">Livret du Citoyen</Link></li>
               <li><Link href="/charte" className="hover:text-saffron">Charte des droits et devoirs</Link></li>
+              <li><Link href="/partenariats" className="hover:text-saffron">Partenariats associations</Link></li>
               <li><a href="mailto:contact@integrafle.fr" className="hover:text-saffron">Contact</a></li>
             </ul>
           </div>

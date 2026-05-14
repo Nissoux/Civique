@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '@/components/brand/Logo';
+import { ReadAloudButton } from '@/components/audio/ReadAloudButton';
 
 export const metadata = {
   title: 'Charte des droits et devoirs du citoyen français — Civique',
@@ -59,11 +60,18 @@ export default function ChartePage() {
           française. Elle rappelle les principes essentiels de la République et
           décline les droits et devoirs de chaque citoyen.
         </p>
-        <p className="text-ink-mute text-[1.05rem] leading-[1.6] mb-12">
+        <p className="text-ink-mute text-[1.05rem] leading-[1.6] mb-6">
           Elle est aussi l'un des supports implicites de l'entretien
           d'assimilation à la préfecture. Lisez-la attentivement — chaque
           ligne peut être interrogée.
         </p>
+
+        {/* Audio fallback for accessibility + candidates who study while
+            commuting or doing chores. Web Speech API — zero cost, zero
+            latency, text never leaves the device. See ReadAloudButton.tsx. */}
+        <div className="mb-12">
+          <ReadAloudButton target="article" label="Écouter la Charte" />
+        </div>
 
         <Section roman="I" title="Principes, valeurs et symboles de la République">
           <p>

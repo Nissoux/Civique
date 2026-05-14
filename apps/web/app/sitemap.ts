@@ -25,6 +25,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/pourquoi-civique`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      // High priority — this is the main differentiation page, target
+      // of paid-acquisition links and the "why us" SEO bucket.
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/methodologie`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/livret-du-citoyen`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/charte`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/partenariats`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
       url: `${BASE_URL}/privacy`,
       lastModified: now,
       changeFrequency: 'yearly',
