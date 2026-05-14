@@ -15,6 +15,7 @@ import paymentRoutes from './routes/payments/index.js';
 import userRoutes from './routes/users/index.js';
 import publicRoutes from './routes/public/index.js';
 import srsRoutes from './routes/srs/index.js';
+import learningRoutes from './routes/learning/index.js';
 
 async function main() {
   const app = Fastify({
@@ -121,6 +122,9 @@ async function main() {
   // SM-2 spaced repetition state per user — backs flashcard reviews
   // and (post-P2) question reviews.
   await app.register(srsRoutes, { prefix: '/api/srs' });
+  // Adaptive recommendations: which theme / subtopic the user fails
+  // most, so the dashboard can surface "go review this" hints.
+  await app.register(learningRoutes, { prefix: '/api/learning' });
 
   // Health check
   app.get('/health', async () => ({ status: 'ok', timestamp: new Date().toISOString() }));

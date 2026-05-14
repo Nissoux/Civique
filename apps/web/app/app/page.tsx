@@ -5,6 +5,7 @@ import { getCurrentExamType, getExamTypeDefinition } from '@/lib/server/examType
 import { getThemeQuestionCount } from '@/lib/server/questions';
 import { getStatsOverview } from '@/lib/server/stats';
 import { fetchSrsStats } from '@/lib/actions/srs';
+import { fetchRecommendations, subtopicLabel } from '@/lib/actions/learning';
 import { ThemePathsClient } from './ThemePathsClient';
 
 export default async function AppPage() {
@@ -13,9 +14,10 @@ export default async function AppPage() {
   const examDef = getExamTypeDefinition(examType);
 
   // Parallel fetch question counts for all themes + stats overview + SRS
-  // counters. SRS is best-effort: a network blip just hides the
-  // "X cartes à réviser" widget — the rest of the dashboard renders.
-  const [counts, stats, srsStats] = await Promise.all([
+  // counters + adaptive recommendations. All best-effort: any single
+  // failure just hides its associated widget — the rest of the
+  // dashboard renders.
+  const [counts, stats, srsStats, recommendations] = await Promise.all([
     Promise.all(
       THEMES.map(async (t) => ({
         themeId: t.id,
@@ -24,7 +26,17 @@ export default async function AppPage() {
     ),
     getStatsOverview(examType).catch(() => null),
     fetchSrsStats(),
+    fetchRecommendations(),
   ]);
+
+  // Pick the single most-severe weak spot, if any. Picking one rather
+  // than three keeps the dashboard focused: "here's the thing to
+  // tackle next" is much more actionable than a leaderboard of
+  // weaknesses.
+  const topWeakness =
+    recommendations?.subtopic_weaknesses?.[0] ??
+    recommendations?.theme_weaknesses?.[0] ??
+    null;
 
   const countByTheme: Record<number, number> = {};
   counts.forEach((c) => {
@@ -212,6 +224,54 @@ export default async function AppPage() {
               </h3>
               <p className="text-xs sm:text-sm text-aubergine/70">
                 Répétition espacée — quelques minutes suffisent
+              </p>
+            </div>
+            <svg className="shrink-0 h-5 w-5 text-aubergine/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        ) : null}
+
+        {/* Adaptive learning — surfaces the single weakest sub-topic
+            (or theme, if no sub-topic data yet) the user has enough
+            evidence on. Only renders once the user has answered at
+            least MIN_ATTEMPTS questions per sub-topic, so new users
+            never see this and feel "judged" before they've engaged. */}
+        {topWeakness ? (
+          <Link
+            href={
+              'subtopic' in topWeakness
+                ? `/app/train/random?subtopic=${topWeakness.subtopic}`
+                : '/app/train/random'
+            }
+            className="
+              mt-4 card !rounded-2xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5
+              bg-terracotta/10 !border-terracotta/40
+              transition-all hover:-translate-y-1 hover:shadow-clay-lg cursor-pointer
+            "
+          >
+            <div
+              className="
+                flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl
+                bg-terracotta text-bone shadow-[0_2px_0_rgb(45_27_46)]
+              "
+              aria-hidden
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.7rem] font-display italic uppercase tracking-wider text-terracotta mb-0.5">
+                — Point faible identifié
+              </p>
+              <h3 className="font-display text-lg sm:text-xl font-medium text-aubergine" style={{ fontVariationSettings: "'opsz' 32" }}>
+                {'subtopic' in topWeakness
+                  ? subtopicLabel(topWeakness.subtopic)
+                  : topWeakness.theme_name}
+              </h3>
+              <p className="text-xs sm:text-sm text-aubergine/70">
+                {topWeakness.accuracy}% de bonnes réponses sur {topWeakness.attempts} tentatives — entraînez-vous spécifiquement
               </p>
             </div>
             <svg className="shrink-0 h-5 w-5 text-aubergine/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
