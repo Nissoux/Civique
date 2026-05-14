@@ -5,7 +5,8 @@ import { getCurrentExamType, getExamTypeDefinition } from '@/lib/server/examType
 import { getThemeQuestionCount } from '@/lib/server/questions';
 import { getStatsOverview } from '@/lib/server/stats';
 import { fetchSrsStats } from '@/lib/actions/srs';
-import { fetchRecommendations, subtopicLabel } from '@/lib/actions/learning';
+import { fetchRecommendations } from '@/lib/actions/learning';
+import { subtopicLabel } from '@/lib/subtopics';
 import { ThemePathsClient } from './ThemePathsClient';
 
 export default async function AppPage() {

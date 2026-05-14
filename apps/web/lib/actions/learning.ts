@@ -49,32 +49,6 @@ export async function fetchRecommendations(): Promise<LearningRecommendations | 
   }
 }
 
-/**
- * Human-readable label for a sub-topic code. The codes are stable
- * (used in DB and SQL queries), the labels are presentation-only and
- * can evolve without a migration.
- *
- * Living next to fetchRecommendations because the dashboard widget
- * is the only consumer for now; if a second consumer shows up we
- * promote this to a shared module.
- */
-export function subtopicLabel(code: string): string {
-  const labels: Record<string, string> = {
-    devise: 'Devise et symboles',
-    laicite: 'Laïcité',
-    situation: 'Mises en situation',
-    vote: 'Démocratie et droit de vote',
-    organisation: 'Organisation de la République',
-    union_europ: 'Union européenne',
-    droits_fond: 'Droits fondamentaux',
-    obligations: 'Obligations et devoirs',
-    periodes: 'Périodes et personnages',
-    geographie: 'Géographie de la France',
-    patrimoine: 'Patrimoine français',
-    installation: 'S’installer en France',
-    soins: 'Accès aux soins',
-    travail: 'Travailler en France',
-    education: 'Autorité parentale et école',
-  };
-  return labels[code] ?? code;
-}
+// subtopicLabel lives in apps/web/lib/subtopics.ts — extracted because
+// Next.js requires every export of a 'use server' module to be an
+// async function, and a pure label lookup doesn't need to be one.
