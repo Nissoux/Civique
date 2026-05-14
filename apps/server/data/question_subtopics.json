@@ -1,0 +1,3255 @@
+{
+  "generated_at": "2026-05-14",
+  "method": "heuristic keyword scoring + situational type force",
+  "count": 611,
+  "by_theme": {
+    "1": {
+      "devise": 56,
+      "situation": 41,
+      "laicite": 20
+    },
+    "2": {
+      "organisation": 75,
+      "vote": 25,
+      "union_europ": 19
+    },
+    "3": {
+      "droits_fond": 54,
+      "obligations": 29,
+      "situation": 38
+    },
+    "4": {
+      "periodes": 84,
+      "geographie": 34,
+      "patrimoine": 28
+    },
+    "5": {
+      "soins": 18,
+      "installation": 35,
+      "travail": 26,
+      "education": 29
+    }
+  },
+  "ambiguous_count": 163,
+  "validation_failures": [],
+  "assignments": [
+    {
+      "text_fr": "À quoi correspond la date du 14 juillet ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quel est l'un des symboles de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Le principe d'égalité signifie que :",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "\"Liberté, égalité, fraternité\", c'est :",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "A-t-on le droit d'insulter publiquement quelqu'un parce qu'il est différent (handicap, apparence physique, sexe...) ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Certains métiers peuvent-ils être réservés aux hommes ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "De quand date la Constitution de la Ve République ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le régime de la France est :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Lequel de ces symboles représente officiellement la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Où peut-on voir la devise de la République ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quels sont des symboles officiels de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qu'est-ce que l'égalité ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que signifie la liberté ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que signifie le mot \"fraternité\" dans la devise française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quel animal est un symbole de la France ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quel est l'un des rôles des associations ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le nom de l'hymne national ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quel symbole de la République française est tricolore ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quelle est la date de la fête nationale française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quelle est la devise de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quelle est la langue officielle de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est la place de la langue française dans la République ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle liberté permet à chacun d'exprimer ses idées ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle proposition est correcte ? La liberté d'expression :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelles sont les couleurs du drapeau français ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qu'est-ce que la Marseillaise ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qu'est-ce qui est traditionnellement organisé sur les Champs-Élysées le 14 juillet pour célébrer la fête nationale ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qui est Marianne ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Une personne peut-elle changer librement de religion ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "\"La France est une République indivisible, ..., démocratique et sociale\". Complétez cette phrase extraite de l'article 1er de la Constitution :",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "En quelle année la loi de séparation des Églises et de l'État a-t-elle été votée ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Que permet le principe de laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Quel droit est garanti par la laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Pourquoi le principe de laïcité doit-il être respecté à l'école ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Qu'est-ce que la laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Un enfant peut-il refuser d'aller à l'école pour une raison religieuse ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Une personne a-t-elle le droit de ne pas croire en une religion ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Parmi les propositions suivantes, laquelle constitue une participation citoyenne ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que garantit la liberté d'expression ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À quoi sert un titre de séjour ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "La liberté de circulation permet à toute personne de :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Sur quel site internet peut-on retrouver le symbole de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Complétez ces paroles de la Marseillaise : \"Aux armes [...] ! Formez vos bataillons\"",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Complétez les paroles de la Marseillaise : \"Allons enfants de la patrie [...]\"",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "En application de la liberté individuelle, quelle proposition est correcte ? Une personne peut :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Concernant la pratique de la religion, quelle proposition est correcte ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "En tant que parent, peut-on refuser que son enfant participe aux cours de sport à l'école car ils sont mixtes ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "La répudiation de sa femme est :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Les impôts permettent de financer les dépenses publiques. Quelle proposition est correcte ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Peut-on brûler publiquement un drapeau français ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Que fait l'État pour lutter contre les discriminations ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que représente Marianne ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qu'est-ce que la liberté d'association ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que la liberté ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Sur quel document peut-on voir Marianne ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Un employeur refuse d'embaucher des femmes dans son entreprise. Que dit la loi ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Une des valeurs de la devise républicaine est l'égalité. Qu'est-ce que cela signifie ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "À l'école publique, qui peut porter des signes religieux très visibles ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Selon le principe de laïcité, que signifie la neutralité de l'État ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Que peut faire un usager du service public dans une mairie ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Qui doit respecter le principe de neutralité religieuse dans une préfecture ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "La laïcité impose-t-elle aux agents publics d'être neutres vis-à-vis des usagers ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Que garantit le principe de laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "A-t-on le droit de changer de religion ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Que représente la laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Qu'est-ce qui est interdit par la Charte de la laïcité à l'école ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Que dit l'article 1er de la Constitution française ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans le cadre d'un entretien d'embauche, que peut-on demander au candidat ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Déclarer ses revenus aux services fiscaux est :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "La liberté d'association est :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "La liberté d'expression sur les réseaux sociaux en France est :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Lequel de ces prénoms évoque un symbole de la République ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quand la sécurité sociale a-t-elle été établie en France ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Que commémore la fête nationale ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Que porte Marianne sur la tête ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Quel symbole de la République peut-on voir sur les maillots de l'équipe de France de football ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "text_fr": "Qu'est-ce qu'une liberté ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En France, il est possible pour l'État de financer :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que dit la loi de 1905 ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Quel jour célèbre-t-on officiellement la laïcité en France ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Quel symbole religieux peut être porté dans une école publique dans le respect de la laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Quel terme désigne précisément la haine ou les préjugés contre les Juifs ?",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel texte est considéré comme le texte fondateur de la laïcité ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Quelle institution française doit rester neutre en matière de religion ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "À l'école, la charte de la laïcité permet de :",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Qui doit respecter et veiller à la neutralité religieuse dans les services publics ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "text_fr": "Une personne déclare ne croire en aucun dieu. On peut dire :",
+      "theme_id": 1,
+      "subtopic": "devise",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui nomme le Premier ministre ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Le Parlement est composé :",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qu'est-ce que le pouvoir exécutif ? Le pouvoir :",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Les dirigeants sont élus par les citoyens dans :",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "A-t-on le droit de ne pas respecter une loi ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui doit respecter la loi ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le rôle de l'autorité judiciaire ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel pouvoir détient un juge ? Le pouvoir :",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "L'autorité judiciaire est exercée par :",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que se passe-t-il si un ministre ne respecte pas la loi ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui est élu lors des élections législatives ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Combien de députés composent l'Assemblée nationale ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quand sont élus les sénateurs ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui est élu lors des élections municipales ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Qui est élu lors des élections présidentielles ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "À partir de quel âge a-t-on le droit de voter ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Pour combien de temps est élu le président de la République française ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Pour combien de temps sont élus les députés ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Pour combien de temps sont élus les sénateurs ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui possède le pouvoir exécutif ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quelle condition est nécessaire pour voter aux élections ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Qui peut voter aux élections en France ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Que signifie « suffrage universel » ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Concernant les partis politiques, quelle proposition est correcte ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le rôle des députés ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "La séparation des pouvoirs est un principe fondamental. Quels sont les trois pouvoirs concernés ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui possède le pouvoir législatif ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui sanctionne l'auteur d'un vol ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui élit les députés ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui vote les lois ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Qui réside au palais de l'Élysée ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Combien y a-t-il de départements en France ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui représente l'État dans un département ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui dirige la commune ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Est-ce que le président de la République a tous les pouvoirs ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui est le préfet ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle du Parlement ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le régime politique de la France aujourd'hui ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Combien d'États font partie de l'Union européenne au 1er janvier 2025 ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quel État n'est pas membre de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quelle condition est nécessaire pour voter aux élections européennes ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "À quelle fréquence les élections européennes sont-elles organisées ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quel pays est un pays fondateur de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quelle est la monnaie utilisée en France ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui élit les députés européens ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quand célèbre-t-on la journée de l'Europe ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Qu'est-ce que l'État de droit ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le président de la République a commis un crime. Quelle proposition est correcte ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "La loi est l'expression de :",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est la durée du mandat du conseil municipal et du maire ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Que garantit l'État de droit ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Une personne peut-elle voter à la place d'une autre ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Est-ce que le vote est obligatoire ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "À la fin de son mandat, le président de la République peut-il décider de rester au pouvoir ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui dirige l'action du Gouvernement ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quelle est l'organisation administrative de la France ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le pouvoir législatif ? Le pouvoir :",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Pourquoi séparer les trois pouvoirs dans une démocratie ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Quel est le rôle du gouvernement ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qu'est-ce que l'Hôtel de Matignon ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle du président de la République ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle du Premier ministre ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui est le chef du Gouvernement ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Combien y a-t-il de régions en France ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle du Défenseur des droits ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Depuis quand l'euro est-il la monnaie unique ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quel est le rôle principal du département ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle principal des communes ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Combien de communes environ existe-t-il en France ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel traité concerne la construction de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quel État a quitté l'Union européenne en 2020 ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quelle est la devise de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Quel est l'hymne de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "De quoi est composé le drapeau européen ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "De quelle couleur est le drapeau européen ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "En quelle année le traité de Maastricht a-t-il été signé ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Où est le siège du Parlement européen ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Où est le siège de la Commission européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Comment est désigné le Premier ministre ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui peut se présenter aux élections présidentielles ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "À qui appartient la souveraineté nationale ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "L'inscription sur les listes électorales est :",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle condition est nécessaire pour voter aux élections présidentielles ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Quelle condition faut-il remplir pour être candidat aux élections municipales ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Parmi ces autorités, laquelle est élue ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelles sont les fonctions du maire ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Une personne n'ayant pas d'accès à internet veut s'inscrire sur les listes électorales. Où peut-elle s'inscrire ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À quel âge peut-on devenir électeur ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "En France, est-ce obligatoire de voter ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Comment sont désignés les députés ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "En France, est-ce possible d'adhérer à un parti politique ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Qui gère les collèges publics ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui gère les écoles primaires et maternelles publiques ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Comment sont désignés les maires ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quelle collectivité territoriale est responsable des transports régionaux ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quelle est l'une des voies possibles pour modifier la Constitution ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Qui assure l'intérim du président de la République en cas de décès ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quel est le rôle du Conseil constitutionnel ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Quelle condition est obligatoire pour se présenter à l'élection présidentielle ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Comment est organisé le découpage administratif de la France ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En quelle année la citoyenneté européenne a-t-elle été créée ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Qui a composé l'hymne de l'Union européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Où est le siège de la Banque centrale européenne ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Qui siège au Parlement européen ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "text_fr": "Comment s'appelle la Constitution actuelle de la France ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Comment s'appelle le texte qui énonce les droits et devoirs des personnes résidant en France ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Concernant les droits individuels, quelle proposition est correcte ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "De quelle année date la Déclaration des droits de l'homme et du citoyen ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Lequel de ces droits est un droit fondamental ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Parmi ces textes, lequel garantit les droits et libertés en France ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que la liberté d'expression ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Quel droit permet à une personne de se défendre devant la justice ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le texte fondateur établissant les droits et les devoirs de chaque citoyen ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quel texte a été adopté pendant la Révolution française ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle liberté permet à une personne de ne pas avoir de religion ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Une femme peut avorter :",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Est-il toujours possible de divorcer ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "La peine de mort est :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Concernant les limites aux libertés individuelles, quelle proposition est correcte ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En France, est-ce légal d'être marié à plusieurs personnes en même temps ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Faut-il réduire ses déchets ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Jeter une bouteille dans la rue est :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Pourquoi les libertés individuelles peuvent-elles être limitées ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que doit faire une personne en cas d'accident ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Que permet la citoyenneté française ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que risque une personne qui ne respecte pas la loi ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quel est le rôle de la gendarmerie ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quel est le rôle de la police ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Qu'est-ce qu'une infraction ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Comment peut-on réduire ses déchets ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Déposer une machine à laver cassée sur le trottoir est :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "En quoi consiste la traite des êtres humains ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que doit faire une victime de violences ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Quelle est l'infraction la plus grave ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "À quelle liberté la PMA fait-elle référence ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Au nom de quoi l'État justifie-t-il la restriction des droits ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Concernant le droit de se marier, quelle proposition est correcte ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Laquelle de ces citations est inscrite dans la Déclaration des droits de l'homme et du citoyen de 1789 ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Le recours à l'avortement est-il autorisé ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que contient la Constitution ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que garantit la liberté de la presse ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Que prévoit la Charte de l'environnement ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Que signifie la dignité humaine ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que signifie le droit de manifester ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Que signifie PMA ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel texte est le plus difficile à modifier ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle liberté permet à une personne de croire en la religion de son choix ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le droit de grève ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Qu'est-ce que la Constitution ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui peut demander à avorter ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Une femme majeure de nationalité française a-t-elle le droit de voter aux élections ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Concernant l'utilisation des réseaux sociaux, quelle proposition est correcte ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Jeter un mégot par terre est :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "L'État peut-il limiter les droits et libertés ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Parmi ces actions, laquelle permet d'adopter une attitude respectueuse de l'environnement ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quelle proposition constitue une obligation ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Pour quel motif peut-on limiter la liberté d'expression ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Pourquoi doit-on trier ses déchets ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Que doit-on faire face aux ordres des policiers ou gendarmes ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Quel est un exemple d'assistance à personne en danger ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Quel exemple illustre une limitation de liberté pour protéger l'intérêt général ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est l'attitude à avoir lorsqu'on est témoin de violences ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Quelle obligation concerne toutes les personnes résidant en France quelle que soit leur nationalité ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quelle proposition représente un exemple de crime ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Quelle proposition représente un exemple de délit ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Qui veille au maintien de l'ordre public ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "S'agissant des déchets, quelle proposition est correcte ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "À quoi sert le droit de grève ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "L'article 4 de la Déclaration des droits de l'homme et du citoyen affirme que « la liberté consiste à pouvoir faire tout ce qui ne nuit pas à autrui ». Qu'est-ce que cela signifie ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Que dit l'article 1er de la Constitution française ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que permet la liberté de circulation ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Que signifie être citoyen d'un État ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que sont les droits fondamentaux ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "text_fr": "Quel droit protège une personne contre une arrestation arbitraire ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel texte affirme que tous les hommes naissent libres et égaux en droits ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle situation est une atteinte à la dignité humaine ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Suite à une interpellation par la police, il est possible de :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Tous les citoyens français ont-ils une religion ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À quel âge est la majorité numérique en France ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans lequel de ces endroits est-on autorisé à fumer ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En France, la conduite sans permis d'une moto est :",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En quoi consiste le devoir de solidarité ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Est-ce obligatoire de déclarer ses impôts chaque année en France ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Est-il obligatoire de porter secours à une personne en danger ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Être juré d'assises est :",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "La vente d'alcool en France est interdite aux personnes de moins de :",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le non-respect du code de la route est :",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Lequel de ces crimes ou délits peut entraîner la privation des droits civils et politiques par un juge ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Pour obtenir une carte d'identité, il faut :",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Que doit faire un citoyen s'il est appelé à être juré dans un procès d'assises ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Quel est l'âge de la majorité civile en France ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est l'un des devoirs principaux d'un citoyen français ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Qu'est-ce que la citoyenneté numérique ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le devoir de mémoire ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "text_fr": "Une personne est privée de ses droits civils et politiques pendant 5 ans suite à une condamnation. Parmi ces propositions laquelle est correcte ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "En quelle année a débuté la Révolution française ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui était Napoléon Ier ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Lequel de ces personnages historiques est français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans quelle République est-on aujourd'hui ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qu'est-ce que la Shoah ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel pays ou région du monde a été colonisé par la France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Qui a rendu l'école gratuite, laïque et obligatoire ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quand a eu lieu la Seconde Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quand a eu lieu la Première Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "En quelle année a été créée la Communauté Économique Européenne (CEE) ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le 11 novembre est un jour férié. À quoi correspond cette date ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui a été le premier Président élu sous la Ve République ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "En quelle année l'esclavage a-t-il été aboli définitivement en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Depuis quelle année l'école publique est-elle gratuite ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Combien y a-t-il eu de républiques en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui était le roi de France au moment de la Révolution française ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui a fondé la Ve République ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Que célèbre-t-on le 14 juillet ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle guerre a eu lieu entre 1914 et 1918 ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Pourquoi l'année 1958 est importante pour la France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel fleuve coule en France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle ville est française ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel océan borde la côte ouest française ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Qu'est-ce que Paris ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est la capitale de la France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Sur quel continent se situe la France métropolitaine ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle île est un département d'outre-mer français ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Combien y a-t-il de régions en France métropolitaine ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle ville est un grand port maritime ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est la mer au sud de la France métropolitaine ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle ville est située au bord de la mer Méditerranée ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Où se situe la Corse ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle chaîne de montagnes est située entre la France et l'Italie ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Qui était Molière ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Charles Baudelaire ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était George Sand ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Simone de Beauvoir ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Albert Camus ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Paul Cézanne ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Marc Chagall ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était Joséphine Baker ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était une chanteuse française célèbre ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le Louvre ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Jean de la Fontaine ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quel écrivain est français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans quelle ville se trouve la tour Eiffel ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quand célèbre-t-on Noël ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel était le surnom de Louis XIV ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel roi de France a été exécuté pendant la Révolution française ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "En quelle année Napoléon Ier est-il devenu empereur ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Lequel de ces personnages a un lien avec la République française ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "De quand date l'appel à la résistance du général de Gaulle ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Pourquoi la Shoah est-elle étudiée à l'école ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel pays a été colonisé par la France ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Depuis quand les Français élisent-ils le président de la République au suffrage universel direct ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quelle est la première étape de la construction européenne en 1951 ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Durant le mandat de quel président la peine de mort a-t-elle été abolie ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel régime politique a été mis en place pendant la Révolution française en 1792 ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui était une figure de la Résistance française pendant la Seconde Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "En 1944, qu'est-ce qui a changé pour les femmes ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quelle organisation internationale a été créée en 1945 après la Seconde Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quelle peine a été supprimée en 1981 ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En quelle année l'euro est-il devenu la monnaie utilisée en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En quelle année a commencé la Première Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Où a eu lieu le débarquement en 1944 ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel continent a été le plus concerné par la décolonisation française après la Seconde Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Que fête-t-on le 8 mai ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle mer ou océan borde la France métropolitaine ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel pays a une frontière terrestre avec la France métropolitaine ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle ville française est un port maritime ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle mer se situe entre la France et l'Angleterre ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Qu'est-ce que la France d'outre-mer ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle chaîne de montagnes est située entre la France et l'Espagne ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle île française se trouve dans l'océan Indien ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle est la population approximative de la France en 2025 ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel fleuve traverse Paris ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Lequel de ces pays partage des frontières terrestres avec la France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel pays a une frontière avec la France métropolitaine au nord-est ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Où se trouvent les principales activités économiques en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Parmi ces pays, lequel attire le plus de visiteurs chaque année ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Où habite la majorité des Français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle région est la plus peuplée ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle ville française fait partie des 10 plus grandes métropoles du pays ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Lequel de ces départements de France est le plus touristique ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quand peut-on visiter gratuitement des lieux culturels en France ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Combien de personnes parlent français dans le monde ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était Marguerite Yourcenar ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel peintre est français ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quel musée est situé à Paris ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Auguste Rodin ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quel est le classement de la langue française parmi les langues les plus parlées dans le monde ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle cathédrale célèbre a été en partie détruite par un incendie en 2019 ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était une écrivaine française célèbre ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était un célèbre musicien français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était Auguste Renoir ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quelle fête est française ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Parmi ces textes, lequel a été adopté sous Napoléon Ier ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui a été président de la Ve République ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Que signifie la date du 14 juillet pour les Français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Lequel de ces pays est un pays fondateur de l'Union européenne ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans quelle région est située une partie des plages du débarquement ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Dans quelle ville les rois de France étaient-ils couronnés ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En quelle année l'Union européenne a-t-elle été fondée ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui a aboli l'esclavage en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Lors de la Seconde Guerre mondiale, à quelle date Paris a-t-elle été libérée ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel était le principal port français impliqué dans la traite négrière au XVIIIe siècle ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel célèbre philosophe des Lumières a dénoncé l'esclavage ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Quel plat est une spécialité de la cuisine française ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était Marie Curie ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Qui a peint « La Liberté guidant le peuple » ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans quel grand musée parisien est exposée la Joconde ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quel château célèbre se trouve près de Paris et symbolise le pouvoir royal de Louis XIV ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "text_fr": "Où peut-on voir des peintures préhistoriques en France ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quel peintre célèbre a peint les Nymphéas ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Que symbolise le 1er mai ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qui était Monsieur Rouget de Lisle ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À quelle occasion a été construite la tour Eiffel ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Qui était un célèbre compositeur français ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel monument historique se trouve sur une île en Normandie ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Quelle île fait partie des Antilles françaises ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle île est française ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quelle est la plus haute montagne de France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle île française est située au sud-est du continent africain ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel département français a une frontière avec le Brésil ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "De quelle ville française décolle la fusée Ariane ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le principal port maritime de France ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel est le chef-lieu de la région Auvergne-Rhône-Alpes ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel est le chef-lieu de la région Bretagne ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel est le chef-lieu de la région Provence-Alpes-Côte d'Azur ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel est le 101e département français depuis 2011 ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quelle région française est réputée pour ses stations de ski ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Quel numéro d'urgence permet d'appeler le SAMU ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Quel numéro d'urgence permet d'appeler les pompiers ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Après avoir obtenu le permis de conduire, que faut-il faire pour pouvoir conduire sa voiture ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "À quelles conditions un mariage est-il reconnu juridiquement ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Quand faut-il déclarer son enfant au service d'état civil de la mairie ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Le travail non déclaré est :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Que doit faire un employeur pour fixer un salaire ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Qu'est-ce que le SMIC ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Quelle est la première démarche à réaliser pour chercher un emploi ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Quelle est la durée légale du temps de travail par semaine ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Qui est aidé par France Travail ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Une personne étrangère en situation régulière peut créer son entreprise :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Une femme peut-elle créer son entreprise ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "À partir de quel âge un mineur peut-il travailler ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Auprès de quel organisme faut-il demander le remboursement des frais de santé ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Qu'est-ce qu'un numéro d'urgence ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Concernant l'accès aux soins, quelle proposition est correcte ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En cas de problème de santé non urgent, à qui faut-il s'adresser en premier ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Quel est le rôle du médecin traitant ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Dans quelles situations doit-on se rendre aux urgences de l'hôpital ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Quel est l'objectif des vaccinations obligatoires ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "À quoi sert la carte Vitale ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "À quoi sert une mutuelle santé ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Jusqu'à quel âge l'école est-elle obligatoire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "L'autorité parentale prévoit l'obligation :",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Pour qui l'école est-elle obligatoire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quel diplôme obtient-on à la fin du lycée ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Dans quels établissements scolaires vont les élèves après l'école élémentaire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Un enfant inscrit à l'école :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Les enfants qui ne parlent pas français :",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Quel mariage est reconnu par l'État ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Auprès de quelle institution les parents peuvent-ils inscrire leur enfant à l'école publique ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "En cas de divorce, qui exerce l'autorité parentale ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Quelle aide permet aux personnes qui ont des difficultés financières d'avoir un avocat ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Où faut-il déclarer la naissance d'un enfant ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Quelle est l'une des conditions pour passer l'examen du permis de conduire ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Un bail locatif est valide s'il est :",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Où peut-on déposer un lave-vaisselle cassé ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quel numéro d'urgence permet d'appeler la police ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "À qui est accessible la contraception ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le principe de confidentialité dans le domaine de la santé ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "L'inscription à l'Assurance maladie est :",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Qui peut demander un congé parental d'éducation ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quelles sont les affaires traitées par le conseil de prud'hommes ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Lorsqu'un employeur veut qu'un salarié travaille plus longtemps que la durée prévue dans le contrat de travail :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Quelle est la mission de France Travail ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Dans une entreprise, le droit syndical permet :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Dans une entreprise, le droit de grève autorise :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Quelles sont les conditions pour toucher les allocations chômage ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Qu'est-ce que l'école maternelle ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Comment s'appelle le diplôme passé par les élèves à la fin du collège ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Les parents d'élève ont le droit de :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Qui peut manger à la cantine scolaire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "À quel âge commence l'instruction obligatoire des enfants ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quel est l'âge de la majorité ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À l'école, il est interdit aux parents de :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quel motif d'absence est accepté par l'école ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Des parents ne respectent pas l'obligation d'instruction pour leurs enfants. Quelle sanction maximale risquent-ils ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quand ont lieu les vacances scolaires de Noël ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "À l'école, un enfant en situation de handicap :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quelle action peut réaliser le locataire d'un logement sans l'autorisation du propriétaire ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Le stationnement sur une place réservée aux personnes handicapées :",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Si une machine à laver est cassée, il est possible de :",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Dans quel cas faut-il déclarer son enfant au service d'état civil ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Qui peut demander le divorce de personnes mariées ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "La contraception :",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Qu'est-ce que le tiers payant ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "L'avortement est-il possible en France ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Quels sont les textes qui définissent les règles au travail ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Qui a le droit de se syndiquer ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Est-il possible de licencier une femme enceinte ou en congé maternité, en raison de sa grossesse ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "L'instruction des enfants est obligatoire de :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quelle est la définition de l'autorité parentale ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "En tant que parent d'élève, il est possible de :",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Quelle instruction est prévue pour les enfants qui ne parlent pas français ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "S'agissant de l'accueil des enfants en situation de handicap à l'école, laquelle des propositions est vraie ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Depuis le 1er juillet 2021, quelle est la durée du congé paternité ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Est-ce possible de punir physiquement ses enfants ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Vous êtes parent d'élève. Votre fille de 14 ans souhaite porter un voile islamique au collège public. Le directeur vous informe que c'est interdit. Quelle est la bonne attitude ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Au travail, vous êtes agent d'accueil dans une mairie. Un collègue vous demande de le remplacer pendant 15 minutes pour qu'il puisse faire sa prière dans un bureau vide. Que faites-vous ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous accompagnez votre mère aux urgences d'un hôpital public. Elle refuse d'être examinée par un médecin homme pour des raisons religieuses. Que devez-vous comprendre ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "À la cantine de l'école publique de votre enfant, vous demandez qu'un menu halal soit systématiquement proposé. Le directeur refuse. A-t-il le droit ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes employé municipal. Le maire souhaite installer une crèche de Noël dans le hall de la mairie. Un administré proteste. Que dit la loi ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes mère d'élève et vous portez le voile. Vous souhaitez accompagner la classe de votre fils lors d'une sortie scolaire. L'école peut-elle vous refuser ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous venez d'être recruté comme fonctionnaire dans un service des impôts. Vous portez habituellement une grande croix autour du cou. Votre supérieur vous demande de la retirer pendant le service. A-t-il raison ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous travaillez dans une entreprise privée. Vous souhaitez prendre un jour de congé pour une fête religieuse qui n'est pas un jour férié officiel. Votre employeur refuse. Est-ce légal ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Plusieurs salariés de votre entreprise demandent à la direction d'aménager une salle de prière dans les locaux. La direction refuse. Les salariés estiment que c'est discriminatoire. Qui a raison ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre enfant revient de l'école et vous dit que son professeur a expliqué en classe l'histoire des grandes religions. Vous estimez que cela viole la laïcité. Avez-vous raison ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous postulez à un emploi de serveur. Lors de l'entretien, le recruteur vous dit : « Nous ne recrutons pas de personnes d'origine étrangère dans notre établissement. » Que pouvez-vous faire ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous cherchez un appartement. Un propriétaire refuse de vous louer son bien en apprenant que vous êtes une mère célibataire avec trois enfants. Est-ce légal ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre voisine âgée est isolée et a du mal à faire ses courses, surtout en hiver. Quelle attitude illustre le mieux la valeur de fraternité républicaine ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Au travail, vous découvrez qu'une collègue femme occupant le même poste que vous, avec la même ancienneté et les mêmes qualifications, gagne 15 % de moins que vous. Que dit la loi ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre ami, étranger en situation régulière en France, se voit refuser l'inscription de son enfant à l'école publique par le directeur qui dit « qu'il faut être français ». Que devez-vous savoir ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes en fauteuil roulant. Un restaurant refuse de vous accueillir en prétextant qu'il n'a pas de rampe d'accès et que « ce serait compliqué ». Que dit la loi ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre collègue est licencié après que son employeur a appris son homosexualité. Votre collègue peut-il contester ce licenciement ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Dans la rue, vous voyez une personne qui fait un malaise. Des passants l'ignorent. Quelle est votre obligation légale ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre fils de 19 ans souhaite s'engager dans une mission d'intérêt général pour aider les autres. Il hésite entre plusieurs dispositifs. Quel dispositif correspond le mieux à la valeur de fraternité républicaine ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes convoqué au tribunal mais vous n'avez pas les moyens de payer un avocat. Que prévoit la République pour garantir l'égalité devant la justice ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Sur les réseaux sociaux, un internaute publie un message insultant et menaçant envers une communauté religieuse. Il se défend en invoquant la liberté d'expression. A-t-il raison ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous souhaitez participer à une manifestation pacifique contre une réforme du gouvernement. Votre employeur menace de vous licencier si vous y allez pendant votre jour de repos. A-t-il le droit ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Un journal publie un article critique envers le président de la République. Un ami vous dit que le journal devrait être interdit pour irrespect. Que répondez-vous ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre voisin écrit sur les réseaux sociaux que le boulanger du quartier « vend de la nourriture empoisonnée » sans aucune preuve. Le boulanger veut porter plainte. A-t-il des motifs ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous souhaitez créer une association culturelle dans votre quartier pour organiser des événements. Quelles sont les conditions en France ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Lors d'un contrôle de police dans la rue, un agent vous demande vos papiers d'identité. Vous n'avez aucun document sur vous. Que se passe-t-il ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Les salariés de votre entreprise décident de faire grève pour protester contre des conditions de travail dangereuses. Votre employeur menace de licencier tous les grévistes. Est-ce légal ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre voisin installe une caméra de surveillance qui filme directement l'entrée de votre appartement et votre palier. Avez-vous un recours ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes invité à un repas entre collègues. Un collègue vous reproche de ne pas boire d'alcool en disant que « en France, on trinque ensemble ». Que répondez-vous ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Lors d'un débat, une personne affirme publiquement que la Shoah n'a jamais existé, en invoquant sa liberté d'expression. Que dit la loi française ?",
+      "theme_id": 1,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "C'est le jour des élections municipales et vous ne retrouvez plus votre carte électorale. Pouvez-vous quand même voter ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Vous devez partir en déplacement professionnel le jour du second tour de l'élection présidentielle. Vous ne voulez pas manquer le vote. Que pouvez-vous faire ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Vous venez d'obtenir la nationalité française et souhaitez voter aux prochaines élections. Quelle est la première démarche obligatoire ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Dans le bureau de vote, vous remarquez qu'un électeur prend directement un seul bulletin sans passer par l'isoloir. L'assesseur lui demande de passer par l'isoloir. L'assesseur a-t-il raison ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Votre voisin est de nationalité portugaise et vit en France depuis 10 ans. Il souhaite voter aux élections. À quelles élections peut-il participer ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "text_fr": "Vous souhaitez vous marier civilement en France. Vers qui devez-vous vous tourner pour célébrer le mariage ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous souhaitez construire une extension de votre maison. Votre voisin vous dit qu'il faut demander un permis de construire. À qui devez-vous vous adresser ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Votre enfant a 3 ans et vous souhaitez l'inscrire à l'école maternelle publique. Quelle est votre première démarche ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous souhaitez assister à une séance du conseil municipal de votre commune pour savoir comment le budget est dépensé. En avez-vous le droit ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Votre grand-père âgé a besoin de l'Allocation Personnalisée d'Autonomie (APA) pour financer son aide à domicile. À quelle collectivité devez-vous vous adresser ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Le gouvernement souhaite augmenter les impôts. Un ami vous dit que le Premier ministre peut le faire seul par décret. Est-ce exact ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Le Parlement vote une loi qui, selon des citoyens, porte atteinte à la liberté d'expression. Les citoyens peuvent-ils contester cette loi et comment ?",
+      "theme_id": 2,
+      "subtopic": "vote",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "À la télévision, vous apprenez que le président de la République a dissous l'Assemblée nationale et convoqué de nouvelles élections. Un ami dit que c'est un coup d'État. A-t-il raison ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Vous êtes étranger en situation régulière et votre titre de séjour arrive à expiration dans deux mois. Où devez-vous faire votre demande de renouvellement ?",
+      "theme_id": 2,
+      "subtopic": "organisation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous estimez être victime d'une discrimination de la part d'un service public et vous ne savez pas vers qui vous tourner. Quelle institution indépendante peut vous aider gratuitement ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "text_fr": "Vous souhaitez inscrire votre enfant de 7 ans à l'école publique de votre quartier. Le directeur vous demande votre titre de séjour avant d'accepter l'inscription. Que faites-vous ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre voisin ouvre régulièrement votre boîte aux lettres et lit votre courrier. Lorsque vous lui en parlez, il répond que ce n'est pas grave car il n'y a rien de secret. Quelle est la bonne réaction ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes contrôlé par la police dans la rue. Les agents vous demandent de présenter une pièce d'identité. Vous n'en avez pas sur vous. Que se passe-t-il ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre employeur vous interdit de quitter le territoire français pendant vos congés payés. A-t-il le droit de vous imposer cette restriction ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre fils de 16 ans est soupçonné d'un vol dans un magasin. Le gérant du magasin affirme devant d'autres clients que votre fils est un voleur. Comment réagissez-vous ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous découvrez qu'un site internet a publié des photos de vous prises à votre insu dans un lieu privé. Quel droit pouvez-vous invoquer ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous souhaitez organiser une réunion publique dans votre quartier pour discuter d'un projet de construction. Devez-vous obtenir une autorisation préalable ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre propriétaire vous annonce qu'il veut installer une caméra de surveillance dans le couloir de votre appartement pour des raisons de sécurité. Quelle est votre position ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Lors d'un entretien d'embauche, le recruteur demande à une candidate si elle prévoit d'avoir des enfants prochainement. Cette question est-elle légale ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre collègue femme découvre qu'elle est payée 15 % de moins qu'un collègue homme occupant le même poste avec la même ancienneté et les mêmes qualifications. Que peut-elle faire ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Dans votre quartier, un père refuse d'envoyer sa fille au collège car il considère que les études ne sont pas nécessaires pour les filles. Cette attitude est-elle acceptable en France ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre amie vous confie que son mari lui interdit de travailler et contrôle toutes ses dépenses. Que pouvez-vous lui dire ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Lors d'une réunion de parents d'élèves, un père affirme que les garçons devraient avoir priorité pour les activités sportives à l'école. Quelle est la position de la loi française ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Un couple de votre entourage souhaite se marier. La future épouse a 17 ans et ses parents sont d'accord. Le mariage peut-il avoir lieu en France ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre employeur refuse de vous accorder un congé paternité à la naissance de votre enfant en disant que « c'est un congé pour les mères ». A-t-il raison ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous travaillez en France depuis un an et vous n'avez jamais déclaré vos revenus aux impôts. Un ami vous dit que ce n'est pas obligatoire pour les étrangers. A-t-il raison ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous recevez une convocation pour être juré d'assises. Vous ne souhaitez pas y participer car cela perturbe votre emploi du temps. Pouvez-vous refuser ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes témoin d'un accident de la route. La victime est blessée et allongée sur le sol. Que devez-vous faire en priorité ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Dans votre immeuble, un voisin stationne systématiquement sa voiture devant la sortie de secours, bloquant l'accès. Que faites-vous ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous découvrez que votre employeur fait travailler des personnes sans papiers dans des conditions indignes et sans les déclarer. Que devez-vous faire ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes citoyen français et les élections municipales approchent. Vous pensez que voter ne sert à rien. Quelle est la réalité concernant le vote en France ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre fils de 17 ans a été convoqué pour la Journée Défense et Citoyenneté (JDC). Il vous dit qu'il ne veut pas y aller. Que lui répondez-vous ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous constatez qu'un enfant de votre voisinage présente régulièrement des traces de coups et semble effrayé par ses parents. Quelle est votre responsabilité ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Lors d'un débat en ligne, un internaute publie des propos haineux contre une communauté religieuse en invoquant la liberté d'expression. A-t-il raison de se défendre ainsi ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre voisin organise une fête avec de la musique très forte tous les samedis soir jusqu'à 4 heures du matin. Vous lui demandez de baisser le volume, mais il vous répond qu'il est chez lui et qu'il fait ce qu'il veut. A-t-il raison ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "La mairie souhaite construire une route qui passerait par votre terrain. On vous propose une indemnisation mais vous refusez de vendre. La mairie peut-elle vous y contraindre ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous souhaitez manifester dans la rue contre une loi que vous jugez injuste. Pouvez-vous organiser cette manifestation librement ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous êtes propriétaire d'un appartement et vous refusez de le louer à une famille en raison de son origine ethnique. Votre agent immobilier vous soutient dans cette démarche. Que dit la loi ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous filmez un policier pendant un contrôle dans la rue et il vous demande d'arrêter en disant que c'est interdit. A-t-il raison ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Votre association religieuse souhaite organiser une prière dans un parc public. Le maire s'y oppose en invoquant la laïcité. Cette interdiction est-elle justifiée ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "text_fr": "Vous venez d'arriver en France et votre voisin vous invite à regarder un défilé militaire et un feu d'artifice le 14 juillet. Que célèbre-t-on ce jour-là ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le 11 novembre, votre employeur vous informe que l'entreprise est fermée. Des cérémonies ont lieu devant le monument aux morts de votre commune. Que commémore cette journée ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Vous passez devant la mairie de votre commune et vous remarquez un drapeau bleu, blanc, rouge accroché à la façade. Votre enfant vous demande ce qu'il représente. Que lui répondez-vous ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Le 8 mai, vous constatez que les commerces sont fermés et que des gerbes de fleurs sont déposées au pied du monument aux morts. Un voisin vous invite à la cérémonie. Que commémore le 8 mai ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Lors d'une cérémonie officielle dans votre mairie, tout le monde se lève quand un hymne est joué. On vous explique que c'est La Marseillaise. Quel est le statut de ce chant ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous souhaitez visiter un musée national à Paris mais vous avez un budget limité. Un ami vous dit que certains jours l'entrée est gratuite. Quelle information est correcte ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Vous visitez le Mont-Saint-Michel avec des amis et vous voyez un panneau indiquant que c'est un site classé au patrimoine mondial de l'UNESCO. Que signifie cette distinction ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Vous êtes invité à dîner chez des voisins français qui vous proposent un repas typique avec entrée, plat, fromage et dessert. Quelle affirmation est vraie concernant la gastronomie française ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "En septembre, vous voyez des affiches annonçant les Journées européennes du patrimoine. Des bâtiments habituellement fermés au public ouvrent leurs portes. De quoi s'agit-il ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Votre enfant revient de l'école en vous parlant d'une sortie scolaire organisée au musée et d'un cours d'éducation musicale. Pourquoi l'école française inclut-elle ces activités culturelles ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "text_fr": "Vous cherchez un emploi et vous consultez des offres dans différentes régions de France. Combien de régions métropolitaines la France compte-t-elle depuis la réforme de 2015 ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Un collègue originaire de la Guadeloupe vous explique qu'il est français. Vous êtes surpris car la Guadeloupe est loin de la métropole. Quelle est la situation juridique des territoires d'outre-mer ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Vous souhaitez voyager en Espagne pour les vacances. Un ami vous dit que vous n'avez pas besoin de passeport si vous avez un titre de séjour français. Pourquoi est-ce possible ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous venez d'arriver en France et vous devez changer votre argent. Quelle est la monnaie utilisée en France et depuis quand ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous recevez un courrier officiel qui mentionne votre commune et votre département. Vous ne comprenez pas la différence entre ces deux niveaux administratifs. Quelle explication est correcte ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "text_fr": "Votre femme vient d'accoucher à l'hôpital. On vous dit que vous devez déclarer la naissance. Où et dans quel délai devez-vous le faire ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous venez d'arriver en France et vous commencez à travailler. Votre employeur vous demande si vous avez une carte Vitale. À quoi sert cette carte ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Vous venez d'obtenir la nationalité française et vous souhaitez voter aux prochaines élections. Quelle démarche devez-vous effectuer ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Votre titre de séjour expire dans trois mois. Que devez-vous faire pour le renouveler ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Vous recevez un courrier de la préfecture vous demandant de fournir des documents supplémentaires pour votre dossier. Que devez-vous faire ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Vous venez de déménager dans une nouvelle ville. Quels organismes devez-vous prévenir de votre changement d'adresse ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous avez besoin de faire une démarche administrative mais vous ne savez pas où vous renseigner. Un ami vous conseille un site officiel du gouvernement. Lequel ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous souhaitez vous marier en France et la mairie vous demande un acte de naissance de moins de 3 mois. Vous êtes né à l'étranger. Où devez-vous demander ce document ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "text_fr": "Votre voisin âgé se plaint de fortes douleurs dans la poitrine et a du mal à respirer. Vous pensez qu'il fait un malaise cardiaque. Quel numéro devez-vous appeler en urgence ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "En rentrant chez vous le soir, vous constatez que la porte de votre appartement a été forcée et que des objets ont disparu. Quel numéro devez-vous appeler ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous sentez une forte odeur de fumée dans votre immeuble et vous voyez de la fumée sortir d'un appartement voisin. Quel numéro appelez-vous en priorité ?",
+      "theme_id": 5,
+      "subtopic": "installation",
+      "ambiguous": true
+    },
+    {
+      "text_fr": "Vous êtes témoin d'un accident de la route en France mais vous ne vous souvenez plus des numéros d'urgence français. Quel numéro unique pouvez-vous appeler qui fonctionne dans toute l'Europe ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Vous vous inscrivez à la Sécurité sociale et on vous demande de choisir un médecin traitant. Pourquoi est-ce important ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Votre enfant se casse le bras en tombant dans un parc le dimanche. Votre médecin traitant ne travaille pas le dimanche. Où devez-vous l'emmener ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Il est 23 heures et vous avez besoin d'un médicament urgent prescrit par le médecin. Toutes les pharmacies de votre quartier sont fermées. Que pouvez-vous faire ?",
+      "theme_id": 5,
+      "subtopic": "soins"
+    },
+    {
+      "text_fr": "Vous venez d'arriver en France avec votre enfant de 7 ans. Vous souhaitez l'inscrire à l'école. Où devez-vous vous rendre en premier ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Votre voisin vous dit que son enfant de 4 ans n'a pas besoin d'aller à l'école car il est trop petit. A-t-il raison ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Votre fille de 14 ans veut porter un signe religieux visible à l'école publique. L'établissement lui dit que ce n'est pas autorisé. Est-ce légal ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "L'école de votre enfant vous invite à une réunion parents-professeurs. Vous ne parlez pas bien français et hésitez à y aller. Que devriez-vous faire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Votre enfant revient de l'école en pleurant et vous dit que des camarades le frappent et l'insultent régulièrement. Que devez-vous faire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Vous souhaitez inscrire votre enfant à la cantine de l'école mais vous avez des revenus modestes. Comment le tarif est-il calculé ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Votre enfant est malade et ne peut pas aller à l'école pendant plusieurs jours. Quelle est votre obligation en tant que parent ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Vous venez d'arriver en France et vous vous demandez si l'inscription de votre enfant à l'école publique est payante. Quelle est la règle en France ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "text_fr": "Vous venez de perdre votre emploi en France. Un ami vous conseille de vous inscrire à France Travail (anciennement Pôle emploi). Pourquoi est-ce important ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "On vous propose un emploi à temps plein mais le salaire proposé vous semble très bas. Existe-t-il un salaire minimum en France ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Vous commencez un nouvel emploi et votre employeur vous remet un contrat de travail. Quels éléments essentiels doit-il contenir ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Au travail, votre supérieur refuse de vous accorder une promotion en raison de votre origine. Que pouvez-vous faire ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Vous travaillez depuis un an dans une entreprise et vous souhaitez prendre des vacances. Avez-vous droit à des congés payés ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Un collègue vous parle des syndicats et vous propose d'adhérer. Votre employeur peut-il vous interdire d'adhérer à un syndicat ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "text_fr": "Des collègues vous annoncent qu'ils vont faire grève pour demander une augmentation de salaire. Vous vous demandez si c'est légal en France. Que dit la loi ?",
+      "theme_id": 5,
+      "subtopic": "travail"
+    }
+  ]
+}
