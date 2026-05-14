@@ -1,0 +1,324 @@
+{
+  "generated_at": "2026-05-14",
+  "method": "heuristic classification of P1 imported questions",
+  "count": 47,
+  "by_theme": {
+    "1": {
+      "devise": 4,
+      "laicite": 2,
+      "situation": 2
+    },
+    "2": {
+      "vote": 5,
+      "organisation": 1,
+      "union_europ": 5
+    },
+    "3": {
+      "droits_fond": 2,
+      "obligations": 2,
+      "situation": 1
+    },
+    "4": {
+      "periodes": 11,
+      "geographie": 5,
+      "patrimoine": 2
+    },
+    "5": {
+      "installation": 2,
+      "travail": 1,
+      "education": 2
+    }
+  },
+  "ambiguous_count": 7,
+  "assignments": [
+    {
+      "id": 200,
+      "text_fr": "Quel est le texte fondateur établissant en France les droits et les devoirs de chaque citoyen ?",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "id": 612,
+      "text_fr": "Qu'est-ce que la formation civique ?",
+      "theme_id": 1,
+      "subtopic": "situation",
+      "ambiguous": true
+    },
+    {
+      "id": 613,
+      "text_fr": "En application de la liberté individuelle, quelle proposition est correcte ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "id": 614,
+      "text_fr": "Quelle est la devise de la France ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "id": 615,
+      "text_fr": "Qu'est-ce que le pouvoir législatif ?",
+      "theme_id": 2,
+      "subtopic": "organisation"
+    },
+    {
+      "id": 616,
+      "text_fr": "Depuis quand l'euro est-elle la monnaie unique ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "id": 617,
+      "text_fr": "En quelle année le traité de Maastricht, qui marque la fondation de l'Union européenne, a-t-il été signé ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "id": 618,
+      "text_fr": "Quelle est l'attitude à avoir lorsque qu'on est témoin de violences ?",
+      "theme_id": 3,
+      "subtopic": "situation"
+    },
+    {
+      "id": 619,
+      "text_fr": "En quelle année l'euro est-elle devenue la monnaie utilisée en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 620,
+      "text_fr": "En France, les impôts permettent de financer les dépenses publiques. Quelle proposition est correcte ?",
+      "theme_id": 1,
+      "subtopic": "situation",
+      "ambiguous": true
+    },
+    {
+      "id": 621,
+      "text_fr": "Lequel de ces symboles représente la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "id": 622,
+      "text_fr": "Lesquels sont des symboles officiels de la République française ?",
+      "theme_id": 1,
+      "subtopic": "devise"
+    },
+    {
+      "id": 623,
+      "text_fr": "Selon la Constitution, la France est une République...",
+      "theme_id": 1,
+      "subtopic": "laicite",
+      "ambiguous": true
+    },
+    {
+      "id": 624,
+      "text_fr": "Une personne peut-elle changer librement de religion en France ?",
+      "theme_id": 1,
+      "subtopic": "laicite"
+    },
+    {
+      "id": 625,
+      "text_fr": "Une personne, n'ayant pas d'accès à internet, veut s'inscrire sur les listes électorales pour pouvoir voter aux prochaines élections politiques. Où peut-elle s'inscrire ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "id": 626,
+      "text_fr": "Quelles sont les durées du mandat du conseil municipal et du maire ?",
+      "theme_id": 2,
+      "subtopic": "vote",
+      "ambiguous": true
+    },
+    {
+      "id": 627,
+      "text_fr": "Quelle est la durée du mandat du Président de la République française ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "id": 628,
+      "text_fr": "Quelle est la durée du mandat des députés ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "id": 629,
+      "text_fr": "Quelle est la durée du mandat des sénateurs ?",
+      "theme_id": 2,
+      "subtopic": "vote"
+    },
+    {
+      "id": 630,
+      "text_fr": "Quel est le dernier Etat à avoir intégré l'Union Européenne en 2013 ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "id": 631,
+      "text_fr": "Quand est célébrée la journée de l'Europe ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "id": 632,
+      "text_fr": "Les citoyens de l'Union européenne peuvent-ils voter aux élections locales dans un autre Etat de l'Union ?",
+      "theme_id": 2,
+      "subtopic": "union_europ"
+    },
+    {
+      "id": 633,
+      "text_fr": "Est-ce légal d'être marié à plusieurs personnes en même temps ?",
+      "theme_id": 3,
+      "subtopic": "obligations",
+      "ambiguous": true
+    },
+    {
+      "id": 634,
+      "text_fr": "Qui peut être appelé à faire partie d'un jury d'assises en France ?",
+      "theme_id": 3,
+      "subtopic": "obligations"
+    },
+    {
+      "id": 635,
+      "text_fr": "Une personne est privée de ses droits civils et politiques pendant 5 ans suite à une condamnation. Parmi ces propositions laquelle est correcte ? Pendant 5 ans,...",
+      "theme_id": 3,
+      "subtopic": "droits_fond"
+    },
+    {
+      "id": 636,
+      "text_fr": "Quel est l'objectif des lois scolaires de la IIIe République ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 637,
+      "text_fr": "Simone Veil est une figure importante de l'histoire française. Elle a notamment :",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 638,
+      "text_fr": "Dans quelle région est située une partie des plages du débarquement ayant permis d'engager la libération de la France ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "id": 639,
+      "text_fr": "Quel roi de France a été guillotiné pendant la Révolution française ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 640,
+      "text_fr": "Quel pays a été une colonie française ?",
+      "theme_id": 4,
+      "subtopic": "periodes",
+      "ambiguous": true
+    },
+    {
+      "id": 641,
+      "text_fr": "Sous quel président a été abolie la peine de mort en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 642,
+      "text_fr": "Que célèbre-t-on le 8 mai ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 643,
+      "text_fr": "Depuis quand l'esclavage a-t-il été aboli en France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 644,
+      "text_fr": "Quelle organisation a été créée en 1945 après la Seconde Guerre mondiale ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 645,
+      "text_fr": "En quelle année l'euro est-il devenu la monnaie officielle de la France ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 646,
+      "text_fr": "Lors de la seconde guerre mondiale, à quelle date la ville de Paris a-t-elle été libérée ?",
+      "theme_id": 4,
+      "subtopic": "periodes"
+    },
+    {
+      "id": 647,
+      "text_fr": "Quelle oeuvre a été écrite par Victor Hugo ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "id": 648,
+      "text_fr": "Pendant quelles journées peut-on visiter gratuitement des lieux culturels en France ?",
+      "theme_id": 4,
+      "subtopic": "patrimoine"
+    },
+    {
+      "id": 649,
+      "text_fr": "Quelle chaîne de montagne est située entre la France et l'Espagne ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "id": 650,
+      "text_fr": "Quelle île française est située dans l'océan indien ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "id": 651,
+      "text_fr": "Quelle île française se trouve au sud-est du continent africain ?",
+      "theme_id": 4,
+      "subtopic": "geographie"
+    },
+    {
+      "id": 652,
+      "text_fr": "Quel est le 101ème département français depuis 2011 ?",
+      "theme_id": 4,
+      "subtopic": "geographie",
+      "ambiguous": true
+    },
+    {
+      "id": 653,
+      "text_fr": "Quel mariage est reconnu légalement ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "id": 654,
+      "text_fr": "Quand faut-il déclarer son enfant au service d'état civil ?",
+      "theme_id": 5,
+      "subtopic": "installation"
+    },
+    {
+      "id": 655,
+      "text_fr": "Auprès de quelle institution les parents peuvent inscrire leurs enfants à l'école publique ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    },
+    {
+      "id": 656,
+      "text_fr": "Travailler sans être déclaré est :",
+      "theme_id": 5,
+      "subtopic": "travail"
+    },
+    {
+      "id": 657,
+      "text_fr": "Comment s'appellent les établissements scolaires que les élèves intègrent après l'école élémentaire ?",
+      "theme_id": 5,
+      "subtopic": "education"
+    }
+  ]
+}

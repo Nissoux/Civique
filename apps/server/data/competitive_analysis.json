@@ -1,0 +1,527 @@
+{
+  "analyzed_at": "2026-05-15",
+  "methodology": "Live browser inspection (Claude in Chrome) of each competitor's public surface: landing, pricing, signup, examen/quiz pages, blog, sitemap. Free trials tested without account when accessible. Civique features cross-checked against repository (apps/server, apps/web, packages/shared) and PROJECT_STATUS.md.",
+  "civique_baseline": {
+    "url": "https://civique.integrafle.fr",
+    "questions_total": 881,
+    "questions_breakdown": {
+      "nat": 258,
+      "cr": 192,
+      "csp": 191,
+      "entretien_assimilation": 240
+    },
+    "fiches": "159 fiches officielles + claim 200 fiches pedagogiques translated",
+    "glossaire_terms": 150,
+    "languages": 8,
+    "languages_list": ["fr", "ar", "fa", "pt", "es", "hi", "en", "tr"],
+    "platforms": ["web (Next.js 15)", "iOS (Expo)", "Android (Expo)"],
+    "design": "Tisserand (web light-only) + Claymorphism (mobile dark mode)",
+    "srs": "Full SM-2 SuperMemo algorithm (apps/server/src/services/srs.ts)",
+    "pricing": {
+      "free_tier": "Yes, no card required; free fiches + quota of questions",
+      "weekly": "3,99 €",
+      "monthly": "10,99 €",
+      "six_month": "39,99 € (one-time, non-renewing)",
+      "payment_model": "Stripe (web) + RevenueCat IAP (iOS/Android)"
+    },
+    "auth": ["email/password", "Google Sign-In (native SDK mobile)", "Apple Sign-In (mobile)"],
+    "features_unique": [
+      "8 languages (most in market)",
+      "Native iOS+Android+Web with synced progression",
+      "True SM-2 SRS spaced repetition",
+      "Stats by theme + weak-areas detection",
+      "Social: friends, challenges, leaderboard, question comments",
+      "611 (active in DB seed) → 881 questions in raw data",
+      "Apple Sign-In + Google Sign-In (only competitor with Apple)",
+      "Verified accessibility audit (A11Y.md), security audit (SECURITY_AUDIT.md)"
+    ],
+    "features_missing_vs_market": [
+      "No AI-powered Entretien d'Assimilation voice simulator (LeTestCivique + ExamenCiviqueNaturalisation both have it)",
+      "No interactive 'Checklist dossier' per profile (ExamenCiviqueNaturalisation has it)",
+      "No 'Money-back guarantee' framing (LeTestCivique has '95% réussite ou remboursé')",
+      "No editorial blog (PrepaCivique has guides, LeTestCivique has ~17 articles, qcmcivique.fr has 4+)",
+      "No 'Arrêté du 10 octobre 2025' citation visible on landing (PrepaCivique cites it explicitly)",
+      "No companion Amazon book / printed product (ExamenCiviqueNaturalisation has one)"
+    ]
+  },
+  "sites": [
+    {
+      "rank": 1,
+      "name": "PrépaCivique",
+      "url": "https://www.prepacivique.fr",
+      "tagline": "PrépaCivique : votre préparation à l'examen civique 2026",
+      "social_proof": "9 411 candidats · 5.0/5 (testimonials in carousel, FR/ES)",
+      "product": {
+        "format": "Web app, no native mobile",
+        "exam_format": "40Q QCM, 45min, 32/40 threshold (80%)",
+        "exam_structure": "28 connaissances + 12 mises en situation",
+        "theme_distribution": "11 valeurs / 11 droits / 8 histoire / 6 institutions / 4 société",
+        "questions_announced": "+2000 (incl. officielles)",
+        "questions_official": "CSP 191 + CR 209 + NAT 258 = 658 officielles",
+        "mises_en_situation": "Yes, designed by their team",
+        "free_blank_exam": "Yes, 40Q 45min no signup, also 10Q 5min option",
+        "languages": "FR only (EN button visible but redirects to FR; en.prepacivique.fr returns 404)",
+        "mobile_friendly": "Yes, responsive Tailwind layout",
+        "native_app": "No"
+      },
+      "pedagogy": {
+        "srs": "Not mentioned; flashcards announced 500 cartes ('mémo flash')",
+        "adaptive": "No claim",
+        "exam_modes": ["Mode Examen (45min, no live correction)", "Mode Préparation (no timer)"],
+        "stats": "Dashboard with stats by theme, weak-areas review",
+        "explanations": "Detailed per answer, historical/legal context"
+      },
+      "nat_content": {
+        "livret_citoyen": "Mentioned, not interactive on landing",
+        "charte_droits_devoirs": "Not surfaced",
+        "entretien_assimilation": "Not addressed"
+      },
+      "pricing": {
+        "model": "Pack one-time, no auto-renewal",
+        "tiers": [
+          {"duration": "1 mois", "price_eur": 12},
+          {"duration": "3 mois", "price_eur": 17, "label": "Le plus populaire"},
+          {"duration": "6 mois", "price_eur": 25}
+        ],
+        "free_trial": "Free signup, free landing test (40Q sans inscription)",
+        "refund_policy": "Has 'Remboursement' footer link, not detailed in tarifs page",
+        "payment": "Stripe"
+      },
+      "auth": {
+        "providers": ["email/password", "Google OAuth"],
+        "apple_signin": false,
+        "required_for_content": "Account needed for full progression; free test accessible without"
+      },
+      "design_score": 4,
+      "design_notes": "Clean Vercel/Tailwind aesthetic, light-only, dark navy CTAs, decent typography. Modern but generic SaaS look. Mobile-responsive.",
+      "perceived_speed": "Fast (Vercel CDN)",
+      "visible_bugs": "EN locale switch is non-functional (label shows but redirects don't work); en.prepacivique.fr 404",
+      "seo_authority": {
+        "arrete_10_oct_2025_cited": true,
+        "ministry_source_visible": true,
+        "blog_articles": "Guide pages (Format examen, Comparatif CSP/CR/NAT, Comment s'inscrire, 10 Conseils, Questions officielles par niveau, Centres d'examen, Test d'éligibilité, Inscription, À propos)"
+      },
+      "civique_vs_them": {
+        "civique_wins": [
+          "8 languages vs FR-only",
+          "Native iOS + Android (they have no app)",
+          "True SM-2 SRS (they have flashcards only, no spaced repetition claim)",
+          "Apple Sign-In + Google + email (they only have Google + email)",
+          "Web + Mobile cross-device sync via JWT",
+          "Free fiches accessible without paywall"
+        ],
+        "they_win": [
+          "Explicit 'Arrêté du 10 octobre 2025' SEO/legal citation",
+          "+2000 questions announced (Civique shows 611)",
+          "Strong social proof on landing: 9 411 candidats, 12+ visible testimonials",
+          "Cheaper entry pack: 12€/1mois vs Civique 10,99€/mois (close, but pack model = no recurrence anxiety)",
+          "Rich SEO guides (10 Conseils, Comment s'inscrire, Format officiel, etc.) — Civique doesn't have an SEO blog",
+          "Strong dedicated 'Examen civique gratuit' SEO page that doubles as funnel"
+        ]
+      }
+    },
+    {
+      "rank": 2,
+      "name": "LeTestCivique",
+      "url": "https://letestcivique.fr",
+      "tagline": "Examen civique : préparation au test civique en ligne — naturalisation, CR, CSP",
+      "social_proof": "14 620+ candidats · 4,9/5 · Garantie réussite ou remboursé (95%)",
+      "product": {
+        "format": "Web app, no native mobile",
+        "exam_format": "Examens chronométrés 40Q 45min mode 'Examen'",
+        "questions_announced": "+1900 questions",
+        "questions_by_level": "QCM officiels CSP / CR / NAT split (specific counts not disclosed)",
+        "free_blank_exam": "Yes (Examen civique gratuit CTA)",
+        "languages": "FR primary; 1 dedicated English SEO landing page (/en/french-naturalization-interview); main app stays FR",
+        "mobile_friendly": "Yes responsive",
+        "native_app": "No"
+      },
+      "pedagogy": {
+        "srs": "Mentions 'répétition espacée' (Flashcards de mémorisation) on landing — flashcards spaced repetition claim",
+        "modes": ["Mode Pratique (correction immédiate)", "Mode Examen (chrono)", "Mode Révision", "Flashcards", "Analyse intelligente"],
+        "flashcards_total": "~915 cards across 14 chapters (76+56+54+90+43+83+83+91+80+97+40+34+41+47)",
+        "flashcards_free": "1 chapter partially free (Devise et symboles, 76 cards); rest Premium",
+        "adaptive": "'Analyse intelligente' identifies weak chapters",
+        "ai_features": "AI Naturalization Interview Simulator (oral, voice mode, adaptive relances, scored report 75/100)"
+      },
+      "nat_content": {
+        "livret_citoyen": "Referenced in entretien naturalisation page",
+        "entretien_assimilation": "FULL AI simulator with voice input + scored report; 300 entretien questions, 5 themes, freemium"
+      },
+      "pricing": {
+        "model": "Pack one-time, no auto-renewal",
+        "tiers": [
+          {"duration": "1 mois", "price_eur": 15, "label": "PASS Essentiel"},
+          {"duration": "3 mois", "price_eur": 22, "label": "PASS Plus — Le plus populaire"},
+          {"duration": "6 mois", "price_eur": 33, "label": "PASS Max"}
+        ],
+        "free_trial": "Free signup, free QCM access, 1 free flashcard chapter",
+        "refund_policy": "'Garantie réussite ou remboursé' on échec officiel + plateforme had marked user 'prêt'",
+        "payment": "Stripe (Visa, PayPal, Amazon Pay)"
+      },
+      "auth": {
+        "providers": ["email/password", "Google OAuth", "Microsoft OAuth"],
+        "apple_signin": false,
+        "referral_code": true,
+        "required_for_content": "Account required to track progression and access flashcards"
+      },
+      "design_score": 4,
+      "design_notes": "Polished aesthetic, dark blue header with strong CTAs. Live chat widget. Good visual hierarchy with badges 'Premium' on locked cards. Top promo banner 'Examen civique réussi! 40/40' is engagement gimmick.",
+      "perceived_speed": "Fast",
+      "visible_bugs": "/en returns 404 despite English page existing at /en/french-naturalization-interview (URL slug only, not localized app); social proof reviews repeat in carousel",
+      "seo_authority": {
+        "arrete_10_oct_2025_cited": false,
+        "decret_cited": true,
+        "ministry_source_visible": false,
+        "blog_articles": "17+ articles (Top 10 questions, Préparer examen, Dispense, Thématiques, Cadre général, Grands rois, Laïcité, Symboles, Différents niveaux, Méthode efficace, Mises en situation, Erreurs fréquentes, Inscription 2026, Difficulté, Choisir plateforme, Prix examen...)"
+      },
+      "civique_vs_them": {
+        "civique_wins": [
+          "8 languages vs effectively FR-only (1 English SEO page is not the same)",
+          "Native iOS + Android apps + cross-device sync",
+          "Apple Sign-In (they have Microsoft, not Apple)",
+          "SRS implemented at question-level, not just flashcard level"
+        ],
+        "they_win": [
+          "AI-powered Entretien Naturalisation oral simulator (voice input, adaptive questions, scored 75/100 report) — MAJOR feature gap for Civique",
+          "300 entretien d'assimilation prep questions vs Civique 240",
+          "+1900 questions announced (we show 611 / 881 in DB)",
+          "'Garantie réussite ou remboursé' — Civique has no money-back guarantee",
+          "Larger social proof: 14 620 candidats vs Civique can't claim comparable",
+          "915 flashcards organized in 14 chapters — Civique has 159 fiches but no dedicated chapter org",
+          "Active blog (~17 articles, April-May 2026)",
+          "Microsoft OAuth (rare; useful for users with Outlook/Office365 only)",
+          "Referral code system on signup (Civique doesn't have one)",
+          "Chat support widget"
+        ]
+      }
+    },
+    {
+      "rank": 3,
+      "name": "France Accueil",
+      "url": "https://franceaccueil.com",
+      "tagline": "Aggregator: immigration blog + WooCommerce boutique + forum",
+      "social_proof": "67 client reviews on '300 questions' product (4.42/5); 117k views on Décrets list page",
+      "product": {
+        "format": "WordPress blog + WooCommerce shop + forum",
+        "type": "NOT a dedicated examen civique platform — sells PDF guides + lawyer affiliate + translation services",
+        "exam_format": "PDF only (no interactive app)",
+        "questions_announced": "300 questions in '300 questions' PDF pack + 200 questions in 'entretien naturalisation' PDF pack",
+        "free_blank_exam": "No interactive simulator; some blog posts include 40 corrected questions",
+        "languages": "FR only",
+        "mobile_friendly": "Yes (responsive WP theme), but UX is bloggish",
+        "native_app": "No"
+      },
+      "pedagogy": {
+        "srs": "No",
+        "modes": "PDF download only; 'fiches imprimables, 2 examens blancs, révisions guidées'",
+        "ai_features": "None"
+      },
+      "nat_content": {
+        "livret_citoyen": "Mentions and links to 'Livret du citoyen 2026' (13.4k views)",
+        "entretien_assimilation": "PDF pack 200 Questions/Réponses, 29,99€",
+        "decret_alert": "Sells 'Alerte décret de Naturalisation' 5,99€ (notification subscription)"
+      },
+      "pricing": {
+        "model": "WooCommerce one-time PDF purchases",
+        "tiers": [
+          {"product": "300 questions examen civique 2026", "price_eur": 29.99, "was": 49.99},
+          {"product": "200 questions entretien naturalisation", "price_eur": 29.99, "was": 49.99},
+          {"product": "Alerte décret de Naturalisation", "price_eur": 5.99, "was": 10.00},
+          {"product": "Avocat pour étrangers (lawyer service)", "price_eur": 1599.00, "was": 2000.00},
+          {"product": "Traduction assermentée", "price_eur": 50.00, "was": 95.00},
+          {"product": "TCF IRN B2 (B2 cert exam prep)", "price_eur": 29.99, "was": 49.99}
+        ],
+        "free_trial": "Free blog content + free forum",
+        "refund_policy": "Standard WooCommerce digital download terms",
+        "payment": "WooCommerce checkout"
+      },
+      "auth": {
+        "providers": ["email/password"],
+        "apple_signin": false,
+        "required_for_content": "Only for forum and checkout"
+      },
+      "design_score": 2,
+      "design_notes": "Generic WordPress theme with strong French flag color accents. Featured article carousel. Bloggish, not modern SaaS. 'Promo!' tags everywhere look like dropshipping.",
+      "perceived_speed": "Medium (WordPress, Facebook widget loads slow)",
+      "visible_bugs": "Product page slug mismatch (front nav points to /produit/300-questions-reponses-pour-reussir-lexamen-civique-2026/ → 404; real slug is /produit/300-questions-reponses-examen-civique/). Broken in their own boutique nav.",
+      "seo_authority": {
+        "arrete_10_oct_2025_cited": false,
+        "ministry_source_visible": true,
+        "blog_articles": "Heavy SEO blog — Décrets de naturalisation (117k views), articles on 'Nationalité française en ligne', 'CMU', '300 questions corrigées', 'TCF IRN', '200 questions entretien'",
+        "social_signals": "Facebook (211 followers), TikTok, YouTube, Instagram, Pinterest"
+      },
+      "civique_vs_them": {
+        "civique_wins": [
+          "Interactive app vs static PDFs",
+          "8 languages vs FR-only",
+          "Native mobile apps",
+          "SRS, stats, progression tracking",
+          "Modern UX",
+          "Free tier on interactive exercises",
+          "Cleaner product focus (just examen civique, not 6 mixed products)"
+        ],
+        "they_win": [
+          "Massive blog traffic & SEO authority (decrees page = 117k views)",
+          "Adjacent services bundle (lawyer, translation, TCF B2 prep, decree alerts)",
+          "Strong forum community engagement",
+          "Décret 'Alerte' product is unique and shows market understanding (Civique has nothing equivalent)",
+          "Cheap (29.99€ flat) for users who just want a PDF and no recurrence",
+          "Amazon-style cross-sells funnel"
+        ]
+      }
+    },
+    {
+      "rank": 4,
+      "name": "ExamenCivique.info / QCM Civique",
+      "url": "https://www.examencivique.info (SEO funnel) → https://qcmcivique.fr (real product)",
+      "tagline": "Préparez l'Examen Civique 2026 — 2 Quiz Gratuits + Pack 3 mois (Simulateur OFII)",
+      "social_proof": "40 000+ candidats entraînés · 100 000+ quiz réalisés · 4,8/5",
+      "product": {
+        "format": "Web app + PWA installable ('Installer QCM Civique' prompt)",
+        "exam_format": "40Q 45min 32/40 (80%) — examen chronométré",
+        "questions_announced": "1800+ officielles",
+        "questions_by_level": "CSP 193 (A2) + CR 209 (B1) + NAT 240 = 642 officielles",
+        "free_blank_exam": "Free full 40Q access with corrections without forced signup (verified live)",
+        "audio_questions": "Yes — 'Écouter' (text-to-speech) button on every question",
+        "languages": "4 languages (Français, English, العربية, Español) — verified via language switcher dropdown",
+        "mobile_friendly": "Yes + PWA installable to home screen",
+        "native_app": "No native iOS/Android — PWA only",
+        "themes": "5 thématiques (Valeurs République, Histoire France, Droits et Devoirs, Institutions, Vivre en France)"
+      },
+      "pedagogy": {
+        "srs": "/revision-intelligente page exists (login-gated) — likely SRS-like 'intelligent revision'",
+        "modes": "Quiz par thème, Examen chronométré 45min, Corrections en temps réel toggle, Test d'éligibilité (25Q)",
+        "adaptive": "Implied via 'revision intelligente' login-gated feature",
+        "explanations": "'Source officielle : Ministère de l'Intérieur' watermark on each question"
+      },
+      "nat_content": {
+        "livret_citoyen": "/livret-citoyen + downloadable PDF",
+        "entretien_assimilation": "Mentioned but separate page (404 when tested) — currently weak",
+        "centres_examen": "Yes, /centres-examen page"
+      },
+      "pricing": {
+        "model": "Unclear — no /tarifs, /nos-packs, or /nos-offres page (all return 404). 'Pack Réussite 3 mois' mentioned as paid but price not surfaced before signup paywall. Suggests partial-product / soft launch.",
+        "tiers": [],
+        "free_trial": "2 free quizzes per ExamenCivique.info; main qcmcivique.fr quiz appears fully accessible without account",
+        "refund_policy": "Not surfaced",
+        "payment": "Not visible"
+      },
+      "auth": {
+        "providers": ["email/password", "Google OAuth"],
+        "apple_signin": false,
+        "required_for_content": "Free QCM accessible without signup; 'revision intelligente' requires login"
+      },
+      "design_score": 3,
+      "design_notes": "Dark mode polished UI on qcmcivique.fr (rare in this market). Modern with red+blue French-flag accents. Strong CTAs. ExamenCivique.info funnel landing is blue-themed and less consistent.",
+      "perceived_speed": "Fast",
+      "visible_bugs": "Multiple broken pages on examencivique.info: /tarifs 404, /entretien-oral 404, nav link 'Entretien oral' returns 404. On qcmcivique.fr: /nos-offres 404, /nos-packs 404. Funnel architecture is fragile.",
+      "seo_authority": {
+        "arrete_10_oct_2025_cited": false,
+        "decret_2025_1345_cited": true,
+        "ministry_source_visible": true,
+        "blog_articles": "qcmcivique.fr/blog with 4+ articles (60% d'échec étude, Islam/République, Top 10 questions, 3 niveaux examen)"
+      },
+      "civique_vs_them": {
+        "civique_wins": [
+          "8 languages vs their 4 (FR/EN/AR/ES)",
+          "Native iOS+Android (they have PWA only)",
+          "Apple Sign-In + Google + email (they have Google + email)",
+          "Cleaner single-domain architecture (their funnel splits across 2 domains with broken nav)",
+          "More polished pricing/checkout (theirs is hidden or broken)",
+          "Entretien d'assimilation 240 questions ready vs theirs (404'd page)"
+        ],
+        "they_win": [
+          "Audio 'Écouter' on every question (text-to-speech) — strong accessibility feature Civique lacks for older users / low literacy",
+          "Free fully-featured exam blanc without signup (no quota) — Civique enforces signup earlier",
+          "Larger claimed social proof: 40 000+ candidats vs Civique's 9-15k range",
+          "PWA installable from browser (Civique web is not PWA-ready)",
+          "Strong claim of being independent / partnership ('Xendwise', 'Examen Civique')",
+          "1800+ questions claim vs Civique 611 visible"
+        ]
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Examen Civique Naturalisation (J.M. ABYRA)",
+      "url": "https://examenciviquenaturalisation.fr",
+      "tagline": "Réussissez votre examen civique du premier coup — Conforme Décret 2025-1345 + Circulaire 2 mai 2025",
+      "social_proof": "+312 candidats naturalisés en 2026 (testimonials in 7 languages incl. PT, TR)",
+      "product": {
+        "format": "Web app (WordPress + custom)",
+        "exam_format": "QCM 40Q 45min 32/40 (80%) — 45 examens blancs Premium",
+        "questions_announced": "740 questions total (100 free + 680 Premium)",
+        "free_blank_exam": "100 questions gratuites + 3 examens blancs (1 NAT, 1 CR, 1 CSP) sans CB",
+        "examens_blancs_premium": 45,
+        "mises_en_situation": "60 exercices Premium",
+        "languages": "7 langues (FR, AR, EN, TR, RU, PT, ES) — interface in 7 langues, corrections in 7 langues, 'EXCLUSIF' badge",
+        "mobile_friendly": "Yes, polished modern UI",
+        "native_app": "No, but Amazon companion book published",
+        "themes": "Multiple thèmes selectable (Symboles, Institutions, Droits et devoirs, Histoire, Société, Géographie)",
+        "level_selector": "3 niveaux (Accessible/Intermédiaire/Avancé) + type (Connaissance/Mise en situation/Mélange) + per-question timer (None/30s/60s)"
+      },
+      "pedagogy": {
+        "srs": "Tableau de bord & progression mentioned (Premium), but no explicit SRS algorithm claim",
+        "modes": "Niveau-based filtering, type-based filtering, theme-based filtering, customizable Q count (10/20/40), per-question timer",
+        "ai_features": "AI 'Mon Conseiller Naturalisation' — 24/7 chatbot answering questions on naturalisation with official source citations (Décret 93-1362, Circulaire 2 mai 2025, Décret 2025-1345). 4 600 questions/month claim, 96% satisfaction"
+      },
+      "nat_content": {
+        "livret_citoyen": "Yes, /livret-du-citoyen/ page",
+        "charte_droits_devoirs": "Implicit",
+        "entretien_assimilation": "/preparer-entretien-naturalisation/ page",
+        "checklist_dossier": "INTERACTIVE checklist per profile (4 profiles) — generates documents list per situation",
+        "centres_examen": "Implicit",
+        "book": "Companion book on Amazon (500 questions + fiches révisions)"
+      },
+      "pricing": {
+        "model": "Paiement unique — sans abonnement",
+        "tiers": [
+          {"duration": "1 mois", "price_eur": 12.99},
+          {"duration": "3 mois", "price_eur": 19.99, "was": 38.97, "label": "Le plus populaire"},
+          {"duration": "9 mois", "price_eur": 29.99, "was": 116.91, "label": "Meilleure valeur"}
+        ],
+        "free_trial": "100 QCM + 3 examens blancs + 7 langues d'aide accessible without paying",
+        "refund_policy": "Renonciation au droit de rétractation 14j (Article L221-28) explicite",
+        "payment": "Stripe (implied)",
+        "discount_code": "Code de réduction field on checkout"
+      },
+      "auth": {
+        "providers": ["email/password"],
+        "apple_signin": false,
+        "google_oauth": false,
+        "required_for_content": "Aperçu gratuit (10 questions) sans inscription; compte gratuit débloque 100 questions + 3 examens blancs"
+      },
+      "design_score": 5,
+      "design_notes": "Most editorial / 'serious' aesthetic of the 5. Serif typography (similar to Civique's Tisserand direction). Pastel pink/blue gradients. Premium feel. Country flags as language selectors. Strong claim hierarchy.",
+      "perceived_speed": "Fast",
+      "visible_bugs": "Many internal nav links 404 (/inscription, /simulateur-qcm direct nav-typed) but actual product pages work via main nav. URL inconsistency between menu links and routed paths.",
+      "seo_authority": {
+        "arrete_10_oct_2025_cited": false,
+        "decret_2025_1345_cited": true,
+        "circulaire_retailleau_cited": true,
+        "b2_requirement_cited": true,
+        "ministry_source_visible": true,
+        "blog_articles": "/examen-civique/ articles page (count not enumerated in this audit)",
+        "book": "Companion Amazon book listed; testimonials in original languages (turkish, portuguese)"
+      },
+      "civique_vs_them": {
+        "civique_wins": [
+          "8 languages vs their 7 (we add Farsi + Hindi; they add Russian)",
+          "Native iOS + Android apps + cross-device sync (they're web-only)",
+          "Apple Sign-In + Google OAuth + email (they have email-only)",
+          "Real SM-2 SRS algorithm vs their 'tableau de bord'",
+          "Free fiches accessible without account vs their 100 QCM cap",
+          "Open source backend on Hetzner = data sovereignty + RGPD focus"
+        ],
+        "they_win": [
+          "Most languages-equivalent direct competitor (7 vs our 8 — close fight)",
+          "AI 'Mon Conseiller Naturalisation' 24/7 chatbot — MAJOR feature gap for Civique (no AI assistant currently)",
+          "INTERACTIVE 'Checklist dossier' per profile — Civique has nothing equivalent (we could ship this in 1-2 sprints)",
+          "Highly differentiated product configuration (Niveau × Type × Thème × Nombre Q × Per-Q timer) — Civique exam config is simpler",
+          "Companion Amazon book (legitimacy + offline access)",
+          "Explicit conformity claims (Décret 2025-1345, Circulaire Retailleau, B2 requirement) on landing — Civique doesn't surface regulatory citations",
+          "Cheapest 1-month entry (12,99€ vs Civique 10,99€/mois — comparable but theirs is one-time)",
+          "Discount code field on checkout — Civique has CIVIQUE2026/BIENVENUE codes but not surfaced on web",
+          "Most editorial/'serious' design — Civique Tisserand is close but theirs adds gold accents and elite feel",
+          "Visible testimonials with photos + native-language quotes (PT, TR included) — Civique landing only has one testimonial"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "civique_unique_strengths": [
+      "8 languages (max in market — no competitor matches)",
+      "Only competitor with native iOS + Android apps + JWT cross-device sync",
+      "Only competitor with Apple Sign-In (required for AppStore + privacy)",
+      "True SM-2 SuperMemo SRS at question-level (LeTestCivique only claims 'flashcards spaced repetition', not algorithmic)",
+      "Open architecture: Postgres + Drizzle, owned VPS Hetzner (RGPD souveraineté)",
+      "Social features (friends, challenges, leaderboard, comments) — no competitor has this",
+      "Most polished design narrative ('Tisserand' editorial vs generic SaaS aesthetics)"
+    ],
+    "civique_gaps_vs_market": [
+      "NO AI Entretien d'Assimilation voice simulator — LeTestCivique has full voice-driven AI; ExamenCiviqueNaturalisation has '24/7 Conseiller' chatbot. This is the single biggest competitive gap.",
+      "NO interactive 'Checklist dossier' per profile — ExamenCiviqueNaturalisation has 4-profile generator. Achievable in 1-2 sprints.",
+      "NO money-back guarantee — LeTestCivique uses '95% réussite ou remboursé' as a trust marker.",
+      "NO editorial SEO blog — PrepaCivique, LeTestCivique, FranceAccueil, qcmcivique.fr all run active blogs. Civique appears once on Google and disappears.",
+      "NO explicit 'Arrêté du 10 octobre 2025' citation on landing — PrepaCivique cites it; ExamenCiviqueNaturalisation cites Décret 2025-1345 + Circulaire Retailleau.",
+      "NO companion physical product (book, PDF) — ExamenCiviqueNaturalisation sells Amazon book; FranceAccueil sells PDFs.",
+      "NO audio 'Écouter' on questions — qcmcivique.fr has text-to-speech for accessibility (target audience often has low literacy).",
+      "NO referral / parrainage code — LeTestCivique has parrainage at signup.",
+      "FEWER announced questions in marketing — we say 611, they say +1900 (LeTestCivique), +2000 (PrepaCivique), 1800+ (qcmcivique.fr). Civique has 881 in raw data but only 611 active in seed; we should backfill and update marketing copy."
+    ],
+    "pricing_benchmark": {
+      "subscription_market_median_monthly": "12-15€ for 1 month",
+      "subscription_market_median_3_months": "17-22€",
+      "subscription_market_median_6_months": "25-33€",
+      "civique_monthly_position": "10,99€/mois — competitive but subscription model is unusual vs market norm of one-time packs (only Civique has a recurring monthly subscription; all others sell time-limited access packs).",
+      "civique_six_month_position": "39,99€ — slightly above market median (33€ at LeTestCivique, 25€ at PrepaCivique, but 29,99€/9mois at ExamenCiviqueNaturalisation is best deal in market).",
+      "free_tier_position": "Civique offers free fiches; LeTestCivique offers 1 free flashcard chapter; ExamenCiviqueNaturalisation offers 100 free QCM + 3 free examens blancs; qcmcivique.fr offers nearly full free QCM. Civique's free tier is mid-pack.",
+      "market_signal": "Market is migrating to ONE-TIME packs (PrepaCivique, LeTestCivique, FranceAccueil, ExamenCiviqueNaturalisation all use one-time). Civique's subscription model + IAP is the outlier. Reconsider going 'pack-based' or at least surfacing the 6-month one-time option more prominently."
+    },
+    "differentiation_axes": {
+      "platform_breadth": {
+        "winner": "Civique",
+        "civique_advantage": "Only player with native iOS + Android + Web triad",
+        "competitors_position": "PrepaCivique, LeTestCivique, FranceAccueil, ExamenCiviqueNaturalisation = web only; qcmcivique.fr = PWA only"
+      },
+      "languages": {
+        "winner": "Civique (8) > ExamenCiviqueNaturalisation (7) > qcmcivique.fr (4) > others (1)",
+        "civique_advantage": "+1 vs nearest competitor; only one with Farsi and Hindi"
+      },
+      "srs_pedagogy": {
+        "winner": "Civique",
+        "civique_advantage": "Only documented SM-2 implementation; LeTestCivique claims spaced repetition but unverified algorithm"
+      },
+      "ai_features": {
+        "winner": "LeTestCivique (full voice AI interview) + ExamenCiviqueNaturalisation (24/7 chatbot)",
+        "civique_gap": "No AI features in product — biggest competitive risk"
+      },
+      "checklist_dossier": {
+        "winner": "ExamenCiviqueNaturalisation",
+        "civique_gap": "No equivalent — should be a sprint priority"
+      },
+      "social_proof_numeric": {
+        "winner": "qcmcivique.fr (40 000+ candidats) > LeTestCivique (14 620) > PrepaCivique (9 411) > Civique (no public claim) > ExamenCiviqueNaturalisation (312 naturalisés 2026)"
+      },
+      "design_editorial": {
+        "winner": "ExamenCiviqueNaturalisation (5/5) ≈ Civique Tisserand (5/5) > PrepaCivique (4/5) ≈ LeTestCivique (4/5) > qcmcivique.fr (3/5) > FranceAccueil (2/5)"
+      },
+      "seo_authority": {
+        "winner": "FranceAccueil (117k views on a single article) > LeTestCivique (17+ articles) > PrepaCivique (guides ecosystem) > qcmcivique.fr (4+ articles) > ExamenCiviqueNaturalisation (articles page) > Civique (no blog)"
+      }
+    },
+    "verdict": {
+      "is_civique_top_of_market": "PARTIAL — Civique is top on platform breadth, languages, SRS rigor, and design narrative, but is materially behind on AI features, marketing claims (announced question count), social proof numbers, SEO content footprint, and onboarding/conversion (checklist dossier). On axes that prospects evaluate at first contact (visible question count, social proof number, presence of 'Arrêté du 10 octobre 2025' citation, money-back guarantee, blog SEO presence), competitors win.",
+      "axes_we_dominate": [
+        "Cross-platform reach (iOS + Android + Web)",
+        "Language coverage (8 vs 7/4/1)",
+        "Algorithmic pedagogy (SM-2 vs vague 'flashcards')",
+        "Apple ecosystem support (only Apple Sign-In in market)",
+        "Architectural quality (open source feel, data sovereignty)",
+        "Editorial design narrative (Tisserand)"
+      ],
+      "axes_where_competitors_dominate": [
+        "AI features: LeTestCivique (voice interview simulator) + ExamenCiviqueNaturalisation (24/7 Conseiller chatbot) lap us",
+        "Checklist dossier: ExamenCiviqueNaturalisation has a unique interactive feature we should ship",
+        "Marketing claims: competitors announce 1800-2000+ questions; we surface 611 (despite having 881 in raw data)",
+        "Social proof numbers: qcmcivique.fr (40k), LeTestCivique (14.6k), PrepaCivique (9.4k) — Civique landing has no aggregate count",
+        "SEO content: LeTestCivique + FranceAccueil + PrepaCivique all run 10-100+ article blogs that own SERPs; Civique has none",
+        "Regulatory citations: PrepaCivique (Arrêté 10 oct 2025), ExamenCiviqueNaturalisation (Décret 2025-1345, Circulaire Retailleau, B2) — Civique landing doesn't cite specific texts",
+        "Trust markers: LeTestCivique's 'Garantie réussite ou remboursé' is a high-conversion lever Civique lacks",
+        "Question audio: qcmcivique.fr has TTS 'Écouter' on every question — high-value accessibility feature missing in Civique"
+      ],
+      "headline": "Civique is top-tier on architecture and language coverage, but not 'leader' on the market-facing comparison axes prospects evaluate. The two strongest competitors — LeTestCivique and ExamenCiviqueNaturalisation — both ship AI features Civique doesn't have. The market is consolidating around one-time pack pricing (we're an outlier with subscription) and AI-augmented prep (we're behind). Civique can credibly claim 'most international (8 languages), only true SRS, only with native apps' but can NOT yet claim 'most complete product'."
+    },
+    "recommendations_priorities": [
+      "P0 — Ship AI entretien d'assimilation voice simulator (or text-based MVP first) to close the LeTestCivique/ExamenCiviqueNaturalisation gap.",
+      "P0 — Surface aggregate social proof on landing (X candidats, X langues, X questions actives, X taux de réussite verified).",
+      "P0 — Update marketing copy from '611 questions' to a number consistent with full corpus (881 raw, or 611 + 240 entretien = 851) and cite the official decree on landing.",
+      "P1 — Ship interactive 'Checklist dossier par profil' (CSP/CR/NAT × situation matrix).",
+      "P1 — Add 'Écouter' TTS button on each question for accessibility parity with qcmcivique.fr.",
+      "P1 — Launch a content/SEO blog (10-20 articles in first 3 months) to compete with PrepaCivique and LeTestCivique on organic search.",
+      "P2 — Add a money-back/satisfaction guarantee marketing line (LeTestCivique-style) — even non-binding messaging helps trust.",
+      "P2 — Add referral / parrainage code at signup (LeTestCivique pattern).",
+      "P2 — Make pricing more legible: surface a one-time pack option prominently on landing, even if subscription remains default."
+    ]
+  }
+}
