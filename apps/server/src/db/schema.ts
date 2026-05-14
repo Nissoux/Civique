@@ -183,6 +183,12 @@ export const questions = pgTable(
     officialCspOrder: integer('official_csp_order'),
     officialCrOrder: integer('official_cr_order'),
     officialNatOrder: integer('official_nat_order'),
+    // Sub-topic axis from the arrêté (devise / laicite / vote /
+    // organisation / union_europ / droits_fond / obligations / situation /
+    // periodes / geographie / patrimoine / installation / soins / travail
+    // / education). Nullable while we classify the corpus; the
+    // distribution-aware tirage falls back to theme-only when null.
+    subtopic: varchar('subtopic', { length: 40 }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
@@ -192,6 +198,7 @@ export const questions = pgTable(
     premiumIdx: index('questions_premium_idx').on(table.isPremium),
     typeIdx: index('questions_type_idx').on(table.type),
     isOfficialIdx: index('questions_is_official_idx').on(table.isOfficial),
+    themeSubtopicIdx: index('questions_theme_subtopic_idx').on(table.themeId, table.subtopic),
   }),
 );
 

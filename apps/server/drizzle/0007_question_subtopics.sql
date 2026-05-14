@@ -1,0 +1,57 @@
+-- Adds the official sub-topic axis to the questions table.
+--
+-- Why
+-- ---
+-- The arrêté du 10 octobre 2025 prescribes a per-theme distribution
+-- (11/6/11/8/4) but it also breaks each theme into named sub-topics
+-- with fixed counts:
+--
+--   Theme 1 — Principes et valeurs (11 total)
+--     devise           3 questions
+--     laicite          2 questions
+--     situation        6 (situational, separate type)
+--
+--   Theme 2 — Système institutionnel (6 total)
+--     vote             3 questions   (democracy / suffrage)
+--     organisation     2 questions   (Republic structure)
+--     union_europ      1 question
+--
+--   Theme 3 — Droits et devoirs (11 total)
+--     droits_fond      2 questions
+--     obligations      3 questions
+--     situation        6 (situational)
+--
+--   Theme 4 — Histoire/géo/culture (8 total)
+--     periodes         3 questions   (people + eras)
+--     geographie       3 questions
+--     patrimoine       2 questions
+--
+--   Theme 5 — Vivre en société (4 total)
+--     installation     1 question
+--     soins            1 question
+--     travail          1 question
+--     education        1 question
+--
+-- Today our exam-blanc tirage only respects the per-theme counts, not
+-- the per-sub-topic ones. A user could (in theory) get 5 questions on
+-- laicité in Theme 1 — possible in our DB, but the real exam will
+-- never serve more than 2. Aligning the tirage with sub-topics is the
+-- conformity step P2 calls out.
+--
+-- Column choice
+-- -------------
+-- Free-form varchar(40) rather than a pgEnum because:
+--   - The list will evolve (the arrêté may add sub-topics later;
+--     migrating an enum across millions of rows is painful).
+--   - We populate it with a heuristic classifier (next step) and
+--     accept that some rows will start out as NULL — pgEnum can't
+--     hold NULL gracefully without a sentinel.
+--
+-- The unique-per-theme part isn't enforced at the SQL level (multiple
+-- rows share each subtopic, which is the whole point); the (theme_id,
+-- subtopic) index is the hot path for the tirage query.
+
+ALTER TABLE "questions" ADD COLUMN IF NOT EXISTS "subtopic" varchar(40);
+CREATE INDEX IF NOT EXISTS "questions_theme_subtopic_idx"
+  ON "questions" ("theme_id", "subtopic")
+  WHERE "subtopic" IS NOT NULL;
