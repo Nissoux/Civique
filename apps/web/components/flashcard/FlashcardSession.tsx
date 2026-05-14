@@ -6,7 +6,7 @@ import { LANGUAGES, type Language } from '@civique/shared';
 import type { Flashcard } from '@/lib/data/flashcards';
 import { useFlashcardStore } from '@/lib/stores/flashcardStore';
 import { TranslationPendingNotice } from '@/components/nav/TranslationStatus';
-import { submitSrsReview } from '@/lib/actions/srs';
+import { submitSrsReview, type SrsFeedback } from '@/lib/actions/srs';
 
 interface Props {
   cards: Flashcard[];
@@ -77,14 +77,18 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
     currentLang === 'fr' ||
     cards.some((c) => getCardTranslation(c, currentLang) !== undefined);
 
-  function handleAnswer(status: 'known' | 'unknown') {
+  function handleAnswer(feedback: SrsFeedback) {
     if (!card) return;
-    // Local progress: still kept (Zustand → localStorage). Drives the
-    // in-session "X / Y connues" pill and the per-theme dashboard tile,
-    // both of which need synchronous reads. The SRS server-side state
-    // is the long-term truth for next-due scheduling; we update both.
-    markCard(card.id, status);
-    if (status === 'known') {
+
+    // The local Zustand store only models known/unknown; we collapse
+    // the 4-grade SRS feedback into that binary for the in-session
+    // counters and per-theme tile. `lapse` and `hard` map to "unknown"
+    // (the user hasn't truly internalised it yet), `good` and `easy`
+    // map to "known".
+    const localStatus: 'known' | 'unknown' =
+      feedback === 'lapse' || feedback === 'hard' ? 'unknown' : 'known';
+    markCard(card.id, localStatus);
+    if (localStatus === 'known') {
       setKnownIds((arr) => [...arr, card.id]);
     } else {
       setUnknownIds((arr) => [...arr, card.id]);
@@ -95,11 +99,7 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
     // breaks the user's session — they'd still see their local
     // progression and the card would be retried automatically on the
     // next review when next_review_at stays unchanged.
-    void submitSrsReview(
-      'flashcard',
-      card.id,
-      status === 'known' ? 'good' : 'lapse',
-    );
+    void submitSrsReview('flashcard', card.id, feedback);
 
     if (index + 1 >= total) {
       setPhase('finished');
@@ -197,49 +197,123 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
         onFlip={() => setFlipped((f) => !f)}
       />
 
-      <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-4">
-        <button
-          type="button"
-          onClick={() => handleAnswer('unknown')}
-          disabled={!flipped}
-          className="
-            rounded-2xl border-[1.5px] border-terracotta bg-terracotta/10
-            px-5 py-4 text-terracotta font-semibold
-            shadow-[0_2px_0_rgb(45_27_46)]
-            transition-all hover:bg-terracotta hover:text-bone hover:-translate-y-0.5
-            disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-terracotta/10 disabled:hover:text-terracotta
-            inline-flex items-center justify-center gap-2
-          "
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      {/* Four-grade feedback — feeds SM-2's quality scale directly.
+          Visual gradient from terracotta (lapse) to saffron-deep (easy),
+          matching the natural "harder ↔ easier" axis users intuit.
+          On mobile we stack 2x2 so each tap target stays ≥48px high
+          even on a 320px screen. */}
+      <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+        <FeedbackButton
+          feedback="lapse"
+          label="Oublié"
+          hint="< 1 jour"
+          accent="lapse"
+          icon={
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-          À revoir
-        </button>
-        <button
-          type="button"
-          onClick={() => handleAnswer('known')}
+          }
           disabled={!flipped}
-          className="
-            rounded-2xl border-[1.5px] border-saffron bg-saffron/15
-            px-5 py-4 text-aubergine font-semibold
-            shadow-[0_2px_0_rgb(45_27_46)]
-            transition-all hover:bg-saffron hover:-translate-y-0.5
-            disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-saffron/15
-            inline-flex items-center justify-center gap-2
-          "
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-          </svg>
-          Je sais
-        </button>
+          onClick={handleAnswer}
+        />
+        <FeedbackButton
+          feedback="hard"
+          label="Difficile"
+          hint="1 jour"
+          accent="hard"
+          icon={
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+          }
+          disabled={!flipped}
+          onClick={handleAnswer}
+        />
+        <FeedbackButton
+          feedback="good"
+          label="Bien"
+          hint="quelques jours"
+          accent="good"
+          icon={
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M5 13l4 4L19 7" />
+          }
+          disabled={!flipped}
+          onClick={handleAnswer}
+        />
+        <FeedbackButton
+          feedback="easy"
+          label="Facile"
+          hint="plus d'une semaine"
+          accent="easy"
+          icon={
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15.4L8.2 18l1-4.4-3.4-3 4.5-.4L12 6l1.7 4.2 4.5.4-3.4 3 1 4.4z" />
+          }
+          disabled={!flipped}
+          onClick={handleAnswer}
+        />
       </div>
 
       <p className="text-center text-xs text-ink-mute mt-5 font-display italic">
-        {flipped ? '— Choisissez votre réponse' : '— Touchez la carte pour la retourner'}
+        {flipped
+          ? '— L\'algorithme programme votre prochaine révision selon votre choix'
+          : '— Touchez la carte pour la retourner'}
       </p>
     </div>
+  );
+}
+
+/**
+ * SM-2 feedback button — one of four. The visual accent communicates
+ * the difficulty/recall scale at a glance (red ↔ green) and the `hint`
+ * line shows the user what they're scheduling next ("1 day", "quelques
+ * jours", etc.). Hints are rough — actual intervals depend on the
+ * card's history — but they set the right expectation.
+ */
+function FeedbackButton({
+  feedback,
+  label,
+  hint,
+  accent,
+  icon,
+  disabled,
+  onClick,
+}: {
+  feedback: SrsFeedback;
+  label: string;
+  hint: string;
+  accent: 'lapse' | 'hard' | 'good' | 'easy';
+  icon: React.ReactNode;
+  disabled: boolean;
+  onClick: (f: SrsFeedback) => void;
+}) {
+  const accentClass = {
+    lapse: 'border-terracotta bg-terracotta/10 text-terracotta hover:bg-terracotta hover:text-bone',
+    hard: 'border-terracotta/50 bg-bone text-terracotta hover:bg-terracotta/10',
+    good: 'border-saffron/60 bg-saffron/10 text-aubergine hover:bg-saffron/30',
+    easy: 'border-saffron bg-saffron/40 text-aubergine hover:bg-saffron',
+  }[accent];
+
+  return (
+    <button
+      type="button"
+      onClick={() => onClick(feedback)}
+      disabled={disabled}
+      className={`
+        rounded-2xl border-[1.5px] ${accentClass}
+        px-3 py-3 sm:px-4 sm:py-4 font-semibold
+        shadow-[0_2px_0_rgb(45_27_46)]
+        transition-all hover:-translate-y-0.5
+        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0
+        flex flex-col items-center justify-center gap-1
+        min-h-[60px]
+      `}
+    >
+      <span className="flex items-center gap-1.5 text-sm sm:text-base">
+        <svg className="h-4 w-4 sm:h-5 sm:w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {icon}
+        </svg>
+        {label}
+      </span>
+      <span className="text-[0.65rem] sm:text-xs opacity-75 font-display italic font-normal">
+        {hint}
+      </span>
+    </button>
   );
 }
 
