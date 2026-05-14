@@ -152,9 +152,13 @@ export function FlashcardSession({ cards, themeId, themeName, themeColor, curren
             style={{ backgroundColor: themeColor }}
             aria-hidden
           >
-            {themeId}
+            {/* themeId=0 is the "all themes" sentinel — show a book glyph
+                rather than a meaningless 0 in the badge. */}
+            {themeId === 0 ? '📚' : themeId}
           </span>
-          <span className="text-ink-mute">Thème {themeId} · {themeName}</span>
+          <span className="text-ink-mute">
+            {themeId === 0 ? themeName : `Thème ${themeId} · ${themeName}`}
+          </span>
         </div>
         {!hasTranslationsForLang ? (
           <TranslationPendingNotice

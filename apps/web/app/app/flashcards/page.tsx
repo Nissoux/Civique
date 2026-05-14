@@ -44,7 +44,13 @@ export default function FlashcardsHubPage() {
       <section className="max-w-5xl mx-auto px-6 sm:px-10 pt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link
-            href="#themes"
+            // Was `#themes` — a same-page anchor that just scrolled to the
+            // per-theme grid. Users tapped it expecting a session to start
+            // and nothing happened. Now lands on /app/flashcards/all, which
+            // actually starts a cross-theme session over the 150 cards.
+            // The per-theme grid below is still there for users who want a
+            // focused practice.
+            href="/app/flashcards/all"
             className="
               card !rounded-2xl p-6 flex items-center gap-5
               transition-all hover:-translate-y-1 hover:shadow-clay-lg
@@ -74,7 +80,7 @@ export default function FlashcardsHubPage() {
                 Cartes mémo classiques
               </h3>
               <p className="text-sm text-ink-mute">
-                Question/réponse, je sais ou à revoir
+                150 cartes, tous thèmes — je sais ou à revoir
               </p>
             </div>
             <ArrowIcon />
