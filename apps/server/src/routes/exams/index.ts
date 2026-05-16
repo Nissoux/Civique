@@ -1,6 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
-import { eq, and, sql, desc, gte } from 'drizzle-orm';
+import { eq, and, sql, desc, gte, inArray } from 'drizzle-orm';
+import type { SQL } from 'drizzle-orm';
 import { db } from '../../config/database.js';
 import {
   examSessions,
@@ -32,6 +33,85 @@ const KNOWLEDGE_COUNT = 28;
 const SITUATIONAL_COUNT = 12;
 const PASS_THRESHOLD = 32;
 const TIME_LIMIT_SEC = 2700;
+
+/**
+ * Number of past completed exam sessions whose questions we try to
+ * avoid re-using in a new tirage. The "anti-repetition" window.
+ *
+ * Why 3
+ * -----
+ * Some sub-topic pools are tiny (soins: 7 questions for NAT, laïcité:
+ * 12, obligations: 11). With N = 3 past exams, the user has at most
+ * seen 3× 1-2 = 3-6 questions from these pots, leaving room to draw
+ * unseen ones. Going higher (N = 5+) would exhaust these pots and
+ * force fall-back to seen questions, defeating the purpose.
+ *
+ * The fallback is graceful: each sub-topic SELECT first tries to
+ * draw unseen, and tops up with already-seen if the unseen pool ran
+ * dry. The exam is always 40 questions, never short.
+ */
+const RECENT_EXAMS_TO_AVOID = 3;
+
+/**
+ * Draw up to `count` questions matching `baseConditions`, preferring
+ * questions whose id is NOT in `exclude`. If the unseen pool is too
+ * small, tops up with seen questions so the caller always gets `count`
+ * (or however many exist in the underlying pool, whichever is less).
+ *
+ * Two queries by design — one biased toward unseen, one fallback. A
+ * single query with `ORDER BY (id = ANY(seen)), RANDOM()` would also
+ * work, but the explicit split makes the intent obvious and lets us
+ * skip the top-up entirely when the unseen draw was sufficient.
+ */
+async function drawPreferringUnseen(
+  baseConditions: SQL[],
+  count: number,
+  exclude: Set<number>,
+): Promise<number[]> {
+  if (count <= 0) return [];
+
+  // ── First pass: only unseen ──
+  const unseenConditions = [...baseConditions];
+  if (exclude.size > 0) {
+    unseenConditions.push(
+      sql`${questions.id} != ALL(ARRAY[${sql.join(
+        Array.from(exclude).map((id) => sql`${id}`),
+        sql`, `,
+      )}]::int[])`,
+    );
+  }
+  const unseen = await db
+    .select({ id: questions.id })
+    .from(questions)
+    .where(and(...unseenConditions))
+    .orderBy(sql`RANDOM()`)
+    .limit(count);
+
+  if (unseen.length >= count || exclude.size === 0) {
+    return unseen.map((r) => r.id);
+  }
+
+  // ── Second pass: top up with seen, excluding what we just picked ──
+  const need = count - unseen.length;
+  const justPicked = new Set(unseen.map((r) => r.id));
+  const topUpConditions = [...baseConditions];
+  if (justPicked.size > 0) {
+    topUpConditions.push(
+      sql`${questions.id} != ALL(ARRAY[${sql.join(
+        Array.from(justPicked).map((id) => sql`${id}`),
+        sql`, `,
+      )}]::int[])`,
+    );
+  }
+  const topUp = await db
+    .select({ id: questions.id })
+    .from(questions)
+    .where(and(...topUpConditions))
+    .orderBy(sql`RANDOM()`)
+    .limit(need);
+
+  return [...unseen.map((r) => r.id), ...topUp.map((r) => r.id)];
+}
 
 /**
  * Official tirage composition prescribed by Arrêté du 10 octobre 2025
@@ -145,15 +225,64 @@ export default async function examRoutes(app: FastifyInstance) {
       return reply.status(500).send({ error: 'No themes configured' });
     }
 
+    // ── Anti-repetition memory ──
+    // Pull question ids the user has seen in their last N completed
+    // exams. We pass these as an "exclude preference" to the tirage —
+    // the draw will favor questions outside this set, falling back to
+    // the seen set only if the underlying pool can't otherwise fill
+    // the quota.
+    //
+    // Two-query approach (sessions then answers) instead of a single
+    // JOIN: the sessions query is small and indexed on (user_id, ts);
+    // the answers query is then a simple IN lookup. Cleaner Drizzle
+    // and easier to debug from a psql session.
+    const recentSessions = await db
+      .select({ id: examSessions.id })
+      .from(examSessions)
+      .where(
+        and(
+          eq(examSessions.userId, userId),
+          sql`${examSessions.finishedAt} IS NOT NULL`,
+        ),
+      )
+      .orderBy(desc(examSessions.finishedAt))
+      .limit(RECENT_EXAMS_TO_AVOID);
+
+    const recentlySeenIds = new Set<number>();
+    if (recentSessions.length > 0) {
+      const seen = await db
+        .selectDistinct({ questionId: examAnswers.questionId })
+        .from(examAnswers)
+        .where(
+          inArray(
+            examAnswers.sessionId,
+            recentSessions.map((s) => s.id),
+          ),
+        );
+      for (const row of seen) recentlySeenIds.add(row.questionId);
+    }
+
     // Tirage strategy: prefer the arrêté-fine sub-topic composition
     // (OFFICIAL_SUBTOPIC_DISTRIBUTION). For each theme, walk its
-    // sub-topics in order and pull `count` questions per. If the
-    // classifier hasn't reached a sub-topic yet (no rows), the loop
-    // takes what's there and moves on — the theme-only fallback at the
-    // end tops up any missing slots so we never ship a < 40-question
-    // exam when the pool can support 40.
+    // sub-topics in order and pull `count` questions per. The
+    // drawPreferringUnseen helper enforces (a) avoid questions seen
+    // in the last N exams when possible, and (b) avoid questions
+    // already picked in this tirage. If the classifier hasn't reached
+    // a sub-topic yet (no rows), the loop takes what's there and
+    // moves on — the theme-only fallback at the end tops up any
+    // missing slots so we never ship a < 40-question exam when the
+    // pool can support 40.
     const selectedQuestionIds: number[] = [];
     const selectedSet = new Set<number>();
+
+    // Combined exclusion: recently-seen + already-picked-in-this-exam.
+    // Rebuilt on each call so already-picked rows propagate forward.
+    const buildExclusion = () => {
+      if (selectedSet.size === 0) return new Set(recentlySeenIds);
+      const merged = new Set(recentlySeenIds);
+      for (const id of selectedSet) merged.add(id);
+      return merged;
+    };
 
     for (const theme of allThemes) {
       const themeId = theme.id;
@@ -166,23 +295,22 @@ export default async function examRoutes(app: FastifyInstance) {
       // ── Sub-topic-aware first pass ──
       if (subDist) {
         for (const [subtopic, count] of Object.entries(subDist)) {
-          const conditions = [
+          const conditions: SQL[] = [
             eq(questions.themeId, themeId),
             eq(questions.subtopic, subtopic),
           ];
           if (examTypeFilter) {
             conditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
           }
-          const rows = await db
-            .select({ id: questions.id })
-            .from(questions)
-            .where(and(...conditions))
-            .orderBy(sql`RANDOM()`)
-            .limit(count);
-          for (const r of rows) {
-            if (!selectedSet.has(r.id)) {
-              selectedSet.add(r.id);
-              selectedQuestionIds.push(r.id);
+          const ids = await drawPreferringUnseen(
+            conditions,
+            count,
+            buildExclusion(),
+          );
+          for (const id of ids) {
+            if (!selectedSet.has(id)) {
+              selectedSet.add(id);
+              selectedQuestionIds.push(id);
               themeDrawn++;
             }
           }
@@ -207,32 +335,23 @@ export default async function examRoutes(app: FastifyInstance) {
           ['situational', situMissing] as const,
         ]) {
           if (n <= 0) continue;
-          const conditions = [
+          const conditions: SQL[] = [
             eq(questions.themeId, themeId),
             eq(questions.type, type),
           ];
           if (examTypeFilter) {
             conditions.push(sql`${examTypeFilter} = ANY(${questions.examTypes})`);
           }
-          // Exclude already-selected ids so we don't double-pick rows
-          // already drawn in the sub-topic pass.
-          if (selectedSet.size > 0) {
-            conditions.push(
-              sql`${questions.id} != ALL(ARRAY[${sql.join(
-                Array.from(selectedSet).map((id) => sql`${id}`),
-                sql`, `,
-              )}]::int[])`,
-            );
-          }
-          const rows = await db
-            .select({ id: questions.id })
-            .from(questions)
-            .where(and(...conditions))
-            .orderBy(sql`RANDOM()`)
-            .limit(n);
-          for (const r of rows) {
-            selectedSet.add(r.id);
-            selectedQuestionIds.push(r.id);
+          const ids = await drawPreferringUnseen(
+            conditions,
+            n,
+            buildExclusion(),
+          );
+          for (const id of ids) {
+            if (!selectedSet.has(id)) {
+              selectedSet.add(id);
+              selectedQuestionIds.push(id);
+            }
           }
         }
       }
