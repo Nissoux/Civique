@@ -12,7 +12,7 @@
     "Circulaire Retailleau du 2 mai 2025 (NOR INTK2511758J)",
     "Décret n° 93-1362 du 30 décembre 1993 relatif aux déclarations de nationalité et aux décisions de naturalisation"
   ],
-  "total": 240,
+  "total": 248,
   "categories": {
     "motivations": "Motivations personnelles et parcours",
     "institutions": "Géographie, institutions et gouvernement",
@@ -2420,6 +2420,86 @@
       "translations": {
         "en": { "text": "What is UNESCO heritage in France?", "answer_hint": "France has 53 listed sites (one of the most represented countries). Examples: Mont-Saint-Michel, Loire Valley castles, Versailles, Banks of the Seine in Paris, Saint-Émilion vineyards." },
         "tr": { "text": "Fransa'daki UNESCO mirası nedir?", "answer_hint": "Fransa'nın 53 listelenmiş alanı var (en çok temsil edilen ülkelerden biri). Örnekler: Mont-Saint-Michel, Loire Vadisi şatoları, Versailles, Paris'te Seine kıyıları, Saint-Émilion bağları." }
+      }
+    },
+    {
+      "id": 241,
+      "category": "valeurs",
+      "text_fr": "La polygamie est-elle autorisée en France ?",
+      "answer_hint": "Non, la polygamie est strictement interdite en France (article 433-20 du Code pénal, peine jusqu'à 1 an de prison). Un seul mariage civil à la fois. Cette interdiction est un point sensible de l'entretien d'assimilation — répondre clairement « Non » sans nuance.",
+      "translations": {
+        "en": { "text": "Is polygamy allowed in France?", "answer_hint": "No, polygamy is strictly forbidden in France (article 433-20 of the Penal Code, up to 1 year imprisonment). Only one civil marriage at a time. This is a sensitive point of the assimilation interview — answer clearly « No » without nuance." },
+        "tr": { "text": "Fransa'da çok eşlilik yasal mı?", "answer_hint": "Hayır, Fransa'da çok eşlilik kesinlikle yasaktır (Ceza Kanunu madde 433-20, 1 yıla kadar hapis cezası). Bir seferde yalnızca bir medeni nikah. Bu, asimilasyon görüşmesinin hassas bir noktasıdır — net « Hayır » yanıtı verin." }
+      }
+    },
+    {
+      "id": 242,
+      "category": "valeurs",
+      "text_fr": "Que pensez-vous de la polygamie ?",
+      "answer_hint": "Question d'opinion personnelle, mais la réponse attendue est : « La polygamie est interdite par la loi française et je respecte cette interdiction ». Inutile de débattre — l'examinateur évalue votre acceptation des règles républicaines.",
+      "translations": {
+        "en": { "text": "What do you think about polygamy?", "answer_hint": "Personal opinion question, but the expected answer is: « Polygamy is forbidden by French law and I respect this prohibition ». No need to debate — the examiner is assessing your acceptance of republican rules." },
+        "tr": { "text": "Çok eşlilik hakkında ne düşünüyorsunuz?", "answer_hint": "Kişisel görüş sorusu, ancak beklenen cevap şu: « Çok eşlilik Fransız yasaları tarafından yasaktır ve bu yasağa saygı duyuyorum ». Tartışmaya gerek yok — sınav görevlisi cumhuriyet kurallarına saygınızı değerlendiriyor." }
+      }
+    },
+    {
+      "id": 243,
+      "category": "valeurs",
+      "text_fr": "Le port du voile religieux est-il autorisé partout en France ?",
+      "answer_hint": "Dans l'espace public général : oui (liberté religieuse, art. 1er Constitution). Dans certains lieux : non — école publique (loi du 15 mars 2004 sur les signes ostensibles), agents publics en service (laïcité de l'État), et dissimulation du visage interdite dans tout espace public (loi du 11 octobre 2010, art. 1).",
+      "translations": {
+        "en": { "text": "Is wearing a religious veil allowed everywhere in France?", "answer_hint": "In general public space: yes (religious freedom, Constitution art. 1). In certain places: no — public school (law of 15 March 2004 on ostentatious signs), public officials on duty (state secularism), and face concealment forbidden in all public spaces (law of 11 October 2010, art. 1)." },
+        "tr": { "text": "Fransa'da dini başörtüsü her yerde yasal mı?", "answer_hint": "Genel kamusal alanda: evet (din özgürlüğü, Anayasa madde 1). Bazı yerlerde: hayır — devlet okulu (15 Mart 2004 yasası), görevdeki kamu çalışanları (devlet laikliği) ve tüm kamusal alanda yüzün gizlenmesi yasak (11 Ekim 2010 yasası, madde 1)." }
+      }
+    },
+    {
+      "id": 244,
+      "category": "valeurs",
+      "text_fr": "Que dit la loi française sur les signes religieux à l'école publique ?",
+      "answer_hint": "Loi du 15 mars 2004 : interdiction des « signes ou tenues par lesquels les élèves manifestent ostensiblement une appartenance religieuse » (voile, kippa, grande croix). S'applique aux élèves, pas aux familles ni aux parents accompagnateurs (sauf en sortie scolaire, jurisprudence variable).",
+      "translations": {
+        "en": { "text": "What does French law say about religious symbols in public schools?", "answer_hint": "Law of 15 March 2004: prohibition of « signs or clothing by which students ostentatiously display religious affiliation » (veil, kippa, large cross). Applies to students, not families or accompanying parents (except on school trips, varying case law)." },
+        "tr": { "text": "Fransız yasaları devlet okullarında dini sembollere ne diyor?", "answer_hint": "15 Mart 2004 yasası: « öğrencilerin dini bağlılığı belirgin biçimde gösterdikleri işaret veya kıyafetlerin » (başörtüsü, kipa, büyük haç) yasaklanması. Öğrencilere uygulanır, ailelere veya refakatçi ebeveynlere değil (okul gezileri hariç, içtihat değişken)." }
+      }
+    },
+    {
+      "id": 245,
+      "category": "valeurs",
+      "text_fr": "Est-il légal de dissimuler son visage dans l'espace public ?",
+      "answer_hint": "Non. La loi du 11 octobre 2010 interdit la dissimulation du visage (burqa, niqab, cagoule) dans tout espace public (rue, transport, administration, commerce). Amende de 150 €. Exceptions : raisons de santé, professionnelles ou festives autorisées.",
+      "translations": {
+        "en": { "text": "Is it legal to cover one's face in public spaces?", "answer_hint": "No. The law of 11 October 2010 forbids face concealment (burqa, niqab, balaclava) in all public spaces (street, transport, administration, shops). €150 fine. Exceptions: authorized health, professional or festive reasons." },
+        "tr": { "text": "Kamusal alanda yüzü kapatmak yasal mı?", "answer_hint": "Hayır. 11 Ekim 2010 yasası tüm kamusal alanlarda (sokak, ulaşım, idare, dükkanlar) yüzün gizlenmesini (burka, nikap, başlık) yasaklar. 150 € para cezası. İstisnalar: izinli sağlık, mesleki veya bayram nedenleri." }
+      }
+    },
+    {
+      "id": 246,
+      "category": "valeurs",
+      "text_fr": "Le mariage forcé est-il une infraction en France ?",
+      "answer_hint": "Oui. Le mariage forcé est un crime. Tromper une personne ou la contraindre à se marier expose à 3 ans de prison et 45 000 € d'amende (loi du 9 juillet 2010). Le consentement libre et éclairé des deux époux est obligatoire devant l'officier d'état civil. Numéro d'aide : 3919.",
+      "translations": {
+        "en": { "text": "Is forced marriage a criminal offense in France?", "answer_hint": "Yes. Forced marriage is a crime. Deceiving or coercing a person into marriage carries up to 3 years imprisonment and a €45,000 fine (law of 9 July 2010). Free and informed consent of both spouses is mandatory before the civil registrar. Helpline: 3919." },
+        "tr": { "text": "Zorla evlilik Fransa'da suç mudur?", "answer_hint": "Evet. Zorla evlilik bir suçtur. Bir kişiyi evlenmeye kandırmak veya zorlamak 3 yıla kadar hapis ve 45.000 € para cezası gerektirir (9 Temmuz 2010 yasası). Her iki eşin de medeni nikah memuru önünde özgür ve bilinçli rızası zorunludur. Yardım hattı: 3919." }
+      }
+    },
+    {
+      "id": 247,
+      "category": "valeurs",
+      "text_fr": "Quel est l'âge légal du mariage en France ?",
+      "answer_hint": "18 ans pour les deux époux depuis la loi du 4 avril 2006 (avant : 18 ans pour l'homme, 15 pour la femme, supprimé). Pas de dispense possible sauf motif grave examiné par le procureur de la République. Aucune tolérance pour les mariages d'enfants à l'étranger non reconnus en droit français.",
+      "translations": {
+        "en": { "text": "What is the legal age of marriage in France?", "answer_hint": "18 years old for both spouses since the law of 4 April 2006 (previously: 18 for men, 15 for women, abolished). No dispensation possible except for serious grounds examined by the public prosecutor. Zero tolerance for child marriages abroad — not recognized under French law." },
+        "tr": { "text": "Fransa'da yasal evlilik yaşı nedir?", "answer_hint": "4 Nisan 2006 yasasından bu yana her iki eş için de 18 yaş (önce: erkek için 18, kadın için 15, kaldırıldı). Cumhuriyet savcısı tarafından incelenen ciddi gerekçeler dışında muafiyet yok. Yurtdışındaki çocuk evliliklerine sıfır tolerans — Fransız hukukunda tanınmaz." }
+      }
+    },
+    {
+      "id": 248,
+      "category": "valeurs",
+      "text_fr": "L'égalité entre les hommes et les femmes est-elle inscrite dans la loi française ?",
+      "answer_hint": "Oui, à plusieurs niveaux : Préambule de la Constitution de 1946 (« la loi garantit à la femme, dans tous les domaines, des droits égaux à ceux de l'homme »), article 1 de la Constitution de 1958, loi Roudy (1983) sur l'égalité professionnelle, loi du 4 août 2014. Une obligation, pas une opinion.",
+      "translations": {
+        "en": { "text": "Is equality between men and women enshrined in French law?", "answer_hint": "Yes, at multiple levels: Preamble to the 1946 Constitution (« the law guarantees women equal rights to men in all fields »), article 1 of the 1958 Constitution, Roudy law (1983) on professional equality, law of 4 August 2014. An obligation, not an opinion." },
+        "tr": { "text": "Kadın ve erkek eşitliği Fransız yasalarında yer alıyor mu?", "answer_hint": "Evet, birden çok düzeyde: 1946 Anayasası'nın Başlangıç bölümü (« yasa kadına tüm alanlarda erkekle eşit haklar garanti eder »), 1958 Anayasası madde 1, Roudy yasası (1983) mesleki eşitlik üzerine, 4 Ağustos 2014 yasası. Bir zorunluluk, görüş değil." }
       }
     }
   ]

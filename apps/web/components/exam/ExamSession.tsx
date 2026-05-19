@@ -399,13 +399,20 @@ function NavigationBar({
       </button>
 
       {!isLast ? (
+        // Suivante is always enabled — the user may skip a question and
+        // come back via the grid. Unanswered questions are tracked in
+        // the answers map; the grid shows them in a distinct color and
+        // the finish-confirm step warns about unanswered ones. Disabling
+        // here used to lock skim-style reading (read all 40 first, then
+        // answer), which is how a lot of real candidates work.
         <button
           type="button"
           onClick={onNext}
-          disabled={!hasAnswered}
-          className="btn-primary !justify-center sm:flex-1 disabled:opacity-40 disabled:cursor-not-allowed"
+          className={`btn-primary !justify-center sm:flex-1 ${
+            hasAnswered ? '' : '!bg-bone-deep !text-aubergine !border-aubergine/30'
+          }`}
         >
-          Suivante
+          {hasAnswered ? 'Suivante' : 'Passer'}
           <svg
             className="h-5 w-5"
             fill="none"

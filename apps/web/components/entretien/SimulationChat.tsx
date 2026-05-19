@@ -54,6 +54,7 @@ export function SimulationChat({ questions, categories }: Props) {
   const [draft, setDraft] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [showHint, setShowHint] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const transcriptEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -116,9 +117,21 @@ export function SimulationChat({ questions, categories }: Props) {
   }
 
   function resetSession() {
-    if (turns.length > 0 && !confirm('Réinitialiser la simulation ? Vos réponses précédentes seront effacées.')) {
+    // Two-step "press again to confirm" pattern instead of the native
+    // confirm() dialog: respects the design system (vs a Chrome chrome
+    // dialog), doesn't block the event loop, works with screen readers
+    // via aria-live, and is trivially internationalisable later.
+    if (turns.length === 0) {
+      setConfirmReset(false);
       return;
     }
+    if (!confirmReset) {
+      setConfirmReset(true);
+      // Auto-cancel the confirm state after 4 s so it doesn't linger.
+      setTimeout(() => setConfirmReset(false), 4000);
+      return;
+    }
+    setConfirmReset(false);
     setTurns([]);
     setShowHint(false);
     setDraft('');
@@ -256,9 +269,10 @@ export function SimulationChat({ questions, categories }: Props) {
                 <button
                   type="button"
                   onClick={resetSession}
-                  className="btn-secondary text-sm"
+                  aria-live="polite"
+                  className={`btn-secondary text-sm ${confirmReset ? '!border-fr-red !text-fr-red' : ''}`}
                 >
-                  Recommencer
+                  {confirmReset ? 'Confirmer la remise à zéro' : 'Recommencer'}
                 </button>
               </div>
             )}
