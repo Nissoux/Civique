@@ -19,10 +19,35 @@ import learningRoutes from './routes/learning/index.js';
 
 async function main() {
   const app = Fastify({
-    logger: true,
+    logger: {
+      // Redact obviously sensitive fields from request/response logs.
+      // Without this, a debug-level log of a /login POST would dump the
+      // user's password into PM2 logs (and any aggregator we plug in
+      // later, like Logflare).
+      redact: {
+        paths: [
+          'req.headers.authorization',
+          'req.headers.cookie',
+          'req.headers["x-api-key"]',
+          'body.password',
+          'body.newPassword',
+          'body.currentPassword',
+          'body.code',
+          'body.token',
+        ],
+        censor: '[redacted]',
+      },
+    },
   });
 
-  // Rate limiting: 100 requests per minute per IP
+  // TODO(perf): register @fastify/compress for gzip+br on JSON
+  // responses (~3-5× bandwidth gain on /questions, /exams). Deferred
+  // because the lockfile couldn't be updated in the same change; add
+  // the dep + register in a separate commit.
+
+  // Rate limiting: 100 requests per minute per IP (global default).
+  // Specific routes (admin, payment, auth) override this with tighter
+  // per-route config — see their config: { rateLimit: ... } blocks.
   await app.register(rateLimit, {
     max: 100,
     timeWindow: '1 minute',

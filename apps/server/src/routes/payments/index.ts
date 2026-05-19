@@ -699,17 +699,36 @@ export default async function paymentRoutes(app: FastifyInstance) {
     adminSecret: z.string(),
   });
 
-  app.post('/admin/create-code', async (request, reply) => {
-    const body = createCodeSchema.parse(request.body);
+  app.post(
+    '/admin/create-code',
+    {
+      // Tight rate limit on admin: 5 attempts / 15 minutes / IP.
+      // Brute-forcing ADMIN_SECRET was previously throttled only by
+      // the global 100/min limit — way too generous.
+      config: {
+        rateLimit: {
+          max: 5,
+          timeWindow: '15 minutes',
+        },
+      },
+    },
+    async (request, reply) => {
+      const body = createCodeSchema.parse(request.body);
 
-    // Verify admin secret
-    const adminSecret = process.env.ADMIN_SECRET;
-    if (!adminSecret) {
-      return reply.status(503).send({ error: 'Admin endpoint not configured' });
-    }
-    if (body.adminSecret !== adminSecret) {
-      return reply.status(403).send({ error: 'Accès refusé' });
-    }
+      // Verify admin secret (constant-time compare).
+      const adminSecret = process.env.ADMIN_SECRET;
+      if (!adminSecret) {
+        return reply.status(503).send({ error: 'Admin endpoint not configured' });
+      }
+      const provided = Buffer.from(body.adminSecret);
+      const expected = Buffer.from(adminSecret);
+      if (
+        provided.length !== expected.length ||
+        !crypto.timingSafeEqual(provided, expected)
+      ) {
+        app.log.warn({ ip: request.ip }, 'Admin secret mismatch on /admin/create-code');
+        return reply.status(403).send({ error: 'Accès refusé' });
+      }
 
     const durationMap: Record<string, number | null> = {
       lifetime: null,
@@ -718,14 +737,15 @@ export default async function paymentRoutes(app: FastifyInstance) {
       '365days': 365,
     };
 
-    const [created] = await db.insert(promoCodes).values({
-      code: body.code,
-      type: body.type,
-      durationDays: durationMap[body.type] ?? null,
-      maxUses: body.maxUses,
-      expiresAt: body.expiresAt ? new Date(body.expiresAt) : null,
-    }).returning();
+      const [created] = await db.insert(promoCodes).values({
+        code: body.code,
+        type: body.type,
+        durationDays: durationMap[body.type] ?? null,
+        maxUses: body.maxUses,
+        expiresAt: body.expiresAt ? new Date(body.expiresAt) : null,
+      }).returning();
 
-    return reply.status(201).send({ data: created });
-  });
+      return reply.status(201).send({ data: created });
+    },
+  );
 }
