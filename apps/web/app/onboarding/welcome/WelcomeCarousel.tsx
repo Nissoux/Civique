@@ -28,7 +28,7 @@ const SLIDES: Slide[] = [
     eyebrow: '— Entraînez-vous',
     title: (
       <>
-        611 questions, examens blancs et <span className="display-italic text-saffron">6 langues</span> disponibles.
+        611 questions QCM + 240 d'entretien et <span className="display-italic text-saffron">8 langues</span> disponibles.
       </>
     ),
     subtitle: "Pratiquez par thème, simulez l'examen officiel, traduisez à la volée.",

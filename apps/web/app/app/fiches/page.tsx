@@ -52,7 +52,7 @@ export default async function FichesPage() {
           </h1>
           <p className="text-sm sm:text-base text-bone/75 max-w-xl">
             Des fiches courtes pour réviser les notions clés à votre rythme,
-            disponibles en six langues.
+            disponibles en huit langues.
           </p>
 
           <div className="mt-6 flex items-center gap-3 flex-wrap">

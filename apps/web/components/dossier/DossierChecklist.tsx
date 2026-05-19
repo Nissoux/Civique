@@ -178,7 +178,12 @@ export function DossierChecklist({ initialExamType }: Props) {
             </h2>
             <ul className="space-y-2.5">
               {section.documents.map((doc) => {
-                const key = `${examType}:${situationId}:${doc.label}`;
+                // The localStorage key uses a stable slug of the label
+                // rather than the full label text. Reformulating the
+                // label (typo fix, copy edit) no longer silently
+                // invalidates the user's checked state — only meaningful
+                // semantic changes will, which is the desired behaviour.
+                const key = `${examType}:${situationId}:${slugifyLabel(doc.label)}`;
                 const isChecked = checked.has(key);
                 return (
                   <li
@@ -305,6 +310,32 @@ function SelectorPill({
       {label}
     </button>
   );
+}
+
+/**
+ * Stable identifier for a checklist document, derived from its label.
+ *
+ * Picks the first ~6 "content" words (length >= 3, no diacritics, no
+ * punctuation) and joins them. The output stays the same for typo
+ * fixes and minor wording tweaks; it changes only when the substance
+ * of the doc shifts enough to alter its leading words — which is
+ * exactly when invalidating the user's tick makes sense.
+ *
+ * Not cryptographic. Not collision-resistant on a 50k-doc corpus —
+ * but our corpus is <100 docs, so collisions are inspected manually
+ * if they occur.
+ */
+function slugifyLabel(label: string): string {
+  return label
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/['']/g, ' ')
+    .replace(/[^\p{L}\p{N}\s]+/gu, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length >= 3)
+    .slice(0, 6)
+    .join('-');
 }
 
 function loadChecks(): Set<string> {

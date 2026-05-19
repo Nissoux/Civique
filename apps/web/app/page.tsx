@@ -91,9 +91,11 @@ export default async function HomePage() {
       <header className="border-b border-aubergine/15">
         <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
           <Logo />
-          <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-9 text-[0.95rem] font-medium">
+          <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-7 lg:gap-9 text-[0.95rem] font-medium">
             <a href="#programme" className="hover:text-terracotta transition-colors">Le programme</a>
-            <a href="#methode" className="hover:text-terracotta transition-colors">Notre méthode</a>
+            <a href="#methode" className="hover:text-terracotta transition-colors">Méthode</a>
+            <Link href="/pourquoi-civique" className="hover:text-terracotta transition-colors">Pourquoi Civique</Link>
+            <Link href="/partenariats" className="hover:text-terracotta transition-colors hidden lg:inline">Partenariats</Link>
             {user ? (
               <Link href="/app" className="btn-primary !px-5 !py-2 text-sm">
                 Mon tableau de bord →
@@ -233,7 +235,7 @@ export default async function HomePage() {
               <div>
                 <p className="display-italic text-[1.5rem] mb-2 text-saffron">+ 200 fiches</p>
                 <p className="text-sm leading-[1.55] text-bone/85 mb-4">
-                  pédagogiques traduites dans les 6 langues d'accompagnement
+                  pédagogiques traduites dans les 8 langues d'accompagnement
                 </p>
                 <p className="text-saffron font-semibold text-sm">à découvrir →</p>
               </div>

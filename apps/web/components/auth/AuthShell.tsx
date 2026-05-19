@@ -56,11 +56,11 @@ export function AuthShell({
               <ul className="space-y-2.5 text-sm text-bone/85">
                 <li className="flex items-baseline gap-3">
                   <span className="text-saffron font-bold">·</span>
-                  <span>5 thèmes officiels · 611 questions</span>
+                  <span>5 thèmes officiels · 851 questions (611 QCM + 240 entretien)</span>
                 </li>
                 <li className="flex items-baseline gap-3">
                   <span className="text-saffron font-bold">·</span>
-                  <span>6 langues d'accompagnement</span>
+                  <span>8 langues d'accompagnement</span>
                 </li>
                 <li className="flex items-baseline gap-3">
                   <span className="text-saffron font-bold">·</span>

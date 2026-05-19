@@ -181,10 +181,12 @@ export default async function SubscriptionPage({ searchParams }: PageProps) {
               </div>
 
               <p className="text-xs text-ink-mute mt-5 leading-relaxed max-w-3xl">
-                Le paiement est sécurisé par Stripe. Pour les formules
-                hebdomadaire et mensuelle, l&apos;abonnement se renouvelle
-                automatiquement à la fin de chaque période. Vous pouvez résilier
-                à tout moment depuis l&apos;e-mail de confirmation Stripe.
+                Le paiement est sécurisé par Stripe. Les trois formules
+                (hebdomadaire, mensuelle et 6 mois) se{' '}
+                <strong>renouvellent automatiquement</strong> à la fin de
+                chaque période. Vous pouvez résilier à tout moment depuis
+                l&apos;e-mail de confirmation Stripe ou en nous écrivant à
+                support@integrafle.fr.
               </p>
             </section>
 
@@ -215,19 +217,19 @@ export default async function SubscriptionPage({ searchParams }: PageProps) {
             Pour les formules à renouvellement automatique, la résiliation
             doit se faire au moins 24 heures avant la fin de la période en
             cours. Consultez notre{' '}
-            <a
-              href="https://api.integrafle.fr/privacy"
+            <Link
+              href="/privacy"
               className="underline-wavy text-terracotta hover:text-aubergine"
             >
               politique de confidentialité
-            </a>{' '}
+            </Link>{' '}
             et nos{' '}
-            <a
-              href="https://api.integrafle.fr/terms"
+            <Link
+              href="/terms"
               className="underline-wavy text-terracotta hover:text-aubergine"
             >
               conditions d&apos;utilisation
-            </a>
+            </Link>
             .
           </p>
         </section>

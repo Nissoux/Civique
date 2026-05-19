@@ -21,7 +21,7 @@ const karla = Karla({
 export const metadata: Metadata = {
   title: 'Civique — Préparez votre examen civique français',
   description:
-    "Civique vous accompagne dans la préparation de l'examen civique français : pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité. 5 thèmes officiels, 611 questions, 6 langues.",
+    "Civique vous accompagne dans la préparation de l'examen civique français : pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité. 5 thèmes officiels, 611 questions QCM + 240 questions d'entretien, 8 langues.",
   metadataBase: new URL('https://civique.integrafle.fr'),
   // Favicons are emitted automatically from `app/icon.svg` + `app/apple-icon.png`
   // via Next.js' file-based metadata convention — no explicit icons block here.

@@ -6,7 +6,7 @@ import { env } from '@/lib/env';
 export const metadata: Metadata = {
   title: 'Pourquoi Civique — la meilleure préparation à l\'examen civique 2026',
   description:
-    "Comparatif honnête entre Civique et les autres ressources de préparation à l'examen civique français : sites officiels, PDF de préfectures, MOOCs, applications. Pool officiel du Ministère de l'Intérieur, 6 langues, SRS adaptative.",
+    "Comparatif honnête entre Civique et les autres ressources de préparation à l'examen civique français : sites officiels, PDF de préfectures, MOOCs, applications. Pool officiel du Ministère de l'Intérieur, 8 langues, SRS adaptative.",
   alternates: { canonical: '/pourquoi-civique' },
 };
 
@@ -91,7 +91,7 @@ export default async function PourquoiPage() {
             <strong>
               une préparation alignée sur l'arrêté du 10 octobre 2025
             </strong>
-            , adaptée à votre rythme, traduite dans six langues, et qui apprend
+            , adaptée à votre rythme, traduite dans huit langues, et qui apprend
             de vos erreurs.
           </p>
           {coverage ? (
@@ -281,7 +281,7 @@ function ComparativeTable() {
     { feature: 'Questions interactives avec correction', civique: true, officielle: false, pdf: false, autres: 'Oui (limité)' },
     { feature: 'Révisions espacées (SRS, Anki-style)', civique: true, officielle: false, pdf: false, autres: false },
     { feature: 'Simulation d\'examen chronométrée', civique: true, officielle: false, pdf: false, autres: 'Parfois' },
-    { feature: '6 langues d\'accompagnement (FR/AR/FA/PT/ES/HI…)', civique: '8 langues', officielle: 'FR uniquement', pdf: 'FR uniquement', autres: 'EN parfois' },
+    { feature: '8 langues d\'accompagnement (FR/AR/FA/PT/ES/HI/EN/TR)', civique: '8 langues', officielle: 'FR uniquement', pdf: 'FR uniquement', autres: 'EN parfois' },
     { feature: 'Mode audio (TTS) gratuit', civique: true, officielle: false, pdf: false, autres: 'Payant' },
     { feature: 'Charte des droits et devoirs intégrée et navigable', civique: true, officielle: 'PDF', pdf: 'PDF', autres: false },
     { feature: 'Suivi de progression personnalisé', civique: true, officielle: false, pdf: false, autres: 'Basique' },
