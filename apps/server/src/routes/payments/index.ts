@@ -346,24 +346,98 @@ export default async function paymentRoutes(app: FastifyInstance) {
   });
 
   // ── POST /webhook/revenuecat ────────────────────────────
-  // RevenueCat webhook handler (no auth - RevenueCat calls this directly)
+  // RevenueCat webhook handler.
+  //
+  // SECURITY (P0 hardening, 2026-05-19)
+  // -----------------------------------
+  // Previously this endpoint accepted ANY POST and upgraded the
+  // `app_user_id` it found in the body. Anyone could grant themselves
+  // (or any user) premium for any duration by curling the endpoint —
+  // verified exploit in the security audit. Now we require the shared
+  // secret RevenueCat sends as the `Authorization` header. The secret
+  // must be configured in:
+  //   - RevenueCat Dashboard → Integrations → Webhooks → Auth header
+  //   - VPS env: `REVENUECAT_WEBHOOK_SECRET=<same-value>`
+  //
+  // If the env var is unset we FAIL CLOSED (401) rather than fail open.
+  // Better to break premium upgrades than to leak revenue silently.
+  //
+  // We also validate the `app_user_id` actually exists before updating
+  // and short-circuit on unknown event types. Replay protection is
+  // event-id-based — duplicates are silently no-op'd.
   app.post('/webhook/revenuecat', async (request, reply) => {
+    const expectedSecret = process.env.REVENUECAT_WEBHOOK_SECRET;
+    if (!expectedSecret) {
+      app.log.error('RevenueCat webhook received but REVENUECAT_WEBHOOK_SECRET is not set — refusing.');
+      return reply.status(503).send({ error: 'Webhook not configured' });
+    }
+
+    // RevenueCat sends "Authorization: Bearer <secret>" — accept both
+    // forms ("<secret>" raw or "Bearer <secret>") to be forgiving of
+    // dashboard misconfig.
+    const authHeader = request.headers['authorization'];
+    const provided =
+      typeof authHeader === 'string'
+        ? authHeader.replace(/^Bearer\s+/i, '').trim()
+        : '';
+
+    // Constant-time compare to defeat timing oracles.
+    const a = Buffer.from(provided);
+    const b = Buffer.from(expectedSecret);
+    if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+      app.log.warn({ ip: request.ip }, 'RevenueCat webhook auth mismatch');
+      return reply.status(401).send({ error: 'Invalid signature' });
+    }
+
     const event = request.body as {
-      event: {
-        type: string;
+      event?: {
+        id?: string;
+        type?: string;
         app_user_id?: string;
         expiration_at_ms?: number;
       };
     };
 
-    app.log.info({ eventType: event.event?.type }, 'RevenueCat webhook received');
-
-    const rcEvent = event.event;
-    if (!rcEvent?.app_user_id) {
+    const rcEvent = event?.event;
+    if (!rcEvent?.app_user_id || !rcEvent.type) {
+      app.log.warn('RevenueCat webhook payload missing app_user_id or type');
       return reply.status(200).send({ received: true });
     }
 
+    app.log.info(
+      { eventType: rcEvent.type, eventId: rcEvent.id },
+      'RevenueCat webhook received',
+    );
+
     const userId = rcEvent.app_user_id;
+
+    // Replay protection: skip if we've already processed this event id.
+    // Reuse the existing `stripe_events_processed` table (it's just an
+    // idempotency journal, the column name is historical). Vendor is
+    // prefixed in the id to avoid collisions with real Stripe events.
+    if (rcEvent.id) {
+      const journalKey = `rc_${rcEvent.id}`;
+      try {
+        await db
+          .insert(stripeEventsProcessed)
+          .values({ eventId: journalKey });
+      } catch {
+        // Duplicate key = already processed.
+        app.log.info({ eventId: rcEvent.id }, 'RevenueCat event already processed, skipping');
+        return reply.status(200).send({ received: true, duplicate: true });
+      }
+    }
+
+    // Validate the user exists before updating — silently ignoring a
+    // bad app_user_id was masking the exploit during the audit.
+    const target = await db.query.users.findFirst({
+      where: eq(users.id, userId),
+      columns: { id: true },
+    });
+    if (!target) {
+      app.log.warn({ userId }, 'RevenueCat webhook: unknown app_user_id');
+      return reply.status(200).send({ received: true, ignored: 'unknown_user' });
+    }
 
     switch (rcEvent.type) {
       case 'INITIAL_PURCHASE':
