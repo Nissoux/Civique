@@ -5,7 +5,7 @@ import { SimulationChat } from '@/components/entretien/SimulationChat';
 import entretienData from '@/lib/data/entretien.json';
 
 export const metadata = {
-  title: "Simulation d'entretien d'assimilation — Civique",
+  title: "Simulation d'entretien d'assimilation",
   description:
     "Entraînez-vous à l'entretien d'assimilation comme à la préfecture. 240 questions types, scoring local de votre réponse, modèle complet révélé après chaque tour. Sans aucun envoi vers un serveur.",
 };

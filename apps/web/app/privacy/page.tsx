@@ -4,7 +4,8 @@ import { Logo } from '@/components/brand/Logo';
 import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialité — Civique',
+  // Layout adds " · Civique" via title.template.
+  title: 'Politique de confidentialité',
   description:
     'Comment Civique collecte, utilise et protège vos données personnelles. Vos droits RGPD, durées de conservation et engagements.',
   alternates: { canonical: '/privacy' },

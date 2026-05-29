@@ -4,7 +4,8 @@ import { Logo } from '@/components/brand/Logo';
 import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 
 export const metadata: Metadata = {
-  title: "Conditions d'utilisation — Civique",
+  // Layout adds " · Civique" via title.template.
+  title: "Conditions d'utilisation",
   description:
     "Les conditions d'utilisation du service Civique : création de compte, abonnement, résiliation, propriété intellectuelle et loi applicable.",
   alternates: { canonical: '/terms' },

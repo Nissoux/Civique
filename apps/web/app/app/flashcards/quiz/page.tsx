@@ -7,7 +7,7 @@ import { getCurrentLang } from '@/lib/server/lang';
 import { FlashcardQuizSession } from '@/components/flashcard/FlashcardQuizSession';
 
 export const metadata = {
-  title: 'Quiz révision — Civique',
+  title: 'Quiz révision',
 };
 
 export const dynamic = 'force-dynamic';

@@ -6,7 +6,7 @@ import { DossierChecklist } from '@/components/dossier/DossierChecklist';
 import type { ExamTypeCode } from '@/lib/data/dossier';
 
 export const metadata = {
-  title: 'Vérifier mon dossier — Civique',
+  title: 'Vérifier mon dossier',
   description:
     "Checklist personnalisée des justificatifs à préparer pour votre demande de carte de séjour pluriannuelle, carte de résident ou naturalisation française. Cochez vos pièces au fur et à mesure.",
 };

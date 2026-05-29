@@ -4,10 +4,27 @@ import { Logo } from '@/components/brand/Logo';
 import { env } from '@/lib/env';
 
 export const metadata: Metadata = {
-  title: 'Pourquoi Civique — la meilleure préparation à l\'examen civique 2026',
+  // Was 67 ch (truncated in SERP). Layout's title.template adds
+  // " · Civique" — keep the bare phrase here for natural reading.
+  title: { absolute: "Pourquoi choisir Civique pour l'examen civique 2026" },
   description:
-    "Comparatif honnête entre Civique et les autres ressources de préparation à l'examen civique français : sites officiels, PDF de préfectures, MOOCs, applications. Pool officiel du Ministère de l'Intérieur, 8 langues, SRS adaptative.",
+    "Comparatif Civique vs sites officiels, PDF préfecture, MOOCs : pool officiel du Ministère, 8 langues, révisions adaptatives SM-2.",
   alternates: { canonical: '/pourquoi-civique' },
+  openGraph: {
+    title: 'Pourquoi Civique pour votre examen civique 2026',
+    description:
+      "La préparation indépendante la plus rigoureuse — pool officiel, 8 langues, méthode adaptative.",
+    url: '/pourquoi-civique',
+    siteName: 'Civique',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pourquoi Civique pour votre examen civique 2026',
+    description:
+      "Comparatif rigoureux face aux sites officiels et aux MOOCs. Pool ministériel, 8 langues, SM-2.",
+  },
 };
 
 interface Coverage {
@@ -81,8 +98,8 @@ export default async function PourquoiPage() {
         <section className="max-w-3xl">
           <p className="eyebrow mb-4">— Pourquoi nous choisir</p>
           <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04] mb-6 font-medium tracking-tight">
-            La préparation la plus<br />
-            <span className="display-italic text-terracotta">rigoureuse</span> et la plus humaine.
+            La préparation à l'<span className="display-italic text-terracotta">examen civique</span><br />
+            la plus rigoureuse et la plus humaine.
           </h1>
           <p className="text-ink-mute text-[1.1rem] leading-[1.65] mb-4">
             Beaucoup de ressources couvrent l'examen civique : sites officiels,
@@ -120,7 +137,7 @@ export default async function PourquoiPage() {
           />
           <Pillar
             icon="🌐"
-            title="Six langues d'accompagnement"
+            title="Huit langues d'accompagnement"
             text="Français, arabe, persan, portugais, espagnol, hindi, anglais et turc : fiches, explications et indices traduits par des relecteurs natifs."
           />
           <Pillar

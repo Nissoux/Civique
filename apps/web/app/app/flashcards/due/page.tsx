@@ -6,7 +6,7 @@ import { getCurrentLang } from '@/lib/server/lang';
 import { fetchDueIds } from '@/lib/actions/srs';
 
 export const metadata = {
-  title: 'Révisions du jour — Civique',
+  title: 'Révisions du jour',
   description:
     "Vos cartes mémo programmées pour aujourd'hui par l'algorithme de répétition espacée.",
 };

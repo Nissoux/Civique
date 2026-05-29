@@ -4,7 +4,7 @@ import { getCurrentUser } from '@/lib/server/me';
 import { getCurrentLang } from '@/lib/server/lang';
 
 export const metadata = {
-  title: 'Glossaire civique — Civique',
+  title: 'Glossaire civique',
   description:
     "Tous les termes essentiels de l'éducation civique : République, laïcité, institutions, droits, vie sociale.",
 };

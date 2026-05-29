@@ -1,12 +1,29 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Logo } from '@/components/brand/Logo';
 import { ReadAloudButton } from '@/components/audio/ReadAloudButton';
 import content from './content.json';
 
-export const metadata = {
-  title: 'Livret du Citoyen — Civique',
+export const metadata: Metadata = {
+  title: 'Livret du Citoyen — synthèse navigable',
   description:
-    "Synthèse navigable du Livret du Citoyen, document de référence du Ministère de l'Intérieur pour les candidats à la naturalisation française. Cinq thèmes, repères chiffrés, dates clés.",
+    "Le Livret du Citoyen du Ministère de l'Intérieur (référence naturalisation française) en version navigable : 5 thèmes, repères chiffrés, dates clés.",
+  alternates: { canonical: '/livret-du-citoyen' },
+  openGraph: {
+    title: 'Livret du Citoyen — synthèse navigable | Civique',
+    description:
+      "Le document officiel du Ministère mis en forme pour la lecture : 5 thèmes, repères chiffrés, dates clés.",
+    url: '/livret-du-citoyen',
+    siteName: 'Civique',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Livret du Citoyen — synthèse navigable',
+    description:
+      "Document de référence Ministère de l'Intérieur, naturalisation française.",
+  },
 };
 
 interface BaseBlock {

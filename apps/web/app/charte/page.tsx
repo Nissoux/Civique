@@ -1,11 +1,28 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Logo } from '@/components/brand/Logo';
 import { ReadAloudButton } from '@/components/audio/ReadAloudButton';
 
-export const metadata = {
-  title: 'Charte des droits et devoirs du citoyen français — Civique',
+export const metadata: Metadata = {
+  title: 'Charte des droits et devoirs du citoyen français',
   description:
-    'Le texte intégral de la Charte des droits et devoirs du citoyen français (décret n° 2012-127 du 30 janvier 2012) — document signé par tout candidat à la naturalisation française.',
+    "Texte intégral de la Charte des droits et devoirs du citoyen français (décret n° 2012-127), signée par tout candidat à la naturalisation française.",
+  alternates: { canonical: '/charte' },
+  openGraph: {
+    title: 'Charte des droits et devoirs du citoyen français | Civique',
+    description:
+      "Document officiel signé à la naturalisation, en version navigable et lecture audio.",
+    url: '/charte',
+    siteName: 'Civique',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Charte du citoyen français — décret 2012-127',
+    description:
+      "Texte intégral signé à la naturalisation. Version navigable + audio.",
+  },
 };
 
 /**

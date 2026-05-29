@@ -4,9 +4,12 @@ import { Logo } from '@/components/brand/Logo';
 import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 
 export const metadata: Metadata = {
-  title: 'Mentions légales — Civique',
+  title: 'Mentions légales',
   description:
     "Informations légales relatives à Civique : éditeur, hébergeur, contact, propriété intellectuelle et loi applicable.",
+  alternates: { canonical: '/mentions-legales' },
+  // Legal pages aren't share-bait — skip OG/Twitter overrides; they
+  // inherit the layout root's defaults.
 };
 
 const LAST_UPDATED = '11 mai 2026';

@@ -4,7 +4,7 @@ import { AuthShell } from '@/components/auth/AuthShell';
 import { ForgotPasswordForm } from './ForgotPasswordForm';
 
 export const metadata: Metadata = {
-  title: 'Mot de passe oublié — Civique',
+  title: 'Mot de passe oublié',
   description:
     "Réinitialisez votre mot de passe Civique. Nous vous enverrons un code à 8 caractères pour récupérer l'accès à votre compte.",
   alternates: { canonical: '/forgot-password' },

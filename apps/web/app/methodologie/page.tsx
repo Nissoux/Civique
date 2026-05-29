@@ -1,11 +1,29 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { Logo } from '@/components/brand/Logo';
 import { env } from '@/lib/env';
 
-export const metadata = {
-  title: 'Méthodologie — Civique',
+export const metadata: Metadata = {
+  // Layout adds " · Civique" via title.template — don't repeat it here.
+  title: "Méthodologie — préparer l'examen civique 2026",
   description:
-    "Comment Civique prépare l'examen civique 2026 conformément à l'arrêté du 10 octobre 2025 : pool officiel du Ministère de l'Intérieur, distribution prescrite 11/6/11/8/4, mises en situation, et pédagogie sous-jacente.",
+    "Pool officiel du Ministère, distribution prescrite 11/6/11/8/4, mises en situation, pédagogie : la méthode Civique pour l'examen civique 2026.",
+  alternates: { canonical: '/methodologie' },
+  openGraph: {
+    title: 'Méthodologie Civique — examen civique 2026',
+    description:
+      "La méthode rigoureuse derrière Civique : pool officiel, distribution prescrite, pédagogie.",
+    url: '/methodologie',
+    siteName: 'Civique',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Méthodologie Civique — examen civique 2026',
+    description:
+      "Pool officiel, distribution arrêté 10 oct. 2025, pédagogie sous-jacente.",
+  },
 };
 
 interface Coverage {
@@ -57,8 +75,8 @@ export default async function MethodologiePage() {
       <article className="max-w-3xl mx-auto px-6 sm:px-10 py-16 sm:py-20">
         <p className="eyebrow mb-4">— Notre méthodologie</p>
         <h1 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.05] mb-6 font-medium tracking-tight">
-          Comment Civique<br />
-          <span className="display-italic text-terracotta">prépare</span> l'examen 2026.
+          Comment Civique prépare<br />
+          l'<span className="display-italic text-terracotta">examen civique</span> 2026.
         </h1>
         <p className="text-ink-mute text-[1.05rem] leading-[1.6] mb-12">
           Civique est aligné sur le cadre officiel défini par l'État français pour l'examen

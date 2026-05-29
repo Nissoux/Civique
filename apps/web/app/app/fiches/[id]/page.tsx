@@ -14,17 +14,17 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps) {
   const { id } = await params;
   const numericId = Number(id);
-  if (!Number.isFinite(numericId)) return { title: 'Fiche — Civique' };
+  if (!Number.isFinite(numericId)) return { title: 'Fiche' };
 
   try {
     const fiche = await getFiche(numericId);
-    if (!fiche) return { title: 'Fiche introuvable — Civique' };
+    if (!fiche) return { title: 'Fiche introuvable' };
     return {
       title: `${fiche.titleFr} — Fiche mémo`,
       description: (fiche.contentFr || '').slice(0, 160),
     };
   } catch {
-    return { title: 'Fiche — Civique' };
+    return { title: 'Fiche' };
   }
 }
 

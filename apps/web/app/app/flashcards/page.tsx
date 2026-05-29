@@ -4,7 +4,7 @@ import { ThemeSelector } from '@/components/flashcard/ThemeSelector';
 import { fetchSrsStats } from '@/lib/actions/srs';
 
 export const metadata = {
-  title: 'Révisions — Civique',
+  title: 'Révisions',
   description:
     'Cartes mémo et quiz de révision pour préparer votre examen civique.',
 };

@@ -8,19 +8,31 @@ import { WovenThreads } from '@/components/brand/WovenThreads';
 import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
 
 export const metadata: Metadata = {
-  title: 'Civique — Préparez votre examen civique français',
+  // Layout's `title.template` adds " · Civique" suffix automatically,
+  // but the home page is the canonical brand impression, so we use the
+  // full standalone string instead of leaning on the template.
+  title: {
+    absolute: 'Civique — Préparez votre examen civique français 2026',
+  },
   description:
-    "Préparation à l'examen civique français 2026 conforme à l'arrêté du 10 octobre 2025. Pour la carte de séjour pluriannuelle, la carte de résident ou la nationalité : 611 questions QCM officielles, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
+    "Examen civique français 2026 (arrêté du 10 oct. 2025) : 611 QCM officiels, 240 questions d'entretien, 8 langues. CSP, CR, naturalisation.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Civique — Préparez votre examen civique français',
+    title: 'Civique — Préparez votre examen civique français 2026',
     description:
-      "Préparation à l'examen civique 2026 (arrêté du 10 octobre 2025) pour CSP, CR et nationalité française. 851 questions au total, 8 langues.",
+      "Préparation indépendante à l'examen civique 2026 (arrêté du 10 oct. 2025) pour CSP, CR et nationalité française. 851 questions, 8 langues.",
     url: '/',
     type: 'website',
     locale: 'fr_FR',
+    siteName: 'Civique',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Civique — Préparez votre examen civique 2026',
+    description:
+      "611 QCM officiels + 240 questions d'entretien, 8 langues. CSP, CR, naturalisation française.",
   },
 };
 
@@ -40,39 +52,96 @@ const THEME_META: Record<number, { questions: number; fiches: number }> = {
   5: { questions: 107, fiches: 29 },
 };
 
-// schema.org JSON-LD describing the program. Helps search engines surface
-// Civique as an educational resource for the French civic exam.
-const STRUCTURED_DATA = {
-  '@context': 'https://schema.org',
-  '@type': 'EducationalOccupationalProgram',
-  name: 'Civique',
-  alternateName: 'Préparation à l\'examen civique français',
-  description:
-    "Préparation indépendante à l'examen civique français 2026, conforme à l'arrêté du 10 octobre 2025. CSP, CR et naturalisation : 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
-  url: 'https://civique.integrafle.fr',
-  inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
-  educationalLevel: 'Adult education',
-  educationalProgramMode: 'online',
-  programType: 'Civic education',
-  provider: {
-    '@type': 'Organization',
+// schema.org JSON-LD — two complementary schemas published on the home:
+//   1. EducationalOccupationalProgram  — positions Civique as a learning
+//      programme. Google uses this to surface us in education-vertical
+//      results and reasoning panels.
+//   2. SoftwareApplication  — positions Civique as an app with concrete
+//      pricing tiers, unlocking the price-range rich snippet ("From
+//      3,99 €") under the SERP title. Crucial for monetisation: a user
+//      seeing the price before clicking is a higher-intent click.
+// The Organization + WebSite schemas are emitted once site-wide from
+// `app/layout.tsx` and referenced here via `@id` to avoid duplication.
+const STRUCTURED_DATA = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOccupationalProgram',
     name: 'Civique',
+    alternateName: "Préparation à l'examen civique français",
+    description:
+      "Préparation indépendante à l'examen civique français 2026, conforme à l'arrêté du 10 octobre 2025. CSP, CR et naturalisation : 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
     url: 'https://civique.integrafle.fr',
-    email: 'support@integrafle.fr',
+    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
+    educationalLevel: 'Adult education',
+    educationalProgramMode: 'online',
+    programType: 'Civic education',
+    provider: { '@id': 'https://civique.integrafle.fr/#organization' },
+    occupationalCategory: 'Civic integration',
+    audience: {
+      '@type': 'EducationalAudience',
+      educationalRole: 'Candidate to French civic exam',
+    },
+    teaches: [
+      'Devise nationale, laïcité, symboles républicains, droits fondamentaux',
+      'Pouvoirs, élections, collectivités locales, intégration européenne',
+      'Le vote, la justice, le service civique, la solidarité',
+      'Grandes dates, régions, patrimoine, arts, traditions',
+      'Travail, santé, école, démarches, vie associative',
+    ],
   },
-  occupationalCategory: 'Civic integration',
-  audience: {
-    '@type': 'EducationalAudience',
-    educationalRole: 'Candidate to French civic exam',
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    '@id': 'https://civique.integrafle.fr/#app',
+    name: 'Civique',
+    applicationCategory: 'EducationalApplication',
+    applicationSubCategory: 'Civic education',
+    operatingSystem: 'Web, iOS 15+, Android 10+',
+    description:
+      "Application de préparation à l'examen civique français 2026 — QCM officiels, entretien d'assimilation, fiches pédagogiques en 8 langues, révisions adaptatives (SM-2).",
+    url: 'https://civique.integrafle.fr',
+    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
+    publisher: { '@id': 'https://civique.integrafle.fr/#organization' },
+    // Pricing aligned with apps/server/src/routes/payments/index.ts (l. 14).
+    // Three tiers — listed so Google can compute the price-range snippet.
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Hebdomadaire',
+        price: '3.99',
+        priceCurrency: 'EUR',
+        category: 'subscription',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Mensuel',
+        price: '10.99',
+        priceCurrency: 'EUR',
+        category: 'subscription',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Semestriel',
+        price: '39.99',
+        priceCurrency: 'EUR',
+        category: 'subscription',
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+    // Free trial — surfaces the no-credit-card commitment to Google.
+    isAccessibleForFree: true,
+    featureList: [
+      '611 questions QCM officielles (pool Ministère de l\'Intérieur)',
+      '240 questions d\'entretien d\'assimilation',
+      '200+ fiches pédagogiques',
+      '8 langues d\'accompagnement (FR, EN, AR, FA, PT, ES, HI, TR)',
+      'Algorithme SM-2 (révisions espacées)',
+      'Conforme à l\'arrêté du 10 octobre 2025',
+    ],
   },
-  teaches: [
-    'Devise nationale, laïcité, symboles républicains, droits fondamentaux',
-    'Pouvoirs, élections, collectivités locales, intégration européenne',
-    'Le vote, la justice, le service civique, la solidarité',
-    'Grandes dates, régions, patrimoine, arts, traditions',
-    'Travail, santé, école, démarches, vie associative',
-  ],
-};
+];
 
 export default async function HomePage() {
   const user = await getCurrentUser();
@@ -266,8 +335,8 @@ export default async function HomePage() {
             />
             <FeatureCard
               icon="🌐"
-              title="Six langues"
-              text="Toutes les explications et fiches sont disponibles en français, arabe, persan, portugais, espagnol et hindi."
+              title="Huit langues"
+              text="Toutes les explications et fiches sont disponibles en français, arabe, persan, portugais, espagnol, hindi, anglais et turc."
             />
             <FeatureCard
               icon="📊"

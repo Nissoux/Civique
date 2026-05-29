@@ -3,10 +3,25 @@ import type { Metadata } from 'next';
 import { Logo } from '@/components/brand/Logo';
 
 export const metadata: Metadata = {
-  title: 'Partenariats associations & collectivités — Civique',
+  title: 'Partenariats associations & collectivités',
   description:
-    "Civique pour les associations d'aide aux migrants, centres sociaux, avocats en droit des étrangers et collectivités locales : codes promo en lot, formations équipes, contenus sur mesure.",
+    "Civique pour associations d'aide aux migrants, centres sociaux, avocats étrangers, collectivités : codes promo, formations équipes, sur mesure.",
   alternates: { canonical: '/partenariats' },
+  openGraph: {
+    title: 'Partenariats Civique — associations & collectivités',
+    description:
+      "Pour les acteurs de l'intégration : codes promo, formations équipes, contenus sur mesure.",
+    url: '/partenariats',
+    siteName: 'Civique',
+    locale: 'fr_FR',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Partenariats Civique',
+    description:
+      "Associations, avocats, collectivités : nous travaillons ensemble pour l'intégration.",
+  },
 };
 
 /**

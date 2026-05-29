@@ -5,7 +5,7 @@ import { getFichesByTheme } from '@/lib/server/fiches';
 import { ThemeFilter } from '@/components/fiches/ThemeFilter';
 
 export const metadata = {
-  title: 'Fiches mémo — Civique',
+  title: 'Fiches mémo',
   description: 'Apprenez les essentiels du programme civique par thème.',
 };
 

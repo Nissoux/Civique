@@ -5,7 +5,7 @@ import { FormMessage } from '@/components/auth/FormMessage';
 import { LoginForm } from './LoginForm';
 
 export const metadata: Metadata = {
-  title: 'Se connecter — Civique',
+  title: 'Se connecter',
   description:
     "Connectez-vous à votre compte Civique pour reprendre votre préparation à l'examen civique français.",
   alternates: { canonical: '/login' },

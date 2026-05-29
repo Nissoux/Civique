@@ -7,18 +7,23 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: [
-          '/',
-          '/privacy',
-          '/terms',
-          '/mentions-legales',
-          '/login',
-          '/register',
-          '/forgot-password',
+        // `allow: ['/']` is the default; listing specific paths under it
+        // is a no-op against the disallow rules. The cleaner intent: open
+        // everything by default, name explicitly what NOT to crawl.
+        allow: ['/'],
+        disallow: [
+          '/app/',                  // authenticated user shell — private
+          '/onboarding/',           // auth flow, private
+          '/api/',                  // API endpoints — never indexed
+          '/design-explorations/',  // prototype HTML pages — pollute index
+          '/forgot-password',       // already noindex via metadata; belt + braces
+          '/reset-password',        // same
+          '/verify-email',          // auth callback, no SEO value
+          '/oauth/',                // OAuth callback routes
         ],
-        disallow: ['/app/', '/onboarding/', '/api/'],
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

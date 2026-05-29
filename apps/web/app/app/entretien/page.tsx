@@ -5,7 +5,7 @@ import entretienData from '@/lib/data/entretien.json';
 import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: "Entretien d'assimilation — Civique",
+  title: "Entretien d'assimilation",
   description:
     "240 questions types posées à l'entretien d'assimilation en préfecture pour la naturalisation française. Conseils de réponse en français, anglais et turc.",
 };
