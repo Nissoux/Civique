@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Logo } from '@/components/brand/Logo';
 import { ReadAloudButton } from '@/components/audio/ReadAloudButton';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import { SiteFooter } from '@/components/site/SiteFooter';
 import content from './content.json';
 
 export const metadata: Metadata = {
@@ -86,19 +87,14 @@ export default function LivretPage() {
   const annexe = normalizeAnnexe(typedContent.annexe);
 
   return (
-    <main className="min-h-screen bg-bone">
-      <header className="border-b border-aubergine/15 sticky top-0 z-10 bg-bone/95 backdrop-blur">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-4 flex items-center justify-between gap-4">
-          <Logo />
-          <Link
-            href="/"
-            className="text-sm font-medium text-aubergine hover:text-terracotta transition-colors"
-          >
-            ← Accueil
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-bone flex flex-col">
+      <SiteHeader />
 
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 focus:outline-none"
+      >
       <article className="max-w-3xl mx-auto px-6 sm:px-10 py-16 sm:py-20">
         <p className="eyebrow mb-4">— Document de référence</p>
         <h1 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[1.05] mb-6 font-medium tracking-tight">
@@ -219,7 +215,10 @@ export default function LivretPage() {
           </footer>
         ) : null}
       </article>
-    </main>
+      </main>
+
+      <SiteFooter />
+    </div>
   );
 }
 

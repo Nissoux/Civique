@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Logo } from '@/components/brand/Logo';
 import { env } from '@/lib/env';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import { SiteFooter } from '@/components/site/SiteFooter';
 
 export const metadata: Metadata = {
   // Was 67 ch (truncated in SERP). Layout's title.template adds
@@ -80,20 +81,14 @@ export default async function PourquoiPage() {
   const coverage = await fetchCoverage();
 
   return (
-    <div className="min-h-screen bg-bone">
-      <header className="border-b border-aubergine/15">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
-          <Logo />
-          <Link
-            href="/"
-            className="text-sm font-medium text-aubergine hover:text-terracotta transition-colors"
-          >
-            ← Retour à l'accueil
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-bone flex flex-col">
+      <SiteHeader />
 
-      <main className="max-w-[1340px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 max-w-[1340px] mx-auto w-full px-6 sm:px-10 py-16 sm:py-20 focus:outline-none"
+      >
         {/* Hero */}
         <section className="max-w-3xl">
           <p className="eyebrow mb-4">— Pourquoi nous choisir</p>
@@ -246,6 +241,8 @@ export default async function PourquoiPage() {
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }

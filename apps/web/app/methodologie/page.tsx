@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Logo } from '@/components/brand/Logo';
 import { env } from '@/lib/env';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import { SiteFooter } from '@/components/site/SiteFooter';
 
 export const metadata: Metadata = {
   // Layout adds " · Civique" via title.template — don't repeat it here.
@@ -59,19 +60,14 @@ async function fetchCoverage(): Promise<Coverage | null> {
 export default async function MethodologiePage() {
   const coverage = await fetchCoverage();
   return (
-    <main className="min-h-screen bg-bone">
-      <header className="border-b border-aubergine/15">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
-          <Logo />
-          <Link
-            href="/"
-            className="text-sm font-medium text-aubergine hover:text-terracotta transition-colors"
-          >
-            ← Retour à l'accueil
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-bone flex flex-col">
+      <SiteHeader />
 
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 focus:outline-none"
+      >
       <article className="max-w-3xl mx-auto px-6 sm:px-10 py-16 sm:py-20">
         <p className="eyebrow mb-4">— Notre méthodologie</p>
         <h1 className="font-display text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.05] mb-6 font-medium tracking-tight">
@@ -339,7 +335,10 @@ export default async function MethodologiePage() {
           </p>
         </div>
       </article>
-    </main>
+      </main>
+
+      <SiteFooter />
+    </div>
   );
 }
 

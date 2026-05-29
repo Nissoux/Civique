@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Logo } from '@/components/brand/Logo';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import { SiteFooter } from '@/components/site/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'Partenariats associations & collectivités',
@@ -60,20 +61,14 @@ export const metadata: Metadata = {
  */
 export default function PartenariatsPage() {
   return (
-    <div className="min-h-screen bg-bone">
-      <header className="border-b border-aubergine/15">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
-          <Logo />
-          <Link
-            href="/"
-            className="text-sm font-medium text-aubergine hover:text-terracotta transition-colors"
-          >
-            ← Retour à l'accueil
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-bone flex flex-col">
+      <SiteHeader />
 
-      <main className="max-w-[1340px] mx-auto px-6 sm:px-10 py-16 sm:py-20">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 max-w-[1340px] mx-auto w-full px-6 sm:px-10 py-16 sm:py-20 focus:outline-none"
+      >
         {/* Hero */}
         <section className="max-w-3xl">
           <p className="eyebrow mb-4">— Partenariats institutionnels</p>
@@ -255,6 +250,8 @@ export default function PartenariatsPage() {
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   );
 }

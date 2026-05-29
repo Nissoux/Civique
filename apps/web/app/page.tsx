@@ -2,10 +2,10 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { THEMES, LANGUAGES } from '@civique/shared';
 import { getCurrentUser } from '@/lib/server/me';
-import { Logo } from '@/components/brand/Logo';
-import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
 import { WovenThreads } from '@/components/brand/WovenThreads';
 import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
+import { SiteHeader } from '@/components/site/SiteHeader';
+import { SiteFooter } from '@/components/site/SiteFooter';
 
 export const metadata: Metadata = {
   // Layout's `title.template` adds " · Civique" suffix automatically,
@@ -154,27 +154,12 @@ export default async function HomePage() {
         // (only static, server-controlled values).
         dangerouslySetInnerHTML={{ __html: JSON.stringify(STRUCTURED_DATA) }}
       />
-      <WelcomeStrip />
-
-      {/* Header */}
-      <header className="border-b border-aubergine/15">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
-          <Logo />
-          <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-7 lg:gap-9 text-[0.95rem] font-medium">
-            <a href="#programme" className="hover:text-terracotta transition-colors">Le programme</a>
-            <a href="#methode" className="hover:text-terracotta transition-colors">Méthode</a>
-            <Link href="/pourquoi-civique" className="hover:text-terracotta transition-colors">Pourquoi Civique</Link>
-            <Link href="/partenariats" className="hover:text-terracotta transition-colors hidden lg:inline">Partenariats</Link>
-            {user ? (
-              <Link href="/app" className="btn-primary !px-5 !py-2 text-sm">
-                Mon tableau de bord →
-              </Link>
-            ) : (
-              <Link href="/login" className="hover:text-terracotta transition-colors">Se connecter</Link>
-            )}
-          </nav>
-        </div>
-      </header>
+      {/* Header — shared between every public landing page so the
+          internal-link surface is identical. The home-specific anchors
+          (#programme, #methode) live in `SiteHeader` as `/#programme`
+          form, so they work from any page (browser handles cross-page
+          fragment scroll natively). */}
+      <SiteHeader />
 
       {/* Hero */}
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
@@ -378,62 +363,7 @@ export default async function HomePage() {
       )}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-aubergine text-bone border-t border-aubergine">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-14 grid grid-cols-2 md:grid-cols-12 gap-8">
-          <div className="col-span-2 md:col-span-5">
-            <Logo size="md" href={null} className="[&_span:last-child]:!text-bone" />
-            <p className="display-italic text-[1.05rem] mt-4 text-saffron">
-              Tisser un nouveau chez-soi.
-            </p>
-            <p className="text-bone/60 text-sm mt-3 max-w-xs leading-relaxed">
-              Préparation indépendante à l'examen civique français. Sans affiliation officielle avec l'État.
-            </p>
-          </div>
-          <div className="col-span-1 md:col-span-2 md:col-start-6">
-            <p className="font-semibold mb-3 text-bone">Produit</p>
-            <ul className="space-y-2 text-sm text-bone/70">
-              <li><a href="#programme" className="hover:text-saffron">Le programme</a></li>
-              <li><a href="#methode" className="hover:text-saffron">Méthode</a></li>
-              <li><Link href="/pourquoi-civique" className="hover:text-saffron">Pourquoi Civique</Link></li>
-              <li>
-                {user ? (
-                  <Link href="/app" className="hover:text-saffron">Mon tableau de bord</Link>
-                ) : (
-                  <Link href="/login" className="hover:text-saffron">Connexion</Link>
-                )}
-              </li>
-            </ul>
-          </div>
-          <div className="col-span-1 md:col-span-3">
-            {/* Reference content — back-links the public documentation
-                pages we ship to crawlers and to anyone vetting our
-                compliance story. Big SEO + credibility win. */}
-            <p className="font-semibold mb-3 text-bone">Référence</p>
-            <ul className="space-y-2 text-sm text-bone/70">
-              <li><Link href="/methodologie" className="hover:text-saffron">Méthodologie & cadre légal</Link></li>
-              <li><Link href="/livret-du-citoyen" className="hover:text-saffron">Livret du Citoyen</Link></li>
-              <li><Link href="/charte" className="hover:text-saffron">Charte des droits et devoirs</Link></li>
-              <li><Link href="/partenariats" className="hover:text-saffron">Partenariats associations</Link></li>
-              <li><a href="mailto:contact@integrafle.fr" className="hover:text-saffron">Contact</a></li>
-            </ul>
-          </div>
-          <div className="col-span-2 md:col-span-2">
-            <p className="font-semibold mb-3 text-bone">Légal</p>
-            <ul className="space-y-2 text-sm text-bone/70">
-              <li><Link href="/privacy" className="hover:text-saffron">Confidentialité</Link></li>
-              <li><Link href="/terms" className="hover:text-saffron">Conditions</Link></li>
-              <li><Link href="/mentions-legales" className="hover:text-saffron">Mentions légales</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="border-t border-bone/10">
-          <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-bone/50">
-            <span>© {new Date().getFullYear()} Civique · Tous droits réservés</span>
-            <span className="display-italic">— Préparation indépendante</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
