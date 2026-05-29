@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import compress from '@fastify/compress';
 import cors from '@fastify/cors';
 import helmet from '@fastify/helmet';
 import rateLimit from '@fastify/rate-limit';
@@ -40,10 +41,16 @@ async function main() {
     },
   });
 
-  // TODO(perf): register @fastify/compress for gzip+br on JSON
-  // responses (~3-5× bandwidth gain on /questions, /exams). Deferred
-  // because the lockfile couldn't be updated in the same change; add
-  // the dep + register in a separate commit.
+  // Response compression — brotli preferred, gzip fallback. Threshold
+  // 1 KB skips tiny payloads where the compression header overhead is
+  // bigger than the saving. ~3-5× bandwidth gain on /questions and
+  // /exams (large JSON arrays). Register BEFORE routes so it wraps
+  // every response.
+  await app.register(compress, {
+    global: true,
+    threshold: 1024,
+    encodings: ['br', 'gzip'],
+  });
 
   // Rate limiting: 100 requests per minute per IP (global default).
   // Specific routes (admin, payment, auth) override this with tighter
