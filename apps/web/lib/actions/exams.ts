@@ -175,3 +175,26 @@ export async function abandonExamAction(
     return { ok: false, error: "Impossible d'abandonner l'examen." };
   }
 }
+
+/**
+ * Abandon the active session (if any), then start a fresh exam.
+ *
+ * Wired to the « Lancer un nouveau » button of the hub's ResumeBlock.
+ * Without the abandon step, startExamAction's resume-first check — and the
+ * server's 409 guard on POST /exams/start — both bounce the user back to
+ * the very session they are trying to leave, so "restart" silently served
+ * the old exam with its old questions and answers.
+ *
+ * The abandoned session is finished with whatever answers it has: it counts
+ * as an attempt in the history, and its questions feed the anti-repetition
+ * memory so the fresh draw prefers unseen questions.
+ */
+export async function restartExamFormAction(): Promise<void> {
+  const active = await getActiveExam();
+  if (active) {
+    // Tolerates "already finished" (400). On a genuine server error the
+    // follow-up start hits the 409 path and resumes — degraded but safe.
+    await abandonExamAction(active.id);
+  }
+  await startExamFormAction();
+}

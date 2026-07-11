@@ -6,7 +6,10 @@ import {
   getExamTypeDefinition,
 } from '@/lib/server/examType';
 import { getExamHistory } from '@/lib/server/exams';
-import { startExamFormAction } from '@/lib/actions/exams';
+import {
+  startExamFormAction,
+  restartExamFormAction,
+} from '@/lib/actions/exams';
 
 const PASS_THRESHOLD_RATIO = 0.8;
 
@@ -180,7 +183,10 @@ function ResumeBlock({ active }: { active: ExamSession }) {
         >
           Reprendre l'examen
         </Link>
-        <form action={startExamFormAction} className="sm:flex-1">
+        {/* restartExamFormAction (NOT startExamFormAction): abandons the
+            active session first, otherwise the resume-first logic + the
+            server 409 guard would loop back to the same exam. */}
+        <form action={restartExamFormAction} className="sm:flex-1">
           <button
             type="submit"
             className="btn-secondary !justify-center w-full"
