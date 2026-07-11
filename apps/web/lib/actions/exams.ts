@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 import { ApiError } from '@/lib/server/api';
 import { getCurrentExamType } from '@/lib/server/examType';
+import { getQuota } from '@/lib/server/stats';
 import {
   startExam,
   finishExam,
@@ -192,6 +193,23 @@ export async function abandonExamAction(
 export async function restartExamFormAction(): Promise<void> {
   const active = await getActiveExam();
   if (active) {
+    // Quota pre-check BEFORE abandoning. The weekly free quota counts
+    // sessions *started*, so a free user out of quota would otherwise
+    // lose their resumable session AND get the paywall — double
+    // penalty. Out of quota → paywall with the session intact.
+    // Fails open: if the quota fetch errors, proceed — worst case the
+    // start hits 429 after abandon (degraded, but the button did what
+    // it promised).
+    const quota = await getQuota().catch(() => null);
+    if (
+      quota &&
+      !quota.isPremium &&
+      quota.weekly.limit !== -1 &&
+      quota.weekly.used >= quota.weekly.limit
+    ) {
+      redirect('/app/settings/subscription?from=exam-quota');
+    }
+
     // Tolerates "already finished" (400). On a genuine server error the
     // follow-up start hits the 409 path and resumes — degraded but safe.
     await abandonExamAction(active.id);
