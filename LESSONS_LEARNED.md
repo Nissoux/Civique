@@ -379,6 +379,52 @@ npx --yes pnpm@9 install --filter mobile
 
 ---
 
+## 10. Incident webhooks paiements (14 août 2026) : un fix de sécu déployé sans son secret = panne de revenus silencieuse
+
+**Ce qui s'est passé.** Le 19 mai, le durcissement P0 du webhook RevenueCat
+(commit `5f4085d`, secret partagé obligatoire, fail-closed) a été déployé
+côté code **sans créer `REVENUECAT_WEBHOOK_SECRET` dans le `.env` du VPS**.
+Le endpoint a refusé tous les webhooks en 503 pendant ~3 mois ; RevenueCat
+a fini par arrêter d'envoyer. Les acheteurs mobiles voyaient « premium »
+dans l'app (SDK local) mais restaient bloqués par les quotas serveur.
+Découvert le 14 août quand une cliente payante a signalé la limite.
+En investiguant, on a trouvé un 2e canal mort : le `STRIPE_WEBHOOK_SECRET`
+en place ne correspondait pas au signing secret de l'endpoint Stripe
+(« signature mismatch » en boucle, `stripe_events_processed` vide).
+
+**Pourquoi c'est passé inaperçu.** Fail-closed sans alerte = échec
+silencieux. Les 503/401 n'apparaissaient que dans les logs PM2 que
+personne ne lit. Le SDK RevenueCat masquait le problème côté app (l'UI
+disait premium). Aucun monitoring ne comparait « achats RevenueCat/Stripe »
+vs « users premium en base ».
+
+**Remédiation (14 août 2026) :**
+- `REVENUECAT_WEBHOOK_SECRET` généré et posé dans le `.env` + restart —
+  endpoint validé (401 sans auth, 200 avec le bon secret).
+- Endpoint Stripe recréé via API (`we_1U4PMm…`, mêmes 4 événements),
+  nouveau signing secret dans le `.env`, ancien endpoint supprimé.
+- Reste côté dashboard RevenueCat (accès PO uniquement) : coller le
+  secret dans Integrations → Webhooks, réactiver, **Resend** des
+  événements depuis le 19 mai pour régulariser les victimes.
+
+**Leçons :**
+1. **Un fix fail-closed se déploie avec son secret, dans le même geste.**
+   Checklist de déploiement d'un secret : générer → poser dans le `.env`
+   du VPS → configurer le côté émetteur (dashboard) → tester un aller-retour
+   réel → seulement ensuite merger le code qui l'exige.
+2. **Tout webhook de paiement doit avoir un test de bout en bout après
+   chaque déploiement qui le touche** (achat sandbox ou resend d'un
+   événement) — pas juste un curl localhost.
+3. **Alerte à mettre en place** : si aucun événement webhook traité en
+   N jours alors que des achats existent côté provider, ou tout 4xx/5xx
+   répété sur `/api/payments/webhook/*` → notification. (Cf. roadmap
+   post-launch : monitoring.)
+4. Le pattern `isPremium = rcPremium || serverInfo.isPremium` côté mobile
+   a **masqué** l'incident au lieu de le révéler : quand les deux sources
+   divergent, logger/alerter au lieu de fusionner en silence.
+
+---
+
 ## Résumé en une phrase
 
 > **Lis la doc officielle, utilise les librairies officielles, teste sur un vrai device, et ne soumets aux stores que quand tout marche.**
