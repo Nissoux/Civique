@@ -33,7 +33,7 @@ export interface CheckoutResult {
 export interface RedeemCodeResult {
   message: string;
   type: string;
-  premiumExpires: string;
+  premiumExpires: string | null;
 }
 
 // ── GET subscription ─────────────────────────────────────

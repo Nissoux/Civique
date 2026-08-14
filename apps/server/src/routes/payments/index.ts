@@ -420,7 +420,7 @@ export default async function paymentRoutes(app: FastifyInstance) {
       try {
         await db
           .insert(stripeEventsProcessed)
-          .values({ eventId: journalKey });
+          .values({ eventId: journalKey, eventType: rcEvent.type });
       } catch {
         // Duplicate key = already processed.
         app.log.info({ eventId: rcEvent.id }, 'RevenueCat event already processed, skipping');
@@ -659,10 +659,10 @@ export default async function paymentRoutes(app: FastifyInstance) {
       return reply.status(409).send({ error: 'Vous avez déjà utilisé ce code' });
     }
 
-    // Apply premium
+    // Apply premium — durationDays null = lifetime (pas d'expiration)
     const premiumExpires = promo.durationDays
       ? new Date(Date.now() + promo.durationDays * 24 * 60 * 60 * 1000)
-      : new Date(Date.now() + 180 * 24 * 60 * 60 * 1000); // 6 months default
+      : null;
 
     await db.update(users).set({
       isPremium: true,
@@ -684,7 +684,7 @@ export default async function paymentRoutes(app: FastifyInstance) {
       data: {
         message: 'Code activé avec succès !',
         type: promo.type,
-        premiumExpires: premiumExpires.toISOString(),
+        premiumExpires: premiumExpires ? premiumExpires.toISOString() : null,
       },
     });
   });
