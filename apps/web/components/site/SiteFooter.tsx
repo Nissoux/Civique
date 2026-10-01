@@ -71,6 +71,11 @@ export async function SiteFooter() {
           <p className="font-semibold mb-3 text-bone">Référence</p>
           <ul className="space-y-2 text-sm text-bone/70">
             <li>
+              <Link href="/guides" className="hover:text-saffron">
+                Guides pratiques
+              </Link>
+            </li>
+            <li>
               <Link href="/methodologie" className="hover:text-saffron">
                 Méthodologie &amp; cadre légal
               </Link>

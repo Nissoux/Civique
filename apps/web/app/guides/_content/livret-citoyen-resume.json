@@ -1,0 +1,190 @@
+{
+  "slug": "livret-citoyen-resume",
+  "metaTitle": "Livret du Citoyen : résumé complet pour réviser",
+  "metaDescription": "Le Livret du Citoyen résumé : ce que contient le référentiel officiel du Ministère de l'Intérieur, ses 5 thèmes et comment l'utiliser pour réviser.",
+  "h1Main": "Le Livret du Citoyen,",
+  "h1Accent": "votre socle de révision",
+  "intro": [
+    "Le **Livret du Citoyen** est un document officiel publié par le Ministère de l'Intérieur. Il rassemble les connaissances attendues d'une personne qui demande la nationalité française : les valeurs de la République, ses institutions, les grands repères d'histoire et de géographie, et la vie quotidienne en France. C'est un « référentiel » — autrement dit, un document de référence : il fixe ce qu'il faut savoir.",
+    "Si vous préparez l'examen civique ou l'entretien de naturalisation — l'entretien en préfecture au cours duquel un agent vérifie votre connaissance de la France —, ce livret est le meilleur point de départ. Il est gratuit, officiel, régulièrement mis à jour, et organisé en grands thèmes clairs.",
+    "Dans ce guide, nous résumons chacun de ces thèmes, puis nous vous proposons une méthode simple pour transformer le livret en plan de révision."
+  ],
+  "sections": [
+    {
+      "heading": "Qu'est-ce que le Livret du Citoyen ?",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Le Livret du Citoyen est édité par le **Ministère de l'Intérieur** et disponible gratuitement sur son site. Il s'adresse aux candidats à la nationalité française. Son objectif : donner à chacun un socle commun de connaissances sur la France, sa République et sa société. Ce n'est pas un formulaire à remplir — c'est un document à lire, à comprendre et à retenir."
+        },
+        {
+          "type": "p",
+          "text": "Pourquoi est-ce **la** base de révision ? Parce que les connaissances demandées pour la naturalisation s'appuient sur ce référentiel. Le programme de l'examen civique, fixé par l'arrêté du 10 octobre 2025, recoupe très largement les thèmes du livret ; et lors de l'entretien en préfecture, les questions portent sur ces mêmes repères. Réviser le livret, c'est donc réviser ce qui sera réellement demandé. Pour comprendre le déroulement des épreuves, consultez notre guide [comment se passe l'examen civique 2026](/guides/comment-passer-examen-civique-2026)."
+        },
+        {
+          "type": "p",
+          "text": "Le programme civique couvre cinq grands thèmes :"
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les principes et valeurs de la République",
+            "Le système institutionnel et politique",
+            "Les droits et les devoirs",
+            "L'histoire, la géographie et la culture",
+            "La vie dans la société française"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Thème 1 — Les principes et valeurs de la République",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Ce premier thème présente ce qui fonde la République : sa devise, ses symboles et ses principes. La devise **« Liberté, Égalité, Fraternité »** apparaît pendant la Révolution française et figure dans la Constitution de 1958. Le thème détaille aussi la **laïcité**, un principe central : chacun est libre de croire ou de ne pas croire, et l'État reste neutre vis-à-vis de toutes les religions. Son texte fondateur est la loi du 9 décembre 1905 de séparation des Églises et de l'État."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les symboles à connaître : le drapeau bleu-blanc-rouge, Marianne, La Marseillaise (composée par Rouget de Lisle en 1792), le coq gaulois et la fête nationale du 14 juillet.",
+            "L'article 1er de la Constitution : la France est une République **indivisible, laïque, démocratique et sociale** — quatre mots à retenir par cœur.",
+            "La laïcité repose sur trois piliers : la liberté de conscience, la séparation de l'État et des religions, l'égalité de tous quelle que soit leur conviction."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Pour approfondir ce thème, lisez notre guide sur [Marianne et les symboles de la République](/guides/marianne-symboles-republique)."
+        }
+      ]
+    },
+    {
+      "heading": "Thème 2 — Le système institutionnel et politique",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "La Constitution du **4 octobre 1958** fonde la Ve République, le régime politique actuel de la France. Ce thème explique comment les pouvoirs sont organisés et séparés : l'exécutif gouverne, le législatif vote les lois, le judiciaire rend la justice."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Le président de la République est élu pour **5 ans** au suffrage universel direct. Il nomme le Premier ministre, qui dirige le Gouvernement.",
+            "Le Parlement vote les lois. Il comprend deux chambres : l'Assemblée nationale (**577 députés**) et le Sénat (**348 sénateurs**).",
+            "La justice est indépendante et rendue au nom du peuple français. Elle comprend deux ordres : l'ordre judiciaire et l'ordre administratif.",
+            "Le territoire est organisé en collectivités : environ 35 000 communes, 101 départements et 18 régions.",
+            "La France est l'un des pays fondateurs de la construction européenne. L'Union européenne compte 27 États membres."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Thème 3 — Les droits et les devoirs",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Le texte fondateur de ce thème est la **Déclaration des droits de l'homme et du citoyen du 26 août 1789**. En 17 articles, elle pose des principes toujours en vigueur : liberté, égalité devant la loi, présomption d'innocence, liberté d'opinion et d'expression."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les droits : liberté d'expression, liberté de conscience, liberté d'association (loi de 1901), liberté syndicale, droit de grève. Les femmes ont obtenu le droit de vote en **1944**.",
+            "Les devoirs : respecter la loi, payer les impôts, participer à la défense nationale (recensement à 16 ans et Journée Défense et Citoyenneté), être juré d'assises si l'on est tiré au sort, porter assistance à une personne en danger.",
+            "Le droit pénal distingue trois catégories d'infractions, de la moins grave à la plus grave : la contravention, le délit et le crime."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Ce thème est l'un des plus interrogés à l'entretien. Nous lui consacrons un guide complet : [les droits et devoirs du citoyen français](/guides/droits-devoirs-citoyen-francais)."
+        }
+      ]
+    },
+    {
+      "heading": "Thème 4 — L'histoire, la géographie et la culture",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Pas besoin d'être historien : ce thème demande des **repères**, pas une érudition. Quelques dates, quelques figures, quelques lieux — ceux qui ont façonné la France d'aujourd'hui."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les dates clés : 1789 (Révolution française et Déclaration des droits de l'homme), 1905 (loi de laïcité), 1944 (droit de vote des femmes), 1958 (Ve République), 1981 (abolition de la peine de mort).",
+            "Les personnages marquants : Charles de Gaulle, Victor Hugo, Marie Curie, Simone Veil, parmi d'autres figures présentes dans le livret.",
+            "La géographie : environ 68 millions d'habitants, des fleuves majeurs (Seine, Loire, Rhône, Garonne, Rhin), le mont Blanc (4 808 mètres) et les territoires d'outre-mer.",
+            "Le patrimoine : la tour Eiffel, le Louvre, le château de Versailles, le mont Saint-Michel — des sites que l'on peut vous demander de situer ou de nommer."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Thème 5 — Vivre dans la société française",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "C'est le thème le plus concret : il décrit la France du quotidien, celle que vous pratiquez déjà. Il est souvent le plus facile à réviser, car il parle de votre vie réelle."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "Les numéros d'urgence : **15** (SAMU), **17** (police), **18** (pompiers), **112** (numéro d'urgence européen).",
+            "La santé : la Sécurité sociale (créée en 1945), la carte Vitale, le médecin traitant.",
+            "Le travail : la durée légale de 35 heures par semaine, le SMIC, les contrats CDI et CDD, les 5 semaines de congés payés.",
+            "L'école : l'instruction est obligatoire de 3 à 16 ans ; l'école publique est gratuite et laïque.",
+            "La citoyenneté : les documents officiels (carte d'identité, titre de séjour), les voies d'accès à la nationalité française et la cérémonie d'accueil dans la citoyenneté, organisée par le préfet pour les nouveaux Français."
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "Comment réviser efficacement avec le livret",
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Le livret est dense. Voici une méthode en quatre étapes pour le travailler sans vous décourager."
+        },
+        {
+          "type": "ul",
+          "items": [
+            "**Lisez-le une première fois en entier**, sans prendre de notes. L'objectif est d'avoir une vue d'ensemble, pas de tout retenir.",
+            "**Travaillez ensuite un thème à la fois.** Une séance peut suffire pour les parties que vous connaissez déjà ; prévoyez-en plusieurs pour l'histoire et les institutions.",
+            "**Faites des fiches avec les chiffres et les dates.** 1789, 1905, 1944, 1958 ; 577 députés, 348 sénateurs, 101 départements, 18 régions : ces repères reviennent très souvent.",
+            "**Entraînez-vous à voix haute.** L'entretien de naturalisation est une conversation : savoir formuler vos réponses en français simple compte autant que connaître les faits."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Pour réviser directement en ligne, utilisez [notre synthèse navigable](/livret-du-citoyen) : elle reprend les cinq thèmes du référentiel, section par section, dans des formulations claires et accessibles. C'est sur ce même socle que Civique construit ses fiches de révision et ses examens blancs."
+        }
+      ]
+    }
+  ],
+  "faq": [],
+  "sources": [
+    {
+      "label": "Ministère de l'Intérieur — Le Livret du Citoyen",
+      "url": "https://www.immigration.interieur.gouv.fr/Integration-et-Acces-a-la-nationalite/La-nationalite-francaise/Le-livret-du-citoyen"
+    },
+    {
+      "label": "Légifrance — Arrêté du 10 octobre 2025 relatif à l'examen civique",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052381620"
+    },
+    {
+      "label": "Service-public.fr — Naturalisation et examen civique",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39426"
+    }
+  ],
+  "related": [
+    "comment-passer-examen-civique-2026",
+    "entretien-assimilation-questions-frequentes",
+    "droits-devoirs-citoyen-francais"
+  ],
+  "keywords": [
+    "livret du citoyen",
+    "livret citoyen résumé",
+    "livret du citoyen naturalisation",
+    "réviser livret citoyen",
+    "examen civique 2026"
+  ],
+  "updatedAt": "2026-10-01",
+  "readingMinutes": 6
+}

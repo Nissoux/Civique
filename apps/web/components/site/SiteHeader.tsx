@@ -34,7 +34,13 @@ export async function SiteHeader() {
             <Link href="/#programme" className="hover:text-terracotta transition-colors">
               Le programme
             </Link>
-            <Link href="/methodologie" className="hover:text-terracotta transition-colors">
+            <Link href="/guides" className="hover:text-terracotta transition-colors">
+              Guides
+            </Link>
+            <Link
+              href="/methodologie"
+              className="hover:text-terracotta transition-colors hidden lg:inline"
+            >
               Méthodologie
             </Link>
             <Link

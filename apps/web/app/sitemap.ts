@@ -22,7 +22,22 @@ const LAST_MODIFIED: Record<string, string> = {
   '/privacy': '2026-05-11',                 // matches LAST_UPDATED in mentions
   '/terms': '2026-05-11',                   // matches LAST_UPDATED in mentions
   '/mentions-legales': '2026-05-11',
+  '/guides': '2026-10-01',                  // cluster launch
 };
+
+// The /guides/ long-tail cluster. Kept as a flat list (rather than
+// importing lib/guides.ts) so the sitemap stays dependency-free; the
+// launch date doubles as lastModified until a guide's content changes.
+const GUIDE_SLUGS: Array<{ slug: string; lastModified: string }> = [
+  { slug: 'comment-passer-examen-civique-2026', lastModified: '2026-10-01' },
+  { slug: 'difference-csp-cr-naturalisation', lastModified: '2026-10-01' },
+  { slug: 'livret-citoyen-resume', lastModified: '2026-10-01' },
+  { slug: 'marianne-symboles-republique', lastModified: '2026-10-01' },
+  { slug: 'laicite-comprendre-principe', lastModified: '2026-10-01' },
+  { slug: 'droits-devoirs-citoyen-francais', lastModified: '2026-10-01' },
+  { slug: 'parcours-naturalisation-etapes', lastModified: '2026-10-01' },
+  { slug: 'entretien-assimilation-questions-frequentes', lastModified: '2026-10-01' },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const date = (path: string) => new Date(LAST_MODIFIED[path]);
@@ -66,6 +81,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${BASE_URL}/guides`,
+      lastModified: date('/guides'),
+      changeFrequency: 'monthly',
+      // Hub of the long-tail content cluster — high priority: it's the
+      // organic-acquisition entry point.
+      priority: 0.9,
+    },
+    ...GUIDE_SLUGS.map((g) => ({
+      url: `${BASE_URL}/guides/${g.slug}`,
+      lastModified: new Date(g.lastModified),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
     {
       url: `${BASE_URL}/register`,
       lastModified: date('/register'),
