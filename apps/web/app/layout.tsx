@@ -96,17 +96,18 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Force every route to render dynamically. We hit a Next.js 15 + React 19 +
-// pnpm-workspace issue where static prerender of /404 and /500 throws
-// "Cannot read properties of null (reading 'useContext')" — the root cause
-// is React being resolved twice in the workspace's traced module graph.
-// Dynamic rendering bypasses prerender entirely. Trade-off: no static HTML
-// caching on the public landing/legal pages, but for an MVP at low traffic
-// this is invisible to users and we keep all our Server Components +
-// Server Actions intact.
-// TODO post-launch: pin react/react-dom via pnpm.overrides at the workspace
-// root once we confirm it doesn't break the mobile RN build, then drop this.
-export const dynamic = 'force-dynamic';
+// 2026-10-01: dropped the `export const dynamic = 'force-dynamic'` escape
+// hatch that had been in place since May. It existed because static
+// prerender of /404 and /500 threw "Cannot read properties of null
+// (reading 'useContext')" (React resolved twice in the pnpm-workspace
+// module graph) — a BUILD-time failure, so if the bug ever resurfaces the
+// deploy build fails loudly and prod keeps the previous bundle; nothing
+// breaks silently at runtime. Benefits of being static again: metadata
+// rendered in <head> (not streamed into the body — Lighthouse flagged
+// "no meta description" on every page), HTML caching on the public
+// landing/legal pages, and back/forward-cache eligibility (no more
+// blanket cache-control: no-store). Auth-gated routes read cookies() and
+// stay dynamic automatically.
 
 export default function RootLayout({
   children,
