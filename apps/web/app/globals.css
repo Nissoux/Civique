@@ -80,12 +80,16 @@
 }
 
 @layer components {
-  /* Primary CTA — warm rounded with stamped shadow */
+  /* Primary CTA — warm rounded with stamped shadow.
+     terracotta-deep (not terracotta) as the resting fill: bone text on
+     plain terracotta is 3.84:1, below the WCAG AA 4.5:1 floor for
+     normal-size text. Deep variant hits 5.38:1 and the hover lightens
+     back to terracotta — contrast-compliant at rest, lively on hover. */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2.5 rounded-full;
-    @apply bg-terracotta text-bone font-semibold px-7 py-3.5;
+    @apply bg-terracotta-deep text-bone font-semibold px-7 py-3.5;
     @apply shadow-warm transition-all;
-    @apply hover:-translate-y-0.5 hover:shadow-warm-lift;
+    @apply hover:-translate-y-0.5 hover:shadow-warm-lift hover:bg-terracotta;
     @apply active:translate-y-0.5 active:shadow-none;
     @apply focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2 focus:ring-offset-bone;
     transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -168,9 +172,12 @@
     @apply font-display italic text-aubergine text-base mb-2 block;
   }
 
-  /* Eyebrow */
+  /* Eyebrow — terracotta-deep for WCAG AA: at 0.78rem bold this is
+     "normal" text (needs 4.5:1); plain terracotta on bone is 3.84:1,
+     deep is 5.38:1 (and 4.84:1 on bone-deep). Dark sections override
+     with `text-saffron` explicitly, unaffected. */
   .eyebrow {
-    @apply text-[0.78rem] font-bold uppercase tracking-[0.18em] text-terracotta;
+    @apply text-[0.78rem] font-bold uppercase tracking-[0.18em] text-terracotta-deep;
   }
 
   /* Wavy underline accent */

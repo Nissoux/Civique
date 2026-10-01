@@ -384,9 +384,12 @@ function ThemeCard({ theme }: { theme: (typeof THEMES)[number] }) {
         >
           {theme.id}
         </div>
+        {/* Decorative duplicate of the numbered badge — hidden from AT
+            so the low-contrast theme tints don't trip WCAG audits. */}
         <span
           className="font-display italic text-[3.5rem] leading-none"
           style={{ color: theme.color, fontVariationSettings: "'opsz' 72" }}
+          aria-hidden
         >
           {romanize(theme.id)}
         </span>
