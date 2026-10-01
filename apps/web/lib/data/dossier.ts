@@ -89,7 +89,7 @@ const COMMON_RESIDENCE: DocumentItem[] = [
   { label: 'Tous les anciens titres de séjour', hint: 'Récupérez-les tous : depuis la première carte. La préfecture vérifie la continuité.', pitfall: true },
   { label: 'Visa long séjour initial (VLS-TS) ou équivalent', hint: 'Avec tampon OFII si applicable.' },
   { label: 'Diplôme du niveau de français requis', hint: 'B1 pour la CR, B2 oral pour la naturalisation depuis circulaire Retailleau du 2 mai 2025.', pitfall: true },
-  { label: 'Attestation de réussite à l\'examen civique', hint: 'Délivrée à l\'issue de l\'examen avec note ≥ 13/20. Conserver l\'original.' },
+  { label: 'Attestation de réussite à l\'examen civique', hint: 'Délivrée en cas de réussite (32 bonnes réponses sur 40). Conserver l\'original.' },
 ];
 
 const COMMON_RESOURCES: DocumentItem[] = [

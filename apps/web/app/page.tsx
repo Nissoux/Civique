@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { THEMES, LANGUAGES } from '@civique/shared';
-import { getCurrentUser } from '@/lib/server/me';
 import { WovenThreads } from '@/components/brand/WovenThreads';
 import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
+import { HeroCtas } from '@/components/site/HeroCtas';
 
 export const metadata: Metadata = {
   // Layout's `title.template` adds " · Civique" suffix automatically,
@@ -143,9 +143,10 @@ const STRUCTURED_DATA = [
   },
 ];
 
-export default async function HomePage() {
-  const user = await getCurrentUser();
-
+// Static page: no cookies() anywhere in the tree. Auth-dependent CTAs
+// (hero, header) are client components probing GET /api/session after
+// mount — see HeroCtas / AuthNav.
+export default function HomePage() {
   return (
     <div className="min-h-screen bg-bone">
       <script
@@ -193,26 +194,7 @@ export default async function HomePage() {
             </div>
 
             <div className="rise-init rise-d-5 flex flex-wrap items-center gap-4 mb-10">
-              {user ? (
-                <Link href="/app" className="btn-primary text-base">
-                  Aller au tableau de bord
-                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </Link>
-              ) : (
-                <>
-                  <Link href="/register" className="btn-primary text-base">
-                    Commencer ma préparation
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </Link>
-                  <Link href="#programme" className="btn-secondary text-base">
-                    Voir le programme
-                  </Link>
-                </>
-              )}
+              <HeroCtas />
             </div>
 
             {/* Language pills */}
@@ -337,9 +319,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* CTA bottom */}
-      {user ? null : (
-        <section className="border-t border-aubergine/15 bg-aubergine text-bone relative overflow-hidden">
+      {/* CTA bottom — always rendered now that the page is static.
+          Logged-in visitors scrolling this far simply see a register
+          pitch they can ignore; standard marketing-page behavior and a
+          fair trade for head metadata + HTML caching. */}
+      <section className="border-t border-aubergine/15 bg-aubergine text-bone relative overflow-hidden">
           <div className="pointer-events-none absolute -top-40 -right-40 w-96 h-96 rounded-full bg-terracotta/30 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-saffron/20 blur-3xl" />
 
@@ -360,7 +344,6 @@ export default async function HomePage() {
             </Link>
           </div>
         </section>
-      )}
       </main>
 
       <SiteFooter />

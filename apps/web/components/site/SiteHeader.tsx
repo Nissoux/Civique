@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { getCurrentUser } from '@/lib/server/me';
 import { Logo } from '@/components/brand/Logo';
 import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
+import { AuthNav } from '@/components/site/AuthNav';
 
 /**
  * Public-site header — used across the landing, /pourquoi-civique,
@@ -17,10 +17,12 @@ import { WelcomeStrip } from '@/components/brand/WelcomeStrip';
  * Anchors (#programme, #methode) use `/#anchor` form so they navigate
  * back to the home and scroll, when clicked from a non-home page.
  * Browsers handle this natively — no router push needed.
+ *
+ * Deliberately NOT reading cookies: one cookies() call here would force
+ * every public page dynamic (no head metadata, no HTML cache, no
+ * bfcache). The auth-dependent slot is the client-side <AuthNav/>.
  */
-export async function SiteHeader() {
-  const user = await getCurrentUser();
-
+export function SiteHeader() {
   return (
     <>
       <WelcomeStrip />
@@ -55,15 +57,7 @@ export async function SiteHeader() {
             >
               Partenariats
             </Link>
-            {user ? (
-              <Link href="/app" className="btn-primary !px-5 !py-2 text-sm">
-                Mon tableau de bord →
-              </Link>
-            ) : (
-              <Link href="/login" className="hover:text-terracotta transition-colors">
-                Se connecter
-              </Link>
-            )}
+            <AuthNav />
           </nav>
         </div>
       </header>

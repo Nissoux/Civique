@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { getCurrentUser } from '@/lib/server/me';
 import { Logo } from '@/components/brand/Logo';
 
 /**
@@ -16,10 +15,12 @@ import { Logo } from '@/components/brand/Logo';
  * Programme + Méthode anchors point to /#programme and /#methode so
  * they keep working from any page (browser handles the cross-page
  * fragment-scroll natively).
+ *
+ * No cookies() here — keeps every public page statically prerenderable
+ * (see SiteHeader). The footer always shows « Connexion »; logged-in
+ * users have the dashboard CTA in the header via <AuthNav/>.
  */
-export async function SiteFooter() {
-  const user = await getCurrentUser();
-
+export function SiteFooter() {
   return (
     <footer className="bg-aubergine text-bone border-t border-aubergine">
       <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-14 grid grid-cols-2 md:grid-cols-12 gap-8">
@@ -52,15 +53,9 @@ export async function SiteFooter() {
               </Link>
             </li>
             <li>
-              {user ? (
-                <Link href="/app" className="hover:text-saffron">
-                  Mon tableau de bord
-                </Link>
-              ) : (
-                <Link href="/login" className="hover:text-saffron">
-                  Connexion
-                </Link>
-              )}
+              <Link href="/login" className="hover:text-saffron">
+                Connexion
+              </Link>
             </li>
           </ul>
         </div>
