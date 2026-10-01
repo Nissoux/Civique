@@ -11,8 +11,11 @@ export const metadata: Metadata = {
   // Layout's `title.template` adds " · Civique" suffix automatically,
   // but the home page is the canonical brand impression, so we use the
   // full standalone string instead of leaning on the template.
+  // Keyword-first, brand last. The brand is unknown to searchers, so
+  // spending the opening characters on it wastes the most-read pixels
+  // of the SERP line. Competitors on this query all lead with the term.
   title: {
-    absolute: 'Civique — Préparez votre examen civique français 2026',
+    absolute: 'Examen civique 2026 : QCM officiels et examen blanc — Civique',
   },
   description:
     "Examen civique français 2026 (arrêté du 10 oct. 2025) : 611 QCM officiels, 240 questions d'entretien, 8 langues. CSP, CR, naturalisation.",
@@ -51,6 +54,55 @@ const THEME_META: Record<number, { questions: number; fiches: number }> = {
   4: { questions: 168, fiches: 42 },
   5: { questions: 107, fiches: 29 },
 };
+
+// FAQ — single source of truth for both the rendered section and the
+// FAQPage JSON-LD below. Google requires schema.org Q&A to match the
+// copy actually visible on the page; deriving both from one array makes
+// drift structurally impossible.
+//
+// Note on expectations: Google fully retired FAQ *rich results* on
+// 7 May 2026 (the last carve-out for government/health sites ended then).
+// FAQPage markup remains valid and supported — it is emitted here for
+// machine readability (AI Overviews, assistants, other engines), not in
+// expectation of a SERP accordion. The real SEO value is the copy itself:
+// it answers the long-tail questions people actually type.
+//
+// Every figure below is sourced from /methodologie and the pricing in
+// apps/server/src/routes/payments/index.ts — do not edit one without the other.
+const FAQ: { q: string; a: string }[] = [
+  {
+    q: 'En quoi consiste l\u2019examen civique 2026 ?',
+    a: 'L\u2019examen civique est un QCM de 40 questions à passer en 45 minutes, avec 4 propositions par question dont une seule correcte. Il se compose de 28 questions de connaissances et de 12 mises en situation.',
+  },
+  {
+    q: 'Quel est le seuil de réussite à l\u2019examen civique ?',
+    a: 'Il faut obtenir au moins 32 bonnes réponses sur 40, soit 80 %. En dessous de ce seuil, l\u2019examen n\u2019est pas validé.',
+  },
+  {
+    q: 'Qui doit passer l\u2019examen civique ?',
+    a: 'Depuis le 1er janvier 2026, l\u2019examen civique est obligatoire pour les demandes de carte de séjour pluriannuelle, de carte de résident et de naturalisation française.',
+  },
+  {
+    q: 'Quels thèmes sont au programme ?',
+    a: 'Cinq thèmes officiels : principes et valeurs de la République, système institutionnel et politique, droits et devoirs, histoire géographie et culture, et vivre dans la société française. L\u2019arrêté fixe une répartition précise des 40 questions entre ces thèmes.',
+  },
+  {
+    q: 'Sur quel texte officiel repose l\u2019examen civique ?',
+    a: 'Sur l\u2019arrêté du 10 octobre 2025, qui fixe le programme, les épreuves et les modalités d\u2019organisation, pris en application du décret n° 2025-647.',
+  },
+  {
+    q: 'Que contient la préparation Civique ?',
+    a: '611 questions QCM issues du pool officiel du Ministère de l\u2019Intérieur, 240 questions d\u2019entretien d\u2019assimilation, plus de 200 fiches pédagogiques et un système de révisions espacées. L\u2019accompagnement est disponible en 8 langues.',
+  },
+  {
+    q: 'Civique est-il gratuit ?',
+    a: 'Vous pouvez commencer gratuitement, sans carte bancaire. L\u2019accès complet est ensuite proposé à 3,99 € par semaine, 10,99 € par mois ou 39,99 € pour six mois.',
+  },
+  {
+    q: 'Civique est-il un site officiel de l\u2019administration ?',
+    a: 'Non. Civique est une préparation indépendante, sans lien avec le Ministère de l\u2019Intérieur. Les démarches officielles et l\u2019inscription à l\u2019examen restent à effectuer auprès de l\u2019administration.',
+  },
+];
 
 // schema.org JSON-LD — two complementary schemas published on the home:
 //   1. EducationalOccupationalProgram  — positions Civique as a learning
@@ -140,6 +192,21 @@ const STRUCTURED_DATA = [
       'Algorithme SM-2 (révisions espacées)',
       'Conforme à l\'arrêté du 10 octobre 2025',
     ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': 'https://civique.integrafle.fr/#faq',
+    // Built from the FAQ array above so the markup can never describe
+    // questions the page does not actually display.
+    mainEntity: FAQ.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
   },
 ];
 
@@ -334,6 +401,54 @@ export default async function HomePage() {
               text="Aucune carte bancaire requise pour commencer. Vous décidez quand passer au plein accès."
             />
           </div>
+        </div>
+      </section>
+
+      {/* FAQ — rendered with native <details>/<summary> rather than a
+          client component with useState. Three reasons: the page stays a
+          Server Component (no JS shipped for this), the answers are present
+          in the server-rendered HTML whether or not a panel is open (so
+          crawlers read them), and the disclosure semantics are built in
+          for screen readers. */}
+      <section id="faq" className="border-t border-aubergine/15 bg-bone">
+        <div className="max-w-3xl mx-auto px-6 sm:px-10 py-20 sm:py-24">
+          <p className="eyebrow text-terracotta mb-4">— Questions fréquentes</p>
+          <h2 className="font-display text-[clamp(2rem,4vw,3rem)] leading-[1.08] mb-10 font-medium tracking-tight text-aubergine">
+            L&apos;examen civique, <span className="display-italic">en clair</span>.
+          </h2>
+
+          <div className="divide-y divide-aubergine/15 border-y border-aubergine/15">
+            {FAQ.map((item) => (
+              <details key={item.q} className="group py-5">
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none font-medium text-aubergine text-[1.05rem]">
+                  <span>{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 mt-1 text-terracotta transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="mt-3 pr-10 text-aubergine/75 leading-relaxed">{item.a}</p>
+              </details>
+            ))}
+          </div>
+
+          <p className="mt-10 text-aubergine/70 leading-relaxed">
+            Pour aller plus loin : consultez le{' '}
+            <Link href="/livret-du-citoyen" className="text-terracotta underline underline-offset-2">
+              Livret du citoyen
+            </Link>
+            , la{' '}
+            <Link href="/charte" className="text-terracotta underline underline-offset-2">
+              Charte des droits et devoirs
+            </Link>{' '}
+            ou le détail de notre{' '}
+            <Link href="/methodologie" className="text-terracotta underline underline-offset-2">
+              méthodologie
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

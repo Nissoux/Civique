@@ -12,8 +12,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://civique.integrafle.
 // Format: YYYY-MM-DD. Convert to Date at build-time.
 const LAST_MODIFIED: Record<string, string> = {
   '/': '2026-05-29',                        // hero copy, themes, FeatureCards
-  '/register': '2026-05-15',                // auth UI stable since May
-  '/login': '2026-05-15',                   // auth UI stable since May
+  // /register and /login are intentionally absent from the sitemap below:
+  // auth screens carry no search intent, and listing them spends crawl
+  // budget that belongs to the content pages. They stay crawlable (not
+  // disallowed in robots.ts) so they can still be reached and linked.
   '/pourquoi-civique': '2026-05-29',        // h1 rewrite + pillar copy
   '/methodologie': '2026-05-29',            // h1 rewrite + meta overhaul
   '/livret-du-citoyen': '2026-05-20',       // content.json last updated
@@ -28,8 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const date = (path: string) => new Date(LAST_MODIFIED[path]);
 
   return [
+    // No trailing slash: must match the canonical emitted by
+    // `app/page.tsx` (`alternates.canonical: '/'` resolves against
+    // metadataBase to "https://civique.integrafle.fr"). A sitemap URL
+    // that differs from the canonical by a trailing slash makes Google
+    // treat them as two URLs and discard one.
     {
-      url: `${BASE_URL}/`,
+      url: BASE_URL,
       lastModified: date('/'),
       changeFrequency: 'weekly',
       priority: 1.0,
@@ -65,18 +72,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: date('/partenariats'),
       changeFrequency: 'monthly',
       priority: 0.6,
-    },
-    {
-      url: `${BASE_URL}/register`,
-      lastModified: date('/register'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/login`,
-      lastModified: date('/login'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
     {
       url: `${BASE_URL}/privacy`,

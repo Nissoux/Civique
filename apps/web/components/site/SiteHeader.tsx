@@ -38,8 +38,14 @@ export async function SiteHeader() {
               Méthodologie
             </Link>
             <Link
-              href="/pourquoi-civique"
+              href="/livret-du-citoyen"
               className="hover:text-terracotta transition-colors"
+            >
+              Livret du citoyen
+            </Link>
+            <Link
+              href="/pourquoi-civique"
+              className="hover:text-terracotta transition-colors hidden lg:inline"
             >
               Pourquoi Civique
             </Link>
