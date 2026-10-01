@@ -367,11 +367,17 @@ function ThemeCard({ theme }: { theme: (typeof THEMES)[number] }) {
         >
           {theme.id}
         </div>
-        {/* Decorative duplicate of the numbered badge — hidden from AT
-            so the low-contrast theme tints don't trip WCAG audits. */}
+        {/* Decorative duplicate of the numbered badge. The raw theme
+            tints (saffron: 1.07:1!) fail WCAG even aria-hidden — axe
+            still evaluates painted text — so mix each tint 50/50 with
+            aubergine: keeps the per-theme hue as a deeper watermark and
+            clears the 3:1 large-text floor on every theme color. */}
         <span
           className="font-display italic text-[3.5rem] leading-none"
-          style={{ color: theme.color, fontVariationSettings: "'opsz' 72" }}
+          style={{
+            color: `color-mix(in srgb, ${theme.color} 50%, rgb(45, 27, 46))`,
+            fontVariationSettings: "'opsz' 72",
+          }}
           aria-hidden
         >
           {romanize(theme.id)}

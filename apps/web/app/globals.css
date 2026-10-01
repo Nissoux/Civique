@@ -180,6 +180,12 @@
     @apply text-[0.78rem] font-bold uppercase tracking-[0.18em] text-terracotta-deep;
   }
 
+  /* Cookie banner — hidden pre-paint once acknowledged; the inline
+     script in the root layout sets the attribute before first paint. */
+  html[data-cookies-ok] [data-cookie-banner] {
+    display: none;
+  }
+
   /* Wavy underline accent */
   .underline-wavy {
     text-decoration: underline;

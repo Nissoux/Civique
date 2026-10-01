@@ -121,6 +121,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased">
+        {/* No-flash cookie-banner gate: runs synchronously before any
+            content paints (parser-blocking inline script). If the user
+            already acknowledged cookies, html[data-cookies-ok] hides
+            the statically-rendered banner via CSS — see CookieBanner. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('civique_cookies_acknowledged')==='1')document.documentElement.setAttribute('data-cookies-ok','1')}catch(e){}",
+          }}
+        />
         {/* Site-wide schema.org JSON-LD: Organization + WebSite.
             Helps Google build the knowledge panel (logo, contact, social
             links — sameAs can be populated when official accounts exist)

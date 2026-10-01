@@ -119,7 +119,9 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-bone/10">
-        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-bone/50">
+        {/* bone/60 (not /50): /50 over aubergine blends to 4.47:1 —
+            three hundredths under the WCAG AA floor. /60 clears it. */}
+        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-bone/60">
           <span>© {new Date().getFullYear()} Civique · Tous droits réservés</span>
           <span className="display-italic">— Préparation indépendante</span>
         </div>

@@ -1,42 +1,39 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'civique_cookies_acknowledged';
 
+/**
+ * Cookie notice — statically rendered, hidden pre-paint when already
+ * acknowledged.
+ *
+ * Previous version mounted hidden and flipped visible in a useEffect,
+ * which pushed its paint seconds after FCP — Lighthouse attributed the
+ * page's LCP to this late paint (5+ s on throttled mobile). Now the
+ * banner ships IN the prerendered HTML (paints with first contentful
+ * paint) and an inline script in the root layout sets
+ * `html[data-cookies-ok]` BEFORE first paint when localStorage says the
+ * user already acknowledged — CSS hides the banner with zero flash
+ * (same pattern as no-flash dark-mode switches).
+ *
+ * Dismissing sets both localStorage (persistence) and the html
+ * attribute (immediate CSS hide) — no React state needed.
+ */
 export function CookieBanner() {
-  // Start hidden — only the client can read localStorage, so we render
-  // the banner after mount to avoid SSR/hydration mismatches.
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    try {
-      const acknowledged = window.localStorage.getItem(STORAGE_KEY);
-      if (acknowledged !== '1') {
-        setVisible(true);
-      }
-    } catch {
-      // Private mode or storage unavailable — show banner anyway.
-      setVisible(true);
-    }
-  }, []);
-
   function dismiss() {
     try {
       window.localStorage.setItem(STORAGE_KEY, '1');
     } catch {
-      // Ignore — banner will just reappear on next mount.
+      // Private mode — banner will reappear next visit, acceptable.
     }
-    setVisible(false);
+    document.documentElement.setAttribute('data-cookies-ok', '1');
   }
-
-  if (!visible) return null;
 
   return (
     <aside
+      data-cookie-banner
       role="region"
-      aria-live="polite"
       aria-label="Information sur les cookies"
       className="
         fixed inset-x-3 bottom-3 sm:inset-x-0 sm:bottom-5 z-[60]
