@@ -152,7 +152,7 @@ export default function PartenariatsPage() {
             />
             <BenefitCard
               title="Multilingue"
-              text="Fiches et explications dans 8 langues — un atout différenciant pour les publics non-francophones."
+              text="Fiches et explications dans 10 langues — un atout différenciant pour les publics non-francophones."
             />
             <BenefitCard
               title="Accessible"

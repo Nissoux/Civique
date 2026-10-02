@@ -6,7 +6,7 @@ import { setCurrentLang } from '@/lib/server/lang';
 import { fastifyFetch, ApiError } from '@/lib/server/api';
 import { getAccessToken } from '@/lib/server/session';
 
-const VALID: readonly Language[] = ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'];
+const VALID: readonly Language[] = ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur'];
 
 export async function setLangAction(lang: Language): Promise<void> {
   if (!VALID.includes(lang)) throw new Error('Invalid language');

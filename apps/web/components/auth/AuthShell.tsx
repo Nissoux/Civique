@@ -60,7 +60,7 @@ export function AuthShell({
                 </li>
                 <li className="flex items-baseline gap-3">
                   <span className="text-saffron font-bold">·</span>
-                  <span>8 langues d'accompagnement</span>
+                  <span>10 langues d'accompagnement</span>
                 </li>
                 <li className="flex items-baseline gap-3">
                   <span className="text-saffron font-bold">·</span>

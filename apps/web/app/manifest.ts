@@ -17,7 +17,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Civique — Examen civique français',
     short_name: 'Civique',
     description:
-      "Préparation indépendante à l'examen civique français 2026 : QCM officiels, entretien d'assimilation, 8 langues.",
+      "Préparation indépendante à l'examen civique français 2026 : QCM officiels, entretien d'assimilation, 10 langues.",
     start_url: '/',
     display: 'standalone',
     background_color: '#F4ECDD', // bone

@@ -19,7 +19,7 @@ const registerSchema = z.object({
   password: z.string().min(8),
   // P1-15: trim before length check so a whitespace-only displayName is rejected.
   displayName: z.string().trim().min(1).max(100),
-  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
+  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur']).optional(),
 });
 
 const loginSchema = z.object({
@@ -35,7 +35,7 @@ const updateProfileSchema = z.object({
   // P1-15: trim before length check (rejects whitespace-only displayName).
   displayName: z.string().trim().min(1).max(100).optional(),
   avatarUrl: z.string().url().nullable().optional(),
-  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']).optional(),
+  preferredLang: z.enum(['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur']).optional(),
   email: z.string().email().optional(),
   // Persisted exam target. Nullable so the client can unset (rare,
   // but legal — a user might restart onboarding).
@@ -617,7 +617,7 @@ export default async function authRoutes(app: FastifyInstance) {
     const updateData: {
       displayName?: string;
       avatarUrl?: string | null;
-      preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr';
+      preferredLang?: 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr' | 'bn' | 'ur';
       preferredExamType?: 'csp' | 'cr' | 'nat' | null;
       email?: string;
       emailVerified?: boolean;

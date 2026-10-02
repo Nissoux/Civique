@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     absolute: 'Civique — Préparez votre examen civique français 2026',
   },
   description:
-    "Examen civique français 2026 (arrêté du 10 oct. 2025) : 611 QCM officiels, 240 questions d'entretien, 8 langues. CSP, CR, naturalisation.",
+    "Examen civique français 2026 (arrêté du 10 oct. 2025) : 611 QCM officiels, 240 questions d'entretien, 10 langues. CSP, CR, naturalisation.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Civique — Préparez votre examen civique français 2026',
     description:
-      "Préparation indépendante à l'examen civique 2026 (arrêté du 10 oct. 2025) pour CSP, CR et nationalité française. 851 questions, 8 langues.",
+      "Préparation indépendante à l'examen civique 2026 (arrêté du 10 oct. 2025) pour CSP, CR et nationalité française. 851 questions, 10 langues.",
     url: '/',
     type: 'website',
     locale: 'fr_FR',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Civique — Préparez votre examen civique 2026',
     description:
-      "611 QCM officiels + 240 questions d'entretien, 8 langues. CSP, CR, naturalisation française.",
+      "611 QCM officiels + 240 questions d'entretien, 10 langues. CSP, CR, naturalisation française.",
   },
 };
 
@@ -69,9 +69,9 @@ const STRUCTURED_DATA = [
     name: 'Civique',
     alternateName: "Préparation à l'examen civique français",
     description:
-      "Préparation indépendante à l'examen civique français 2026, conforme à l'arrêté du 10 octobre 2025. CSP, CR et naturalisation : 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.",
+      "Préparation indépendante à l'examen civique français 2026, conforme à l'arrêté du 10 octobre 2025. CSP, CR et naturalisation : 611 questions QCM, 240 questions d'entretien d'assimilation, 10 langues d'accompagnement.",
     url: 'https://civique.integrafle.fr',
-    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
+    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur'],
     educationalLevel: 'Adult education',
     educationalProgramMode: 'online',
     programType: 'Civic education',
@@ -98,9 +98,9 @@ const STRUCTURED_DATA = [
     applicationSubCategory: 'Civic education',
     operatingSystem: 'Web, iOS 15+, Android 10+',
     description:
-      "Application de préparation à l'examen civique français 2026 — QCM officiels, entretien d'assimilation, fiches pédagogiques en 8 langues, révisions adaptatives (SM-2).",
+      "Application de préparation à l'examen civique français 2026 — QCM officiels, entretien d'assimilation, fiches pédagogiques en 10 langues, révisions adaptatives (SM-2).",
     url: 'https://civique.integrafle.fr',
-    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr'],
+    inLanguage: ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur'],
     publisher: { '@id': 'https://civique.integrafle.fr/#organization' },
     // Pricing aligned with apps/server/src/routes/payments/index.ts (l. 14).
     // Three tiers — listed so Google can compute the price-range snippet.
@@ -136,7 +136,7 @@ const STRUCTURED_DATA = [
       '611 questions QCM officielles (pool Ministère de l\'Intérieur)',
       '240 questions d\'entretien d\'assimilation',
       '200+ fiches pédagogiques',
-      '8 langues d\'accompagnement (FR, EN, AR, FA, PT, ES, HI, TR)',
+      '10 langues d\'accompagnement (FR, EN, AR, FA, PT, ES, HI, TR, BN, UR)',
       'Algorithme SM-2 (révisions espacées)',
       'Conforme à l\'arrêté du 10 octobre 2025',
     ],
@@ -186,7 +186,7 @@ export default function HomePage() {
             </h1>
 
             <p className="rise-init rise-d-4 max-w-[34rem] text-[1.15rem] leading-[1.65] text-ink-mute mb-9">
-              La préparation indépendante pour la <em className="display-italic text-aubergine">carte de séjour pluriannuelle</em>, la <em className="display-italic text-aubergine">carte de résident</em> et la <em className="display-italic text-aubergine">nationalité française</em>. 5 thèmes, 611 questions QCM, 240 questions d'entretien d'assimilation, 8 langues d'accompagnement.
+              La préparation indépendante pour la <em className="display-italic text-aubergine">carte de séjour pluriannuelle</em>, la <em className="display-italic text-aubergine">carte de résident</em> et la <em className="display-italic text-aubergine">nationalité française</em>. 5 thèmes, 611 questions QCM, 240 questions d'entretien d'assimilation, 10 langues d'accompagnement.
             </p>
 
             <div className="rise-init rise-d-5 mb-9">
@@ -271,7 +271,7 @@ export default function HomePage() {
               <div>
                 <p className="display-italic text-[1.5rem] mb-2 text-saffron">+ 200 fiches</p>
                 <p className="text-sm leading-[1.55] text-bone/85 mb-4">
-                  pédagogiques traduites dans les 8 langues d'accompagnement
+                  pédagogiques traduites dans les 10 langues d'accompagnement
                 </p>
                 <p className="text-saffron font-semibold text-sm">à découvrir →</p>
               </div>
@@ -302,8 +302,8 @@ export default function HomePage() {
             />
             <FeatureCard
               icon="🌐"
-              title="Huit langues"
-              text="Toutes les explications et fiches sont disponibles en français, arabe, persan, portugais, espagnol, hindi, anglais et turc."
+              title="Dix langues"
+              text="Toutes les explications et fiches sont disponibles en français, arabe, persan, portugais, espagnol, hindi, anglais, turc, bengali et ourdou."
             />
             <FeatureCard
               icon="📊"

@@ -1,4 +1,4 @@
-export type Language = 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr';
+export type Language = 'fr' | 'ar' | 'fa' | 'pt' | 'es' | 'hi' | 'en' | 'tr' | 'bn' | 'ur';
 
 export interface LanguageDefinition {
   code: Language;
@@ -16,4 +16,6 @@ export const LANGUAGES: LanguageDefinition[] = [
   { code: 'hi', name: 'Hindi', nativeName: '\u0939\u093f\u0928\u094d\u0926\u0940', rtl: false },
   { code: 'en', name: 'English', nativeName: 'English', rtl: false },
   { code: 'tr', name: 'Turkish', nativeName: 'T\u00fcrk\u00e7e', rtl: false },
+  { code: 'bn', name: 'Bengali', nativeName: '\u09ac\u09be\u0982\u09b2\u09be', rtl: false },
+  { code: 'ur', name: 'Urdu', nativeName: '\u0627\u0631\u062f\u0648', rtl: true },
 ];

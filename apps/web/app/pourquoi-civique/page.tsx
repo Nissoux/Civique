@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   // " · Civique" — keep the bare phrase here for natural reading.
   title: { absolute: "Pourquoi choisir Civique pour l'examen civique 2026" },
   description:
-    "Comparatif Civique vs sites officiels, PDF préfecture, MOOCs : pool officiel du Ministère, 8 langues, révisions adaptatives SM-2.",
+    "Comparatif Civique vs sites officiels, PDF préfecture, MOOCs : pool officiel du Ministère, 10 langues, révisions adaptatives SM-2.",
   alternates: { canonical: '/pourquoi-civique' },
   openGraph: {
     title: 'Pourquoi Civique pour votre examen civique 2026',
     description:
-      "La préparation indépendante la plus rigoureuse — pool officiel, 8 langues, méthode adaptative.",
+      "La préparation indépendante la plus rigoureuse — pool officiel, 10 langues, méthode adaptative.",
     url: '/pourquoi-civique',
     siteName: 'Civique',
     locale: 'fr_FR',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Pourquoi Civique pour votre examen civique 2026',
     description:
-      "Comparatif rigoureux face aux sites officiels et aux MOOCs. Pool ministériel, 8 langues, SM-2.",
+      "Comparatif rigoureux face aux sites officiels et aux MOOCs. Pool ministériel, 10 langues, SM-2.",
   },
 };
 
@@ -103,7 +103,7 @@ export default async function PourquoiPage() {
             <strong>
               une préparation alignée sur l'arrêté du 10 octobre 2025
             </strong>
-            , adaptée à votre rythme, traduite dans huit langues, et qui apprend
+            , adaptée à votre rythme, traduite dans dix langues, et qui apprend
             de vos erreurs.
           </p>
           {coverage ? (
@@ -132,8 +132,8 @@ export default async function PourquoiPage() {
           />
           <Pillar
             icon="🌐"
-            title="Huit langues d'accompagnement"
-            text="Français, arabe, persan, portugais, espagnol, hindi, anglais et turc : fiches, explications et indices traduits par des relecteurs natifs."
+            title="Dix langues d'accompagnement"
+            text="Français, arabe, persan, portugais, espagnol, hindi, anglais, turc, bengali et ourdou : fiches, explications et indices traduits avec relecture attentive."
           />
           <Pillar
             icon="🧠"
@@ -190,7 +190,7 @@ export default async function PourquoiPage() {
               <li>✓ Importer le pool officiel du Ministère de l'Intérieur.</li>
               <li>✓ Reproduire la distribution prescrite par l'arrêté de 2025.</li>
               <li>✓ Adapter les révisions à vos lacunes (SM-2 / spaced repetition).</li>
-              <li>✓ Traduire fiches et explications dans 8 langues.</li>
+              <li>✓ Traduire fiches et explications dans 10 langues.</li>
               <li>✓ Offrir le mode audio (Livret + Charte).</li>
               <li>✓ Vous laisser commencer gratuitement, sans CB.</li>
             </ul>
@@ -295,7 +295,7 @@ function ComparativeTable() {
     { feature: 'Questions interactives avec correction', civique: true, officielle: false, pdf: false, autres: 'Oui (limité)' },
     { feature: 'Révisions espacées (SRS, Anki-style)', civique: true, officielle: false, pdf: false, autres: false },
     { feature: 'Simulation d\'examen chronométrée', civique: true, officielle: false, pdf: false, autres: 'Parfois' },
-    { feature: '8 langues d\'accompagnement (FR/AR/FA/PT/ES/HI/EN/TR)', civique: '8 langues', officielle: 'FR uniquement', pdf: 'FR uniquement', autres: 'EN parfois' },
+    { feature: '10 langues d\'accompagnement (FR/AR/FA/PT/ES/HI/EN/TR/BN/UR)', civique: '10 langues', officielle: 'FR uniquement', pdf: 'FR uniquement', autres: 'EN parfois' },
     { feature: 'Mode audio (TTS) gratuit', civique: true, officielle: false, pdf: false, autres: 'Payant' },
     { feature: 'Charte des droits et devoirs intégrée et navigable', civique: true, officielle: 'PDF', pdf: 'PDF', autres: false },
     { feature: 'Suivi de progression personnalisé', civique: true, officielle: false, pdf: false, autres: 'Basique' },

@@ -1,5 +1,5 @@
 // Multilingual welcome banner — declares immediately who the product is for.
-// Six languages: French · Arabic · Persian · Portuguese · Spanish · Hindi.
+// One greeting per supported translation language (FR shown, EN implied).
 
 const GREETINGS = [
   { text: 'Bienvenue', lang: 'fr' },
@@ -8,6 +8,8 @@ const GREETINGS = [
   { text: 'Bem-vindo', lang: 'pt' },
   { text: 'Bienvenidos', lang: 'es' },
   { text: 'स्वागत है', lang: 'hi' },
+  { text: 'স্বাগতম', lang: 'bn' },
+  { text: 'خوش آمدید', lang: 'ur' },
 ] as const;
 
 export function WelcomeStrip() {
@@ -32,7 +34,7 @@ export function WelcomeStrip() {
             <span
               className="font-display italic text-[1.05rem] text-saffron"
               lang={g.lang}
-              dir={g.lang === 'ar' || g.lang === 'fa' ? 'rtl' : 'ltr'}
+              dir={g.lang === 'ar' || g.lang === 'fa' || g.lang === 'ur' ? 'rtl' : 'ltr'}
             >
               {g.text}
             </span>
@@ -45,7 +47,7 @@ export function WelcomeStrip() {
             <span
               className="font-display italic text-[1.05rem] text-saffron"
               lang={g.lang}
-              dir={g.lang === 'ar' || g.lang === 'fa' ? 'rtl' : 'ltr'}
+              dir={g.lang === 'ar' || g.lang === 'fa' || g.lang === 'ur' ? 'rtl' : 'ltr'}
             >
               {g.text}
             </span>

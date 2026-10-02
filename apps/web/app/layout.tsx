@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: '%s · Civique',
   },
   description:
-    "Préparation indépendante à l'examen civique 2026 : 611 QCM officiels + 240 questions d'entretien, 8 langues, conforme à l'arrêté du 10 octobre 2025.",
+    "Préparation indépendante à l'examen civique 2026 : 611 QCM officiels + 240 questions d'entretien, 10 langues, conforme à l'arrêté du 10 octobre 2025.",
   metadataBase: new URL('https://civique.integrafle.fr'),
   applicationName: 'Civique',
   authors: [{ name: 'Civique', url: 'https://civique.integrafle.fr' }],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Civique — Préparez votre examen civique français',
     description:
-      "La préparation indépendante pour la carte de séjour, la carte de résident et la nationalité française. 8 langues.",
+      "La préparation indépendante pour la carte de séjour, la carte de résident et la nationalité française. 10 langues.",
     url: 'https://civique.integrafle.fr',
     siteName: 'Civique',
     locale: 'fr_FR',
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Civique — Préparez votre examen civique français',
     description:
-      "Préparation indépendante à l'examen civique 2026 : 611 QCM officiels + 240 questions d'entretien, 8 langues.",
+      "Préparation indépendante à l'examen civique 2026 : 611 QCM officiels + 240 questions d'entretien, 10 langues.",
   },
   // Verification tokens — populated when GSC/Bing/Yandex consoles are set up.
   // verification: { google: 'TODO', other: { 'msvalidate.01': 'TODO' } },

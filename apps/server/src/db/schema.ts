@@ -20,7 +20,7 @@ import { relations } from 'drizzle-orm';
 // Enums
 // ──────────────────────────────────────────────
 
-export const languageEnum = pgEnum('language', ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr']);
+export const languageEnum = pgEnum('language', ['fr', 'ar', 'fa', 'pt', 'es', 'hi', 'en', 'tr', 'bn', 'ur']);
 export const questionTypeEnum = pgEnum('question_type', ['knowledge', 'situational']);
 export const choiceEnum = pgEnum('choice', ['a', 'b', 'c', 'd']);
 export const examTypeEnum = pgEnum('exam_type', ['csp', 'cr', 'nat']);
