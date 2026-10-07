@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   description:
     "Créez votre compte Civique gratuitement et commencez votre préparation à l'examen civique français. Aucune carte bancaire requise.",
   alternates: { canonical: '/register' },
+  // Thin auth form — same reasoning as /login: keep it out of the index
+  // so crawl budget goes to the content pages. Still reachable from
+  // every CTA; `follow` keeps its outgoing links counted.
+  robots: { index: false, follow: true },
 };
 
 export default function RegisterPage() {

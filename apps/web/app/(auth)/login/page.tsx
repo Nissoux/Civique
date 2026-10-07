@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description:
     "Connectez-vous à votre compte Civique pour reprendre votre préparation à l'examen civique français.",
   alternates: { canonical: '/login' },
+  // Thin auth form: no search value, and on a young domain every crawl
+  // it receives is one a guide doesn't get. `follow` keeps the links
+  // back to the public pages counted. (Search Console, 2026-10-07.)
+  robots: { index: false, follow: true },
 };
 
 interface PageProps {

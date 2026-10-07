@@ -6,6 +6,7 @@ import { ExamTypeBadges } from '@/components/brand/ExamTypeBadges';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { HeroCtas } from '@/components/site/HeroCtas';
+import { getAllGuides } from '@/lib/guides';
 
 export const metadata: Metadata = {
   // Layout's `title.template` adds " · Civique" suffix automatically,
@@ -147,6 +148,8 @@ const STRUCTURED_DATA = [
 // (hero, header) are client components probing GET /api/session after
 // mount — see HeroCtas / AuthNav.
 export default function HomePage() {
+  const guides = getAllGuides();
+
   return (
     <div className="min-h-screen bg-bone">
       <script
@@ -316,6 +319,62 @@ export default function HomePage() {
               text="Aucune carte bancaire requise pour commencer. Vous décidez quand passer au plein accès."
             />
           </div>
+        </div>
+      </section>
+
+      {/* Guides — a direct link to each of the 8 long-tail guides.
+          Until now the home only linked the hub (/guides), leaving the
+          guides two hops from the most-crawled URL of a young domain;
+          Search Console (2026-10-07) showed them stuck in « Détectée,
+          actuellement non indexée ». Same order as the hub (learning
+          path) and same card language, minus the description. */}
+      <section id="guides" className="border-t border-aubergine/15 bg-bone-deep">
+        <div className="max-w-[1340px] mx-auto px-6 sm:px-10 py-20 sm:py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <p className="eyebrow mb-4">— Guides pratiques</p>
+              <h2 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-[1.05] font-medium tracking-tight mb-5">
+                Comprendre l'examen<br />
+                <span className="display-italic text-terracotta">avant de réviser</span>.
+              </h2>
+              <p className="text-ink-mute text-[1.05rem] leading-[1.6]">
+                Huit guides gratuits et sourcés, sans inscription : le déroulé de l'examen civique 2026, les différences entre carte de séjour pluriannuelle, carte de résident et naturalisation, la laïcité, les symboles de la République, l'entretien d'assimilation.
+              </p>
+            </div>
+            <Link href="/guides" className="btn-secondary">
+              Tous les guides
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
+
+          <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {guides.map((g, i) => (
+              <li key={g.slug} className="flex">
+                <Link
+                  href={`/guides/${g.slug}`}
+                  className="card !rounded-3xl !p-6 flex flex-1 flex-col transition-all hover:-translate-y-0.5 hover:shadow-clay-lg"
+                >
+                  <span
+                    className="font-display italic text-[2.25rem] leading-none text-terracotta/70 mb-3"
+                    aria-hidden
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3
+                    className="font-display text-[1.15rem] font-medium leading-snug text-aubergine"
+                    style={{ fontVariationSettings: "'opsz' 36" }}
+                  >
+                    {g.h1Main} {g.h1Accent}
+                  </h3>
+                  <p className="mt-auto pt-4 text-sm font-semibold text-terracotta">
+                    Lecture {g.readingMinutes} min →
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
