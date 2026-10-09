@@ -407,6 +407,22 @@ vs « users premium en base ».
   secret dans Integrations → Webhooks, réactiver, **Resend** des
   événements depuis le 19 mai pour régulariser les victimes.
 
+**Clôture (9 octobre 2026).** Le webhook a finalement été créé via
+Claude pilotant Chrome (extension Claude in Chrome) sur le dashboard
+RevenueCat, avec validation du PO à chaque étape. Découverte au
+passage : le compte contient DEUX projets « Civique » — un doublon
+vide issu du setup initial et le vrai projet (`7ec222f4`, celui des
+transactions). Le projet actif n'avait AUCUNE intégration (« Active :
+0 ») : le webhook de mai avait vraisemblablement été créé sur le
+doublon, ou jamais créé. Webhook « Serveur Civique (production) »
+créé sur le bon projet, event de test validé de bout en bout
+(RevenueCat → nginx → Fastify → 200, eventId vérifié dans les deux
+sens). Victimes régularisées à la main entre-temps (soukaina à vie,
+Narumi alignée sur sa vraie échéance, Yuliia 14 j offerts + mot
+d'excuse). Leçon supplémentaire : **supprimer ou renommer les projets
+doublons** dans les consoles tierces — un nom dupliqué a
+probablement coûté cinq mois de revenus silencieusement.
+
 **Leçons :**
 1. **Un fix fail-closed se déploie avec son secret, dans le même geste.**
    Checklist de déploiement d'un secret : générer → poser dans le `.env`
