@@ -28,6 +28,7 @@ const LAST_MODIFIED: Record<string, string> = {
 // launch date doubles as lastModified until a guide's content changes.
 const GUIDE_SLUGS: Array<{ slug: string; lastModified: string }> = [
   { slug: 'comment-passer-examen-civique-2026', lastModified: '2026-10-01' },
+  { slug: 'mises-en-situation-examen-civique', lastModified: '2026-10-09' },
   { slug: 'difference-csp-cr-naturalisation', lastModified: '2026-10-01' },
   { slug: 'livret-citoyen-resume', lastModified: '2026-10-01' },
   { slug: 'marianne-symboles-republique', lastModified: '2026-10-01' },

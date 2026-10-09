@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import commentPasser from '@/app/guides/_content/comment-passer-examen-civique-2026.json';
+import misesEnSituation from '@/app/guides/_content/mises-en-situation-examen-civique.json';
 import differenceTitres from '@/app/guides/_content/difference-csp-cr-naturalisation.json';
 import entretienFaq from '@/app/guides/_content/entretien-assimilation-questions-frequentes.json';
 import livretResume from '@/app/guides/_content/livret-citoyen-resume.json';
@@ -62,6 +63,7 @@ export interface GuideContent {
  */
 const REGISTRY: GuideContent[] = [
   commentPasser,
+  misesEnSituation,
   differenceTitres,
   livretResume,
   symboles,
