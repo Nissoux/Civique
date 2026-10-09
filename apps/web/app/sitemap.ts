@@ -11,9 +11,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_WEB_URL || 'https://civique.integrafle.
 // Bump the date for a route when its content materially changes.
 // Format: YYYY-MM-DD. Convert to Date at build-time.
 const LAST_MODIFIED: Record<string, string> = {
-  '/': '2026-05-29',                        // hero copy, themes, FeatureCards
-  '/register': '2026-05-15',                // auth UI stable since May
-  '/login': '2026-05-15',                   // auth UI stable since May
+  '/': '2026-10-07',                        // + section « Guides pratiques » (8 liens)
   '/pourquoi-civique': '2026-05-29',        // h1 rewrite + pillar copy
   '/methodologie': '2026-05-29',            // h1 rewrite + meta overhaul
   '/livret-du-citoyen': '2026-05-20',       // content.json last updated
@@ -95,18 +93,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.8,
     })),
-    {
-      url: `${BASE_URL}/register`,
-      lastModified: date('/register'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/login`,
-      lastModified: date('/login'),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    // /register and /login are deliberately absent: they are noindex
+    // (see their page metadata) and a sitemap must only list URLs we
+    // want indexed — listing them sent Googlebot to the auth forms
+    // while the guides were still waiting to be crawled.
     {
       url: `${BASE_URL}/privacy`,
       lastModified: date('/privacy'),
