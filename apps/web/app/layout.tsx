@@ -94,6 +94,11 @@ export const viewport: Viewport = {
   themeColor: '#F4ECDD',
   width: 'device-width',
   initialScale: 1,
+  // Tisserand is light-only by design (decision #2, CLAUDE.md). This
+  // opts the site out of Chrome's Auto Dark Mode / Android force-dark,
+  // which otherwise algorithmically invert the bone palette into a
+  // muddy brown (seen in the wild, 2026-10-10).
+  colorScheme: 'only light',
 };
 
 // 2026-10-01: dropped the `export const dynamic = 'force-dynamic'` escape

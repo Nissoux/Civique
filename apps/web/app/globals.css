@@ -4,6 +4,11 @@
 
 @layer base {
   :root {
+    /* Light-only, enforced: pairs with viewport.colorScheme in the
+       layout to opt out of browser force-dark transformations, and
+       keeps native form controls / scrollbars light everywhere. */
+    color-scheme: only light;
+
     /* Tisserand — warm welcoming */
     --bone: 244 236 221;
     --bone-deep: 236 224 203;
